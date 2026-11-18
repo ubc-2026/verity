@@ -1,0 +1,24 @@
+{
+  "note": "Free official-source checks run before any purchase. The NYC outcomes are FIXTURE ASSUMPTIONS: the contract's terms PDF and the NWS CLINYC product were not read for this slice. Replace them with the live check before relying on either result.",
+  "checks": {
+    "nyc-settlement-version": {
+      "sources": [
+        "Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "NWS Climatological Report (Daily) for Central Park, product CLINYC"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the terms name the specific CLI issuance used for settlement, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the terms cite 'NWS Climatological Report (Daily)' without naming which issuance controls, and the free CLINYC page shows only the latest issuance, not the exchange's rule.",
+          "fixture_assumption": true
+        }
+      }
+    }
+  }
+}
