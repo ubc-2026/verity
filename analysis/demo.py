@@ -2,7 +2,8 @@
 
     python demo.py            # prints the three runs and writes samples/*.json
 
-Live (needs network, GEMINI_API_KEY and VERITY_GEMINI_MODEL; still places no trades):
+Live (needs network only; the Gemini Exchange events API is public, the analyst is
+code-only with no LLM, and it still places no trades):
     python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 """
 from __future__ import annotations
@@ -67,7 +68,7 @@ def run_live(ticker: str, outcome: str, read_terms: bool) -> None:
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser(description="Verity analysis demo")
-    ap.add_argument("--live", metavar="EVENT_TICKER", help="read this Gemini Exchange event and call Google Gemini")
+    ap.add_argument("--live", metavar="EVENT_TICKER", help="read this Gemini Exchange event and score it with the code-only rules")
     ap.add_argument("--outcome", help="contract label to analyze, e.g. 'Oklahoma City'")
     ap.add_argument("--no-terms", action="store_true", help="skip downloading the terms PDF")
     args = ap.parse_args()
@@ -78,4 +79,4 @@ if __name__ == "__main__":
         raise SystemExit(0)
     run("OKC moneyline: clear rules", "fx-okc-moneyline-20261118", None, "okc_moneyline.json")
     run("NYC high temp: free check answers (FIXTURE)", "fx-nyc-high-20261118", "free-check-answers", None)
-    run("NYC high temp: gap remains (FIXTURE)", "fx-nyc-high-20261118", "free-check-inconclusive", "nyc_high_gap_remains.json")
+    run("NYC high temp: gap remains (OBSERVED terms + NWS, 2026-11-18)", "fx-nyc-high-20261118", "observed-2026-11-18", "nyc_high_gap_remains.json")

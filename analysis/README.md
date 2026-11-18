@@ -1,7 +1,7 @@
 # Verity analysis: risk scoring and evidence proposals
 
 Market fixture → `get_risk_analysis()` → `generate_purchase_request()` → an unsigned proposal, or `null` with a logged reason.
-Fixture mode (the default) uses no network, no API key and no wallet. Live mode is optional and is described below.
+Fixture mode (the default) uses no network, no API key and no wallet. Live mode is optional and is described below. Neither mode uses an LLM.
 
 ## Run it
 
@@ -9,31 +9,30 @@ Fixture mode (the default) uses no network, no API key and no wallet. Live mode 
 cd analysis
 python3 -m venv .venv && . .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python -m pytest -q        # 41 passed
+python -m pytest -q        # 45 passed
 python demo.py             # 3 runs; writes samples/*.json
 ```
 
-These commands were verified on Linux from a clean virtualenv (Python 3.13, pydantic 2.13), with both `requirements.txt` and `requirements-live.txt`. They have not been run on Windows yet. The tests fake both APIs, so they need no network and no key.
+These commands were verified on Linux from a clean virtualenv (Python 3.13, pydantic 2.13), with both `requirements.txt` and `requirements-live.txt`. They have not been run on Windows yet. The tests fake the Gemini Exchange API, so they need no network and no key.
 
 ## Live mode
 
-This reads a real Gemini Exchange market and has Google Gemini score it. It still places no trades and signs nothing.
+This reads a real Gemini Exchange market and scores it with code-only rules. It needs no API key, places no trades and signs nothing.
 
 ```bash
 pip install -r requirements-live.txt
-export GEMINI_API_KEY=...            # Windows PowerShell: $env:GEMINI_API_KEY="..."
-export VERITY_GEMINI_MODEL=...       # model id from Google AI Studio
 python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 ```
 
 - `verity/live.py` reads `GET /v1/prediction-markets/events/{ticker}`, which is public and needs no key. It records the real snapshot time and instrument symbol, downloads the terms PDF (add `--no-terms` to skip it), and reshapes everything into the fixture format.
-- `verity/llm.py` calls Google Gemini with structured output (`response_schema`, temperature 0).
-  - The model scores only ambiguity, source and correlation, and names any evidence gaps. Liquidity stays computed in code.
-  - Its output is checked before use. A score outside 1–3 becomes `null` with a reason, citations to excerpts that don't exist are dropped, and a forecast question can never count as material. Each of these fixes is flagged in the output.
+- `verity/rules_analyst.py` scores ambiguity, source and correlation with fixed rules from the workbook's Framework sheet, and names the evidence gaps those rules imply. There is no LLM and no model key.
+  - Prices never feed the analyst. Liquidity stays computed in code.
+  - When the record doesn't hold enough to apply a rule (no rule text, or a settlement source the rules don't recognize), the score is `null` with a reason, so the rating shows as incomplete instead of guessing.
+  - Every score cites the excerpt ids it used, and the output carries the flag `analyst=verity-rules-v1 (code rules, no LLM)`.
 - `analyze_live()` returns the analysis and its context. Pass both to `generate_purchase_request()`.
 - The output is written to `samples/live_last_run.json`, which git ignores.
-- **Key handling:** whoever pays for the Google Gemini API sets `GEMINI_API_KEY` in their own shell. The code does not read a `.env` file, and `.env` is gitignored. Never commit the key or paste it anywhere.
 - **Purchases stay blocked in live mode.** The free official-source checks are only wired up for fixtures so far. A live gap with no free check is logged and skipped.
+- **API status, 2026-11-18 00:40 ET:** every `/v1/prediction-markets/...` path on `api.gemini.com` returned HTTP 500 ("An unexpected error occurred"), including the single-event lookup for all three fixture tickers and the events list. Other public endpoints (`/v1/symbols`, `/v1/pubticker/btcusd`) returned 200. Retry before the demo, and check the path against Gemini's current docs if it keeps failing.
 
 ## Exchange actions (guarded)
 
@@ -73,14 +72,14 @@ The fixtures were checked against `Prediction market risk analysis.xlsx`, which 
 
 ```
 verity/
-  schemas.py     RiskAnalysisV1, PurchaseProposalV1 (pydantic, extra fields forbidden)
-  scoring.py     workbook 1-3 rubric, 4-12 bands, overrides kept separate, liquidity computed in code
-  analysis.py    get_risk_analysis(contract_id, ctx=None)
-  proposals.py   generate_purchase_request(risk_analysis, ctx=None, decision_log=None)
-  fixtures.py    loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
-  live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live()
-  llm.py         Google Gemini analyst (structured output), validation and repair
-  exchange.py    guarded Gemini Exchange actions: sandbox + dry run by default, caps, approval, audit
+  schemas.py        RiskAnalysisV1, PurchaseProposalV1 (pydantic, extra fields forbidden)
+  scoring.py        workbook 1-3 rubric, 4-12 bands, overrides kept separate, liquidity computed in code
+  analysis.py       get_risk_analysis(contract_id, ctx=None)
+  proposals.py      generate_purchase_request(risk_analysis, ctx=None, decision_log=None)
+  fixtures.py       loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
+  live.py           Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live()
+  rules_analyst.py  code-only analyst for live records (Framework rules, no LLM)
+  exchange.py       guarded Gemini Exchange actions: sandbox + dry run by default, caps, approval, audit
 fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
@@ -97,8 +96,18 @@ samples/                    generated outputs (OKC, NYC gap-remains)
   - A 3 in Ambiguity or Source sets a floor of Medium.
   - A 3 in Liquidity is a trading rule, so it becomes a note ("the price is an unreliable signal") and does not change the rating.
 - **Null** scores carry a reason. With any null, the rating is `complete: false` and `final_rating: null`, and the output shows the `possible_range`.
-- **Liquidity** is computed from the quotes and never comes from the model. In fixture mode, the analyst block in each fixture stands in for the Google Gemini structured-output call.
+- **Liquidity** is computed from the quotes in code. In fixture mode, the analyst block in each fixture holds the workbook's scores; in live mode, `rules_analyst.py` fills it.
 - **Research actions:** Low → `no_further_research`, Medium → `investigate`, High → `flag_for_human_review`. This replaces the workbook's trading verbs.
+
+## Live rules (`rules_analyst.py`)
+
+| Category | 3 | 2 | 1 | null |
+|---|---|---|---|---|
+| Ambiguity | rules mention a setting, ranking or judgment ("style control", "top-ranked", "at its discretion") | terms PDF not read, event terms link empty (Agent rule 3), or numeric band edges decide it | terms read, objective outcome | no rule text |
+| Source | leaderboard, LM Arena, social metrics | NWS / climate report, BLS, CPI, GDP, anything preliminary or revisable | league, NCAA, Federal Reserve, official result | no source, or one the rules don't recognize |
+| Correlation | sibling events on the same underlying (Agent rule 7) | scheduled data or news (CPI, jobs, FOMC, injuries, earnings) | neither | — |
+
+Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. Both have no free check yet, so live purchases stay blocked.
 
 ## Proposal gates
 
@@ -126,12 +135,13 @@ All five rows reproduce the workbook's totals.
 
 ## What still needs live data
 
-- **NYC free check:** both outcomes are FIXTURE ASSUMPTIONS. Read the weather terms PDF and the NWS CLINYC product, then record the real result. That PDF's URL is inferred, because the event-level `termsAndConditionsUrl` was empty.
+- **Gemini Exchange API:** the prediction-market endpoints returned HTTP 500 on 2026-11-18 (see Live mode). Nobody has completed a live call yet, so `verity/live.py`'s field names still need checking against one real response.
+- **NYC free check:** done on 2026-11-18 as scenario `observed-2026-11-18` in `free_checks.json`, which the demo now uses. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later corrections don't count. The rule text is missing a word, though, and NWS publishes a same-day partial CLINYC (valid to 4 PM) before the full-day report, so whether that partial report counts is still unstated. The result is `inconclusive` and the 0.05 USDC proposal still stands, now labeled `OBSERVED`. The two `free-check-*` scenarios remain as labeled fixture assumptions. The terms PDF URL was inferred but resolves.
+- **NYC expiry:** the terms set expiry at the first 11:00 PM ET after the data are available. That is later than the fixture's `2026-11-19T04:59:00Z` from the API, which is probably the trading close. Confirm against a live response.
 - **Snapshot time:** the workbook stores only the date (2026-11-17). Live reads should store the UTC time.
 - **Instrument symbols** are missing in the OKC and NYC fixtures. Live mode records them.
-- **Field names:** `verity/live.py` uses the field names from Gemini's API docs. Check them against one real response; nobody has made a live call yet.
 - **Tickers** are missing for the Fed and Best AI rows, which came from CoinRithm rather than Gemini. They are flagged, and purchases for them are blocked.
-- **Rules text** is a paraphrase of the API descriptions. Fetch the terms PDFs so citations quote the actual rules.
+- **Rules text** is a paraphrase of the API descriptions, except NYC, which now cites the real terms (`C-NYC-4`, `C-NYC-5`). Fetch the OKC and MSU terms PDFs the same way.
 - **Expiry:** every fixture market expires between Nov 19 and Jan 1. After that, keep the fixture clock or take a new snapshot.
-- **The Google Gemini analyst** is built and tested only against a fake client. It needs one real run with the paid key to confirm the model ID and how good its scores are.
+- **Rules analyst:** check its scores against the workbook on the first real live run. In the tests it reproduces the workbook's NYC scores (2, 2, 1) on a faked NYC event.
 - **Free checks in live mode:** to let a live gap lead to a purchase, add a free-check source for each type of gap (for example, read the terms PDF for the settlement rule).
