@@ -78,6 +78,11 @@ def _flags(m: dict[str, Any]) -> list[str]:
         f.append(f"volume_basis={m['market'].get('volume_basis')}: not comparable with event-total rows")
     if m["source"]["label"].startswith("CoinRithm"):
         f.append("third_party_price_source: price not read from Gemini directly")
+    if m.get("terms_problem"):
+        f.append(f"terms_not_read: {m['terms_problem']}")
+    if m.get("model_id"):
+        f.append(f"analyst=google-gemini ({m['model_id']})")
+    f.extend(m.get("model_flags", []))
     return f
 
 
@@ -113,10 +118,10 @@ def get_risk_analysis(contract_id: str, ctx: Optional[FixtureContext] = None) ->
         unresolved.append("Which Gemini event ticker and instrument symbol is this market?")
 
     conflicts = list(GLOBAL_WORKBOOK_CONFLICTS)
-    wb = m["workbook"]
-    if wb["scores"]["liquidity"] != liq:
+    wb = m.get("workbook")          # only fixtures carry a workbook row to compare with
+    if wb and wb["scores"]["liquidity"] != liq:
         conflicts.append(f"Row {m['workbook_row']} liquidity is {wb['scores']['liquidity']}; the code computes {liq} from the same quotes.")
-    if rating.raw_total is not None and wb["total"] != rating.raw_total:
+    if wb and rating.raw_total is not None and wb["total"] != rating.raw_total:
         conflicts.append(f"Row {m['workbook_row']} total is {wb['total']}; the code computes {rating.raw_total}.")
     if m["contract_id"] in ROW_CONFLICTS:
         conflicts.append(ROW_CONFLICTS[m["contract_id"]])
