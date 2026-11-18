@@ -8,7 +8,8 @@
     "fixture": "node scripts/fixture.ts",
     "arc:keygen": "node scripts/arc-keygen.ts",
     "arc:purchase": "node scripts/arc-purchase.ts",
-    "arc:qualify": "node scripts/arc-qualify.ts"
+    "arc:qualify": "node scripts/arc-qualify.ts",
+    "quicknode:backfill": "node scripts/quicknode-backfill.ts"
   },
   "repository": {
     "type": "git",

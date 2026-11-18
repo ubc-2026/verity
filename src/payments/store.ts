@@ -99,6 +99,11 @@ export class PaymentStore {
     this.#db.close();
   }
 
+  /** Shared connection for modules that must update payment records in the same transaction. */
+  get database(): DatabaseSync {
+    return this.#db;
+  }
+
   #transaction<T>(fn: () => T): T {
     this.#db.exec("BEGIN IMMEDIATE");
     try {
