@@ -1,0 +1,34 @@
+{
+  "name": "verity",
+  "version": "1.0.0",
+  "description": "Verity: an AI agent that buys evidence to clarify how prediction markets resolve.",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "fixture": "node scripts/fixture.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubc-2026/verity.git"
+  },
+  "keywords": [],
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ubc-2026/verity/issues"
+  },
+  "homepage": "https://github.com/ubc-2026/verity#readme",
+  "dependencies": {
+    "@humanwhocodes/momoa": "^3.3.13",
+    "canonicalize": "^5.1.0",
+    "viem": "^2.57.13",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.18"
+  }
+}
