@@ -1,3 +1,5 @@
 __pycache__/
 .pytest_cache/
 .venv/
+.env
+samples/live_last_run.json
