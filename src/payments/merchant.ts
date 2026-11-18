@@ -108,7 +108,12 @@ export async function verifyPaidRequest(input: PaidRequest, deps: MerchantDeps):
   // Route: configured origin + exact path, POST only, no query or fragment.
   if (input.method !== "POST") return fail(402, "method does not match quote");
   if (!input.target.startsWith("/") || /[?#]/.test(input.target)) return fail(400, "invalid request target");
-  const resourceUrl = new URL(input.target, config.origin).href;
+  let resourceUrl: string;
+  try {
+    resourceUrl = new URL(input.target, config.origin).href;
+  } catch {
+    return fail(400, "unparseable request target");
+  }
   if (resourceUrl !== `${config.origin}${input.target}`) return fail(400, "non-canonical request target");
   if (resourceUrl !== quote.resourceUrl) return fail(402, "route does not match quote");
 
@@ -139,6 +144,8 @@ export async function verifyPaidRequest(input: PaidRequest, deps: MerchantDeps):
   if (validBefore - validAfter > config.maxAuthorizationWindowSeconds) return fail(402, "authorization window too long");
   if (now <= validAfter || now >= validBefore) return fail(402, "authorization not currently valid");
   if (now >= quote.expiresAt) return fail(410, "quote expired");
+  // The buyer caps validBefore at quote expiry; enforce it independently here.
+  if (validBefore > quote.expiresAt) return fail(402, "authorization outlives quote");
 
   // Rebuild and commit. Values come from the quote, route, body, and authorization.
   let request: ResearchRequestV1;

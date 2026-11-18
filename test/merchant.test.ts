@@ -84,6 +84,11 @@ describe("merchant verification before settlement", () => {
     ["body with duplicate key", 400, (i) => void (i.body = new TextEncoder().encode('{"contractId":"x","contractId":"demo-contract-001","evidenceType":"resolution_source"}'))],
     ["different route", 402, (i) => void (i.target = "/evidence/other")],
     ["query string", 400, (i) => void (i.target = "/evidence/resolution-source?x=1")],
+    ["unparseable target", 400, (i) => void (i.target = "//[")],
+    ["backslash host-swap target", 400, (i) => void (i.target = "/\\evil.example/evidence/resolution-source")],
+    ["protocol-relative target", 400, (i) => void (i.target = "//evil.example/evidence/resolution-source")],
+    ["dot-segment target", 400, (i) => void (i.target = "/evidence/../evidence/resolution-source")],
+    ["relative target", 400, (i) => void (i.target = "evidence/resolution-source")],
     ["different method", 402, (i) => void (i.method = "PUT")],
     ["missing binding header", 400, (i) => void (i.bindingHeader = undefined)],
     ["wrong salt", 402, (i) => void (i.bindingHeader = encodeBindingHeader({ purchaseId: "purchase-demo-001", quoteId: "quote-demo-001", salt: `0x${"11".repeat(32)}` }))],
@@ -131,6 +136,23 @@ describe("merchant verification before settlement", () => {
     const result = await handlePaidRequest(input, { ...deps, now: () => Number(input.authorization.validBefore) });
     assert.equal(result.verified.ok, false);
     assert.equal(settled.length, 0);
+  });
+
+  it("rejects an authorization whose validBefore outlives the saved quote", async () => {
+    const input = await paidRequest(); // validBefore = DEMO_NOW + 300
+    const { deps, settled } = harness({ ...demoQuote(), expiresAt: DEMO_NOW + 100 });
+    const result = await handlePaidRequest(input, deps);
+    assert.ok(!result.verified.ok && result.verified.status === 402, JSON.stringify(result.verified));
+    assert.match(result.verified.ok ? "" : result.verified.reason, /outlives quote/);
+    assert.equal(settled.length, 0);
+  });
+
+  it("accepts validBefore exactly at quote expiry", async () => {
+    const input = await paidRequest();
+    const { deps, settled } = harness({ ...demoQuote(), expiresAt: Number(input.authorization.validBefore) });
+    const result = await handlePaidRequest(input, deps);
+    assert.equal(result.verified.ok, true, JSON.stringify(result.verified));
+    assert.equal(settled.length, 1);
   });
 
   it("rejects when the merchant's saved quote differs from what the buyer committed to", async () => {
