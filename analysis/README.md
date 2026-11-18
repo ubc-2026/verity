@@ -9,7 +9,7 @@ Fixture mode (the default) uses no network, no API key and no wallet. Live mode 
 cd analysis
 python3 -m venv .venv && . .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python -m pytest -q        # 24 passed
+python -m pytest -q        # 41 passed
 python demo.py             # 3 runs; writes samples/*.json
 ```
 
@@ -35,6 +35,38 @@ python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 - **Key handling:** whoever pays for the Google Gemini API sets `GEMINI_API_KEY` in their own shell. The code does not read a `.env` file, and `.env` is gitignored. Never commit the key or paste it anywhere.
 - **Purchases stay blocked in live mode.** The free official-source checks are only wired up for fixtures so far. A live gap with no free check is logged and skipped.
 
+## Exchange actions (guarded)
+
+`verity/exchange.py` is the only code that can act on a Gemini Exchange account, and every action goes through one gate. The exchange's market data stays public, so analysis never needs this key.
+
+| Rule | Default |
+|---|---|
+| Environment | sandbox (`api.sandbox.gemini.com`). Production needs `VERITY_EXCHANGE_ENV=production` **and** `VERITY_ALLOW_PRODUCTION=yes` |
+| Sending | dry run: orders are built, checked and logged, but not sent, until you pass `dry_run=False` |
+| Order types | limit only, with a price strictly between 0 and 1 |
+| Per order | at most $5.00 |
+| Per day | at most $25.00, counting orders sent and orders whose outcome is unknown |
+| Owner approval | required above $1.00. The default approver denies, so plug in the payment service's wallet-signature check |
+| Price band | within 5¢ of the analysed best ask (buy) or best bid (sell) |
+| Analysis | an order needs a `RiskAnalysisV1` for the same instrument. Markets flagged for human review are refused |
+| Expiry | refused within 1 hour of expiry |
+| Allowlist | only symbols you list in `TradingPolicy.symbol_allowlist` |
+| Funds movement | no withdraw, transfer or deposit method exists, and those paths are refused even if called directly |
+| Timeouts | an order with an unknown outcome blocks that symbol until `mark_reconciled()` is called |
+| Pause | `VERITY_TRADING_PAUSED=1` stops every write |
+| Audit | every decision (refused, dry_run, sent, outcome_unknown, reconciled) goes to a JSON-lines log. Keys, secrets and signatures are never logged |
+
+Key setup: create the key at exchange.gemini.com, under Settings, then API. Make it account-scoped, with a time-based nonce, and give it the **Auditor** role for read-only use. Use **Trader** only if the agent really places orders, and never use **Fund Manager**. Set it in the shell as `GEMINI_EXCHANGE_API_KEY` and `GEMINI_EXCHANGE_API_SECRET`. The account must accept the prediction-market terms before its first order. Sandbox needs its own separate account and key.
+
+```python
+from verity.exchange import GuardedExchange, TradingPolicy, AuditLog, OrderRequest
+ex = GuardedExchange(TradingPolicy(symbol_allowlist={ra.instrument_symbol}), AuditLog(Path("audit/exchange.jsonl")))
+ex.place_order(OrderRequest(symbol=ra.instrument_symbol, side="buy", outcome="yes",
+                            quantity="1", price=ra.quoted_price.best_ask, reason="..."), analysis=ra)
+```
+
+Not built yet: the WebSocket `order.place` path. Gemini recommends it for active trading, but REST is enough for occasional orders. The paths for listing active orders were not in the docs that were read, so they are not wired up.
+
 The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. The repo-level README still describes a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
 
 ## Layout
@@ -48,11 +80,12 @@ verity/
   fixtures.py    loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
   live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live()
   llm.py         Google Gemini analyst (structured output), validation and repair
+  exchange.py    guarded Gemini Exchange actions: sandbox + dry run by default, caps, approval, audit
 fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
   free_checks.json          free official-source checks; NYC outcomes are labeled assumptions
-tests/test_slice.py, tests/test_live.py (both APIs faked)
+tests/test_slice.py, test_live.py, test_exchange.py (all external APIs faked)
 demo.py
 samples/                    generated outputs (OKC, NYC gap-remains)
 ```
