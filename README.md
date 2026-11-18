@@ -1,5 +1,4 @@
-
-[README (6).md](https://github.com/user-attachments/files/35008439/README.6.md)
+[README (7).md](https://github.com/user-attachments/files/35008499/README.7.md)
 # Verity
 
 **Prediction-market research with accountable agent spending.**
@@ -12,7 +11,7 @@ Verity reads the rules of a prediction-market contract, identifies evidence that
 
 Imagine an election market asks whether a candidate will win. The quoted price reflects market expectations. To understand how the contract settles, Verity checks which source the rules recognize, when it is checked, and whether the result must be certified.
 
-1. **Identify the gap.** Google Gemini analyzes the contract text and market metadata. It returns structured findings with quoted rules, a risk assessment, and the evidence needed to resolve each material question.
+1. **Identify the gap.** Verity pulls contract text and market metadata from the Gemini Exchange prediction-market API. Verity analyzes that data and returns structured findings with quoted rules, a risk assessment, and the evidence needed to resolve each material question.
 2. **Request a quote.** The agent proposes a specific resource from an approved merchant. The merchant returns an x402 quote for the resource.
 3. **Apply the spending policy.** The payment service checks the amount, budget, merchant, and purpose. For a purchase that needs human approval, ElevenLabs explains the request and the owner authorizes it with a wallet signature.
 4. **Pay and verify delivery.** The merchant checks the signed authorization against the request before submitting the transfer. The buyer checks the returned resource against the quoted digest.
@@ -22,7 +21,7 @@ Imagine an election market asks whether a candidate will win. The quoted price r
 
 | Component | Responsibility | Technology |
 | --- | --- | --- |
-| Market analysis | Extract resolution criteria, flag ambiguous terms or sources, identify correlated outcomes, and propose evidence to inspect | Google Gemini API and structured JSON |
+| Market analysis | Extract resolution criteria, flag ambiguous terms or sources, identify correlated outcomes, and propose evidence to inspect | Gemini Exchange prediction-market API and structured JSON |
 | Payment service and merchant | Validate the quote, bind the authorization to the exact research request, and deliver the resource after settlement | x402, testnet USDC, EIP-3009 |
 | Spending controls | Check budget and merchant allowlists, request owner approval when needed, and log the decision | Policy engine, ElevenLabs, owner wallet |
 | Reconciliation | Match settlement and delivery evidence and show discrepancies | QuickNode Streams, webhook, database, dashboard |
