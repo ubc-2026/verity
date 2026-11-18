@@ -1,0 +1,115 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "fx-okc-moneyline-20261118",
+    "event_ticker": "NBA-2611190100-ATL-OKC-M",
+    "instrument_symbol": null,
+    "question": "Atlanta vs Oklahoma City, NBA moneyline (game Nov 18, 2026, 8:00 PM ET): will Oklahoma City win?",
+    "expiry_utc": "2026-11-20T13:00:00Z",
+    "analyzed_at_utc": "2026-11-18T01:00:00Z",
+    "snapshot": {
+      "source_mode": "fixture",
+      "source_label": "Gemini Exchange public events list, captured via the workbook",
+      "snapshot_date": "2026-11-17",
+      "snapshot_time_utc": null,
+      "snapshot_hash": "sha256:c4e0d7cfd3e30c3f2c80c98497aca46560ad0107d36e549c419dddd029418c2b",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "Oklahoma City",
+      "best_bid": "0.69",
+      "best_ask": "0.70",
+      "mid": "0.695",
+      "implied_probability": "0.695",
+      "volume_usd": "1071",
+      "volume_basis": "total",
+      "observed_date": "2026-11-17",
+      "observed_time_utc": null
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 1,
+        "rationale": "Binary win/lose outcome tied to a scheduled game.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-OKC-1"
+        ]
+      },
+      "source": {
+        "score": 1,
+        "rationale": "Official league result with named fallbacks.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-OKC-2"
+        ]
+      },
+      "liquidity": {
+        "score": 1,
+        "rationale": "Volume $1071 with a 1c spread.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-OKC-3"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling markets captured; injury news moves the odds but not how the contract settles.",
+        "null_reason": null,
+        "citation_ids": []
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 4,
+      "raw_total": 4,
+      "raw_rating": "Low",
+      "rating_floor": null,
+      "final_rating": "Low",
+      "possible_range": null,
+      "overrides": []
+    },
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 4). Research action: no_further_research. No open resolution questions.",
+    "citations": [
+      {
+        "id": "C-OKC-1",
+        "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "field_or_rule": "event.description (paraphrased)",
+        "quote": "Moneyline for the game scheduled Nov 18, 2026 at 8:00 PM ET; pays Yes if the named team wins."
+      },
+      {
+        "id": "C-OKC-2",
+        "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "field_or_rule": "sourceDetails / contract rules (paraphrased)",
+        "quote": "Sources in order: the league governing body, ESPN, Fox Sports, and the broadcast partner."
+      },
+      {
+        "id": "C-OKC-3",
+        "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "field_or_rule": "contracts[OKC].prices",
+        "quote": "bestBid 0.69, bestAsk 0.70; event volume 1071"
+      }
+    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
+    "data_quality_flags": [
+      "source_mode=fixture (Gemini Exchange public events list, captured via the workbook)",
+      "snapshot_time_unrecorded: workbook stores the date only",
+      "instrument_symbol_not_captured",
+      "rules_paraphrased: excerpts paraphrase API descriptions; terms PDF not fetched"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review.",
+      "Row 2 scores Correlation 1, yet its Key risks cite injury news, which the Framework lists under Correlation 2 ('injury reports'). The total stays Low either way (4 vs 5)."
+    ]
+  },
+  "purchase_proposal": null,
+  "decision_log": [
+    "[fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research)."
+  ]
+}
