@@ -1,6 +1,6 @@
 # ResearchRequestV1 commitment
 
-`ResearchRequestV1` is the single versioned object that the buyer (the payment service) and the merchant both commit to. Its hash, combined with a random salt, becomes the EIP-3009 `nonce`. Once the payer signs, the authorization can only settle for this exact request.
+`ResearchRequestV1` is the single versioned object that the buyer (the payment service) and the merchant both commit to. Its hash, combined with a random salt, becomes the EIP-3009 `nonce`. Before submitting payment for settlement, the merchant recomputes the commitment from the request it received and verifies that it matches the signed nonce.
 
 **Source of truth:** the schema, rules, and test vector below are copied from the README at commit [`ad091fc`](https://github.com/ubc-2026/verity/blob/ad091fc15a1d909fa0062a341dc9fc35bad4dd4e/README.md#2-hardened-x402-payments), section "2. Hardened x402 payments". The current README keeps the same formulas and does not conflict with them.
 
