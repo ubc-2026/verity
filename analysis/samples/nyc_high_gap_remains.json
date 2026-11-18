@@ -1,0 +1,164 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "fx-nyc-high-20261118",
+    "event_ticker": "WXHIGH-NYC-2611190459",
+    "instrument_symbol": null,
+    "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+    "expiry_utc": "2026-11-19T04:59:00Z",
+    "analyzed_at_utc": "2026-11-18T01:00:00Z",
+    "snapshot": {
+      "source_mode": "fixture",
+      "source_label": "Gemini Exchange public events list, captured via the workbook",
+      "snapshot_date": "2026-11-17",
+      "snapshot_time_utc": null,
+      "snapshot_hash": "sha256:a4304ef7e6528887ac8658cff5c9e2906b17f77a2b1f8dc743bbfc586865b50d",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "62°F to 63°F",
+      "best_bid": "0.54",
+      "best_ask": "0.58",
+      "mid": "0.56",
+      "implied_probability": "0.56",
+      "volume_usd": "7",
+      "volume_basis": "total",
+      "observed_date": "2026-11-17",
+      "observed_time_utc": null
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 2,
+        "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-NYC-1",
+          "C-NYC-2"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Official NWS source, but the daily climate report can be issued preliminarily and corrected later (Agent rule 9).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-NYC-1"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "Volume $7 is under $100 (spread 4c).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-NYC-3"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.",
+        "null_reason": null,
+        "citation_ids": []
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 8,
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-NYC-1",
+        "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "field_or_rule": "event.description (paraphrased)",
+        "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."
+      },
+      {
+        "id": "C-NYC-2",
+        "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "field_or_rule": "event.termsAndConditionsUrl",
+        "quote": "(empty)"
+      },
+      {
+        "id": "C-NYC-3",
+        "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "field_or_rule": "contracts[62-63F].prices",
+        "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-NYC-SETTLE",
+        "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "If a correction moves the max across a 2°F band edge, the version used decides the outcome.",
+        "free_checks": [
+          "nyc-settlement-version"
+        ]
+      },
+      {
+        "id": "GAP-NYC-FORECAST",
+        "question": "What maximum temperature is likely at Central Park on Nov 18?",
+        "gap_type": "outcome_forecast",
+        "affects": "outcome_probability",
+        "material": false,
+        "why": "A forecast changes the estimated chance of the event, not the risk of how the contract settles. Verity is research-only and places no trades.",
+        "free_checks": []
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "source_mode=fixture (Gemini Exchange public events list, captured via the workbook)",
+      "snapshot_time_unrecorded: workbook stores the date only",
+      "instrument_symbol_not_captured",
+      "event_terms_url_empty",
+      "rules_paraphrased: excerpts paraphrase API descriptions; terms PDF not fetched"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-f14ba059791a",
+    "contract_id": "fx-nyc-high-20261118",
+    "evidence_gap_id": "GAP-NYC-SETTLE",
+    "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+    "catalog_parameters": {
+      "station": "Central Park, NY (CLINYC)",
+      "date": "2026-11-18"
+    },
+    "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": "FIXTURE: free-check scenario 'free-check-inconclusive' (assumed, not observed)",
+    "signed": false,
+    "created_at_utc": "2026-11-18T01:00:00Z"
+  },
+  "decision_log": [
+    "[fx-nyc-high-20261118] skip GAP-NYC-FORECAST: outcome forecast changes event probability, not settlement risk; research-only, no trades.",
+    "[fx-nyc-high-20261118] GAP-NYC-SETTLE: free official-source check (Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, NWS Climatological Report (Daily) for Central Park, product CLINYC) -> inconclusive. FIXTURE ASSUMPTION: the terms cite 'NWS Climatological Report (Daily)' without naming which issuance controls, and the free CLINYC page shows only the latest issuance, not the exchange's rule.",
+    "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-NYC-SETTLE: max 50000 base units (= 0.05 USDC), unsigned."
+  ]
+}
