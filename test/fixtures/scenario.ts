@@ -6,7 +6,7 @@
  */
 import { privateKeyToAccount } from "viem/accounts";
 import type { Hex } from "viem";
-import type { CatalogItem } from "../../src/payments/buyer.ts";
+import { catalogById, RESOLUTION_ITEM } from "../../src/payments/catalog.ts";
 import type { MerchantConfig, SavedQuote } from "../../src/payments/merchant.ts";
 import type { ResearchRequestV1 } from "../../src/payments/researchRequest.ts";
 
@@ -16,6 +16,14 @@ export const DEMO_PAYER = privateKeyToAccount(
 export const DEMO_OTHER_SIGNER = privateKeyToAccount(
   "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",
 );
+/** Anvil test key #2. Signs delivery receipts. Never fund it. */
+export const DEMO_MERCHANT_SIGNER = privateKeyToAccount(
+  "0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a",
+);
+/** Anvil test key #3. Enrolled owner. Never fund it. */
+export const DEMO_OWNER = privateKeyToAccount(
+  "0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6",
+);
 
 export const DEMO_NOW = 1795185100;
 export const ARC_TESTNET_CHAIN_ID = 5042002;
@@ -23,19 +31,8 @@ export const ARC_TESTNET_USDC: Hex = "0x3600000000000000000000000000000000000000
 export const DEMO_PAY_TO: Hex = "0x2222222222222222222222222222222222222222";
 export const DEMO_CONTENT_HASH: Hex = "0xecb8d0303298a3bff971405264cc3670f3297da1468bd6c39a3e32e5abd2dda9";
 
-export const DEMO_CATALOG_ITEM: CatalogItem = {
-  catalogItemId: "resolution-source-excerpt-v1",
-  merchantId: "verity-demo-merchant",
-  resourceUrl: "https://merchant.example/evidence/resolution-source",
-  method: "POST",
-  contentType: "application/json",
-  chainId: ARC_TESTNET_CHAIN_ID,
-  token: ARC_TESTNET_USDC,
-  payTo: DEMO_PAY_TO,
-  maxAmount: 100_000n,
-};
-
-export const DEMO_CATALOG = new Map([[DEMO_CATALOG_ITEM.catalogItemId, DEMO_CATALOG_ITEM]]);
+export const DEMO_CATALOG_ITEM = RESOLUTION_ITEM;
+export const DEMO_CATALOG = catalogById();
 
 export const DEMO_PARAMETERS = { contractId: "demo-contract-001", evidenceType: "resolution_source" };
 

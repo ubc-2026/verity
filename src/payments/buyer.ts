@@ -27,6 +27,13 @@ export interface CatalogItem {
   payTo: Hex;
   /** Hard price ceiling for this item, in USDC base units. */
   maxAmount: bigint;
+  /** Listed price the mock merchant quotes, in USDC base units. */
+  price: bigint;
+  evidenceType: string;
+  /** Resolution evidence can be purchased. Outcome forecasts cannot. */
+  affects: "resolution_risk" | "outcome_probability";
+  /** Catalog parameter names the merchant requires besides contractId. */
+  requiredParameters: readonly string[];
 }
 
 /**

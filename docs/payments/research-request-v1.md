@@ -90,9 +90,25 @@ The pinned README does not specify the following. Each is narrow on purpose and 
 - **Authorization window.** The buyer default is a 300 s window with `validAfter` backdated 30 s, capped at quote expiry. The merchant rejects windows longer than `maxAuthorizationWindowSeconds` (600 s in the fixture).
 - **Token EIP-712 domain.** The fixture uses `{ name: "USDC", version: "2" }` as a placeholder. Read the real Arc Testnet USDC domain from the contract during facilitator qualification.
 
+## Local demo slice
+
+`npm run demo` starts the mock merchant and runs the payment service against it. Nothing is sent to Arc. The run shows:
+
+1. One auto-approved purchase (`0.05` USDC) that verifies and returns the quoted document.
+2. A swapped document, rejected with `wrong_resource` before the nonce is spent.
+3. A changed URL, rejected because the route no longer matches the quote.
+4. The first authorization submitted again, rejected with `nonce_replay`.
+5. The NYC `PurchaseProposalV1` from the analysis slice, bought as the NWS settlement excerpt.
+6. A `0.80` USDC quote that waits for an owner EIP-712 signature, then verifies.
+7. A `2.50` USDC quote rejected by policy.
+
+`GET /ledger` then lists each purchase as reconciled, mismatch, or duplicate. A payment with no delivery is `paid_delivery_missing`. A delivery with no payment is `delivered_payment_unconfirmed`.
+
+The merchant signs `DeliveryReceiptV1` over the raw response hash. The buyer hashes those bytes before trusting the receipt.
+
 ## Pending
 
-- Durable, transactional authorization store, plus uniqueness on `(chain, token, payer, nonce)`. Today only the in-memory fixture store exists.
-- Nonce freshness and on-chain `authorizationState` check on the merchant side.
-- Live x402 settlement adapter and Arc Testnet facilitator qualification. The fixture uses a stub adapter.
-- HTTP wiring for the 402 quote and the paid retry (`PAYMENT-REQUIRED`, `PAYMENT-SIGNATURE`, `PAYMENT-RESPONSE`).
+- Durable, transactional authorization store. The demo keeps nonces, reservations, and the ledger in memory.
+- On-chain `authorizationState` check. Replay protection here is the merchant's spent-nonce set, not the USDC contract.
+- Live x402 settlement on Arc Testnet. Accepting a payment in this slice is a local decision.
+- QuickNode delivery of `AuthorizationUsed` and `Transfer` logs into the ledger.
