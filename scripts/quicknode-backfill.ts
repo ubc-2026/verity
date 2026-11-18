@@ -54,7 +54,29 @@ const liveBlockers: string[] = [];
 if (!process.env.QUICKNODE_API_KEY) liveBlockers.push("QUICKNODE_API_KEY is not set");
 if (!process.env.VERITY_WEBHOOK_URL) liveBlockers.push("VERITY_WEBHOOK_URL (public HTTPS URL ending in /webhooks/quicknode) is not set");
 if (!providedToken) liveBlockers.push("VERITY_QN_SECURITY_TOKEN is not set (using an ephemeral local token below)");
-if (!process.env.QUICKNODE_ARC_TESTNET_SLUG) liveBlockers.push(`network slug "${slug}" is unconfirmed; set QUICKNODE_ARC_TESTNET_SLUG from GET /streams or the dashboard`);
+
+/** Confirms the network slug and the filter against QuickNode's own copy of the block. */
+async function testFilter(): Promise<boolean> {
+  const response = await fetch("https://api.quicknode.com/streams/rest/v1/streams/test_filter", {
+    method: "POST",
+    headers: { accept: "application/json", "content-type": "application/json", "x-api-key": process.env.QUICKNODE_API_KEY! },
+    body: JSON.stringify({ network: slug, dataset: "block_with_receipts", filter_function: config.filter_function, block: String(BLOCK) }),
+  });
+  const text = await response.text();
+  const ok = response.ok && text.toLowerCase().includes(TX);
+  console.log(`\ntest_filter network=${slug} block=${BLOCK} -> HTTP ${response.status}; target tx ${ok ? "present" : "NOT present"}`);
+  console.log(text.slice(0, 1200));
+  return ok;
+}
+
+if (process.argv.includes("--test-filter") || process.argv.includes("--create")) {
+  if (!process.env.QUICKNODE_API_KEY) {
+    console.log("\ntest_filter skipped: QUICKNODE_API_KEY is not set");
+    liveBlockers.push(`network slug "${slug}" not confirmed by test_filter`);
+  } else if (!(await testFilter())) {
+    liveBlockers.push(`test_filter did not confirm network slug "${slug}" with the target tx`);
+  }
+}
 
 if (process.argv.includes("--create")) {
   if (liveBlockers.length > 0) {

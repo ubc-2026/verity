@@ -9,7 +9,9 @@
     "arc:keygen": "node scripts/arc-keygen.ts",
     "arc:purchase": "node scripts/arc-purchase.ts",
     "arc:qualify": "node scripts/arc-qualify.ts",
-    "quicknode:backfill": "node scripts/quicknode-backfill.ts"
+    "quicknode:backfill": "node scripts/quicknode-backfill.ts",
+    "quicknode:token": "node scripts/quicknode-token.ts",
+    "webhook:serve": "node scripts/webhook-server.ts"
   },
   "repository": {
     "type": "git",
