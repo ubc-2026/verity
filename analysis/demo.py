@@ -1,6 +1,9 @@
 """Fixture-only demo: no network, no API key, no wallet.
 
     python demo.py            # prints the three runs and writes samples/*.json
+
+Live (needs network, GEMINI_API_KEY and VERITY_GEMINI_MODEL; still places no trades):
+    python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 """
 from __future__ import annotations
 
@@ -38,7 +41,41 @@ def run(title: str, contract_id: str, scenario: str | None, sample_name: str | N
             indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def run_live(ticker: str, outcome: str, read_terms: bool) -> None:
+    from verity.live import analyze_live
+    ra, ctx = analyze_live(ticker, outcome, read_terms=read_terms)
+    print(f"\n=== LIVE {ticker} / {outcome} ===  (clock {ctx.clock.now_utc})")
+    s, r = ra.scores, ra.rating
+    print(f"price  bid {ra.quoted_price.best_bid} / ask {ra.quoted_price.best_ask}  implied {ra.quoted_price.implied_probability}")
+    print(f"scores ambiguity={s.ambiguity.score} source={s.source.score} liquidity={s.liquidity.score} correlation={s.correlation.score}")
+    print(f"rating raw {r.raw_total} -> {r.raw_rating}; floor {r.rating_floor}; final {r.final_rating}; "
+          f"complete={r.complete}; action {ra.research_action}")
+    for f in ra.data_quality_flags:
+        print("  flag:", f)
+    log: list[str] = []
+    prop = generate_purchase_request(ra, ctx, decision_log=log)
+    for line in log:
+        print("  log:", line)
+    print("proposal:", "null" if prop is None else prop.model_dump_json(indent=2))
+    OUT.mkdir(exist_ok=True)
+    (OUT / "live_last_run.json").write_text(json.dumps(
+        {"risk_analysis": ra.model_dump(mode="json"),
+         "purchase_proposal": None if prop is None else prop.model_dump(mode="json"),
+         "decision_log": log}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser(description="Verity analysis demo")
+    ap.add_argument("--live", metavar="EVENT_TICKER", help="read this Gemini Exchange event and call Google Gemini")
+    ap.add_argument("--outcome", help="contract label to analyze, e.g. 'Oklahoma City'")
+    ap.add_argument("--no-terms", action="store_true", help="skip downloading the terms PDF")
+    args = ap.parse_args()
+    if args.live:
+        if not args.outcome:
+            ap.error("--live needs --outcome")
+        run_live(args.live, args.outcome, read_terms=not args.no_terms)
+        raise SystemExit(0)
     run("OKC moneyline: clear rules", "fx-okc-moneyline-20261118", None, "okc_moneyline.json")
     run("NYC high temp: free check answers (FIXTURE)", "fx-nyc-high-20261118", "free-check-answers", None)
     run("NYC high temp: gap remains (FIXTURE)", "fx-nyc-high-20261118", "free-check-inconclusive", "nyc_high_gap_remains.json")
