@@ -80,6 +80,87 @@ The planned QuickNode Stream sends Arc Testnet block receipts to `/webhooks/quic
 | Inconsistent payment fields, invalid receipt, or wrong digest | Mismatch |
 | An extra settlement or a transfer with no matching purchase | Duplicate or unmatched payment |
 
+## Grok Bot: overdue delivery incidents
+
+Grok Bot runs Verity's overdue-delivery incident workflow. When the reconciliation ledger reports that an Arc Testnet USDC payment is confirmed but the merchant missed its deadline to deliver verified evidence, it POSTs a `verity.overdue_delivery.v1` event to a Grok Bot webhook routine. Grok Bot rechecks the latest purchase state in the ledger, then opens at most one card per purchase on a private incident Page, using an `environment:purchaseId:exceptionType` key so replays and restarts never create duplicates. The card records missing verified delivery, which is overdue evidence and not a finding about the merchant's conduct, and it points the owner to the purchase's delivery record. Grok Bot only reads the ledger and only writes to the incident Page, so wallet keys and raw evidence stay inside Verity.
+
+The webhook URL and sender key are provided privately by the Grok Bot owner. This repository does not store them. The field-level contract is [Overdue delivery incidents](docs/grok-bot/overdue-delivery-incidents.md).
+
+### Event: `verity.overdue_delivery.v1`
+
+The ledger POSTs one JSON object when a delivery deadline passes. Unknown fields, missing fields, wrong types, and values that fail these rules are rejected and create no incident.
+
+| Field | Type | Rules |
+| --- | --- | --- |
+| `schema` | string | Exactly `verity.overdue_delivery.v1`. |
+| `eventId` | string | Non-empty. Identifies this emission. It is not the incident key. |
+| `environment` | string | Exactly `fixture` or `arc-testnet`. |
+| `purchaseId` | string | Non-empty Verity purchase identifier. |
+| `exceptionType` | string | Exactly `paid_delivery_missing`. |
+| `ledgerStatus` | string | Non-empty. Informational on the event. Eligibility uses the rechecked ledger record. |
+| `settlementConfirmed` | boolean | JSON boolean only (`true` or `false`, not `0`, `1`, or `"true"`). |
+| `txHash` | string | `0x` followed by exactly 64 hexadecimal characters. |
+| `amountBaseUnits` | string | Integer string of USDC base units (6 decimals). `"50000"` is 0.05 USDC. No leading zeros except `"0"`. Not a JSON number. |
+| `merchantLabel` | string | Non-empty public label for the purchase. |
+| `deliveryDeadlineUtc` | string | ISO 8601 timestamp ending in `Z`. Optional fractional seconds are accepted. No other timezone offset. |
+| `emittedAtUtc` | string | ISO 8601 timestamp ending in `Z`, when the ledger emitted the event. |
+
+```json
+{
+  "schema": "verity.overdue_delivery.v1",
+  "eventId": "evt-fx-001",
+  "environment": "fixture",
+  "purchaseId": "fx-001",
+  "exceptionType": "paid_delivery_missing",
+  "ledgerStatus": "Paid, delivery missing",
+  "settlementConfirmed": true,
+  "txHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+  "amountBaseUnits": "50000",
+  "merchantLabel": "Verity demo merchant (fixture)",
+  "deliveryDeadlineUtc": "2026-11-16T17:00:00Z",
+  "emittedAtUtc": "2026-11-16T17:00:01Z"
+}
+```
+
+### Ledger recheck
+
+Before opening a card, Grok Bot reads the latest purchase state. It does not trust the event alone.
+
+```http
+GET {VERITY_LEDGER_URL}/purchases/{purchaseId}
+Accept: application/json
+Authorization: Bearer {VERITY_LEDGER_TOKEN}
+```
+
+`purchaseId` is URL-encoded. The bearer token is read-only and scoped to the incident feed. A successful response is HTTP 200 with the latest record itself, including `purchaseId`, `txHash`, `amountBaseUnits`, `ledgerStatus`, `settlementConfirmed`, `deliveryDeadlineUtc`, and `merchantLabel`. The client times out after 3 seconds.
+
+### Eligibility
+
+An incident is opened only when that latest record has `ledgerStatus` exactly `Paid, delivery missing`, `settlementConfirmed` true, the same `purchaseId`, `txHash`, and `amountBaseUnits` as the event, and a `deliveryDeadlineUtc` strictly earlier than now in UTC. `txHash` is compared case-insensitively, and the amount is compared numerically. A pending payment, a deadline that has not passed, a reconciled delivery, a mismatch with the event, or an unavailable ledger produces no incident.
+
+### Incident key
+
+```text
+incidentKey = "{environment}:{purchaseId}:{exceptionType}"
+```
+
+Example: `fixture:fx-001:paid_delivery_missing`. A replay or restart updates the existing card. The card links the settlement at `https://explorer.testnet.arc.io/tx/{txHash}`.
+
+### Current status
+
+The workflow is fixture-tested:
+
+- An overdue confirmed payment creates one card.
+- A replay or restart keeps one card.
+- Delivery verified before processing creates zero cards.
+- A pending payment, a future deadline, and an unavailable ledger create none.
+
+The real ledger is not wired yet. Payments and security (Decong) connects it by:
+
+1. Emitting `verity.overdue_delivery.v1` when a delivery deadline passes, using the webhook URL and sender key provided privately by the Grok Bot owner.
+2. Exposing the read-only `GET {VERITY_LEDGER_URL}/purchases/{purchaseId}` endpoint.
+3. Issuing a read-only bearer token (`VERITY_LEDGER_TOKEN`) scoped to that incident feed.
+
 ## Setup and verification
 
 The integration plan uses Arc Testnet (chain ID `5042002`) and USDC at `0x3600000000000000000000000000000000000000`.
