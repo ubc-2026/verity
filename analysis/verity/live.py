@@ -119,19 +119,18 @@ def analyze_live(
     outcome_label: str,
     *,
     http_get: Optional[HttpGet] = None,
-    client: Any = None,
-    model: Optional[str] = None,
     read_terms: bool = True,
     now: Optional[datetime] = None,
 ):
-    """Fetch -> (terms PDF) -> Google Gemini analyst -> RiskAnalysisV1.
+    """Fetch -> (terms PDF) -> code-only rules analyst -> RiskAnalysisV1.
 
+    No LLM and no API key: the Gemini Exchange events API is public.
     Returns (risk_analysis, ctx); pass the same ctx to generate_purchase_request so
     it uses the same clock and catalog.
     """
     from .analysis import get_risk_analysis
     from .fixtures import FixedClock, FixtureContext
-    from .llm import gemini_analyst
+    from .rules_analyst import rules_analyst
 
     now = now or datetime.now(timezone.utc)
     event = fetch_event(event_ticker, http_get)
@@ -140,7 +139,7 @@ def analyze_live(
     text, problem = (None, "no terms URL in the event") if not terms_url else (
         fetch_terms_text(terms_url, http_get) if read_terms else (None, "terms reading disabled"))
     record = build_live_record(event, outcome_label, now=now, terms_text=text, terms_problem=problem)
-    record = gemini_analyst(record, client=client, model=model)
+    record = rules_analyst(record)
 
     ctx = FixtureContext.default(clock=FixedClock(fmt_utc(now)))
     ctx.markets = {**ctx.markets, record["contract_id"]: record}

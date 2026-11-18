@@ -47,6 +47,14 @@ def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
     return {p: known.get(p, "") for p in item["parameters"]}
 
 
+def _free_check_label(scenario: Optional[str], res: Optional[dict[str, Any]]) -> Optional[str]:
+    if not scenario:
+        return None
+    if res is not None and res.get("fixture_assumption") is False:
+        return f"OBSERVED: free-check scenario '{scenario}' read from the official sources at {res.get('observed_utc')}"
+    return f"FIXTURE: free-check scenario '{scenario}' (assumed, not observed)"
+
+
 def generate_purchase_request(
     risk_analysis: RiskAnalysisV1,
     ctx: Optional[FixtureContext] = None,
@@ -84,6 +92,7 @@ def generate_purchase_request(
             continue
 
         answered = False
+        res: Optional[dict[str, Any]] = None
         for check_id in g.free_checks:
             check = ctx.free_checks.get(check_id)
             if check is None:
@@ -117,7 +126,7 @@ def generate_purchase_request(
             catalog_parameters=_catalog_params(ra, item),
             rationale=f"{g.question} {g.why} No cached or free official source answered it, and catalog item '{item['title']}' answers exactly this gap type.",
             max_amount_base_units=item["price_base_units"],
-            fixture_label=f"FIXTURE: free-check scenario '{ctx.free_check_scenario}' (assumed, not observed)" if ctx.free_check_scenario else None,
+            fixture_label=_free_check_label(ctx.free_check_scenario, res),
             created_at_utc=created,
         )
         _record(decision_log, f"[{ra.contract_id}] PROPOSE {item['id']} for {g.id}: max {item['price_base_units']} base units (= {int(item['price_base_units']) / 1_000_000:.2f} USDC), unsigned.")

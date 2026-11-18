@@ -1,8 +1,8 @@
 """get_risk_analysis(contract_id) -> RiskAnalysisV1, fixture-backed.
 
-In fixture mode the "analyst" block in each fixture stands in for the Google
-Gemini structured-output call. Liquidity is always computed in code from the
-quoted numbers, so the model cannot talk its way past thin markets.
+In fixture mode the "analyst" block in each fixture holds the workbook's scores.
+In live mode verity/rules_analyst.py fills it with code-only rules (no LLM).
+Liquidity is always computed in code from the quoted numbers.
 """
 from __future__ import annotations
 
@@ -80,9 +80,8 @@ def _flags(m: dict[str, Any]) -> list[str]:
         f.append("third_party_price_source: price not read from Gemini directly")
     if m.get("terms_problem"):
         f.append(f"terms_not_read: {m['terms_problem']}")
-    if m.get("model_id"):
-        f.append(f"analyst=google-gemini ({m['model_id']})")
-    f.extend(m.get("model_flags", []))
+    if m.get("analyst_id"):
+        f.append(f"analyst={m['analyst_id']} (code rules, no LLM)")
     return f
 
 
