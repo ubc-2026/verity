@@ -79,6 +79,10 @@ def generate_purchase_request(
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: cached evidence already answers it ({cached}).")
             continue
 
+        if not g.free_checks:
+            _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no free official-source check is configured for this gap, so free evidence was not ruled out.")
+            continue
+
         answered = False
         for check_id in g.free_checks:
             check = ctx.free_checks.get(check_id)
