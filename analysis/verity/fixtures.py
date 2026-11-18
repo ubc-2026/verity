@@ -6,7 +6,7 @@ import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 
 FIXTURE_DIR = Path(__file__).resolve().parent.parent / "fixtures"
 
@@ -50,6 +50,12 @@ class FixtureContext:
     free_checks: dict[str, Any] = field(default_factory=dict)
     cached_evidence: dict[tuple[str, str], str] = field(default_factory=dict)
     free_check_scenario: Optional[str] = None   # which labeled fixture outcome to use
+    # When set, and no fixture scenario is selected, read the public documents.
+    live_research: bool = False
+    fetch_text: Optional[Callable[[str], tuple[Optional[str], Optional[str]]]] = None
+    # When set, and no fixture scenario is selected, one model call answers each gap.
+    # The callable is complete_json(system, user, schema) -> dict. No key is read here.
+    complete_json: Optional[Callable[[str, str, dict], Any]] = None
 
     @classmethod
     def default(cls, **overrides: Any) -> "FixtureContext":

@@ -19,7 +19,7 @@ Verity reads a prediction-market contract, identifies missing evidence that coul
 
 ```mermaid
 flowchart TD
-    Market["Gemini Exchange market data"] --> Analysis["Google Gemini analysis"]
+    Market["Gemini Exchange market data"] --> Analysis["Risk scoring in code"]
     Analysis --> Proposal["Catalog purchase proposal"]
     Proposal --> Policy["Payment policy and signer"]
     Owner["Owner wallet approval"] --> Policy
@@ -31,7 +31,7 @@ flowchart TD
     Delivery --> Ledger
 ```
 
-The model proposes a catalog item and explains why it matters. The payment service holds the signer and derives the merchant endpoint, recipient, asset, network, and amount from the allowlisted catalog and validated quote.
+The purchase proposal names a catalog item and why it matters. The payment service holds the signer and derives the merchant endpoint, recipient, asset, network, and amount from the allowlisted catalog and validated quote.
 
 ### Market analysis
 
@@ -87,7 +87,7 @@ The integration plan uses Arc Testnet (chain ID `5042002`) and USDC at `0x360000
 1. **Start with a fixture.** Share one timestamped market snapshot, one catalog item, and one request schema across the analyst, payment service, and merchant. Label fixture data in the demo.
 2. **Test a purchase locally.** Confirm both sides derive the same request hash and nonce. Alter a bound request field and confirm rejection. Alter the response bytes and confirm the ledger flags the mismatch.
 3. **Verify testnet settlement.** Fund the test payer, confirm facilitator support, and run one Arc transfer. Check that its authorization and transfer logs match the request before wiring QuickNode.
-4. **Connect the live services.** Configure the Gemini Exchange feed, Google Gemini, the merchant and facilitator, Arc RPC, the QuickNode signing secret, the enrolled owner wallet, and ElevenLabs if using voice. Store credentials in the runtime environment.
+4. **Connect the live services.** Configure the Gemini Exchange feed, the merchant and facilitator, Arc RPC, the QuickNode signing secret, the enrolled owner wallet, and ElevenLabs if using voice. Store credentials in the runtime environment.
 5. **Record the demo.** Show one reconciled purchase, one quote that requires owner approval, and one tampered request rejected before settlement. Also check that concurrent reservations respect the budget and retries do not create a second transfer.
 
 ## Team workstreams
@@ -101,7 +101,7 @@ The integration plan uses Arc Testnet (chain ID `5042002`) and USDC at `0x360000
 
 ## References
 
-- [Gemini Exchange prediction-market events](https://developer.gemini.com/rest-api/prediction-markets/events/list-events) and [Google Gemini structured output](https://ai.google.dev/gemini-api/docs/structured-output)
+- [Gemini Exchange prediction-market events](https://developer.gemini.com/rest-api/prediction-markets/events/list-events)
 - [x402 exact EVM scheme](https://github.com/x402-foundation/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md), [EIP-3009](https://eips.ethereum.org/EIPS/eip-3009), and [JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785.html)
 - [Arc Testnet explorer](https://explorer.testnet.arc.io/), [Circle faucet](https://faucet.circle.com/), and [QuickNode webhook verification](https://www.quicknode.com/docs/streams/destinations/webhooks)
 - [ElevenLabs phone integration](https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/native-integration/) and [UBC 2026 Devpost](https://ubc-hackathon-2026.devpost.com/)

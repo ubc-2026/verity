@@ -9,31 +9,28 @@ Fixture mode (the default) uses no network, no API key and no wallet. Live mode 
 cd analysis
 python3 -m venv .venv && . .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python -m pytest -q        # 24 passed
+python -m pytest -q
 python demo.py             # 3 runs; writes samples/*.json
 ```
 
-These commands were verified on Linux from a clean virtualenv (Python 3.13, pydantic 2.13), with both `requirements.txt` and `requirements-live.txt`. They have not been run on Windows yet. The tests fake both APIs, so they need no network and no key.
+These commands were verified on Linux from a clean virtualenv (Python 3.13, pydantic 2.13), with both `requirements.txt` and `requirements-live.txt`. They have not been run on Windows yet. The tests fake the exchange API, so they need no network and no key.
 
 ## Live mode
 
-This reads a real Gemini Exchange market and has Google Gemini score it. It still places no trades and signs nothing.
+This reads a real Gemini Exchange market. It needs no API key. It still places no trades and signs nothing.
 
 ```bash
 pip install -r requirements-live.txt
-export GEMINI_API_KEY=...            # Windows PowerShell: $env:GEMINI_API_KEY="..."
-export VERITY_GEMINI_MODEL=...       # model id from Google AI Studio
 python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 ```
 
-- `verity/live.py` reads `GET /v1/prediction-markets/events/{ticker}`, which is public and needs no key. It records the real snapshot time and instrument symbol, downloads the terms PDF (add `--no-terms` to skip it), and reshapes everything into the fixture format.
-- `verity/llm.py` calls Google Gemini with structured output (`response_schema`, temperature 0).
-  - The model scores only ambiguity, source and correlation, and names any evidence gaps. Liquidity stays computed in code.
-  - Its output is checked before use. A score outside 1–3 becomes `null` with a reason, citations to excerpts that don't exist are dropped, and a forecast question can never count as material. Each of these fixes is flagged in the output.
+- `verity/live.py` reads `GET /v1/prediction-markets/events/{ticker}`, which is public. It records the real snapshot time and instrument symbol, downloads the terms PDF (add `--no-terms` to skip it), and reshapes everything into the fixture format.
+- Ambiguity, source, and correlation stay `null` on a live snapshot. The exchange sends the contract text. It does not score how the contract settles, and this code does not invent those scores.
+- Liquidity is computed in code from the bid, the ask, and the volume.
 - `analyze_live()` returns the analysis and its context. Pass both to `generate_purchase_request()`.
 - The output is written to `samples/live_last_run.json`, which git ignores.
-- **Key handling:** whoever pays for the Google Gemini API sets `GEMINI_API_KEY` in their own shell. The code does not read a `.env` file, and `.env` is gitignored. Never commit the key or paste it anywhere.
-- **Purchases stay blocked in live mode.** The free official-source checks are only wired up for fixtures so far. A live gap with no free check is logged and skipped.
+- **Purchases stay blocked on a live market snapshot.** That snapshot has no evidence gaps. The New York fixture gap can be checked against the public terms PDF and the NWS Central Park report with `python demo.py --research`. A document that cannot be read does not become a purchase. The labeled fixture scenarios are unchanged.
+- **A model can answer any gap** when `FixtureContext.complete_json` is set. That function is `complete_json(system, user, schema) -> dict`. The model may quote only text that was gathered. A quote or URL it was not given makes the result `failed`, and a failure does not propose a purchase. No model provider or API key is wired in. A fixture scenario still takes priority.
 
 The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. The repo-level README still describes a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
 
@@ -45,9 +42,9 @@ verity/
   scoring.py     workbook 1-3 rubric, 4-12 bands, overrides kept separate, liquidity computed in code
   analysis.py    get_risk_analysis(contract_id, ctx=None)
   proposals.py   generate_purchase_request(risk_analysis, ctx=None, decision_log=None)
+  research.py    NYC document check, and one injected model call per gap
   fixtures.py    loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
   live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live()
-  llm.py         Google Gemini analyst (structured output), validation and repair
 fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
@@ -64,7 +61,8 @@ samples/                    generated outputs (OKC, NYC gap-remains)
   - A 3 in Ambiguity or Source sets a floor of Medium.
   - A 3 in Liquidity is a trading rule, so it becomes a note ("the price is an unreliable signal") and does not change the rating.
 - **Null** scores carry a reason. With any null, the rating is `complete: false` and `final_rating: null`, and the output shows the `possible_range`.
-- **Liquidity** is computed from the quotes and never comes from the model. In fixture mode, the analyst block in each fixture stands in for the Google Gemini structured-output call.
+- **Ambiguity, source, and correlation** follow `READING_RUBRIC` in `verity/scoring.py`. Fixture files store those three scores. A live snapshot leaves them null. An empty terms link is at least ambiguity 2. No named settlement source is a null source score, not a guess. Correlation measures overlap between contracts. Sibling buckets of the same question stay 1. A wording conflict with the source is a snapshot flag, not a second score.
+- **Liquidity** is computed from the quotes. Volume under $100, a spread over 5¢, or a missing bid or ask is 3. Volume of at least $1,000, a spread of at most 2¢, and a bid on every strike is 1. Anything else with two prices is 2. No data at all is null. Both prices with no volume is null. `total` and `24h` volume are labeled and are not converted.
 - **Research actions:** Low → `no_further_research`, Medium → `investigate`, High → `flag_for_human_review`. This replaces the workbook's trading verbs.
 
 ## Proposal gates
@@ -96,9 +94,9 @@ All five rows reproduce the workbook's totals.
 - **NYC free check:** both outcomes are FIXTURE ASSUMPTIONS. Read the weather terms PDF and the NWS CLINYC product, then record the real result. That PDF's URL is inferred, because the event-level `termsAndConditionsUrl` was empty.
 - **Snapshot time:** the workbook stores only the date (2026-11-17). Live reads should store the UTC time.
 - **Instrument symbols** are missing in the OKC and NYC fixtures. Live mode records them.
-- **Field names:** `verity/live.py` uses the field names from Gemini's API docs. Check them against one real response; nobody has made a live call yet.
+- **Field names:** `verity/live.py` reads the public event payload. Contract descriptions may arrive as a document tree; the loader flattens those to plain text.
 - **Tickers** are missing for the Fed and Best AI rows, which came from CoinRithm rather than Gemini. They are flagged, and purchases for them are blocked.
 - **Rules text** is a paraphrase of the API descriptions. Fetch the terms PDFs so citations quote the actual rules.
 - **Expiry:** every fixture market expires between Nov 19 and Jan 1. After that, keep the fixture clock or take a new snapshot.
-- **The Google Gemini analyst** is built and tested only against a fake client. It needs one real run with the paid key to confirm the model ID and how good its scores are.
+- **Reading scores:** a live snapshot does not assign ambiguity, source, or correlation. Fixture files still carry the workbook scores for those three.
 - **Free checks in live mode:** to let a live gap lead to a purchase, add a free-check source for each type of gap (for example, read the terms PDF for the settlement rule).

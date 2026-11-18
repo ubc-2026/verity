@@ -20,6 +20,7 @@ from datetime import timedelta
 from typing import Any, Optional
 
 from .fixtures import FixtureContext, fmt_utc, parse_utc
+from .research import ResearchResult, research_free_check, research_gap
 from .schemas import PurchaseProposalV1, RiskAnalysisV1
 
 log = logging.getLogger("verity.decisions")
@@ -39,6 +40,46 @@ def _catalog_match(ctx: FixtureContext, gap_type: str) -> Optional[dict[str, Any
                 and item["merchant_id"] in allow):
             return item
     return None
+
+
+def _research_line(contract_id: str, gap_id: str, found: ResearchResult) -> str:
+    sources = ", ".join(found.sources) if found.sources else "no url"
+    excerpt = f" Excerpt: {found.excerpts[0][:160]}" if found.excerpts else ""
+    return (f"[{contract_id}] {gap_id}: free research {found.status}. {found.conclusion} "
+            f"Sources: {sources}.{excerpt}")
+
+
+def _proposal_rationale(question: str, why: str, title: str, research_note: Optional[str]) -> str:
+    if research_note:
+        return (f"{question} {why} Free research left it open: {research_note} "
+                f"Catalog item '{title}' answers exactly this gap type.")
+    return (f"{question} {why} No cached or free official source answered it, "
+            f"and catalog item '{title}' answers exactly this gap type.")
+
+
+def _emit_proposal(
+    decision_log: Optional[list[str]],
+    ra: RiskAnalysisV1,
+    gap: Any,
+    item: dict[str, Any],
+    ctx: FixtureContext,
+    now: Any,
+    research_note: Optional[str],
+) -> PurchaseProposalV1:
+    created = fmt_utc(now)
+    proposal = PurchaseProposalV1(
+        proposal_id="prop-" + hashlib.sha256(f"{ra.contract_id}|{gap.id}|{item['id']}|{created}".encode()).hexdigest()[:12],
+        contract_id=ra.contract_id,
+        evidence_gap_id=gap.id,
+        catalog_item_id=item["id"],
+        catalog_parameters=_catalog_params(ra, item),
+        rationale=_proposal_rationale(gap.question, gap.why, item["title"], research_note),
+        max_amount_base_units=item["price_base_units"],
+        fixture_label=f"FIXTURE: free-check scenario '{ctx.free_check_scenario}' (assumed, not observed)" if ctx.free_check_scenario else None,
+        created_at_utc=created,
+    )
+    _record(decision_log, f"[{ra.contract_id}] PROPOSE {item['id']} for {gap.id}: max {item['price_base_units']} base units (= {int(item['price_base_units']) / 1_000_000:.2f} USDC), unsigned.")
+    return proposal
 
 
 def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
@@ -79,12 +120,57 @@ def generate_purchase_request(
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: cached evidence already answers it ({cached}).")
             continue
 
+        if ctx.complete_json is not None and ctx.free_check_scenario is None:
+            market = ctx.markets.get(ra.contract_id) or {}
+            found = research_gap(
+                ra, g,
+                terms_url=market.get("terms_url"),
+                fetch_text=ctx.fetch_text,
+                complete_json=ctx.complete_json,
+            )
+            _record(decision_log, _research_line(ra.contract_id, g.id, found))
+            if found.status == "failed":
+                _record(decision_log, f"[{ra.contract_id}] no purchase: model research failed, so the gap was not validated.")
+                return None
+            if found.resolved:
+                _record(decision_log, f"[{ra.contract_id}] skip {g.id}: the model read resolved it; nothing to buy.")
+                continue
+            item = _catalog_match(ctx, g.gap_type)
+            if item is None:
+                _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
+                continue
+            return _emit_proposal(decision_log, ra, g, item, ctx, now, found.conclusion)
+
         if not g.free_checks:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no free official-source check is configured for this gap, so free evidence was not ruled out.")
             continue
 
         answered = False
+        research_note: Optional[str] = None
+        skip_gap = False
         for check_id in g.free_checks:
+            if ctx.live_research and ctx.free_check_scenario is None:
+                market = ctx.markets.get(ra.contract_id) or {}
+                found = research_free_check(
+                    check_id,
+                    question=g.question,
+                    terms_url=market.get("terms_url"),
+                    fetch_text=ctx.fetch_text,
+                )
+                _record(decision_log, _research_line(ra.contract_id, g.id, found))
+                if found.status == "failed":
+                    _record(decision_log, f"[{ra.contract_id}] no purchase: free research failed, so the gap was not validated.")
+                    return None
+                if found.status == "not_configured":
+                    _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no free official-source check is configured for this gap, so free evidence was not ruled out.")
+                    skip_gap = True
+                    break
+                if found.resolved:
+                    answered = True
+                    break
+                research_note = found.conclusion
+                continue
+
             check = ctx.free_checks.get(check_id)
             if check is None:
                 _record(decision_log, f"[{ra.contract_id}] {g.id}: free check {check_id!r} not configured.")
@@ -98,6 +184,8 @@ def generate_purchase_request(
             if res["result"] == "answered":
                 answered = True
                 break
+        if skip_gap:
+            continue
         if answered:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: answered by the free check; nothing to buy.")
             continue
@@ -107,21 +195,7 @@ def generate_purchase_request(
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
             continue
 
-        created = fmt_utc(now)
-        pid = "prop-" + hashlib.sha256(f"{ra.contract_id}|{g.id}|{item['id']}|{created}".encode()).hexdigest()[:12]
-        proposal = PurchaseProposalV1(
-            proposal_id=pid,
-            contract_id=ra.contract_id,
-            evidence_gap_id=g.id,
-            catalog_item_id=item["id"],
-            catalog_parameters=_catalog_params(ra, item),
-            rationale=f"{g.question} {g.why} No cached or free official source answered it, and catalog item '{item['title']}' answers exactly this gap type.",
-            max_amount_base_units=item["price_base_units"],
-            fixture_label=f"FIXTURE: free-check scenario '{ctx.free_check_scenario}' (assumed, not observed)" if ctx.free_check_scenario else None,
-            created_at_utc=created,
-        )
-        _record(decision_log, f"[{ra.contract_id}] PROPOSE {item['id']} for {g.id}: max {item['price_base_units']} base units (= {int(item['price_base_units']) / 1_000_000:.2f} USDC), unsigned.")
-        return proposal
+        return _emit_proposal(decision_log, ra, g, item, ctx, now, research_note)
 
     _record(decision_log, f"[{ra.contract_id}] no purchase: every material gap was answered, cached, or had no catalog match.")
     return None
