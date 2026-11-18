@@ -1,12 +1,11 @@
-"""Live path with both APIs faked: no network, no key."""
-import io
+"""Live path with the Gemini Exchange API faked: no network, no key, no LLM."""
 from datetime import datetime, timezone
 
 import pytest
 
 from verity import generate_purchase_request
 from verity.live import analyze_live, build_live_record
-from verity.llm import AnalystOut, apply_analyst, build_prompt
+from verity.rules_analyst import ANALYST_ID, rules_analyst
 
 NOW = datetime(2026, 11, 18, 1, 0, tzinfo=timezone.utc)
 
@@ -26,6 +25,19 @@ EVENT = {
         {"label": "58°F to 59°F", "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-B58",
          "prices": {"bestBid": None, "bestAsk": "0.03"}},
     ],
+}
+
+GAME = {
+    "ticker": "NBA-2611190100-ATL-OKC-M",
+    "title": "Atlanta vs Oklahoma City",
+    "description": "Pays Yes if the named team wins the game, per the official NBA result.",
+    "expiryDate": "2026-11-20T13:00:00.000Z",
+    "volume": 1071,
+    "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/nba.pdf",
+    "sourceDetails": {"agency": "NBA"},
+    "contracts": [{"label": "Oklahoma City", "instrumentSymbol": "GEMI-NBA-OKC",
+                   "prices": {"bestBid": "0.69", "bestAsk": "0.70"}}],
+    "events": [{"ticker": "NBA-2611190100-ATL-OKC-T"}],
 }
 
 
@@ -49,36 +61,6 @@ def fake_get(url, timeout=None):
     raise AssertionError(url)
 
 
-MODEL_JSON = {
-    "ambiguity": {"score": 2, "rationale": "Band edges decide it.", "citation_ids": ["C-EVENT", "C-NOPE"]},
-    "source": {"score": 2, "rationale": "NWS report can be corrected.", "citation_ids": ["C-EVENT"]},
-    "correlation": {"score": 7, "rationale": "bad value", "citation_ids": []},
-    "evidence_gaps": [
-        {"question": "Which CLI issuance settles?", "gap_type": "settlement_source_version",
-         "affects": "resolution_risk", "material": True, "why": "Corrections can cross a band edge."},
-        {"question": "What will the max be?", "gap_type": "outcome_forecast",
-         "affects": "outcome_probability", "material": True, "why": "Forecast."},
-    ],
-}
-
-
-class FakeModels:
-    def __init__(self):
-        self.calls = []
-
-    def generate_content(self, *, model, contents, config):
-        self.calls.append({"model": model, "contents": contents, "config": config})
-        class R:  # mimics GenerateContentResponse.parsed
-            parsed = AnalystOut.model_validate(MODEL_JSON)
-            text = ""
-        return R()
-
-
-class FakeClient:
-    def __init__(self):
-        self.models = FakeModels()
-
-
 def test_live_record_has_time_symbol_and_real_text():
     r = build_live_record(EVENT, "62°F to 63°F", now=NOW)
     assert r["source"]["snapshot_time_utc"] == "2026-11-18T01:00:00Z"
@@ -93,33 +75,49 @@ def test_unknown_outcome_lists_labels():
         build_live_record(EVENT, "Nope", now=NOW)
 
 
-def test_prompt_excludes_prices_and_marks_data():
-    p = build_prompt(build_live_record(EVENT, "62°F to 63°F", now=NOW))
-    assert "C-PRICES" not in p and "0.54" not in p
+def test_rules_analyst_scores_weather_market():
+    r = rules_analyst(build_live_record(EVENT, "62°F to 63°F", now=NOW))
+    a = r["analyst"]
+    assert a["ambiguity"]["score"] == 2 and "band edges" in a["ambiguity"]["rationale"]
+    assert a["source"]["score"] == 2            # NWS daily report can be corrected
+    assert a["correlation"]["score"] == 1
+    assert "C-PRICES" not in a["ambiguity"]["citation_ids"]   # prices never feed the analyst
+    gap = r["evidence_gaps"][0]
+    assert gap["gap_type"] == "settlement_source_version" and gap["material"] is True
+    assert r["analyst_id"] == ANALYST_ID
 
 
-def test_model_output_is_repaired_and_flagged():
-    r = apply_analyst(build_live_record(EVENT, "62°F to 63°F", now=NOW), AnalystOut.model_validate(MODEL_JSON))
-    assert r["analyst"]["correlation"]["score"] is None
-    assert "outside 1-3" in r["analyst"]["correlation"]["null_reason"]
-    assert r["analyst"]["ambiguity"]["citation_ids"] == ["C-EVENT"]
-    assert "model_citation_dropped:ambiguity" in r["model_flags"]
-    assert r["evidence_gaps"][1]["material"] is False  # forecasts never count as material
+def test_rules_analyst_scores_game_with_siblings():
+    r = rules_analyst(build_live_record(GAME, "Oklahoma City", now=NOW,
+                                        terms_text="Settles on the official NBA final score."))
+    a = r["analyst"]
+    assert (a["ambiguity"]["score"], a["source"]["score"], a["correlation"]["score"]) == (1, 1, 3)
+    assert r["evidence_gaps"] == []
+
+
+def test_rules_analyst_leaderboard_is_high_risk():
+    ev = {**GAME, "description": "Yes if Google has the top-ranked LLM on the LM Arena leaderboard.",
+          "sourceDetails": {}, "events": []}
+    r = rules_analyst(build_live_record(ev, "Oklahoma City", now=NOW))
+    assert r["analyst"]["ambiguity"]["score"] == 3 and r["analyst"]["source"]["score"] == 3
+    assert any(g["gap_type"] == "leaderboard_snapshot" for g in r["evidence_gaps"])
+
+
+def test_unrecognized_source_is_null_not_guessed():
+    ev = {**GAME, "description": "Pays Yes if the thing happens.", "sourceDetails": {"agency": "Acme Corp"}, "events": []}
+    r = rules_analyst(build_live_record(ev, "Oklahoma City", now=NOW))
+    assert r["analyst"]["source"]["score"] is None
+    assert "not recognized" in r["analyst"]["source"]["null_reason"]
 
 
 def test_analyze_live_end_to_end_with_fakes():
-    client = FakeClient()
-    ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F",
-                           http_get=fake_get, client=client, model="fake-model", now=NOW)
-    call = client.models.calls[0]
-    assert call["model"] == "fake-model" and call["config"]["response_schema"] is AnalystOut
+    ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F", http_get=fake_get, now=NOW)
     assert ra.snapshot.source_mode == "live"
     assert ra.scores.liquidity.score == 3                 # computed in code from $7 volume
-    assert ra.rating.complete is False                    # correlation came back invalid
-    assert ra.rating.possible_range == ("Medium", "High")   # known 7 + one unknown
-    assert ra.rating.final_rating is None and ra.research_action == "flag_for_human_review"
+    assert ra.rating.complete is True and ra.rating.raw_total == 8
+    assert ra.rating.final_rating == "Medium" and ra.research_action == "investigate"
     assert any(f.startswith("terms_not_read") for f in ra.data_quality_flags)
-    assert "analyst=google-gemini (fake-model)" in ra.data_quality_flags
+    assert f"analyst={ANALYST_ID} (code rules, no LLM)" in ra.data_quality_flags
     assert ra.workbook_conflicts  # global notes still attached; no workbook row to compare
 
     log = []
@@ -127,12 +125,11 @@ def test_analyze_live_end_to_end_with_fakes():
     assert any("no free official-source check is configured" in l for l in log)
 
 
-def test_missing_key_or_model_fails_clearly(monkeypatch):
-    from verity.llm import gemini_analyst
-    rec = build_live_record(EVENT, "62°F to 63°F", now=NOW)
-    monkeypatch.delenv("VERITY_GEMINI_MODEL", raising=False)
-    with pytest.raises(RuntimeError, match="VERITY_GEMINI_MODEL"):
-        gemini_analyst(rec)
-    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
-    with pytest.raises(RuntimeError, match="GEMINI_API_KEY"):
-        gemini_analyst(rec, model="m")
+def test_no_google_gemini_anywhere():
+    import pathlib
+    root = pathlib.Path(__file__).resolve().parent.parent
+    assert not (root / "verity" / "llm.py").exists()
+    for f in list((root / "verity").glob("*.py")) + [root / "requirements-live.txt", root / ".env.example"]:
+        if f.exists():
+            body = f.read_text(encoding="utf-8")
+            assert "google-genai" not in body and "from google" not in body and "GEMINI_API_KEY" not in body, f
