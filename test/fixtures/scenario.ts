@@ -1,9 +1,10 @@
 /**
  * DEMO FIXTURE: a local buyer/merchant scenario for tests and `npm run fixture`.
  * The private key is the public Anvil/Hardhat test key #0. Never fund it.
- * The token EIP-712 domain below is a placeholder until the Arc Testnet USDC
- * domain is qualified against the live contract.
+ * The token EIP-712 domain is the Arc Testnet USDC domain confirmed on chain
+ * (see src/payments/arc.ts).
  */
+import { ARC_TESTNET } from "../../src/payments/arc.ts";
 import { privateKeyToAccount } from "viem/accounts";
 import type { Hex } from "viem";
 import type { CatalogItem } from "../../src/payments/buyer.ts";
@@ -65,7 +66,7 @@ export const DEMO_MERCHANT_CONFIG: MerchantConfig = {
   chainId: ARC_TESTNET_CHAIN_ID,
   token: ARC_TESTNET_USDC,
   payTo: DEMO_PAY_TO,
-  tokenDomain: { name: "USDC", version: "2" },
+  tokenDomain: ARC_TESTNET.usdcDomain,
   maxAuthorizationWindowSeconds: 600,
 };
 
