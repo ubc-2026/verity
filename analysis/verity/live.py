@@ -8,31 +8,99 @@ Liquidity is computed later from the quotes.
 from __future__ import annotations
 
 import io
+import json
 from datetime import datetime, timezone
 from typing import Any, Callable, Optional
+from urllib.parse import quote, urljoin, urlsplit
 
 from .fixtures import fmt_utc
 
 BASE = "https://api.gemini.com/v1/prediction-markets"
 TERMS_MAX_CHARS = 6000
 
-HttpGet = Callable[..., Any]  # requests.get-compatible
+# The analysis path reads only these public hosts. Terms links and document
+# text come from the exchange, not from Verity, so any other host, scheme,
+# port, or redirect target is refused before a request is sent.
+READ_HOSTS = frozenset({"api.gemini.com", "assets.gemini.com", "forecast.weather.gov"})
+MAX_RESPONSE_BYTES = 5_000_000
+MAX_REDIRECTS = 3
+
+HttpGet = Callable[..., Any]  # requests.get-compatible: get(url, timeout=...)
+
+
+def url_problem(url: str) -> Optional[str]:
+    """None when the analysis path may read this URL; otherwise the reason it may not."""
+    try:
+        parts = urlsplit(url)
+        port = parts.port
+    except ValueError:
+        return "malformed URL"
+    if parts.scheme != "https":
+        return "only https URLs are read"
+    if parts.username or parts.password or port not in (None, 443):
+        return "URLs with credentials or a non-default port are refused"
+    if (parts.hostname or "") not in READ_HOSTS:
+        return f"host not on the read allowlist: {parts.hostname or '(none)'}"
+    return None
+
+
+class _CappedResponse:
+    """The parts of a response the readers use, with the body read under a size cap."""
+
+    def __init__(self, response: Any, content: bytes):
+        self._response = response
+        self.status_code = response.status_code
+        self.content = content
+
+    def raise_for_status(self) -> None:
+        self._response.raise_for_status()
+
+    @property
+    def text(self) -> str:
+        return self.content.decode(self._response.encoding or "utf-8", errors="replace")
+
+    def json(self) -> Any:
+        return json.loads(self.content)
 
 
 def _default_get() -> HttpGet:
     import requests  # imported lazily so fixture mode needs no extra package
-    return requests.get
+
+    def get(url: str, timeout: float = 15) -> _CappedResponse:
+        # Redirects are followed by hand so every hop passes the allowlist.
+        for _ in range(MAX_REDIRECTS + 1):
+            problem = url_problem(url)
+            if problem:
+                raise ValueError(problem)
+            response = requests.get(url, timeout=timeout, allow_redirects=False, stream=True)
+            if response.is_redirect:
+                url = urljoin(url, response.headers.get("location", ""))
+                response.close()
+                continue
+            content = bytearray()
+            for chunk in response.iter_content(65536):
+                content += chunk
+                if len(content) > MAX_RESPONSE_BYTES:
+                    response.close()
+                    raise ValueError(f"response is larger than {MAX_RESPONSE_BYTES} bytes")
+            return _CappedResponse(response, bytes(content))
+        raise ValueError(f"more than {MAX_REDIRECTS} redirects")
+
+    return get
 
 
 def fetch_event(event_ticker: str, http_get: Optional[HttpGet] = None) -> dict[str, Any]:
     get = http_get or _default_get()
-    r = get(f"{BASE}/events/{event_ticker}", timeout=15)
+    r = get(f"{BASE}/events/{quote(event_ticker, safe='')}", timeout=15)
     r.raise_for_status()
     return r.json()
 
 
 def fetch_terms_text(url: str, http_get: Optional[HttpGet] = None) -> tuple[Optional[str], Optional[str]]:
     """Return (text, problem). Needs pypdf; a missing package or a bad PDF is reported, not raised."""
+    problem = url_problem(url)
+    if problem:
+        return None, f"terms PDF not read: {problem}"
     try:
         from pypdf import PdfReader
     except ImportError:
@@ -116,7 +184,7 @@ def build_live_record(
     if contract_text:
         excerpts.append({"id": "C-CONTRACT", "field_or_rule": "contract.description", "quote": contract_text})
     if terms_text:
-        excerpts.append({"id": "C-TERMS", "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)", "quote": terms_text})
+        excerpts.append({"id": "C-TERMS", "source": terms_url, "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)", "quote": terms_text})
     excerpts.append({"id": "C-PRICES", "field_or_rule": "contract.prices",
                      "quote": f"bestBid {_s(p.get('bestBid'))}, bestAsk {_s(p.get('bestAsk'))}; event volume {_s(event.get('volume'))}"})
 

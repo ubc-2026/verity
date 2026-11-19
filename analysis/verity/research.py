@@ -20,6 +20,8 @@ from typing import Any, Callable, Optional
 
 from pydantic import BaseModel, ConfigDict, ValidationError
 
+from .live import _default_get, url_problem
+
 NYC_CHECK = "nyc-settlement-version"
 NWS_CLINYC_URL = (
     "https://forecast.weather.gov/product.php?site=OKX&product=CLI&issuedby=NYC"
@@ -85,11 +87,11 @@ def _fetch_page(url: str) -> tuple[Optional[str], Optional[str]]:
         from .live import fetch_terms_text
         return fetch_terms_text(url)
     try:
-        import requests
+        get = _default_get()  # allowlisted hosts only, capped body, redirects rechecked
     except ImportError:
         return None, "requests is not installed"
     try:
-        response = requests.get(url, timeout=20)
+        response = get(url, timeout=20)
         response.raise_for_status()
     except Exception as exc:  # network and HTTP errors are a failed check, not a guess
         return None, f"fetch failed: {type(exc).__name__}"
@@ -97,6 +99,14 @@ def _fetch_page(url: str) -> tuple[Optional[str], Optional[str]]:
     if not text:
         return None, "empty response"
     return text[:6000], None
+
+
+def _allowlisted(fetch: FetchText) -> FetchText:
+    """URLs come from exchange data and document text, so off-list URLs are never fetched."""
+    def read(url: str) -> tuple[Optional[str], Optional[str]]:
+        problem = url_problem(url)
+        return (None, problem) if problem else fetch(url)
+    return read
 
 
 def research_free_check(
@@ -107,7 +117,7 @@ def research_free_check(
     fetch_text: Optional[FetchText] = None,
 ) -> ResearchResult:
     """Read the free sources for this check id, or say that none is configured."""
-    fetch = fetch_text or _fetch_page
+    fetch = _allowlisted(fetch_text or _fetch_page)
     if check_id != NYC_CHECK:
         return ResearchResult(
             question=question,
@@ -264,7 +274,7 @@ def research_gap(
     `complete_json(system, user, schema)` returns the model's object. The caller
     supplies that function. Nothing in this module contacts a model vendor.
     """
-    fetch = fetch_text or _fetch_page
+    fetch = _allowlisted(fetch_text or _fetch_page)
     excerpts = [(c.id, c.quote) for c in analysis.citations if c.quote and not _is_price(c)]
     wanted: list[str] = []
     for _, quote in excerpts:

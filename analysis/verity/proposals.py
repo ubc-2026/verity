@@ -16,7 +16,8 @@ from __future__ import annotations
 
 import hashlib
 import logging
-from datetime import timedelta
+import re
+from datetime import datetime, timedelta
 from typing import Any, Optional
 
 from .fixtures import FixtureContext, fmt_utc, parse_utc
@@ -65,14 +66,19 @@ def _emit_proposal(
     ctx: FixtureContext,
     now: Any,
     research_note: Optional[str],
-) -> PurchaseProposalV1:
+) -> Optional[PurchaseProposalV1]:
+    params = _catalog_params(ra, item)
+    missing = [name for name, value in params.items() if not value]
+    if missing:
+        _record(decision_log, f"[{ra.contract_id}] skip {gap.id}: catalog item {item['id']} needs {', '.join(missing)}, which this market does not supply; no proposal with blank parameters.")
+        return None
     created = fmt_utc(now)
     proposal = PurchaseProposalV1(
         proposal_id="prop-" + hashlib.sha256(f"{ra.contract_id}|{gap.id}|{item['id']}|{created}".encode()).hexdigest()[:12],
         contract_id=ra.contract_id,
         evidence_gap_id=gap.id,
         catalog_item_id=item["id"],
-        catalog_parameters=_catalog_params(ra, item),
+        catalog_parameters=params,
         rationale=_proposal_rationale(gap.question, gap.why, item["title"], research_note),
         max_amount_base_units=item["price_base_units"],
         fixture_label=_free_check_label(ctx.free_check_scenario, next(
@@ -84,9 +90,23 @@ def _emit_proposal(
     return proposal
 
 
+_NYC_HIGH_TICKER = re.compile(r"^WXHIGH-NYC-(\d{10})$")
+
+
 def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
-    # Fixture mapping for the NWS item; other items take their params from the contract.
-    known = {"station": "Central Park, NY (CLINYC)", "date": "2026-11-18"} if ra.event_ticker and ra.event_ticker.startswith("WXHIGH-NYC") else {}
+    """Parameters for the catalog item, taken from this market. A blank value means unknown."""
+    known: dict[str, str] = {}
+    match = _NYC_HIGH_TICKER.match(ra.event_ticker or "")
+    if match:
+        # The ticker ends with the trading close in UTC (YYMMDDHHMM), late on the
+        # climate day in New York: 2611190459 is 11:59 PM EST on Nov 18. NWS climate
+        # days run on local standard time (UTC-5) all year, so shift by 5 hours.
+        try:
+            close = datetime.strptime(match.group(1), "%y%m%d%H%M")
+        except ValueError:
+            close = None
+        if close is not None:
+            known = {"station": "Central Park, NY (CLINYC)", "date": (close - timedelta(hours=5)).date().isoformat()}
     return {p: known.get(p, "") for p in item["parameters"]}
 
 
@@ -149,7 +169,10 @@ def generate_purchase_request(
             if item is None:
                 _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
                 continue
-            return _emit_proposal(decision_log, ra, g, item, ctx, now, found.conclusion)
+            proposal = _emit_proposal(decision_log, ra, g, item, ctx, now, found.conclusion)
+            if proposal is None:
+                continue
+            return proposal
 
         if not g.free_checks:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no free official-source check is configured for this gap, so free evidence was not ruled out.")
@@ -205,7 +228,10 @@ def generate_purchase_request(
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
             continue
 
-        return _emit_proposal(decision_log, ra, g, item, ctx, now, research_note)
+        proposal = _emit_proposal(decision_log, ra, g, item, ctx, now, research_note)
+        if proposal is None:
+            continue
+        return proposal
 
     _record(decision_log, f"[{ra.contract_id}] no purchase: every material gap was answered, cached, or had no catalog match.")
     return None
