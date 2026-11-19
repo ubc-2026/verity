@@ -12,7 +12,8 @@
     "quicknode:backfill": "node scripts/quicknode-backfill.ts",
     "quicknode:token": "node scripts/quicknode-token.ts",
     "webhook:serve": "node scripts/webhook-server.ts",
-    "delivery:demo": "node scripts/delivery-demo.ts"
+    "delivery:demo": "node scripts/delivery-demo.ts",
+    "demo": "node scripts/demo.ts"
   },
   "repository": {
     "type": "git",

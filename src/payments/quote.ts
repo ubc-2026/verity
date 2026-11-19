@@ -32,6 +32,14 @@ export const verityQuoteSchema = z.strictObject({
   payTo: address,
   amount: z.string().regex(/^[1-9][0-9]*$/),
   expiresAt: z.number().int().nonnegative(),
+  /**
+   * Parameters that select which fixture document a catalog item refers to
+   * (station and date, for example). They are not part of ResearchRequestV1;
+   * the quote's content hash is what the payment commits to.
+   */
+  catalogParameters: z
+    .record(z.string().regex(/^[a-z][a-z0-9_]{0,31}$/), z.string().min(1).max(160))
+    .optional(),
 });
 
 export type VerityQuote = z.output<typeof verityQuoteSchema>;
