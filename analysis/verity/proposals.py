@@ -18,6 +18,7 @@ import hashlib
 import logging
 import re
 from datetime import datetime, timedelta
+from decimal import Decimal
 from typing import Any, Optional
 
 from .fixtures import FixtureContext, fmt_utc, parse_utc
@@ -34,10 +35,15 @@ def _record(decision_log: Optional[list[str]], msg: str) -> None:
         decision_log.append(msg)
 
 
-def _catalog_match(ctx: FixtureContext, gap_type: str) -> Optional[dict[str, Any]]:
+def _catalog_match(ctx: FixtureContext, ra: RiskAnalysisV1, gap_type: str) -> Optional[dict[str, Any]]:
     """First allowlisted item that answers the gap on the requested payment rail."""
     allow = set(ctx.catalog["merchant_allowlist"])
     for item in ctx.catalog["items"]:
+        live_contract = item.get("live_contract_id")
+        if ra.snapshot.source_mode == "live" and live_contract != ra.contract_id:
+            continue
+        if ra.snapshot.source_mode != "live" and live_contract is not None:
+            continue
         if (gap_type in item["answers_gap_types"] and item["affects"] == "resolution_risk"
                 and item["merchant_id"] in allow and item.get("rail", "arc-eip3009") == ctx.payment_rail):
             return item
@@ -88,27 +94,29 @@ def _emit_proposal(
              for c in gap.free_checks if c in ctx.free_checks), None)),
         created_at_utc=created,
     )
-    _record(decision_log, f"[{ra.contract_id}] PROPOSE {item['id']} for {gap.id}: max {item['price_base_units']} base units (= {int(item['price_base_units']) / 1_000_000:.2f} USDC), unsigned.")
+    price = Decimal(item["price_base_units"]) / 1_000_000
+    _record(decision_log, f"[{ra.contract_id}] PROPOSE {item['id']} for {gap.id}: max {item['price_base_units']} base units (= {price:f} USDC), unsigned.")
     return proposal
 
 
-_NYC_HIGH_TICKER = re.compile(r"^WXHIGH-NYC-(\d{10})$")
+_WEATHER_HIGH_TICKER = re.compile(r"WXHIGH-(NYC|SFO)-(\d{10})")
+_WEATHER_STATIONS = {"NYC": ("Central Park, NY (CLINYC)", 5), "SFO": ("San Francisco Airport, CA (CLISFO)", 8)}
 
 
 def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
     """Parameters for the catalog item, taken from this market. A blank value means unknown."""
     known: dict[str, str] = {}
-    match = _NYC_HIGH_TICKER.match(ra.event_ticker or "")
+    match = _WEATHER_HIGH_TICKER.fullmatch(ra.event_ticker or "")
     if match:
-        # The ticker ends with the trading close in UTC (YYMMDDHHMM), late on the
-        # climate day in New York: 2611190459 is 11:59 PM EST on Nov 18. NWS climate
-        # days run on local standard time (UTC-5) all year, so shift by 5 hours.
+        city, ticker_time = match.groups()
+        station, offset = _WEATHER_STATIONS[city]
+        # The ticker ends in a UTC close time during the station's climate day.
         try:
-            close = datetime.strptime(match.group(1), "%y%m%d%H%M")
+            close = datetime.strptime(ticker_time, "%y%m%d%H%M")
         except ValueError:
             close = None
         if close is not None:
-            known = {"station": "Central Park, NY (CLINYC)", "date": (close - timedelta(hours=5)).date().isoformat()}
+            known = {"station": station, "date": (close - timedelta(hours=offset)).date().isoformat()}
     return {p: known.get(p, "") for p in item["parameters"]}
 
 
@@ -167,7 +175,7 @@ def generate_purchase_request(
             if found.resolved:
                 _record(decision_log, f"[{ra.contract_id}] skip {g.id}: the model read resolved it; nothing to buy.")
                 continue
-            item = _catalog_match(ctx, g.gap_type)
+            item = _catalog_match(ctx, ra, g.gap_type)
             if item is None:
                 _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
                 continue
@@ -191,6 +199,7 @@ def generate_purchase_request(
                     question=g.question,
                     terms_url=market.get("terms_url"),
                     fetch_text=ctx.fetch_text,
+                    contract_text=next((c.quote for c in ra.citations if c.id == "C-CONTRACT"), ""),
                 )
                 _record(decision_log, _research_line(ra.contract_id, g.id, found))
                 if found.status == "failed":
@@ -225,9 +234,10 @@ def generate_purchase_request(
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: answered by the free check; nothing to buy.")
             continue
 
-        item = _catalog_match(ctx, g.gap_type)
+        item = _catalog_match(ctx, ra, g.gap_type)
         if item is None:
-            _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
+            qualified = " for this live contract" if ra.snapshot.source_mode == "live" else ""
+            _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}{qualified}.")
             continue
 
         proposal = _emit_proposal(decision_log, ra, g, item, ctx, now, research_note)

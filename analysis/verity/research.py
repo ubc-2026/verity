@@ -2,7 +2,7 @@
 
 Two ways to answer a gap:
 
-- `research_free_check` reads the New York terms PDF and the NWS report.
+- `research_free_check` reads the exchange terms and local NWS reports for supported cities.
   It does not call a model. Any other check id returns "not configured".
 - `research_gap` asks an injected model, when a caller passes `complete_json`.
   The model may only quote text this function gathered. A bad quote or a bad
@@ -16,17 +16,30 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from html import unescape
 from typing import Any, Callable, Optional
 
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from .live import _default_get, url_problem
+from .live import HttpGet, _default_get, url_problem
 
 NYC_CHECK = "nyc-settlement-version"
+SFO_CHECK = "sfo-settlement-version"
 NWS_CLINYC_URL = (
     "https://forecast.weather.gov/product.php?site=OKX&product=CLI&issuedby=NYC"
     "&format=txt&version=1&glossary=0"
 )
+NWS_CLISFO_URL = (
+    "https://forecast.weather.gov/product.php?site=MTR&product=CLI&issuedby=SFO"
+    "&format=txt&version=1&glossary=0"
+)
+_NWS_CHECKS = {NYC_CHECK: ("Central Park", NWS_CLINYC_URL), SFO_CHECK: ("San Francisco Airport", NWS_CLISFO_URL)}
+_SFO_FULL_DAY_RULE = re.compile(
+    r"(?:^|(?<=[.!?]) )(?:(?:the |this )?(?:contract|market) (?:shall|will) (?:settle|resolve) (?:on|using)|"
+    r"settlement (?:shall|will) use) (?:the )?(?:first (?:published )?|final )?full[- ]day "
+    r"(?:NWS (?:daily )?)?(?:issuance|report)\.(?= |$)", re.I,
+)
+_INTRADAY_CUTOFF = re.compile(r"\bvalid today as of \d{3,4} [ap]m local time\b", re.I)
 
 # The terms name an issuance only when they pick one of these. Mentioning the
 # daily climate report, without one of these phrases, leaves the gap open.
@@ -81,13 +94,13 @@ def named_issuance(text: str) -> Optional[str]:
     return None
 
 
-def _fetch_page(url: str) -> tuple[Optional[str], Optional[str]]:
+def _fetch_page(url: str, *, http_get: Optional[HttpGet] = None) -> tuple[Optional[str], Optional[str]]:
     """Read a public text page. PDF bytes are handled by the terms reader."""
     if url.lower().split("?", 1)[0].endswith(".pdf"):
         from .live import fetch_terms_text
-        return fetch_terms_text(url)
+        return fetch_terms_text(url, http_get)
     try:
-        get = _default_get()  # allowlisted hosts only, capped body, redirects rechecked
+        get = http_get or _default_get()  # allowlisted hosts only, capped body, redirects rechecked
     except ImportError:
         return None, "requests is not installed"
     try:
@@ -95,7 +108,12 @@ def _fetch_page(url: str) -> tuple[Optional[str], Optional[str]]:
         response.raise_for_status()
     except Exception as exc:  # network and HTTP errors are a failed check, not a guess
         return None, f"fetch failed: {type(exc).__name__}"
-    text = _flat(response.text)
+    body = response.text
+    if url in (NWS_CLINYC_URL, NWS_CLISFO_URL):
+        bulletin = re.search(r"<pre\b[^>]*>(.*?)</pre>", body, re.I | re.S)
+        if bulletin:
+            body = unescape(bulletin.group(1))
+    text = _flat(body)
     if not text:
         return None, "empty response"
     return text[:6000], None
@@ -115,19 +133,22 @@ def research_free_check(
     question: str,
     terms_url: Optional[str],
     fetch_text: Optional[FetchText] = None,
+    contract_text: str = "",
 ) -> ResearchResult:
     """Read the free sources for this check id, or say that none is configured."""
     fetch = _allowlisted(fetch_text or _fetch_page)
-    if check_id != NYC_CHECK:
+    configured = _NWS_CHECKS.get(check_id)
+    if configured is None:
         return ResearchResult(
             question=question,
             conclusion=f"No free official-source check is configured for {check_id}.",
             resolved=False,
             status="not_configured",
-            reasoning="Only the New York settlement-issuance check reads public sources. Other gaps are not guessed.",
+            reasoning="This gap has no configured official-source check.",
         )
 
-    sources = [url for url in (terms_url, NWS_CLINYC_URL) if url]
+    location, report_url = configured
+    sources = [url for url in (terms_url, report_url) if url]
     if not terms_url:
         return ResearchResult(
             question=question,
@@ -148,11 +169,11 @@ def research_free_check(
             sources=sources,
             reasoning="The gap stays unvalidated when the terms cannot be read, so no purchase is proposed from this result.",
         )
-    report_text, report_error = fetch(NWS_CLINYC_URL)
+    report_text, report_error = fetch(report_url)
     if report_error or not report_text:
         return ResearchResult(
             question=question,
-            conclusion=f"The NWS Central Park daily report could not be read ({report_error or 'empty document'}).",
+            conclusion=f"The NWS {location} daily report could not be read ({report_error or 'empty document'}).",
             resolved=False,
             status="failed",
             sources=sources,
@@ -161,6 +182,26 @@ def research_free_check(
         )
 
     excerpts = [_around(terms_text, "climatological")[:240], _around(report_text, "climatological")[:240]]
+    if check_id == SFO_CHECK:
+        report = _flat(report_text)
+        rule = _flat(contract_text)
+        if not re.search(r"\bCLISFO\b", report) or "san francisco airport" not in report.lower():
+            return _failed(question, "The NWS response did not identify the CLISFO product and station.",
+                           "Both official sources must be readable and match the market.", sources)
+        if "san francisco airport" not in rule.lower() or not re.search(r"\bNWS\b|National Weather Service", rule, re.I):
+            return _failed(question, "The exchange contract did not identify the SFO station and NWS source.",
+                           "The product cannot be attributed to this market from its ticker alone.", sources)
+        cutoff = _INTRADAY_CUTOFF.search(report)
+        excerpts = [_around(rule, "first published"), cutoff.group() if cutoff else _around(report, "clisfo")]
+        full_day = _SFO_FULL_DAY_RULE.search(rule) or _SFO_FULL_DAY_RULE.search(_flat(terms_text))
+        if full_day:
+            return ResearchResult(question, "The contract expressly selects a full-day NWS report.",
+                                  True, "resolved", sources, [full_day.group(), excerpts[1]])
+        return ResearchResult(
+            question, "The exchange rule does not establish whether an intraday CLISFO report qualifies as the settling issuance.",
+            False, "unresolved", sources, excerpts,
+            "The NWS report shows the station and publication format. Only Gemini can decide which issue is applicable.",
+        )
     named = named_issuance(terms_text)
     if named:
         return ResearchResult(

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import io
 import json
+import re
 from datetime import datetime, timezone
 from typing import Any, Callable, Optional
 from urllib.parse import quote, urljoin, urlsplit
@@ -110,7 +111,7 @@ def fetch_terms_text(url: str, http_get: Optional[HttpGet] = None) -> tuple[Opti
         r = get(url, timeout=20)
         r.raise_for_status()
         reader = PdfReader(io.BytesIO(r.content))
-        text = "\n".join((p.extract_text() or "") for p in reader.pages).strip()
+        text = " ".join("\n".join((p.extract_text() or "") for p in reader.pages).split())
     except Exception as e:  # network, HTTP or PDF errors all lower confidence instead of crashing
         return None, f"terms PDF unreadable: {type(e).__name__}"
     if not text:
@@ -147,6 +148,24 @@ def _plain_text(value: Any) -> Optional[str]:
     return None
 
 
+def _contract_terms_url(event: dict[str, Any], contract: dict[str, Any]) -> Optional[str]:
+    direct = _s(contract.get("termsAndConditionsUrl")) or _event_terms_url(event)
+    if direct:
+        return direct
+
+    # Some Gemini weather contracts put the sole terms PDF in the description.
+    urls = set(re.findall(r"\]\((https://[^\s)]+)\)", _plain_text(contract.get("description")) or ""))
+    candidates = set()
+    for url in urls:
+        if url_problem(url):
+            continue
+        parts = urlsplit(url)
+        if (parts.hostname == "assets.gemini.com" and parts.path.startswith("/predictions/terms_and_conditions/")
+                and parts.path.lower().endswith(".pdf")):
+            candidates.add(url)
+    return next(iter(candidates)) if len(candidates) == 1 else None
+
+
 def _unscored(name: str) -> dict[str, Any]:
     """A reading score we refuse to invent. Missing is null, not zero."""
     return {
@@ -174,7 +193,7 @@ def build_live_record(
     c = matches[0]
     p = c.get("prices") or {}
     url = f"{BASE}/events/{event.get('ticker')}"
-    terms_url = _s(c.get("termsAndConditionsUrl")) or _event_terms_url(event)
+    terms_url = _contract_terms_url(event, c)
 
     excerpts = []
     event_text = _plain_text(event.get("description"))
@@ -254,7 +273,7 @@ def analyze_live(
     now = now or datetime.now(timezone.utc)
     event = fetch_event(event_ticker, http_get)
     contract = next((c for c in event.get("contracts") or [] if c.get("label") == outcome_label), {})
-    terms_url = _s(contract.get("termsAndConditionsUrl")) or _event_terms_url(event)
+    terms_url = _contract_terms_url(event, contract)
     text, problem = (None, "no terms URL in the event") if not terms_url else (
         fetch_terms_text(terms_url, http_get) if read_terms else (None, "terms reading disabled"))
     record = build_live_record(event, outcome_label, now=now, terms_text=text, terms_problem=problem)
@@ -263,6 +282,11 @@ def analyze_live(
         record = rules_analyst(record)
         record["reading_scores_unscored"] = False
 
-    ctx = FixtureContext.default(clock=FixedClock(fmt_utc(now)))
+    def read_public_source(url: str) -> tuple[Optional[str], Optional[str]]:
+        from .research import _fetch_page
+
+        return (text, problem) if url == terms_url else _fetch_page(url, http_get=http_get)
+
+    ctx = FixtureContext.default(clock=FixedClock(fmt_utc(now)), live_research=True, fetch_text=read_public_source)
     ctx.markets = {**ctx.markets, record["contract_id"]: record}
     return get_risk_analysis(record["contract_id"], ctx), ctx

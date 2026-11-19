@@ -1,10 +1,15 @@
 """Live path with the exchange API faked: no network, no key."""
+import hashlib
+import json
+from copy import deepcopy
 from datetime import datetime, timezone
 
 import pytest
 
 from verity import generate_purchase_request
 from verity.live import analyze_live, build_live_record
+from verity.reassess import reassess
+from verity.research import NWS_CLISFO_URL
 
 NOW = datetime(2026, 11, 18, 1, 0, tzinfo=timezone.utc)
 
@@ -43,6 +48,7 @@ GAME = {
 class FakeResp:
     def __init__(self, payload=None, content=b"", status=200):
         self._p, self.content, self.status_code = payload, content, status
+        self.text = content.decode("utf-8")
 
     def json(self):
         return self._p
@@ -85,6 +91,89 @@ def test_document_description_becomes_plain_text():
 def test_unknown_outcome_lists_labels():
     with pytest.raises(KeyError, match="labels"):
         build_live_record(EVENT, "Nope", now=NOW)
+
+
+def _sfo_research(monkeypatch, *, selection="The first published version of the applicable report is used.", report_status=200):
+    event = deepcopy(EVENT)
+    event["ticker"] = "WXHIGH-SFO-2611200459"
+    event["title"] = "Highest temperature in San Francisco on November 19, 2026?"
+    event["expiryDate"] = "2026-11-20T04:59:59Z"
+    event["sourceDetails"] = {"agency": "NWS", "index": "CLISFO"}
+    contract = event["contracts"][0]
+    contract["instrumentSymbol"] = "GEMI-WXHIGH-SFO-2611200459-58TO59"
+    contract["termsAndConditionsUrl"] = ""
+    url = "https://assets.gemini.com/predictions/terms_and_conditions/weather.pdf"
+    contract["description"] = f"San Francisco Airport uses the NWS daily climate report. {selection} [Full rules]({url})."
+    calls = []
+
+    def get(target, timeout=None):
+        calls.append(target)
+        if target.endswith("/events/" + event["ticker"]):
+            return FakeResp(event)
+        assert target == NWS_CLISFO_URL
+        return FakeResp(content=b"CLISFO\nSAN FRANCISCO AIRPORT CLIMATE SUMMARY\nVALID TODAY AS OF 0400 PM LOCAL TIME.", status=report_status)
+
+    def terms(target, _get):
+        assert target == url
+        calls.append(target)
+        return "Gemini's official weather terms.", None
+
+    monkeypatch.setattr("verity.live.fetch_terms_text", terms)
+    risk, ctx = analyze_live(event["ticker"], contract["label"], http_get=get, now=NOW)
+    assert ctx.markets[risk.contract_id]["terms_url"] == url
+    assert risk.evidence_gaps[0].free_checks == ["sfo-settlement-version"]
+    return risk, ctx, calls
+
+
+def test_sfo_live_free_sources_precede_exact_live_catalog(monkeypatch):
+    risk, ctx, calls = _sfo_research(monkeypatch)
+    log = []
+    assert generate_purchase_request(risk, ctx, log) is None
+    assert calls[-1] == NWS_CLISFO_URL
+    assert len(calls) == 3  # market, linked PDF, station report
+    assert any("free research unresolved" in line for line in log)
+    assert any("for this live contract" in line for line in log)
+
+    # Simulated operator-approved catalog entry. The repository ships no such live artifact.
+    original = ctx.catalog["items"][0]
+    ctx.payment_rail = "circle-gateway-batched"
+    item = {**original, "id": "sfo-live-test-evidence", "live_contract_id": risk.contract_id,
+            "rail": ctx.payment_rail, "price_base_units": "1000"}
+    ctx.catalog["items"] = [{**item, "id": "unrelated-live-test-evidence", "live_contract_id": "different-contract"}, item]
+    log = []
+    proposal = generate_purchase_request(risk, ctx, log)
+    assert proposal is not None and proposal.catalog_item_id == item["id"]
+    assert proposal.catalog_parameters == {"station": "San Francisco Airport, CA (CLISFO)", "date": "2026-11-19"}
+    assert proposal.max_amount_base_units == "1000" and proposal.signed is False
+    assert any("0.001 USDC" in line for line in log)
+
+    # The receipt verifier supplies this provenance in a real run.
+    doc = {"source": "test merchant", "gap_type": proposal.evidence_type, **proposal.catalog_parameters,
+           "settling_issuance": "first full-day report", "excludes": [], "corrections_count": False,
+           "summary": "The first full-day report controls."}
+    provenance = {"purchase_id": "purchase-test", "contract_id": risk.contract_id,
+                  "evidence_gap_id": proposal.evidence_gap_id, "catalog_item_id": proposal.catalog_item_id,
+                  "merchant_id": item["merchant_id"], "request_hash": "request", "content_hash_keccak256": "content",
+                  "receipt_digest": "digest", "receipt_signer": "signer", "verified_by": "verifyGatewayDelivery",
+                  "payment_rail": ctx.payment_rail, "payment_ref": "test-transfer"}
+    for label, status in [("FIXTURE", "evidence_rejected"), ("LIVE", "revised")]:
+        body = json.dumps({**doc, "label": label}).encode()
+        result = reassess(risk, body, {**provenance, "data_label": label,
+                                      "content_sha256": "0x" + hashlib.sha256(body).hexdigest()}, ctx)
+        assert result.status == status, result.reason
+    assert result.revised.scores.source.score == 1
+
+
+@pytest.mark.parametrize("selection,report_status,status", [
+    ("Settlement shall use the first full-day NWS daily report.", 200, "resolved"),
+    ("The first published version of the applicable report is used.", 404, "failed"),
+])
+def test_sfo_recognizes_resolved_or_failed_official_checks(monkeypatch, selection, report_status, status):
+    risk, ctx, _calls = _sfo_research(monkeypatch, selection=selection, report_status=report_status)
+    ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+    log = []
+    assert generate_purchase_request(risk, ctx, log) is None
+    assert any(f"free research {status}" in line for line in log)
 
 
 def test_analyze_live_end_to_end_with_fakes():
