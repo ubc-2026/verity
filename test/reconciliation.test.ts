@@ -212,7 +212,7 @@ describe("POST /webhooks/quicknode", () => {
       assert.equal((await t.post(t.payload, {})).status, 401);
       assert.equal((await t.post(t.payload, { ...t.signed("a"), "x-qn-signature": "0".repeat(64) })).status, 401);
       assert.equal((await t.post(t.payload.replace("0x1", "0x0"), t.signed("a"))).status, 401);
-      assert.deepEqual(t.ledger.counts(), { events: 0, settlements: 0, findings: 0 });
+      assert.deepEqual(t.ledger.counts(), { events: 0, settlements: 0, deliveries: 0, findings: 0 });
     } finally {
       t.server.close();
     }

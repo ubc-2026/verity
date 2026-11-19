@@ -29,9 +29,12 @@ export const USDC_EIP3009_ABI = parseAbi([
 export class SettlementError extends Error {
   override name = "SettlementError";
   readonly txHash: Hex | undefined;
-  constructor(message: string, txHash?: Hex) {
+  /** True only when the transfer was submitted and its outcome is still unknown. */
+  readonly pending: boolean;
+  constructor(message: string, txHash?: Hex, pending = false) {
     super(message);
     this.txHash = txHash;
+    this.pending = pending;
   }
 }
 
@@ -49,7 +52,7 @@ export interface ArcChain {
   chainId(): Promise<number>;
   authorizationUsed(authorizer: Hex, nonce: Hex): Promise<boolean>;
   submitTransferWithAuthorization(authorization: Eip3009Authorization): Promise<Hex>;
-  waitForReceipt(txHash: Hex): Promise<SettlementReceipt>;
+  waitForReceipt(txHash: Hex, authorization: Eip3009Authorization): Promise<SettlementReceipt>;
 }
 
 export function summarizeReceipt(receipt: TransactionReceipt, authorization: Eip3009Authorization): SettlementReceipt {
@@ -82,7 +85,6 @@ export function summarizeReceipt(receipt: TransactionReceipt, authorization: Eip
 
 export function viemArcChain(publicClient: PublicClient, walletClient: WalletClient): ArcChain {
   const address = ARC_TESTNET.usdc;
-  const pending = new Map<Hex, Eip3009Authorization>();
   return {
     chainId: () => publicClient.getChainId(),
     authorizationUsed: (authorizer, nonce) =>
@@ -106,13 +108,11 @@ export function viemArcChain(publicClient: PublicClient, walletClient: WalletCli
           s,
         ],
       });
-      const txHash = await walletClient.writeContract(request);
-      pending.set(txHash, auth);
-      return txHash;
+      return walletClient.writeContract(request);
     },
-    async waitForReceipt(txHash) {
+    async waitForReceipt(txHash, auth) {
       const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 120_000 });
-      return summarizeReceipt(receipt, pending.get(txHash)!);
+      return summarizeReceipt(receipt, auth);
     },
   };
 }
@@ -138,12 +138,25 @@ export class SelfHostedArcFacilitator implements SettlementAdapter {
 
     const txHash = await this.chain.submitTransferWithAuthorization(auth);
     this.onSubmitted(txHash);
+    return this.#confirm(auth, txHash);
+  }
 
+  /**
+   * Retry path for a transfer already submitted (e.g. after a timeout):
+   * waits on the known tx hash and applies the same receipt checks. It never
+   * submits again.
+   */
+  async resume(verified: Extract<VerifyResult, { ok: true }>, auth: Eip3009Authorization, txHash: Hex): Promise<SettlementReceipt> {
+    if (auth.nonce.toLowerCase() !== verified.nonce) throw new SettlementError("authorization nonce differs from verified nonce", txHash);
+    return this.#confirm(auth, txHash);
+  }
+
+  async #confirm(auth: Eip3009Authorization, txHash: Hex): Promise<SettlementReceipt> {
     let receipt: SettlementReceipt;
     try {
-      receipt = await this.chain.waitForReceipt(txHash);
+      receipt = await this.chain.waitForReceipt(txHash, auth);
     } catch (error) {
-      throw new SettlementError(`submitted but outcome unknown: ${(error as Error).message}`, txHash);
+      throw new SettlementError(`submitted but outcome unknown: ${(error as Error).message}`, txHash, true);
     }
     if (receipt.status !== "success") throw new SettlementError("transfer reverted", txHash);
     if (!receipt.authorizationUsedLog || !receipt.transferLog) {

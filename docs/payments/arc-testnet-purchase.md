@@ -49,4 +49,4 @@ npm run arc:purchase   # live purchase; records in .verity/payments.sqlite (giti
 - **Live:** Arc Testnet RPC, USDC settlement, on-chain receipt and log checks, durable SQLite records.
 - **DEMO FIXTURE:** the merchant runs in-process with the labeled demo artifact. The merchant workstream owns the real HTTP merchant, so HTTP wiring stays pending.
 - **Policy:** only tier 1 (0.01–0.10 USDC, automatic) is implemented. Higher tiers are refused until the material-gap rule and owner wallet approval land.
-- **Not in this slice:** `DeliveryReceiptV1` signing and buyer-side receipt verification, merchant-side idempotent replay of cached artifacts, QuickNode reconciliation, and on-chain timeout recovery (a pending purchase keeps its reservation and tx hash).
+- **Not in this slice:** `DeliveryReceiptV1` signing and buyer-side receipt verification, merchant-side idempotent replay of cached artifacts, QuickNode reconciliation, and on-chain timeout recovery (a pending purchase keeps its reservation and tx hash). Delivery receipts and replay are in [delivery-receipt-v1.md](delivery-receipt-v1.md).

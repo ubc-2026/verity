@@ -11,7 +11,8 @@
     "arc:qualify": "node scripts/arc-qualify.ts",
     "quicknode:backfill": "node scripts/quicknode-backfill.ts",
     "quicknode:token": "node scripts/quicknode-token.ts",
-    "webhook:serve": "node scripts/webhook-server.ts"
+    "webhook:serve": "node scripts/webhook-server.ts",
+    "delivery:demo": "node scripts/delivery-demo.ts"
   },
   "repository": {
     "type": "git",

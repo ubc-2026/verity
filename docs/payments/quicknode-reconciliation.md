@@ -35,7 +35,7 @@ For each USDC `AuthorizationUsed(authorizer, nonce)` in a successful receipt:
 - On a match, insert `settlements` (unique on purchase, on `(chain, token, payer, nonce)`, and on `(chain, tx, log index)`), mark the authorization `settled`, and move a `held` reservation to `spent`. A replay hits the unique keys and returns `settlement_already_recorded`.
 - Otherwise record a finding instead of a settlement: `unmatched_payment`, `mismatch`, or `failed_receipt`.
 
-The settlement is recorded with `settlement_status = confirmed`, `delivery_status = pending`, and `ledger_outcome = settlement_confirmed_delivery_pending`. It becomes reconciled only after the buyer verifies a signed `DeliveryReceiptV1` and the content hash. The demo merchant artifact was a fixture, and no `DeliveryReceiptV1` exists yet.
+The settlement is recorded with `settlement_status = confirmed`, `delivery_status = pending`, and `ledger_outcome = settlement_confirmed_delivery_pending`. It becomes `reconciled` when the buyer accepts a verified [`DeliveryReceiptV1`](delivery-receipt-v1.md) for the same tx. The live purchase's merchant artifact was a fixture, and no receipt was issued for it, so its delivery stays pending.
 
 ## What was run
 

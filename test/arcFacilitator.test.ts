@@ -102,6 +102,32 @@ describe("SelfHostedArcFacilitator", () => {
     await assert.rejects(new SelfHostedArcFacilitator(chain).settle(verified, auth), (error: SettlementError) => {
       assert.match(error.message, /outcome unknown/);
       assert.equal(error.txHash, TX);
+      assert.equal(error.pending, true);
+      return true;
+    });
+  });
+
+  it("resumes a submitted transfer by tx hash without submitting again", async () => {
+    const { verified, auth } = verifiedFixture();
+    const waited: Hex[] = [];
+    const { chain, submissions } = fakeChain({
+      waitForReceipt: async (txHash) => {
+        waited.push(txHash);
+        return { txHash, blockNumber: 1n, status: "success", gasUsed: 1n, authorizationUsedLog: true, transferLog: true };
+      },
+    });
+    const receipt = await new SelfHostedArcFacilitator(chain).resume(verified, auth, TX);
+    assert.equal(receipt.txHash, TX);
+    assert.deepEqual(waited, [TX]);
+    assert.equal(submissions.length, 0);
+  });
+
+  it("marks a reverted transfer as failed, not pending", async () => {
+    const { verified, auth } = verifiedFixture();
+    const { chain } = fakeChain({ receipt: { status: "reverted" } });
+    await assert.rejects(new SelfHostedArcFacilitator(chain).resume(verified, auth, TX), (error: SettlementError) => {
+      assert.equal(error.txHash, TX);
+      assert.equal(error.pending, false);
       return true;
     });
   });

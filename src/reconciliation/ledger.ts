@@ -1,6 +1,7 @@
 import type { DatabaseSync } from "node:sqlite";
 import { hexToBigInt, type Hex } from "viem";
 import { ARC_TESTNET } from "../payments/arc.ts";
+import type { DeliveryAcceptanceStore, DeliveryRecordOutcome, SignedDeliveryReceiptV1 } from "../payments/deliveryReceipt.ts";
 import type { PaymentStore } from "../payments/store.ts";
 
 export const AUTHORIZATION_USED_TOPIC: Hex = "0x98de503528ee59b575ef0c0a2576a82497bfc029a5685b209e9ec333479b10a5";
@@ -43,8 +44,8 @@ export interface SettlementRecord {
   authorizationLogIndex: number;
   transferLogIndex: number;
   settlementStatus: "confirmed";
-  deliveryStatus: "pending";
-  ledgerOutcome: "settlement_confirmed_delivery_pending";
+  deliveryStatus: "pending" | "verified" | "mismatch";
+  ledgerOutcome: "settlement_confirmed_delivery_pending" | "reconciled" | "mismatch";
   source: string;
   firstEventId: string;
   recordedAt: number;
@@ -82,6 +83,14 @@ CREATE TABLE IF NOT EXISTS settlements (
   UNIQUE (chain_id, token, payer, nonce),
   UNIQUE (chain_id, tx_hash, authorization_log_index)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS deliveries (
+  purchase_id    TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
+  receipt_digest TEXT NOT NULL,
+  tx_hash        TEXT NOT NULL,
+  content_hash   TEXT NOT NULL,
+  receipt_json   TEXT NOT NULL,
+  verified_at    INTEGER NOT NULL
+) STRICT;
 CREATE TABLE IF NOT EXISTS reconciliation_findings (
   tx_hash    TEXT NOT NULL,
   log_index  INTEGER NOT NULL,
@@ -101,7 +110,7 @@ const num = (hex: Hex) => Number(hexToBigInt(hex));
  * authorization identity (chain, token, payer, nonce) and is idempotent: a
  * replayed event or a re-delivered receipt never creates a second settlement.
  */
-export class ReconciliationLedger {
+export class ReconciliationLedger implements DeliveryAcceptanceStore {
   readonly #db: DatabaseSync;
   readonly #chainId: number;
   readonly #token: Hex;
@@ -131,21 +140,91 @@ export class ReconciliationLedger {
       authorizationLogIndex: row.authorization_log_index as number,
       transferLogIndex: row.transfer_log_index as number,
       settlementStatus: row.settlement_status as "confirmed",
-      deliveryStatus: row.delivery_status as "pending",
-      ledgerOutcome: row.ledger_outcome as "settlement_confirmed_delivery_pending",
+      deliveryStatus: row.delivery_status as SettlementRecord["deliveryStatus"],
+      ledgerOutcome: row.ledger_outcome as SettlementRecord["ledgerOutcome"],
       source: row.source as string,
       firstEventId: row.first_event_id as string,
       recordedAt: row.recorded_at as number,
     };
   }
 
-  counts(): { events: number; settlements: number; findings: number } {
+  counts(): { events: number; settlements: number; deliveries: number; findings: number } {
     const one = (sql: string) => (this.#db.prepare(sql).get() as { n: number }).n;
     return {
       events: one(`SELECT COUNT(*) AS n FROM webhook_events`),
       settlements: one(`SELECT COUNT(*) AS n FROM settlements`),
+      deliveries: one(`SELECT COUNT(*) AS n FROM deliveries`),
       findings: one(`SELECT COUNT(*) AS n FROM reconciliation_findings`),
     };
+  }
+
+  /**
+   * Records a delivery the buyer has already verified (signature, binding, and
+   * response digest; see acceptDelivery). One receipt per purchase: the same
+   * receipt again is a no-op, a different one is a mismatch. With a confirmed
+   * settlement for the same tx the purchase becomes `reconciled`.
+   */
+  recordVerifiedDelivery(args: { receipt: SignedDeliveryReceiptV1; digest: Hex; now: number }): DeliveryRecordOutcome {
+    const { receipt, digest, now } = args;
+    const purchaseId = receipt.purchaseId;
+    const db = this.#db;
+    db.exec("BEGIN IMMEDIATE");
+    try {
+      const outcome = this.#recordDelivery(receipt, digest, now);
+      db.exec("COMMIT");
+      return outcome;
+    } catch (error) {
+      db.exec("ROLLBACK");
+      if (/FOREIGN KEY/.test((error as Error).message)) return { kind: "mismatch", purchaseId, detail: "receipt names an unknown purchase" };
+      throw error;
+    }
+  }
+
+  #recordDelivery(receipt: SignedDeliveryReceiptV1, digest: Hex, now: number): DeliveryRecordOutcome {
+    const purchaseId = receipt.purchaseId;
+    const existing = this.#db.prepare(`SELECT receipt_digest FROM deliveries WHERE purchase_id = ?`).get(purchaseId) as { receipt_digest: string } | undefined;
+    if (existing) {
+      if (existing.receipt_digest !== digest) return this.#deliveryMismatch(receipt, "a different receipt was already accepted for this purchase", now);
+      const settlement = this.settlement(purchaseId);
+      if (settlement?.deliveryStatus === "mismatch") return { kind: "mismatch", purchaseId, detail: "settlement tx differs from the accepted receipt" };
+      return { kind: "delivery_already_recorded", purchaseId, ledgerOutcome: settlement?.ledgerOutcome ?? "delivered_payment_unconfirmed" };
+    }
+
+    const own = this.#db.prepare(`SELECT tx_hash FROM authorizations WHERE purchase_id = ?`).get(purchaseId) as { tx_hash: string | null } | undefined;
+    if (own?.tx_hash && own.tx_hash.toLowerCase() !== receipt.txHash) {
+      return this.#deliveryMismatch(receipt, `receipt tx ${receipt.txHash} differs from recorded tx ${own.tx_hash}`, now);
+    }
+    this.#db
+      .prepare(`INSERT INTO deliveries (purchase_id, receipt_digest, tx_hash, content_hash, receipt_json, verified_at) VALUES (?, ?, ?, ?, ?, ?)`)
+      .run(purchaseId, digest, receipt.txHash, receipt.contentHash, JSON.stringify(receipt), now);
+    return this.#promote(purchaseId, now) ?? { kind: "delivered_payment_unconfirmed", purchaseId };
+  }
+
+  /** Joins a confirmed settlement with a verified delivery for the same tx. */
+  #promote(purchaseId: string, now: number): DeliveryRecordOutcome | undefined {
+    const settlement = this.settlement(purchaseId);
+    const delivery = this.#db.prepare(`SELECT tx_hash, receipt_json FROM deliveries WHERE purchase_id = ?`).get(purchaseId) as
+      | { tx_hash: string; receipt_json: string }
+      | undefined;
+    if (!settlement || !delivery) return undefined;
+    if (settlement.txHash !== delivery.tx_hash) {
+      const receipt = JSON.parse(delivery.receipt_json) as SignedDeliveryReceiptV1;
+      return this.#deliveryMismatch(receipt, `receipt tx ${delivery.tx_hash} differs from settlement tx ${settlement.txHash}`, now);
+    }
+    this.#db
+      .prepare(`UPDATE settlements SET delivery_status = 'verified', ledger_outcome = 'reconciled' WHERE purchase_id = ?`)
+      .run(purchaseId);
+    return { kind: "reconciled", purchaseId };
+  }
+
+  #deliveryMismatch(receipt: SignedDeliveryReceiptV1, detail: string, now: number): DeliveryRecordOutcome {
+    this.#db
+      .prepare(`INSERT OR IGNORE INTO reconciliation_findings (tx_hash, log_index, kind, detail, event_id, found_at) VALUES (?, -1, 'receipt_mismatch', ?, ?, ?)`)
+      .run(receipt.txHash, detail, `receipt:${receipt.purchaseId}`, now);
+    this.#db
+      .prepare(`UPDATE settlements SET delivery_status = 'mismatch', ledger_outcome = 'mismatch' WHERE purchase_id = ? AND delivery_status <> 'verified'`)
+      .run(receipt.purchaseId);
+    return { kind: "mismatch", purchaseId: receipt.purchaseId, detail };
   }
 
   /**
@@ -273,6 +352,9 @@ export class ReconciliationLedger {
       this.#db
         .prepare(`UPDATE reservations SET status = 'spent', updated_at = ? WHERE purchase_id = ? AND status = 'held'`)
         .run(now, purchaseId);
+
+      // A delivery verified before the settlement was observed is joined now.
+      if (Number(insert.changes) === 1) this.#promote(purchaseId, now);
 
       outcomes.push({
         kind: Number(insert.changes) === 1 ? "settlement_recorded" : "settlement_already_recorded",
