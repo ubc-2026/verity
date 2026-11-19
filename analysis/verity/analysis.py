@@ -82,6 +82,8 @@ def _flags(m: dict[str, Any]) -> list[str]:
         f.append(f"terms_not_read: {m['terms_problem']}")
     if m.get("reading_scores_unscored"):
         f.append("reading_scores_unscored: ambiguity, source, and correlation are left null")
+    if m.get("analyst_id"):
+        f.append(f"analyst={m['analyst_id']} (code rules, no LLM)")
     return f
 
 

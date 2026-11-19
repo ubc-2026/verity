@@ -166,12 +166,20 @@ def analyze_live(
     http_get: Optional[HttpGet] = None,
     read_terms: bool = True,
     now: Optional[datetime] = None,
+    analyst: str = "rules",
 ):
     """Fetch one Gemini Exchange event and run the code scoring path.
+
+    analyst="rules" (default) scores ambiguity, source and correlation with the
+    code-only Framework rules in rules_analyst.py and names evidence gaps.
+    analyst="none" leaves those three scores null for a person to read.
+    No LLM and no API key either way.
 
     Returns (risk_analysis, ctx). Pass the same ctx to generate_purchase_request
     so it uses the same clock and catalog.
     """
+    if analyst not in ("rules", "none"):
+        raise ValueError(f"analyst must be 'rules' or 'none', not {analyst!r}")
     from .analysis import get_risk_analysis
     from .fixtures import FixedClock, FixtureContext
 
@@ -182,6 +190,10 @@ def analyze_live(
     text, problem = (None, "no terms URL in the event") if not terms_url else (
         fetch_terms_text(terms_url, http_get) if read_terms else (None, "terms reading disabled"))
     record = build_live_record(event, outcome_label, now=now, terms_text=text, terms_problem=problem)
+    if analyst == "rules":
+        from .rules_analyst import rules_analyst
+        record = rules_analyst(record)
+        record["reading_scores_unscored"] = False
 
     ctx = FixtureContext.default(clock=FixedClock(fmt_utc(now)))
     ctx.markets = {**ctx.markets, record["contract_id"]: record}

@@ -104,6 +104,18 @@ def _gaps(source: dict[str, Any], ambiguity: dict[str, Any], hay: str) -> list[d
     return gaps
 
 
+# Free checks research.py can run for a live gap, by event-ticker prefix and gap type.
+_LIVE_FREE_CHECKS = {("WXHIGH-NYC", "settlement_source_version"): "nyc-settlement-version"}
+
+
+def _attach_free_checks(record: dict[str, Any], gaps: list[dict[str, Any]]) -> None:
+    ticker = record.get("event_ticker") or ""
+    for g in gaps:
+        for (prefix, gap_type), check in _LIVE_FREE_CHECKS.items():
+            if ticker.startswith(prefix) and g["gap_type"] == gap_type:
+                g["free_checks"] = [check]
+
+
 def rules_analyst(record: dict[str, Any]) -> dict[str, Any]:
     """Write analyst scores and evidence gaps into a live record. Pure function of the record."""
     text, ids = _text(record)
@@ -112,5 +124,6 @@ def rules_analyst(record: dict[str, Any]) -> dict[str, Any]:
     cor = _correlation(record, text, ids)
     record["analyst"] = {"ambiguity": amb, "source": src, "correlation": cor}
     record["evidence_gaps"] = _gaps(src, amb, " ".join(filter(None, [record.get("settlement_source"), text])))
+    _attach_free_checks(record, record["evidence_gaps"])
     record["analyst_id"] = ANALYST_ID
     return record
