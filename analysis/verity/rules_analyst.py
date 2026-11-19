@@ -29,7 +29,8 @@ _SOURCE_RULES: list[tuple[int, re.Pattern[str], str]] = [
 
 _JUDGMENT = re.compile(r"style control|top[- ]ranked|\bbest\b|at (its|the exchange's) (sole )?discretion|"
                        r"determined by gemini|subjective", re.I)
-_BANDS = re.compile(r"\d+\s*°?\s*[fc]?\s*(to|-|–)\s*\d+\s*°|\bbetween\b.*\band\b|or (more|higher|above|less|lower|below)", re.I)
+_BANDS = re.compile(r"\d+\s*°?\s*[fc]?\s*(to|-|–)\s*\d+\s*°|\bbetween\s+\$?\d[\d.,]*\S*\s+and\s+\$?\d|"
+                    r"\d[\d.,]*\s*°?\s*[fc]?\s+or\s+(more|higher|above|less|lower|below)", re.I)
 _SCHEDULED_DATA = re.compile(r"\bcpi\b|jobs report|nonfarm|payrolls|fomc|federal reserve|fed speak|"
                              r"injur|earnings|\bgdp\b", re.I)
 

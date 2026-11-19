@@ -52,6 +52,32 @@ def _s(x: Any) -> Optional[str]:
     return None if x in (None, "") else str(x)
 
 
+def _rich_text(x: Any) -> Optional[str]:
+    """Contract descriptions arrive as a rich-text document ({"nodeType": "document",
+    "content": [{"value": ...}]}), event descriptions as plain strings. Return plain text."""
+    if x is None or isinstance(x, str):
+        return _s(x)
+    parts: list[str] = []
+
+    def walk(node: Any) -> None:
+        if isinstance(node, dict):
+            if isinstance(node.get("value"), str):
+                parts.append(node["value"])
+            for child in node.get("content") or []:
+                walk(child)
+        elif isinstance(node, list):
+            for child in node:
+                walk(child)
+
+    walk(x)
+    return _s("".join(parts).strip())
+
+
+def _event_terms_url(event: dict[str, Any]) -> Optional[str]:
+    # The live API puts the event-level link in "termsLink"; older docs used "termsAndConditionsUrl".
+    return _s(event.get("termsLink")) or _s(event.get("termsAndConditionsUrl"))
+
+
 def build_live_record(
     event: dict[str, Any],
     outcome_label: str,
@@ -69,13 +95,14 @@ def build_live_record(
     c = matches[0]
     p = c.get("prices") or {}
     url = f"{BASE}/events/{event.get('ticker')}"
-    terms_url = _s(c.get("termsAndConditionsUrl")) or _s(event.get("termsAndConditionsUrl"))
+    terms_url = _s(c.get("termsAndConditionsUrl")) or _event_terms_url(event)
+    contract_text = _rich_text(c.get("description"))
 
     excerpts = []
     if _s(event.get("description")):
         excerpts.append({"id": "C-EVENT", "field_or_rule": "event.description", "quote": str(event["description"])})
-    if _s(c.get("description")):
-        excerpts.append({"id": "C-CONTRACT", "field_or_rule": "contract.description", "quote": str(c["description"])})
+    if contract_text:
+        excerpts.append({"id": "C-CONTRACT", "field_or_rule": "contract.description", "quote": contract_text})
     if terms_text:
         excerpts.append({"id": "C-TERMS", "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)", "quote": terms_text})
     excerpts.append({"id": "C-PRICES", "field_or_rule": "contract.prices",
@@ -106,7 +133,7 @@ def build_live_record(
         },
         "settlement_source": " / ".join(str(v) for v in (sd.get("agency"), sd.get("index")) if v) or None,
         "terms_url": terms_url,
-        "event_terms_url_present": bool(_s(event.get("termsAndConditionsUrl"))),
+        "event_terms_url_present": bool(_event_terms_url(event)),
         "terms_problem": terms_problem,
         "rules_excerpts": excerpts,
         "sibling_events": [e.get("ticker") for e in (event.get("events") or []) if e.get("ticker")],
@@ -135,7 +162,7 @@ def analyze_live(
     now = now or datetime.now(timezone.utc)
     event = fetch_event(event_ticker, http_get)
     contract = next((c for c in event.get("contracts") or [] if c.get("label") == outcome_label), {})
-    terms_url = contract.get("termsAndConditionsUrl") or event.get("termsAndConditionsUrl")
+    terms_url = _s(contract.get("termsAndConditionsUrl")) or _event_terms_url(event)
     text, problem = (None, "no terms URL in the event") if not terms_url else (
         fetch_terms_text(terms_url, http_get) if read_terms else (None, "terms reading disabled"))
     record = build_live_record(event, outcome_label, now=now, terms_text=text, terms_problem=problem)
