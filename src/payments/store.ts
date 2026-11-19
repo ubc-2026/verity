@@ -1,5 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 import type { Hex } from "viem";
+import { APPROVAL_MAX, AUTO_MAX, AUTO_MIN, GAP_MAX, MISSION_BUDGET, verifyOwnerApproval } from "./policy.ts";
 import {
   commitResearchRequest,
   computeRequestHash,
@@ -18,18 +19,28 @@ import {
  * no native build step on Windows). Amounts are USDC base units stored as text.
  */
 
-/** Demo policy from the README, in USDC base units (6 decimals). */
+/** Demo policy from the README, in USDC base units (6 decimals). Same numbers as policy.ts. */
 export const DEMO_POLICY = {
-  missionBudget: 25_000_000n,
-  minAmount: 10_000n, // 0.01 USDC
-  /** Highest amount this slice approves automatically (tier 1, 0.01–0.10 USDC). */
-  autoApproveMax: 100_000n,
-  purchaseCap: 2_000_000n,
+  missionBudget: MISSION_BUDGET,
+  minAmount: AUTO_MIN, // 0.01 USDC
+  /** Tier 1: approved automatically (0.01-0.10 USDC). */
+  autoApproveMax: AUTO_MAX,
+  /** Tier 2: only for a material unresolved gap with no free or cached evidence (to 0.50 USDC). */
+  gapMax: GAP_MAX,
+  /** Above gapMax needs an owner wallet signature; above purchaseCap is refused. */
+  purchaseCap: APPROVAL_MAX,
 } as const;
 
 export type SpendingPolicy = { [K in keyof typeof DEMO_POLICY]: bigint };
 
-export type AuthorizationStatus = "prepared" | "signed" | "submitted" | "pending" | "settled" | "failed";
+export type AuthorizationStatus =
+  | "awaiting_approval"
+  | "prepared"
+  | "signed"
+  | "submitted"
+  | "pending"
+  | "settled"
+  | "failed";
 
 export interface StoredAuthorization {
   purchaseId: string;
@@ -45,6 +56,11 @@ export interface StoredAuthorization {
 
 export class PolicyError extends Error {
   override name = "PolicyError";
+}
+
+/** Tier 3 purchase: recorded and reserved, but not signable until a valid owner approval is stored. */
+export class ApprovalRequiredError extends PolicyError {
+  override name = "ApprovalRequiredError";
 }
 
 const SCHEMA = `
@@ -64,6 +80,13 @@ CREATE TABLE IF NOT EXISTS reservations (
   amount      TEXT NOT NULL,
   status      TEXT NOT NULL CHECK (status IN ('held', 'spent', 'released')),
   updated_at  INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS owner_approvals (
+  purchase_id  TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
+  owner        TEXT NOT NULL,
+  request_hash TEXT NOT NULL,
+  signature    TEXT NOT NULL,
+  approved_at  INTEGER NOT NULL
 ) STRICT;
 CREATE TABLE IF NOT EXISTS authorizations (
   purchase_id  TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
@@ -97,6 +120,11 @@ export class PaymentStore {
 
   close() {
     this.#db.close();
+  }
+
+  /** Spending limits this store enforces. */
+  get policy(): SpendingPolicy {
+    return this.#policy;
   }
 
   /** Shared connection for modules that must update payment records in the same transaction. */
@@ -149,6 +177,8 @@ export class PaymentStore {
     missionId: string;
     request: ResearchRequestV1;
     now: number;
+    /** True only when the analyst left a material resolution gap with no free or cached evidence. */
+    materialUnresolvedGap?: boolean;
     saltSource?: () => Hex;
   }): { record: StoredAuthorization; reused: boolean } {
     const { missionId, request, now } = input;
@@ -169,12 +199,21 @@ export class PaymentStore {
       const policy = this.#policy;
       if (amount < policy.minAmount) throw new PolicyError("amount below policy minimum");
       if (amount > policy.purchaseCap) throw new PolicyError("amount above purchase cap");
-      if (amount > policy.autoApproveMax) {
-        throw new PolicyError("amount requires a policy tier not implemented in this slice (material-gap or owner approval)");
+      if (amount > policy.autoApproveMax && amount <= policy.gapMax && input.materialUnresolvedGap !== true) {
+        throw new PolicyError("this tier requires a material unresolved gap with no free or cached evidence");
       }
       if (this.committedSpend(missionId) + amount > policy.missionBudget) {
         throw new PolicyError("mission budget exceeded (confirmed spend plus reservations)");
       }
+      const duplicate = this.#db
+        .prepare(`SELECT purchase_id FROM purchases WHERE mission_id = ? AND contract_id = ? AND evidence_type = ?`)
+        .get(missionId, request.parameters.contractId, request.parameters.evidenceType) as Row | undefined;
+      if (duplicate) {
+        throw new PolicyError(
+          `duplicate purchase: ${String(duplicate.purchase_id)} already covers ${request.parameters.contractId} / ${request.parameters.evidenceType}`,
+        );
+      }
+      const initialStatus: AuthorizationStatus = amount > policy.gapMax ? "awaiting_approval" : "prepared";
 
       const commitment = commitResearchRequest(request, (input.saltSource ?? generateSalt)());
       this.#db
@@ -198,7 +237,7 @@ export class PaymentStore {
         .prepare(
           `INSERT INTO authorizations
              (purchase_id, chain_id, token, payer, nonce, salt, request_hash, request_json, status, updated_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'prepared', ?)`,
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         )
         .run(
           request.purchaseId,
@@ -209,10 +248,39 @@ export class PaymentStore {
           commitment.salt,
           commitment.requestHash,
           canonicalizeResearchRequest(request),
+          initialStatus,
           now,
         );
       return { record: this.get(request.purchaseId)!, reused: false };
     });
+  }
+
+  /**
+   * Verifies the owner's EIP-712 approval for a tier 3 purchase and makes it
+   * signable. The approval binds the purchase ID and the stored request hash,
+   * so it cannot be reused for another purchase or a changed request.
+   */
+  async recordOwnerApproval(args: { purchaseId: string; signature: Hex; owner: Hex; now: number }): Promise<StoredAuthorization> {
+    const record = this.get(args.purchaseId);
+    if (!record) throw new PolicyError(`no purchase ${args.purchaseId} to approve`);
+    if (record.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+    const verdict = await verifyOwnerApproval({
+      request: record.request,
+      requestHash: record.requestHash,
+      signature: args.signature,
+      owner: args.owner,
+      now: args.now,
+    });
+    if (!verdict.ok) throw new PolicyError(verdict.reason);
+    this.#transaction(() => {
+      this.#db
+        .prepare(`INSERT INTO owner_approvals (purchase_id, owner, request_hash, signature, approved_at) VALUES (?, ?, ?, ?, ?)`)
+        .run(args.purchaseId, args.owner.toLowerCase(), record.requestHash, args.signature, args.now);
+      this.#db
+        .prepare(`UPDATE authorizations SET status = 'prepared', updated_at = ? WHERE purchase_id = ? AND status = 'awaiting_approval'`)
+        .run(args.now, args.purchaseId);
+    });
+    return this.get(args.purchaseId)!;
   }
 
   /** Stores the signature once. Returns whichever signature is stored. */
@@ -224,6 +292,7 @@ export class PaymentStore {
       )
       .run(signature, now, purchaseId);
     const stored = this.get(purchaseId);
+    if (stored?.status === "awaiting_approval") throw new ApprovalRequiredError(`purchase ${purchaseId} needs owner approval before signing`);
     if (!stored?.signature) throw new ResearchRequestError(`no authorization to sign for ${purchaseId}`);
     return stored;
   }

@@ -1,86 +1,72 @@
-import { recoverTypedDataAddress, type Hex } from "viem";
-import {
-  buildResearchRequest,
-  InMemoryAuthorizationStore,
-  prepareAuthorization,
-  type CatalogItem,
-  type PreparedAuthorization,
-  type ProposalSelection,
-} from "./buyer.ts";
+import { randomBytes } from "node:crypto";
+import type { Hex } from "viem";
+import { buildResearchRequest, type CatalogItem } from "./buyer.ts";
+import { explainDecision, type DecisionExplanation } from "./explain.ts";
+import { authorizeStoredPurchase, type AuthorizedPayment, type PaymentSigner } from "./paymentService.ts";
+import { approvalTypedData, assessPolicy, parseQuoteAmount, type PolicyDecision } from "./policy.ts";
+import type { AcceptedProposal } from "./proposal.ts";
 import type { VerityQuote } from "./quote.ts";
-import {
-  assessPolicy,
-  MissionBudget,
-  ownerApprovalDomain,
-  ownerApprovalTypes,
-  parseQuoteAmount,
-  type OwnerApprovalMessage,
-  type PolicyDecision,
-} from "./policy.ts";
-import { computeRequestHash, type ResearchRequestV1 } from "./researchRequest.ts";
+import { ResearchRequestError, type ResearchRequestV1 } from "./researchRequest.ts";
+import { PolicyError, type PaymentStore } from "./store.ts";
 
-export interface PurchaseInput {
-  selection: ProposalSelection;
-  groupKey: string;
-  quote: VerityQuote;
-  payer: Hex;
-  now: number;
-  materialUnresolvedGap: boolean;
-  ownerSignature?: Hex;
+/** Buyer-generated purchase ID, sent with the quote request. The quote must echo it. */
+export function newPurchaseId(): string {
+  return `purchase-${randomBytes(12).toString("hex")}`;
 }
 
 export type PurchaseResult =
-  | { status: "rejected"; decision: Extract<PolicyDecision, { decision: "reject" }> }
+  | { status: "rejected"; reason: string; decision: PolicyDecision | null; explanation: DecisionExplanation }
   | {
       status: "awaiting_approval";
       decision: Extract<PolicyDecision, { decision: "needs_approval" }>;
       request: ResearchRequestV1;
       requestHash: Hex;
+      /** EIP-712 payload the owner wallet must sign before anything is authorized. */
+      approval: ReturnType<typeof approvalTypedData>;
+      explanation: DecisionExplanation;
     }
   | {
-      status: "ready";
+      status: "authorized";
       decision: PolicyDecision;
       request: ResearchRequestV1;
-      prepared: PreparedAuthorization;
+      payment: AuthorizedPayment;
+      explanation: DecisionExplanation;
     };
 
-function approvalMessage(request: ResearchRequestV1, requestHash: Hex): OwnerApprovalMessage {
-  return {
-    purchaseId: request.purchaseId,
-    requestHash,
-    amount: BigInt(request.amount),
-    payTo: request.payTo,
-    expiry: BigInt(request.validBefore),
-  };
-}
-
-export function approvalTypedData(request: ResearchRequestV1, requestHash: Hex) {
-  return {
-    domain: ownerApprovalDomain(request.chainId),
-    types: ownerApprovalTypes,
-    primaryType: "OwnerApproval" as const,
-    message: approvalMessage(request, requestHash),
-  };
-}
-
 /**
- * Payment service. It reserves the mission budget, and it creates an EIP-3009
- * authorization only after policy passes. Owner approval is a signature over
- * the request hash. A missing signature leaves the reservation outstanding.
+ * Buyer side of a purchase. Policy is decided from durable state, the budget is
+ * reserved and the request, salt, and nonce recorded in one transaction, and
+ * the EIP-3009 authorization is signed only from that stored record. A purchase
+ * above the gap tier stays `awaiting_approval` and cannot be signed until a
+ * valid owner signature is stored.
  */
-export class PaymentService {
-  readonly budget: MissionBudget;
-  readonly authorizations = new InMemoryAuthorizationStore();
+export class BuyerService {
+  readonly #store: PaymentStore;
   readonly #catalog: ReadonlyMap<string, CatalogItem>;
   readonly #owner: Hex;
-  readonly #pending = new Map<string, ResearchRequestV1>();
-  readonly #usedApprovals = new Set<string>();
+  readonly #signer: PaymentSigner;
+  readonly #tokenDomain: { name: string; version: string };
+  readonly #missionId: string;
+  readonly #saltSource: (() => Hex) | undefined;
   #paused = false;
 
-  constructor(options: { catalog: ReadonlyMap<string, CatalogItem>; owner: Hex; budget?: bigint }) {
+  constructor(options: {
+    store: PaymentStore;
+    catalog: ReadonlyMap<string, CatalogItem>;
+    owner: Hex;
+    signer: PaymentSigner;
+    tokenDomain: { name: string; version: string };
+    missionId: string;
+    /** Fixture runs pass a deterministic salt source; production leaves the CSPRNG default. */
+    saltSource?: () => Hex;
+  }) {
+    this.#store = options.store;
     this.#catalog = options.catalog;
     this.#owner = options.owner;
-    this.budget = new MissionBudget(options.budget);
+    this.#signer = options.signer;
+    this.#tokenDomain = options.tokenDomain;
+    this.#missionId = options.missionId;
+    this.#saltSource = options.saltSource;
   }
 
   pause(): void {
@@ -91,98 +77,118 @@ export class PaymentService {
     this.#paused = false;
   }
 
-  confirm(groupKey: string): void {
-    this.budget.confirm(groupKey);
-    this.#pending.delete(groupKey);
-  }
+  async purchase(input: {
+    accepted: AcceptedProposal;
+    purchaseId: string;
+    quote: VerityQuote;
+    now: number;
+    ownerSignature?: Hex;
+  }): Promise<PurchaseResult> {
+    const { accepted, purchaseId, quote, now } = input;
+    const existing = this.#store.get(purchaseId);
+    if (existing) return this.#continue(existing.request, input);
 
-  release(groupKey: string): void {
-    if (this.budget.keys("reserved").includes(groupKey)) this.budget.release(groupKey);
-    this.#pending.delete(groupKey);
-  }
-
-  async begin(input: PurchaseInput): Promise<PurchaseResult> {
-    const pending = this.#pending.get(input.groupKey);
-    if (pending) return this.#finishApproval(input, pending);
-
+    const amount = parseQuoteAmount(quote.amount);
     const decision = assessPolicy({
-      amount: parseQuoteAmount(input.quote.amount),
-      now: input.now,
-      expiresAt: input.quote.expiresAt,
-      merchantId: input.quote.merchantId,
-      catalogItemId: input.quote.catalogItemId,
-      groupKey: input.groupKey,
-      materialUnresolvedGap: input.materialUnresolvedGap,
+      amount,
+      now,
+      expiresAt: quote.expiresAt,
+      merchantId: quote.merchantId,
+      catalogItemId: quote.catalogItemId,
+      groupKey: accepted.groupKey,
+      materialUnresolvedGap: accepted.materialUnresolvedGap,
       paused: this.#paused,
       allowlistedMerchants: [...new Set([...this.#catalog.values()].map((item) => item.merchantId))],
       allowlistedItems: [...this.#catalog.keys()],
-      reservedKeys: this.budget.keys("reserved"),
-      spentKeys: this.budget.keys("spent"),
-      committedBaseUnits: this.budget.committed(),
-      budget: this.budget.budget,
+      // Duplicates are enforced durably by PaymentStore (one purchase per mission, contract, and evidence type).
+      reservedKeys: [],
+      spentKeys: [],
+      committedBaseUnits: this.#store.committedSpend(this.#missionId),
+      budget: this.#store.policy.missionBudget,
     });
-    if (decision.decision === "reject") return { status: "rejected", decision };
+    if (decision.decision === "reject") {
+      return { status: "rejected", reason: decision.reason, decision, explanation: explainDecision({ decision, quote }) };
+    }
 
-    const request = buildResearchRequest({
-      catalog: this.#catalog,
-      proposal: input.selection,
-      quote: input.quote,
-      payer: input.payer,
+    let request: ResearchRequestV1;
+    try {
+      request = buildResearchRequest({
+        catalog: this.#catalog,
+        proposal: accepted.selection,
+        quote,
+        purchaseId,
+        catalogParameters: accepted.catalogParameters,
+        payer: this.#signer.address,
+        now,
+      });
+      this.#store.reserveAndRecord({
+        missionId: this.#missionId,
+        request,
+        now,
+        materialUnresolvedGap: accepted.materialUnresolvedGap,
+        ...(this.#saltSource ? { saltSource: this.#saltSource } : {}),
+      });
+    } catch (error) {
+      if (!(error instanceof PolicyError || error instanceof ResearchRequestError)) throw error;
+      const rejected = { decision: "reject", reason: error.message } as const;
+      return { status: "rejected", reason: error.message, decision: rejected, explanation: explainDecision({ decision: rejected, quote }) };
+    }
+    return this.#continue(request, input, decision);
+  }
+
+  async #continue(
+    request: ResearchRequestV1,
+    input: { purchaseId: string; quote: VerityQuote; now: number; ownerSignature?: Hex },
+    decision?: PolicyDecision,
+  ): Promise<PurchaseResult> {
+    let record = this.#store.get(input.purchaseId)!;
+    const amount = BigInt(request.amount);
+    const limits = this.#store.policy;
+    const effective: PolicyDecision =
+      decision ??
+      (amount > limits.gapMax
+        ? { decision: "needs_approval", tier: "owner" }
+        : { decision: "allow", tier: amount > limits.autoApproveMax ? "gap" : "auto" });
+
+    if (record.status === "awaiting_approval") {
+      const waiting = { decision: "needs_approval", tier: "owner" } as const;
+      if (!input.ownerSignature) {
+        return {
+          status: "awaiting_approval",
+          decision: waiting,
+          request,
+          requestHash: record.requestHash,
+          approval: approvalTypedData(request, record.requestHash),
+          explanation: explainDecision({ decision: waiting, quote: input.quote }),
+        };
+      }
+      try {
+        record = await this.#store.recordOwnerApproval({
+          purchaseId: input.purchaseId,
+          signature: input.ownerSignature,
+          owner: this.#owner,
+          now: input.now,
+        });
+      } catch (error) {
+        if (!(error instanceof PolicyError)) throw error;
+        const rejected = { decision: "reject", reason: error.message } as const;
+        return { status: "rejected", reason: error.message, decision: rejected, explanation: explainDecision({ decision: rejected, quote: input.quote }) };
+      }
+    }
+
+    const payment = await authorizeStoredPurchase({
+      store: this.#store,
+      purchaseId: input.purchaseId,
+      signer: this.#signer,
+      tokenDomain: this.#tokenDomain,
       now: input.now,
     });
-
-    if (decision.decision === "needs_approval" && !input.ownerSignature) {
-      this.budget.hold(input.groupKey, parseQuoteAmount(input.quote.amount));
-      this.#pending.set(input.groupKey, request);
-      return { status: "awaiting_approval", decision, request, requestHash: computeRequestHash(request) };
-    }
-
-    if (decision.decision === "needs_approval") {
-      const approved = await this.#ownerSigned(input, request);
-      if (!approved.ok) return { status: "rejected", decision: { decision: "reject", reason: approved.reason } };
-    }
-
-    this.budget.hold(input.groupKey, parseQuoteAmount(input.quote.amount));
     return {
-      status: "ready",
-      decision,
-      request,
-      prepared: prepareAuthorization(request, this.authorizations),
+      status: "authorized",
+      decision: effective,
+      request: payment.record.request,
+      payment,
+      explanation: explainDecision({ decision: effective, quote: input.quote, ownerApproved: input.ownerSignature !== undefined }),
     };
-  }
-
-  async #finishApproval(input: PurchaseInput, request: ResearchRequestV1): Promise<PurchaseResult> {
-    const decision = { decision: "needs_approval", tier: "owner" } as const;
-    if (!input.ownerSignature) {
-      return { status: "awaiting_approval", decision, request, requestHash: computeRequestHash(request) };
-    }
-    const approved = await this.#ownerSigned(input, request);
-    if (!approved.ok) return { status: "rejected", decision: { decision: "reject", reason: approved.reason } };
-    this.#pending.delete(input.groupKey);
-    return {
-      status: "ready",
-      decision,
-      request,
-      prepared: prepareAuthorization(request, this.authorizations),
-    };
-  }
-
-  async #ownerSigned(input: PurchaseInput, request: ResearchRequestV1): Promise<{ ok: true } | { ok: false; reason: string }> {
-    if (this.#usedApprovals.has(request.purchaseId)) {
-      return { ok: false, reason: "owner approval was already used" };
-    }
-    if (input.now >= request.validBefore) return { ok: false, reason: "owner approval expired" };
-    const requestHash = computeRequestHash(request);
-    const signature = input.ownerSignature;
-    if (!signature) return { ok: false, reason: "owner signature is required" };
-    const signer = await recoverTypedDataAddress({
-      ...approvalTypedData(request, requestHash),
-      signature,
-    }).catch(() => undefined);
-    if (!signer || signer.toLowerCase() !== this.#owner.toLowerCase()) {
-      return { ok: false, reason: "owner signature does not match the enrolled wallet" };
-    }
-    this.#usedApprovals.add(request.purchaseId);
-    return { ok: true };
   }
 }

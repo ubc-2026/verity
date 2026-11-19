@@ -177,7 +177,7 @@ The processor prints one JSON line:
 
 ## What Decong needs to connect the real ledger
 
-The real ledger is not wired yet. Payments and security (Decong) connects it by:
+The Verity side now exists in code but is not deployed: `src/alerts/overdue.ts` builds and strictly validates `verity.overdue_delivery.v1` events from the reconciliation ledger, and `src/alerts/ledgerFeed.ts` serves the read-only `GET /purchases/{purchaseId}` record behind a bearer token (constant-time compare, `GET` only). `npm run e2e` checks both against a contract model of the routine (`scripts/e2e/grokRoutineModel.ts`): a reconciled purchase emits no event and a forged event for it opens no card; an overdue purchase opens one card, an exact replay keeps one card, and a wrong routine key is refused. That model is not the Grok Bot routine. Payments and security (Decong) still connects it by:
 
 1. Emitting a `verity.overdue_delivery.v1` event when a delivery deadline passes. POST it to the Grok Bot routine webhook with the routine key as a bearer token (see [Webhook authentication](#webhook-authentication)), and retry with backoff until the response is `200`. The webhook URL and key are provided privately by the Grok Bot owner. This repository does not create the routine.
 2. Exposing a read-only `GET /purchases/{purchaseId}` that returns the latest record using the field contract above. The bot runtime calls it at `{VERITY_LEDGER_URL}/purchases/{purchaseId}`.

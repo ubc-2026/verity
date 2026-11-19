@@ -164,7 +164,14 @@ def test_terms_excerpts_cite_the_terms_pdf():
     assert sources["C-NYC-1"].startswith("https://api.gemini.com/")
 
 
-def test_the_read_path_does_not_load_the_trading_client():
-    code = ("import sys, verity, verity.live, verity.research, verity.rules_analyst; "
-            "sys.exit(1 if 'verity.exchange' in sys.modules else 0)")
-    assert subprocess.run([sys.executable, "-c", code], cwd=Path(__file__).resolve().parents[1]).returncode == 0
+def test_no_order_placement_code_ships_with_the_analysis_path():
+    # The guarded trading client was removed from the integration: Verity is research-only.
+    root = Path(__file__).resolve().parents[1]
+    assert not (root / "verity" / "exchange.py").exists()
+    code = ("import sys, importlib.util, verity, verity.live, verity.research, verity.rules_analyst, "
+            "verity.trends, verity.reassess, verity.cli; "
+            "sys.exit(1 if importlib.util.find_spec('verity.exchange') is not None else 0)")
+    assert subprocess.run([sys.executable, "-c", code], cwd=root).returncode == 0
+    sources = "\n".join(p.read_text(encoding="utf-8") for p in (root / "verity").glob("*.py"))
+    for marker in ("/v1/order/new", "X-GEMINI-SIGNATURE", "GEMINI_EXCHANGE_API_SECRET"):
+        assert marker not in sources

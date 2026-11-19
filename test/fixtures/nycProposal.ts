@@ -5,6 +5,7 @@ export const NYC_PURCHASE_PROPOSAL = {
   contract_id: "fx-nyc-high-20261118",
   evidence_gap_id: "GAP-NYC-SETTLE",
   catalog_item_id: "cat-nws-cli-settlement-version-v1",
+  evidence_type: "settlement_source_version",
   catalog_parameters: {
     station: "Central Park, NY (CLINYC)",
     date: "2026-11-18",

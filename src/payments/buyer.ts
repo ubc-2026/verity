@@ -51,6 +51,13 @@ export interface BuildRequestInput {
   proposal: ProposalSelection;
   /** Already parsed with `parseQuote`. */
   quote: VerityQuote;
+  /** Purchase ID the buyer generated before asking for the quote. The quote must echo it. */
+  purchaseId: string;
+  /**
+   * Catalog parameters derived from the contract (station and date, for example).
+   * When the item declares parameters, the quote must carry exactly these values.
+   */
+  catalogParameters?: Readonly<Record<string, string>>;
   payer: Hex;
   /** Current UTC epoch seconds. */
   now: number;
@@ -88,6 +95,15 @@ export function buildResearchRequest(input: BuildRequestInput): ResearchRequestV
   if (!sameAddress(quote.payTo, item.payTo)) mismatches.push("payTo");
   const parameters = parseResearchParameters(proposal.parameters);
   if (canonicalize(parameters) !== canonicalize(quote.parameters)) mismatches.push("parameters");
+  if (quote.purchaseId !== input.purchaseId) mismatches.push("purchaseId");
+  const wanted = input.catalogParameters ?? {};
+  const required = item.requiredParameters ?? [];
+  for (const name of required) {
+    if (!wanted[name]) throw new ResearchRequestError(`catalog parameter ${name} is missing or empty`);
+  }
+  const extra = Object.keys(wanted).filter((name) => !required.includes(name));
+  if (extra.length > 0) throw new ResearchRequestError(`catalog parameters not declared by the item: ${extra.join(", ")}`);
+  if (canonicalize(wanted) !== canonicalize(quote.catalogParameters ?? {})) mismatches.push("catalogParameters");
   if (mismatches.length > 0) {
     throw new ResearchRequestError(`quote disagrees with catalog or proposal: ${mismatches.join(", ")}`);
   }
@@ -100,7 +116,7 @@ export function buildResearchRequest(input: BuildRequestInput): ResearchRequestV
   const validBefore = Math.min(now + windowSeconds, quote.expiresAt);
   return parseResearchRequest({
     version: RESEARCH_REQUEST_VERSION,
-    purchaseId: quote.purchaseId,
+    purchaseId: input.purchaseId,
     quoteId: quote.quoteId,
     merchantId: item.merchantId,
     method: item.method,

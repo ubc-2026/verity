@@ -1,15 +1,16 @@
-import { getAddress, type Hex } from "viem";
-import { fromBaseUnits } from "./researchRequest.ts";
+import { getAddress, recoverTypedDataAddress, type Hex } from "viem";
+import { fromBaseUnits, type ResearchRequestV1 } from "./researchRequest.ts";
 
 /** 25 USDC mission budget, in 6-decimal base units. */
 export const MISSION_BUDGET = 25_000_000n;
 /** Local placeholder. This is not the USDC contract. */
 export const POLICY_CONTRACT: Hex = getAddress("0x0000000000000000000000000000000000000001");
 
-const AUTO_MIN = 10_000n;
-const AUTO_MAX = 100_000n;
-const GAP_MAX = 500_000n;
-const APPROVAL_MAX = 2_000_000n;
+/** Tier limits from the README, in USDC base units. PaymentStore enforces the same numbers. */
+export const AUTO_MIN = 10_000n;
+export const AUTO_MAX = 100_000n;
+export const GAP_MAX = 500_000n;
+export const APPROVAL_MAX = 2_000_000n;
 
 export const ownerApprovalTypes = {
   OwnerApproval: [
@@ -94,52 +95,41 @@ export function parseQuoteAmount(amount: string): bigint {
   return fromBaseUnits(amount);
 }
 
-interface Hold {
-  amount: bigint;
-  state: "reserved" | "spent";
+function approvalMessage(request: ResearchRequestV1, requestHash: Hex): OwnerApprovalMessage {
+  return {
+    purchaseId: request.purchaseId,
+    requestHash,
+    amount: BigInt(request.amount),
+    payTo: request.payTo,
+    expiry: BigInt(request.validBefore),
+  };
 }
 
-/**
- * In-memory mission budget. Reserved and spent holds both count toward the
- * 25 USDC cap. One group key (contract + evidence gap) can be held once.
- */
-export class MissionBudget {
-  readonly #holds = new Map<string, Hold>();
-  readonly #budget: bigint;
+/** EIP-712 payload the owner signs. It binds the purchase, the exact request, the amount, and the recipient. */
+export function approvalTypedData(request: ResearchRequestV1, requestHash: Hex) {
+  return {
+    domain: ownerApprovalDomain(request.chainId),
+    types: ownerApprovalTypes,
+    primaryType: "OwnerApproval" as const,
+    message: approvalMessage(request, requestHash),
+  };
+}
 
-  constructor(budget: bigint = MISSION_BUDGET) {
-    this.#budget = budget;
+/** Checks an owner approval signature against the enrolled owner wallet. */
+export async function verifyOwnerApproval(args: {
+  request: ResearchRequestV1;
+  requestHash: Hex;
+  signature: Hex;
+  owner: Hex;
+  now: number;
+}): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (args.now >= args.request.validBefore) return { ok: false, reason: "owner approval expired" };
+  const signer = await recoverTypedDataAddress({
+    ...approvalTypedData(args.request, args.requestHash),
+    signature: args.signature,
+  }).catch(() => undefined);
+  if (!signer || signer.toLowerCase() !== args.owner.toLowerCase()) {
+    return { ok: false, reason: "owner signature does not match the enrolled wallet" };
   }
-
-  get budget(): bigint {
-    return this.#budget;
-  }
-
-  committed(): bigint {
-    let total = 0n;
-    for (const hold of this.#holds.values()) total += hold.amount;
-    return total;
-  }
-
-  keys(state: Hold["state"]): string[] {
-    return [...this.#holds.entries()].filter(([, hold]) => hold.state === state).map(([key]) => key);
-  }
-
-  hold(groupKey: string, amount: bigint): void {
-    if (this.#holds.has(groupKey)) throw new Error(`group already held: ${groupKey}`);
-    if (this.committed() + amount > this.#budget) throw new Error("mission budget exceeded");
-    this.#holds.set(groupKey, { amount, state: "reserved" });
-  }
-
-  release(groupKey: string): void {
-    const hold = this.#holds.get(groupKey);
-    if (!hold || hold.state !== "reserved") throw new Error(`no reservation to release: ${groupKey}`);
-    this.#holds.delete(groupKey);
-  }
-
-  confirm(groupKey: string): void {
-    const hold = this.#holds.get(groupKey);
-    if (!hold || hold.state !== "reserved") throw new Error(`no reservation to confirm: ${groupKey}`);
-    hold.state = "spent";
-  }
+  return { ok: true };
 }

@@ -17,10 +17,10 @@ One 0.05 USDC evidence purchase through the allowlisted merchant, settled on Arc
 ```text
 buildResearchRequest            catalog + validated quote
 PaymentStore.reserveAndRecord   one IMMEDIATE transaction:
-                                  policy (min, cap, tier 1, mission budget incl. reservations)
+                                  policy (min, cap, tiers, mission budget incl. reservations)
                                   purchase + reservation(held) + authorization(salt, nonce, request)
 authorizeStoredPurchase         signs only from the stored record; stored signature reused on retry
-handlePaidRequest (merchant)    binding + payment checks, then:
+deliverPaidRequest (merchant)   binding + payment checks, durable per-purchase claim, then:
   SelfHostedArcFacilitator      chain/token pinned, nonce == verified nonce, authorizationState unused
                                   simulate, submit, record pending tx, wait for receipt
                                   require status success + AuthorizationUsed(payer, nonce) + Transfer(payer, payTo, 50000)
@@ -31,7 +31,9 @@ Retry guarantees, covered by `test/payments-store.test.ts` and checked live by t
 
 - Repeating `reserveAndRecord` and `authorizeStoredPurchase` for the same purchase returns the stored nonce and signature. The signer is not called again, including after reopening the database.
 - A different request under the same purchase ID is refused, as is a second purchase for the same mission, contract, and evidence gap.
-- Resubmitting a settled authorization is refused before any transaction, because the nonce is already used on chain.
+- Resubmitting the same paid request replays the stored DeliveryReceiptV1 and settles nothing (the durable claim in `merchant_deliveries`). If it ever reached the chain, the used nonce would also be refused.
+
+`scripts/arc-purchase.ts` moved from the removed `handlePaidRequest` to `deliverPaidRequest` in the integration branch. That version of the script has not been run against Arc Testnet; a new live run needs the owner's approval first.
 
 ## Run it
 

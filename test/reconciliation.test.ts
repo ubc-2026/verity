@@ -30,6 +30,7 @@ async function settledScenario(opts: { amount?: bigint; payTo?: Hex; status?: He
     catalog: DEMO_CATALOG,
     proposal: { catalogItemId: DEMO_CATALOG_ITEM.catalogItemId, parameters: DEMO_PARAMETERS, maxAmount: 100_000n },
     quote: parseQuote(wire),
+    purchaseId: wire.purchaseId,
     payer: DEMO_PAYER.address,
     now: DEMO_NOW,
   });

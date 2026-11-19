@@ -6,7 +6,7 @@ import { after, describe, it } from "node:test";
 import { hashDomain, recoverTypedDataAddress } from "viem";
 import { ARC_TESTNET, TRANSFER_WITH_AUTHORIZATION_TYPES } from "../src/payments/arc.ts";
 import { buildResearchRequest } from "../src/payments/buyer.ts";
-import { handlePaidRequest } from "../src/payments/merchant.ts";
+import { verifyPaidRequest } from "../src/payments/merchant.ts";
 import { authorizeStoredPurchase, type PaymentSigner } from "../src/payments/paymentService.ts";
 import { parseQuote } from "../src/payments/quote.ts";
 import { parseResearchRequest, ResearchRequestError } from "../src/payments/researchRequest.ts";
@@ -35,6 +35,7 @@ function demoRequest(overrides: Record<string, unknown> = {}) {
       maxAmount: 2_000_000n,
     },
     quote: parseQuote({ ...wire, ...overrides }),
+    purchaseId: String(overrides.purchaseId ?? wire.purchaseId),
     payer: DEMO_PAYER.address,
     now: DEMO_NOW,
   });
@@ -150,7 +151,7 @@ describe("PaymentStore and authorizeStoredPurchase", () => {
     const store = new PaymentStore();
     store.reserveAndRecord({ missionId: "mission-1", request: demoRequest(), now: DEMO_NOW });
     const split = demoRequest({ purchaseId: "purchase-demo-002", quoteId: "quote-demo-002" });
-    assert.throws(() => store.reserveAndRecord({ missionId: "mission-1", request: split, now: DEMO_NOW }), /UNIQUE/);
+    assert.throws(() => store.reserveAndRecord({ missionId: "mission-1", request: split, now: DEMO_NOW }), /duplicate purchase/);
     assert.equal(store.committedSpend("mission-1"), 50_000n);
   });
 
@@ -159,6 +160,7 @@ describe("PaymentStore and authorizeStoredPurchase", () => {
       missionBudget: 120_000n,
       minAmount: 10_000n,
       autoApproveMax: 100_000n,
+      gapMax: 500_000n,
       purchaseCap: 2_000_000n,
     });
     const reserve = (n: number) =>
@@ -177,13 +179,27 @@ describe("PaymentStore and authorizeStoredPurchase", () => {
     assert.equal(store.committedSpend("mission-1"), 100_000n);
   });
 
-  it("rejects amounts outside the implemented auto-approve tier", () => {
+  it("applies the tiers: gap tier needs a material gap, owner tier waits for approval, cap and minimum refuse", async () => {
     const store = new PaymentStore();
-    // Built directly: the buyer's catalog ceiling would already stop 0.100001 USDC.
-    const over = parseResearchRequest({ ...demoRequest(), amount: "100001" });
-    assert.throws(() => store.reserveAndRecord({ missionId: "m", request: over, now: DEMO_NOW }), PolicyError);
-    const under = demoRequest({ amount: "9999" });
-    assert.throws(() => store.reserveAndRecord({ missionId: "m", request: under, now: DEMO_NOW }), PolicyError);
+    // Built directly: the buyer's catalog ceiling would already stop these amounts for this item.
+    const gap = parseResearchRequest({ ...demoRequest(), amount: "100001" });
+    assert.throws(() => store.reserveAndRecord({ missionId: "m", request: gap, now: DEMO_NOW }), PolicyError);
+    assert.equal(store.reserveAndRecord({ missionId: "m", request: gap, now: DEMO_NOW, materialUnresolvedGap: true }).record.status, "prepared");
+
+    const owner = parseResearchRequest({
+      ...demoRequest({ purchaseId: "purchase-owner", quoteId: "quote-owner", parameters: { ...DEMO_PARAMETERS, contractId: "c-owner" } }),
+      amount: "800000",
+    });
+    assert.equal(store.reserveAndRecord({ missionId: "m", request: owner, now: DEMO_NOW }).record.status, "awaiting_approval");
+    await assert.rejects(
+      authorizeStoredPurchase({ store, purchaseId: "purchase-owner", signer: DEMO_PAYER, tokenDomain: ARC_TESTNET.usdcDomain, now: DEMO_NOW }),
+      /needs owner approval/,
+    );
+
+    const cap = parseResearchRequest({ ...demoRequest({ purchaseId: "purchase-cap", quoteId: "quote-cap" }), amount: "2000001" });
+    assert.throws(() => store.reserveAndRecord({ missionId: "m2", request: cap, now: DEMO_NOW }), PolicyError);
+    const under = demoRequest({ purchaseId: "purchase-under", quoteId: "quote-under", amount: "9999" });
+    assert.throws(() => store.reserveAndRecord({ missionId: "m3", request: under, now: DEMO_NOW }), PolicyError);
   });
 
   it("feeds a stored authorization through merchant verification", async () => {
@@ -191,8 +207,7 @@ describe("PaymentStore and authorizeStoredPurchase", () => {
     const request = demoRequest();
     store.reserveAndRecord({ missionId: "mission-1", request, now: DEMO_NOW });
     const paid = await authorizeStoredPurchase({ store, purchaseId: request.purchaseId, signer: DEMO_PAYER, tokenDomain: ARC_TESTNET.usdcDomain, now: DEMO_NOW });
-    let settled = 0;
-    const result = await handlePaidRequest(
+    const verified = await verifyPaidRequest(
       {
         method: "POST",
         target: "/evidence/resolution-source",
@@ -208,10 +223,8 @@ describe("PaymentStore and authorizeStoredPurchase", () => {
         loadQuote: () => demoQuote(),
         hasArtifact: (h) => h === DEMO_CONTENT_HASH,
         now: () => DEMO_NOW,
-        settlement: { settle: async () => ++settled },
       },
     );
-    assert.equal(result.verified.ok, true, JSON.stringify(result.verified));
-    assert.equal(settled, 1);
+    assert.equal(verified.ok, true, JSON.stringify(verified));
   });
 });

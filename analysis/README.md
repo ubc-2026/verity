@@ -47,14 +47,14 @@ verity/
   fixtures.py    loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
   live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live(); read allowlist
   rules_analyst.py  code-only Framework rules for live ambiguity, source, and correlation scores
-  exchange.py    guarded Gemini Exchange trading client (sandbox and dry run by default). Not imported
-                 by demo.py or the analysis path. It reads GEMINI_EXCHANGE_API_KEY/SECRET when used;
-                 the analysis path needs no key.
+  trends.py      normalized market, Exa coverage (recent vs prior window), price movement or why it is unavailable
+  reassess.py    applies receipt-verified evidence to a RiskAnalysisV1 and lists every changed or unchanged finding
+  cli.py         JSON commands used by `npm run e2e`: `analyze` and `reassess`
 fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
   free_checks.json          free official-source checks; NYC outcomes are labeled assumptions
-tests/test_slice.py, test_live.py, test_research.py, test_safety.py, test_exchange.py (all external APIs faked)
+tests/test_slice.py, test_live.py, test_research.py, test_safety.py, test_integration.py (all external APIs faked)
 demo.py
 samples/                    generated outputs (OKC, NYC gap-remains)
 ```
@@ -82,6 +82,14 @@ Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Sou
 
 On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): total 6, Low, `no_further_research`. The workbook scored Correlation 1.
 
+## Research, trends, and reassessment
+
+- `python -m verity.cli analyze --contract <id> [--free-check-scenario <name>]` prints the research record, the risk analysis, and either one unsigned proposal or the specific reason there is none.
+- **Coverage** comes from `fixtures/exa_coverage.json`. The NYC entry is a real Exa search captured on 2026-11-18 (labeled `CAPTURED`); other markets have none and say so. Results are counted in the 7 days before the snapshot and the 7 days before that; undated results are excluded. This is a coverage trend, not a price trend. `exa_coverage_sample()` is the live client: the key and the HTTP call are injected, and it has only been tested with a fake transport.
+- **Price movement** is reported only from two or more timestamped prices for the same instrument symbol. The fixtures record no instrument symbol and one price, so it is `unavailable` with that reason.
+- **Reassessment** (`python -m verity.cli reassess`, JSON on stdin) accepts only bytes whose SHA-256 matches the provenance from the buyer's receipt check, for an open gap on the same contract, with the station and date derived from the contract. For the settlement-version gap, a document that names the settling issuance closes the gap, and if it also says later corrections do not count, Source drops from 2 to 1. The rating is recomputed with the same rubric, and each change (or unchanged finding) carries its reason.
+- **Order placement was removed.** The guarded trading client (`exchange.py`) is not part of the integration; Verity is research-only.
+
 ## Proposal gates
 
 1. The ticker must be confirmed.
@@ -90,7 +98,8 @@ On the real OKC moneyline response (2026-11-18) with the terms read, the rules g
    - skip it if cached evidence exists;
    - otherwise run the free official-source check;
    - if the gap is still open, look for an allowlisted catalog item that answers that gap type;
-   - fill every catalog parameter from the market. For the NWS item the date is the New York climate day read from the `WXHIGH-NYC` ticker, which ends with the trading close in UTC. If any parameter cannot be filled, no proposal is made.
+   - fill every catalog parameter from the market. For the NWS item the date is the New York climate day read from the `WXHIGH-NYC` ticker, which ends with the trading close in UTC. If any parameter cannot be filled, no proposal is made, and `PurchaseProposalV1` itself refuses an empty value.
+   - the proposal carries the catalog item's `evidence_type`; the payment service refuses a proposal whose type or parameter names differ from the allowlisted item, and the merchant refuses a quote for parameters it has no document for.
 
 Forecast gaps (outcome probability) are logged and skipped. When the free check has no result for the chosen scenario, there is no purchase, because the gap can't be validated.
 

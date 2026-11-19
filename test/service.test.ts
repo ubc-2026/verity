@@ -1,125 +1,125 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import type { Hex } from "viem";
+import { BINDING_HEADER } from "../src/payments/binding.ts";
 import { catalogById } from "../src/payments/catalog.ts";
-import { PaymentService } from "../src/payments/purchase.ts";
-import { listen } from "../src/payments/server.ts";
-import { MerchantService, savedQuoteWire } from "../src/payments/service.ts";
+import { acceptDelivery, RECEIPT_HEADER, type DeliveryAcceptanceStore } from "../src/payments/deliveryReceipt.ts";
+import { acceptPurchaseProposal } from "../src/payments/proposal.ts";
+import { BuyerService } from "../src/payments/purchase.ts";
 import { parseQuote } from "../src/payments/quote.ts";
-import type { PaidRequest } from "../src/payments/merchant.ts";
-import {
-  DEMO_CATALOG_ITEM,
-  DEMO_MERCHANT_CONFIG,
-  DEMO_MERCHANT_SIGNER,
-  DEMO_NOW,
-  DEMO_OWNER,
-  DEMO_PARAMETERS,
-  DEMO_PAYER,
-  signTransferWithAuthorization,
-} from "./fixtures/scenario.ts";
+import { encodePaymentHeader, listen, PAYMENT_HEADER } from "../src/payments/server.ts";
+import { MerchantService } from "../src/payments/service.ts";
+import { PaymentStore } from "../src/payments/store.ts";
+import { NYC_PURCHASE_PROPOSAL } from "./fixtures/nycProposal.ts";
+import { DEMO_MERCHANT_CONFIG, DEMO_MERCHANT_SIGNER, DEMO_NOW, DEMO_OWNER, DEMO_PAYER } from "./fixtures/scenario.ts";
 
-function merchant() {
-  return new MerchantService({ config: DEMO_MERCHANT_CONFIG, signer: DEMO_MERCHANT_SIGNER, now: () => DEMO_NOW });
-}
+const TOKEN = "test-buyer-session-token-0001";
+const TX: Hex = `0x${"ab".repeat(32)}`;
 
-async function paid(service: MerchantService, purchaseId: string, catalogItemId = DEMO_CATALOG_ITEM.catalogItemId): Promise<PaidRequest> {
-  const item = catalogById().get(catalogItemId);
-  assert.ok(item);
-  const saved = service.issueQuote({
-    catalogItemId,
-    purchaseId,
-    buyerSessionId: "session-demo-001",
-    parameters: { contractId: "demo-contract-001", evidenceType: item.evidenceType },
+async function setup() {
+  let settles = 0;
+  const merchant = new MerchantService({
+    config: DEMO_MERCHANT_CONFIG,
+    signer: DEMO_MERCHANT_SIGNER,
+    settlement: { settle: async () => (settles++, { txHash: TX }) },
+    now: () => DEMO_NOW,
+    sessions: { [TOKEN]: "session-a" },
   });
-  const payments = new PaymentService({ catalog: catalogById(), owner: DEMO_OWNER.address });
-  const begun = await payments.begin({
-    selection: {
-      catalogItemId,
-      parameters: { contractId: "demo-contract-001", evidenceType: item.evidenceType },
-      maxAmount: item.maxAmount,
-    },
-    groupKey: `${purchaseId}:gap`,
-    quote: parseQuote(savedQuoteWire(saved)),
-    payer: DEMO_PAYER.address,
-    now: DEMO_NOW,
-    materialUnresolvedGap: true,
-  });
-  assert.equal(begun.status, "ready");
-  if (begun.status !== "ready") throw new Error("purchase was not ready");
+  const server = await listen(merchant, { origin: DEMO_MERCHANT_CONFIG.origin });
+  const base = `http://127.0.0.1:${server.port}`;
+  const store = new PaymentStore();
+  const buyer = new BuyerService({ store, catalog: catalogById(), owner: DEMO_OWNER.address, signer: DEMO_PAYER, tokenDomain: { name: "USDC", version: "2" }, missionId: "m" });
+  const accepted = acceptPurchaseProposal(NYC_PURCHASE_PROPOSAL, catalogById());
+  const post = (path: string, body: string, headers: Record<string, string> = {}) =>
+    fetch(`${base}${path}`, { method: "POST", headers: { authorization: `Bearer ${TOKEN}`, ...headers }, body });
+
+  const quoteBody = (purchaseId: string, extra: Record<string, unknown> = {}) =>
+    JSON.stringify({ catalogItemId: accepted.selection.catalogItemId, purchaseId, parameters: accepted.selection.parameters, catalogParameters: accepted.catalogParameters, ...extra });
+
+  async function authorized(purchaseId = "purchase-svc-001") {
+    const response = await post("/quotes", quoteBody(purchaseId));
+    assert.equal(response.status, 402);
+    const quote = parseQuote(((await response.json()) as { quote: unknown }).quote);
+    const result = await buyer.purchase({ accepted, purchaseId, quote, now: DEMO_NOW });
+    assert.equal(result.status, "authorized");
+    if (result.status !== "authorized") throw new Error("not authorized");
+    return result;
+  }
+  function paidHeaders(result: Awaited<ReturnType<typeof authorized>>) {
+    return {
+      [BINDING_HEADER]: result.payment.bindingHeader,
+      [PAYMENT_HEADER]: encodePaymentHeader({ chainId: result.request.chainId, token: result.request.token, authorization: result.payment.authorization }),
+    };
+  }
+  const recorded: unknown[] = [];
+  const sink: DeliveryAcceptanceStore = { recordVerifiedDelivery: (args) => (recorded.push(args), { kind: "delivered_payment_unconfirmed", purchaseId: args.receipt.purchaseId }) };
   return {
-    method: "POST",
-    target: new URL(item.resourceUrl).pathname,
-    body: new TextEncoder().encode(JSON.stringify({ contractId: "demo-contract-001", evidenceType: item.evidenceType })),
-    bindingHeader: begun.prepared.bindingHeader,
-    buyerSessionId: "session-demo-001",
-    chainId: begun.request.chainId,
-    token: begun.request.token,
-    authorization: {
-      from: begun.request.payer,
-      to: begun.request.payTo,
-      value: begun.request.amount,
-      validAfter: String(begun.request.validAfter),
-      validBefore: String(begun.request.validBefore),
-      nonce: begun.prepared.record.nonce,
-      signature: await signTransferWithAuthorization(begun.request, begun.prepared.record.nonce),
-    },
+    post, quoteBody, authorized, paidHeaders, store, sink, recorded, settles: () => settles,
+    close: async () => (await server.close(), merchant.close()),
   };
 }
 
-describe("mock merchant", () => {
-  it("verifies one purchase and rejects a replay, a swapped document, and a changed URL", async () => {
-    const service = merchant();
-    const honest = await paid(service, "purchase-honest-001");
-    const verified = await service.verify(honest);
-    assert.equal(verified.outcome, "verified", JSON.stringify(verified));
-    assert.equal(verified.checks.requestHash.ok, true);
-    assert.equal(verified.checks.amount.ok, true);
-    assert.equal(verified.checks.merchant.ok, true);
-    assert.equal(verified.checks.authorization.ok, true);
-    assert.equal(verified.checks.nonce.ok, true);
-    assert.equal(verified.checks.resource.ok, true);
-    assert.match(verified.delivery?.body ?? "", /Cutoff policy excerpt/);
-
-    const replay = await service.attackDuplicate(honest);
-    assert.equal(replay.outcome, "rejected");
-    assert.equal(replay.reason, "nonce_replay");
-
-    const other = await paid(service, "purchase-swap-001");
-    const swapped = await service.attackWrongResource(other, "cat-filing-packet-v1");
-    assert.equal(swapped.outcome, "rejected");
-    assert.equal(swapped.reason, "wrong_resource");
-    assert.equal(swapped.delivery, null);
-
-    const moved = await paid(service, "purchase-url-001");
-    const changed = await service.attackChangedUrl(moved, "/evidence/other");
-    assert.equal(changed.outcome, "rejected");
-    assert.equal(changed.checks.requestHash.ok, false);
-
-    const statuses = service.ledger.entries().map((entry) => `${entry.purchaseId}:${entry.status}`);
-    assert.ok(statuses.includes("purchase-honest-001:reconciled"));
-    assert.ok(statuses.includes("purchase-honest-001:duplicate"));
-    assert.ok(statuses.includes("purchase-swap-001:mismatch"));
-    assert.ok(statuses.includes("purchase-url-001:mismatch"));
+describe("merchant HTTP route", () => {
+  it("quotes only to an authenticated session and echoes the buyer's purchase ID", async () => {
+    const t = await setup();
+    try {
+      const anonymous = await fetch(`${(await t.post("/catalog", "")).url.replace("/catalog", "")}/quotes`, { method: "POST", body: t.quoteBody("purchase-anon") });
+      assert.equal(anonymous.status, 401);
+      const response = await t.post("/quotes", t.quoteBody("purchase-echo-1"));
+      assert.equal(response.status, 402);
+      assert.equal(((await response.json()) as { quote: { purchaseId: string } }).quote.purchaseId, "purchase-echo-1");
+      const empty = await t.post("/quotes", t.quoteBody("purchase-echo-2", { catalogParameters: { station: "Central Park, NY (CLINYC)", date: "" } }));
+      assert.equal(empty.status, 400);
+      const other = await t.post("/quotes", t.quoteBody("purchase-echo-3", { catalogParameters: { station: "Central Park, NY (CLINYC)", date: "2026-11-19" } }));
+      assert.equal(other.status, 400);
+    } finally {
+      await t.close();
+    }
   });
 
-  it("serves the same report over HTTP", async () => {
-    const service = merchant();
-    const http = await listen(service);
+  it("delivers once through the durable handler; a retry replays the receipt without settling again", async () => {
+    const t = await setup();
     try {
-      const payment = await paid(service, "purchase-http-001");
-      const response = await fetch(`http://127.0.0.1:${http.port}/verify`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          ...payment,
-          body: DEMO_PARAMETERS,
-          token: payment.token,
-        }),
+      const result = await t.authorized();
+      const body = JSON.stringify(result.request.parameters);
+      const first = await t.post("/evidence/nws-cli-settlement", body, t.paidHeaders(result));
+      assert.equal(first.status, 200);
+      const bytes = new Uint8Array(await first.arrayBuffer());
+      const accepted = await acceptDelivery({
+        response: { body: bytes, receiptHeader: first.headers.get(RECEIPT_HEADER) ?? undefined },
+        trusted: { merchantId: DEMO_MERCHANT_CONFIG.merchantId, receiptSigner: DEMO_MERCHANT_SIGNER.address },
+        request: t.store.get("purchase-svc-001")!.request,
+        store: t.sink,
+        now: DEMO_NOW,
       });
-      const report = (await response.json()) as { outcome: string };
-      assert.equal(response.status, 200);
-      assert.equal(report.outcome, "verified");
+      assert.equal(accepted.accepted, true);
+      const retry = await t.post("/evidence/nws-cli-settlement", body, t.paidHeaders(result));
+      assert.equal(retry.status, 200);
+      assert.equal(retry.headers.get(RECEIPT_HEADER), first.headers.get(RECEIPT_HEADER));
+      assert.equal(t.settles(), 1);
     } finally {
-      await http.close();
+      await t.close();
+    }
+  });
+
+  it("rejects a changed URL, a changed body, a missing session, and a missing payment header without settling", async () => {
+    const t = await setup();
+    try {
+      const result = await t.authorized();
+      const body = JSON.stringify(result.request.parameters);
+      assert.equal((await t.post("/evidence/resolution-source", body, t.paidHeaders(result))).status, 402);
+      const changed = JSON.stringify({ ...result.request.parameters, contractId: "fx-other" });
+      assert.equal((await t.post("/evidence/nws-cli-settlement", changed, t.paidHeaders(result))).status, 402);
+      const noSession = await fetch((await t.post("/catalog", "")).url.replace("/catalog", "/evidence/nws-cli-settlement"), {
+        method: "POST",
+        headers: t.paidHeaders(result),
+        body,
+      });
+      assert.equal(noSession.status, 401);
+      assert.equal((await t.post("/evidence/nws-cli-settlement", body, { [BINDING_HEADER]: result.payment.bindingHeader })).status, 400);
+      assert.equal(t.settles(), 0);
+    } finally {
+      await t.close();
     }
   });
 });

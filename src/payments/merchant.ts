@@ -201,16 +201,9 @@ export async function verifyPaidRequest(input: PaidRequest, deps: MerchantDeps):
   return { ok: true, request, requestHash, nonce };
 }
 
-export interface SettlementAdapter {
-  settle(verified: Extract<VerifyResult, { ok: true }>, authorization: Eip3009Authorization): Promise<unknown>;
-}
-
-/** Merchant path: the binding is checked before the settlement adapter is called. */
-export async function handlePaidRequest(
-  input: PaidRequest,
-  deps: MerchantDeps & { settlement: SettlementAdapter },
-): Promise<{ verified: VerifyResult; settlement?: unknown }> {
-  const verified = await verifyPaidRequest(input, deps);
-  if (!verified.ok) return { verified };
-  return { verified, settlement: await deps.settlement.settle(verified, input.authorization) };
-}
+/*
+ * There is deliberately no settle-after-verify helper here. The only path that
+ * settles is deliverPaidRequest (merchantDelivery.ts): it claims the purchase
+ * durably first, so concurrent copies and retries never settle twice, and a
+ * submitted transfer is resumed by its tx hash.
+ */

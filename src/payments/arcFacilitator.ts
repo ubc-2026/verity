@@ -8,7 +8,8 @@ import {
   type WalletClient,
 } from "viem";
 import { ARC_TESTNET } from "./arc.ts";
-import type { Eip3009Authorization, SettlementAdapter, VerifyResult } from "./merchant.ts";
+import type { Eip3009Authorization, VerifyResult } from "./merchant.ts";
+import type { DeliverySettlementAdapter } from "./merchantDelivery.ts";
 
 /**
  * Testnet-only self-hosted x402 facilitator for Arc Testnet USDC.
@@ -117,7 +118,7 @@ export function viemArcChain(publicClient: PublicClient, walletClient: WalletCli
   };
 }
 
-export class SelfHostedArcFacilitator implements SettlementAdapter {
+export class SelfHostedArcFacilitator implements DeliverySettlementAdapter {
   readonly chain: ArcChain;
   readonly onSubmitted: (txHash: Hex) => void;
   constructor(chain: ArcChain, onSubmitted: (txHash: Hex) => void = () => {}) {

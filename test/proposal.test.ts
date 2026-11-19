@@ -19,6 +19,21 @@ describe("analysis handoff", () => {
     assert.equal(accepted.materialUnresolvedGap, true);
   });
 
+  it("rejects a proposal whose evidence type or parameters do not match the catalog item", () => {
+    const catalog = catalogById();
+    assert.throws(() => acceptPurchaseProposal({ ...NYC_PURCHASE_PROPOSAL, evidence_type: "resolution_source" }, catalog), /evidence type/);
+    const { evidence_type: _e, ...missing } = NYC_PURCHASE_PROPOSAL;
+    assert.throws(() => acceptPurchaseProposal(missing, catalog), ResearchRequestError);
+    assert.throws(
+      () => acceptPurchaseProposal({ ...NYC_PURCHASE_PROPOSAL, catalog_parameters: { station: "Central Park, NY (CLINYC)", date: "" } }, catalog),
+      /empty/,
+    );
+    assert.throws(
+      () => acceptPurchaseProposal({ ...NYC_PURCHASE_PROPOSAL, catalog_parameters: { station: "Central Park, NY (CLINYC)" } }, catalog),
+      /catalog parameters must be/,
+    );
+  });
+
   it("rejects a signed proposal and an unknown catalog item", () => {
     assert.throws(() => acceptPurchaseProposal({ ...NYC_PURCHASE_PROPOSAL, signed: true }, catalogById()), ResearchRequestError);
     assert.throws(

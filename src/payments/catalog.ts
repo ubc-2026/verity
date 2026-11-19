@@ -87,8 +87,10 @@ export const RESEARCH_RESOURCES: readonly ResearchResource[] = [
       requiredParameters: ["date", "station"],
       sampleParameters: { station: "Central Park, NY (CLINYC)", date: "2026-11-18" },
     },
+    // FIXTURE document. It answers the observed open question (partial-day report vs full-day report, and
+    // corrections) in the shape analysis/verity/reassess.py reads. It is not an NWS or Gemini statement.
     text(
-      `{"source":"nws-cli","station":"Central Park, NY (CLINYC)","date":"2026-11-18","issuance":"final","summary":"Gemini settles this contract on the final NWS CLI issuance for CLINYC on 2026-11-18."}`,
+      `{"label":"FIXTURE","source":"nws-cli","gap_type":"settlement_source_version","station":"Central Park, NY (CLINYC)","date":"2026-11-18","settling_issuance":"first_full_day_cli","excludes":["same-day partial CLINYC valid to 4 PM","later corrections"],"corrections_count":false,"summary":"FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count."}`,
     ),
   ),
   item(

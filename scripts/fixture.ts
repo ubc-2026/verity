@@ -6,7 +6,7 @@
  *    a stub settlement adapter, for one honest and one tampered request.
  */
 import { buildResearchRequest, InMemoryAuthorizationStore, prepareAuthorization } from "../src/payments/buyer.ts";
-import { handlePaidRequest, type PaidRequest } from "../src/payments/merchant.ts";
+import { verifyPaidRequest, type PaidRequest } from "../src/payments/merchant.ts";
 import { parseQuote } from "../src/payments/quote.ts";
 import { commitResearchRequest, hashContent, parseResearchRequestJson } from "../src/payments/researchRequest.ts";
 import * as vector from "../test/fixtures/demoVector.ts";
@@ -33,6 +33,7 @@ const request = buildResearchRequest({
   catalog: demo.DEMO_CATALOG,
   proposal: { catalogItemId: demo.DEMO_CATALOG_ITEM.catalogItemId, parameters: demo.DEMO_PARAMETERS, maxAmount: 100_000n },
   quote: parseQuote(wire),
+  purchaseId: wire.purchaseId,
   payer: demo.DEMO_PAYER.address,
   now: demo.DEMO_NOW,
 });
@@ -58,22 +59,20 @@ const paid = (body: object): PaidRequest => ({
   },
 });
 
-let settlements = 0;
 const deps = {
   config: demo.DEMO_MERCHANT_CONFIG,
   loadQuote: (id: string) => (id === wire.quoteId ? { ...wire, buyerSessionId } : undefined),
   hasArtifact: () => true,
   now: () => demo.DEMO_NOW,
-  settlement: { settle: async () => ({ stub: true, settlement: ++settlements }) },
 };
 
+// Verification only. Settlement, receipts, and retries are exercised by `npm run e2e`.
 console.log(`\nbuyer nonce  ${record.nonce}`);
-const honest = await handlePaidRequest(paid(demo.DEMO_PARAMETERS), deps);
-console.log(`honest   -> ${honest.verified.ok ? "verified, stub settlement called" : `rejected: ${honest.verified.reason}`}`);
-const tampered = await handlePaidRequest(paid({ ...demo.DEMO_PARAMETERS, contractId: "demo-contract-002" }), deps);
-console.log(`tampered -> ${tampered.verified.ok ? "verified (UNEXPECTED)" : `rejected ${tampered.verified.status}: ${tampered.verified.reason}`}`);
-console.log(`stub settlement calls: ${settlements}`);
+const honest = await verifyPaidRequest(paid(demo.DEMO_PARAMETERS), deps);
+console.log(`honest   -> ${honest.ok ? "verified" : `rejected: ${honest.reason}`}`);
+const tampered = await verifyPaidRequest(paid({ ...demo.DEMO_PARAMETERS, contractId: "demo-contract-002" }), deps);
+console.log(`tampered -> ${tampered.ok ? "verified (UNEXPECTED)" : `rejected ${tampered.status}: ${tampered.reason}`}`);
 
-const ok = vectorOk && honest.verified.ok && !tampered.verified.ok && settlements === 1;
+const ok = vectorOk && honest.ok && !tampered.ok;
 console.log(`\n${ok ? "FIXTURE OK" : "FIXTURE FAILED"}`);
 process.exitCode = ok ? 0 : 1;

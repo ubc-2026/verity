@@ -13,7 +13,7 @@
     "quicknode:token": "node scripts/quicknode-token.ts",
     "webhook:serve": "node scripts/webhook-server.ts",
     "delivery:demo": "node scripts/delivery-demo.ts",
-    "demo": "node scripts/demo.ts"
+    "e2e": "node scripts/e2e.ts"
   },
   "repository": {
     "type": "git",

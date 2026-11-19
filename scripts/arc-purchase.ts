@@ -18,7 +18,8 @@ import { arcTestnet } from "viem/chains";
 import { ARC_TESTNET } from "../src/payments/arc.ts";
 import { SelfHostedArcFacilitator, SettlementError, USDC_EIP3009_ABI, viemArcChain } from "../src/payments/arcFacilitator.ts";
 import { buildResearchRequest, type CatalogItem } from "../src/payments/buyer.ts";
-import { handlePaidRequest, type MerchantConfig, type PaidRequest, type SavedQuote } from "../src/payments/merchant.ts";
+import type { MerchantConfig, PaidRequest, SavedQuote } from "../src/payments/merchant.ts";
+import { deliverPaidRequest, MerchantDeliveryStore } from "../src/payments/merchantDelivery.ts";
 import { authorizeStoredPurchase, type PaymentSigner } from "../src/payments/paymentService.ts";
 import { parseQuote } from "../src/payments/quote.ts";
 import { hashContent } from "../src/payments/researchRequest.ts";
@@ -92,6 +93,10 @@ const item: CatalogItem = {
   token: ARC_TESTNET.usdc,
   payTo: merchant!.address,
   maxAmount: 100_000n,
+  price: AMOUNT,
+  evidenceType: "resolution_source",
+  affects: "resolution_risk",
+  requiredParameters: [],
 };
 const savedQuote: SavedQuote = {
   quoteId: `quote-${purchaseId}`,
@@ -129,6 +134,7 @@ const request = buildResearchRequest({
   catalog: new Map([[item.catalogItemId, item]]),
   proposal: { catalogItemId: item.catalogItemId, parameters, maxAmount: 100_000n },
   quote: parseQuote(wireQuote),
+  purchaseId,
   payer: payer!.address,
   now,
 });
@@ -167,37 +173,52 @@ const paidRequest: PaidRequest = {
   token: request.token,
   authorization: paid.authorization,
 };
+// Settlement goes through the durable delivery path only: claim once, settle
+// once, resume a submitted tx by hash, and sign a DeliveryReceiptV1.
+let settleCalls = 0;
+let lastReceipt: Awaited<ReturnType<SelfHostedArcFacilitator["settle"]>> | undefined;
+const countingSettlement = {
+  async settle(...args: Parameters<SelfHostedArcFacilitator["settle"]>) {
+    settleCalls += 1;
+    lastReceipt = await facilitator.settle(...args);
+    return lastReceipt;
+  },
+  resume: (...args: Parameters<SelfHostedArcFacilitator["resume"]>) => facilitator.resume(...args),
+};
+const deliveries = new MerchantDeliveryStore(process.env.VERITY_MERCHANT_DB ?? ".verity/merchant.sqlite");
 const deps = {
   config: merchantConfig,
   loadQuote: (id: string) => (id === savedQuote.quoteId ? savedQuote : undefined),
   hasArtifact: (hash: Hex) => hash === contentHash,
   now: () => Math.floor(Date.now() / 1000),
-  settlement: facilitator,
+  settlement: countingSettlement,
+  deliveries,
+  loadArtifact: (hash: Hex) => (hash === contentHash ? artifact : undefined),
+  receiptSigner: merchant!,
 };
 
 let result;
 try {
-  result = await handlePaidRequest(paidRequest, deps);
+  result = await deliverPaidRequest(paidRequest, deps);
 } catch (error) {
   const txHash = error instanceof SettlementError ? error.txHash : undefined;
   console.log(`\nSETTLEMENT FAILED: ${(error as Error).message}${txHash ? ` (tx ${txHash}, purchase stays pending)` : ""}`);
   process.exit(1);
 }
-if (!result.verified.ok) {
-  console.log(`\nMERCHANT REJECTED ${result.verified.status}: ${result.verified.reason}`);
+if (result.status !== 200) {
+  console.log(`\nMERCHANT DID NOT DELIVER ${result.status}: ${result.reason}${result.txHash ? ` (tx ${result.txHash})` : ""}`);
   process.exit(1);
 }
-const receipt = result.settlement as Awaited<ReturnType<SelfHostedArcFacilitator["settle"]>>;
+const receipt = lastReceipt!;
 store.recordSettlement(purchaseId, receipt.txHash, Math.floor(Date.now() / 1000));
 
-// 5. Resubmitting the same authorization must not create a second transfer.
-let secondTransfer = "none";
-try {
-  await handlePaidRequest(paidRequest, deps);
-  secondTransfer = "UNEXPECTED: second settlement accepted";
-} catch (error) {
-  secondTransfer = `refused (${(error as Error).message})`;
-}
+// 5. Resubmitting the same paid request replays the stored receipt and settles nothing.
+const replay = await deliverPaidRequest(paidRequest, deps);
+const secondTransfer =
+  replay.status === 200 && replay.replayed && settleCalls === 1
+    ? "refused (stored receipt replayed, settle calls = 1)"
+    : `UNEXPECTED: status ${replay.status}, settle calls = ${settleCalls}`;
+deliveries.close();
 
 const payerBalanceAfter = await read<bigint>("balanceOf", [payer!.address]);
 const stored = store.get(purchaseId)!;

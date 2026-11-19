@@ -13,6 +13,8 @@ export const purchaseProposalSchema = z.strictObject({
   contract_id: z.string().min(1),
   evidence_gap_id: z.string().min(1),
   catalog_item_id: z.string().min(1),
+  /** Must equal the catalog item's evidence type; the payment never takes it from here alone. */
+  evidence_type: z.string().regex(/^[a-z][a-z0-9_]{0,63}$/),
   catalog_parameters: z.record(z.string(), z.string()),
   rationale: z.string().min(1),
   max_amount_base_units: z.string().regex(/^[1-9][0-9]*$/),
@@ -60,6 +62,11 @@ export function acceptPurchaseProposal(
   if (!item) throw new ResearchRequestError(`catalog item not allowlisted: ${proposal.catalog_item_id}`);
   if (item.affects !== "resolution_risk") {
     throw new ResearchRequestError("proposal is for an outcome forecast, not resolution evidence");
+  }
+  if (proposal.evidence_type !== item.evidenceType) {
+    throw new ResearchRequestError(
+      `proposal evidence type ${proposal.evidence_type} does not match catalog item ${item.catalogItemId} (${item.evidenceType})`,
+    );
   }
 
   const parameterNames = Object.keys(proposal.catalog_parameters);

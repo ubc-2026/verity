@@ -2,7 +2,7 @@ import type { Hex } from "viem";
 import { TRANSFER_WITH_AUTHORIZATION_TYPES } from "./arc.ts";
 import { encodeBindingHeader } from "./binding.ts";
 import type { Eip3009Authorization } from "./merchant.ts";
-import type { PaymentStore, StoredAuthorization } from "./store.ts";
+import { ApprovalRequiredError, type PaymentStore, type StoredAuthorization } from "./store.ts";
 
 /** The signer stays behind the payment service. Only typed-data signing is needed. */
 export interface PaymentSigner {
@@ -45,7 +45,9 @@ export async function authorizeStoredPurchase(args: {
   const { store, purchaseId, signer } = args;
   let record = store.get(purchaseId);
   if (!record) throw new Error(`purchase ${purchaseId} has no recorded reservation; reserve before signing`);
-
+  if (record.status === "awaiting_approval") {
+    throw new ApprovalRequiredError(`purchase ${purchaseId} needs owner approval before signing`);
+  }
   const reused = record.signature !== null;
   if (!reused) {
     const { request } = record;

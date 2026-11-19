@@ -29,9 +29,41 @@ const proposal: ProposalSelection = {
   maxAmount: 100_000n,
 };
 const build = (q = quote(), p = proposal) =>
-  buildResearchRequest({ catalog: DEMO_CATALOG, proposal: p, quote: q, payer: DEMO_PAYER.address, now: DEMO_NOW });
+  buildResearchRequest({ catalog: DEMO_CATALOG, proposal: p, quote: q, purchaseId: q.purchaseId, payer: DEMO_PAYER.address, now: DEMO_NOW });
 
 describe("buildResearchRequest", () => {
+  it("refuses a quote that does not echo the buyer's purchase ID", () => {
+    const q = quote({ purchaseId: "purchase-chosen-by-merchant" });
+    assert.throws(
+      () => buildResearchRequest({ catalog: DEMO_CATALOG, proposal, quote: q, purchaseId: "purchase-demo-001", payer: DEMO_PAYER.address, now: DEMO_NOW }),
+      /purchaseId/,
+    );
+  });
+
+  it("requires the contract-derived catalog parameters and refuses a quote for other values", () => {
+    const nws = DEMO_CATALOG.get("cat-nws-cli-settlement-version-v1")!;
+    const nwsProposal: ProposalSelection = {
+      catalogItemId: nws.catalogItemId,
+      parameters: { contractId: "fx-nyc-high-20261118", evidenceType: nws.evidenceType },
+      maxAmount: 100_000n,
+    };
+    const wanted = { station: "Central Park, NY (CLINYC)", date: "2026-11-18" };
+    const q = (catalogParameters: Record<string, string>) =>
+      quote({
+        catalogItemId: nws.catalogItemId,
+        resourceUrl: nws.resourceUrl,
+        parameters: nwsProposal.parameters,
+        catalogParameters,
+      });
+    const build = (catalogParameters: Record<string, string> | undefined, quoted: Record<string, string>) =>
+      buildResearchRequest({ catalog: DEMO_CATALOG, proposal: nwsProposal, quote: q(quoted), purchaseId: "purchase-demo-001", catalogParameters, payer: DEMO_PAYER.address, now: DEMO_NOW });
+    assert.equal(build(wanted, wanted).resourceUrl, nws.resourceUrl);
+    assert.throws(() => build(wanted, { ...wanted, date: "2026-11-19" }), /catalogParameters/);
+    assert.throws(() => build(undefined, wanted), /missing or empty/);
+    assert.throws(() => build({ ...wanted, date: "" }, wanted), /missing or empty/);
+    assert.throws(() => build({ ...wanted, extra: "x" }, wanted), /not declared/);
+  });
+
   it("takes the resource and payment target from the catalog and price from the quote", () => {
     const request = build();
     assert.equal(request.resourceUrl, DEMO_CATALOG_ITEM.resourceUrl);
@@ -95,6 +127,7 @@ describe("prepareAuthorization", () => {
       catalog: DEMO_CATALOG,
       proposal,
       quote: quote(),
+      purchaseId: "purchase-demo-001",
       payer: DEMO_PAYER.address,
       now: DEMO_NOW + 5,
     });

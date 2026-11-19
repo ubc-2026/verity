@@ -78,6 +78,7 @@ def _emit_proposal(
         contract_id=ra.contract_id,
         evidence_gap_id=gap.id,
         catalog_item_id=item["id"],
+        evidence_type=item["evidence_type"],
         catalog_parameters=params,
         rationale=_proposal_rationale(gap.question, gap.why, item["title"], research_note),
         max_amount_base_units=item["price_base_units"],

@@ -51,6 +51,7 @@ async function buyer() {
     catalog: DEMO_CATALOG,
     proposal: { catalogItemId: DEMO_CATALOG_ITEM.catalogItemId, parameters: DEMO_PARAMETERS, maxAmount: 100_000n },
     quote: parseQuote(wire),
+    purchaseId: wire.purchaseId,
     payer: DEMO_PAYER.address,
     now: DEMO_NOW,
   });
@@ -327,6 +328,15 @@ describe("safe retry", () => {
     release();
     ok(await first);
     ok(await deliverPaidRequest(b.input, m.deps));
+    assert.equal(m.calls.settle, 1);
+  });
+
+  it("same-tick copies both pass the pre-check; the atomic claim lets only one settle", async () => {
+    const b = await buyer();
+    const m = merchant();
+    // Both calls read "no record" before either awaits verification, so only the INSERT OR IGNORE claim separates them.
+    const [a, c] = await Promise.all([deliverPaidRequest(b.input, m.deps), deliverPaidRequest(b.input, m.deps)]);
+    assert.deepEqual([a.status, c.status].sort(), [200, 202]);
     assert.equal(m.calls.settle, 1);
   });
 

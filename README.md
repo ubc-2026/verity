@@ -56,7 +56,11 @@ When a confirmed payment reaches its delivery deadline with no verified delivery
 - **Replays.** A replayed, retried, or forged event cannot open a card unless the latest ledger record still shows the overdue payment. Repeats update the existing card instead of adding one.
 - **Fixture and live data.** Fixture events use `environment: "fixture"`, are checked against a fixture ledger in the Grok Bot runtime, and produce cards labeled `FIXTURE`. Live events use `arc-testnet` and the real ledger endpoint.
 
-Status: fixture-tested in the Grok Bot runtime, which is outside this repository. The ledger event and endpoint are not built yet. Field contract and wiring steps: [Overdue delivery incidents](docs/grok-bot/overdue-delivery-incidents.md).
+Status: the routine is fixture-tested in the Grok Bot runtime, which is outside this repository. The Verity side (the overdue event and the read-only `GET /purchases/{purchaseId}` feed) is built in `src/alerts/` and checked against a contract model of the routine in `npm run e2e`. Neither is deployed, and no live event has been sent. Field contract and wiring steps: [Overdue delivery incidents](docs/grok-bot/overdue-delivery-incidents.md).
+
+## Connected fixture workflow
+
+`npm run e2e` runs one market from research through risk analysis, an evidence purchase, and the updated assessment. Settlement is stubbed and nothing leaves the machine. Commands, scenarios, and what is fixture versus live: [Connected fixture workflow](docs/integration.md).
 
 ## Demo plan
 

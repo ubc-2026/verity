@@ -35,6 +35,7 @@ async function scenario(settle: MerchantDeliveryDeps["settlement"], receiptSigne
     catalog: demo.DEMO_CATALOG,
     proposal: { catalogItemId: demo.DEMO_CATALOG_ITEM.catalogItemId, parameters: demo.DEMO_PARAMETERS, maxAmount: 100_000n },
     quote: parseQuote(wire),
+    purchaseId: wire.purchaseId,
     payer: demo.DEMO_PAYER.address,
     now: demo.DEMO_NOW,
   });

@@ -3,7 +3,17 @@ import { describe, it } from "node:test";
 import type { Hex } from "viem";
 import { encodeBindingHeader } from "../src/payments/binding.ts";
 import { buildResearchRequest, InMemoryAuthorizationStore, prepareAuthorization } from "../src/payments/buyer.ts";
-import { handlePaidRequest, type PaidRequest, type SavedQuote } from "../src/payments/merchant.ts";
+import { verifyPaidRequest, type Eip3009Authorization, type MerchantDeps, type PaidRequest, type SavedQuote, type VerifyResult } from "../src/payments/merchant.ts";
+
+/** Test-only: verification first, then the stub settlement. Shipping code settles only through deliverPaidRequest. */
+async function handlePaidRequest(
+  input: PaidRequest,
+  deps: MerchantDeps & { settlement: { settle(verified: Extract<VerifyResult, { ok: true }>, auth: Eip3009Authorization): Promise<unknown> } },
+): Promise<{ verified: VerifyResult; settlement?: unknown }> {
+  const verified = await verifyPaidRequest(input, deps);
+  if (!verified.ok) return { verified };
+  return { verified, settlement: await deps.settlement.settle(verified, input.authorization) };
+}
 import { parseQuote } from "../src/payments/quote.ts";
 import {
   DEMO_CATALOG,
@@ -25,6 +35,7 @@ async function paidRequest(): Promise<PaidRequest> {
     catalog: DEMO_CATALOG,
     proposal: { catalogItemId: DEMO_CATALOG_ITEM.catalogItemId, parameters: DEMO_PARAMETERS, maxAmount: 100_000n },
     quote: parseQuote(JSON.stringify(wire)),
+    purchaseId: wire.purchaseId,
     payer: DEMO_PAYER.address,
     now: DEMO_NOW,
   });
@@ -111,6 +122,7 @@ describe("merchant verification before settlement", () => {
           catalog: DEMO_CATALOG,
           proposal: { catalogItemId: DEMO_CATALOG_ITEM.catalogItemId, parameters: DEMO_PARAMETERS, maxAmount: 100_000n },
           quote: parseQuote(wire),
+          purchaseId: wire.purchaseId,
           payer: DEMO_PAYER.address,
           now: DEMO_NOW,
         });
