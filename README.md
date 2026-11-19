@@ -1,108 +1,74 @@
-
+[README (7).md](https://github.com/user-attachments/files/35008499/README.7.md)
 # Verity
 
-**An AI agent that buys evidence to clarify how prediction markets resolve.**
+**Prediction-market research with accountable agent spending.**
 
-Verity reads a prediction-market contract, identifies missing evidence that could affect its resolution, and proposes a specific research purchase. A separate payment service enforces the owner’s spending rules. The audit ledger shows whether the merchant delivered the quoted evidence and whether the payment settled.
+Verity reads the rules of a prediction-market contract, identifies evidence that could clarify how it resolves, and proposes buying that evidence. The payment service enforces the owner’s spending rules. An audit trail links each purchase to both the onchain transfer and the resource the merchant delivered.
 
-> [!NOTE]
-> **UBC 2026 hackathon project · Planned MVP.** The demo scope is read-only market analysis, one allowlisted merchant, and USDC settlement on Arc Testnet. The merchant may serve a labeled fixture while settlement and reconciliation run live. Setup commands and a hosted demo have yet to be documented.
+> **Project status** · UBC 2026 hackathon design. The demo targets testnet USDC and a controlled merchant. This brief describes the planned workflow. Install commands and a demo URL are pending.
 
-## What the demo shows
+## How it works
 
-1. **Find a gap.** Read a Gemini Exchange contract and highlight a specific question about its resolution rules or sources. For example, a contract might leave the cutoff time unclear.
-2. **Price the evidence.** Match the gap to a catalog item. In the demo, the merchant quotes **0.05 testnet USDC** for a versioned source excerpt.
-3. **Apply the spending policy.** Check the quote, reserve funds, and obtain the owner’s wallet signature when the price requires it.
-4. **Verify the outcome.** Compare the received bytes with the signed merchant receipt and the original quote. Match the payment to the Arc transaction using QuickNode Streams.
+Imagine an election market asks whether a candidate will win. The quoted price reflects market expectations. To understand how the contract settles, Verity checks which source the rules recognize, when it is checked, and whether the result must be certified.
+
+1. **Identify the gap.** Verity pulls contract text and market metadata from the Gemini Exchange prediction-market API. Verity analyzes that data and returns structured findings with quoted rules, a risk assessment, and the evidence needed to resolve each material question.
+2. **Request a quote.** The agent proposes a specific resource from an approved merchant. The merchant returns an x402 quote for the resource.
+3. **Apply the spending policy.** The payment service checks the amount, budget, merchant, and purpose. For a purchase that needs human approval, ElevenLabs explains the request and the owner authorizes it with a wallet signature.
+4. **Pay and verify delivery.** The merchant checks the signed authorization against the request before submitting the transfer. The buyer checks the returned resource against the quoted digest.
+5. **Reconcile and report.** QuickNode Streams supplies onchain payment records. Verity matches those records against the purchase and delivery records, then updates the risk assessment with any verified evidence.
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    Market["Gemini Exchange market data"] --> Analysis["Risk scoring in code"]
-    Analysis --> Proposal["Catalog purchase proposal"]
-    Proposal --> Policy["Payment policy and signer"]
-    Owner["Owner wallet approval"] --> Policy
-    Policy --> Merchant["x402 merchant"]
-    Merchant --> Arc["Arc Testnet"]
-    Merchant --> Delivery["Buyer verifies delivery"]
-    Arc --> Stream["QuickNode Streams"]
-    Stream --> Ledger["Audit ledger"]
-    Delivery --> Ledger
-```
+| Component | Responsibility | Technology |
+| --- | --- | --- |
+| Market analysis | Extract resolution criteria, flag ambiguous terms or sources, identify correlated outcomes, and propose evidence to inspect | Gemini Exchange prediction-market API and structured JSON |
+| Payment service and merchant | Validate the quote, bind the authorization to the exact research request, and deliver the resource after settlement | x402, testnet USDC, EIP-3009 |
+| Spending controls | Check budget and merchant allowlists, request owner approval when needed, and log the decision | Policy engine, ElevenLabs, owner wallet |
+| Reconciliation | Match settlement and delivery evidence and show discrepancies | QuickNode Streams, webhook, database, dashboard |
 
-The purchase proposal names a catalog item and why it matters. The payment service holds the signer and derives the merchant endpoint, recipient, asset, network, and amount from the allowlisted catalog and validated quote.
+### Request-bound payments
 
-### Market analysis
+The payment service hashes a canonical request that includes the resource URL, parameters, amount, recipient, and expiry. The proposed design commits to that hash through the nonce in the EIP-3009 authorization. The merchant reconstructs the request from what it actually receives and verifies the amount, recipient, signature, expiry, and nonce before submitting the payment.
 
-| Interface | Responsibility |
+Once the merchant delivers the resource, the buyer hashes the received bytes and compares the result with the quoted digest. This checks that the delivery matches the purchased resource. The agent evaluates the relevance and credibility of the evidence during its follow-up analysis.
+
+### Owner approval
+
+The policy engine applies the configured budget, merchant allowlist, and purpose checks. Eligible small purchases can proceed automatically. Purchases above the configured approval threshold require a wallet signature from the owner. ElevenLabs can explain the resource, merchant, price, and reason for the purchase. The payment service denies requests that time out or lack a valid wallet signature. Spending thresholds are configurable and remain open for the demo.
+
+### Audit trail
+
+The backend links the onchain transaction to the purchase record using the payment authorization and matching transfer fields. The purchase record connects that authorization to the request hash and delivery evidence.
+
+| Evidence observed | Dashboard status |
 | --- | --- |
-| `get_risk_analysis(contract_id)` → `RiskAnalysisV1` | Normalize the market snapshot and assess resolution ambiguity, source quality, liquidity, and dependence for multi-leg contracts. Record citations, uncertainty, and the snapshot timestamp and hash. |
-| `generate_purchase_request(risk_analysis)` → `PurchaseProposalV1` or `null` | Match a material evidence gap to a catalog item or log why no purchase was proposed. The proposal identifies the contract, gap, item, parameters, rationale, and maximum spend in USDC base units. |
+| Confirmed transfer and verified delivery | Reconciled |
+| Confirmed transfer with missing delivery | Paid, delivery missing |
+| Verified delivery with no confirmed matching transfer | Delivered, payment unconfirmed |
+| Different amount, recipient, or content digest | Mismatch |
+| A second transfer for the same purchase | Duplicate payment |
 
-Scores range from 1 (low observed risk) to 5 (material risk supported by evidence). Missing or inapplicable data produces a `null` score with a reason. The dashboard displays observed prices and timestamps separately from risk scores and preserves the original analysis so changes after delivery can be traced.
+## Demo plan
 
-### Spending policy
+1. Open a prediction-market contract and highlight a specific ambiguity in its resolution rules.
+2. Use a controlled merchant to demonstrate an automatically approved testnet purchase. Show the quote, delivered evidence, and matching onchain transaction.
+3. Trigger a purchase that requires owner approval. Show the voice explanation and record the wallet approval before the payment proceeds.
+4. Return an intentionally different payload from the demo merchant and show the resulting digest mismatch in the dashboard.
 
-| Quote amount | Decision |
-| --- | --- |
-| 0.01–0.10 USDC | Automatic after shared policy checks |
-| 0.11–0.50 USDC | Automatic for a material unresolved gap with a catalog match and no suitable free or cached evidence |
-| 0.51–2.00 USDC | Requires a one-use, expiring EIP-712 approval from the enrolled owner wallet |
-| Above 2.00 USDC | Rejected |
+### Integration milestones
 
-Every purchase checks the pause state, allowlists, quote expiry, duplicates, and the **25 USDC mission budget**, which includes confirmed spend and outstanding reservations. The service groups proposals by contract and evidence gap to prevent splitting a purchase across quotes. ElevenLabs can explain a proposed purchase by phone or browser voice. Authorization comes from the owner’s wallet signature.
+- Agree on the canonical request format and nonce construction, then verify the buyer and merchant compute matching values.
+- Exercise the quote, approval, payment, and delivery flow with a controlled merchant and testnet USDC.
+- Configure the QuickNode webhook and confirm that settlement and delivery records reconcile.
+- Confirm the voice flow and prepare a labeled recording in case the live call is unavailable.
 
-The policy is enforced by the payment service and uses a dedicated, low-balance testnet signer. A compromised signer could bypass the service. Pausing blocks new signatures, and issued signatures remain valid until expiry or verified cancellation.
-
-### Payment and delivery
-
-The merchant returns an HTTP `402` quote that pins the recipient, price, expiry, content type, and digest of the evidence. The payment service reserves funds and records the canonical `ResearchRequestV1` before signing. It binds the request to the EIP-3009 authorization through the nonce.
-
-```text
-requestHash = keccak256(UTF8(JCS(ResearchRequestV1)))
-nonce       = keccak256(UTF8("verity:eip3009:nonce:v1") || requestHash || salt)
-```
-
-The salt is 32 random bytes, and concatenation uses raw bytes. The merchant rebuilds the request from the actual route and body, checks the derived nonce and payment fields before settlement, and treats repeat submissions for the same authorization as retries. If submission times out, the service tracks the existing nonce or transaction until it can resolve the outcome.
-
-After settlement, the merchant returns the quoted evidence and a signed `DeliveryReceiptV1`. The buyer verifies the receipt against the pinned merchant key and hashes the raw response before parsing. A matching digest establishes that the buyer received the quoted bytes. The analysis still has to assess whether the evidence is credible and relevant.
-
-### Settlement audit
-
-The planned QuickNode Stream sends Arc Testnet block receipts to `/webhooks/quicknode`, filtering for relevant USDC `AuthorizationUsed` or `Transfer` logs. The receiver verifies the webhook signature, deduplicates events, and accounts for chain reorganizations. It matches the payer and authorization nonce with the exact recipient and amount in the same transaction, then waits for finality.
-
-| Evidence observed | Ledger outcome |
-| --- | --- |
-| Confirmed payment, valid signed receipt, and matching response bytes | Reconciled |
-| Confirmed payment with no verified delivery by the deadline | Paid, delivery missing |
-| Verified delivery with no confirmed matching payment by the deadline | Delivered, payment unconfirmed |
-| Inconsistent payment fields, invalid receipt, or wrong digest | Mismatch |
-| An extra settlement or a transfer with no matching purchase | Duplicate or unmatched payment |
-
-## Setup and verification
-
-The integration plan uses Arc Testnet (chain ID `5042002`) and USDC at `0x3600000000000000000000000000000000000000`.
-
-1. **Start with a fixture.** Share one timestamped market snapshot, one catalog item, and one request schema across the analyst, payment service, and merchant. Label fixture data in the demo.
-2. **Test a purchase locally.** Confirm both sides derive the same request hash and nonce. Alter a bound request field and confirm rejection. Alter the response bytes and confirm the ledger flags the mismatch.
-3. **Verify testnet settlement.** Fund the test payer, confirm facilitator support, and run one Arc transfer. Check that its authorization and transfer logs match the request before wiring QuickNode.
-4. **Connect the live services.** Configure the Gemini Exchange feed, the merchant and facilitator, Arc RPC, the QuickNode signing secret, the enrolled owner wallet, and ElevenLabs if using voice. Store credentials in the runtime environment.
-5. **Record the demo.** Show one reconciled purchase, one quote that requires owner approval, and one tampered request rejected before settlement. Also check that concurrent reservations respect the budget and retries do not create a second transfer.
+Circle nanopayments for per-fact pricing are a stretch goal.
 
 ## Team workstreams
 
-| Workstream | Handoff |
+| Workstream | Deliverable |
 | --- | --- |
-| Market intelligence | Normalized contract snapshot and cited `RiskAnalysisV1` |
-| Purchase decisions | `PurchaseProposalV1`, decision reasons, and policy fixtures |
-| Merchant and demo | Catalog, x402 quote, versioned evidence, and signed delivery receipt |
-| Payments and security · Decong | Request binding, reservations, approval verification, settlement, and reconciliation |
-
-## References
-
-- [Gemini Exchange prediction-market events](https://developer.gemini.com/rest-api/prediction-markets/events/list-events)
-- [x402 exact EVM scheme](https://github.com/x402-foundation/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md), [EIP-3009](https://eips.ethereum.org/EIPS/eip-3009), and [JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785.html)
-- [Arc Testnet explorer](https://explorer.testnet.arc.io/), [Circle faucet](https://faucet.circle.com/), and [QuickNode webhook verification](https://www.quicknode.com/docs/streams/destinations/webhooks)
-- [ElevenLabs phone integration](https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/native-integration/) and [UBC 2026 Devpost](https://ubc-hackathon-2026.devpost.com/)
-
+| Market analysis | Contract parser, structured analysis, and evidence-gap detection |
+| Payments | x402 client and demo merchant, authorization signing, and request binding |
+| Approvals | Spending policy, voice flow, and owner signature validation |
+| Audit | QuickNode integration, reconciliation logic, and dashboard |
