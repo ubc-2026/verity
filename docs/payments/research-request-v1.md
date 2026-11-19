@@ -16,7 +16,7 @@ nonce       = keccak256(UTF8("verity:eip3009:nonce:v1") || requestHash || salt)
 
 - JCS is [RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html), implemented here with the `canonicalize` package. Keccak-256 is Ethereum Keccak, implemented with `viem`.
 - `||` concatenates raw bytes. The 32-byte `requestHash` and `salt` are decoded from hex before concatenation.
-- Each new authorization gets a fresh salt. A retry of the same purchase reuses the stored salt and nonce, so it never creates a second authorization.
+- Each new authorization gets a fresh salt. A retry of the same purchase reuses the stored salt and nonce, so it never creates a second authorization. The store is in memory, so this holds only within one process until the durable store below lands.
 
 ## Schema (pinned example fixture)
 
@@ -95,4 +95,6 @@ The pinned README does not specify the following. Each is narrow on purpose and 
 - Durable, transactional authorization store, plus uniqueness on `(chain, token, payer, nonce)`. Today only the in-memory fixture store exists.
 - Nonce freshness and on-chain `authorizationState` check on the merchant side.
 - Live x402 settlement adapter and Arc Testnet facilitator qualification. The fixture uses a stub adapter.
+- Settle at most once per authorization. `handlePaidRequest` calls the adapter on every request that verifies, so two concurrent copies of one paid request, or a retry after success, call it again. The token contract still rejects a reused nonce on chain, so funds cannot move twice, but the merchant would submit twice. Do not connect a live adapter to `handlePaidRequest` until a per-purchase claim lands.
+- Resume a submitted transfer by its transaction hash. The adapter interface has no transaction hash or resume path, so a retry after a timeout cannot wait on the transfer already sent.
 - HTTP wiring for the 402 quote and the paid retry (`PAYMENT-REQUIRED`, `PAYMENT-SIGNATURE`, `PAYMENT-RESPONSE`).
