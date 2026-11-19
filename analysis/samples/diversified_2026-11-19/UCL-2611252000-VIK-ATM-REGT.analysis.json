@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O5",
     "question": "Viking vs Atlético: Total Goals",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:46Z",
+    "analyzed_at_utc": "2026-11-19T06:15:35Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:46Z",
-      "snapshot_hash": "sha256:b487781f998bcc015b8ad2f850b251df368d563bed2f3c3c0bc43d55651be0ea",
+      "snapshot_time_utc": "2026-11-19T06:15:35Z",
+      "snapshot_hash": "sha256:a034b3787948a7d2b4e5c711efbb6598073238047d0d4fdbd8c219b661511304",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:46Z"
+      "observed_time_utc": "2026-11-19T06:15:35Z"
     },
     "scores": {
       "ambiguity": {

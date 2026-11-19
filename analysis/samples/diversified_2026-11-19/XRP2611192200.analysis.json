@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-XRP2611192200-HI0D98",
     "question": "XRP price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:41Z",
+    "analyzed_at_utc": "2026-11-19T06:16:39Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:41Z",
-      "snapshot_hash": "sha256:affaf0ccf2d0597bad989159576cbbd2f2c6b73213b23789ebe04b744a2f1606",
+      "snapshot_time_utc": "2026-11-19T06:16:39Z",
+      "snapshot_hash": "sha256:a83774c5f9166e953765eea8b0db0b9eb4338c0622e735b0ff83a8f5921a2698",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$0.98 or above",
-      "best_bid": "0.38",
-      "best_ask": "0.42",
-      "mid": "0.40",
-      "implied_probability": "0.40",
+      "best_bid": "0.39",
+      "best_ask": "0.44",
+      "mid": "0.415",
+      "implied_probability": "0.415",
       "volume_usd": "411.87",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:41Z"
+      "observed_time_utc": "2026-11-19T06:16:39Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 2,
-        "rationale": "event-total volume $411.87, 4c spread.",
+        "rationale": "event-total volume $411.87, 5c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -101,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XRP2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.38, bestAsk 0.42; event volume 411.87"
+        "quote": "bestBid 0.39, bestAsk 0.44; event volume 411.87"
       }
     ],
     "evidence_gaps": [],

@@ -25,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.92",
+          "yes": "0.93",
           "no": "0.23"
         },
         "sell": {
           "yes": "0.77",
-          "no": "0.08"
+          "no": "0.07"
         },
         "bestBid": "0.77",
-        "bestAsk": "0.92"
+        "bestAsk": "0.93"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -294,6 +294,63 @@
       }
     },
     {
+      "id": "476621-1203018",
+      "label": "Ja'Kobi Lane 15+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Ja'Kobi Lane records 15 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.85",
+          "no": "0.3"
+        },
+        "sell": {
+          "yes": "0.7",
+          "no": "0.15"
+        },
+        "bestBid": "0.7",
+        "bestAsk": "0.85"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "JLANEO14",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-JLANEO14",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 9,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Ja'Kobi Lane",
+        "externalIds": {
+          "sportradar": "ea285842-4fdf-4b27-bd73-6bfd916c6bc5"
+        }
+      }
+    },
+    {
       "id": "476621-1203165",
       "label": "Zay Flowers 40+ Receiving Yards",
       "description": {
@@ -347,63 +404,6 @@
         "name": "Zay Flowers",
         "externalIds": {
           "sportradar": "2b6d74b7-10fb-4f17-99c8-9bb557fb475b"
-        }
-      }
-    },
-    {
-      "id": "476621-1203018",
-      "label": "Ja'Kobi Lane 15+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Ja'Kobi Lane records 15 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.84",
-          "no": "0.3"
-        },
-        "sell": {
-          "yes": "0.7",
-          "no": "0.16"
-        },
-        "bestBid": "0.7",
-        "bestAsk": "0.84"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "JLANEO14",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-JLANEO14",
-      "marketState": "open",
-      "color": "#241773",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 9,
-      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
-      "strike": {
-        "type": "over",
-        "value": "14.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Ja'Kobi Lane",
-        "externalIds": {
-          "sportradar": "ea285842-4fdf-4b27-bd73-6bfd916c6bc5"
         }
       }
     },
@@ -522,6 +522,120 @@
       }
     },
     {
+      "id": "476621-1202917",
+      "label": "Chuba Hubbard 10+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 10 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.8",
+          "no": "0.65"
+        },
+        "sell": {
+          "yes": "0.35",
+          "no": "0.2"
+        },
+        "bestBid": "0.35",
+        "bestAsk": "0.8"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CHUBBARDO9",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO9",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 0,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "9.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
+        }
+      }
+    },
+    {
+      "id": "476621-1203116",
+      "label": "Tetairoa McMillan 40+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Tetairoa McMillan records 40 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.79",
+          "no": "0.36"
+        },
+        "sell": {
+          "yes": "0.64",
+          "no": "0.21"
+        },
+        "bestBid": "0.64",
+        "bestAsk": "0.79"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "TMCMILLANO39",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-TMCMILLANO39",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 54,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "39.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Tetairoa McMillan",
+        "externalIds": {
+          "sportradar": "874de000-586c-4999-ac12-02766563e200"
+        }
+      }
+    },
+    {
       "id": "476621-1203020",
       "label": "Ja'Kobi Lane 20+ Receiving Yards",
       "description": {
@@ -636,63 +750,6 @@
       }
     },
     {
-      "id": "476621-1203116",
-      "label": "Tetairoa McMillan 40+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Tetairoa McMillan records 40 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.78",
-          "no": "0.36"
-        },
-        "sell": {
-          "yes": "0.64",
-          "no": "0.22"
-        },
-        "bestBid": "0.64",
-        "bestAsk": "0.78"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "TMCMILLANO39",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-TMCMILLANO39",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 54,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "39.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Tetairoa McMillan",
-        "externalIds": {
-          "sportradar": "874de000-586c-4999-ac12-02766563e200"
-        }
-      }
-    },
-    {
       "id": "476621-1203140",
       "label": "Tommy Tremble 10+ Receiving Yards",
       "description": {
@@ -750,63 +807,6 @@
       }
     },
     {
-      "id": "476621-1202917",
-      "label": "Chuba Hubbard 10+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 10 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.77",
-          "no": "0.65"
-        },
-        "sell": {
-          "yes": "0.35",
-          "no": "0.23"
-        },
-        "bestBid": "0.35",
-        "bestAsk": "0.77"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CHUBBARDO9",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO9",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 0,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "9.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Chuba Hubbard",
-        "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
-        }
-      }
-    },
-    {
       "id": "476621-1203042",
       "label": "Jalen Coker 25+ Receiving Yards",
       "description": {
@@ -823,15 +823,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.76",
+          "yes": "0.77",
           "no": "0.38"
         },
         "sell": {
           "yes": "0.62",
-          "no": "0.24"
+          "no": "0.23"
         },
         "bestBid": "0.62",
-        "bestAsk": "0.76"
+        "bestAsk": "0.77"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -880,15 +880,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.74",
+          "yes": "0.75",
           "no": "0.39"
         },
         "sell": {
           "yes": "0.61",
-          "no": "0.26"
+          "no": "0.25"
         },
         "bestBid": "0.61",
-        "bestAsk": "0.74"
+        "bestAsk": "0.75"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -937,15 +937,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.73",
+          "yes": "0.74",
           "no": "0.41"
         },
         "sell": {
           "yes": "0.59",
-          "no": "0.27"
+          "no": "0.26"
         },
         "bestBid": "0.59",
-        "bestAsk": "0.73"
+        "bestAsk": "0.74"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -994,15 +994,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.7",
+          "yes": "0.71",
           "no": "0.43"
         },
         "sell": {
           "yes": "0.57",
-          "no": "0.3"
+          "no": "0.29"
         },
         "bestBid": "0.57",
-        "bestAsk": "0.7"
+        "bestAsk": "0.71"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -1031,6 +1031,63 @@
         "name": "Ja'Kobi Lane",
         "externalIds": {
           "sportradar": "ea285842-4fdf-4b27-bd73-6bfd916c6bc5"
+        }
+      }
+    },
+    {
+      "id": "476621-1203044",
+      "label": "Jalen Coker 30+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jalen Coker records 30 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.7",
+          "no": "0.44"
+        },
+        "sell": {
+          "yes": "0.56",
+          "no": "0.3"
+        },
+        "bestBid": "0.56",
+        "bestAsk": "0.7"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "COKERO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-COKERO29",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 23,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jalen Coker",
+        "externalIds": {
+          "sportradar": "67977ab0-070b-11ef-978d-05d80704d329"
         }
       }
     },
@@ -1092,63 +1149,6 @@
       }
     },
     {
-      "id": "476621-1203044",
-      "label": "Jalen Coker 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Jalen Coker records 30 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.69",
-          "no": "0.44"
-        },
-        "sell": {
-          "yes": "0.56",
-          "no": "0.31"
-        },
-        "bestBid": "0.56",
-        "bestAsk": "0.69"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "COKERO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-COKERO29",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 23,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Jalen Coker",
-        "externalIds": {
-          "sportradar": "67977ab0-070b-11ef-978d-05d80704d329"
-        }
-      }
-    },
-    {
       "id": "476621-1203117",
       "label": "Tetairoa McMillan 50+ Receiving Yards",
       "description": {
@@ -1165,15 +1165,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.69",
+          "yes": "0.7",
           "no": "0.45"
         },
         "sell": {
           "yes": "0.55",
-          "no": "0.31"
+          "no": "0.3"
         },
         "bestBid": "0.55",
-        "bestAsk": "0.69"
+        "bestAsk": "0.7"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -1202,6 +1202,63 @@
         "name": "Tetairoa McMillan",
         "externalIds": {
           "sportradar": "874de000-586c-4999-ac12-02766563e200"
+        }
+      }
+    },
+    {
+      "id": "476621-1202918",
+      "label": "Chuba Hubbard 15+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 15 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.68",
+          "no": "0.72"
+        },
+        "sell": {
+          "yes": "0.28",
+          "no": "0.32"
+        },
+        "bestBid": "0.28",
+        "bestAsk": "0.68"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CHUBBARDO14",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO14",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 1,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
         }
       }
     },
@@ -1263,15 +1320,15 @@
       }
     },
     {
-      "id": "476621-1202918",
-      "label": "Chuba Hubbard 15+ Receiving Yards",
+      "id": "476621-1203024",
+      "label": "Ja'Kobi Lane 30+ Receiving Yards",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 15 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "value": "This market resolves to Yes if Ja'Kobi Lane records 30 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
             "nodeType": "text"
           }
         ],
@@ -1279,31 +1336,31 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.65",
-          "no": "0.72"
+          "yes": "0.64",
+          "no": "0.5"
         },
         "sell": {
-          "yes": "0.28",
-          "no": "0.35"
+          "yes": "0.5",
+          "no": "0.36"
         },
-        "bestBid": "0.28",
-        "bestAsk": "0.65"
+        "bestBid": "0.5",
+        "bestAsk": "0.64"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CHUBBARDO14",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO14",
+      "ticker": "JLANEO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-JLANEO29",
       "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
       "expiryDate": "2026-11-24T06:00:00.000Z",
       "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 1,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "sortOrder": 12,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
       "strike": {
         "type": "over",
-        "value": "14.5"
+        "value": "29.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -1313,9 +1370,9 @@
       "priceMinimum": "0.01",
       "target": {
         "type": "player",
-        "name": "Chuba Hubbard",
+        "name": "Ja'Kobi Lane",
         "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
+          "sportradar": "ea285842-4fdf-4b27-bd73-6bfd916c6bc5"
         }
       }
     },
@@ -1373,63 +1430,6 @@
         "name": "Rashod Bateman",
         "externalIds": {
           "sportradar": "d9f8b92b-69d4-4d83-9bf2-106ee523efed"
-        }
-      }
-    },
-    {
-      "id": "476621-1203024",
-      "label": "Ja'Kobi Lane 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Ja'Kobi Lane records 30 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.63",
-          "no": "0.5"
-        },
-        "sell": {
-          "yes": "0.5",
-          "no": "0.37"
-        },
-        "bestBid": "0.5",
-        "bestAsk": "0.63"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "JLANEO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-JLANEO29",
-      "marketState": "open",
-      "color": "#241773",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 12,
-      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Ja'Kobi Lane",
-        "externalIds": {
-          "sportradar": "ea285842-4fdf-4b27-bd73-6bfd916c6bc5"
         }
       }
     },
@@ -1507,15 +1507,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.61",
-          "no": "0.5"
+          "yes": "0.62",
+          "no": "0.51"
         },
         "sell": {
-          "yes": "0.5",
-          "no": "0.39"
+          "yes": "0.49",
+          "no": "0.38"
         },
-        "bestBid": "0.5",
-        "bestAsk": "0.61"
+        "bestBid": "0.49",
+        "bestAsk": "0.62"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -1776,63 +1776,6 @@
       }
     },
     {
-      "id": "476621-1202919",
-      "label": "Chuba Hubbard 20+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 20 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.55",
-          "no": "0.63"
-        },
-        "sell": {
-          "yes": "0.37",
-          "no": "0.45"
-        },
-        "bestBid": "0.37",
-        "bestAsk": "0.55"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CHUBBARDO19",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO19",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 2,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "19.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Chuba Hubbard",
-        "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
-        }
-      }
-    },
-    {
       "id": "476621-1203172",
       "label": "Zay Flowers 70+ Receiving Yards",
       "description": {
@@ -2061,6 +2004,60 @@
       }
     },
     {
+      "id": "476621-1202921",
+      "label": "Chuba Hubbard 25+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 25 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.47"
+        },
+        "sell": {
+          "no": "0.53"
+        },
+        "bestAsk": "0.47"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CHUBBARDO24",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO24",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 3,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "24.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
+        }
+      }
+    },
+    {
       "id": "476621-1203121",
       "label": "Tetairoa McMillan 70+ Receiving Yards",
       "description": {
@@ -2134,15 +2131,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.44",
+          "yes": "0.46",
           "no": "0.69"
         },
         "sell": {
           "yes": "0.31",
-          "no": "0.56"
+          "no": "0.54"
         },
         "bestBid": "0.31",
-        "bestAsk": "0.44"
+        "bestAsk": "0.46"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -2192,13 +2189,13 @@
       "prices": {
         "buy": {
           "yes": "0.44",
-          "no": "0.7"
+          "no": "0.68"
         },
         "sell": {
-          "yes": "0.3",
+          "yes": "0.32",
           "no": "0.56"
         },
-        "bestBid": "0.3",
+        "bestBid": "0.32",
         "bestAsk": "0.44"
       },
       "status": "active",
@@ -2232,63 +2229,6 @@
       }
     },
     {
-      "id": "476621-1202921",
-      "label": "Chuba Hubbard 25+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 25 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.43",
-          "no": "0.76"
-        },
-        "sell": {
-          "yes": "0.24",
-          "no": "0.57"
-        },
-        "bestBid": "0.24",
-        "bestAsk": "0.43"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CHUBBARDO24",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO24",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 3,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "24.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Chuba Hubbard",
-        "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
-        }
-      }
-    },
-    {
       "id": "476621-1203174",
       "label": "Zay Flowers 80+ Receiving Yards",
       "description": {
@@ -2305,15 +2245,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.43",
+          "yes": "0.44",
           "no": "0.71"
         },
         "sell": {
           "yes": "0.29",
-          "no": "0.57"
+          "no": "0.56"
         },
         "bestBid": "0.29",
-        "bestAsk": "0.43"
+        "bestAsk": "0.44"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -2363,13 +2303,13 @@
       "prices": {
         "buy": {
           "yes": "0.41",
-          "no": "0.88"
+          "no": "0.83"
         },
         "sell": {
-          "yes": "0.12",
+          "yes": "0.17",
           "no": "0.59"
         },
-        "bestBid": "0.12",
+        "bestBid": "0.17",
         "bestAsk": "0.41"
       },
       "status": "active",
@@ -2399,6 +2339,63 @@
         "name": "Chuba Hubbard",
         "externalIds": {
           "sportradar": "32205e74-b23f-420a-b312-465b29260745"
+        }
+      }
+    },
+    {
+      "id": "476621-1203123",
+      "label": "Tetairoa McMillan 80+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Tetairoa McMillan records 80 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.4",
+          "no": "0.75"
+        },
+        "sell": {
+          "yes": "0.25",
+          "no": "0.6"
+        },
+        "bestBid": "0.25",
+        "bestAsk": "0.4"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "TMCMILLANO79",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-TMCMILLANO79",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 58,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "79.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Tetairoa McMillan",
+        "externalIds": {
+          "sportradar": "874de000-586c-4999-ac12-02766563e200"
         }
       }
     },
@@ -2460,63 +2457,6 @@
       }
     },
     {
-      "id": "476621-1203123",
-      "label": "Tetairoa McMillan 80+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Tetairoa McMillan records 80 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.39",
-          "no": "0.75"
-        },
-        "sell": {
-          "yes": "0.25",
-          "no": "0.61"
-        },
-        "bestBid": "0.25",
-        "bestAsk": "0.39"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "TMCMILLANO79",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-TMCMILLANO79",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 58,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "79.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Tetairoa McMillan",
-        "externalIds": {
-          "sportradar": "874de000-586c-4999-ac12-02766563e200"
-        }
-      }
-    },
-    {
       "id": "476621-1203027",
       "label": "Ja'Kobi Lane 50+ Receiving Yards",
       "description": {
@@ -2533,15 +2473,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.38",
+          "yes": "0.39",
           "no": "0.74"
         },
         "sell": {
           "yes": "0.26",
-          "no": "0.62"
+          "no": "0.61"
         },
         "bestBid": "0.26",
-        "bestAsk": "0.38"
+        "bestAsk": "0.39"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -2574,15 +2514,15 @@
       }
     },
     {
-      "id": "476621-1203051",
-      "label": "Jalen Coker 60+ Receiving Yards",
+      "id": "476621-1203176",
+      "label": "Zay Flowers 90+ Receiving Yards",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Jalen Coker records 60 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "value": "This market resolves to Yes if Zay Flowers records 90 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
             "nodeType": "text"
           }
         ],
@@ -2590,31 +2530,31 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.35",
-          "no": "0.79"
+          "yes": "0.36",
+          "no": "0.8"
         },
         "sell": {
-          "yes": "0.21",
-          "no": "0.65"
+          "yes": "0.2",
+          "no": "0.64"
         },
-        "bestBid": "0.21",
-        "bestAsk": "0.35"
+        "bestBid": "0.2",
+        "bestAsk": "0.36"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "COKERO59",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-COKERO59",
+      "ticker": "XFLOWERSO89",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-XFLOWERSO89",
       "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
       "expiryDate": "2026-11-24T06:00:00.000Z",
       "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 26,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "sortOrder": 82,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
       "strike": {
         "type": "over",
-        "value": "59.5"
+        "value": "89.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -2624,9 +2564,9 @@
       "priceMinimum": "0.01",
       "target": {
         "type": "player",
-        "name": "Jalen Coker",
+        "name": "Zay Flowers",
         "externalIds": {
-          "sportradar": "67977ab0-070b-11ef-978d-05d80704d329"
+          "sportradar": "2b6d74b7-10fb-4f17-99c8-9bb557fb475b"
         }
       }
     },
@@ -2688,15 +2628,15 @@
       }
     },
     {
-      "id": "476621-1203176",
-      "label": "Zay Flowers 90+ Receiving Yards",
+      "id": "476621-1203051",
+      "label": "Jalen Coker 60+ Receiving Yards",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Zay Flowers records 90 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "value": "This market resolves to Yes if Jalen Coker records 60 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
             "nodeType": "text"
           }
         ],
@@ -2704,31 +2644,31 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.35",
-          "no": "0.8"
+          "yes": "0.34",
+          "no": "0.77"
         },
         "sell": {
-          "yes": "0.2",
-          "no": "0.65"
+          "yes": "0.23",
+          "no": "0.66"
         },
-        "bestBid": "0.2",
-        "bestAsk": "0.35"
+        "bestBid": "0.23",
+        "bestAsk": "0.34"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "XFLOWERSO89",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-XFLOWERSO89",
+      "ticker": "COKERO59",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-COKERO59",
       "marketState": "open",
-      "color": "#241773",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
       "expiryDate": "2026-11-24T06:00:00.000Z",
       "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 82,
-      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "sortOrder": 26,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
       "strike": {
         "type": "over",
-        "value": "89.5"
+        "value": "59.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -2738,9 +2678,9 @@
       "priceMinimum": "0.01",
       "target": {
         "type": "player",
-        "name": "Zay Flowers",
+        "name": "Jalen Coker",
         "externalIds": {
-          "sportradar": "2b6d74b7-10fb-4f17-99c8-9bb557fb475b"
+          "sportradar": "67977ab0-070b-11ef-978d-05d80704d329"
         }
       }
     },
@@ -2973,6 +2913,63 @@
       }
     },
     {
+      "id": "476621-1203010",
+      "label": "Chuba Hubbard 40+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 40 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.28",
+          "no": "0.9"
+        },
+        "sell": {
+          "yes": "0.1",
+          "no": "0.72"
+        },
+        "bestBid": "0.1",
+        "bestAsk": "0.28"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CHUBBARDO39",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO39",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 5,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "39.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
+        }
+      }
+    },
+    {
       "id": "476621-1203053",
       "label": "Jalen Coker 70+ Receiving Yards",
       "description": {
@@ -3103,15 +3100,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.25",
+          "yes": "0.26",
           "no": "0.9"
         },
         "sell": {
           "yes": "0.1",
-          "no": "0.75"
+          "no": "0.74"
         },
         "bestBid": "0.1",
-        "bestAsk": "0.25"
+        "bestAsk": "0.26"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:12:04.325Z",
@@ -3197,63 +3194,6 @@
         "name": "Tetairoa McMillan",
         "externalIds": {
           "sportradar": "874de000-586c-4999-ac12-02766563e200"
-        }
-      }
-    },
-    {
-      "id": "476621-1203010",
-      "label": "Chuba Hubbard 40+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 40 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.23",
-          "no": "0.9"
-        },
-        "sell": {
-          "yes": "0.1",
-          "no": "0.77"
-        },
-        "bestBid": "0.1",
-        "bestAsk": "0.23"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CHUBBARDO39",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO39",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 5,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "39.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Chuba Hubbard",
-        "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
         }
       }
     },
@@ -3727,11 +3667,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.17"
+          "yes": "0.17",
+          "no": "0.99"
         },
         "sell": {
+          "yes": "0.01",
           "no": "0.83"
         },
+        "bestBid": "0.01",
         "bestAsk": "0.17"
       },
       "status": "active",
@@ -4263,60 +4206,6 @@
       }
     },
     {
-      "id": "476621-1203059",
-      "label": "Jalen Coker 100+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Jalen Coker records 100 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.13"
-        },
-        "sell": {
-          "no": "0.87"
-        },
-        "bestAsk": "0.13"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:12:04.325Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "COKERO99",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-COKERO99",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 30,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "99.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Jalen Coker",
-        "externalIds": {
-          "sportradar": "67977ab0-070b-11ef-978d-05d80704d329"
-        }
-      }
-    },
-    {
       "id": "476621-1203034",
       "label": "Ja'Kobi Lane 90+ Receiving Yards",
       "description": {
@@ -4367,6 +4256,60 @@
         "name": "Ja'Kobi Lane",
         "externalIds": {
           "sportradar": "ea285842-4fdf-4b27-bd73-6bfd916c6bc5"
+        }
+      }
+    },
+    {
+      "id": "476621-1203059",
+      "label": "Jalen Coker 100+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jalen Coker records 100 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12"
+        },
+        "sell": {
+          "no": "0.88"
+        },
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "COKERO99",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-COKERO99",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 30,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "99.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jalen Coker",
+        "externalIds": {
+          "sportradar": "67977ab0-070b-11ef-978d-05d80704d329"
         }
       }
     },
@@ -5015,6 +4958,55 @@
         "name": "Mark Andrews",
         "externalIds": {
           "sportradar": "0618f387-9b72-4270-8b8f-dec4cccc9e4a"
+        }
+      }
+    },
+    {
+      "id": "476621-1202919",
+      "label": "Chuba Hubbard 20+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 20 or more Receiving Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:04.325Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CHUBBARDO19",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-CHUBBARDO19",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 2,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
         }
       }
     }

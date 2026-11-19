@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL1",
     "question": "Tulane vs Louisiana Tech: Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:11Z",
+    "analyzed_at_utc": "2026-11-19T06:16:03Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:11Z",
-      "snapshot_hash": "sha256:b4d11a782834583e1ccd52d494c32bd5a8b472167214d9a65cf58c8487b75f99",
+      "snapshot_time_utc": "2026-11-19T06:16:03Z",
+      "snapshot_hash": "sha256:ea870ba27b506f00f92ddeead89387b90bda1ca9b20c0a0d22ea5d4dad759c5d",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:11Z"
+      "observed_time_utc": "2026-11-19T06:16:03Z"
     },
     "scores": {
       "ambiguity": {

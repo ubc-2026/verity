@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-MLS-2611250300-HOU-SJ-REGS-SJ1",
     "question": "Houston vs San Jose: Point Spread",
     "expiry_utc": "2026-11-26T03:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:15Z",
+    "analyzed_at_utc": "2026-11-19T06:15:05Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:15Z",
-      "snapshot_hash": "sha256:43ed1853fb12ce550cbfb4eb99a0f243b22e8a62957961a583c5e3035c42b88d",
+      "snapshot_time_utc": "2026-11-19T06:15:05Z",
+      "snapshot_hash": "sha256:8b548c54d3b94f57bfa1929ad9de51dd183e07bf8d3c1f5c34c5e75f507ca7a0",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:15Z"
+      "observed_time_utc": "2026-11-19T06:15:05Z"
     },
     "scores": {
       "ambiguity": {

@@ -1,0 +1,552 @@
+{
+  "id": "476451",
+  "title": "Oregon vs Michigan State: 1st Quarter Point Spread",
+  "slug": "oregon-vs-michigan-state-1st-quarter-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAF-2611210100-ORE-MSU-1QS",
+  "status": "active",
+  "createdAt": "2026-11-18T07:41:26.567Z",
+  "contracts": [
+    {
+      "id": "476451-1201991",
+      "label": "Oregon -3.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon covers a -3.5 point spread against Michigan State during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Oregon scores more than 3.5 points more than Michigan State during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ORE3",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-ORE3",
+      "marketState": "post_only",
+      "abbreviatedName": "Oregon",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_Ducks_0f879991-a2f7-4d98-9cff-612284ab8da5.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1201993",
+      "label": "Oregon -10.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon covers a -10.5 point spread against Michigan State during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Oregon scores more than 10.5 points more than Michigan State during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ORE10",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-ORE10",
+      "marketState": "post_only",
+      "abbreviatedName": "Oregon",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_Ducks_0f879991-a2f7-4d98-9cff-612284ab8da5.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1201994",
+      "label": "Michigan State -10.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Michigan State covers a -10.5 point spread against Oregon during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Michigan State scores more than 10.5 points more than Oregon during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "MSU10",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-MSU10",
+      "marketState": "post_only",
+      "abbreviatedName": "Michigan State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Michigan_State_Spartans_3a84aa38-2ef3-403e-9380-917ea0ea54a0.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1201995",
+      "label": "Michigan State -7.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Michigan State covers a -7.5 point spread against Oregon during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Michigan State scores more than 7.5 points more than Oregon during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "MSU7",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-MSU7",
+      "marketState": "post_only",
+      "abbreviatedName": "Michigan State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Michigan_State_Spartans_3a84aa38-2ef3-403e-9380-917ea0ea54a0.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1201996",
+      "label": "Oregon -6.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon covers a -6.5 point spread against Michigan State during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Oregon scores more than 6.5 points more than Michigan State during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ORE6",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-ORE6",
+      "marketState": "post_only",
+      "abbreviatedName": "Oregon",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_Ducks_0f879991-a2f7-4d98-9cff-612284ab8da5.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1201997",
+      "label": "Oregon -2.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon covers a -2.5 point spread against Michigan State during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Oregon scores more than 2.5 points more than Michigan State during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ORE2",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-ORE2",
+      "marketState": "post_only",
+      "abbreviatedName": "Oregon",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_Ducks_0f879991-a2f7-4d98-9cff-612284ab8da5.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1201998",
+      "label": "Oregon -7.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon covers a -7.5 point spread against Michigan State during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Oregon scores more than 7.5 points more than Michigan State during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ORE7",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-ORE7",
+      "marketState": "post_only",
+      "abbreviatedName": "Oregon",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_Ducks_0f879991-a2f7-4d98-9cff-612284ab8da5.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1202000",
+      "label": "Michigan State -2.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Michigan State covers a -2.5 point spread against Oregon during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Michigan State scores more than 2.5 points more than Oregon during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "MSU2",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-MSU2",
+      "marketState": "post_only",
+      "abbreviatedName": "Michigan State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Michigan_State_Spartans_3a84aa38-2ef3-403e-9380-917ea0ea54a0.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1202001",
+      "label": "Michigan State -6.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Michigan State covers a -6.5 point spread against Oregon during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Michigan State scores more than 6.5 points more than Oregon during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "MSU6",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-MSU6",
+      "marketState": "post_only",
+      "abbreviatedName": "Michigan State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Michigan_State_Spartans_3a84aa38-2ef3-403e-9380-917ea0ea54a0.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476451-1202002",
+      "label": "Michigan State -3.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Michigan State covers a -3.5 point spread against Oregon during the 1st quarter of the College Football game between Oregon and Michigan State scheduled for November 20, 2026 at 8:00 PM ET, meaning Michigan State scores more than 3.5 points more than Oregon during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:41:26.567Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "MSU3",
+      "instrumentSymbol": "GEMI-NCAAF-2611210100-ORE-MSU-1QS-MSU3",
+      "marketState": "post_only",
+      "abbreviatedName": "Michigan State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Michigan_State_Spartans_3a84aa38-2ef3-403e-9380-917ea0ea54a0.avif",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T07:41:26.567Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "name": "Oregon",
+      "abbreviation": "ORE",
+      "side": "away"
+    },
+    {
+      "id": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "name": "Oregon",
+      "abbreviation": "ORE",
+      "side": "away"
+    },
+    {
+      "id": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "name": "Michigan State",
+      "abbreviation": "MSU",
+      "side": "home"
+    },
+    {
+      "id": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "name": "Michigan State",
+      "abbreviation": "MSU",
+      "side": "home"
+    },
+    {
+      "id": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "name": "Oregon",
+      "abbreviation": "ORE",
+      "side": "away"
+    },
+    {
+      "id": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "name": "Oregon",
+      "abbreviation": "ORE",
+      "side": "away"
+    },
+    {
+      "id": "5c218a3b-a013-4037-97b6-603c9502b701",
+      "name": "Oregon",
+      "abbreviation": "ORE",
+      "side": "away"
+    },
+    {
+      "id": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "name": "Michigan State",
+      "abbreviation": "MSU",
+      "side": "home"
+    },
+    {
+      "id": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "name": "Michigan State",
+      "abbreviation": "MSU",
+      "side": "home"
+    },
+    {
+      "id": "1cdf66a2-f157-4b4f-ad37-bd31e268f0ae",
+      "name": "Michigan State",
+      "abbreviation": "MSU",
+      "side": "home"
+    }
+  ],
+  "description": "Which team will cover the point spread in the 1st quarter?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Football"
+  ],
+  "expiryDate": "2026-11-22T01:00:00.000Z",
+  "startTime": "2026-11-21T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+  "subcategory": {
+    "id": 13,
+    "slug": "sports_football_college-football",
+    "name": "College Football",
+    "path": [
+      "Sports",
+      "Football",
+      "College Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.avif",
+  "template": "sports-spread",
+  "gameId": "44cf3771-cf49-4768-96bf-495e2f57baee",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Am. football"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "quarter",
+      "ordinal": 1
+    },
+    "metric": "points",
+    "team": {
+      "symbol": "ORE",
+      "name": "Oregon Ducks",
+      "externalIds": {
+        "sportradarId": "5c218a3b-a013-4037-97b6-603c9502b701"
+      }
+    }
+  }
+}

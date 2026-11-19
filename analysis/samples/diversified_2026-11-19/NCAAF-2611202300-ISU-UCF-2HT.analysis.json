@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611202300-ISU-UCF-2HT-O9",
     "question": "Iowa State vs UCF: 2nd Half Point Total",
     "expiry_utc": "2026-11-21T23:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:37Z",
+    "analyzed_at_utc": "2026-11-19T06:15:28Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:37Z",
-      "snapshot_hash": "sha256:2648c2ef85cf01846b53142fbe2a5167b332ebb8dddc4da9642cc5dedea3c70e",
+      "snapshot_time_utc": "2026-11-19T06:15:28Z",
+      "snapshot_hash": "sha256:a785404622b54f9570dac557b0978720f0f9566fd7028bfa81959994aacbfd66",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:37Z"
+      "observed_time_utc": "2026-11-19T06:15:28Z"
     },
     "scores": {
       "ambiguity": {

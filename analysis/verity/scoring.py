@@ -3,6 +3,8 @@
 Bands, from the workbook: total 4-6 Low, 7-8 Medium, 9-12 High.
 Overrides, applied separately from the raw total:
   * Any 3 in Ambiguity or Source  -> rating is at least Medium.
+  * 3 in Correlation              -> rating is at least High (overlapping
+    markets can flip together; raw totals of 8 otherwise stall at Medium).
   * 3 in Liquidity                -> trading rule ("never trade more than
     top-of-book"). Verity places no trades, so it is translated into a research
     note: the quoted price is unreliable as a signal. It does not move the rating.
@@ -135,6 +137,13 @@ def rate(scores: Scores) -> OverallRating:
                 triggered_by=cat,
                 effect="rating floor Medium; always seek evidence on the settlement rule",
             ))
+    if known.get("correlation") == 3:
+        floor = _max("High", floor)
+        overrides.append(AppliedOverride(
+            rule="High (3) in Correlation -> at least High",
+            triggered_by="correlation",
+            effect="rating floor High; overlapping markets can flip together",
+        ))
     if known.get("liquidity") == 3:
         overrides.append(AppliedOverride(
             rule="High (3) in Liquidity -> never trade more than top-of-book",

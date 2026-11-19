@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPRYDS-ALLGEIERO39",
     "question": "Arizona vs Kansas City: Player Rushing Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:40Z",
+    "analyzed_at_utc": "2026-11-19T06:15:30Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:40Z",
-      "snapshot_hash": "sha256:cf8347375c395d07fefbad492d24f4d432685480578a51362867e90ca3f10621",
+      "snapshot_time_utc": "2026-11-19T06:15:30Z",
+      "snapshot_hash": "sha256:ec39a1c2a1c5375b6f4c6f9fa80d6b50bc7aef32f4ad360df299053be7b4d016",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Tyler Allgeier 40+ Rushing Yards",
-      "best_bid": "0.14",
+      "best_bid": "0.13",
       "best_ask": "0.31",
-      "mid": "0.225",
-      "implied_probability": "0.225",
+      "mid": "0.22",
+      "implied_probability": "0.22",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:40Z"
+      "observed_time_utc": "2026-11-19T06:15:30Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (17c spread).",
+        "rationale": "event-total volume $0 is under $100 (18c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPRYDS",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.14, bestAsk 0.31; event volume 0"
+        "quote": "bestBid 0.13, bestAsk 0.31; event volume 0"
       }
     ],
     "evidence_gaps": [],

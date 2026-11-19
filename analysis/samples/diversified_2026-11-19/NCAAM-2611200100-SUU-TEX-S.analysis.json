@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200100-SUU-TEX-S-TEX45",
     "question": "Southern Utah vs Texas: Point Spread",
     "expiry_utc": "2026-11-22T01:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:25Z",
+    "analyzed_at_utc": "2026-11-19T06:16:20Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:25Z",
-      "snapshot_hash": "sha256:90ebccab1c0c71155dee9d88f1272533f0b5898320c54cdb1ab8bbe20c629fcd",
+      "snapshot_time_utc": "2026-11-19T06:16:20Z",
+      "snapshot_hash": "sha256:0d8b4f1cc1fdaa55bf8cd3aa6876c09e06863913d7b818ee819e43ed01ba15f7",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:25Z"
+      "observed_time_utc": "2026-11-19T06:16:20Z"
     },
     "scores": {
       "ambiguity": {

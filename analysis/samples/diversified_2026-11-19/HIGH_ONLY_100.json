@@ -8,8 +8,9 @@
     "non_sports_pct": 20.0
   },
   "ratings": {
-    "Low": 69,
-    "Medium": 31
+    "Low": 68,
+    "High": 4,
+    "Medium": 28
   },
   "proposed": 0,
   "propose_pct": 0.0,

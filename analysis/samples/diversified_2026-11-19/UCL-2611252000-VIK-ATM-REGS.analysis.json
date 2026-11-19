@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-VIK-ATM-REGS-ATM2",
     "question": "Viking vs Atlético: Point Spread",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:41Z",
+    "analyzed_at_utc": "2026-11-19T06:15:31Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:41Z",
-      "snapshot_hash": "sha256:982f6e1c8e737b1f4ba762beaac0092b154ed9c2268e5f0866aaaf2a72429aca",
+      "snapshot_time_utc": "2026-11-19T06:15:31Z",
+      "snapshot_hash": "sha256:3fc9ebf845ae82da86a9b5e37c87f47237623b85c9cfdf9f525c49c8ef1efeae",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:41Z"
+      "observed_time_utc": "2026-11-19T06:15:31Z"
     },
     "scores": {
       "ambiguity": {

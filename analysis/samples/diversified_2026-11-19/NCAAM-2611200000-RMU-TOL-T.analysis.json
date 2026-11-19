@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-RMU-TOL-T-O144",
     "question": "Robert Morris vs Toledo: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:52Z",
+    "analyzed_at_utc": "2026-11-19T06:15:42Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:52Z",
-      "snapshot_hash": "sha256:e5cd67d427cb71a15fff49eca5cf45427da62ee153ac6702626eeef7915c3caa",
+      "snapshot_time_utc": "2026-11-19T06:15:42Z",
+      "snapshot_hash": "sha256:df97da4506b830e7c2c404972aef1b2fae961b93534bb1cf3425b4ad3d959e3f",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:52Z"
+      "observed_time_utc": "2026-11-19T06:15:42Z"
     },
     "scores": {
       "ambiguity": {

@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-BTC2611190700-HI63400",
     "question": "BTC price today at 2am EST",
     "expiry_utc": "2026-11-19T07:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:42Z",
+    "analyzed_at_utc": "2026-11-19T06:16:38Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:42Z",
-      "snapshot_hash": "sha256:7479885e0ea6dc6196687f918f70134bd9fbee5e0b49b254bda77c1edf3e0ceb",
+      "snapshot_time_utc": "2026-11-19T06:16:38Z",
+      "snapshot_hash": "sha256:94e5c03b45bbbeb355a28b9cc6c31b7d9c75791baee75904d329827227d87a09",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$63,400 or above",
-      "best_bid": "0.38",
-      "best_ask": "0.42",
-      "mid": "0.40",
-      "implied_probability": "0.40",
-      "volume_usd": "855.33",
+      "best_bid": "0.51",
+      "best_ask": "0.6",
+      "mid": "0.555",
+      "implied_probability": "0.555",
+      "volume_usd": "1013.7",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:42Z"
+      "observed_time_utc": "2026-11-19T06:16:38Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 2,
-        "rationale": "event-total volume $855.33, 4c spread.",
+        "score": 3,
+        "rationale": "9c spread is over 5c.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,16 +68,22 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
-      "raw_rating": "Low",
+      "known_total": 7,
+      "raw_total": 7,
+      "raw_rating": "Medium",
       "rating_floor": null,
-      "final_rating": "Low",
+      "final_rating": "Medium",
       "possible_range": null,
-      "overrides": []
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
     },
-    "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -101,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190700",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.38, bestAsk 0.42; event volume 855.33"
+        "quote": "bestBid 0.51, bestAsk 0.6; event volume 1013.7"
       }
     ],
     "evidence_gaps": [],
@@ -120,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-BTC2611190700-HI63400] no purchase: 0:46:18 to expiry is under 1h (Agent rule 11)."
+    "[GEMI-BTC2611190700-HI63400] no purchase: 0:43:22 to expiry is under 1h (Agent rule 11)."
   ]
 }

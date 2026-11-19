@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-LAC-SAS-S-SAS8",
     "question": "Los Angeles C vs San Antonio: Point Spread",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:42Z",
+    "analyzed_at_utc": "2026-11-19T06:15:36Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:42Z",
-      "snapshot_hash": "sha256:9ff020e16bba092287632302e75c8c9cfefe7a9561b9434083b68f6c736f14ae",
+      "snapshot_time_utc": "2026-11-19T06:15:36Z",
+      "snapshot_hash": "sha256:4865f9a7361954ca083bf6394107996bd8ea18ebc25e37b0b76aa14041ca9455",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:42Z"
+      "observed_time_utc": "2026-11-19T06:15:36Z"
     },
     "scores": {
       "ambiguity": {

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-WORTHYO39",
     "question": "Arizona vs Kansas City: Player Receiving Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:35Z",
+    "analyzed_at_utc": "2026-11-19T06:15:25Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:35Z",
-      "snapshot_hash": "sha256:fa415d6046c21df23741248a3be8e3770e557d17e23cbf8e053ab4678963ec00",
+      "snapshot_time_utc": "2026-11-19T06:15:25Z",
+      "snapshot_hash": "sha256:8db87a5f84f13a372d2e92ee6ee877a63827fb20f140d9f60713b74973b7698c",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:35Z"
+      "observed_time_utc": "2026-11-19T06:15:25Z"
     },
     "scores": {
       "ambiguity": {

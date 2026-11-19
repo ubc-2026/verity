@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-NBA-2611200100-NYK-MIN-PPPTS-GOBERTO4",
+    "contract_id": "GEMI-NBA-2611200100-NYK-MIN-PPPTS-GOBERTO9",
     "event_ticker": "NBA-2611200100-NYK-MIN-PPPTS",
-    "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-PPPTS-GOBERTO4",
+    "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-PPPTS-GOBERTO9",
     "question": "New York vs Minnesota: Player Points",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:54Z",
+    "analyzed_at_utc": "2026-11-19T06:15:48Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:54Z",
-      "snapshot_hash": "sha256:57a3c397d77e87288debdd599633551922d48d1a0fff177b633c0f12ef9cfd1d",
+      "snapshot_time_utc": "2026-11-19T06:15:48Z",
+      "snapshot_hash": "sha256:b7ef1c44d10866172a0f870454859061ec1d9e12e72395e3cc8d9678844c2bc1",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "Rudy Gobert 5+ Points",
-      "best_bid": "0.7",
-      "best_ask": "0.9",
-      "mid": "0.8",
-      "implied_probability": "0.8",
+      "outcome_label": "Rudy Gobert 10+ Points",
+      "best_bid": "0.36",
+      "best_ask": "0.5",
+      "mid": "0.43",
+      "implied_probability": "0.43",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:54Z"
+      "observed_time_utc": "2026-11-19T06:15:48Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (20c spread).",
+        "rationale": "event-total volume $0 is under $100 (14c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-NYK-MIN-PPPTS",
         "field_or_rule": "contract.description",
-        "quote": "Subject to the settlement exceptions below, this market resolves to Yes if Rudy Gobert records 5 or more Points in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Points credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Points, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Points following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Points_Class_0d6c1b1d-d3d2-4e96-82a6-fc089dc8416e.pdf)."
+        "quote": "Subject to the settlement exceptions below, this market resolves to Yes if Rudy Gobert records 10 or more Points in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Points credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Points, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Points following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Points_Class_0d6c1b1d-d3d2-4e96-82a6-fc089dc8416e.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-NYK-MIN-PPPTS",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.7, bestAsk 0.9; event volume 0"
+        "quote": "bestBid 0.36, bestAsk 0.5; event volume 0"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NBA-2611200100-NYK-MIN-PPPTS-GOBERTO4] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NBA-2611200100-NYK-MIN-PPPTS-GOBERTO9] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

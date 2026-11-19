@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-MAHOMESO2",
     "question": "Arizona vs Kansas City: Quarterback Passing Touchdowns",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:30Z",
+    "analyzed_at_utc": "2026-11-19T06:15:20Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:30Z",
-      "snapshot_hash": "sha256:c636ff94f127ffd74c50ffea4ea45f1677f9a3935b3c30c0e09f820af946996e",
+      "snapshot_time_utc": "2026-11-19T06:15:20Z",
+      "snapshot_hash": "sha256:89f50ec9a69ff4f7b2b33896ed57e002c12e7a481e73775fad7c678455850cf0",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:30Z"
+      "observed_time_utc": "2026-11-19T06:15:20Z"
     },
     "scores": {
       "ambiguity": {

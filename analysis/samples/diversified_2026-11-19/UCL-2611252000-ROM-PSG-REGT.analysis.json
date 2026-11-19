@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-ROM-PSG-REGT-O4",
     "question": "Roma vs PSG: Total Goals",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:36Z",
+    "analyzed_at_utc": "2026-11-19T06:15:26Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:36Z",
-      "snapshot_hash": "sha256:831ae84c6290908f30b020ba5ca6a4e2b651e871ca9d9311c95e62cce6576745",
+      "snapshot_time_utc": "2026-11-19T06:15:26Z",
+      "snapshot_hash": "sha256:7c8897548e9483492f6b41624e933f810bbb94ae742df6db421eb18b763ad658",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:36Z"
+      "observed_time_utc": "2026-11-19T06:15:26Z"
     },
     "scores": {
       "ambiguity": {

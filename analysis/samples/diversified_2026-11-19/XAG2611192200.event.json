@@ -74,15 +74,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.93",
-          "no": "0.11"
+          "yes": "0.94",
+          "no": "0.1"
         },
         "sell": {
-          "yes": "0.89",
-          "no": "0.07"
+          "yes": "0.9",
+          "no": "0.06"
         },
-        "bestBid": "0.89",
-        "bestAsk": "0.93"
+        "bestBid": "0.9",
+        "bestAsk": "0.94"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:22.253Z",
@@ -98,55 +98,6 @@
       "strike": {
         "type": "above",
         "value": "44"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478187-1211956",
-      "label": "$44.5 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Silver is $44.5 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.84",
-          "no": "0.2"
-        },
-        "sell": {
-          "yes": "0.8",
-          "no": "0.16"
-        },
-        "bestBid": "0.8",
-        "bestAsk": "0.84"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:56:22.253Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
-      "ticker": "HI44D5",
-      "instrumentSymbol": "GEMI-XAG2611192200-HI44D5",
-      "marketState": "open",
-      "abbreviatedName": ">$44.5",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 1,
-      "strike": {
-        "type": "above",
-        "value": "44.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -172,15 +123,12 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.69",
-          "no": "0.35"
+          "yes": "0.71"
         },
         "sell": {
-          "yes": "0.65",
-          "no": "0.31"
+          "no": "0.29"
         },
-        "bestBid": "0.65",
-        "bestAsk": "0.69"
+        "bestAsk": "0.71"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:22.253Z",
@@ -196,55 +144,6 @@
       "strike": {
         "type": "above",
         "value": "45"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478187-1211963",
-      "label": "$45.5 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Silver is $45.5 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.5",
-          "no": "0.54"
-        },
-        "sell": {
-          "yes": "0.46",
-          "no": "0.5"
-        },
-        "bestBid": "0.46",
-        "bestAsk": "0.5"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:56:22.253Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
-      "ticker": "HI45D5",
-      "instrumentSymbol": "GEMI-XAG2611192200-HI45D5",
-      "marketState": "open",
-      "abbreviatedName": ">$45.5",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 3,
-      "strike": {
-        "type": "above",
-        "value": "45.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -270,15 +169,13 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.31",
-          "no": "0.73"
+          "yes": "0.2",
+          "no": "0.8"
         },
         "sell": {
-          "yes": "0.27",
-          "no": "0.69"
+          "yes": "0.2",
+          "no": "0.8"
         },
-        "bestBid": "0.27",
-        "bestAsk": "0.31",
         "lastTradePrice": "0.2"
       },
       "status": "active",
@@ -295,55 +192,6 @@
       "strike": {
         "type": "above",
         "value": "46"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478187-1213432",
-      "label": "$46.5 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Silver is $46.5 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.15",
-          "no": "0.9"
-        },
-        "sell": {
-          "yes": "0.1",
-          "no": "0.85"
-        },
-        "bestBid": "0.1",
-        "bestAsk": "0.15"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:56:22.253Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
-      "ticker": "HI46D5",
-      "instrumentSymbol": "GEMI-XAG2611192200-HI46D5",
-      "marketState": "open",
-      "abbreviatedName": ">$46.5",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 5,
-      "strike": {
-        "type": "above",
-        "value": "46.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -393,6 +241,129 @@
       "strike": {
         "type": "above",
         "value": "47"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478187-1211956",
+      "label": "$44.5 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Silver is $44.5 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:22.253Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
+      "ticker": "HI44D5",
+      "instrumentSymbol": "GEMI-XAG2611192200-HI44D5",
+      "marketState": "open",
+      "abbreviatedName": ">$44.5",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "above",
+        "value": "44.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478187-1211963",
+      "label": "$45.5 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Silver is $45.5 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:22.253Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
+      "ticker": "HI45D5",
+      "instrumentSymbol": "GEMI-XAG2611192200-HI45D5",
+      "marketState": "open",
+      "abbreviatedName": ">$45.5",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "above",
+        "value": "45.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478187-1213432",
+      "label": "$46.5 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Silver is $46.5 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:22.253Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
+      "ticker": "HI46D5",
+      "instrumentSymbol": "GEMI-XAG2611192200-HI46D5",
+      "marketState": "open",
+      "abbreviatedName": ">$46.5",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "above",
+        "value": "46.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

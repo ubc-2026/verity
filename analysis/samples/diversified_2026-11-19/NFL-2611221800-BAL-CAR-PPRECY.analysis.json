@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-PPRECY-XFLOWERSO89",
     "question": "Baltimore vs Carolina: Player Receiving Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:23Z",
+    "analyzed_at_utc": "2026-11-19T06:16:17Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:23Z",
-      "snapshot_hash": "sha256:f05e1c2197a6bdde7a661846cb907dc3a1a43bb0e188547484558fc72b603d68",
+      "snapshot_time_utc": "2026-11-19T06:16:17Z",
+      "snapshot_hash": "sha256:28937e87755ab32054b93af27e1cf47187dd7d02e2313cdefbdae9e78edfc2db",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Zay Flowers 90+ Receiving Yards",
       "best_bid": "0.2",
-      "best_ask": "0.35",
-      "mid": "0.275",
-      "implied_probability": "0.275",
+      "best_ask": "0.36",
+      "mid": "0.28",
+      "implied_probability": "0.28",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:23Z"
+      "observed_time_utc": "2026-11-19T06:16:17Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (15c spread).",
+        "rationale": "event-total volume $0 is under $100 (16c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-PPRECY",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.2, bestAsk 0.35; event volume 0"
+        "quote": "bestBid 0.2, bestAsk 0.36; event volume 0"
       }
     ],
     "evidence_gaps": [],

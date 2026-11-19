@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-CAR6",
     "question": "Baltimore vs Carolina: 1st Quarter Point Spread",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:57Z",
+    "analyzed_at_utc": "2026-11-19T06:15:47Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:57Z",
-      "snapshot_hash": "sha256:16e2113c76f23fc3052810b37e657bacada9ab6c7bc969a8bcb96647abb7fec7",
+      "snapshot_time_utc": "2026-11-19T06:15:47Z",
+      "snapshot_hash": "sha256:4f9fcd48e3a65c83f56c8a488badd182ed350695bc9d303dec89c0dc4c5e7c42",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:57Z"
+      "observed_time_utc": "2026-11-19T06:15:47Z"
     },
     "scores": {
       "ambiguity": {

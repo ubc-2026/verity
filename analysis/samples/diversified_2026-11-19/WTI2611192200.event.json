@@ -25,15 +25,13 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.92",
-          "no": "0.12"
+          "yes": "0.83",
+          "no": "0.17"
         },
         "sell": {
-          "yes": "0.88",
-          "no": "0.08"
+          "yes": "0.83",
+          "no": "0.17"
         },
-        "bestBid": "0.88",
-        "bestAsk": "0.92",
         "lastTradePrice": "0.83"
       },
       "status": "active",
@@ -75,15 +73,13 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.79",
-          "no": "0.25"
+          "yes": "0.77",
+          "no": "0.23"
         },
         "sell": {
-          "yes": "0.75",
-          "no": "0.21"
+          "yes": "0.77",
+          "no": "0.23"
         },
-        "bestBid": "0.75",
-        "bestAsk": "0.79",
         "lastTradePrice": "0.77"
       },
       "status": "active",
@@ -125,15 +121,13 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.58",
-          "no": "0.46"
+          "yes": "0.73",
+          "no": "0.27"
         },
         "sell": {
-          "yes": "0.54",
-          "no": "0.42"
+          "yes": "0.73",
+          "no": "0.27"
         },
-        "bestBid": "0.54",
-        "bestAsk": "0.58",
         "lastTradePrice": "0.73"
       },
       "status": "active",
@@ -175,15 +169,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.35",
-          "no": "0.69"
+          "yes": "0.36",
+          "no": "0.67"
         },
         "sell": {
-          "yes": "0.31",
-          "no": "0.65"
+          "yes": "0.33",
+          "no": "0.64"
         },
-        "bestBid": "0.31",
-        "bestAsk": "0.35",
+        "bestAsk": "0.36",
         "lastTradePrice": "0.33"
       },
       "status": "active",
@@ -226,13 +219,13 @@
       "prices": {
         "buy": {
           "yes": "0.18",
-          "no": "0.87"
+          "no": "0.86"
         },
         "sell": {
-          "yes": "0.13",
+          "yes": "0.14",
           "no": "0.82"
         },
-        "bestBid": "0.13",
+        "bestBid": "0.14",
         "bestAsk": "0.18",
         "lastTradePrice": "0.15"
       },
@@ -276,13 +269,13 @@
       "prices": {
         "buy": {
           "yes": "0.09",
-          "no": "0.96"
+          "no": "0.95"
         },
         "sell": {
-          "yes": "0.04",
+          "yes": "0.05",
           "no": "0.91"
         },
-        "bestBid": "0.04",
+        "bestBid": "0.05",
         "bestAsk": "0.09"
       },
       "status": "active",

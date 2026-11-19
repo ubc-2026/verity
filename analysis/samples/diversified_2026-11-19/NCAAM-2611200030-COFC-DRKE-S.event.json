@@ -59,56 +59,6 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "478477-1213004",
-      "label": "Charleston wins by more than 5.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.41",
-          "no": "0.76"
-        },
-        "sell": {
-          "yes": "0.24",
-          "no": "0.59"
-        },
-        "bestBid": "0.24",
-        "bestAsk": "0.41"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T22:30:51.490Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
-      "ticker": "COFC5",
-      "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC5",
-      "marketState": "open",
-      "abbreviatedName": "Charleston",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
-      "expiryDate": "2026-11-22T00:30:00.000Z",
-      "effectiveDate": "2026-11-18T00:00:14.000Z",
-      "sortOrder": 0,
-      "strike": {
-        "type": "spread",
-        "value": "5.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "478477-1213006",
       "label": "Drake wins by more than 4.5 points",
       "description": {
@@ -341,6 +291,53 @@
       "strike": {
         "type": "spread",
         "value": "23.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478477-1213004",
+      "label": "Charleston wins by more than 5.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.76"
+        },
+        "sell": {
+          "yes": "0.24"
+        },
+        "bestBid": "0.24"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:30:51.490Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "COFC5",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC5",
+      "marketState": "open",
+      "abbreviatedName": "Charleston",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "spread",
+        "value": "5.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

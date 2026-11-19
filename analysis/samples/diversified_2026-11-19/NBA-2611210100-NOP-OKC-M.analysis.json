@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611210100-NOP-OKC-M-NOP",
     "question": "New Orleans vs Oklahoma City",
     "expiry_utc": "2026-11-22T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:26Z",
+    "analyzed_at_utc": "2026-11-19T06:15:22Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:26Z",
-      "snapshot_hash": "sha256:c0ddd6191214c09e402e9ea165c3fecabc200a6b519227f80179a0dfa341ddb0",
+      "snapshot_time_utc": "2026-11-19T06:15:22Z",
+      "snapshot_hash": "sha256:9b3e23dd9b94c961f6e6bcb214c7a8591ca22ea6e028681c64c93b8f77f709f8",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "5.52",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:26Z"
+      "observed_time_utc": "2026-11-19T06:15:22Z"
     },
     "scores": {
       "ambiguity": {

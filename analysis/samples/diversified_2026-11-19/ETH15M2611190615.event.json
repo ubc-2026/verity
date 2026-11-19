@@ -5,7 +5,7 @@
   "type": "binary",
   "category": "Crypto",
   "ticker": "ETH15M2611190615",
-  "status": "active",
+  "status": "settled",
   "createdAt": "2026-11-19T04:56:49.548Z",
   "contracts": [
     {
@@ -24,27 +24,20 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {
-          "yes": "0.99",
-          "no": "0.04"
-        },
-        "sell": {
-          "yes": "0.96",
-          "no": "0.01"
-        },
-        "bestBid": "0.96",
-        "bestAsk": "0.99",
-        "lastTradePrice": "0.85"
+        "buy": {},
+        "sell": {}
       },
-      "status": "active",
+      "status": "settled",
       "createdAt": "2026-11-19T04:56:49.548Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
       "ticker": "UP",
       "instrumentSymbol": "GEMI-ETH15M2611190615-UP",
-      "marketState": "open",
+      "marketState": "closed",
       "abbreviatedName": "Up",
       "color": "#4CAF50",
       "expiryDate": "2026-11-19T06:15:00.000Z",
+      "resolutionSide": "yes",
+      "resolvedAt": "2026-11-19T06:15:05.558Z",
       "effectiveDate": "2026-11-19T06:00:00.000Z",
       "sortOrder": 0,
       "strike": {
@@ -53,6 +46,7 @@
         "availableAt": "2026-11-19T06:00:00.000Z"
       },
       "source": "LS-LRRR-ETHUSD",
+      "settlementValue": "1800.2818333333332",
       "isCombo": false,
       "quantityIncrement": "0.01",
       "quantityMinimum": "0.01",
@@ -62,11 +56,12 @@
     }
   ],
   "effectiveDate": "2026-11-19T04:56:49.548Z",
-  "isLive": true,
+  "isLive": false,
   "participants": [],
   "description": "Interval ETH price prediction event expiring on November 19, 2026 at 1:15am ET",
   "imageUrl": "https://assets.gemini.com/predictions/images/eth_427f68cf-9bf1-4b52-9738-6e906c1e2146.avif",
   "series": "ETH15M",
+  "resolvedAt": "2026-11-19T06:15:05.558Z",
   "volume": "30",
   "volume24h": "30",
   "tags": [
@@ -100,6 +95,9 @@
     }
   ],
   "source": "LS-LRRR-ETHUSD",
+  "settlement": {
+    "value": "1800.2818333333332"
+  },
   "sourceDetails": {
     "agency": "lukka",
     "index": "LS-LRRR-ETHUSD"

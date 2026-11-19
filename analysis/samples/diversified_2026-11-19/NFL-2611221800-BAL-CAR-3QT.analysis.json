@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O7",
     "question": "Baltimore vs Carolina: 3rd Quarter Point Total",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:16Z",
+    "analyzed_at_utc": "2026-11-19T06:16:07Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:16Z",
-      "snapshot_hash": "sha256:8f8911c07b0f177b4a4608b15154c0f0b342f6b5f49fa0a9f4a3d3ad2b2b369f",
+      "snapshot_time_utc": "2026-11-19T06:16:07Z",
+      "snapshot_hash": "sha256:5a8d74a3cb9421a914b23d9aabb1dae329c7a02a0cebb5a90fdcfe8f417d5117",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:16Z"
+      "observed_time_utc": "2026-11-19T06:16:07Z"
     },
     "scores": {
       "ambiguity": {

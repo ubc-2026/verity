@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-MTST-HP-T-O149",
     "question": "Montana State vs High Point: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:44Z",
+    "analyzed_at_utc": "2026-11-19T06:15:33Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:44Z",
-      "snapshot_hash": "sha256:891306b592eeffa0bb3e0a02b341893b68d09d0ec5aa9cce6290847335f3cf64",
+      "snapshot_time_utc": "2026-11-19T06:15:33Z",
+      "snapshot_hash": "sha256:f4768e94b8301a88c01e645ad5182b49c33ad4c31e0bb9aa39bd9b5fe705d343",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:44Z"
+      "observed_time_utc": "2026-11-19T06:15:33Z"
     },
     "scores": {
       "ambiguity": {

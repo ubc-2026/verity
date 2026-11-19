@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299",
     "question": "Arizona vs Kansas City: Quarterback Passing Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:45Z",
+    "analyzed_at_utc": "2026-11-19T06:15:34Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:45Z",
-      "snapshot_hash": "sha256:be5501e190f3e89a3dd5ee4d60d153750743507c75f1412e9e024f3ac18fe72f",
+      "snapshot_time_utc": "2026-11-19T06:15:34Z",
+      "snapshot_hash": "sha256:4d3e9acadc938e3d0cd49b2a84edd849b5474562cf6d4b5c73fc96727b8e0c73",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Patrick Mahomes 300+ Passing Yards",
-      "best_bid": "0.15",
+      "best_bid": "0.17",
       "best_ask": "0.31",
-      "mid": "0.23",
-      "implied_probability": "0.23",
+      "mid": "0.24",
+      "implied_probability": "0.24",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:45Z"
+      "observed_time_utc": "2026-11-19T06:15:34Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (16c spread).",
+        "rationale": "event-total volume $0 is under $100 (14c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPYDS",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.15, bestAsk 0.31; event volume 0"
+        "quote": "bestBid 0.17, bestAsk 0.31; event volume 0"
       }
     ],
     "evidence_gaps": [],

@@ -75,7 +75,7 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 
 Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; on `WXHIGH-CHI` it uses `chi-midway-settlement-version` (Midway CLI). Live WXHIGH events often omit `termsLink`; `analyze_live` falls back to the shared weather terms PDF so free research can run. `analyze_live` sets `live_research=True` so inconclusive free reads can emit an unsigned catalog proposal (Midway prefers `cat-midway-vs-title-station-pack-v1`).
 
-On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): total 6, Low, `no_further_research`. The workbook scored Correlation 1.
+On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): raw total 6 (Low), floor High from Correlation 3, final High, `flag_for_human_review`. The workbook scored Correlation 1.
 
 ## Proposal gates
 
@@ -103,7 +103,7 @@ All five rows reproduce the workbook's totals.
 
 ## What still needs live data
 
-- **Live OKC result (2026-11-18, terms not read):** Ambiguity 2, Source 1, Liquidity 1 ($1,392 volume, 1¢ spread), Correlation 3, total 7, Medium, `investigate`, no purchase. The live event has 5 sibling events (spread, totals, 3 player props), so Correlation is 3, not the workbook's 1. With the terms PDF read (`pypdf`), Ambiguity should drop to 1 and the total to 6, Low.
+- **Live OKC result (2026-11-18, terms not read):** Ambiguity 2, Source 1, Liquidity 1 ($1,392 volume, 1¢ spread), Correlation 3, raw total 7 (Medium), floor High, final High, `flag_for_human_review`, no purchase (no material gap). The live event has 5 sibling events (spread, totals, 3 player props), so Correlation is 3, not the workbook's 1. With the terms PDF read (`pypdf`), Ambiguity drops to 1 and the raw total to 6; Correlation 3 still floors final to High.
 - **NYC free check:** done on 2026-11-18 as scenario `observed-2026-11-18` in `free_checks.json`, which the demo now uses. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later corrections don't count. The rule text is missing a word, though, and NWS publishes a same-day partial CLINYC (valid to 4 PM) before the full-day report, so whether that partial report counts is still unstated. The result is `inconclusive` and the 0.05 USDC proposal still stands, now labeled `OBSERVED`. The two `free-check-*` scenarios remain as labeled fixture assumptions. The terms PDF URL was inferred but resolves.
 - **NYC expiry:** the terms set expiry at the first 11:00 PM ET after the data are available. That is later than the fixture's `2026-11-19T04:59:00Z` from the API, which is probably the trading close. Confirm against a live response.
 - **Snapshot time:** the workbook stores only the date (2026-11-17). Live reads should store the UTC time.

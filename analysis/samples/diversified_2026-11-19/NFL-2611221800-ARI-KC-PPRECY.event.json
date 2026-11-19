@@ -253,15 +253,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.84",
+          "yes": "0.85",
           "no": "0.3"
         },
         "sell": {
           "yes": "0.7",
-          "no": "0.16"
+          "no": "0.15"
         },
         "bestBid": "0.7",
-        "bestAsk": "0.84"
+        "bestAsk": "0.85"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -367,15 +367,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.82",
+          "yes": "0.83",
           "no": "0.32"
         },
         "sell": {
           "yes": "0.68",
-          "no": "0.18"
+          "no": "0.17"
         },
         "bestBid": "0.68",
-        "bestAsk": "0.82"
+        "bestAsk": "0.83"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -424,15 +424,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.81",
+          "yes": "0.82",
           "no": "0.33"
         },
         "sell": {
           "yes": "0.67",
-          "no": "0.19"
+          "no": "0.18"
         },
         "bestBid": "0.67",
-        "bestAsk": "0.81"
+        "bestAsk": "0.82"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -595,15 +595,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.74",
+          "yes": "0.75",
           "no": "0.4"
         },
         "sell": {
           "yes": "0.6",
-          "no": "0.26"
+          "no": "0.25"
         },
         "bestBid": "0.6",
-        "bestAsk": "0.74"
+        "bestAsk": "0.75"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -652,15 +652,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.72",
+          "yes": "0.73",
           "no": "0.43"
         },
         "sell": {
           "yes": "0.57",
-          "no": "0.28"
+          "no": "0.27"
         },
         "bestBid": "0.57",
-        "bestAsk": "0.72"
+        "bestAsk": "0.73"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -709,15 +709,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.71",
+          "yes": "0.72",
           "no": "0.43"
         },
         "sell": {
           "yes": "0.57",
-          "no": "0.29"
+          "no": "0.28"
         },
         "bestBid": "0.57",
-        "bestAsk": "0.71"
+        "bestAsk": "0.72"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -750,6 +750,63 @@
       }
     },
     {
+      "id": "476104-1204075",
+      "label": "Travis Kelce 30+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Travis Kelce records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.72",
+          "no": "0.43"
+        },
+        "sell": {
+          "yes": "0.57",
+          "no": "0.28"
+        },
+        "bestBid": "0.57",
+        "bestAsk": "0.72"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "KELCEO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO29",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 68,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Travis Kelce",
+        "externalIds": {
+          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
+        }
+      }
+    },
+    {
       "id": "476104-1200767",
       "label": "Elijah Higgins 10+ Receiving Yards",
       "description": {
@@ -767,13 +824,13 @@
       "prices": {
         "buy": {
           "yes": "0.71",
-          "no": "0.5"
+          "no": "0.47"
         },
         "sell": {
-          "yes": "0.5",
+          "yes": "0.53",
           "no": "0.29"
         },
-        "bestBid": "0.5",
+        "bestBid": "0.53",
         "bestAsk": "0.71"
       },
       "status": "active",
@@ -803,63 +860,6 @@
         "name": "Elijah Higgins",
         "externalIds": {
           "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
-        }
-      }
-    },
-    {
-      "id": "476104-1204075",
-      "label": "Travis Kelce 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Travis Kelce records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.71",
-          "no": "0.43"
-        },
-        "sell": {
-          "yes": "0.57",
-          "no": "0.29"
-        },
-        "bestBid": "0.57",
-        "bestAsk": "0.71"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "KELCEO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO29",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 68,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Travis Kelce",
-        "externalIds": {
-          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
         }
       }
     },
@@ -1166,13 +1166,13 @@
       "prices": {
         "buy": {
           "yes": "0.64",
-          "no": "0.5"
+          "no": "0.48"
         },
         "sell": {
-          "yes": "0.5",
+          "yes": "0.52",
           "no": "0.36"
         },
-        "bestBid": "0.5",
+        "bestBid": "0.52",
         "bestAsk": "0.64"
       },
       "status": "active",
@@ -1279,15 +1279,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.59",
+          "yes": "0.6",
           "no": "0.53"
         },
         "sell": {
           "yes": "0.47",
-          "no": "0.41"
+          "no": "0.4"
         },
         "bestBid": "0.47",
-        "bestAsk": "0.59"
+        "bestAsk": "0.6"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -1337,13 +1337,13 @@
       "prices": {
         "buy": {
           "yes": "0.58",
-          "no": "0.63"
+          "no": "0.61"
         },
         "sell": {
-          "yes": "0.37",
+          "yes": "0.39",
           "no": "0.42"
         },
-        "bestBid": "0.37",
+        "bestBid": "0.39",
         "bestAsk": "0.58"
       },
       "status": "active",
@@ -1565,13 +1565,13 @@
       "prices": {
         "buy": {
           "yes": "0.55",
-          "no": "0.55"
+          "no": "0.58"
         },
         "sell": {
-          "yes": "0.45",
+          "yes": "0.42",
           "no": "0.45"
         },
-        "bestBid": "0.45",
+        "bestBid": "0.42",
         "bestAsk": "0.55"
       },
       "status": "active",
@@ -1622,13 +1622,13 @@
       "prices": {
         "buy": {
           "yes": "0.53",
-          "no": "0.54"
+          "no": "0.55"
         },
         "sell": {
-          "yes": "0.46",
+          "yes": "0.45",
           "no": "0.47"
         },
-        "bestBid": "0.46",
+        "bestBid": "0.45",
         "bestAsk": "0.53"
       },
       "status": "active",
@@ -1658,6 +1658,63 @@
         "name": "Trey McBride",
         "externalIds": {
           "sportradar": "734d54cc-c869-4e2f-a60f-c59c493f5110"
+        }
+      }
+    },
+    {
+      "id": "476104-1205466",
+      "label": "Cyrus Allen 15+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Cyrus Allen records 15 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.53",
+          "no": "0.6"
+        },
+        "sell": {
+          "yes": "0.4",
+          "no": "0.47"
+        },
+        "bestBid": "0.4",
+        "bestAsk": "0.53"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CALLENO14",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-CALLENO14",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 79,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Cyrus Allen",
+        "externalIds": {
+          "sportradar": "a07ac8bd-3929-4e48-b3c4-3ddeecd09dca"
         }
       }
     },
@@ -1776,72 +1833,15 @@
       }
     },
     {
-      "id": "476104-1205466",
-      "label": "Cyrus Allen 15+ Receiving Yards",
+      "id": "476104-1200298",
+      "label": "Xavier Worthy 30+ Receiving Yards",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Cyrus Allen records 15 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.51",
-          "no": "0.6"
-        },
-        "sell": {
-          "yes": "0.4",
-          "no": "0.49"
-        },
-        "bestBid": "0.4",
-        "bestAsk": "0.51"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CALLENO14",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-CALLENO14",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 79,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "14.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Cyrus Allen",
-        "externalIds": {
-          "sportradar": "a07ac8bd-3929-4e48-b3c4-3ddeecd09dca"
-        }
-      }
-    },
-    {
-      "id": "476104-1200771",
-      "label": "Elijah Higgins 20+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Elijah Higgins records 20 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "value": "This market resolves to Yes if Xavier Worthy records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
             "nodeType": "text"
           }
         ],
@@ -1850,30 +1850,30 @@
       "prices": {
         "buy": {
           "yes": "0.49",
-          "no": "0.73"
+          "no": "0.67"
         },
         "sell": {
-          "yes": "0.27",
+          "yes": "0.33",
           "no": "0.51"
         },
-        "bestBid": "0.27",
+        "bestBid": "0.33",
         "bestAsk": "0.49"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "EHIGGINSO19",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO19",
+      "ticker": "WORTHYO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-WORTHYO29",
       "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
       "expiryDate": "2026-11-24T06:00:00.000Z",
       "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 36,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "sortOrder": 27,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
       "strike": {
         "type": "over",
-        "value": "19.5"
+        "value": "29.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -1883,9 +1883,9 @@
       "priceMinimum": "0.01",
       "target": {
         "type": "player",
-        "name": "Elijah Higgins",
+        "name": "Xavier Worthy",
         "externalIds": {
-          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
+          "sportradar": "52e049b1-0a7a-4e7f-9866-d2848e9cc478"
         }
       }
     },
@@ -1947,6 +1947,120 @@
       }
     },
     {
+      "id": "476104-1200277",
+      "label": "Rashee Rice 60+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Rashee Rice records 60 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.48",
+          "no": "0.66"
+        },
+        "sell": {
+          "yes": "0.34",
+          "no": "0.52"
+        },
+        "bestBid": "0.34",
+        "bestAsk": "0.48"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "RICEO59",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-RICEO59",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 16,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "59.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Rashee Rice",
+        "externalIds": {
+          "sportradar": "cbd73c09-da07-48b0-a0d6-f248dfa631b6"
+        }
+      }
+    },
+    {
+      "id": "476104-1200771",
+      "label": "Elijah Higgins 20+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Elijah Higgins records 20 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.48",
+          "no": "0.68"
+        },
+        "sell": {
+          "yes": "0.32",
+          "no": "0.52"
+        },
+        "bestBid": "0.32",
+        "bestAsk": "0.48"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "EHIGGINSO19",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO19",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 36,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Elijah Higgins",
+        "externalIds": {
+          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
+        }
+      }
+    },
+    {
       "id": "476104-1200793",
       "label": "Simi Fehoko 20+ Receiving Yards",
       "description": {
@@ -2000,120 +2114,6 @@
         "name": "Simi Fehoko",
         "externalIds": {
           "sportradar": "3860693c-99a2-4484-99db-1d43e3ff7fd4"
-        }
-      }
-    },
-    {
-      "id": "476104-1200277",
-      "label": "Rashee Rice 60+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Rashee Rice records 60 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.47",
-          "no": "0.66"
-        },
-        "sell": {
-          "yes": "0.34",
-          "no": "0.53"
-        },
-        "bestBid": "0.34",
-        "bestAsk": "0.47"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "RICEO59",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-RICEO59",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 16,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "59.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Rashee Rice",
-        "externalIds": {
-          "sportradar": "cbd73c09-da07-48b0-a0d6-f248dfa631b6"
-        }
-      }
-    },
-    {
-      "id": "476104-1200298",
-      "label": "Xavier Worthy 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Xavier Worthy records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.47",
-          "no": "0.67"
-        },
-        "sell": {
-          "yes": "0.33",
-          "no": "0.53"
-        },
-        "bestBid": "0.33",
-        "bestAsk": "0.47"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "WORTHYO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-WORTHYO29",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 27,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Xavier Worthy",
-        "externalIds": {
-          "sportradar": "52e049b1-0a7a-4e7f-9866-d2848e9cc478"
         }
       }
     },
@@ -2191,15 +2191,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.44",
+          "yes": "0.45",
           "no": "0.7"
         },
         "sell": {
           "yes": "0.3",
-          "no": "0.56"
+          "no": "0.55"
         },
         "bestBid": "0.3",
-        "bestAsk": "0.44"
+        "bestAsk": "0.45"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
@@ -2346,6 +2346,63 @@
       }
     },
     {
+      "id": "476104-1200821",
+      "label": "Trey McBride 60+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Trey McBride records 60 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.41",
+          "no": "0.74"
+        },
+        "sell": {
+          "yes": "0.26",
+          "no": "0.59"
+        },
+        "bestBid": "0.26",
+        "bestAsk": "0.41"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "MCBRIDEO59",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-MCBRIDEO59",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 54,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "59.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Trey McBride",
+        "externalIds": {
+          "sportradar": "734d54cc-c869-4e2f-a60f-c59c493f5110"
+        }
+      }
+    },
+    {
       "id": "476104-1206038",
       "label": "Reggie Virgil 25+ Receiving Yards",
       "description": {
@@ -2460,15 +2517,15 @@
       }
     },
     {
-      "id": "476104-1200821",
-      "label": "Trey McBride 60+ Receiving Yards",
+      "id": "476104-1200256",
+      "label": "Josh Downs 50+ Receiving Yards",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Trey McBride records 60 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "value": "This market resolves to Yes if Josh Downs records 50 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
             "nodeType": "text"
           }
         ],
@@ -2476,31 +2533,31 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.4",
-          "no": "0.74"
+          "yes": "0.39",
+          "no": "0.7"
         },
         "sell": {
-          "yes": "0.26",
-          "no": "0.6"
+          "yes": "0.3",
+          "no": "0.61"
         },
-        "bestBid": "0.26",
-        "bestAsk": "0.4"
+        "bestBid": "0.3",
+        "bestAsk": "0.39"
       },
       "status": "active",
       "createdAt": "2026-11-18T03:22:48.733Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "MCBRIDEO59",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-MCBRIDEO59",
+      "ticker": "JDOWNSO49",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-JDOWNSO49",
       "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
       "expiryDate": "2026-11-24T06:00:00.000Z",
       "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 54,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "sortOrder": 5,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
       "strike": {
         "type": "over",
-        "value": "59.5"
+        "value": "49.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -2510,9 +2567,9 @@
       "priceMinimum": "0.01",
       "target": {
         "type": "player",
-        "name": "Trey McBride",
+        "name": "Josh Downs",
         "externalIds": {
-          "sportradar": "734d54cc-c869-4e2f-a60f-c59c493f5110"
+          "sportradar": "dd227f4a-0785-482d-a28b-f231c7f3b73f"
         }
       }
     },
@@ -2574,63 +2631,6 @@
       }
     },
     {
-      "id": "476104-1200256",
-      "label": "Josh Downs 50+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Josh Downs records 50 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.38",
-          "no": "0.7"
-        },
-        "sell": {
-          "yes": "0.3",
-          "no": "0.62"
-        },
-        "bestBid": "0.3",
-        "bestAsk": "0.38"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "JDOWNSO49",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-JDOWNSO49",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 5,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "49.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Josh Downs",
-        "externalIds": {
-          "sportradar": "dd227f4a-0785-482d-a28b-f231c7f3b73f"
-        }
-      }
-    },
-    {
       "id": "476104-1200774",
       "label": "Elijah Higgins 25+ Receiving Yards",
       "description": {
@@ -2648,13 +2648,13 @@
       "prices": {
         "buy": {
           "yes": "0.37",
-          "no": "0.83"
+          "no": "0.81"
         },
         "sell": {
-          "yes": "0.17",
+          "yes": "0.19",
           "no": "0.63"
         },
-        "bestBid": "0.17",
+        "bestBid": "0.19",
         "bestAsk": "0.37"
       },
       "status": "active",
@@ -2802,6 +2802,120 @@
       }
     },
     {
+      "id": "476104-1206039",
+      "label": "Reggie Virgil 30+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Reggie Virgil records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.35",
+          "no": "0.8"
+        },
+        "sell": {
+          "yes": "0.2",
+          "no": "0.65"
+        },
+        "bestBid": "0.2",
+        "bestAsk": "0.35"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "VIRGILO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-VIRGILO29",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 98,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Reggie Virgil",
+        "externalIds": {
+          "sportradar": "5c342ca7-20ec-4278-8d30-f8134d5a0fd3"
+        }
+      }
+    },
+    {
+      "id": "476104-1200798",
+      "label": "Simi Fehoko 30+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Simi Fehoko records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.34",
+          "no": "0.81"
+        },
+        "sell": {
+          "yes": "0.19",
+          "no": "0.66"
+        },
+        "bestBid": "0.19",
+        "bestAsk": "0.34"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "FEHOKOO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-FEHOKOO29",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 46,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Simi Fehoko",
+        "externalIds": {
+          "sportradar": "3860693c-99a2-4484-99db-1d43e3ff7fd4"
+        }
+      }
+    },
+    {
       "id": "476104-1206029",
       "label": "Devin Duvernay 25+ Receiving Yards",
       "description": {
@@ -2855,177 +2969,6 @@
         "name": "Devin Duvernay",
         "externalIds": {
           "sportradar": "d93dbc83-e604-4823-a24e-d162cbd8d4d9"
-        }
-      }
-    },
-    {
-      "id": "476104-1206039",
-      "label": "Reggie Virgil 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Reggie Virgil records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.34",
-          "no": "0.8"
-        },
-        "sell": {
-          "yes": "0.2",
-          "no": "0.66"
-        },
-        "bestBid": "0.2",
-        "bestAsk": "0.34"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "VIRGILO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-VIRGILO29",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 98,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Reggie Virgil",
-        "externalIds": {
-          "sportradar": "5c342ca7-20ec-4278-8d30-f8134d5a0fd3"
-        }
-      }
-    },
-    {
-      "id": "476104-1200776",
-      "label": "Elijah Higgins 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Elijah Higgins records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.33",
-          "no": "0.9"
-        },
-        "sell": {
-          "yes": "0.1",
-          "no": "0.67"
-        },
-        "bestBid": "0.1",
-        "bestAsk": "0.33"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "EHIGGINSO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO29",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 38,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Elijah Higgins",
-        "externalIds": {
-          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
-        }
-      }
-    },
-    {
-      "id": "476104-1200798",
-      "label": "Simi Fehoko 30+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Simi Fehoko records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.33",
-          "no": "0.81"
-        },
-        "sell": {
-          "yes": "0.19",
-          "no": "0.67"
-        },
-        "bestBid": "0.19",
-        "bestAsk": "0.33"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "FEHOKOO29",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-FEHOKOO29",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 46,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "29.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Simi Fehoko",
-        "externalIds": {
-          "sportradar": "3860693c-99a2-4484-99db-1d43e3ff7fd4"
         }
       }
     },
@@ -3144,6 +3087,63 @@
       }
     },
     {
+      "id": "476104-1200776",
+      "label": "Elijah Higgins 30+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Elijah Higgins records 30 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.32",
+          "no": "0.88"
+        },
+        "sell": {
+          "yes": "0.12",
+          "no": "0.68"
+        },
+        "bestBid": "0.12",
+        "bestAsk": "0.32"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "EHIGGINSO29",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO29",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 38,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Elijah Higgins",
+        "externalIds": {
+          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
+        }
+      }
+    },
+    {
       "id": "476104-1205469",
       "label": "Cyrus Allen 30+ Receiving Yards",
       "description": {
@@ -3197,6 +3197,63 @@
         "name": "Cyrus Allen",
         "externalIds": {
           "sportradar": "a07ac8bd-3929-4e48-b3c4-3ddeecd09dca"
+        }
+      }
+    },
+    {
+      "id": "476104-1200281",
+      "label": "Rashee Rice 80+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Rashee Rice records 80 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.3",
+          "no": "0.85"
+        },
+        "sell": {
+          "yes": "0.15",
+          "no": "0.7"
+        },
+        "bestBid": "0.15",
+        "bestAsk": "0.3"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "RICEO79",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-RICEO79",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 18,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "79.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Rashee Rice",
+        "externalIds": {
+          "sportradar": "cbd73c09-da07-48b0-a0d6-f248dfa631b6"
         }
       }
     },
@@ -3372,63 +3429,6 @@
       }
     },
     {
-      "id": "476104-1200281",
-      "label": "Rashee Rice 80+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Rashee Rice records 80 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.28",
-          "no": "0.85"
-        },
-        "sell": {
-          "yes": "0.15",
-          "no": "0.72"
-        },
-        "bestBid": "0.15",
-        "bestAsk": "0.28"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "RICEO79",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-RICEO79",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 18,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "79.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Rashee Rice",
-        "externalIds": {
-          "sportradar": "cbd73c09-da07-48b0-a0d6-f248dfa631b6"
-        }
-      }
-    },
-    {
       "id": "476104-1204081",
       "label": "Travis Kelce 70+ Receiving Yards",
       "description": {
@@ -3543,6 +3543,63 @@
       }
     },
     {
+      "id": "476104-1200800",
+      "label": "Simi Fehoko 40+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Simi Fehoko records 40 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.25",
+          "no": "0.9"
+        },
+        "sell": {
+          "yes": "0.1",
+          "no": "0.75"
+        },
+        "bestBid": "0.1",
+        "bestAsk": "0.25"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "FEHOKOO39",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-FEHOKOO39",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 47,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "39.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Simi Fehoko",
+        "externalIds": {
+          "sportradar": "3860693c-99a2-4484-99db-1d43e3ff7fd4"
+        }
+      }
+    },
+    {
       "id": "476104-1206040",
       "label": "Reggie Virgil 40+ Receiving Yards",
       "description": {
@@ -3596,63 +3653,6 @@
         "name": "Reggie Virgil",
         "externalIds": {
           "sportradar": "5c342ca7-20ec-4278-8d30-f8134d5a0fd3"
-        }
-      }
-    },
-    {
-      "id": "476104-1200800",
-      "label": "Simi Fehoko 40+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Simi Fehoko records 40 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.24",
-          "no": "0.9"
-        },
-        "sell": {
-          "yes": "0.1",
-          "no": "0.76"
-        },
-        "bestBid": "0.1",
-        "bestAsk": "0.24"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "FEHOKOO39",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-FEHOKOO39",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 47,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "39.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Simi Fehoko",
-        "externalIds": {
-          "sportradar": "3860693c-99a2-4484-99db-1d43e3ff7fd4"
         }
       }
     },
@@ -3942,63 +3942,6 @@
       }
     },
     {
-      "id": "476104-1200778",
-      "label": "Elijah Higgins 40+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Elijah Higgins records 40 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.22",
-          "no": "0.96"
-        },
-        "sell": {
-          "yes": "0.04",
-          "no": "0.78"
-        },
-        "bestBid": "0.04",
-        "bestAsk": "0.22"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "EHIGGINSO39",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO39",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 39,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "39.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Elijah Higgins",
-        "externalIds": {
-          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
-        }
-      }
-    },
-    {
       "id": "476104-1200826",
       "label": "Trey McBride 80+ Receiving Yards",
       "description": {
@@ -4052,6 +3995,63 @@
         "name": "Trey McBride",
         "externalIds": {
           "sportradar": "734d54cc-c869-4e2f-a60f-c59c493f5110"
+        }
+      }
+    },
+    {
+      "id": "476104-1200778",
+      "label": "Elijah Higgins 40+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Elijah Higgins records 40 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.21",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.79"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.21"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "EHIGGINSO39",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO39",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 39,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "39.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Elijah Higgins",
+        "externalIds": {
+          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
         }
       }
     },
@@ -4737,6 +4737,60 @@
       }
     },
     {
+      "id": "476104-1200780",
+      "label": "Elijah Higgins 50+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Elijah Higgins records 50 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.15"
+        },
+        "sell": {
+          "no": "0.85"
+        },
+        "bestAsk": "0.15"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "EHIGGINSO49",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO49",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 40,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "49.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Elijah Higgins",
+        "externalIds": {
+          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
+        }
+      }
+    },
+    {
       "id": "476104-1205472",
       "label": "Cyrus Allen 60+ Receiving Yards",
       "description": {
@@ -4787,6 +4841,60 @@
         "name": "Cyrus Allen",
         "externalIds": {
           "sportradar": "a07ac8bd-3929-4e48-b3c4-3ddeecd09dca"
+        }
+      }
+    },
+    {
+      "id": "476104-1206032",
+      "label": "Devin Duvernay 50+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Devin Duvernay records 50 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.15"
+        },
+        "sell": {
+          "no": "0.85"
+        },
+        "bestAsk": "0.15"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "DUVERNAYO49",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-DUVERNAYO49",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 92,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "49.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Devin Duvernay",
+        "externalIds": {
+          "sportradar": "d93dbc83-e604-4823-a24e-d162cbd8d4d9"
         }
       }
     },
@@ -5115,60 +5223,6 @@
       }
     },
     {
-      "id": "476104-1200780",
-      "label": "Elijah Higgins 50+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Elijah Higgins records 50 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.13"
-        },
-        "sell": {
-          "no": "0.87"
-        },
-        "bestAsk": "0.13"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "EHIGGINSO49",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-EHIGGINSO49",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 40,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "49.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Elijah Higgins",
-        "externalIds": {
-          "sportradar": "a01b7698-d67f-4b60-b2fb-4c667336b718"
-        }
-      }
-    },
-    {
       "id": "476104-1200830",
       "label": "Trey McBride 100+ Receiving Yards",
       "description": {
@@ -5219,60 +5273,6 @@
         "name": "Trey McBride",
         "externalIds": {
           "sportradar": "734d54cc-c869-4e2f-a60f-c59c493f5110"
-        }
-      }
-    },
-    {
-      "id": "476104-1206032",
-      "label": "Devin Duvernay 50+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Devin Duvernay records 50 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.13"
-        },
-        "sell": {
-          "no": "0.87"
-        },
-        "bestAsk": "0.13"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "DUVERNAYO49",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-DUVERNAYO49",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 92,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "49.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Devin Duvernay",
-        "externalIds": {
-          "sportradar": "d93dbc83-e604-4823-a24e-d162cbd8d4d9"
         }
       }
     },

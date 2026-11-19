@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611251745-VIL-SLA-REGS-VIL1",
     "question": "Villarreal vs Slavia Prague: Point Spread",
     "expiry_utc": "2026-11-27T05:45:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:19Z",
+    "analyzed_at_utc": "2026-11-19T06:15:11Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:19Z",
-      "snapshot_hash": "sha256:0b44ae2dac738654aa58899b1af2bc1e65c45c71e08437cd0dbfb824387fa60d",
+      "snapshot_time_utc": "2026-11-19T06:15:11Z",
+      "snapshot_hash": "sha256:e448003590d794607a4a08d95b60f50b0244eea7304eedd97484ee68f69fe0bc",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:19Z"
+      "observed_time_utc": "2026-11-19T06:15:11Z"
     },
     "scores": {
       "ambiguity": {

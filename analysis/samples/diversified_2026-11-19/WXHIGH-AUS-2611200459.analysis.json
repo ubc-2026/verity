@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-WXHIGH-AUS-2611200459-74TO75",
     "question": "Highest temperature in Austin on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:44Z",
+    "analyzed_at_utc": "2026-11-19T06:16:44Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:44Z",
-      "snapshot_hash": "sha256:9f47c6dd78f353ec2dca7a2fc73359ded299c2df72c6dc0d9272ea8e1309937d",
+      "snapshot_time_utc": "2026-11-19T06:16:44Z",
+      "snapshot_hash": "sha256:85a59ec231eab7b0e60e8e8fe8bc3796b9d11759206dee4994c57bd0f9fb2266",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:44Z"
+      "observed_time_utc": "2026-11-19T06:16:44Z"
     },
     "scores": {
       "ambiguity": {

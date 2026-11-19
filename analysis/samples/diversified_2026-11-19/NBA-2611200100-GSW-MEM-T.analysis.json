@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-GSW-MEM-T-O239",
     "question": "Golden State vs Memphis: Total Points",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:36Z",
+    "analyzed_at_utc": "2026-11-19T06:15:31Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:36Z",
-      "snapshot_hash": "sha256:7ae3e7ee7f91f666fa80bc7284862653344c626adb8fec84d09aa7d1d4926e41",
+      "snapshot_time_utc": "2026-11-19T06:15:31Z",
+      "snapshot_hash": "sha256:f89b9b2b3681fef08d0b64a34faf2fdda93849de5532efc812eb7c138d184e70",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:36Z"
+      "observed_time_utc": "2026-11-19T06:15:31Z"
     },
     "scores": {
       "ambiguity": {

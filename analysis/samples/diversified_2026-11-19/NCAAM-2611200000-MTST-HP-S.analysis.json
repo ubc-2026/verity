@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-MTST-HP-S-HP8",
     "question": "Montana State vs High Point: Point Spread",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:39Z",
+    "analyzed_at_utc": "2026-11-19T06:15:29Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:39Z",
-      "snapshot_hash": "sha256:f35c6e1808616718b22cb500b0edddf33b6de37cd9611e44ab1d8525f02ac13c",
+      "snapshot_time_utc": "2026-11-19T06:15:29Z",
+      "snapshot_hash": "sha256:f1a17d800d1e743298af5f499abde520ed30685038a7246c4f1b645d3e2c9700",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:39Z"
+      "observed_time_utc": "2026-11-19T06:15:29Z"
     },
     "scores": {
       "ambiguity": {

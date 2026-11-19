@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-WXHIGH-BOS-2611200459-65TO66",
     "question": "Highest temperature in Boston on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:40Z",
+    "analyzed_at_utc": "2026-11-19T06:16:38Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:40Z",
-      "snapshot_hash": "sha256:27a35c429a34c3061a659d358f62a0cfdf25b7f3ee8674086f738f854e9a0e85",
+      "snapshot_time_utc": "2026-11-19T06:16:38Z",
+      "snapshot_hash": "sha256:a82b4b9ad44570c1c54c44be5ef1feda8e85ea057c3c42a9c7f7c3a341f6f8b3",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:40Z"
+      "observed_time_utc": "2026-11-19T06:16:38Z"
     },
     "scores": {
       "ambiguity": {

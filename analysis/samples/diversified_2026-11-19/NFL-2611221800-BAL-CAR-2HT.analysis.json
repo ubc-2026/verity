@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-2HT-O28",
     "question": "Baltimore vs Carolina: 2nd Half Point Total",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:09Z",
+    "analyzed_at_utc": "2026-11-19T06:15:59Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:09Z",
-      "snapshot_hash": "sha256:867f6370840b38c91b848a1e0b5ea55e4739b9cceaea6ef2f94ad4a487813c57",
+      "snapshot_time_utc": "2026-11-19T06:15:59Z",
+      "snapshot_hash": "sha256:38bd26c4f5701819edc8eb6a2ed0ac60e4a3882e6007e13b30cd4bfdb376c166",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:09Z"
+      "observed_time_utc": "2026-11-19T06:15:59Z"
     },
     "scores": {
       "ambiguity": {

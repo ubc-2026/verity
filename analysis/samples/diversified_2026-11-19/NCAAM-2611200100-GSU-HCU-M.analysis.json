@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200100-GSU-HCU-M-HCU",
     "question": "Georgia Southern vs Houston Christian",
     "expiry_utc": "2026-11-22T01:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:18Z",
+    "analyzed_at_utc": "2026-11-19T06:16:11Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:18Z",
-      "snapshot_hash": "sha256:0cd9a0d546ebeb32a2ee4f91f124876e36a4a524211607909e2f87a43c484249",
+      "snapshot_time_utc": "2026-11-19T06:16:11Z",
+      "snapshot_hash": "sha256:df0515321a1c4682620f967b7ce3f019aef12d0bb425219cce687d6875e34e4b",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:18Z"
+      "observed_time_utc": "2026-11-19T06:16:11Z"
     },
     "scores": {
       "ambiguity": {
@@ -71,10 +71,15 @@
       "known_total": 8,
       "raw_total": 8,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
+        {
+          "rule": "High (3) in Correlation -> at least High",
+          "triggered_by": "correlation",
+          "effect": "rating floor High; overlapping markets can flip together"
+        },
         {
           "rule": "High (3) in Liquidity -> never trade more than top-of-book",
           "triggered_by": "liquidity",
@@ -82,8 +87,8 @@
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. No open resolution questions.",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 8). Research action: flag_for_human_review. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -126,6 +131,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611200100-GSU-HCU-M-HCU] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NCAAM-2611200100-GSU-HCU-M-HCU] no purchase: no material resolution gap (research action: flag_for_human_review)."
   ]
 }

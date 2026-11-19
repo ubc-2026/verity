@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE8",
     "question": "Charleston vs Drake: Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:04Z",
+    "analyzed_at_utc": "2026-11-19T06:15:53Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:04Z",
-      "snapshot_hash": "sha256:7691e609244fd344ef08afac003a2f489bb2121895eae3602129b372e50759cf",
+      "snapshot_time_utc": "2026-11-19T06:15:53Z",
+      "snapshot_hash": "sha256:eddf1eb1adda10efac60dbcbf28201f95b00df2454ca73182141f4cee84385b1",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:04Z"
+      "observed_time_utc": "2026-11-19T06:15:53Z"
     },
     "scores": {
       "ambiguity": {

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611210100-CAMP-KSU-M-KSU",
     "question": "Campbell vs Kansas State",
     "expiry_utc": "2026-11-23T01:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:18Z",
+    "analyzed_at_utc": "2026-11-19T06:15:09Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:18Z",
-      "snapshot_hash": "sha256:c106c1a8c54770890baa9412d54827569a9a3202d4cf7a197d479d26f7ff95b0",
+      "snapshot_time_utc": "2026-11-19T06:15:09Z",
+      "snapshot_hash": "sha256:1307d53c98a254bb1df590520a8b0d164f16a8bc3c9a32af61585cd3c4bcce39",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "35",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:18Z"
+      "observed_time_utc": "2026-11-19T06:15:09Z"
     },
     "scores": {
       "ambiguity": {

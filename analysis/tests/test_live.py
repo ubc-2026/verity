@@ -202,8 +202,10 @@ def test_live_rules_analyst_on_real_okc_response():
         live.fetch_terms_text = orig
     s = ra.scores
     assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (1, 1, 1, 3)
-    assert ra.rating.raw_total == 6 and ra.rating.final_rating == "Low"
-    assert ra.research_action == "no_further_research"
+    # raw 6 is Low, but Correlation 3 floors final rating to High
+    assert ra.rating.raw_total == 6 and ra.rating.raw_rating == "Low"
+    assert ra.rating.rating_floor == "High" and ra.rating.final_rating == "High"
+    assert ra.research_action == "flag_for_human_review"
     assert generate_purchase_request(ra, ctx) is None
 
 

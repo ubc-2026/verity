@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O161",
+    "contract_id": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O165",
     "event_ticker": "NCAAM-2611200000-UMBC-OSU-T",
-    "instrument_symbol": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O161",
+    "instrument_symbol": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O165",
     "question": "UMBC vs Ohio State: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:00Z",
+    "analyzed_at_utc": "2026-11-19T06:15:49Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:00Z",
-      "snapshot_hash": "sha256:5c1ef066f86898ca5d858b70f48e6cf35218e01f63a83fa2f248d1aaaf9653d1",
+      "snapshot_time_utc": "2026-11-19T06:15:49Z",
+      "snapshot_hash": "sha256:3c4472d297ce0a9cef71ff627a04d93632ca42961be068bd74bdf323e87e4b5a",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "More than 161.5 points scored",
-      "best_bid": "0.37",
-      "best_ask": "0.5",
-      "mid": "0.435",
-      "implied_probability": "0.435",
+      "outcome_label": "More than 165.5 points scored",
+      "best_bid": "0.28",
+      "best_ask": "0.36",
+      "mid": "0.32",
+      "implied_probability": "0.32",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:00Z"
+      "observed_time_utc": "2026-11-19T06:15:49Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (13c spread).",
+        "rationale": "event-total volume $0 is under $100 (8c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200000-UMBC-OSU-T",
         "field_or_rule": "contract.description",
-        "quote": "This market resolves to Yes if UMBC and Ohio State collectively score over 161.5 total points in the men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf)."
+        "quote": "This market resolves to Yes if UMBC and Ohio State collectively score over 165.5 total points in the men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200000-UMBC-OSU-T",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.37, bestAsk 0.5; event volume 0"
+        "quote": "bestBid 0.28, bestAsk 0.36; event volume 0"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611200000-UMBC-OSU-T-O161] no purchase: rating is Low; research buys are limited to High-risk markets."
+    "[GEMI-NCAAM-2611200000-UMBC-OSU-T-O165] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

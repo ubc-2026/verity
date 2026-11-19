@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611211700-TAM-OU-M-TAM",
     "question": "Texas A&M vs Oklahoma",
     "expiry_utc": "2026-11-22T20:45:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:17Z",
+    "analyzed_at_utc": "2026-11-19T06:15:08Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:17Z",
-      "snapshot_hash": "sha256:3544d584c93eb8b95098a1f76e208cd9c1b8946027d2f6355e286deafdc88502",
+      "snapshot_time_utc": "2026-11-19T06:15:08Z",
+      "snapshot_hash": "sha256:98ec28139b1839feb297630b88569a65664ce1855bfdadb89a5e222668e49aae",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:17Z"
+      "observed_time_utc": "2026-11-19T06:15:08Z"
     },
     "scores": {
       "ambiguity": {
@@ -71,10 +71,15 @@
       "known_total": 8,
       "raw_total": 8,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
+        {
+          "rule": "High (3) in Correlation -> at least High",
+          "triggered_by": "correlation",
+          "effect": "rating floor High; overlapping markets can flip together"
+        },
         {
           "rule": "High (3) in Liquidity -> never trade more than top-of-book",
           "triggered_by": "liquidity",
@@ -82,8 +87,8 @@
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. No open resolution questions.",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 8). Research action: flag_for_human_review. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -126,6 +131,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAF-2611211700-TAM-OU-M-TAM] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NCAAF-2611211700-TAM-OU-M-TAM] no purchase: no material resolution gap (research action: flag_for_human_review)."
   ]
 }

@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-BTC2611192200-HI63500",
     "question": "BTC price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:31Z",
+    "analyzed_at_utc": "2026-11-19T06:16:29Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:31Z",
-      "snapshot_hash": "sha256:09ec6bc39c6a13e0a43c1d0abcedbdec18c80b773eccc96b23866d4996324654",
+      "snapshot_time_utc": "2026-11-19T06:16:29Z",
+      "snapshot_hash": "sha256:997d3777d0a68b2a6dee449834f41354ae01de3ba1768c2a0227246d4b985039",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$63,500 or above",
-      "best_bid": "0.45",
-      "best_ask": "0.48",
-      "mid": "0.465",
-      "implied_probability": "0.465",
+      "best_bid": "0.47",
+      "best_ask": "0.5",
+      "mid": "0.485",
+      "implied_probability": "0.485",
       "volume_usd": "23498.88",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:31Z"
+      "observed_time_utc": "2026-11-19T06:16:29Z"
     },
     "scores": {
       "ambiguity": {
@@ -101,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.45, bestAsk 0.48; event volume 23498.88"
+        "quote": "bestBid 0.47, bestAsk 0.5; event volume 23498.88"
       }
     ],
     "evidence_gaps": [],

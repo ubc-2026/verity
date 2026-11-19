@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611210300-SAC-LAL-M-SAC",
     "question": "Sacramento vs Los Angeles L",
     "expiry_utc": "2026-11-22T15:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:22Z",
+    "analyzed_at_utc": "2026-11-19T06:15:13Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:22Z",
-      "snapshot_hash": "sha256:d0c06f834cf43c4b85af359a1c169fa42c19f733d88e3cf5098bdb06dbc885c4",
+      "snapshot_time_utc": "2026-11-19T06:15:13Z",
+      "snapshot_hash": "sha256:6dd6248c6d8a4b39c255d369f8be69bdb79c865a938bd644d08c0de07ea68aae",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "46.23",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:22Z"
+      "observed_time_utc": "2026-11-19T06:15:13Z"
     },
     "scores": {
       "ambiguity": {

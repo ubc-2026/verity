@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-SFO-2611200459-58TO59",
     "question": "Highest temperature in San Francisco on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:43Z",
+    "analyzed_at_utc": "2026-11-19T06:16:40Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:43Z",
-      "snapshot_hash": "sha256:1516c2139e6a1a5537880e912a2b3b4b07c57bdf7da0fc5f4c5be68e311ff41d",
+      "snapshot_time_utc": "2026-11-19T06:16:40Z",
+      "snapshot_hash": "sha256:4a507c9251b07273ed6af61eec18341a1da2cd26b8f0ce859737fc856ffbdfef",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "58°F to 59°F",
-      "best_bid": "0.46",
-      "best_ask": "0.51",
-      "mid": "0.485",
-      "implied_probability": "0.485",
+      "best_bid": "0.47",
+      "best_ask": "0.52",
+      "mid": "0.495",
+      "implied_probability": "0.495",
       "volume_usd": "23",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:43Z"
+      "observed_time_utc": "2026-11-19T06:16:40Z"
     },
     "scores": {
       "ambiguity": {
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-SFO-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.46, bestAsk 0.51; event volume 23"
+        "quote": "bestBid 0.47, bestAsk 0.52; event volume 23"
       }
     ],
     "evidence_gaps": [

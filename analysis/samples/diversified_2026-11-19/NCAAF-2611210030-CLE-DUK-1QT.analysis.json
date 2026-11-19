@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QT-O7",
     "question": "Clemson vs Duke: 1st Quarter Point Total",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:06Z",
+    "analyzed_at_utc": "2026-11-19T06:15:32Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:06Z",
-      "snapshot_hash": "sha256:c0e51658be5186e25a3b08c8bc5b62c8b738528c56b7b23916568a6c4fee05d5",
+      "snapshot_time_utc": "2026-11-19T06:15:32Z",
+      "snapshot_hash": "sha256:fa29ebfe8844ef1df9cec97795b7319f547f192d99749d724c75fb178dca3493",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:06Z"
+      "observed_time_utc": "2026-11-19T06:15:32Z"
     },
     "scores": {
       "ambiguity": {

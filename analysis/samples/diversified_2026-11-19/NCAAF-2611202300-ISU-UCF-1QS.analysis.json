@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611202300-ISU-UCF-1QS-UCF7",
     "question": "Iowa State vs UCF: 1st Quarter Point Spread",
     "expiry_utc": "2026-11-21T23:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:23Z",
+    "analyzed_at_utc": "2026-11-19T06:15:14Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:23Z",
-      "snapshot_hash": "sha256:9800091664124560730a0b9bab22dac7083d6be673a6f22c674705a101fa7e78",
+      "snapshot_time_utc": "2026-11-19T06:15:14Z",
+      "snapshot_hash": "sha256:5dc574f1529a2315c310a0d7d558ceaabdd46391ce373de937ca8b205357bd57",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:23Z"
+      "observed_time_utc": "2026-11-19T06:15:14Z"
     },
     "scores": {
       "ambiguity": {

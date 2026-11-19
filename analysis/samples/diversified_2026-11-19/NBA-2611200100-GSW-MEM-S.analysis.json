@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611200100-GSW-MEM-S-MEM9",
     "question": "Golden State vs Memphis: Point Spread",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:32Z",
+    "analyzed_at_utc": "2026-11-19T06:15:27Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:32Z",
-      "snapshot_hash": "sha256:610fd04db81331b5c3f33d7f3de060ab70120f530af90ca7b54c821a9aff8342",
+      "snapshot_time_utc": "2026-11-19T06:15:27Z",
+      "snapshot_hash": "sha256:12102010dc628e2f9884464c6c120d7528f285a3dc0a5747754545c30e50a2e0",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Memphis wins by more than 9.5 points",
       "best_bid": "0.44",
-      "best_ask": "0.48",
-      "mid": "0.46",
-      "implied_probability": "0.46",
+      "best_ask": "0.49",
+      "mid": "0.465",
+      "implied_probability": "0.465",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:32Z"
+      "observed_time_utc": "2026-11-19T06:15:27Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "rationale": "event-total volume $0 is under $100 (5c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-GSW-MEM-S",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.44, bestAsk 0.48; event volume 0"
+        "quote": "bestBid 0.44, bestAsk 0.49; event volume 0"
       }
     ],
     "evidence_gaps": [],

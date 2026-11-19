@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO89",
     "question": "Minnesota vs San Francisco: Player Receiving Yards",
     "expiry_utc": "2026-11-24T13:20:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:24Z",
+    "analyzed_at_utc": "2026-11-19T06:15:16Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:24Z",
-      "snapshot_hash": "sha256:bd296ccb34c6df59ef2d81c9e7b188d40b9c936186d669b6737aba6188efbd6a",
+      "snapshot_time_utc": "2026-11-19T06:15:16Z",
+      "snapshot_hash": "sha256:f5064f737adc7e56fe5b468c4403ca9c317a10846d7fb7dd3ab13ff17f618477",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "50",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:24Z"
+      "observed_time_utc": "2026-11-19T06:15:16Z"
     },
     "scores": {
       "ambiguity": {

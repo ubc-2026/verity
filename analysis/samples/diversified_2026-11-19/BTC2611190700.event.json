@@ -9,56 +9,6 @@
   "createdAt": "2026-11-19T04:56:14.692Z",
   "contracts": [
     {
-      "id": "479826-1219478",
-      "label": "$63,500 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Bitcoin (BTC) is $63,500 or above on November 19, 2026 at 2am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.99",
-          "no": "0.79"
-        },
-        "sell": {
-          "yes": "0.21",
-          "no": "0.01"
-        },
-        "bestBid": "0.21",
-        "bestAsk": "0.99"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:56:14.692Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf",
-      "ticker": "HI63500",
-      "instrumentSymbol": "GEMI-BTC2611190700-HI63500",
-      "marketState": "open",
-      "abbreviatedName": ">$63,500",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T07:00:00.000Z",
-      "effectiveDate": "2026-11-19T06:00:00.000Z",
-      "sortOrder": 4,
-      "strike": {
-        "type": "above",
-        "value": "63500"
-      },
-      "source": "LS-LRRR-XBTUSD",
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "479826-1219467",
       "label": "$63,100 or above",
       "description": {
@@ -75,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.93",
-          "no": "0.14"
+          "yes": "0.98",
+          "no": "0.11"
         },
         "sell": {
-          "yes": "0.86",
-          "no": "0.07"
+          "yes": "0.89",
+          "no": "0.02"
         },
-        "bestBid": "0.86",
-        "bestAsk": "0.93",
+        "bestBid": "0.89",
+        "bestAsk": "0.98",
         "lastTradePrice": "0.79"
       },
       "status": "active",
@@ -126,15 +76,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.83",
-          "no": "0.24"
-        },
-        "sell": {
-          "yes": "0.76",
+          "yes": "0.89",
           "no": "0.17"
         },
-        "bestBid": "0.76",
-        "bestAsk": "0.83",
+        "sell": {
+          "yes": "0.83",
+          "no": "0.11"
+        },
+        "bestBid": "0.83",
+        "bestAsk": "0.89",
         "lastTradePrice": "0.71"
       },
       "status": "active",
@@ -177,15 +127,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.68",
-          "no": "0.4"
+          "yes": "0.78",
+          "no": "0.28"
         },
         "sell": {
-          "yes": "0.6",
-          "no": "0.32"
+          "yes": "0.72",
+          "no": "0.22"
         },
-        "bestBid": "0.6",
-        "bestAsk": "0.68"
+        "bestBid": "0.72",
+        "bestAsk": "0.78"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:56:14.692Z",
@@ -227,15 +177,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.42",
-          "no": "0.62"
+          "yes": "0.6",
+          "no": "0.49"
         },
         "sell": {
-          "yes": "0.38",
-          "no": "0.58"
+          "yes": "0.51",
+          "no": "0.4"
         },
-        "bestBid": "0.38",
-        "bestAsk": "0.42",
+        "bestBid": "0.51",
+        "bestAsk": "0.6",
         "lastTradePrice": "0.42"
       },
       "status": "active",
@@ -262,6 +212,56 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "479826-1219478",
+      "label": "$63,500 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Bitcoin (BTC) is $63,500 or above on November 19, 2026 at 2am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.4",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.6"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.4"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:56:14.692Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf",
+      "ticker": "HI63500",
+      "instrumentSymbol": "GEMI-BTC2611190700-HI63500",
+      "marketState": "open",
+      "abbreviatedName": ">$63,500",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T07:00:00.000Z",
+      "effectiveDate": "2026-11-19T06:00:00.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "above",
+        "value": "63500"
+      },
+      "source": "LS-LRRR-XBTUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479826-1219481",
       "label": "$63,600 or above",
       "description": {
@@ -278,14 +278,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.19",
-          "no": "0.92"
+          "yes": "0.25",
+          "no": "0.99"
         },
         "sell": {
-          "yes": "0.08",
-          "no": "0.81"
+          "yes": "0.01",
+          "no": "0.75"
         },
-        "bestBid": "0.08",
+        "bestBid": "0.01",
+        "bestAsk": "0.25",
         "lastTradePrice": "0.19"
       },
       "status": "active",
@@ -328,14 +329,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.12",
-          "no": "0.98"
+          "yes": "0.14",
+          "no": "0.99"
         },
         "sell": {
-          "yes": "0.02",
-          "no": "0.88"
+          "yes": "0.01",
+          "no": "0.86"
         },
-        "bestBid": "0.02",
+        "bestBid": "0.01",
+        "bestAsk": "0.14",
         "lastTradePrice": "0.12"
       },
       "status": "active",
@@ -378,14 +380,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.12",
-          "no": "0.99"
-        },
-        "sell": {
-          "yes": "0.01",
+          "yes": "0.09",
           "no": "0.88"
         },
-        "bestBid": "0.01",
+        "sell": {
+          "yes": "0.12",
+          "no": "0.91"
+        },
+        "bestAsk": "0.09",
         "lastTradePrice": "0.12"
       },
       "status": "active",
@@ -418,8 +420,8 @@
   "description": "Interval BTC price prediction event expiring on November 19, 2026 at 2am ET",
   "imageUrl": "https://assets.gemini.com/predictions/images/btc_ace6c0f4-f500-4b7d-a66c-a3ea5ea1d9e9.avif",
   "series": "BTC1H",
-  "volume": "855.33",
-  "volume24h": "855.33",
+  "volume": "1013.7",
+  "volume24h": "1013.7",
   "tags": [
     "Bitcoin"
   ],

@@ -5,7 +5,7 @@
   "type": "binary",
   "category": "Crypto",
   "ticker": "BTC05M2611190615",
-  "status": "active",
+  "status": "settled",
   "createdAt": "2026-11-19T05:05:59.795Z",
   "contracts": [
     {
@@ -24,27 +24,20 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {
-          "yes": "0.28",
-          "no": "0.98"
-        },
-        "sell": {
-          "yes": "0.02",
-          "no": "0.72"
-        },
-        "bestBid": "0.02",
-        "bestAsk": "0.28",
-        "lastTradePrice": "0.01"
+        "buy": {},
+        "sell": {}
       },
-      "status": "active",
+      "status": "settled",
       "createdAt": "2026-11-19T05:05:59.795Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf",
       "ticker": "UP",
       "instrumentSymbol": "GEMI-BTC05M2611190615-UP",
-      "marketState": "open",
+      "marketState": "closed",
       "abbreviatedName": "Up",
       "color": "#4CAF50",
       "expiryDate": "2026-11-19T06:15:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T06:15:05.558Z",
       "effectiveDate": "2026-11-19T06:10:00.000Z",
       "sortOrder": 0,
       "strike": {
@@ -53,6 +46,7 @@
         "availableAt": "2026-11-19T06:10:00.000Z"
       },
       "source": "LS-LRRR-XBTUSD",
+      "settlementValue": "63398.414333333334",
       "isCombo": false,
       "quantityIncrement": "0.01",
       "quantityMinimum": "0.01",
@@ -62,11 +56,12 @@
     }
   ],
   "effectiveDate": "2026-11-19T05:05:59.795Z",
-  "isLive": true,
+  "isLive": false,
   "participants": [],
   "description": "Interval BTC price prediction event expiring on November 19, 2026 at 1:15am ET",
   "imageUrl": "https://assets.gemini.com/predictions/images/btc_ace6c0f4-f500-4b7d-a66c-a3ea5ea1d9e9.avif",
   "series": "BTC05M",
+  "resolvedAt": "2026-11-19T06:15:05.558Z",
   "volume": "26.9",
   "volume24h": "26.9",
   "tags": [
@@ -100,6 +95,9 @@
     }
   ],
   "source": "LS-LRRR-XBTUSD",
+  "settlement": {
+    "value": "63398.414333333334"
+  },
   "sourceDetails": {
     "agency": "lukka",
     "index": "LS-LRRR-XBTUSD"

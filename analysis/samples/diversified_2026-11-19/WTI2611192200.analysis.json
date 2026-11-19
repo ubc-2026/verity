@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-WTI2611192200-HI83",
+    "contract_id": "GEMI-WTI2611192200-HI84",
     "event_ticker": "WTI2611192200",
-    "instrument_symbol": "GEMI-WTI2611192200-HI83",
+    "instrument_symbol": "GEMI-WTI2611192200-HI84",
     "question": "Oil (WTI) price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:36Z",
+    "analyzed_at_utc": "2026-11-19T06:16:33Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:36Z",
-      "snapshot_hash": "sha256:839cc4792c8e7530b7bd7b61e891da5162b6d4b86da4225d0fa4fb5ff363daa7",
+      "snapshot_time_utc": "2026-11-19T06:16:33Z",
+      "snapshot_hash": "sha256:d98dbf243007770e4ae7732533321165233d09a46d89157bebd904f5afed1cae",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$83 or above",
-      "best_bid": "0.31",
-      "best_ask": "0.35",
-      "mid": "0.33",
-      "implied_probability": "0.33",
+      "outcome_label": "$84 or above",
+      "best_bid": "0.14",
+      "best_ask": "0.18",
+      "mid": "0.16",
+      "implied_probability": "0.16",
       "volume_usd": "120.46",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:36Z"
+      "observed_time_utc": "2026-11-19T06:16:33Z"
     },
     "scores": {
       "ambiguity": {
@@ -89,7 +89,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WTI2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Oil (WTI) is $83 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf)."
+        "quote": "If the price of Oil (WTI) is $84 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -101,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WTI2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.31, bestAsk 0.35; event volume 120.46"
+        "quote": "bestBid 0.14, bestAsk 0.18; event volume 120.46"
       }
     ],
     "evidence_gaps": [],
@@ -120,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WTI2611192200-HI83] no purchase: rating is Low; research buys are limited to High-risk markets."
+    "[GEMI-WTI2611192200-HI84] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

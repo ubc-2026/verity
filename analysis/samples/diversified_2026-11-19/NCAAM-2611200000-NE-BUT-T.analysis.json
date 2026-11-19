@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-NE-BUT-T-O166",
     "question": "Northeastern vs Butler: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:48Z",
+    "analyzed_at_utc": "2026-11-19T06:15:38Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:48Z",
-      "snapshot_hash": "sha256:ff994a15dd44af9dbf40bfaf2fa570607f8dc405df0f94266dba5d68088fc981",
+      "snapshot_time_utc": "2026-11-19T06:15:38Z",
+      "snapshot_hash": "sha256:8ab1bfc861bb71341259f8e4a48c502070a029a55a8ea1579d2f4d9455595ed1",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:48Z"
+      "observed_time_utc": "2026-11-19T06:15:38Z"
     },
     "scores": {
       "ambiguity": {

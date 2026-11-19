@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611251745-VIL-SLA-REGT-O4",
     "question": "Villarreal vs Slavia Prague: Total Goals",
     "expiry_utc": "2026-11-27T05:45:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:25Z",
+    "analyzed_at_utc": "2026-11-19T06:15:17Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:25Z",
-      "snapshot_hash": "sha256:714bea68aaaee571c16c78cc7d9855ecee48a6356116f5a9211606b0dc3da548",
+      "snapshot_time_utc": "2026-11-19T06:15:17Z",
+      "snapshot_hash": "sha256:be602f43a0e2b7203a681c0abfc9324bd84f3b23700e4cee4d5d07305cce50b8",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:25Z"
+      "observed_time_utc": "2026-11-19T06:15:17Z"
     },
     "scores": {
       "ambiguity": {

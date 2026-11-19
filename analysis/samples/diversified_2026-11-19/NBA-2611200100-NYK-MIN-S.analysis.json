@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-S-NYK9",
     "question": "New York vs Minnesota: Point Spread",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:02Z",
+    "analyzed_at_utc": "2026-11-19T06:15:56Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:02Z",
-      "snapshot_hash": "sha256:fa8ce7695e06b5561e95a9e6669db823d87dd4a256bdeb836ffa8df774a548b8",
+      "snapshot_time_utc": "2026-11-19T06:15:56Z",
+      "snapshot_hash": "sha256:a8444a01779bf3bfbc33f0380f587d17dcc231d018be3848a6924defa1d84deb",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:02Z"
+      "observed_time_utc": "2026-11-19T06:15:56Z"
     },
     "scores": {
       "ambiguity": {

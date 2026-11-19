@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-ETH2611192200-HI1800",
     "question": "ETH price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:35Z",
+    "analyzed_at_utc": "2026-11-19T06:16:32Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:35Z",
-      "snapshot_hash": "sha256:38b09832335f915d96fbf1f3aa13c71338560556f589dec867f9cc0eee5307b0",
+      "snapshot_time_utc": "2026-11-19T06:16:32Z",
+      "snapshot_hash": "sha256:1af36fafb4bb68ab4f7f75ea3e2fa3965280d3d03111a14c354a4a64562bc10e",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$1,800 or above",
-      "best_bid": "0.47",
-      "best_ask": "0.52",
-      "mid": "0.495",
-      "implied_probability": "0.495",
+      "best_bid": "0.48",
+      "best_ask": "0.53",
+      "mid": "0.505",
+      "implied_probability": "0.505",
       "volume_usd": "96.6",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:35Z"
+      "observed_time_utc": "2026-11-19T06:16:32Z"
     },
     "scores": {
       "ambiguity": {
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/ETH2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.47, bestAsk 0.52; event volume 96.6"
+        "quote": "bestBid 0.48, bestAsk 0.53; event volume 96.6"
       }
     ],
     "evidence_gaps": [],

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611210030-CLE-DUK-2HS-DUK9",
     "question": "Clemson vs Duke: 2nd Half Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:10Z",
+    "analyzed_at_utc": "2026-11-19T06:15:37Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:10Z",
-      "snapshot_hash": "sha256:25d2acf208704964217178a4c6073fbbd58a6a16dd9f32b59ec97b1675410f85",
+      "snapshot_time_utc": "2026-11-19T06:15:37Z",
+      "snapshot_hash": "sha256:ba969e837c6fc66e2e9c040b99e15518a5c317c0a0b05e4b6ca9655cc50027f2",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:10Z"
+      "observed_time_utc": "2026-11-19T06:15:37Z"
     },
     "scores": {
       "ambiguity": {

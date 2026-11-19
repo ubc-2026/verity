@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-BUFF-SBU-T-O148",
     "question": "Buffalo vs St. Bonaventure: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:34Z",
+    "analyzed_at_utc": "2026-11-19T06:15:24Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:34Z",
-      "snapshot_hash": "sha256:b154706b85a283fbbe9604fbad8580a69794762ab9837be0aa22dddbb9643ed3",
+      "snapshot_time_utc": "2026-11-19T06:15:24Z",
+      "snapshot_hash": "sha256:bc575f5405d451f415603035befc90e72066d8d02ee9a31bef0ef1ce13e2d0d8",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:34Z"
+      "observed_time_utc": "2026-11-19T06:15:24Z"
     },
     "scores": {
       "ambiguity": {

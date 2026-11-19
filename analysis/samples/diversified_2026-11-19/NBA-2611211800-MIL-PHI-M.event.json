@@ -1,0 +1,205 @@
+{
+  "id": "475120",
+  "title": "Milwaukee vs Philadelphia",
+  "slug": "milwaukee-vs-philadelphia",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611211800-MIL-PHI-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:02:43.019Z",
+  "contracts": [
+    {
+      "id": "475120-1195458",
+      "label": "Philadelphia",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Philadelphia wins the Pro Basketball game between Philadelphia and Milwaukee originally scheduled for November 21, 2026 at 1:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.86",
+          "no": "0.17"
+        },
+        "sell": {
+          "yes": "0.83",
+          "no": "0.14"
+        },
+        "bestBid": "0.83",
+        "bestAsk": "0.86"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:43.019Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "PHI",
+      "instrumentSymbol": "GEMI-NBA-2611211800-MIL-PHI-M-PHI",
+      "marketState": "open",
+      "abbreviatedName": "PHI",
+      "color": "#006BB6",
+      "imageUrl": "https://assets.gemini.com/predictions/images/PHI_7927fb8e-12cd-49d4-95ad-16b2b53f1794.png",
+      "expiryDate": "2026-11-23T06:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:08.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "583ec87d-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Philadelphia 76ers",
+        "externalIds": {
+          "sportradar": "583ec87d-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    },
+    {
+      "id": "475120-1195426",
+      "label": "Milwaukee",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Milwaukee wins the Pro Basketball game between Milwaukee and Philadelphia originally scheduled for November 21, 2026 at 1:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.18",
+          "no": "0.84"
+        },
+        "sell": {
+          "yes": "0.16",
+          "no": "0.82"
+        },
+        "bestBid": "0.16",
+        "bestAsk": "0.18",
+        "lastTradePrice": "0.13"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:43.019Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "MIL",
+      "instrumentSymbol": "GEMI-NBA-2611211800-MIL-PHI-M-MIL",
+      "marketState": "open",
+      "abbreviatedName": "MIL",
+      "color": "#00471B",
+      "imageUrl": "https://assets.gemini.com/predictions/images/MIL_5d06f35a-b234-4ee0-b615-ae4eb0452046.png",
+      "expiryDate": "2026-11-23T06:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:08.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "583ecefd-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Milwaukee Bucks",
+        "externalIds": {
+          "sportradar": "583ecefd-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:02:43.019Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "470",
+      "name": "Philadelphia 76ers",
+      "abbreviation": "PHI",
+      "side": "home"
+    },
+    {
+      "id": "467",
+      "name": "Milwaukee Bucks",
+      "abbreviation": "MIL",
+      "side": "away"
+    }
+  ],
+  "description": "Milwaukee vs Philadelphia",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "14.46",
+  "volume24h": "14.46",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-23T06:00:00.000Z",
+  "startTime": "2026-11-21T18:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "377196f0-d137-45cc-8e14-3848e3d51fb4",
+  "eventTags": [
+    {
+      "id": 40,
+      "name": "76ers",
+      "slug": "76ers"
+    },
+    {
+      "id": 13003,
+      "name": "Bucks",
+      "slug": "bucks"
+    },
+    {
+      "id": 13876,
+      "name": "Eastern",
+      "slug": "eastern"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "MIL",
+      "name": "Milwaukee Bucks",
+      "externalIds": {
+        "sportradarId": "583ecefd-fb46-11e1-82cb-f4ce4684ea4c"
+      }
+    }
+  }
+}

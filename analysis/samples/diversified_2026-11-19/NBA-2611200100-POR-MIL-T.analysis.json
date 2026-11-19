@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-POR-MIL-T-O239",
     "question": "Portland vs Milwaukee: Total Points",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:13Z",
+    "analyzed_at_utc": "2026-11-19T06:16:08Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:13Z",
-      "snapshot_hash": "sha256:76a13fef711082ad8bf5927b36f8d0ee404d8b6f0b60c9fa5a9a1d57202f4e59",
+      "snapshot_time_utc": "2026-11-19T06:16:08Z",
+      "snapshot_hash": "sha256:83134407150aae9a1c9051ed9fc387aa48138efeb92381ccbd2dfbe4a28c6e43",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:13Z"
+      "observed_time_utc": "2026-11-19T06:16:08Z"
     },
     "scores": {
       "ambiguity": {

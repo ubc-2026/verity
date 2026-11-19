@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU35",
     "question": "UMBC vs Ohio State: Point Spread",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:56Z",
+    "analyzed_at_utc": "2026-11-19T06:15:46Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:56Z",
-      "snapshot_hash": "sha256:7259d1e22282007503a47d016bc7372f77cca5b3e397596c9d2862e77f88c613",
+      "snapshot_time_utc": "2026-11-19T06:15:46Z",
+      "snapshot_hash": "sha256:bed99068ebe5b1be76ac2a49faacfdb02a6bbbe4974942d79623dde54e10f95e",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Ohio State wins by more than 35.5 points",
       "best_bid": "0.35",
-      "best_ask": "0.46",
-      "mid": "0.405",
-      "implied_probability": "0.405",
+      "best_ask": "0.44",
+      "mid": "0.395",
+      "implied_probability": "0.395",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:56Z"
+      "observed_time_utc": "2026-11-19T06:15:46Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (11c spread).",
+        "rationale": "event-total volume $0 is under $100 (9c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200000-UMBC-OSU-S",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.35, bestAsk 0.46; event volume 0"
+        "quote": "bestBid 0.35, bestAsk 0.44; event volume 0"
       }
     ],
     "evidence_gaps": [],

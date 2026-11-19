@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-MLS-2611250300-HOU-SJ-REGT-O3",
     "question": "Houston vs San Jose: Total Goals",
     "expiry_utc": "2026-11-26T03:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:21Z",
+    "analyzed_at_utc": "2026-11-19T06:15:13Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:21Z",
-      "snapshot_hash": "sha256:06ee8cdc43d68f67ec3f6807f7bab758c42e662c62ecba48c71b3975bd7141cd",
+      "snapshot_time_utc": "2026-11-19T06:15:13Z",
+      "snapshot_hash": "sha256:9f586f4dfd652e64d4ca4005c175c5261c61d3c6731b6a726a9a338f7c3c8246",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:21Z"
+      "observed_time_utc": "2026-11-19T06:15:13Z"
     },
     "scores": {
       "ambiguity": {

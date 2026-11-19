@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-POR-MIL-S-POR9",
     "question": "Portland vs Milwaukee: Point Spread",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:10Z",
+    "analyzed_at_utc": "2026-11-19T06:16:04Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:10Z",
-      "snapshot_hash": "sha256:51456ba69a67ffaacbb5574d9aaccd23bc52835f0a1ab0ad2de4f70dadf0f356",
+      "snapshot_time_utc": "2026-11-19T06:16:04Z",
+      "snapshot_hash": "sha256:b307b42d5b5cbc0cd7fba3cd338ab6dab9cc5dbc4ace3d3bc8636cee66a4c8ad",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:10Z"
+      "observed_time_utc": "2026-11-19T06:16:04Z"
     },
     "scores": {
       "ambiguity": {

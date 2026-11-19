@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-T-O229",
     "question": "New York vs Minnesota: Total Points",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:05Z",
+    "analyzed_at_utc": "2026-11-19T06:16:00Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:05Z",
-      "snapshot_hash": "sha256:081570a945485582fcb15062acd29bc0d012c86f4bca6666f3b49d55e89dfc8b",
+      "snapshot_time_utc": "2026-11-19T06:16:00Z",
+      "snapshot_hash": "sha256:08834609d2591b4a9900d820da3a5eba70e489a4f74137a543ef51f425d061e1",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "More than 229.5 points scored",
-      "best_bid": "0.17",
-      "best_ask": "0.28",
-      "mid": "0.225",
-      "implied_probability": "0.225",
+      "best_bid": "0.19",
+      "best_ask": "0.25",
+      "mid": "0.22",
+      "implied_probability": "0.22",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:05Z"
+      "observed_time_utc": "2026-11-19T06:16:00Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (11c spread).",
+        "rationale": "event-total volume $0 is under $100 (6c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-NYK-MIN-T",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.17, bestAsk 0.28; event volume 0"
+        "quote": "bestBid 0.19, bestAsk 0.25; event volume 0"
       }
     ],
     "evidence_gaps": [],

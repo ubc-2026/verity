@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611210300-HOU-DEN-M-HOU",
     "question": "Houston vs Denver",
     "expiry_utc": "2026-11-22T15:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:16Z",
+    "analyzed_at_utc": "2026-11-19T06:16:13Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:16Z",
-      "snapshot_hash": "sha256:c4bd25a8b0c888af3ffd700586927d5960ab36b1f8228efb18741a248c8db264",
+      "snapshot_time_utc": "2026-11-19T06:16:13Z",
+      "snapshot_hash": "sha256:634d5f31d083239bb96c4523fd709ed54425f258dee87b2ed9fa2c11a2d5ecce",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:16Z"
+      "observed_time_utc": "2026-11-19T06:16:13Z"
     },
     "scores": {
       "ambiguity": {

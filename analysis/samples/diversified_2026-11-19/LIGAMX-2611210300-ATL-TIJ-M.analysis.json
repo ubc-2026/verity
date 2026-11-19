@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ",
     "question": "Atlante vs Tijuana",
     "expiry_utc": "2026-11-21T11:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:20Z",
+    "analyzed_at_utc": "2026-11-19T06:15:11Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:20Z",
-      "snapshot_hash": "sha256:01724a37b3661c7e25508744b23324b8dfe8e785bc463a7f4c16aa4e836dca79",
+      "snapshot_time_utc": "2026-11-19T06:15:11Z",
+      "snapshot_hash": "sha256:38f862dfb79a786882ca952a365a157196da52976c09a2edcc6580a3fcd42133",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:20Z"
+      "observed_time_utc": "2026-11-19T06:15:11Z"
     },
     "scores": {
       "ambiguity": {

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200100-STET-LOU-T-O157",
     "question": "Stetson vs Louisville: Total Points",
     "expiry_utc": "2026-11-22T01:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:22Z",
+    "analyzed_at_utc": "2026-11-19T06:16:16Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:22Z",
-      "snapshot_hash": "sha256:1bfcb4d56f20bcbc79d0291a6503f092de275118a0f9a05c2d664a64314740ab",
+      "snapshot_time_utc": "2026-11-19T06:16:16Z",
+      "snapshot_hash": "sha256:3adb3dd6ac091a49123ed9260b0826bf9161719a9c89cd6540d826b41541c95c",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:22Z"
+      "observed_time_utc": "2026-11-19T06:16:16Z"
     },
     "scores": {
       "ambiguity": {

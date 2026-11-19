@@ -39,6 +39,13 @@ def test_override_floor_applied_separately_from_raw_total():
     assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (6, "Low", "Medium", "Medium")
 
 
+def test_correlation_3_floors_rating_at_high():
+    """Sibling/overlapping markets (C=3) should not stall at Medium when raw total is 8."""
+    r = rate(_s(1, 1, 3, 3))
+    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (8, "Medium", "High", "High")
+    assert any(o.triggered_by == "correlation" for o in r.overrides)
+
+
 def test_incomplete_rating_is_not_silently_low():
     r = rate(_s(1, 1, None, 1))
     assert not r.complete and r.final_rating is None and r.raw_total is None

@@ -5,8 +5,9 @@ Proposals: **0/100** (0.0%).
 
 ## Rating mix
 
-- **Low**: 69 markets, 0 propose
-- **Medium**: 31 markets, 0 propose
+- **Low**: 68 markets, 0 propose
+- **Medium**: 28 markets, 0 propose
+- **High**: 4 markets, 0 propose
 
 ## Buys
 

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-LAC-SAS-T-O241",
     "question": "Los Angeles C vs San Antonio: Total Points",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:46Z",
+    "analyzed_at_utc": "2026-11-19T06:15:40Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:46Z",
-      "snapshot_hash": "sha256:9250b93c6156620ab0c45a945f8969ba0f3ccb92398565aa48c51280f39040f7",
+      "snapshot_time_utc": "2026-11-19T06:15:40Z",
+      "snapshot_hash": "sha256:e3a3bc06b4d4b3ac7dfa2544175d26e5c5ab72a61fdbd18007f7fb2a48037148",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:46Z"
+      "observed_time_utc": "2026-11-19T06:15:40Z"
     },
     "scores": {
       "ambiguity": {

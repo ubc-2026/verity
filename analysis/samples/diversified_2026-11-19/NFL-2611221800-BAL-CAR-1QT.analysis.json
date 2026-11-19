@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-1QT-O7",
     "question": "Baltimore vs Carolina: 1st Quarter Point Total",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:01Z",
+    "analyzed_at_utc": "2026-11-19T06:15:50Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:01Z",
-      "snapshot_hash": "sha256:af16036420ca981498ba094d75b8ee3aa90d87909e7d04d94303cd4fa6a70f1b",
+      "snapshot_time_utc": "2026-11-19T06:15:50Z",
+      "snapshot_hash": "sha256:10d822ab56b39bfe293f9f2a90051f660229355023863a80c50ae25891ccc083",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:01Z"
+      "observed_time_utc": "2026-11-19T06:15:50Z"
     },
     "scores": {
       "ambiguity": {

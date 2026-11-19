@@ -73,7 +73,7 @@
         "agency": "statscore-rest-api",
         "index": "Am. football"
       },
-      "action": "investigate",
+      "action": "flag_for_human_review",
       "scores": {
         "ambiguity": 1,
         "source": 1,
@@ -106,7 +106,7 @@
       "ticker": "NFL-2611230120-MIN-SF-PPRYDS",
       "category": "Sports",
       "title": "Minnesota vs San Francisco: Player Rushing Yards",
-      "outcome": "Kirk Cousins 10+ Rushing Yards",
+      "outcome": "Kaelon Black 30+ Rushing Yards",
       "sourceDetails": {
         "agency": "sportradar-rest-api",
         "index": "American Football Player Props"
@@ -274,10 +274,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611210100-NOP-OKC-M",
+      "ticker": "NBA-2611211800-MIL-PHI-M",
       "category": "Sports",
-      "title": "New Orleans vs Oklahoma City",
-      "outcome": "New Orleans",
+      "title": "Milwaukee vs Philadelphia",
+      "outcome": "Milwaukee",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -320,7 +320,7 @@
         "agency": "statscore-rest-api",
         "index": "Basketball"
       },
-      "action": "investigate",
+      "action": "flag_for_human_review",
       "scores": {
         "ambiguity": 1,
         "source": 1,
@@ -369,10 +369,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-GSW-MEM-S",
+      "ticker": "NBA-2611210100-NOP-OKC-M",
       "category": "Sports",
-      "title": "Golden State vs Memphis: Point Spread",
-      "outcome": "Memphis wins by more than 9.5 points",
+      "title": "New Orleans vs Oklahoma City",
+      "outcome": "New Orleans",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -464,10 +464,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-GSW-MEM-T",
+      "ticker": "NBA-2611200100-GSW-MEM-S",
       "category": "Sports",
-      "title": "Golden State vs Memphis: Total Points",
-      "outcome": "More than 239.5 points scored",
+      "title": "Golden State vs Memphis: Point Spread",
+      "outcome": "Memphis wins by more than 9.5 points",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -559,10 +559,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-LAC-SAS-S",
+      "ticker": "NBA-2611200100-GSW-MEM-T",
       "category": "Sports",
-      "title": "Los Angeles C vs San Antonio: Point Spread",
-      "outcome": "San Antonio wins by more than 8.5 points",
+      "title": "Golden State vs Memphis: Total Points",
+      "outcome": "More than 239.5 points scored",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -578,10 +578,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-2QT",
+      "ticker": "NCAAF-2611210030-CLE-DUK-1QT",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 2nd Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 2nd quarter",
+      "title": "Clemson vs Duke: 1st Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 1st quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -654,10 +654,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-LAC-SAS-T",
+      "ticker": "NBA-2611200100-LAC-SAS-S",
       "category": "Sports",
-      "title": "Los Angeles C vs San Antonio: Total Points",
-      "outcome": "More than 241.5 points scored",
+      "title": "Los Angeles C vs San Antonio: Point Spread",
+      "outcome": "San Antonio wins by more than 8.5 points",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -673,10 +673,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-3QS",
+      "ticker": "NCAAF-2611210030-CLE-DUK-2HS",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 3rd Quarter Point Spread",
-      "outcome": "UCF -7.5 in the 3rd quarter",
+      "title": "Clemson vs Duke: 2nd Half Point Spread",
+      "outcome": "Duke -9.5 in the 2nd half",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -730,17 +730,17 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-NYK-MIN-PPAST",
+      "ticker": "NBA-2611200100-LAC-SAS-T",
       "category": "Sports",
-      "title": "New York vs Minnesota: Player Assists",
-      "outcome": "Rudy Gobert 2+ Assists",
+      "title": "Los Angeles C vs San Antonio: Total Points",
+      "outcome": "More than 241.5 points scored",
       "sourceDetails": {
-        "agency": "sportradar-rest-api",
-        "index": "Basketball Player Props"
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
       },
-      "action": "investigate",
+      "action": "no_further_research",
       "scores": {
-        "ambiguity": 2,
+        "ambiguity": 1,
         "source": 1,
         "liquidity": 3,
         "correlation": 1
@@ -749,10 +749,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-3QT",
+      "ticker": "NCAAF-2611210030-CLE-DUK-2HT",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 3rd Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 3rd quarter",
+      "title": "Clemson vs Duke: 2nd Half Point Total",
+      "outcome": "More than 9.5 points scored in the 2nd half",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -806,12 +806,12 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-NYK-MIN-PPPTS",
+      "ticker": "NBA-2611200100-NYK-MIN-PPAST",
       "category": "Sports",
-      "title": "New York vs Minnesota: Player Points",
-      "outcome": "Rudy Gobert 5+ Points",
+      "title": "New York vs Minnesota: Player Assists",
+      "outcome": "Rudy Gobert 2+ Assists",
       "sourceDetails": {
-        "agency": "statscore-rest-api",
+        "agency": "sportradar-rest-api",
         "index": "Basketball Player Props"
       },
       "action": "investigate",
@@ -825,10 +825,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-4QS",
+      "ticker": "NCAAF-2611210030-CLE-DUK-2QS",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 4th Quarter Point Spread",
-      "outcome": "UCF -7.5 in the 4th quarter",
+      "title": "Clemson vs Duke: 2nd Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 2nd quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -882,12 +882,12 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-NYK-MIN-PPREB",
+      "ticker": "NBA-2611200100-NYK-MIN-PPPTS",
       "category": "Sports",
-      "title": "New York vs Minnesota: Player Rebounds",
-      "outcome": "Rudy Gobert 8+ Rebounds",
+      "title": "New York vs Minnesota: Player Points",
+      "outcome": "Rudy Gobert 10+ Points",
       "sourceDetails": {
-        "agency": "sportradar-rest-api",
+        "agency": "statscore-rest-api",
         "index": "Basketball Player Props"
       },
       "action": "investigate",
@@ -901,10 +901,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-4QT",
+      "ticker": "NCAAF-2611210030-CLE-DUK-2QT",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 4th Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 4th quarter",
+      "title": "Clemson vs Duke: 2nd Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 2nd quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -923,7 +923,7 @@
       "ticker": "NCAAM-2611200000-UMBC-OSU-T",
       "category": "Sports",
       "title": "UMBC vs Ohio State: Total Points",
-      "outcome": "More than 161.5 points scored",
+      "outcome": "More than 165.5 points scored",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -958,17 +958,17 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-NYK-MIN-S",
+      "ticker": "NBA-2611200100-NYK-MIN-PPREB",
       "category": "Sports",
-      "title": "New York vs Minnesota: Point Spread",
-      "outcome": "New York wins by more than 9.5 points",
+      "title": "New York vs Minnesota: Player Rebounds",
+      "outcome": "Rudy Gobert 8+ Rebounds",
       "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
+        "agency": "sportradar-rest-api",
+        "index": "Basketball Player Props"
       },
-      "action": "no_further_research",
+      "action": "investigate",
       "scores": {
-        "ambiguity": 1,
+        "ambiguity": 2,
         "source": 1,
         "liquidity": 3,
         "correlation": 1
@@ -977,10 +977,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-1QS",
+      "ticker": "NCAAF-2611210030-CLE-DUK-3QS",
       "category": "Sports",
-      "title": "Clemson vs Duke: 1st Quarter Point Spread",
-      "outcome": "Duke -7.5 in the 1st quarter",
+      "title": "Clemson vs Duke: 3rd Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 3rd quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1034,10 +1034,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-NYK-MIN-T",
+      "ticker": "NBA-2611200100-NYK-MIN-S",
       "category": "Sports",
-      "title": "New York vs Minnesota: Total Points",
-      "outcome": "More than 229.5 points scored",
+      "title": "New York vs Minnesota: Point Spread",
+      "outcome": "New York wins by more than 9.5 points",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1053,10 +1053,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-1QT",
+      "ticker": "NCAAF-2611210030-CLE-DUK-3QT",
       "category": "Sports",
-      "title": "Clemson vs Duke: 1st Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 1st quarter",
+      "title": "Clemson vs Duke: 3rd Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 3rd quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1080,7 +1080,7 @@
         "agency": "statscore-rest-api",
         "index": "Basketball"
       },
-      "action": "investigate",
+      "action": "flag_for_human_review",
       "scores": {
         "ambiguity": 1,
         "source": 1,
@@ -1110,10 +1110,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-POR-MIL-S",
+      "ticker": "NBA-2611200100-NYK-MIN-T",
       "category": "Sports",
-      "title": "Portland vs Milwaukee: Point Spread",
-      "outcome": "Portland wins by more than 9.5 points",
+      "title": "New York vs Minnesota: Total Points",
+      "outcome": "More than 229.5 points scored",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1129,10 +1129,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-2HS",
+      "ticker": "NCAAF-2611210030-CLE-DUK-4QS",
       "category": "Sports",
-      "title": "Clemson vs Duke: 2nd Half Point Spread",
-      "outcome": "Duke -9.5 in the 2nd half",
+      "title": "Clemson vs Duke: 4th Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 4th quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1186,10 +1186,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611200100-POR-MIL-T",
+      "ticker": "NBA-2611200100-POR-MIL-S",
       "category": "Sports",
-      "title": "Portland vs Milwaukee: Total Points",
-      "outcome": "More than 239.5 points scored",
+      "title": "Portland vs Milwaukee: Point Spread",
+      "outcome": "Portland wins by more than 9.5 points",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1205,10 +1205,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-2HT",
+      "ticker": "NCAAF-2611210030-CLE-DUK-4QT",
       "category": "Sports",
-      "title": "Clemson vs Duke: 2nd Half Point Total",
-      "outcome": "More than 9.5 points scored in the 2nd half",
+      "title": "Clemson vs Duke: 4th Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 4th quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1262,10 +1262,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611210300-HOU-DEN-M",
+      "ticker": "NBA-2611200100-POR-MIL-T",
       "category": "Sports",
-      "title": "Houston vs Denver",
-      "outcome": "Houston",
+      "title": "Portland vs Milwaukee: Total Points",
+      "outcome": "More than 239.5 points scored",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1281,10 +1281,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-2QS",
+      "ticker": "NCAAF-2611210100-ORE-MSU-1QS",
       "category": "Sports",
-      "title": "Clemson vs Duke: 2nd Quarter Point Spread",
-      "outcome": "Duke -7.5 in the 2nd quarter",
+      "title": "Oregon vs Michigan State: 1st Quarter Point Spread",
+      "outcome": "Oregon -7.5 in the 1st quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1308,7 +1308,7 @@
         "agency": "statscore-rest-api",
         "index": "Basketball"
       },
-      "action": "investigate",
+      "action": "flag_for_human_review",
       "scores": {
         "ambiguity": 1,
         "source": 1,
@@ -1338,10 +1338,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611220100-NOP-SAS-M",
+      "ticker": "NBA-2611210300-HOU-DEN-M",
       "category": "Sports",
-      "title": "New Orleans vs San Antonio",
-      "outcome": "San Antonio",
+      "title": "Houston vs Denver",
+      "outcome": "Houston",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1357,10 +1357,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-2QT",
+      "ticker": "NCAAF-2611210100-ORE-MSU-1QT",
       "category": "Sports",
-      "title": "Clemson vs Duke: 2nd Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 2nd quarter",
+      "title": "Oregon vs Michigan State: 1st Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 1st quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1414,10 +1414,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611220300-BOS-SAC-M",
+      "ticker": "NBA-2611220100-NOP-SAS-M",
       "category": "Sports",
-      "title": "Boston vs Sacramento",
-      "outcome": "Sacramento",
+      "title": "New Orleans vs San Antonio",
+      "outcome": "San Antonio",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1433,10 +1433,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-3QS",
+      "ticker": "NCAAF-2611210100-ORE-MSU-2HS",
       "category": "Sports",
-      "title": "Clemson vs Duke: 3rd Quarter Point Spread",
-      "outcome": "Duke -7.5 in the 3rd quarter",
+      "title": "Oregon vs Michigan State: 2nd Half Point Spread",
+      "outcome": "Oregon -9.5 in the 2nd half",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1474,7 +1474,7 @@
       "ticker": "NFL-2611221800-BAL-CAR-PPRYDS",
       "category": "Sports",
       "title": "Baltimore vs Carolina: Player Rushing Yards",
-      "outcome": "Justice Hill 20+ Rushing Yards",
+      "outcome": "Justice Hill 25+ Rushing Yards",
       "sourceDetails": {
         "agency": "sportradar-rest-api",
         "index": "American Football Player Props"
@@ -1490,10 +1490,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NBA-2611190100-ATL-OKC-S",
+      "ticker": "NBA-2611220300-BOS-SAC-M",
       "category": "Sports",
-      "title": "Atlanta vs Oklahoma City: Point Spread",
-      "outcome": "Oklahoma City wins by more than 9.5 points",
+      "title": "Boston vs Sacramento",
+      "outcome": "Sacramento",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -1509,10 +1509,10 @@
       "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611210030-CLE-DUK-3QT",
+      "ticker": "NCAAF-2611210100-ORE-MSU-2HT",
       "category": "Sports",
-      "title": "Clemson vs Duke: 3rd Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 3rd quarter",
+      "title": "Oregon vs Michigan State: 2nd Half Point Total",
+      "outcome": "More than 9.5 points scored in the 2nd half",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -1563,7 +1563,7 @@
       "ticker": "BRENT2611192200",
       "category": "Commodities",
       "title": "Oil (Brent) price on November 19?",
-      "outcome": "$88 or above",
+      "outcome": "$90 or above",
       "sourceDetails": {
         "agency": "kaiko-equities",
         "index": "KK_RFR_BRENTOILUSDC"
@@ -1601,7 +1601,7 @@
       "ticker": "XAG2611192200",
       "category": "Commodities",
       "title": "Silver price on November 19?",
-      "outcome": "$46 or above",
+      "outcome": "$47 or above",
       "sourceDetails": {
         "agency": "kaiko-equities",
         "index": "KK_RFR_XAGUSDC"
@@ -1639,7 +1639,7 @@
       "ticker": "WTI2611192200",
       "category": "Commodities",
       "title": "Oil (WTI) price on November 19?",
-      "outcome": "$83 or above",
+      "outcome": "$84 or above",
       "sourceDetails": {
         "agency": "kaiko-equities",
         "index": "KK_RFR_WTIUSDC"
@@ -1663,11 +1663,11 @@
         "agency": "lukka",
         "index": "LS-LRRR-SOLNUSD"
       },
-      "action": "investigate",
+      "action": "no_further_research",
       "scores": {
         "ambiguity": 2,
         "source": 1,
-        "liquidity": 3,
+        "liquidity": 2,
         "correlation": 1
       },
       "has_proposal": false,
@@ -1725,44 +1725,6 @@
       "proposal_item": null
     },
     {
-      "ticker": "XRP2611192200",
-      "category": "Crypto",
-      "title": "XRP price on November 19",
-      "outcome": "$0.98 or above",
-      "sourceDetails": {
-        "agency": "lukka",
-        "index": "LS-LRRR-XRPUSD"
-      },
-      "action": "no_further_research",
-      "scores": {
-        "ambiguity": 2,
-        "source": 1,
-        "liquidity": 2,
-        "correlation": 1
-      },
-      "has_proposal": false,
-      "proposal_item": null
-    },
-    {
-      "ticker": "COPPER2611192200",
-      "category": "Commodities",
-      "title": "Copper price on November 19?",
-      "outcome": "$5.66 or above",
-      "sourceDetails": {
-        "agency": "kaiko-equities",
-        "index": "KK_RFR_COPPERUSDC"
-      },
-      "action": "no_further_research",
-      "scores": {
-        "ambiguity": 2,
-        "source": 1,
-        "liquidity": 2,
-        "correlation": 1
-      },
-      "has_proposal": false,
-      "proposal_item": null
-    },
-    {
       "ticker": "BTC2611190700",
       "category": "Crypto",
       "title": "BTC price today at 2am EST",
@@ -1770,6 +1732,25 @@
       "sourceDetails": {
         "agency": "lukka",
         "index": "LS-LRRR-XBTUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "XRP2611192200",
+      "category": "Crypto",
+      "title": "XRP price on November 19",
+      "outcome": "$0.98 or above",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-XRPUSD"
       },
       "action": "no_further_research",
       "scores": {
@@ -1817,6 +1798,25 @@
       "proposal_item": null
     },
     {
+      "ticker": "BTC05M2611190615",
+      "category": "Crypto",
+      "title": "BTC price today at 1:15am EST",
+      "outcome": "Up",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-XBTUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
       "ticker": "WXHIGH-AUS-2611200459",
       "category": "Weather",
       "title": "Highest temperature in Austin on November 19, 2026?",
@@ -1836,7 +1836,7 @@
       "ticker": "XAU2611192200",
       "category": "Commodities",
       "title": "Gold price on November 19?",
-      "outcome": "$3,650 or above",
+      "outcome": "$3,775 or above",
       "sourceDetails": {
         "agency": "kaiko-equities",
         "index": "KK_RFR_XAUUSDC"
@@ -1852,13 +1852,13 @@
       "proposal_item": null
     },
     {
-      "ticker": "XRP05M2611190615",
+      "ticker": "BTC05M2611190620",
       "category": "Crypto",
-      "title": "XRP price today at 1:15am EST",
+      "title": "BTC price today at 1:20am EST",
       "outcome": "Up",
       "sourceDetails": {
         "agency": "lukka",
-        "index": "LS-LRRR-XRPUSD"
+        "index": "LS-LRRR-XBTUSD"
       },
       "action": "investigate",
       "scores": {
@@ -1871,9 +1871,9 @@
       "proposal_item": null
     },
     {
-      "ticker": "BTC05M2611190615",
+      "ticker": "BTC05M2611190635",
       "category": "Crypto",
-      "title": "BTC price today at 1:15am EST",
+      "title": "BTC price today at 1:35am EST",
       "outcome": "Up",
       "sourceDetails": {
         "agency": "lukka",

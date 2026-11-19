@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611220100-NOP-SAS-M-SAS",
     "question": "New Orleans vs San Antonio",
     "expiry_utc": "2026-11-23T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:20Z",
+    "analyzed_at_utc": "2026-11-19T06:16:18Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:20Z",
-      "snapshot_hash": "sha256:d7efd4dfba90a59f762e91fac6ebe391d54862f25d7097e57f6fba9628201608",
+      "snapshot_time_utc": "2026-11-19T06:16:18Z",
+      "snapshot_hash": "sha256:05b2ce4324a6120fbd436db69e5c7ee6f240edc10f19bc7f9791e0a395a4ea9d",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:20Z"
+      "observed_time_utc": "2026-11-19T06:16:18Z"
     },
     "scores": {
       "ambiguity": {

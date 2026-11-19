@@ -276,13 +276,13 @@
       "prices": {
         "buy": {
           "yes": "0.63",
-          "no": "0.47"
+          "no": "0.48"
         },
         "sell": {
-          "yes": "0.53",
+          "yes": "0.52",
           "no": "0.37"
         },
-        "bestBid": "0.53",
+        "bestBid": "0.52",
         "bestAsk": "0.63"
       },
       "status": "active",
@@ -476,13 +476,13 @@
       "prices": {
         "buy": {
           "yes": "0.47",
-          "no": "0.59"
+          "no": "0.61"
         },
         "sell": {
-          "yes": "0.41",
+          "yes": "0.39",
           "no": "0.53"
         },
-        "bestBid": "0.41",
+        "bestBid": "0.39",
         "bestAsk": "0.47"
       },
       "status": "active",
@@ -576,13 +576,13 @@
       "prices": {
         "buy": {
           "yes": "0.41",
-          "no": "0.67"
+          "no": "0.65"
         },
         "sell": {
-          "yes": "0.33",
+          "yes": "0.35",
           "no": "0.59"
         },
-        "bestBid": "0.33",
+        "bestBid": "0.35",
         "bestAsk": "0.41"
       },
       "status": "active",
@@ -625,15 +625,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.38",
-          "no": "0.68"
+          "yes": "0.41",
+          "no": "0.7"
         },
         "sell": {
-          "yes": "0.32",
-          "no": "0.62"
+          "yes": "0.3",
+          "no": "0.59"
         },
-        "bestBid": "0.32",
-        "bestAsk": "0.38"
+        "bestBid": "0.3",
+        "bestAsk": "0.41"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:38:26.633Z",
@@ -925,15 +925,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.25",
-          "no": "0.86"
+          "yes": "0.23",
+          "no": "0.83"
         },
         "sell": {
-          "yes": "0.14",
-          "no": "0.75"
+          "yes": "0.17",
+          "no": "0.77"
         },
-        "bestBid": "0.14",
-        "bestAsk": "0.25"
+        "bestBid": "0.17",
+        "bestAsk": "0.23"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:38:26.633Z",

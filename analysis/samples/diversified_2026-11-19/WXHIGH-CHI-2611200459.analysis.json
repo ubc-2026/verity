@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
     "question": "Highest temperature in Chicago on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:29Z",
+    "analyzed_at_utc": "2026-11-19T06:16:27Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:29Z",
-      "snapshot_hash": "sha256:2b23e8c5d4a867353de4f0b58aa744312336334fe19bbeaf49238e6a0760842f",
+      "snapshot_time_utc": "2026-11-19T06:16:27Z",
+      "snapshot_hash": "sha256:a2a2484c2e78505d85483620c6a6d148c8d09f90136eada9e7b157bab928a4c5",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "66°F to 67°F",
-      "best_bid": "0.62",
+      "best_bid": "0.63",
       "best_ask": "0.67",
-      "mid": "0.645",
-      "implied_probability": "0.645",
+      "mid": "0.65",
+      "implied_probability": "0.65",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:29Z"
+      "observed_time_utc": "2026-11-19T06:16:27Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (5c spread).",
+        "rationale": "event-total volume $0 is under $100 (4c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.62, bestAsk 0.67; event volume 0"
+        "quote": "bestBid 0.63, bestAsk 0.67; event volume 0"
       }
     ],
     "evidence_gaps": [

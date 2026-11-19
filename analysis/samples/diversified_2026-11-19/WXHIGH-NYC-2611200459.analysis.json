@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-WXHIGH-NYC-2611200459-65TO66",
     "question": "Highest temperature in NYC on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:30Z",
+    "analyzed_at_utc": "2026-11-19T06:16:28Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:30Z",
-      "snapshot_hash": "sha256:c7ceb4b5c4a56bf5f24abcc97a71d95dbad99697d28c109ff9144e13a09df996",
+      "snapshot_time_utc": "2026-11-19T06:16:28Z",
+      "snapshot_hash": "sha256:a2666f2b4c0a160cb138883bd805e4a1f68fd9860a856fbc4861ee9af64cb4f3",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:30Z"
+      "observed_time_utc": "2026-11-19T06:16:28Z"
     },
     "scores": {
       "ambiguity": {

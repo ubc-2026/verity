@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-ETH15M2611190615-UP",
     "question": "ETH price today at 1:15am EST",
     "expiry_utc": "2026-11-19T06:15:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:44Z",
+    "analyzed_at_utc": "2026-11-19T06:16:40Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:44Z",
-      "snapshot_hash": "sha256:7eb9a8de67826364f7ea2fb5f829033f719ce94269789de48674049d7974a5bd",
+      "snapshot_time_utc": "2026-11-19T06:16:40Z",
+      "snapshot_hash": "sha256:0b5eec8a01ed4d032316aa507641490753e43a16e0207722a77ec2297e8ef210",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Up",
-      "best_bid": "0.96",
-      "best_ask": "0.99",
-      "mid": "0.975",
-      "implied_probability": "0.975",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
       "volume_usd": "30",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:44Z"
+      "observed_time_utc": "2026-11-19T06:16:40Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $30 is under $100 (3c spread).",
+        "rationale": "No two-sided quote. event-total volume $30 is on file.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/ETH15M2611190615",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.96, bestAsk 0.99; event volume 30"
+        "quote": "bestBid None, bestAsk None; event volume 30"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-ETH15M2611190615-UP] no purchase: 0:01:16 to expiry is under 1h (Agent rule 11)."
+    "[GEMI-ETH15M2611190615-UP] no purchase: -1 day, 23:58:20 to expiry is under 1h (Agent rule 11)."
   ]
 }

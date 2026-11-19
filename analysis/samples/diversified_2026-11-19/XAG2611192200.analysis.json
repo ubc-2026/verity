@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-XAG2611192200-HI46",
+    "contract_id": "GEMI-XAG2611192200-HI47",
     "event_ticker": "XAG2611192200",
-    "instrument_symbol": "GEMI-XAG2611192200-HI46",
+    "instrument_symbol": "GEMI-XAG2611192200-HI47",
     "question": "Silver price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:32Z",
+    "analyzed_at_utc": "2026-11-19T06:16:30Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:32Z",
-      "snapshot_hash": "sha256:19b573e88dcda87fc18a293ef6a07817e2d82a21f1c34dd80dba79cc6bd6a7eb",
+      "snapshot_time_utc": "2026-11-19T06:16:30Z",
+      "snapshot_hash": "sha256:f778f6554972e24546ab2e35499cdc82cbe07a3df44860c998cbbb294bffecc7",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$46 or above",
-      "best_bid": "0.27",
-      "best_ask": "0.31",
-      "mid": "0.29",
-      "implied_probability": "0.29",
+      "outcome_label": "$47 or above",
+      "best_bid": "0.05",
+      "best_ask": "0.09",
+      "mid": "0.07",
+      "implied_probability": "0.07",
       "volume_usd": "12",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:32Z"
+      "observed_time_utc": "2026-11-19T06:16:30Z"
     },
     "scores": {
       "ambiguity": {
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XAG2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Silver is $46 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf)."
+        "quote": "If the price of Silver is $47 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliquid.xyz/trade/xyz:SILVER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XAG2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.27, bestAsk 0.31; event volume 12"
+        "quote": "bestBid 0.05, bestAsk 0.09; event volume 12"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-XAG2611192200-HI46] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-XAG2611192200-HI47] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

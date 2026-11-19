@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-BRENT2611192200-HI88",
+    "contract_id": "GEMI-BRENT2611192200-HI90",
     "event_ticker": "BRENT2611192200",
-    "instrument_symbol": "GEMI-BRENT2611192200-HI88",
+    "instrument_symbol": "GEMI-BRENT2611192200-HI90",
     "question": "Oil (Brent) price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:30Z",
+    "analyzed_at_utc": "2026-11-19T06:16:28Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:30Z",
-      "snapshot_hash": "sha256:b28915f88054b948e33d08ae4a4b6287f48b27d9fa8d81fe06abcb4d506acefc",
+      "snapshot_time_utc": "2026-11-19T06:16:28Z",
+      "snapshot_hash": "sha256:fecdb35e0ad78d59f23349f4e2d4600635410725f9fc3fd5e07081e4eb4c5867",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$88 or above",
-      "best_bid": "0.75",
-      "best_ask": "0.79",
-      "mid": "0.77",
-      "implied_probability": "0.77",
+      "outcome_label": "$90 or above",
+      "best_bid": "0.34",
+      "best_ask": "0.38",
+      "mid": "0.36",
+      "implied_probability": "0.36",
       "volume_usd": "79.32",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:30Z"
+      "observed_time_utc": "2026-11-19T06:16:28Z"
     },
     "scores": {
       "ambiguity": {
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BRENT2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Oil (Brent) is $88 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf)."
+        "quote": "If the price of Oil (Brent) is $90 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BRENT2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.75, bestAsk 0.79; event volume 79.32"
+        "quote": "bestBid 0.34, bestAsk 0.38; event volume 79.32"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-BRENT2611192200-HI88] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-BRENT2611192200-HI90] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

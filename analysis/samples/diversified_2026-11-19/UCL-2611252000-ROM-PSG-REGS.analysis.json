@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2",
     "question": "Roma vs PSG: Point Spread",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:31Z",
+    "analyzed_at_utc": "2026-11-19T06:15:22Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:31Z",
-      "snapshot_hash": "sha256:71c64266353e9bb2994e4c600999e7ddb08f5a5297100d26e805cf4c0b2c3c37",
+      "snapshot_time_utc": "2026-11-19T06:15:22Z",
+      "snapshot_hash": "sha256:a9d4868b419dbc4007b724f4e7f7834d24ef47ac9fa6e66b5026f23a59863f1e",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:31Z"
+      "observed_time_utc": "2026-11-19T06:15:22Z"
     },
     "scores": {
       "ambiguity": {

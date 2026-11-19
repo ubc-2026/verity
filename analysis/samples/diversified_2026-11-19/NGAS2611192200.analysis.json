@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NGAS2611192200-HI3D850",
     "question": "Natural Gas price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:38Z",
+    "analyzed_at_utc": "2026-11-19T06:16:35Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:38Z",
-      "snapshot_hash": "sha256:76811a1625b74e47791946c588979a6e0670eed6f595cf0be19a541e17d16209",
+      "snapshot_time_utc": "2026-11-19T06:16:35Z",
+      "snapshot_hash": "sha256:f19c35fbc12608aea2820d9a808647f139476ca81f73ace29d238f50b1a525d1",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:38Z"
+      "observed_time_utc": "2026-11-19T06:16:35Z"
     },
     "scores": {
       "ambiguity": {

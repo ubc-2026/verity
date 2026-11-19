@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611210000-CMU-PITT-M-CMU",
     "question": "Central Michigan vs Pittsburgh",
     "expiry_utc": "2026-11-23T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:12:24Z",
+    "analyzed_at_utc": "2026-11-19T06:15:15Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:12:24Z",
-      "snapshot_hash": "sha256:72e180a2574507b285afb236e200ea8913d04706af379a9ea2f17089359d8f7c",
+      "snapshot_time_utc": "2026-11-19T06:15:15Z",
+      "snapshot_hash": "sha256:92562ee512a154ed8deb17735d795bb516f0d2bce5286fb824d76db4bdde9b8a",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "14",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:12:24Z"
+      "observed_time_utc": "2026-11-19T06:15:15Z"
     },
     "scores": {
       "ambiguity": {

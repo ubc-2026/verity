@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO1",
     "question": "Baltimore vs Carolina: Quarterback Passing Touchdowns",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:19Z",
+    "analyzed_at_utc": "2026-11-19T06:16:12Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:19Z",
-      "snapshot_hash": "sha256:efd9cdd8e05afad123dd043f61b6617375b6c96e44beee168bc3d2aa8290e4c5",
+      "snapshot_time_utc": "2026-11-19T06:16:12Z",
+      "snapshot_hash": "sha256:96e4e656615022533602b933cc70b7498456a9bd884d754beeb5a7b9b23368a6",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:19Z"
+      "observed_time_utc": "2026-11-19T06:16:12Z"
     },
     "scores": {
       "ambiguity": {

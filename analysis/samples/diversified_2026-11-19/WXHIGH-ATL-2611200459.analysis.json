@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-WXHIGH-ATL-2611200459-68TO69",
     "question": "Highest temperature in Atlanta on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:39Z",
+    "analyzed_at_utc": "2026-11-19T06:16:36Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:39Z",
-      "snapshot_hash": "sha256:b3c508378f2bc18c93e19a70935b63a3315505bd6d0d63b96d969644b537e5b5",
+      "snapshot_time_utc": "2026-11-19T06:16:36Z",
+      "snapshot_hash": "sha256:18be0cba08bb66af5e5a6d9d6e1dd82c686fd150a9591bc00a972f065f2667f2",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:39Z"
+      "observed_time_utc": "2026-11-19T06:16:36Z"
     },
     "scores": {
       "ambiguity": {

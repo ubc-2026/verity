@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200030-TUL-LT-T-O144",
     "question": "Tulane vs Louisiana Tech: Total Points",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:15Z",
+    "analyzed_at_utc": "2026-11-19T06:16:06Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:15Z",
-      "snapshot_hash": "sha256:95f46183f4a4540aec733c0188b2ce009e3c948388ea27f577caba15e24359e7",
+      "snapshot_time_utc": "2026-11-19T06:16:06Z",
+      "snapshot_hash": "sha256:d8b8a8f8b8c98d0bec6d6524d154f1a36fa8f65482ff55a1ccc69d812f412300",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:15Z"
+      "observed_time_utc": "2026-11-19T06:16:06Z"
     },
     "scores": {
       "ambiguity": {

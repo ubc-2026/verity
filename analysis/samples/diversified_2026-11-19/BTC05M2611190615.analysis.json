@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-BTC05M2611190615-UP",
     "question": "BTC price today at 1:15am EST",
     "expiry_utc": "2026-11-19T06:15:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:13:47Z",
+    "analyzed_at_utc": "2026-11-19T06:16:42Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:13:47Z",
-      "snapshot_hash": "sha256:b274f8438482ffd24f291fc9bf04c35be5cb8a556973d20d185274a7b0d81225",
+      "snapshot_time_utc": "2026-11-19T06:16:42Z",
+      "snapshot_hash": "sha256:f09ed3abab2ea455b2f9b044af01d3f1d56932ba5e02e4f8971910b70cccf04c",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Up",
-      "best_bid": "0.03",
-      "best_ask": "0.23",
-      "mid": "0.13",
-      "implied_probability": "0.13",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
       "volume_usd": "26.9",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:13:47Z"
+      "observed_time_utc": "2026-11-19T06:16:42Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $26.9 is under $100 (20c spread).",
+        "rationale": "No two-sided quote. event-total volume $26.9 is on file.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BTC05M2611190615",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.03, bestAsk 0.23; event volume 26.9"
+        "quote": "bestBid None, bestAsk None; event volume 26.9"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-BTC05M2611190615-UP] no purchase: 0:01:13 to expiry is under 1h (Agent rule 11)."
+    "[GEMI-BTC05M2611190615-UP] no purchase: -1 day, 23:58:18 to expiry is under 1h (Agent rule 11)."
   ]
 }
