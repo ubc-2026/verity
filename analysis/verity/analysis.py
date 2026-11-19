@@ -1,8 +1,8 @@
-"""get_risk_analysis(contract_id) -> RiskAnalysisV1, fixture-backed.
+"""get_risk_analysis(contract_id) -> RiskAnalysisV1.
 
-In fixture mode the "analyst" block in each fixture holds the workbook's scores.
-In live mode verity/rules_analyst.py fills it with code-only rules (no LLM).
-Liquidity is always computed in code from the quoted numbers.
+Fixture files already contain ambiguity, source, and correlation scores.
+A live exchange snapshot leaves those three null. Liquidity is always
+computed here from the quoted numbers.
 """
 from __future__ import annotations
 
@@ -80,8 +80,8 @@ def _flags(m: dict[str, Any]) -> list[str]:
         f.append("third_party_price_source: price not read from Gemini directly")
     if m.get("terms_problem"):
         f.append(f"terms_not_read: {m['terms_problem']}")
-    if m.get("analyst_id"):
-        f.append(f"analyst={m['analyst_id']} (code rules, no LLM)")
+    if m.get("reading_scores_unscored"):
+        f.append("reading_scores_unscored: ambiguity, source, and correlation are left null")
     return f
 
 
@@ -95,6 +95,7 @@ def get_risk_analysis(contract_id: str, ctx: Optional[FixtureContext] = None) ->
     liq, liq_why, liq_null = liquidity_score(
         _dec(mk.get("volume_usd")), _dec(mk.get("best_bid")), _dec(mk.get("best_ask")),
         bool(mk.get("some_strikes_unquoted")),
+        mk.get("volume_basis"),
     )
     a = m["analyst"]
     scores = Scores(

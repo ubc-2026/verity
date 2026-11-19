@@ -1,10 +1,12 @@
-"""Fixture-only demo: no network, no API key, no wallet.
+"""Fixture demo: no network, no API key, no wallet.
 
     python demo.py            # prints the three runs and writes samples/*.json
 
-Live (needs network only; the Gemini Exchange events API is public, the analyst is
-code-only with no LLM, and it still places no trades):
+Live market read from the public Gemini Exchange API. No key. Still places no trades:
     python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
+
+Free research for the New York settlement gap. No key. Still signs nothing:
+    python demo.py --research
 """
 from __future__ import annotations
 
@@ -49,6 +51,9 @@ def run_live(ticker: str, outcome: str, read_terms: bool) -> None:
     s, r = ra.scores, ra.rating
     print(f"price  bid {ra.quoted_price.best_bid} / ask {ra.quoted_price.best_ask}  implied {ra.quoted_price.implied_probability}")
     print(f"scores ambiguity={s.ambiguity.score} source={s.source.score} liquidity={s.liquidity.score} correlation={s.correlation.score}")
+    for name, cat in (("ambiguity", s.ambiguity), ("source", s.source), ("correlation", s.correlation)):
+        if cat.score is None and cat.null_reason:
+            print(f"  {name}: {cat.null_reason}")
     print(f"rating raw {r.raw_total} -> {r.raw_rating}; floor {r.rating_floor}; final {r.final_rating}; "
           f"complete={r.complete}; action {ra.research_action}")
     for f in ra.data_quality_flags:
@@ -65,13 +70,30 @@ def run_live(ticker: str, outcome: str, read_terms: bool) -> None:
          "decision_log": log}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def run_research() -> None:
+    """Read the public terms PDF and the NWS report. A failed fetch proposes nothing."""
+    ctx = FixtureContext.default(live_research=True)
+    contract_id = "fx-nyc-high-20261118"
+    print("\n=== NYC free research ===  (public documents, no key)")
+    ra = get_risk_analysis(contract_id, ctx)
+    log: list[str] = []
+    prop = generate_purchase_request(ra, ctx, decision_log=log)
+    for line in log:
+        print("  log:", line)
+    print("proposal:", "null" if prop is None else prop.model_dump_json(indent=2))
+
+
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser(description="Verity analysis demo")
-    ap.add_argument("--live", metavar="EVENT_TICKER", help="read this Gemini Exchange event and score it with the code-only rules")
+    ap.add_argument("--live", metavar="EVENT_TICKER", help="read this Gemini Exchange event and score it in code")
     ap.add_argument("--outcome", help="contract label to analyze, e.g. 'Oklahoma City'")
     ap.add_argument("--no-terms", action="store_true", help="skip downloading the terms PDF")
+    ap.add_argument("--research", action="store_true", help="read the NYC terms PDF and NWS report, then maybe propose")
     args = ap.parse_args()
+    if args.research:
+        run_research()
+        raise SystemExit(0)
     if args.live:
         if not args.outcome:
             ap.error("--live needs --outcome")

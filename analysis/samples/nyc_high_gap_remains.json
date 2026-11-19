@@ -46,7 +46,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "Volume $7 is under $100 (spread 4c).",
+        "rationale": "event-total volume $7 is under $100 (4c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-NYC-3"

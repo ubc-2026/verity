@@ -3,7 +3,7 @@ from pydantic import ValidationError
 
 from verity import FixedClock, FixtureContext, generate_purchase_request, get_risk_analysis
 from verity.schemas import CategoryScore, PurchaseProposalV1, Scores
-from verity.scoring import band, liquidity_score, rate
+from verity.scoring import READING_RUBRIC, band, liquidity_score, rate
 from decimal import Decimal
 
 OKC = "fx-okc-moneyline-20261118"
@@ -50,6 +50,28 @@ def test_liquidity_thresholds_match_framework():
     assert liquidity_score(Decimal("7"), Decimal("0.54"), Decimal("0.58"))[0] == 3
     assert liquidity_score(Decimal("857.53"), Decimal("0.51"), Decimal("0.54"), True)[0] == 2
     assert liquidity_score(Decimal("20"), None, None)[0] == 3
+    # Both prices missing is a 3 when any volume is present, and null only when nothing is present.
+    assert liquidity_score(None, None, None)[0] is None
+    assert liquidity_score(None, Decimal("0.40"), Decimal("0.44"))[0] is None
+    # A tight, busy book is still a 2 when some strikes have no bid.
+    assert liquidity_score(Decimal("5000"), Decimal("0.40"), Decimal("0.41"), True)[0] == 2
+    # $100 and a 5c spread are the last values before a 3.
+    assert liquidity_score(Decimal("100"), Decimal("0.40"), Decimal("0.45"))[0] == 2
+
+
+def test_liquidity_rationale_names_the_volume_window():
+    score, why, _ = liquidity_score(Decimal("1071"), Decimal("0.69"), Decimal("0.70"), False, "total")
+    assert score == 1 and why.startswith("event-total volume")
+    score, why, _ = liquidity_score(Decimal("20"), None, None, False, "24h")
+    assert score == 3 and "24h volume" in why
+
+
+def test_reading_rubric_keeps_the_edge_cases():
+    assert "empty event terms link" in READING_RUBRIC
+    assert "exchange may set the payout" in READING_RUBRIC
+    assert "No settlement source is named" in READING_RUBRIC
+    assert "not a portfolio" in READING_RUBRIC
+    assert "Sibling buckets" in READING_RUBRIC
 
 
 # --- OKC -------------------------------------------------------------------

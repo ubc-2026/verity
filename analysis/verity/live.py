@@ -1,7 +1,9 @@
 """Live market read from the public Gemini Exchange API (no key needed).
 
-`build_live_record()` turns one event + outcome into the same record shape the
-fixtures use, so scoring, overrides and proposal gates run unchanged.
+`build_live_record()` turns one event and one outcome into the same record shape
+the fixtures use. The feed supplies the contract text, the price, and the
+expiry. It does not score ambiguity, source, or correlation, so those stay null.
+Liquidity is computed later from the quotes.
 """
 from __future__ import annotations
 
@@ -52,30 +54,39 @@ def _s(x: Any) -> Optional[str]:
     return None if x in (None, "") else str(x)
 
 
-def _rich_text(x: Any) -> Optional[str]:
-    """Contract descriptions arrive as a rich-text document ({"nodeType": "document",
-    "content": [{"value": ...}]}), event descriptions as plain strings. Return plain text."""
-    if x is None or isinstance(x, str):
-        return _s(x)
-    parts: list[str] = []
-
-    def walk(node: Any) -> None:
-        if isinstance(node, dict):
-            if isinstance(node.get("value"), str):
-                parts.append(node["value"])
-            for child in node.get("content") or []:
-                walk(child)
-        elif isinstance(node, list):
-            for child in node:
-                walk(child)
-
-    walk(x)
-    return _s("".join(parts).strip())
-
-
 def _event_terms_url(event: dict[str, Any]) -> Optional[str]:
     # The live API puts the event-level link in "termsLink"; older docs used "termsAndConditionsUrl".
     return _s(event.get("termsLink")) or _s(event.get("termsAndConditionsUrl"))
+
+
+def _plain_text(value: Any) -> Optional[str]:
+    """Exchange descriptions are a string, or a small document tree with text nodes."""
+    if value in (None, ""):
+        return None
+    if isinstance(value, str):
+        text = value.strip()
+        return text or None
+    if isinstance(value, dict):
+        parts: list[str] = []
+        if isinstance(value.get("value"), str):
+            parts.append(value["value"])
+        for child in value.get("content") or []:
+            child_text = _plain_text(child)
+            if child_text:
+                parts.append(child_text)
+        text = " ".join(parts).strip()
+        return text or None
+    return None
+
+
+def _unscored(name: str) -> dict[str, Any]:
+    """A reading score we refuse to invent. Missing is null, not zero."""
+    return {
+        "score": None,
+        "rationale": "The exchange snapshot stores the contract text for a person to read.",
+        "null_reason": f"The Gemini Exchange feed does not score {name}.",
+        "citation_ids": [],
+    }
 
 
 def build_live_record(
@@ -96,11 +107,12 @@ def build_live_record(
     p = c.get("prices") or {}
     url = f"{BASE}/events/{event.get('ticker')}"
     terms_url = _s(c.get("termsAndConditionsUrl")) or _event_terms_url(event)
-    contract_text = _rich_text(c.get("description"))
 
     excerpts = []
-    if _s(event.get("description")):
-        excerpts.append({"id": "C-EVENT", "field_or_rule": "event.description", "quote": str(event["description"])})
+    event_text = _plain_text(event.get("description"))
+    if event_text:
+        excerpts.append({"id": "C-EVENT", "field_or_rule": "event.description", "quote": event_text})
+    contract_text = _plain_text(c.get("description"))
     if contract_text:
         excerpts.append({"id": "C-CONTRACT", "field_or_rule": "contract.description", "quote": contract_text})
     if terms_text:
@@ -138,6 +150,12 @@ def build_live_record(
         "rules_excerpts": excerpts,
         "sibling_events": [e.get("ticker") for e in (event.get("events") or []) if e.get("ticker")],
         "evidence_gaps": [],
+        "reading_scores_unscored": True,
+        "analyst": {
+            "ambiguity": _unscored("ambiguity"),
+            "source": _unscored("source"),
+            "correlation": _unscored("correlation"),
+        },
     }
 
 
@@ -149,15 +167,13 @@ def analyze_live(
     read_terms: bool = True,
     now: Optional[datetime] = None,
 ):
-    """Fetch -> (terms PDF) -> code-only rules analyst -> RiskAnalysisV1.
+    """Fetch one Gemini Exchange event and run the code scoring path.
 
-    No LLM and no API key: the Gemini Exchange events API is public.
-    Returns (risk_analysis, ctx); pass the same ctx to generate_purchase_request so
-    it uses the same clock and catalog.
+    Returns (risk_analysis, ctx). Pass the same ctx to generate_purchase_request
+    so it uses the same clock and catalog.
     """
     from .analysis import get_risk_analysis
     from .fixtures import FixedClock, FixtureContext
-    from .rules_analyst import rules_analyst
 
     now = now or datetime.now(timezone.utc)
     event = fetch_event(event_ticker, http_get)
@@ -166,7 +182,6 @@ def analyze_live(
     text, problem = (None, "no terms URL in the event") if not terms_url else (
         fetch_terms_text(terms_url, http_get) if read_terms else (None, "terms reading disabled"))
     record = build_live_record(event, outcome_label, now=now, terms_text=text, terms_problem=problem)
-    record = rules_analyst(record)
 
     ctx = FixtureContext.default(clock=FixedClock(fmt_utc(now)))
     ctx.markets = {**ctx.markets, record["contract_id"]: record}

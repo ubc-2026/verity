@@ -45,7 +45,7 @@
       },
       "liquidity": {
         "score": 1,
-        "rationale": "Volume $1071 with a 1c spread.",
+        "rationale": "event-total volume $1071 with a 1c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-OKC-3"

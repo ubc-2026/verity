@@ -19,7 +19,7 @@ Verity reads a prediction-market contract, identifies missing evidence that coul
 
 ```mermaid
 flowchart TD
-    Market["Gemini Exchange market data"] --> Analysis["Rules-based risk analysis"]
+    Market["Gemini Exchange market data"] --> Analysis["Risk scoring in code"]
     Analysis --> Proposal["Catalog purchase proposal"]
     Proposal --> Policy["Payment policy and signer"]
     Owner["Owner wallet approval"] --> Policy
@@ -31,7 +31,7 @@ flowchart TD
     Delivery --> Ledger
 ```
 
-The analysis proposes a catalog item and explains why it matters. The payment service holds the signer and derives the merchant endpoint, recipient, asset, network, and amount from the allowlisted catalog and validated quote.
+The purchase proposal names a catalog item and why it matters. The payment service holds the signer and derives the merchant endpoint, recipient, asset, network, and amount from the allowlisted catalog and validated quote.
 
 ### Market analysis
 
