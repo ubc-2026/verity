@@ -1,0 +1,33 @@
+{
+  "n": 100,
+  "mix": {
+    "target": "80% sports / 20% non-sports (follow live Gemini board)",
+    "sports": 80,
+    "non_sports": 20,
+    "sports_pct": 80.0,
+    "non_sports_pct": 20.0
+  },
+  "ratings": {
+    "Medium": 95,
+    "Low": 1,
+    "High": 4
+  },
+  "proposed": 1,
+  "propose_pct": 1.0,
+  "gate": "High-only",
+  "buys": [
+    {
+      "ticker": "NCAAF-2611211700-TAM-OU-M",
+      "category": "Sports",
+      "title": "Texas A&M vs Oklahoma",
+      "total": 9,
+      "item": "cat-sports-settlement-version-v1",
+      "scores": {
+        "A": 1,
+        "S": 2,
+        "L": 3,
+        "C": 3
+      }
+    }
+  ]
+}
