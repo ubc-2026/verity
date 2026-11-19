@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-XRP2611192200-HI0D98",
     "question": "XRP price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:08Z",
+    "analyzed_at_utc": "2026-11-19T06:13:41Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:08Z",
-      "snapshot_hash": "sha256:ee0dbc7e76476010eef39dad18832f74a1c57b2177e35ebf7ebac3f889e53f05",
+      "snapshot_time_utc": "2026-11-19T06:13:41Z",
+      "snapshot_hash": "sha256:affaf0ccf2d0597bad989159576cbbd2f2c6b73213b23789ebe04b744a2f1606",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$0.98 or above",
-      "best_bid": "0.37",
-      "best_ask": "0.41",
-      "mid": "0.39",
-      "implied_probability": "0.39",
+      "best_bid": "0.38",
+      "best_ask": "0.42",
+      "mid": "0.40",
+      "implied_probability": "0.40",
       "volume_usd": "411.87",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:08Z"
+      "observed_time_utc": "2026-11-19T06:13:41Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'lukka').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,16 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -101,25 +101,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XRP2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.37, bestAsk 0.41; event volume 411.87"
+        "quote": "bestBid 0.38, bestAsk 0.42; event volume 411.87"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "crypto-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -134,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-XRP2611192200-HI0D98] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-XRP2611192200-HI0D98] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

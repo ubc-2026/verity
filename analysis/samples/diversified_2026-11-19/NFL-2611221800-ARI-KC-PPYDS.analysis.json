@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299",
     "question": "Arizona vs Kansas City: Quarterback Passing Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:23Z",
+    "analyzed_at_utc": "2026-11-19T06:12:45Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:23Z",
-      "snapshot_hash": "sha256:361c0bb42255ef5be9ff1b1368d7d23888cdd31c5d274efad588823499addd66",
+      "snapshot_time_utc": "2026-11-19T06:12:45Z",
+      "snapshot_hash": "sha256:be5501e190f3e89a3dd5ee4d60d153750743507c75f1412e9e024f3ac18fe72f",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Patrick Mahomes 300+ Passing Yards",
-      "best_bid": "0.09",
+      "best_bid": "0.15",
       "best_ask": "0.31",
-      "mid": "0.20",
-      "implied_probability": "0.20",
+      "mid": "0.23",
+      "implied_probability": "0.23",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:23Z"
+      "observed_time_utc": "2026-11-19T06:12:45Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'sportradar').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (22c spread).",
+        "rationale": "event-total volume $0 is under $100 (16c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
       "rating_floor": null,
       "final_rating": "Medium",
@@ -83,7 +83,7 @@
       ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,25 +107,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPYDS",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.09, bestAsk 0.31; event volume 0"
+        "quote": "bestBid 0.15, bestAsk 0.31; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],

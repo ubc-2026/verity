@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NGAS2611192200-HI3D850",
     "question": "Natural Gas price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:07Z",
+    "analyzed_at_utc": "2026-11-19T06:13:38Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:07Z",
-      "snapshot_hash": "sha256:19041212d97c8f990d2ba7b37af80a25de93f84b44619f36d306b48dbaf49c60",
+      "snapshot_time_utc": "2026-11-19T06:13:38Z",
+      "snapshot_hash": "sha256:76811a1625b74e47791946c588979a6e0670eed6f595cf0be19a541e17d16209",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:07Z"
+      "observed_time_utc": "2026-11-19T06:13:38Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'kaiko').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
       "rating_floor": null,
       "final_rating": "Medium",
@@ -83,7 +83,7 @@
       ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -110,22 +110,8 @@
         "quote": "bestBid None, bestAsk None; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "commodity-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],

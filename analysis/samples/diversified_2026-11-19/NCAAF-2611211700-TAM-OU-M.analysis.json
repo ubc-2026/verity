@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611211700-TAM-OU-M-TAM",
     "question": "Texas A&M vs Oklahoma",
     "expiry_utc": "2026-11-22T20:45:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:51:59Z",
+    "analyzed_at_utc": "2026-11-19T06:12:17Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:51:59Z",
-      "snapshot_hash": "sha256:1e9c04015bc7953a068b92a2a5f43f9f44f2d752ce9e67e0ee4d82a0358a803b",
+      "snapshot_time_utc": "2026-11-19T06:12:17Z",
+      "snapshot_hash": "sha256:3544d584c93eb8b95098a1f76e208cd9c1b8946027d2f6355e286deafdc88502",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:51:59Z"
+      "observed_time_utc": "2026-11-19T06:12:17Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,11 +68,11 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 9,
-      "raw_total": 9,
-      "raw_rating": "High",
+      "known_total": 8,
+      "raw_total": 8,
+      "raw_rating": "Medium",
       "rating_floor": null,
-      "final_rating": "High",
+      "final_rating": "Medium",
       "possible_range": null,
       "overrides": [
         {
@@ -82,8 +82,8 @@
         }
       ]
     },
-    "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 9). Research action: flag_for_human_review. 1 open question(s).",
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -110,22 +110,8 @@
         "quote": "bestBid 0.27, bestAsk 0.28; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -138,27 +124,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-202ced24635b",
-    "contract_id": "GEMI-NCAAF-2611211700-TAM-OU-M-TAM",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-sports-settlement-version-v1",
-    "catalog_parameters": {
-      "league": "NCAAF",
-      "provider": "sports data provider",
-      "event": "NCAAF-2611211700-TAM-OU-M"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:51:59Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAF-2611211700-TAM-OU-M-TAM] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/NCAA_FBS_Win-Loss_23ef351f-7ee0-4503-a740-5da5c95d4b2c.pdf. Excerpt: ts certified pursuant to 17 C.F.R. § 40.2(d), each of which shares an identical settlement source, formula, procedure, and methodology with the Contract referen",
-    "[GEMI-NCAAF-2611211700-TAM-OU-M-TAM] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NCAAF-2611211700-TAM-OU-M-TAM] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

@@ -767,13 +767,13 @@
       "prices": {
         "buy": {
           "yes": "0.32",
-          "no": "0.82"
+          "no": "0.92"
         },
         "sell": {
-          "yes": "0.18",
+          "yes": "0.08",
           "no": "0.68"
         },
-        "bestBid": "0.18",
+        "bestBid": "0.08",
         "bestAsk": "0.32"
       },
       "status": "active",
@@ -1089,6 +1089,60 @@
       }
     },
     {
+      "id": "475798-1206016",
+      "label": "Bam Knight 50+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bam Knight records 50 or more Rushing Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.22"
+        },
+        "sell": {
+          "no": "0.78"
+        },
+        "bestAsk": "0.22"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:29.097Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "ZKNIGHTO49",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRYDS-ZKNIGHTO49",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 23,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "49.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bam Knight",
+        "externalIds": {
+          "sportradar": "53df5e30-d3bd-11ec-96a0-c3471a31202c"
+        }
+      }
+    },
+    {
       "id": "475798-1206023",
       "label": "Carson Beck 25+ Rushing Yards",
       "description": {
@@ -1254,60 +1308,6 @@
       }
     },
     {
-      "id": "475798-1206016",
-      "label": "Bam Knight 50+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Bam Knight records 50 or more Rushing Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.18"
-        },
-        "sell": {
-          "no": "0.82"
-        },
-        "bestAsk": "0.18"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:07:29.097Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "ZKNIGHTO49",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRYDS-ZKNIGHTO49",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 23,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "49.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Bam Knight",
-        "externalIds": {
-          "sportradar": "53df5e30-d3bd-11ec-96a0-c3471a31202c"
-        }
-      }
-    },
-    {
       "id": "475798-1199094",
       "label": "Patrick Mahomes 40+ Rushing Yards",
       "description": {
@@ -1324,12 +1324,12 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.15"
+          "yes": "0.16"
         },
         "sell": {
-          "no": "0.85"
+          "no": "0.84"
         },
-        "bestAsk": "0.15"
+        "bestAsk": "0.16"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:07:29.097Z",

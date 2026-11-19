@@ -75,15 +75,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.82",
-          "no": "0.22"
+          "yes": "0.79",
+          "no": "0.25"
         },
         "sell": {
-          "yes": "0.78",
-          "no": "0.18"
+          "yes": "0.75",
+          "no": "0.21"
         },
-        "bestBid": "0.78",
-        "bestAsk": "0.82",
+        "bestBid": "0.75",
+        "bestAsk": "0.79",
         "lastTradePrice": "0.77"
       },
       "status": "active",
@@ -125,15 +125,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.62",
-          "no": "0.42"
+          "yes": "0.58",
+          "no": "0.46"
         },
         "sell": {
-          "yes": "0.58",
-          "no": "0.38"
+          "yes": "0.54",
+          "no": "0.42"
         },
-        "bestBid": "0.58",
-        "bestAsk": "0.62",
+        "bestBid": "0.54",
+        "bestAsk": "0.58",
         "lastTradePrice": "0.73"
       },
       "status": "active",
@@ -175,14 +175,16 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.26",
-          "no": "0.74"
+          "yes": "0.35",
+          "no": "0.69"
         },
         "sell": {
-          "yes": "0.26",
-          "no": "0.74"
+          "yes": "0.31",
+          "no": "0.65"
         },
-        "lastTradePrice": "0.26"
+        "bestBid": "0.31",
+        "bestAsk": "0.35",
+        "lastTradePrice": "0.33"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:55:21.617Z",
@@ -223,15 +225,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.19",
-          "no": "0.85"
+          "yes": "0.18",
+          "no": "0.87"
         },
         "sell": {
-          "yes": "0.15",
-          "no": "0.81"
+          "yes": "0.13",
+          "no": "0.82"
         },
-        "bestBid": "0.15",
-        "bestAsk": "0.19",
+        "bestBid": "0.13",
+        "bestAsk": "0.18",
         "lastTradePrice": "0.15"
       },
       "status": "active",
@@ -274,13 +276,13 @@
       "prices": {
         "buy": {
           "yes": "0.09",
-          "no": "0.95"
+          "no": "0.96"
         },
         "sell": {
-          "yes": "0.05",
+          "yes": "0.04",
           "no": "0.91"
         },
-        "bestBid": "0.05",
+        "bestBid": "0.04",
         "bestAsk": "0.09"
       },
       "status": "active",
@@ -312,8 +314,8 @@
   "description": "Interval WTI price prediction event expiring on November 19, 2026 at 5pm ET",
   "imageUrl": "https://assets.gemini.com/predictions/images/oil_thumb_b051e146-0bb8-480e-9a08-14ebbc9aa70c.avif",
   "series": "WTI",
-  "volume": "84",
-  "volume24h": "84",
+  "volume": "120.46",
+  "volume24h": "120.46",
   "tags": [
     "Oil (WTI)"
   ],

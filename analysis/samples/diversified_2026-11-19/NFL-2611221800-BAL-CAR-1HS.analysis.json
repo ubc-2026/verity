@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9",
     "question": "Baltimore vs Carolina: 1st Half Point Spread",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:30Z",
+    "analyzed_at_utc": "2026-11-19T06:12:49Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:30Z",
-      "snapshot_hash": "sha256:e24ea1cd489476e436463ce7ee9ba70de680915463314da3e62d20396c60af9f",
+      "snapshot_time_utc": "2026-11-19T06:12:49Z",
+      "snapshot_hash": "sha256:2ee85187b4aa09afc34ad0a3303e64f3f1571c2077c4387d296b6d28e0b7b80f",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:30Z"
+      "observed_time_utc": "2026-11-19T06:12:49Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,11 +68,11 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": [
         {
@@ -82,8 +82,8 @@
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -110,22 +110,8 @@
         "quote": "bestBid 0.15, bestAsk 0.25; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

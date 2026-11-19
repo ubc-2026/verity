@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-BOS-2611200459-65TO66",
     "question": "Highest temperature in Boston on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:08Z",
+    "analyzed_at_utc": "2026-11-19T06:13:40Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:08Z",
-      "snapshot_hash": "sha256:9bab971f4719753a3f2d5418cf69d41fbac9a94d90f65024b05798bf7d74e184",
+      "snapshot_time_utc": "2026-11-19T06:13:40Z",
+      "snapshot_hash": "sha256:27a35c429a34c3061a659d358f62a0cfdf25b7f3ee8674086f738f854e9a0e85",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "65°F to 66°F",
-      "best_bid": "0.19",
-      "best_ask": "0.27",
-      "mid": "0.23",
-      "implied_probability": "0.23",
+      "best_bid": "0.18",
+      "best_ask": "0.26",
+      "mid": "0.22",
+      "implied_probability": "0.22",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:08Z"
+      "observed_time_utc": "2026-11-19T06:13:40Z"
     },
     "scores": {
       "ambiguity": {
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-BOS-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.19, bestAsk 0.27; event volume 0"
+        "quote": "bestBid 0.18, bestAsk 0.26; event volume 0"
       }
     ],
     "evidence_gaps": [

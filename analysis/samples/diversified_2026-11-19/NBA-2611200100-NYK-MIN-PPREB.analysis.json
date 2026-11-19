@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-PPREB-GOBERTO7",
     "question": "New York vs Minnesota: Player Rebounds",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:39Z",
+    "analyzed_at_utc": "2026-11-19T06:12:58Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:39Z",
-      "snapshot_hash": "sha256:2ef53eab8a528b5c726870137f51edb4089714e1f0e594e310bae45bbd077090",
+      "snapshot_time_utc": "2026-11-19T06:12:58Z",
+      "snapshot_hash": "sha256:d125168ba591b0f32742bbed01f358ca484790d7db7a69291e3913b2def2784b",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Rudy Gobert 8+ Rebounds",
-      "best_bid": "0.68",
+      "best_bid": "0.69",
       "best_ask": "0.83",
-      "mid": "0.755",
-      "implied_probability": "0.755",
+      "mid": "0.76",
+      "implied_probability": "0.76",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:39Z"
+      "observed_time_utc": "2026-11-19T06:12:58Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'sportradar').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (15c spread).",
+        "rationale": "event-total volume $0 is under $100 (14c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
       "rating_floor": null,
       "final_rating": "Medium",
@@ -83,7 +83,7 @@
       ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,25 +107,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-NYK-MIN-PPREB",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.68, bestAsk 0.83; event volume 0"
+        "quote": "bestBid 0.69, bestAsk 0.83; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],

@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-BTC2611190600-HI63300",
-    "event_ticker": "BTC2611190600",
-    "instrument_symbol": "GEMI-BTC2611190600-HI63300",
-    "question": "BTC price today at 1am EST",
-    "expiry_utc": "2026-11-19T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:08Z",
+    "contract_id": "GEMI-BTC05M2611190615-UP",
+    "event_ticker": "BTC05M2611190615",
+    "instrument_symbol": "GEMI-BTC05M2611190615-UP",
+    "question": "BTC price today at 1:15am EST",
+    "expiry_utc": "2026-11-19T06:15:00.000Z",
+    "analyzed_at_utc": "2026-11-19T06:13:47Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:08Z",
-      "snapshot_hash": "sha256:4777d3e03b3d2c728b2c04421c577aeb60ef83a9c8300465a8e79305e734bc13",
+      "snapshot_time_utc": "2026-11-19T06:13:47Z",
+      "snapshot_hash": "sha256:b274f8438482ffd24f291fc9bf04c35be5cb8a556973d20d185274a7b0d81225",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$63,300 or above",
-      "best_bid": "0.24",
-      "best_ask": "0.27",
-      "mid": "0.255",
-      "implied_probability": "0.255",
-      "volume_usd": "812.65",
+      "outcome_label": "Up",
+      "best_bid": "0.03",
+      "best_ask": "0.23",
+      "mid": "0.13",
+      "implied_probability": "0.13",
+      "volume_usd": "26.9",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:08Z"
+      "observed_time_utc": "2026-11-19T06:13:47Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'lukka').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 2,
-        "rationale": "event-total volume $812.65, 3c spread.",
+        "score": 3,
+        "rationale": "event-total volume $26.9 is under $100 (20c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -74,52 +74,44 @@
       "rating_floor": null,
       "final_rating": "Medium",
       "possible_range": null,
-      "overrides": []
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
-        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190600",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC05M2611190615",
         "field_or_rule": "event.description",
-        "quote": "Interval BTC price prediction event expiring on November 19, 2026 at 1am ET"
+        "quote": "Interval BTC price prediction event expiring on November 19, 2026 at 1:15am ET"
       },
       {
         "id": "C-CONTRACT",
-        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190600",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC05M2611190615",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Bitcoin (BTC) is $63,300 or above on November 19, 2026 at 1am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf)."
+        "quote": "If the price of Bitcoin (BTC) is greater than or equal to the price specified in the title on November 19, 2026 at 1:15am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf)."
       },
       {
         "id": "C-TERMS",
-        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190600",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC05M2611190615",
         "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
         "quote": "Supplemental\n \nAttachment\n \nA\n \nRule\n \nText\n \nfor\n \n“Will\n \nBTC\n \non\n \n{date}\n \nat\n \n{time}\n \nbe\n \n{above/below/between/exactly/at\n \nleast}\n \n{price}?”\n  \n \nRule\n \n13.135a\n \n(a)\n \nGeneral\n \n(1)\n \nThese\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \n“Will\n \nBTC\n \non\n \n{date}\n \nat\n \n{time}\n \nbe\n \n{above/below/between/exactly/at\n \nleast}\n \n{price}?”\n \n(“BTC1”\n \nor\n \nthe\n \n“Contract”)\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContract\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n \n(2)\n \nCapitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nRulebook.\n \n \n(b)\n \nUnderlying\n \n(1)\n \nThe\n \nUnderlying\n \nfor\n \neach\n \nContract\n \nis\n \nthe\n \nprice\n \nof\n \nbitcoin\n \n(“BTC”)\n \nas\n \ncalculated\n \nand\n \npublished\n \nby\n \nthe\n \nSource\n \nAgency\n \nat\n \nthe\n \napplicable\n \nExpiration\n \nTime.\n \n(2)\n \nThe\n \nSource\n \nAgency\n \nis\n \nKaiko\n \nIndices\n \n(“Kaiko”)\n \nor\n \nLukka\n \nInc.\n \n(“Lukka”),\n \nas\n \nspecified\n \nby\n \nthe\n \nExchange\n \nfor\n \neach\n \nContract\n \niteration.\n  \nBoth\n \nKaiko\n \nand\n \nLukka\n \npublish\n \nBTC\n \nprice\n \nbenchmarks\n \nderived\n \nfrom\n \nmajor\n \ndigital\n \nasset\n \nexchanges\n \nusing\n \npublicly\n \ndocumented\n \nmethodologies.\n \nThe\n \nExchange\n \nwill\n \nspecify\n \nin\n \neach\n \nContract\n \niteration\n \nwhich\n \nof\n \nthese\n \nproviders\n \nwill\n \nserve\n \nas\n \nthe\n \nSource\n \nAgency,\n \nthe\n \napplicable\n \nindex\n \nmethodology,\n \nand,\n \nwhere\n \nan\n \naveraging\n \nwindow\n \napplies,\n \nthe\n \nlength\n \nof\n \nsuch\n \nwindow.\n  \n \n(3)\n \nIf\n \nthe\n \ndesignated\n \nSource\n \nAgency\n \nfor\n \na\n \nContract\n \niteration\n \nis\n \nunavailable\n \nat\n \nthe\n \nExpiration\n \nTime,\n \nthe\n \nExchange\n \nmay\n \nuse\n \nthe\n \nother\n \nof\n \nKaiko\n \nor\n \nLukka\n \nas\n \na\n \nbackup,\n \nand\n \nthereafter\n \nmay\n \nuse\n \nany\n \nof\n \nthe\n \nfollowing\n \nas\n \na\n \nfurther\n \nbackup:\n \na\n \ndifferent\n \nindependent\n \nindex\n \nprovider\n \n(e.g.,\n \nCF\n \nBenchmarks)\n \nor\n \na\n \nspot\n \nmarket\n \nexchange\n \nplatform\n \n(e.g.,\n \nCoinbase,\n \nGemini,\n \nBinance).\n \n(4)\n \nThe\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n  \nWhere\n \nthe\n \nExchange\n \nspecifies\n \nthat\n \nthe\n \nExpiration\n \nValue\n \nis\n \ndetermined\n \nusing\n \na\n \ntime-weighted\n \naverage\n \nprice\n \n(“TWAP”)\n \nover\n \na\n \nlookback\n \nwindow\n \n(e.g.,\n \na\n \n60-second\n \nTWAP\n \nending\n \nat\n \nthe\n \nExpiration\n \nTime),\n \nthe\n \nExpiration\n \nValue\n \nshall\n \nbe\n \ncalculated\n \naccordingly.\n \nRevisions\n \nto\n \nthe\n \nUnderlying\n \nmade\n \nafter\n \nExpiration\n \nwill\n \nnot\n \nbe\n \naccounted\n \nfor\n \nin\n \ndetermining\n \nthe\n \nExpiration\n \nValue.\n \n(c)\n \nIssuance\n \n(1)\n \nThe\n \nContract\n \nis\n \nbased\n \non\n \nthe\n \nprice\n \nof\n \nBTC,\n \nwhich\n \nis\n \navailable\n \non\n \na\n \nreal-time\n \nbasis.\n \nContract\n \niterations\n \nwill\n \nbe\n \nissued\n \non\n \na\n \nrecurring\n \nbasis.\n \n(2)\n \nIterations\n \nof\n \nthe\n \nContract\n \nwill\n \nvary\n \nbased\n \non\n \nthe\n \nfollowing\n \nparameters:\n \n(i)\n \n{date}\n \nrefers\n \nto\n \nthe\n \ndate\n \nas\n \nspecified\n \nby\n \nthe\n \nExchange;\n \n(ii)\n \n{time}\n \nrefers\n \nto\n \na\n \ntime\n \non\n \na\n \ncalendar\n \ndate\n \nspecified\n \nby\n \nthe\n \nExchange.\n \nThe\n \nExchange\n \nmay\n \nlist\n \niterations\n \nof\n \nthe\n \nContract\n \ncorresponding\n \nto\n \ndifferent\n \nstatistical\n \nperiods\n \nof\n \n{time};\n \n \n(iii)\n \n \n{above/below/between/exactly/at\n \nleast}\n \nrefers\n \nto\n \nthe\n \nthreshold\n \ncriteria\n \nfor\n \nthe\n \nPayout\n \nCriterion:\n \n \na.\n \n“above”\n \nmeans\n \nstrictly\n \ngreater\n \nthan\n \n{price};\n \nb.\n \n“below”\n \nmeans\n \nstrictly\n \nless\n \nthan\n \n{price};\n \nc.\n \n“at\n \nleast”\n \nmeans\n \ngreater\n \nthan\n \nor\n \nequal\n \nto\n \n{price};\n \n1\n \n \nd.\n \n“exactly”\n \nmeans\n \nequal\n \nto\n \n{price}\n \n(to\n \ntwo\n \ndecimal\n \nplace\n \nprecision,\n \ni.e.,\n \n0.01);\n \nand\n \n \ne.\n \n“between”\n \nmeans\n \ngreater\n \nthan\n \nor\n \nequal\n \nto\n \nthe\n \nlower\n \n{price}\n \nvalue\n \nAND\n \nless\n \nthan\n \nor\n \nequal\n \nto\n \nthe\n \nhigher\n \n{price}\n \nvalue\n \n(inclusive\n \non\n \nboth\n \nends).\n \n \n(iv)\n \n{price}\n \nrefers\n \nto\n \niterations\n \nof\n \nthe\n \nContract\n \nthat\n \nmay\n \nbe\n \nlisted\n \nby\n \nthe\n \nExchange\n \nwith\n \n{price}\n \nlevels\n \nthat\n \nfall\n \nwithin\n \nan\n \ninclusive\n \nrange\n \nbetween\n \n0\n \nand\n \n100,000,000\n \nat\n \nconsecutive\n \nincrements\n \nof\n \n0.01.\n \n \n(d)\n \nContract\n \nSize\n \n(1)\n \nEach\n \nBTC1\n \nhas\n \na\n \nnotional\n \nsize\n \nof\n \none\n \ndollar\n \n($1.00).\n \n \n(e)\n \nSettlement\n \nand\n \nExpiration\n \n(1)\n \nPayout\n \nCriterion\n \nfor\n \nthe\n \nContract\n \nencompasses\n \nthe\n \nExpiration\n \nValues\n \nthat\n \nBTC\n \nis\n \n{above/below/between/exactly/at\n \nleast}\n \n{price}\n \non\n \n{date}\n \nat\n \n{time}.\n \n \n(2)\n \nThe\n \nExpiration\n \nDate\n \nof\n \nthe\n \nContract\n \nshall\n \nbe\n \nthe\n \nsooner\n \nof:\n \n(i)\n \nthe\n \nmoment\n \nthat\n \ndata\n \nfrom\n \nthe\n \nSource\n \nAgency\n \nis\n \navailable\n \nfollowing\n \nthe\n \nend\n \nof\n \nthe\n \napplicable\n \nperiod\n \nconfirming\n \nthe\n \nExpiration\n \nValue,\n \nor\n \n(ii)\n \none\n \nhour\n \nafter\n \nthe\n \nend\n \nof\n \nsuch\n \nperiod.\n  \nIf\n \nan\n \nExpiration\n \nValue\n \nthat\n \nis\n \nincluded\n \nin\n \nthe\n \nPayout\n \nCriterion\n \nof\n \na\n \nContract\n \noccurs\n \nprior\n \nto\n \nthe\n \nscheduled\n \nExpiration\n \nDate,\n \nthe\n \nExchange\n \nmay\n \nadjust\n \nthe\n \nExpiration\n \nDate\n \nand\n \nthe\n \nExpiration\n \nTime\n \nto\n \nbe\n \nearlier\n \nin\n \naccordance\n \nwith\n \nRule\n \n7.2\n \n \n(3)\n \nThe\n \nExpiration\n \nTime\n \nof\n \nthe\n \nContract\n \nshall\n \nbe\n \n{time}\n \non\n \n{date}.\n \n(4)\n \nThe\n \nSettlement\n \nDate\n \nof\n \nthe\n \nContract\n \nshall\n \nbe\n \nthe\n \nsame\n \nday\n \nas\n \nExpiration\n \nDate,\n \nunless\n \nthe\n \nMarket\n \nOutcome\n \nis\n \nunder\n \nreview\n \npursuant\n \nto\n \nRule\n \n7.1.\n  \nFor\n \nContracts\n \nwith\n \nan\n \nexpiration\n \ninterval\n \nof\n \nless\n \nthan\n \none\n \nday,\n \nthe\n \nExchange\n \nwill\n \nendeavor\n \nto\n \nsettle\n \nthe\n \nContract\n \nas\n \nsoon\n \nas\n \npracticable\n \nfollowing\n \nthe\n \nExpiration\n \nTime.\n \n(f)\n \nListing\n \nand\n \nTrading\n \nHours\n \n(1)\n \nContracts\n \nare\n \nlisted\n \nby\n \nthe\n \nExchange\n \non\n \na\n \nrecurring\n \nbasis.\n \n(2)\n \nAs\n \noutlined\n \nin\n \nRule\n \n5.16\n \nof\n \nthe\n \nRulebook,\n \ntrading\n \nshall\n \nbe\n \navailable\n \nat\n \nall\n \ntimes\n \noutside\n \nof\n \nany\n \nmaintenance\n \nwindows,\n \nwhich\n \nwill\n \nbe\n \nannounced\n \nin\n \nadv"
       },
       {
         "id": "C-PRICES",
-        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190600",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/BTC05M2611190615",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.24, bestAsk 0.27; event volume 812.65"
+        "quote": "bestBid 0.03, bestAsk 0.23; event volume 26.9"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "crypto-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -134,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-BTC2611190600-HI63300] no purchase: 0:06:52 to expiry is under 1h (Agent rule 11)."
+    "[GEMI-BTC05M2611190615-UP] no purchase: 0:01:13 to expiry is under 1h (Agent rule 11)."
   ]
 }

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
     "question": "Highest temperature in Chicago on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:01Z",
+    "analyzed_at_utc": "2026-11-19T06:13:29Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:01Z",
-      "snapshot_hash": "sha256:66e5aa93022cd7e9389084c5bd9b20886064c4b2a6e005c917d770219a5e060b",
+      "snapshot_time_utc": "2026-11-19T06:13:29Z",
+      "snapshot_hash": "sha256:2b23e8c5d4a867353de4f0b58aa744312336334fe19bbeaf49238e6a0760842f",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:01Z"
+      "observed_time_utc": "2026-11-19T06:13:29Z"
     },
     "scores": {
       "ambiguity": {

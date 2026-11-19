@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611200100-POR-MIL-S-POR9",
     "question": "Portland vs Milwaukee: Point Spread",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:47Z",
+    "analyzed_at_utc": "2026-11-19T06:13:10Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:47Z",
-      "snapshot_hash": "sha256:ad662d1f3151b82f55e31d00de4c2d8f944839638ba3cb5de772cd7501506eba",
+      "snapshot_time_utc": "2026-11-19T06:13:10Z",
+      "snapshot_hash": "sha256:51456ba69a67ffaacbb5574d9aaccd23bc52835f0a1ab0ad2de4f70dadf0f356",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Portland wins by more than 9.5 points",
       "best_bid": "0.48",
-      "best_ask": "0.54",
-      "mid": "0.51",
-      "implied_probability": "0.51",
+      "best_ask": "0.52",
+      "mid": "0.50",
+      "implied_probability": "0.50",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:47Z"
+      "observed_time_utc": "2026-11-19T06:13:10Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (6c spread).",
+        "rationale": "event-total volume $0 is under $100 (4c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,11 +68,11 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": [
         {
@@ -82,8 +82,8 @@
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,25 +107,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-POR-MIL-S",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.48, bestAsk 0.54; event volume 0"
+        "quote": "bestBid 0.48, bestAsk 0.52; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NBA-2611200100-POR-MIL-S-POR9] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NBA-2611200100-POR-MIL-S-POR9] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

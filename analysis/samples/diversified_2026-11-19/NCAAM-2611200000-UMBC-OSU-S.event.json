@@ -9,98 +9,6 @@
   "createdAt": "2026-11-19T00:21:47.466Z",
   "contracts": [
     {
-      "id": "478859-1214157",
-      "label": "Ohio State wins by more than 6.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Ohio State in the entire men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Ohio State's score minus UMBC's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.99"
-        },
-        "sell": {
-          "no": "0.01"
-        },
-        "bestAsk": "0.99"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:21:47.466Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
-      "ticker": "OSU6",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU6",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/OhioState_f4d325fa-36dd-42db-991d-9f7d375b83e1.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 1,
-      "strike": {
-        "type": "spread",
-        "value": "6.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478859-1214165",
-      "label": "Ohio State wins by more than 11.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Ohio State in the entire men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT is above 11.5. Otherwise, it resolves to No. The Underlying is the score differential (Ohio State's score minus UMBC's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.99"
-        },
-        "sell": {
-          "no": "0.01"
-        },
-        "bestAsk": "0.99"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:21:47.466Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
-      "ticker": "OSU11",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU11",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/OhioState_f4d325fa-36dd-42db-991d-9f7d375b83e1.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 7,
-      "strike": {
-        "type": "spread",
-        "value": "11.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "478859-1214154",
       "label": "Ohio State wins by more than 30.5 points",
       "description": {
@@ -199,6 +107,47 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "478859-1214157",
+      "label": "Ohio State wins by more than 6.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Ohio State in the entire men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Ohio State's score minus UMBC's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:21:47.466Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "OSU6",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU6",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OhioState_f4d325fa-36dd-42db-991d-9f7d375b83e1.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "478859-1214158",
       "label": "Ohio State wins by more than 45.5 points",
       "description": {
@@ -214,13 +163,8 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {
-          "yes": "0.26"
-        },
-        "sell": {
-          "no": "0.74"
-        },
-        "bestAsk": "0.26"
+        "buy": {},
+        "sell": {}
       },
       "status": "active",
       "createdAt": "2026-11-19T00:21:47.466Z",
@@ -236,52 +180,6 @@
       "strike": {
         "type": "spread",
         "value": "45.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478859-1218794",
-      "label": "Ohio State wins by more than 49.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Ohio State in the entire men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT is above 49.5. Otherwise, it resolves to No. The Underlying is the score differential (Ohio State's score minus UMBC's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.21"
-        },
-        "sell": {
-          "no": "0.79"
-        },
-        "bestAsk": "0.21"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:21:47.466Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
-      "ticker": "OSU49",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU49",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/OhioState_f4d325fa-36dd-42db-991d-9f7d375b83e1.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 11,
-      "strike": {
-        "type": "spread",
-        "value": "49.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -414,6 +312,47 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "478859-1214165",
+      "label": "Ohio State wins by more than 11.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Ohio State in the entire men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT is above 11.5. Otherwise, it resolves to No. The Underlying is the score differential (Ohio State's score minus UMBC's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:21:47.466Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "OSU11",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU11",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OhioState_f4d325fa-36dd-42db-991d-9f7d375b83e1.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "spread",
+        "value": "11.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "478859-1214166",
       "label": "Ohio State wins by more than 20.5 points",
       "description": {
@@ -528,6 +467,47 @@
       "strike": {
         "type": "spread",
         "value": "40.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478859-1218794",
+      "label": "Ohio State wins by more than 49.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Ohio State in the entire men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT is above 49.5. Otherwise, it resolves to No. The Underlying is the score differential (Ohio State's score minus UMBC's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:21:47.466Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "OSU49",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-S-OSU49",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OhioState_f4d325fa-36dd-42db-991d-9f7d375b83e1.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 11,
+      "strike": {
+        "type": "spread",
+        "value": "49.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

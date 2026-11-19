@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-NCAAM-2611200000-MTST-HP-T-O147",
+    "contract_id": "GEMI-NCAAM-2611200000-MTST-HP-T-O149",
     "event_ticker": "NCAAM-2611200000-MTST-HP-T",
-    "instrument_symbol": "GEMI-NCAAM-2611200000-MTST-HP-T-O147",
+    "instrument_symbol": "GEMI-NCAAM-2611200000-MTST-HP-T-O149",
     "question": "Montana State vs High Point: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:22Z",
+    "analyzed_at_utc": "2026-11-19T06:12:44Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:22Z",
-      "snapshot_hash": "sha256:29dd69caeabb5e32459c2f90c407ec24da37900d7d8d5b6bbcf89b5c029d73f5",
+      "snapshot_time_utc": "2026-11-19T06:12:44Z",
+      "snapshot_hash": "sha256:891306b592eeffa0bb3e0a02b341893b68d09d0ec5aa9cce6290847335f3cf64",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "More than 147.5 points scored",
-      "best_bid": "0.31",
-      "best_ask": "0.56",
-      "mid": "0.435",
-      "implied_probability": "0.435",
+      "outcome_label": "More than 149.5 points scored",
+      "best_bid": "0.27",
+      "best_ask": "0.45",
+      "mid": "0.36",
+      "implied_probability": "0.36",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:22Z"
+      "observed_time_utc": "2026-11-19T06:12:44Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (25c spread).",
+        "rationale": "event-total volume $0 is under $100 (18c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,11 +68,11 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": [
         {
@@ -82,8 +82,8 @@
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200000-MTST-HP-T",
         "field_or_rule": "contract.description",
-        "quote": "This market resolves to Yes if Montana State and High Point collectively score over 147.5 total points in the men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf)."
+        "quote": "This market resolves to Yes if Montana State and High Point collectively score over 149.5 total points in the men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,25 +107,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200000-MTST-HP-T",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.31, bestAsk 0.56; event volume 0"
+        "quote": "bestBid 0.27, bestAsk 0.45; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611200000-MTST-HP-T-O147] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NCAAM-2611200000-MTST-HP-T-O149] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

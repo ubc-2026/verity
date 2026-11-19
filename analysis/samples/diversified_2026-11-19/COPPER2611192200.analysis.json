@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-COPPER2611192200-HI5D84",
+    "contract_id": "GEMI-COPPER2611192200-HI5D66",
     "event_ticker": "COPPER2611192200",
-    "instrument_symbol": "GEMI-COPPER2611192200-HI5D84",
+    "instrument_symbol": "GEMI-COPPER2611192200-HI5D66",
     "question": "Copper price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:09Z",
+    "analyzed_at_utc": "2026-11-19T06:13:41Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:09Z",
-      "snapshot_hash": "sha256:0a61497db432e2e6b17a08159feeb73c15909081f13a68e1ad4b97e8c15f55f1",
+      "snapshot_time_utc": "2026-11-19T06:13:41Z",
+      "snapshot_hash": "sha256:3cdd93c0bf62df248d761017d02f6d83c00cf475e46db94af102609ecf19560e",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$5.84 or above",
-      "best_bid": "0.19",
-      "best_ask": "0.24",
-      "mid": "0.215",
-      "implied_probability": "0.215",
+      "outcome_label": "$5.66 or above",
+      "best_bid": "0.83",
+      "best_ask": "0.87",
+      "mid": "0.85",
+      "implied_probability": "0.85",
       "volume_usd": "275",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:09Z"
+      "observed_time_utc": "2026-11-19T06:13:41Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'kaiko').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 2,
-        "rationale": "event-total volume $275, 5c spread.",
+        "rationale": "event-total volume $275, 4c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,16 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -89,7 +89,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/COPPER2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Copper is $5.84 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf)."
+        "quote": "If the price of Copper is $5.66 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -101,25 +101,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/COPPER2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.19, bestAsk 0.24; event volume 275"
+        "quote": "bestBid 0.83, bestAsk 0.87; event volume 275"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "commodity-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -134,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-COPPER2611192200-HI5D84] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-COPPER2611192200-HI5D66] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

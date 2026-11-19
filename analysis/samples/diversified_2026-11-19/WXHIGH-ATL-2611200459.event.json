@@ -25,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.47",
-          "no": "0.6"
+          "yes": "0.48",
+          "no": "0.59"
         },
         "sell": {
-          "yes": "0.4",
-          "no": "0.53"
+          "yes": "0.41",
+          "no": "0.52"
         },
-        "bestBid": "0.4",
-        "bestAsk": "0.47"
+        "bestBid": "0.41",
+        "bestAsk": "0.48"
       },
       "status": "active",
       "createdAt": "2026-11-18T13:59:08.201Z",
@@ -70,15 +70,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.36",
-          "no": "0.73"
+          "yes": "0.38",
+          "no": "0.68"
         },
         "sell": {
-          "yes": "0.27",
-          "no": "0.64"
+          "yes": "0.32",
+          "no": "0.62"
         },
-        "bestBid": "0.27",
-        "bestAsk": "0.36"
+        "bestBid": "0.32",
+        "bestAsk": "0.38"
       },
       "status": "active",
       "createdAt": "2026-11-18T13:59:08.201Z",
@@ -115,15 +115,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.19",
-          "no": "0.87"
+          "yes": "0.15",
+          "no": "0.89"
         },
         "sell": {
-          "yes": "0.13",
-          "no": "0.81"
+          "yes": "0.11",
+          "no": "0.85"
         },
-        "bestBid": "0.13",
-        "bestAsk": "0.19"
+        "bestBid": "0.11",
+        "bestAsk": "0.15"
       },
       "status": "active",
       "createdAt": "2026-11-18T13:59:08.201Z",
@@ -193,6 +193,52 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "477271-1207150",
+      "label": "61\u00b0F or below",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Atlanta, GA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Atlanta, GA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Atlanta on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.03"
+        },
+        "sell": {
+          "no": "0.97"
+        },
+        "bestAsk": "0.03"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.201Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "LO61",
+      "instrumentSymbol": "GEMI-WXHIGH-ATL-2611200459-LO61",
+      "marketState": "open",
+      "abbreviatedName": "61\u00b0 or below",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "below",
+        "value": "61"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "477271-1207152",
       "label": "62\u00b0F to 63\u00b0F",
       "description": {
@@ -230,52 +276,6 @@
       "expiryDate": "2026-11-20T04:59:59.000Z",
       "effectiveDate": "2026-11-18T14:59:59.000Z",
       "sortOrder": 2,
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "477271-1207150",
-      "label": "61\u00b0F or below",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market will resolve based on the highest temperature recorded at Atlanta, GA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Atlanta, GA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Atlanta on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.02"
-        },
-        "sell": {
-          "no": "0.98"
-        },
-        "bestAsk": "0.02"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T13:59:08.201Z",
-      "termsAndConditionsUrl": "",
-      "ticker": "LO61",
-      "instrumentSymbol": "GEMI-WXHIGH-ATL-2611200459-LO61",
-      "marketState": "open",
-      "abbreviatedName": "61\u00b0 or below",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-20T04:59:59.000Z",
-      "effectiveDate": "2026-11-18T14:59:59.000Z",
-      "sortOrder": 1,
-      "strike": {
-        "type": "below",
-        "value": "61"
-      },
       "isCombo": false,
       "quantityIncrement": "0.01",
       "quantityMinimum": "0.01",

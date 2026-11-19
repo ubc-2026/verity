@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611210300-SAC-LAL-M-SAC",
     "question": "Sacramento vs Los Angeles L",
     "expiry_utc": "2026-11-22T15:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:04Z",
+    "analyzed_at_utc": "2026-11-19T06:12:22Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:04Z",
-      "snapshot_hash": "sha256:2128305aeb0e7a8abf80651e7691446a884d1bd1c89581c9a35699b2ff641867",
+      "snapshot_time_utc": "2026-11-19T06:12:22Z",
+      "snapshot_hash": "sha256:d0c06f834cf43c4b85af359a1c169fa42c19f733d88e3cf5098bdb06dbc885c4",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "46.23",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:04Z"
+      "observed_time_utc": "2026-11-19T06:12:22Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,11 +68,11 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": [
         {
@@ -82,8 +82,8 @@
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -110,22 +110,8 @@
         "quote": "bestBid 0.12, bestAsk 0.14; event volume 46.23"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NBA-2611210300-SAC-LAL-M-SAC] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NBA-2611210300-SAC-LAL-M-SAC] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

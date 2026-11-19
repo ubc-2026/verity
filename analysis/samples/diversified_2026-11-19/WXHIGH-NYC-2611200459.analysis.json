@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-NYC-2611200459-65TO66",
     "question": "Highest temperature in NYC on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:02Z",
+    "analyzed_at_utc": "2026-11-19T06:13:30Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:02Z",
-      "snapshot_hash": "sha256:2550f076177b300291750374ab1fb0e2251b4cc31eeb78f11c0d6937e311ec9c",
+      "snapshot_time_utc": "2026-11-19T06:13:30Z",
+      "snapshot_hash": "sha256:c7ceb4b5c4a56bf5f24abcc97a71d95dbad99697d28c109ff9144e13a09df996",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "65°F to 66°F",
-      "best_bid": "0.39",
-      "best_ask": "0.48",
-      "mid": "0.435",
-      "implied_probability": "0.435",
+      "best_bid": "0.44",
+      "best_ask": "0.47",
+      "mid": "0.455",
+      "implied_probability": "0.455",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:02Z"
+      "observed_time_utc": "2026-11-19T06:13:30Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (9c spread).",
+        "rationale": "event-total volume $0 is under $100 (3c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-NYC-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.39, bestAsk 0.48; event volume 0"
+        "quote": "bestBid 0.44, bestAsk 0.47; event volume 0"
       }
     ],
     "evidence_gaps": [

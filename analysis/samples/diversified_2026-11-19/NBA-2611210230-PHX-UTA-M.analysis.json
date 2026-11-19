@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611210230-PHX-UTA-M-UTA",
     "question": "Phoenix vs Utah",
     "expiry_utc": "2026-11-22T14:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:51:56Z",
+    "analyzed_at_utc": "2026-11-19T06:12:16Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:51:56Z",
-      "snapshot_hash": "sha256:a177b44de858268771d1e742a60c662b59ddd9abc1acbb46ff0a8079e8edaf4b",
+      "snapshot_time_utc": "2026-11-19T06:12:16Z",
+      "snapshot_hash": "sha256:2606fde8c50b5bcf929496be8e366dc02aa18aa33e180008064e5d27fec0f974",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Utah",
-      "best_bid": "0.32",
-      "best_ask": "0.34",
-      "mid": "0.33",
-      "implied_probability": "0.33",
+      "best_bid": "0.41",
+      "best_ask": "0.42",
+      "mid": "0.415",
+      "implied_probability": "0.415",
       "volume_usd": "414.39",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:51:56Z"
+      "observed_time_utc": "2026-11-19T06:12:16Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 2,
-        "rationale": "event-total volume $414.39, 2c spread.",
+        "rationale": "event-total volume $414.39, 1c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
@@ -77,7 +77,7 @@
       "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. 1 open question(s).",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -101,25 +101,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611210230-PHX-UTA-M",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.32, bestAsk 0.34; event volume 414.39"
+        "quote": "bestBid 0.41, bestAsk 0.42; event volume 414.39"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],

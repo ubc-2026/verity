@@ -9,6 +9,63 @@
   "createdAt": "2026-11-19T05:25:42.907Z",
   "contracts": [
     {
+      "id": "479886-1219735",
+      "label": "Jalen Brunson 2+ Assists",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Jalen Brunson records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.99",
+          "no": "0.17"
+        },
+        "sell": {
+          "yes": "0.83",
+          "no": "0.01"
+        },
+        "bestBid": "0.83",
+        "bestAsk": "0.99"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T05:25:42.907Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
+      "ticker": "BRUNSONO1",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-BRUNSONO1",
+      "marketState": "post_only",
+      "color": "#006BB6",
+      "imageUrl": "https://assets.gemini.com/predictions/images/NYK_69e0d4c9-46ed-463c-a955-526f08c73b7a.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 3,
+      "teamId": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jalen Brunson",
+        "externalIds": {
+          "sportradar": "8d3edba8-9004-4199-9328-cc2208e8b0d3"
+        }
+      }
+    },
+    {
       "id": "479886-1219747",
       "label": "Karl-Anthony Towns 2+ Assists",
       "description": {
@@ -26,13 +83,13 @@
       "prices": {
         "buy": {
           "yes": "0.95",
-          "no": "0.44"
+          "no": "0.2"
         },
         "sell": {
-          "yes": "0.56",
+          "yes": "0.8",
           "no": "0.05"
         },
-        "bestBid": "0.56",
+        "bestBid": "0.8",
         "bestAsk": "0.95"
       },
       "status": "active",
@@ -66,15 +123,15 @@
       }
     },
     {
-      "id": "479886-1219732",
-      "label": "Jaden McDaniels 2+ Assists",
+      "id": "479886-1219736",
+      "label": "Jalen Brunson 4+ Assists",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Jaden McDaniels records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Jalen Brunson records 4 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
             "nodeType": "text"
           }
         ],
@@ -82,31 +139,31 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.92",
-          "no": "0.4"
+          "yes": "0.91",
+          "no": "0.24"
         },
         "sell": {
-          "yes": "0.6",
-          "no": "0.08"
+          "yes": "0.76",
+          "no": "0.09"
         },
-        "bestBid": "0.6",
-        "bestAsk": "0.92"
+        "bestBid": "0.76",
+        "bestAsk": "0.91"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
-      "ticker": "JMCDO1",
-      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-JMCDO1",
+      "ticker": "BRUNSONO3",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-BRUNSONO3",
       "marketState": "post_only",
-      "color": "#0C2340",
-      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
+      "color": "#006BB6",
+      "imageUrl": "https://assets.gemini.com/predictions/images/NYK_69e0d4c9-46ed-463c-a955-526f08c73b7a.png",
       "expiryDate": "2026-11-21T13:00:00.000Z",
       "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 0,
-      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
+      "sortOrder": 4,
+      "teamId": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
       "strike": {
         "type": "over",
-        "value": "1.5"
+        "value": "3.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -116,9 +173,9 @@
       "priceMinimum": "0.01",
       "target": {
         "type": "player",
-        "name": "Jaden McDaniels",
+        "name": "Jalen Brunson",
         "externalIds": {
-          "sportradar": "aa5536d2-4d75-43fb-8df3-47fbf99d3b7c"
+          "sportradar": "8d3edba8-9004-4199-9328-cc2208e8b0d3"
         }
       }
     },
@@ -140,13 +197,13 @@
       "prices": {
         "buy": {
           "yes": "0.91",
-          "no": "0.29"
+          "no": "0.24"
         },
         "sell": {
-          "yes": "0.71",
+          "yes": "0.76",
           "no": "0.09"
         },
-        "bestBid": "0.71",
+        "bestBid": "0.76",
         "bestAsk": "0.91"
       },
       "status": "active",
@@ -196,15 +253,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.87",
+          "yes": "0.9",
           "no": "0.23"
         },
         "sell": {
           "yes": "0.77",
-          "no": "0.13"
+          "no": "0.1"
         },
         "bestBid": "0.77",
-        "bestAsk": "0.87"
+        "bestAsk": "0.9"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
@@ -237,6 +294,120 @@
       }
     },
     {
+      "id": "479886-1219732",
+      "label": "Jaden McDaniels 2+ Assists",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Jaden McDaniels records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.89",
+          "no": "0.3"
+        },
+        "sell": {
+          "yes": "0.7",
+          "no": "0.11"
+        },
+        "bestBid": "0.7",
+        "bestAsk": "0.89"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T05:25:42.907Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
+      "ticker": "JMCDO1",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-JMCDO1",
+      "marketState": "post_only",
+      "color": "#0C2340",
+      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 0,
+      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jaden McDaniels",
+        "externalIds": {
+          "sportradar": "aa5536d2-4d75-43fb-8df3-47fbf99d3b7c"
+        }
+      }
+    },
+    {
+      "id": "479886-1219759",
+      "label": "Mikal Bridges 2+ Assists",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Mikal Bridges records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.76",
+          "no": "0.37"
+        },
+        "sell": {
+          "yes": "0.63",
+          "no": "0.24"
+        },
+        "bestBid": "0.63",
+        "bestAsk": "0.76"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T05:25:42.907Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
+      "ticker": "MIKALO1",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-MIKALO1",
+      "marketState": "post_only",
+      "color": "#006BB6",
+      "imageUrl": "https://assets.gemini.com/predictions/images/NYK_69e0d4c9-46ed-463c-a955-526f08c73b7a.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 19,
+      "teamId": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Mikal Bridges",
+        "externalIds": {
+          "sportradar": "83cc5b28-36a7-43ba-ba20-8347bd1de583"
+        }
+      }
+    },
+    {
       "id": "479886-1219755",
       "label": "LaMelo Ball 6+ Assists",
       "description": {
@@ -253,15 +424,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.65",
+          "yes": "0.66",
           "no": "0.5"
         },
         "sell": {
           "yes": "0.5",
-          "no": "0.35"
+          "no": "0.34"
         },
         "bestBid": "0.5",
-        "bestAsk": "0.65"
+        "bestAsk": "0.66"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
@@ -310,15 +481,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.61",
+          "yes": "0.6",
           "no": "0.52"
         },
         "sell": {
           "yes": "0.48",
-          "no": "0.39"
+          "no": "0.4"
         },
         "bestBid": "0.48",
-        "bestAsk": "0.61"
+        "bestAsk": "0.6"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
@@ -367,15 +538,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.59",
+          "yes": "0.57",
           "no": "0.54"
         },
         "sell": {
           "yes": "0.46",
-          "no": "0.41"
+          "no": "0.43"
         },
         "bestBid": "0.46",
-        "bestAsk": "0.59"
+        "bestAsk": "0.57"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
@@ -482,13 +653,13 @@
       "prices": {
         "buy": {
           "yes": "0.47",
-          "no": "0.7"
+          "no": "0.69"
         },
         "sell": {
-          "yes": "0.3",
+          "yes": "0.31",
           "no": "0.53"
         },
-        "bestBid": "0.3",
+        "bestBid": "0.31",
         "bestAsk": "0.47"
       },
       "status": "active",
@@ -653,13 +824,13 @@
       "prices": {
         "buy": {
           "yes": "0.33",
-          "no": "0.81"
+          "no": "0.83"
         },
         "sell": {
-          "yes": "0.19",
+          "yes": "0.17",
           "no": "0.67"
         },
-        "bestBid": "0.19",
+        "bestBid": "0.17",
         "bestAsk": "0.33"
       },
       "status": "active",
@@ -709,15 +880,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.31",
+          "yes": "0.29",
           "no": "0.85"
         },
         "sell": {
           "yes": "0.15",
-          "no": "0.69"
+          "no": "0.71"
         },
         "bestBid": "0.15",
-        "bestAsk": "0.31"
+        "bestAsk": "0.29"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
@@ -767,13 +938,13 @@
       "prices": {
         "buy": {
           "yes": "0.28",
-          "no": "0.95"
+          "no": "0.9"
         },
         "sell": {
-          "yes": "0.05",
+          "yes": "0.1",
           "no": "0.72"
         },
-        "bestBid": "0.05",
+        "bestBid": "0.1",
         "bestAsk": "0.28"
       },
       "status": "active",
@@ -880,12 +1051,12 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.21"
+          "yes": "0.2"
         },
         "sell": {
-          "no": "0.79"
+          "no": "0.8"
         },
-        "bestAsk": "0.21"
+        "bestAsk": "0.2"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:25:42.907Z",
@@ -914,63 +1085,6 @@
         "name": "Rudy Gobert",
         "externalIds": {
           "sportradar": "37fbc3a5-0d10-4e22-803b-baa2ea0cdb12"
-        }
-      }
-    },
-    {
-      "id": "479886-1219758",
-      "label": "LaMelo Ball 10+ Assists",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "Subject to the settlement exceptions below, this market resolves to Yes if LaMelo Ball records 10 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.2",
-          "no": "0.97"
-        },
-        "sell": {
-          "yes": "0.03",
-          "no": "0.8"
-        },
-        "bestBid": "0.03",
-        "bestAsk": "0.2"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T05:25:42.907Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
-      "ticker": "LAMELOO9",
-      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-LAMELOO9",
-      "marketState": "post_only",
-      "color": "#0C2340",
-      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 18,
-      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
-      "strike": {
-        "type": "over",
-        "value": "9.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "LaMelo Ball",
-        "externalIds": {
-          "sportradar": "be53f27f-c666-4bd2-8fcd-0713f963aa2b"
         }
       }
     },
@@ -1028,6 +1142,63 @@
         "name": "Jaden McDaniels",
         "externalIds": {
           "sportradar": "aa5536d2-4d75-43fb-8df3-47fbf99d3b7c"
+        }
+      }
+    },
+    {
+      "id": "479886-1219758",
+      "label": "LaMelo Ball 10+ Assists",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if LaMelo Ball records 10 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.19",
+          "no": "0.96"
+        },
+        "sell": {
+          "yes": "0.04",
+          "no": "0.81"
+        },
+        "bestBid": "0.04",
+        "bestAsk": "0.19"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T05:25:42.907Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
+      "ticker": "LAMELOO9",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-LAMELOO9",
+      "marketState": "post_only",
+      "color": "#0C2340",
+      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 18,
+      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
+      "strike": {
+        "type": "over",
+        "value": "9.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "LaMelo Ball",
+        "externalIds": {
+          "sportradar": "be53f27f-c666-4bd2-8fcd-0713f963aa2b"
         }
       }
     },
@@ -1251,168 +1422,6 @@
       }
     },
     {
-      "id": "479886-1219735",
-      "label": "Jalen Brunson 2+ Assists",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Jalen Brunson records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "no": "0.37"
-        },
-        "sell": {
-          "yes": "0.63"
-        },
-        "bestBid": "0.63"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T05:25:42.907Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
-      "ticker": "BRUNSONO1",
-      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-BRUNSONO1",
-      "marketState": "post_only",
-      "color": "#006BB6",
-      "imageUrl": "https://assets.gemini.com/predictions/images/NYK_69e0d4c9-46ed-463c-a955-526f08c73b7a.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 3,
-      "teamId": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
-      "strike": {
-        "type": "over",
-        "value": "1.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Jalen Brunson",
-        "externalIds": {
-          "sportradar": "8d3edba8-9004-4199-9328-cc2208e8b0d3"
-        }
-      }
-    },
-    {
-      "id": "479886-1219736",
-      "label": "Jalen Brunson 4+ Assists",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Jalen Brunson records 4 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "no": "0.31"
-        },
-        "sell": {
-          "yes": "0.69"
-        },
-        "bestBid": "0.69"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T05:25:42.907Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
-      "ticker": "BRUNSONO3",
-      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-BRUNSONO3",
-      "marketState": "post_only",
-      "color": "#006BB6",
-      "imageUrl": "https://assets.gemini.com/predictions/images/NYK_69e0d4c9-46ed-463c-a955-526f08c73b7a.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 4,
-      "teamId": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
-      "strike": {
-        "type": "over",
-        "value": "3.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Jalen Brunson",
-        "externalIds": {
-          "sportradar": "8d3edba8-9004-4199-9328-cc2208e8b0d3"
-        }
-      }
-    },
-    {
-      "id": "479886-1219759",
-      "label": "Mikal Bridges 2+ Assists",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "Subject to the settlement exceptions below, this market resolves to Yes if Mikal Bridges records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "no": "0.41"
-        },
-        "sell": {
-          "yes": "0.59"
-        },
-        "bestBid": "0.59"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T05:25:42.907Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
-      "ticker": "MIKALO1",
-      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-MIKALO1",
-      "marketState": "post_only",
-      "color": "#006BB6",
-      "imageUrl": "https://assets.gemini.com/predictions/images/NYK_69e0d4c9-46ed-463c-a955-526f08c73b7a.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 19,
-      "teamId": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
-      "strike": {
-        "type": "over",
-        "value": "1.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Mikal Bridges",
-        "externalIds": {
-          "sportradar": "83cc5b28-36a7-43ba-ba20-8347bd1de583"
-        }
-      }
-    },
-    {
       "id": "479886-1219762",
       "label": "OG Anunoby 2+ Assists",
       "description": {
@@ -1556,6 +1565,55 @@
         "name": "OG Anunoby",
         "externalIds": {
           "sportradar": "9474fa0a-70dd-44c4-9751-dac5839ae7f3"
+        }
+      }
+    },
+    {
+      "id": "479886-1220018",
+      "label": "LaMelo Ball 2+ Assists",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if LaMelo Ball records 2 or more Assists in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Assists credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Assists, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Assists following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "approved",
+      "createdAt": "2026-11-19T05:25:42.907Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Assists_Class_76239ffa-aa99-438c-8704-db71de2d2363.pdf",
+      "ticker": "LAMELOO1",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPAST-LAMELOO1",
+      "marketState": "post_only",
+      "color": "#0C2340",
+      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 28,
+      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "LaMelo Ball",
+        "externalIds": {
+          "sportradar": "be53f27f-c666-4bd2-8fcd-0713f963aa2b"
         }
       }
     }

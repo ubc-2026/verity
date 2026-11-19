@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-XAU2611192200-HI3775",
+    "contract_id": "GEMI-XAU2611192200-HI3650",
     "event_ticker": "XAU2611192200",
-    "instrument_symbol": "GEMI-XAU2611192200-HI3775",
+    "instrument_symbol": "GEMI-XAU2611192200-HI3650",
     "question": "Gold price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:12Z",
+    "analyzed_at_utc": "2026-11-19T06:13:45Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:12Z",
-      "snapshot_hash": "sha256:b4ec13e87ff7649af851367fe2ac6bcdfd7c5ec4960fc1d1c029a559757a6cd7",
+      "snapshot_time_utc": "2026-11-19T06:13:45Z",
+      "snapshot_hash": "sha256:a9ae93d4eb40f11cda15eb1d7bbc30a4292a4f3d7badab89c2831bc425dc7b21",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$3,775 or above",
-      "best_bid": "0.19",
-      "best_ask": "0.24",
-      "mid": "0.215",
-      "implied_probability": "0.215",
+      "outcome_label": "$3,650 or above",
+      "best_bid": "0.94",
+      "best_ask": "0.98",
+      "mid": "0.96",
+      "implied_probability": "0.96",
       "volume_usd": "12",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:12Z"
+      "observed_time_utc": "2026-11-19T06:13:45Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'kaiko').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $12 is under $100 (5c spread).",
+        "rationale": "event-total volume $12 is under $100 (4c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
       "rating_floor": null,
       "final_rating": "Medium",
@@ -83,7 +83,7 @@
       ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XAU2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Gold is $3,775 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf)."
+        "quote": "If the price of Gold is $3,650 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,25 +107,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XAU2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.19, bestAsk 0.24; event volume 12"
+        "quote": "bestBid 0.94, bestAsk 0.98; event volume 12"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "commodity-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,6 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-XAU2611192200-HI3775] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-XAU2611192200-HI3650] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

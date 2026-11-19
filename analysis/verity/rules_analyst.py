@@ -16,16 +16,32 @@ from typing import Any, Optional
 ANALYST_ID = "verity-rules-v1"
 
 # Framework Source row: (score, pattern, label). First match wins, highest risk first.
+# Do NOT use a bare "revis" stem — sports/commodity PDFs often say "Revisions" in
+# boilerplate and were falsely scored as revisable official data (Source=2).
 _SOURCE_RULES: list[tuple[int, re.Pattern[str], str]] = [
     (3, re.compile(r"leaderboard|lm ?arena|lmsys|social|followers|views|likes|ranking", re.I),
      "third-party ranking that changes continuously or can be gamed"),
-    (2, re.compile(r"\bnws\b|national weather service|climatolog|\bcli[a-z]{3}\b|preliminary|revis|"
-                   r"\bbls\b|\bcpi\b|nonfarm|payrolls|\bgdp\b|bureau of", re.I),
-     "official but revisable or preliminary data"),
-    (1, re.compile(r"\bnba\b|\bnfl\b|\bnhl\b|\bmlb\b|\bncaa\b|\bmls\b|league|federal reserve|\bfomc\b|"
-                   r"governing body|official (result|score)", re.I),
-     "official primary source"),
+    (2, re.compile(
+        r"\bnws\b|national weather service|climatolog|\bcli[a-z]{3}\b|"
+        r"\bpreliminary\b|subject to revision|later revision|data revisions?|"
+        r"revised (print|figure|estimate|issuance)|revisable|"
+        r"\bbls\b|\bcpi\b|nonfarm|payrolls|\bgdp\b|bureau of",
+        re.I,
+    ), "official but revisable or preliminary data"),
+    (1, re.compile(
+        r"statscore|sportradar|lukka|kaiko|"
+        r"\bnba\b|\bnfl\b|\bnhl\b|\bmlb\b|\bncaa\b|\bmls\b|league|"
+        r"federal reserve|\bfomc\b|governing body|official (result|score)",
+        re.I,
+    ), "official primary source"),
 ]
+
+# Issuance-style revision language (used to upgrade a primary feed to Source=2).
+_REVISABLE_ISSUANCE = re.compile(
+    r"\bpreliminary\b|subject to revision|later revision|data revisions?|"
+    r"revised (print|figure|estimate|issuance)|which issuance|corrected issuance",
+    re.I,
+)
 
 _JUDGMENT = re.compile(r"style control|top[- ]ranked|\bbest\b|at (its|the exchange's) (sole )?discretion|"
                        r"determined by gemini|subjective", re.I)
@@ -65,9 +81,31 @@ def _ambiguity(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, A
 
 
 def _source(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, Any]:
-    hay = " ".join(filter(None, [record.get("settlement_source"), text]))
+    settlement = record.get("settlement_source") or ""
+    hay = " ".join(filter(None, [settlement, text]))
     if not hay.strip():
         return _cat(None, "No settlement source in the record.", [], "settlement source not stated")
+
+    # Prefer the named Gemini agency/index when it is a primary feed. Only raise to
+    # Source=2 if the terms actually discuss preliminary/revisable issuance.
+    primary = re.search(
+        r"statscore|sportradar|lukka|kaiko|\bnba\b|\bnfl\b|\bnhl\b|\bmlb\b|\bncaa\b|\bmls\b",
+        settlement,
+        re.I,
+    )
+    if primary:
+        if _REVISABLE_ISSUANCE.search(text):
+            return _cat(
+                2,
+                f"Primary feed '{primary.group(0)}', but terms discuss revisable/preliminary issuance.",
+                ids,
+            )
+        return _cat(
+            1,
+            f"Settlement source looks like official primary source (matched '{primary.group(0)}').",
+            ids,
+        )
+
     for score, pat, label in _SOURCE_RULES:
         m = pat.search(hay)
         if m:
@@ -76,9 +114,34 @@ def _source(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, Any]
                 "settlement source not recognized by the rules; a person should score it")
 
 
+def _same_question_band_siblings(ticker: str, siblings: list[str]) -> bool:
+    """Framework: sibling temperature/price bands of the same question stay Correlation 1."""
+    if not ticker or not siblings:
+        return False
+    # Weather city ladder: WXHIGH-CHI-... with other WXHIGH-CHI-...
+    if ticker.startswith("WXHIGH-"):
+        parts = ticker.split("-")
+        if len(parts) >= 2:
+            city_prefix = f"{parts[0]}-{parts[1]}-"
+            return all(s.startswith(city_prefix) for s in siblings)
+    # Same-day crypto/commodity ladders share a letter prefix before the date digits.
+    m = re.match(r"^([A-Z]+)\d{6,}", ticker)
+    if m:
+        stem = m.group(1)
+        return all(re.match(rf"^{re.escape(stem)}\d{{6,}}", s) for s in siblings)
+    return False
+
+
 def _correlation(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, Any]:
-    sib = record.get("sibling_events") or []
+    sib = [s for s in (record.get("sibling_events") or []) if s]
+    ticker = record.get("event_ticker") or ""
     if sib:
+        if _same_question_band_siblings(ticker, sib):
+            return _cat(
+                1,
+                f"{len(sib)} sibling band(s) of the same question; treated as stand-alone (Framework).",
+                ids,
+            )
         return _cat(3, f"{len(sib)} sibling event(s) on the same underlying (Agent rule 7).", ids)
     if _SCHEDULED_DATA.search(text + " " + record.get("question", "")):
         return _cat(2, "Driven by scheduled data or news named in the rules.", ids)

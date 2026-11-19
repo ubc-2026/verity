@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO89",
     "question": "Minnesota vs San Francisco: Player Receiving Yards",
     "expiry_utc": "2026-11-24T13:20:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:06Z",
+    "analyzed_at_utc": "2026-11-19T06:12:24Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:06Z",
-      "snapshot_hash": "sha256:5dbf7898c01c6afebd6710db6816d6f12fff59e7aef9affb221b07d37057acb9",
+      "snapshot_time_utc": "2026-11-19T06:12:24Z",
+      "snapshot_hash": "sha256:bd296ccb34c6df59ef2d81c9e7b188d40b9c936186d669b6737aba6188efbd6a",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "50",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:06Z"
+      "observed_time_utc": "2026-11-19T06:12:24Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'sportradar').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
       "rating_floor": null,
       "final_rating": "Medium",
@@ -83,7 +83,7 @@
       ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -110,22 +110,8 @@
         "quote": "bestBid 0.48, bestAsk 0.49; event volume 50"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],

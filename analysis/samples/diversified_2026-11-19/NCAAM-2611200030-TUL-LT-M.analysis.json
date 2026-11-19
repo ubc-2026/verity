@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200030-TUL-LT-M-TUL",
     "question": "Tulane vs Louisiana Tech",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:52:48Z",
+    "analyzed_at_utc": "2026-11-19T06:13:07Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:52:48Z",
-      "snapshot_hash": "sha256:d333bb263236539ffadbd554e9c557a1cdb7cab2d3a02fb55da4c04747ecc114",
+      "snapshot_time_utc": "2026-11-19T06:13:07Z",
+      "snapshot_hash": "sha256:2c995b2ec58772958830283a364204711129beb68023b7395e2e43c8cfc148ab",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:52:48Z"
+      "observed_time_utc": "2026-11-19T06:13:07Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,11 +68,11 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 9,
-      "raw_total": 9,
-      "raw_rating": "High",
+      "known_total": 8,
+      "raw_total": 8,
+      "raw_rating": "Medium",
       "rating_floor": null,
-      "final_rating": "High",
+      "final_rating": "Medium",
       "possible_range": null,
       "overrides": [
         {
@@ -82,8 +82,8 @@
         }
       ]
     },
-    "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 9). Research action: flag_for_human_review. 1 open question(s).",
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -110,22 +110,8 @@
         "quote": "bestBid 0.5, bestAsk 0.51; event volume 0"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "sports-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,8 +126,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611200030-TUL-LT-M-TUL] GAP-1: free research resolved. The terms name which StatsScore / Sportradar / league official result issuance settles the contract. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf. Excerpt: ays of its originally scheduled tip-off, the Contract will resolve based on the official final result of the rescheduled {NCAA game",
-    "[GEMI-NCAAM-2611200030-TUL-LT-M-TUL] skip GAP-1: answered by the free check; nothing to buy.",
-    "[GEMI-NCAAM-2611200030-TUL-LT-M-TUL] no purchase: every material gap was answered, cached, or had no catalog match."
+    "[GEMI-NCAAM-2611200030-TUL-LT-M-TUL] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

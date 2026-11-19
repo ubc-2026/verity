@@ -25,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.91",
-          "no": "0.13"
+          "yes": "0.87",
+          "no": "0.17"
         },
         "sell": {
-          "yes": "0.87",
-          "no": "0.09"
+          "yes": "0.83",
+          "no": "0.13"
         },
-        "bestBid": "0.87",
-        "bestAsk": "0.91"
+        "bestBid": "0.83",
+        "bestAsk": "0.87"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -49,105 +49,6 @@
       "strike": {
         "type": "above",
         "value": "5.66"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478188-1218286",
-      "label": "$5.68 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Copper is $5.68 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.86",
-          "no": "0.18"
-        },
-        "sell": {
-          "yes": "0.82",
-          "no": "0.14"
-        },
-        "bestBid": "0.82",
-        "bestAsk": "0.86"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:56:28.199Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
-      "ticker": "HI5D68",
-      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D68",
-      "marketState": "open",
-      "abbreviatedName": ">$5.68",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 8,
-      "strike": {
-        "type": "above",
-        "value": "5.68"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478188-1212326",
-      "label": "$5.7 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Copper is $5.7 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.82",
-          "no": "0.22"
-        },
-        "sell": {
-          "yes": "0.78",
-          "no": "0.18"
-        },
-        "bestBid": "0.78",
-        "bestAsk": "0.82",
-        "lastTradePrice": "0.79"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:56:28.199Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
-      "ticker": "HI5D70",
-      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D70",
-      "marketState": "open",
-      "abbreviatedName": ">$5.7",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 5,
-      "strike": {
-        "type": "above",
-        "value": "5.70"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -205,15 +106,15 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "478188-1213591",
-      "label": "$5.82 or above",
+      "id": "478188-1212326",
+      "label": "$5.7 or above",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "If the price of Copper is $5.82 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
+            "value": "If the price of Copper is $5.7 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
             "nodeType": "text"
           }
         ],
@@ -221,30 +122,29 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.3",
-          "no": "0.74"
+          "yes": "0.79",
+          "no": "0.21"
         },
         "sell": {
-          "yes": "0.26",
-          "no": "0.7"
+          "yes": "0.79",
+          "no": "0.21"
         },
-        "bestBid": "0.26",
-        "bestAsk": "0.3"
+        "lastTradePrice": "0.79"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
-      "ticker": "HI5D82",
-      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D82",
+      "ticker": "HI5D70",
+      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D70",
       "marketState": "open",
-      "abbreviatedName": ">$5.82",
+      "abbreviatedName": ">$5.7",
       "color": "#4CAF50",
       "expiryDate": "2026-11-19T22:00:00.000Z",
       "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 6,
+      "sortOrder": 5,
       "strike": {
         "type": "above",
-        "value": "5.82"
+        "value": "5.70"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -270,15 +170,13 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.24",
-          "no": "0.81"
+          "yes": "0.18",
+          "no": "0.82"
         },
         "sell": {
-          "yes": "0.19",
-          "no": "0.76"
+          "yes": "0.18",
+          "no": "0.82"
         },
-        "bestBid": "0.19",
-        "bestAsk": "0.24",
         "lastTradePrice": "0.18"
       },
       "status": "active",
@@ -459,6 +357,88 @@
       "strike": {
         "type": "above",
         "value": "5.80"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478188-1213591",
+      "label": "$5.82 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Copper is $5.82 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:28.199Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
+      "ticker": "HI5D82",
+      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D82",
+      "marketState": "open",
+      "abbreviatedName": ">$5.82",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "above",
+        "value": "5.82"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478188-1218286",
+      "label": "$5.68 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Copper is $5.68 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:28.199Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
+      "ticker": "HI5D68",
+      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D68",
+      "marketState": "open",
+      "abbreviatedName": ">$5.68",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "above",
+        "value": "5.68"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

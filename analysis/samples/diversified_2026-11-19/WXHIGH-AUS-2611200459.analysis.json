@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-AUS-2611200459-74TO75",
     "question": "Highest temperature in Austin on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:11Z",
+    "analyzed_at_utc": "2026-11-19T06:13:44Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:11Z",
-      "snapshot_hash": "sha256:f371ba3748462915bf203faa7f67809a014675860b0767e1113137bba5a3b4c9",
+      "snapshot_time_utc": "2026-11-19T06:13:44Z",
+      "snapshot_hash": "sha256:9f47c6dd78f353ec2dca7a2fc73359ded299c2df72c6dc0d9272ea8e1309937d",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "74°F to 75°F",
-      "best_bid": "0.46",
+      "best_bid": "0.48",
       "best_ask": "0.53",
-      "mid": "0.495",
-      "implied_probability": "0.495",
+      "mid": "0.505",
+      "implied_probability": "0.505",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:11Z"
+      "observed_time_utc": "2026-11-19T06:13:44Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (7c spread).",
+        "rationale": "event-total volume $0 is under $100 (5c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-AUS-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.46, bestAsk 0.53; event volume 0"
+        "quote": "bestBid 0.48, bestAsk 0.53; event volume 0"
       }
     ],
     "evidence_gaps": [

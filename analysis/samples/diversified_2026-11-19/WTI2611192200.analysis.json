@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-WTI2611192200-HI82",
+    "contract_id": "GEMI-WTI2611192200-HI83",
     "event_ticker": "WTI2611192200",
-    "instrument_symbol": "GEMI-WTI2611192200-HI82",
+    "instrument_symbol": "GEMI-WTI2611192200-HI83",
     "question": "Oil (WTI) price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:53:05Z",
+    "analyzed_at_utc": "2026-11-19T06:13:36Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:53:05Z",
-      "snapshot_hash": "sha256:d8ff66ff27a3a0f37eafb3a51f3d5b69e1752321c859b66bcfeeaf00e2dbd390",
+      "snapshot_time_utc": "2026-11-19T06:13:36Z",
+      "snapshot_hash": "sha256:839cc4792c8e7530b7bd7b61e891da5162b6d4b86da4225d0fa4fb5ff363daa7",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$82 or above",
-      "best_bid": "0.58",
-      "best_ask": "0.62",
-      "mid": "0.60",
-      "implied_probability": "0.60",
-      "volume_usd": "84",
+      "outcome_label": "$83 or above",
+      "best_bid": "0.31",
+      "best_ask": "0.35",
+      "mid": "0.33",
+      "implied_probability": "0.33",
+      "volume_usd": "120.46",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:53:05Z"
+      "observed_time_utc": "2026-11-19T06:13:36Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "score": 1,
+        "rationale": "Settlement source looks like official primary source (matched 'kaiko').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $84 is under $100 (4c spread).",
+        "score": 2,
+        "rationale": "event-total volume $120.46, 4c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +89,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WTI2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Oil (WTI) is $82 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf)."
+        "quote": "If the price of Oil (WTI) is $83 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,25 +101,11 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WTI2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.58, bestAsk 0.62; event volume 84"
+        "quote": "bestBid 0.31, bestAsk 0.35; event volume 120.46"
       }
     ],
-    "evidence_gaps": [
-      {
-        "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
-        "gap_type": "settlement_source_version",
-        "affects": "resolution_risk",
-        "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
-        "free_checks": [
-          "commodity-settlement-version"
-        ]
-      }
-    ],
-    "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
-    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -140,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WTI2611192200-HI82] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-WTI2611192200-HI83] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

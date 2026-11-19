@@ -9,6 +9,251 @@
   "createdAt": "2026-11-19T04:40:17.369Z",
   "contracts": [
     {
+      "id": "479788-1219343",
+      "label": "More than 203.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 203.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.96",
+          "no": "0.15"
+        },
+        "sell": {
+          "yes": "0.85",
+          "no": "0.04"
+        },
+        "bestBid": "0.85",
+        "bestAsk": "0.96"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O203",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O203",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 14,
+      "strike": {
+        "type": "over",
+        "value": "203.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219341",
+      "label": "More than 205.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 205.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.95",
+          "no": "0.16"
+        },
+        "sell": {
+          "yes": "0.84",
+          "no": "0.05"
+        },
+        "bestBid": "0.84",
+        "bestAsk": "0.95"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O205",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O205",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 13,
+      "strike": {
+        "type": "over",
+        "value": "205.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219339",
+      "label": "More than 207.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 207.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.92",
+          "no": "0.19"
+        },
+        "sell": {
+          "yes": "0.81",
+          "no": "0.08"
+        },
+        "bestBid": "0.81",
+        "bestAsk": "0.92"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O207",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O207",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 12,
+      "strike": {
+        "type": "over",
+        "value": "207.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219337",
+      "label": "More than 209.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 209.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.9",
+          "no": "0.21"
+        },
+        "sell": {
+          "yes": "0.79",
+          "no": "0.1"
+        },
+        "bestBid": "0.79",
+        "bestAsk": "0.9"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O209",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O209",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "over",
+        "value": "209.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219335",
+      "label": "More than 211.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 211.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.86",
+          "no": "0.25"
+        },
+        "sell": {
+          "yes": "0.75",
+          "no": "0.14"
+        },
+        "bestBid": "0.75",
+        "bestAsk": "0.86"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O211",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O211",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 9,
+      "strike": {
+        "type": "over",
+        "value": "211.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479788-1219351",
       "label": "More than 213.5 points scored",
       "description": {
@@ -25,15 +270,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.81",
+          "yes": "0.8",
           "no": "0.26"
         },
         "sell": {
           "yes": "0.74",
-          "no": "0.19"
+          "no": "0.2"
         },
         "bestBid": "0.74",
-        "bestAsk": "0.81"
+        "bestAsk": "0.8"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -107,6 +352,55 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "479788-1219332",
+      "label": "More than 217.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 217.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.75",
+          "no": "0.34"
+        },
+        "sell": {
+          "yes": "0.66",
+          "no": "0.25"
+        },
+        "bestBid": "0.66",
+        "bestAsk": "0.75"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O217",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O217",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "over",
+        "value": "217.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479788-1219347",
       "label": "More than 219.5 points scored",
       "description": {
@@ -123,15 +417,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.68",
-          "no": "0.39"
+          "yes": "0.67",
+          "no": "0.38"
         },
         "sell": {
-          "yes": "0.61",
-          "no": "0.32"
+          "yes": "0.62",
+          "no": "0.33"
         },
-        "bestBid": "0.61",
-        "bestAsk": "0.68"
+        "bestBid": "0.62",
+        "bestAsk": "0.67"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -172,15 +466,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.67",
-          "no": "0.44"
+          "yes": "0.63",
+          "no": "0.43"
         },
         "sell": {
-          "yes": "0.56",
-          "no": "0.33"
+          "yes": "0.57",
+          "no": "0.37"
         },
-        "bestBid": "0.56",
-        "bestAsk": "0.67"
+        "bestBid": "0.57",
+        "bestAsk": "0.63"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -221,15 +515,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.62",
-          "no": "0.49"
+          "yes": "0.58",
+          "no": "0.48"
         },
         "sell": {
-          "yes": "0.51",
-          "no": "0.38"
+          "yes": "0.52",
+          "no": "0.42"
         },
-        "bestBid": "0.51",
-        "bestAsk": "0.62"
+        "bestBid": "0.52",
+        "bestAsk": "0.58"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -245,55 +539,6 @@
       "strike": {
         "type": "over",
         "value": "223.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219349",
-      "label": "More than 227.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 227.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.53",
-          "no": "0.58"
-        },
-        "sell": {
-          "yes": "0.42",
-          "no": "0.47"
-        },
-        "bestBid": "0.42",
-        "bestAsk": "0.53"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O227",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O227",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 20,
-      "strike": {
-        "type": "over",
-        "value": "227.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -320,13 +565,13 @@
       "prices": {
         "buy": {
           "yes": "0.53",
-          "no": "0.52"
+          "no": "0.51"
         },
         "sell": {
-          "yes": "0.48",
+          "yes": "0.49",
           "no": "0.47"
         },
-        "bestBid": "0.48",
+        "bestBid": "0.49",
         "bestAsk": "0.53"
       },
       "status": "active",
@@ -352,6 +597,55 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "479788-1219349",
+      "label": "More than 227.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 227.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.49",
+          "no": "0.56"
+        },
+        "sell": {
+          "yes": "0.44",
+          "no": "0.51"
+        },
+        "bestBid": "0.44",
+        "bestAsk": "0.49"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O227",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O227",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 20,
+      "strike": {
+        "type": "over",
+        "value": "227.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479788-1219326",
       "label": "More than 229.5 points scored",
       "description": {
@@ -368,15 +662,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.48",
-          "no": "0.63"
+          "yes": "0.45",
+          "no": "0.61"
         },
         "sell": {
-          "yes": "0.37",
-          "no": "0.52"
+          "yes": "0.39",
+          "no": "0.55"
         },
-        "bestBid": "0.37",
-        "bestAsk": "0.48"
+        "bestBid": "0.39",
+        "bestAsk": "0.45"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -392,6 +686,104 @@
       "strike": {
         "type": "over",
         "value": "229.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219353",
+      "label": "More than 231.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 231.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.4",
+          "no": "0.65"
+        },
+        "sell": {
+          "yes": "0.35",
+          "no": "0.6"
+        },
+        "bestBid": "0.35",
+        "bestAsk": "0.4"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O231",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O231",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 24,
+      "strike": {
+        "type": "over",
+        "value": "231.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219355",
+      "label": "More than 233.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 233.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.35",
+          "no": "0.7"
+        },
+        "sell": {
+          "yes": "0.3",
+          "no": "0.65"
+        },
+        "bestBid": "0.3",
+        "bestAsk": "0.35"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O233",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O233",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 26,
+      "strike": {
+        "type": "over",
+        "value": "233.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -417,15 +809,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.31",
+          "yes": "0.32",
           "no": "0.74"
         },
         "sell": {
           "yes": "0.26",
-          "no": "0.69"
+          "no": "0.68"
         },
         "bestBid": "0.26",
-        "bestAsk": "0.31"
+        "bestAsk": "0.32"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -515,15 +907,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.24",
+          "yes": "0.25",
           "no": "0.81"
         },
         "sell": {
           "yes": "0.19",
-          "no": "0.76"
+          "no": "0.75"
         },
         "bestBid": "0.19",
-        "bestAsk": "0.24"
+        "bestAsk": "0.25"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -548,6 +940,104 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "479788-1219344",
+      "label": "More than 241.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 241.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.24",
+          "no": "0.87"
+        },
+        "sell": {
+          "yes": "0.13",
+          "no": "0.76"
+        },
+        "bestBid": "0.13",
+        "bestAsk": "0.24"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O241",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O241",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 15,
+      "strike": {
+        "type": "over",
+        "value": "241.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219338",
+      "label": "More than 243.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 243.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.21",
+          "no": "0.9"
+        },
+        "sell": {
+          "yes": "0.1",
+          "no": "0.79"
+        },
+        "bestBid": "0.1",
+        "bestAsk": "0.21"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O243",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O243",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 11,
+      "strike": {
+        "type": "over",
+        "value": "243.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479788-1219321",
       "label": "More than 245.5 points scored",
       "description": {
@@ -563,8 +1053,16 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {},
-        "sell": {}
+        "buy": {
+          "yes": "0.19",
+          "no": "0.92"
+        },
+        "sell": {
+          "yes": "0.08",
+          "no": "0.81"
+        },
+        "bestBid": "0.08",
+        "bestAsk": "0.19"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -589,6 +1087,104 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "479788-1219334",
+      "label": "More than 247.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 247.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.16",
+          "no": "0.95"
+        },
+        "sell": {
+          "yes": "0.05",
+          "no": "0.84"
+        },
+        "bestBid": "0.05",
+        "bestAsk": "0.16"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O247",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O247",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "over",
+        "value": "247.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479788-1219331",
+      "label": "More than 249.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 249.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.15",
+          "no": "0.96"
+        },
+        "sell": {
+          "yes": "0.04",
+          "no": "0.85"
+        },
+        "bestBid": "0.04",
+        "bestAsk": "0.15"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O249",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O249",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "over",
+        "value": "249.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479788-1219322",
       "label": "More than 251.5 points scored",
       "description": {
@@ -604,8 +1200,13 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {},
-        "sell": {}
+        "buy": {
+          "yes": "0.13"
+        },
+        "sell": {
+          "no": "0.87"
+        },
+        "bestAsk": "0.13"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -630,6 +1231,52 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "479788-1219329",
+      "label": "More than 253.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 253.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12"
+        },
+        "sell": {
+          "no": "0.88"
+        },
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:17.369Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O253",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O253",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "over",
+        "value": "253.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "479788-1219325",
       "label": "More than 199.5 points scored",
       "description": {
@@ -645,8 +1292,13 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {},
-        "sell": {}
+        "buy": {
+          "no": "0.12"
+        },
+        "sell": {
+          "yes": "0.88"
+        },
+        "bestBid": "0.88"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -686,8 +1338,13 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {},
-        "sell": {}
+        "buy": {
+          "no": "0.1"
+        },
+        "sell": {
+          "yes": "0.9"
+        },
+        "bestBid": "0.9"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -712,498 +1369,6 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "479788-1219329",
-      "label": "More than 253.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 253.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O253",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O253",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 5,
-      "strike": {
-        "type": "over",
-        "value": "253.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219331",
-      "label": "More than 249.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 249.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O249",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O249",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 6,
-      "strike": {
-        "type": "over",
-        "value": "249.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219332",
-      "label": "More than 217.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 217.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O217",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O217",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 7,
-      "strike": {
-        "type": "over",
-        "value": "217.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219334",
-      "label": "More than 247.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 247.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O247",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O247",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 8,
-      "strike": {
-        "type": "over",
-        "value": "247.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219335",
-      "label": "More than 211.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 211.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O211",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O211",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 9,
-      "strike": {
-        "type": "over",
-        "value": "211.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219337",
-      "label": "More than 209.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 209.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O209",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O209",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 10,
-      "strike": {
-        "type": "over",
-        "value": "209.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219338",
-      "label": "More than 243.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 243.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O243",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O243",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 11,
-      "strike": {
-        "type": "over",
-        "value": "243.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219339",
-      "label": "More than 207.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 207.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O207",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O207",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 12,
-      "strike": {
-        "type": "over",
-        "value": "207.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219341",
-      "label": "More than 205.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 205.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O205",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O205",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 13,
-      "strike": {
-        "type": "over",
-        "value": "205.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219343",
-      "label": "More than 203.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 203.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O203",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O203",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 14,
-      "strike": {
-        "type": "over",
-        "value": "203.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219344",
-      "label": "More than 241.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 241.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O241",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O241",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 15,
-      "strike": {
-        "type": "over",
-        "value": "241.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219353",
-      "label": "More than 231.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 231.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O231",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O231",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 24,
-      "strike": {
-        "type": "over",
-        "value": "231.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "479788-1219354",
       "label": "More than 201.5 points scored",
       "description": {
@@ -1219,8 +1384,13 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {},
-        "sell": {}
+        "buy": {
+          "no": "0.13"
+        },
+        "sell": {
+          "yes": "0.87"
+        },
+        "bestBid": "0.87"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:40:17.369Z",
@@ -1236,47 +1406,6 @@
       "strike": {
         "type": "over",
         "value": "201.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "479788-1219355",
-      "label": "More than 233.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Portland and Milwaukee collectively score over 233.5 total points in the NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:40:17.369Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
-      "ticker": "O233",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-T-O233",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 26,
-      "strike": {
-        "type": "over",
-        "value": "233.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
