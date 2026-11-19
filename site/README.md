@@ -17,6 +17,7 @@ npm run build    # checks that it builds; writes dist/index.html
 | Layout and styling | `src/site.css` |
 | Colours, fonts, spacing | `src/tokens.css` |
 | The 3D coin | `src/Coin3D.tsx` |
+| The ledger page | `src/Portal.tsx`, opened at `#ledger` |
 
 Make changes on a branch and open a pull request, like the rest of this repo.
 

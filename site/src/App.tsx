@@ -1,10 +1,11 @@
-import {useMemo, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {SplitText as GSAPSplitText} from 'gsap/SplitText';
 import {useGSAP} from '@gsap/react';
 import Magnet from './bits/Magnet';
 import Coin3D from './Coin3D';
+import Portal from './Portal';
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
@@ -204,11 +205,19 @@ function Spending() {
 
 export default function App() {
   const root = useRef<HTMLDivElement>(null);
+  const [ledger, setLedger] = useState(() => window.location.hash === '#ledger');
+
+  useEffect(() => {
+    const sync = () => setLedger(window.location.hash === '#ledger');
+    window.addEventListener('hashchange', sync);
+    return () => window.removeEventListener('hashchange', sync);
+  }, []);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add('(prefers-reduced-motion: no-preference)', () => {
+        if (!root.current?.querySelector('.hero h1')) return;
         // Opening: the engraving draws itself, then the type and the certificate strip.
         const split = new GSAPSplitText('.hero h1', {type: 'lines', mask: 'lines'});
         gsap
@@ -267,11 +276,12 @@ export default function App() {
             <a href="#how">How it works</a>
             <a href="#markets">Markets</a>
             <a href="#spending">Spending</a>
+            <a href="#ledger" aria-current={ledger ? 'page' : undefined}>Ledger</a>
           </nav>
         </div>
       </header>
 
-      <main id="top">
+      {ledger ? <Portal /> : <main id="top">
         <section className="hero">
           <Guilloche className="hero-rosette" bands={6} />
           <div className="container hero-in">
@@ -482,7 +492,7 @@ export default function App() {
             </a>
           </div>
         </section>
-      </main>
+      </main>}
 
       <footer className="foot">
         <Microprint text="Verity · A UBC 2026 hackathon prototype · No trades placed · Testnet payments" />
