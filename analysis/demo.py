@@ -44,9 +44,9 @@ def run(title: str, contract_id: str, scenario: str | None, sample_name: str | N
             indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def run_live(ticker: str, outcome: str, read_terms: bool) -> None:
+def run_live(ticker: str, outcome: str, read_terms: bool, analyst: str = "rules") -> None:
     from verity.live import analyze_live
-    ra, ctx = analyze_live(ticker, outcome, read_terms=read_terms)
+    ra, ctx = analyze_live(ticker, outcome, read_terms=read_terms, analyst=analyst)
     print(f"\n=== LIVE {ticker} / {outcome} ===  (clock {ctx.clock.now_utc})")
     s, r = ra.scores, ra.rating
     print(f"price  bid {ra.quoted_price.best_bid} / ask {ra.quoted_price.best_ask}  implied {ra.quoted_price.implied_probability}")
@@ -89,6 +89,8 @@ if __name__ == "__main__":
     ap.add_argument("--live", metavar="EVENT_TICKER", help="read this Gemini Exchange event and score it in code")
     ap.add_argument("--outcome", help="contract label to analyze, e.g. 'Oklahoma City'")
     ap.add_argument("--no-terms", action="store_true", help="skip downloading the terms PDF")
+    ap.add_argument("--analyst", choices=["rules", "none"], default="rules",
+                    help="rules: score ambiguity/source/correlation in code (default); none: leave them null")
     ap.add_argument("--research", action="store_true", help="read the NYC terms PDF and NWS report, then maybe propose")
     args = ap.parse_args()
     if args.research:
@@ -97,7 +99,7 @@ if __name__ == "__main__":
     if args.live:
         if not args.outcome:
             ap.error("--live needs --outcome")
-        run_live(args.live, args.outcome, read_terms=not args.no_terms)
+        run_live(args.live, args.outcome, read_terms=not args.no_terms, analyst=args.analyst)
         raise SystemExit(0)
     run("OKC moneyline: clear rules", "fx-okc-moneyline-20261118", None, "okc_moneyline.json")
     run("NYC high temp: free check answers (FIXTURE)", "fx-nyc-high-20261118", "free-check-answers", None)

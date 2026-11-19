@@ -25,11 +25,11 @@ python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 ```
 
 - `verity/live.py` reads `GET /v1/prediction-markets/events/{ticker}`, which is public. It records the real snapshot time and instrument symbol, downloads the terms PDF (add `--no-terms` to skip it), and reshapes everything into the fixture format.
-- Ambiguity, source, and correlation stay `null` on a live snapshot. The exchange sends the contract text. It does not score how the contract settles, and this code does not invent those scores.
+- **The analyst is `verity/rules_analyst.py`.** It scores ambiguity, source, and correlation from the contract text, the settlement source, and the sibling events, using the Framework rules in the table under *Live rules*. It has no LLM and needs no key. Every score cites the excerpt ids it used. When a rule can't be applied (no rule text, or a settlement source the rules don't recognize), that score stays `null` with a reason instead of being guessed. Pass `--analyst none` (or `analyze_live(..., analyst="none")`) to leave all three `null` for a person to read instead.
 - Liquidity is computed in code from the bid, the ask, and the volume.
 - `analyze_live()` returns the analysis and its context. Pass both to `generate_purchase_request()`.
 - The output is written to `samples/live_last_run.json`, which git ignores.
-- **Purchases stay blocked on a live market snapshot.** That snapshot has no evidence gaps. The New York fixture gap can be checked against the public terms PDF and the NWS Central Park report with `python demo.py --research`. A document that cannot be read does not become a purchase. The labeled fixture scenarios are unchanged.
+- **Evidence gaps on live markets** come from the rules analyst. A live NYC weather gap is wired to the `nyc-settlement-version` free check in `research.py`; other live gaps have no free check yet, so they are logged and skipped, and no purchase is proposed. The New York fixture gap can be checked against the public terms PDF and the NWS Central Park report with `python demo.py --research`. A document that cannot be read does not become a purchase. The labeled fixture scenarios are unchanged.
 - **A model can answer any gap** when `FixtureContext.complete_json` is set. That function is `complete_json(system, user, schema) -> dict`. The model may quote only text that was gathered. A quote or URL it was not given makes the result `failed`, and a failure does not propose a purchase. No model provider or API key is wired in. A fixture scenario still takes priority.
 
 The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. The repo-level README still describes a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
@@ -73,7 +73,9 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 | Source | leaderboard, LM Arena, social metrics | NWS / climate report, BLS, CPI, GDP, anything preliminary or revisable | league, NCAA, Federal Reserve, official result | no source, or one the rules don't recognize |
 | Correlation | sibling events on the same underlying (Agent rule 7) | scheduled data or news (CPI, jobs, FOMC, injuries, earnings) | neither | — |
 
-Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. Both have no free check yet, so live purchases stay blocked.
+Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; the others have none yet.
+
+On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): total 6, Low, `no_further_research`. The workbook scored Correlation 1.
 
 ## Proposal gates
 
@@ -110,5 +112,5 @@ All five rows reproduce the workbook's totals.
 - **Tickers** are missing for the Fed and Best AI rows, which came from CoinRithm rather than Gemini. They are flagged, and purchases for them are blocked.
 - **Rules text** is a paraphrase of the API descriptions, except NYC, which now cites the real terms (`C-NYC-4`, `C-NYC-5`). Fetch the OKC and MSU terms PDFs the same way.
 - **Expiry:** every fixture market expires between Nov 19 and Jan 1. After that, keep the fixture clock or take a new snapshot.
-- **Reading scores:** a live snapshot does not assign ambiguity, source, or correlation. Fixture files still carry the workbook scores for those three.
+- **Reading scores:** on live markets they come from `rules_analyst.py`. Check its scores against the workbook on a few more real markets. Fixture files still carry the workbook scores.
 - **Free checks in live mode:** to let a live gap lead to a purchase, add a free-check source for each type of gap (for example, read the terms PDF for the settlement rule).
