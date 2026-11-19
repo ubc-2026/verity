@@ -148,7 +148,8 @@ def get_risk_analysis(contract_id: str, ctx: Optional[FixtureContext] = None) ->
         rating=rating,
         research_action=action,
         summary=summary,
-        citations=[Citation(source=m["source"]["url"], **e) for e in m["rules_excerpts"]],
+        # An excerpt read from another document (the terms PDF) names it as its source.
+        citations=[Citation(**{"source": m["source"]["url"], **e}) for e in m["rules_excerpts"]],
         evidence_gaps=gaps,
         unresolved_questions=unresolved,
         data_quality_flags=_flags(m),
