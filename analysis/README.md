@@ -56,14 +56,13 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 
 ## Scoring decisions
 
-- **Scale:** the workbook's 1–3 per category, summed to 4–12. Low is 4–6, Medium 7–8, High 9–12. The README's 1–5 scale is not used in this prototype.
-- **Overrides** are applied after the raw band and reported separately (`raw_rating`, `rating_floor`, `final_rating`).
-  - A 3 in Ambiguity or Source sets a floor of Medium.
-  - Source ≥ 2 sets a floor of Medium (Excel settlement edge / Investigate).
-  - Source ≥ 2 and Ambiguity ≥ 2 sets a floor of High.
-  - A 3 in Correlation sets a floor of High.
-  - A 3 in Liquidity sets a floor of Medium (Excel Avoid / untradeable) and keeps the note that the price is an unreliable signal.
-  - Any two categories at 3 sets a floor of High.
+- **Scale (this branch):** `Gemini Market Risk Analysis.xlsx`. Factors are Excel 0–2, stored as schema 1–3 (Excel+1). Ambiguity = resolution criteria, Source = source reliability, Correlation = outside events (context only).
+- **Composites:** `settlement_edge = resolution + source` (0–4), `execution_risk = liquidity + price_quality` (0–4).
+- **Actions → ratings:** Trade normally → Low, Investigate → Medium, Avoid → High.
+  - Avoid if liquidity is worst, execution_risk ≥ 3, or not researchable.
+  - Else Investigate if settlement_edge ≥ 1.
+  - Else Trade normally.
+- **Research buys** follow Excel Investigate (Medium), not Avoid (High).
 - **Null** scores carry a reason. With any null, the rating is `complete: false` and `final_rating: null`, and the output shows the `possible_range`.
 - **Ambiguity, source, and correlation** follow `READING_RUBRIC` in `verity/scoring.py`. Fixture files store those three scores. A live snapshot leaves them null. An empty terms link is at least ambiguity 2. No named settlement source is a null source score, not a guess. Correlation measures overlap between contracts. Sibling buckets of the same question stay 1. A wording conflict with the source is a snapshot flag, not a second score.
 - **Liquidity** follows the Excel Framework cutoffs. A missing bid or ask, or a spread over 15¢, is 3. Volume of at least $1,000 with a spread of at most 5¢ and a bid on every strike is 1. Any other two-sided quote (including thin volume) is 2. No data at all is null. Both prices with no volume is null. `total` and `24h` volume are labeled and are not converted.

@@ -253,6 +253,47 @@
       "priceIncrement": "0.01",
       "quoteAssetPrecision": 2,
       "priceMinimum": "0.01"
+    },
+    {
+      "id": "478190-1220068",
+      "label": "$3.7 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Natural Gas is $3.7 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_NATGASUSDC index. This index provides a 60 second average of the [NATGAS-USDC](https://app.hyperliquid.xyz/trade/xyz:NATGAS) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/NATGAS1_Terms_and_Conditions_74071889-27c7-4398-9fc7-203097d4d2c2.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:43.243Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/NATGAS1_Terms_and_Conditions_74071889-27c7-4398-9fc7-203097d4d2c2.pdf",
+      "ticker": "HI3D700",
+      "instrumentSymbol": "GEMI-NGAS2611192200-HI3D700",
+      "marketState": "open",
+      "abbreviatedName": ">$3.7",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "above",
+        "value": "3.700"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
     }
   ],
   "effectiveDate": "2026-11-18T20:56:43.243Z",

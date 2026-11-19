@@ -3,7 +3,7 @@ from pydantic import ValidationError
 
 from verity import FixedClock, FixtureContext, generate_purchase_request, get_risk_analysis
 from verity.schemas import CategoryScore, PurchaseProposalV1, Scores
-from verity.scoring import READING_RUBRIC, band, liquidity_score, rate
+from verity.scoring import READING_RUBRIC, band, excel_action, liquidity_score, rate, to_excel, to_schema
 from decimal import Decimal
 
 OKC = "fx-okc-moneyline-20261118"
@@ -14,12 +14,13 @@ def ctx(**kw):
     return FixtureContext.default(**kw)
 
 
-def _with_high_rating(ra):
+def _with_investigate(ra):
+    """Force Excel Investigate so purchase-path tests can isolate other gates."""
     return ra.model_copy(update={
         "rating": ra.rating.model_copy(update={
-            "final_rating": "High", "raw_rating": "High", "raw_total": 9, "complete": True,
+            "final_rating": "Medium", "raw_rating": "Medium", "raw_total": 7, "complete": True,
         }),
-        "research_action": "flag_for_human_review",
+        "research_action": "investigate",
     })
 
 
@@ -29,42 +30,51 @@ def test_bands():
     assert [band(t) for t in (4, 6, 7, 8, 9, 12)] == ["Low", "Low", "Medium", "Medium", "High", "High"]
 
 
+def test_excel_schema_roundtrip():
+    assert [to_schema(x) for x in (0, 1, 2)] == [1, 2, 3]
+    assert [to_excel(x) for x in (1, 2, 3)] == [0, 1, 2]
+
+
 def _s(a, s, l, c):
     mk = lambda v: CategoryScore(score=v, rationale="t") if v else CategoryScore(score=None, rationale="t", null_reason="missing")
     return Scores(ambiguity=mk(a), source=mk(s), liquidity=mk(l), correlation=mk(c))
 
 
-def test_override_floor_applied_separately_from_raw_total():
-    r = rate(_s(3, 1, 1, 1))
-    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (6, "Low", "Medium", "Medium")
+def test_excel_trade_normally_when_no_settlement_edge():
+    r = rate(_s(1, 1, 1, 1), price_quality_excel=0)
+    assert r.final_rating == "Low" and r.raw_rating == "Low"
+    assert any("Trade normally" in o.rule for o in r.overrides)
 
 
-def test_correlation_3_floors_rating_at_high():
-    """Sibling/overlapping markets (C=3) should not stall at Medium when raw total is 8."""
-    r = rate(_s(1, 1, 3, 3))
-    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (8, "Medium", "High", "High")
-    assert any(o.triggered_by == "correlation" for o in r.overrides)
+def test_excel_investigate_when_settlement_edge():
+    # schema 2,2 = excel 1,1 -> edge 2; tradeable liquidity schema 1 = excel 0
+    r = rate(_s(2, 2, 1, 1), price_quality_excel=0, researchable=True)
+    assert r.final_rating == "Medium"
+    assert any("Investigate" in o.rule for o in r.overrides)
 
 
-def test_source_2_and_ambiguity_2_floor_high():
-    """Excel-style settlement edge with unclear criteria -> High research attention."""
-    r = rate(_s(2, 2, 1, 1))
-    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (6, "Low", "High", "High")
+def test_excel_avoid_when_liquidity_worst():
+    # schema liquidity 3 = excel 2 -> Avoid
+    r = rate(_s(1, 1, 3, 1), price_quality_excel=0)
+    assert r.final_rating == "High"
+    assert any("Avoid" in o.rule and "Liquidity" in o.rule for o in r.overrides)
 
 
-def test_liquidity_3_floors_at_medium():
-    r = rate(_s(1, 1, 3, 1))
-    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (6, "Low", "Medium", "Medium")
+def test_excel_avoid_when_not_researchable():
+    r = rate(_s(3, 2, 1, 1), price_quality_excel=0, researchable=False)
+    assert r.final_rating == "High"
+    assert any("not researchable" in o.rule for o in r.overrides)
+
+
+def test_excel_action_helper():
+    action, edge, exe, _ = excel_action(0, 2, 0, 0, True)
+    assert action == "Investigate" and edge == 2 and exe == 0
 
 
 def test_incomplete_rating_is_not_silently_low():
     r = rate(_s(1, 1, None, 1))
     assert not r.complete and r.final_rating is None and r.raw_total is None
-    assert r.possible_range == ("Low", "Low")
-    r2 = rate(_s(2, 2, None, 2))           # known 6, range 7..9; Source>=2+Amb>=2 floors High
-    assert r2.possible_range == ("High", "High") and r2.rating_floor == "High"
-    r3 = rate(_s(3, 1, None, 1))           # known 5, range 6..8, floor Medium
-    assert r3.possible_range == ("Medium", "Medium") and r3.rating_floor == "Medium"
+    assert r.possible_range == ("Low", "High")
 
 
 def test_null_score_requires_reason():
@@ -74,18 +84,13 @@ def test_null_score_requires_reason():
 
 def test_liquidity_thresholds_match_framework():
     assert liquidity_score(Decimal("1071"), Decimal("0.69"), Decimal("0.70"))[0] == 1
-    # Thin but quoted with a tight spread is Excel Liquidity mid (our 2), not max.
     assert liquidity_score(Decimal("7"), Decimal("0.54"), Decimal("0.58"))[0] == 2
     assert liquidity_score(Decimal("857.53"), Decimal("0.51"), Decimal("0.54"), True)[0] == 2
     assert liquidity_score(Decimal("20"), None, None)[0] == 3
-    # Both prices missing is a 3 when any volume is present, and null only when nothing is present.
     assert liquidity_score(None, None, None)[0] is None
     assert liquidity_score(None, Decimal("0.40"), Decimal("0.44"))[0] is None
-    # A tight, busy book is still a 2 when some strikes have no bid.
     assert liquidity_score(Decimal("5000"), Decimal("0.40"), Decimal("0.41"), True)[0] == 2
-    # Spread over 15c is Excel Avoid / our Liquidity 3.
     assert liquidity_score(Decimal("500"), Decimal("0.40"), Decimal("0.60"))[0] == 3
-    # Thin volume with a two-sided <=15c quote stays 2.
     assert liquidity_score(Decimal("100"), Decimal("0.40"), Decimal("0.45"))[0] == 2
 
 
@@ -96,28 +101,30 @@ def test_liquidity_rationale_names_the_volume_window():
     assert score == 3 and "24h volume" in why
 
 
-def test_reading_rubric_keeps_the_edge_cases():
-    assert "empty event terms link" in READING_RUBRIC
-    assert "exchange may set the payout" in READING_RUBRIC
-    assert "No settlement source is named" in READING_RUBRIC
-    assert "not a portfolio" in READING_RUBRIC
-    assert "Sibling buckets" in READING_RUBRIC
+def test_reading_rubric_mentions_excel_factors():
+    assert "Resolution criteria" in READING_RUBRIC
+    assert "Source reliability" in READING_RUBRIC
+    assert "Chicago vs Midway" in READING_RUBRIC
+    assert "crypto perp" in READING_RUBRIC.lower() or "Proxy" in READING_RUBRIC
 
 
 # --- OKC -------------------------------------------------------------------
 
-def test_okc_low_and_no_purchase():
+def test_okc_trade_normally_and_no_purchase():
     c = ctx()
     ra = get_risk_analysis(OKC, c)
-    assert ra.rating.final_rating == "Low" and ra.rating.raw_total == 4
+    assert ra.rating.final_rating == "Low"
     assert ra.research_action == "no_further_research"
     log = []
     assert generate_purchase_request(ra, c, log) is None
-    assert any("limited to High-risk markets" in l for l in log)
-    # Even if forced High, OKC has no material resolution gap to buy for.
+    assert any("Investigate" in l for l in log)
+    # Avoid (High) also does not buy; OKC has no material gap either.
     log2 = []
-    assert generate_purchase_request(_with_high_rating(ra), c, log2) is None
-    assert any("no material resolution gap" in l for l in log2)
+    forced = ra.model_copy(update={
+        "rating": ra.rating.model_copy(update={"final_rating": "High", "raw_rating": "High"}),
+        "research_action": "flag_for_human_review",
+    })
+    assert generate_purchase_request(forced, c, log2) is None
 
 
 def test_price_is_separate_from_risk():
@@ -128,48 +135,46 @@ def test_price_is_separate_from_risk():
 
 # --- NYC -------------------------------------------------------------------
 
-def test_nyc_source_ambiguity_floors_high():
-    """NWS + band edges: Source>=2 and Ambiguity>=2 floor final to High (Excel settlement edge)."""
+def test_nyc_investigate_on_settlement_edge():
     ra = get_risk_analysis(NYC, ctx())
-    assert (ra.rating.raw_total, ra.rating.final_rating, ra.research_action) == (7, "High", "flag_for_human_review")
-    assert ra.rating.rating_floor == "High"
-    assert any("Source >= 2 and Ambiguity >= 2" in o.rule for o in ra.rating.overrides)
+    assert ra.rating.final_rating == "Medium"
+    assert ra.research_action == "investigate"
+    assert any("Investigate" in o.rule for o in ra.rating.overrides)
     assert "event_terms_url_empty" in ra.data_quality_flags
 
 
 def test_nyc_free_check_answers_means_no_purchase():
     c = ctx(free_check_scenario="free-check-answers")
     log = []
-    assert generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c, log) is None
+    assert generate_purchase_request(_with_investigate(get_risk_analysis(NYC, c)), c, log) is None
     assert any("free official-source check" in l for l in log)
     assert any("GAP-NYC-FORECAST" in l and "not settlement risk" in l for l in log)
 
 
-def test_nyc_high_proposes_when_free_check_inconclusive():
+def test_nyc_investigate_proposes_when_free_check_inconclusive():
     c = ctx(free_check_scenario="free-check-inconclusive")
     ra = get_risk_analysis(NYC, c)
-    assert ra.rating.final_rating == "High"
-    log = []
-    p = generate_purchase_request(ra, c, log)
+    assert ra.rating.final_rating == "Medium"
+    p = generate_purchase_request(ra, c, [])
     assert p is not None and p.catalog_item_id == "cat-nws-cli-settlement-version-v1"
 
 
-def test_medium_rating_still_blocks_research_buy():
+def test_avoid_rating_blocks_research_buy():
     c = ctx(free_check_scenario="free-check-inconclusive")
     ra = get_risk_analysis(NYC, c).model_copy(update={
         "rating": get_risk_analysis(NYC, c).rating.model_copy(update={
-            "final_rating": "Medium", "raw_rating": "Medium", "rating_floor": None,
+            "final_rating": "High", "raw_rating": "High",
         }),
-        "research_action": "investigate",
+        "research_action": "flag_for_human_review",
     })
     log = []
     assert generate_purchase_request(ra, c, log) is None
-    assert any("limited to High-risk markets" in line for line in log)
+    assert any("Investigate" in line for line in log)
 
 
 def test_nyc_gap_remains_proposes_005_usdc_unsigned():
     c = ctx(free_check_scenario="free-check-inconclusive")
-    p = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c)
+    p = generate_purchase_request(_with_investigate(get_risk_analysis(NYC, c)), c)
     assert isinstance(p, PurchaseProposalV1)
     assert p.max_amount_base_units == "50000" and p.signed is False
     assert p.evidence_gap_id == "GAP-NYC-SETTLE"
@@ -179,12 +184,13 @@ def test_nyc_gap_remains_proposes_005_usdc_unsigned():
 
 def test_forecast_item_is_never_proposed():
     c = ctx(free_check_scenario="free-check-inconclusive")
-    p = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c)
+    p = generate_purchase_request(_with_investigate(get_risk_analysis(NYC, c)), c)
     assert p.catalog_item_id != "cat-point-forecast-v1"
 
 
 def test_no_scenario_means_gap_cannot_be_validated():
     c = ctx(free_check_scenario=None)
+    # NYC is Investigate, but fixture free-check scenario missing -> no purchase
     assert generate_purchase_request(get_risk_analysis(NYC, c), c) is None
 
 
@@ -217,14 +223,12 @@ def test_missing_tickers_flagged_and_block_purchase():
         assert generate_purchase_request(ra, c) is None
 
 
-def test_all_five_fixtures_validate_and_match_workbook_totals():
+def test_all_five_fixtures_validate():
     c = ctx()
-    # NYC workbook scored Liquidity 3; Excel-aligned thresholds compute 2 from the same quotes.
-    known_raw_drift = {"fx-nyc-high-20261118": 7}
-    for cid, m in c.markets.items():
+    for cid in c.markets:
         ra = get_risk_analysis(cid, c)
-        expected = known_raw_drift.get(cid, m["workbook"]["total"])
-        assert ra.rating.raw_total == expected, cid
+        assert ra.rating.complete
+        assert ra.rating.final_rating in ("Low", "Medium", "High")
         assert ra.snapshot.snapshot_hash.startswith("sha256:")
 
 
@@ -235,7 +239,7 @@ def test_snapshot_hash_is_stable():
 def test_nyc_observed_check_is_inconclusive_and_labeled_observed():
     c = ctx(free_check_scenario="observed-2026-11-18")
     log = []
-    p = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c, log)
+    p = generate_purchase_request(_with_investigate(get_risk_analysis(NYC, c)), c, log)
     assert p is not None and p.catalog_item_id == "cat-nws-cli-settlement-version-v1"
     assert p.fixture_label.startswith("OBSERVED") and "FIXTURE" not in p.fixture_label
     assert any("first published version" in l for l in log)

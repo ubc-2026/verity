@@ -1,8 +1,10 @@
 """get_risk_analysis(contract_id) -> RiskAnalysisV1.
 
-Fixture files already contain ambiguity, source, and correlation scores.
-A live exchange snapshot leaves those three null. Liquidity is always
-computed here from the quoted numbers.
+Fixture files already contain ambiguity, source, and correlation scores
+(schema 1-3 = Excel Framework 0-2 + 1). A live exchange snapshot leaves those
+three null until rules_analyst fills them. Liquidity and price quality are
+always computed here from the quoted numbers. The Excel action formula then
+picks Trade normally / Investigate / Avoid.
 """
 from __future__ import annotations
 
@@ -14,22 +16,21 @@ from .schemas import (
     CategoryScore, Citation, EvidenceGap, QuotedPrice, ResearchAction,
     RiskAnalysisV1, Scores, Snapshot,
 )
-from .scoring import liquidity_score, rate
+from .scoring import liquidity_score, price_data_quality_score, rate
 
-# Workbook-level conflicts that apply to every fixture.
+# Notes that apply when comparing against the older ASLC workbook rows.
 GLOBAL_WORKBOOK_CONFLICTS = [
-    "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-    "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-    "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-    "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-    "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-    "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review.",
+    "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+    "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+    "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+    "Research buys fire on Investigate (Medium), not Avoid (High).",
+    "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm.",
 ]
 
 ROW_CONFLICTS = {
-    "fx-okc-moneyline-20261118": "Row 2 scores Correlation 1, yet its Key risks cite injury news, which the Framework lists under Correlation 2 ('injury reports'). The total stays Low either way (4 vs 5).",
-    "fx-msu-spread-20261117": "Row 4 is Medium (7) but its action is 'Proceed, small size'; the Framework's Medium default is 'Investigate first'.",
-    "fx-best-ai-2026-gemini": "Row 6 scores Source 2, but the Framework describes LM Arena ('third-party ranking that changes continuously') as Source 3.",
+    "fx-okc-moneyline-20261118": "Row 2 scores Correlation 1, yet its Key risks cite injury news, which the Framework lists under outside-events 1.",
+    "fx-msu-spread-20261117": "Row 4 action was 'Proceed, small size'; Excel would Investigate when settlement_edge>=1.",
+    "fx-best-ai-2026-gemini": "Row 6 scores Source 2; Excel treats LM Arena / private rankings as source reliability 2 (schema 3).",
 }
 
 _ACTION: dict[str, ResearchAction] = {
@@ -84,6 +85,10 @@ def _flags(m: dict[str, Any]) -> list[str]:
         f.append("reading_scores_unscored: ambiguity, source, and correlation are left null")
     if m.get("analyst_id"):
         f.append(f"analyst={m['analyst_id']} (code rules, no LLM)")
+    if m.get("researchable") is False:
+        f.append("researchable=No: Excel Avoid path")
+    elif m.get("researchable") is True:
+        f.append("researchable=Yes")
     return f
 
 
@@ -94,20 +99,32 @@ def get_risk_analysis(contract_id: str, ctx: Optional[FixtureContext] = None) ->
     m = ctx.markets[contract_id]
 
     mk = m["market"]
+    bid, ask = _dec(mk.get("best_bid")), _dec(mk.get("best_ask"))
+    vol = _dec(mk.get("volume_usd"))
     liq, liq_why, liq_null = liquidity_score(
-        _dec(mk.get("volume_usd")), _dec(mk.get("best_bid")), _dec(mk.get("best_ask")),
+        vol, bid, ask,
         bool(mk.get("some_strikes_unquoted")),
         mk.get("volume_basis"),
     )
+    pq_excel, _pq_why = price_data_quality_score(
+        vol, bid, ask,
+        last_trade=_dec(mk.get("last_trade")),
+        prices_contradict=bool(mk.get("prices_contradict")),
+    )
+
     a = m["analyst"]
     scores = Scores(
-        ambiguity=CategoryScore(**a["ambiguity"]),
-        source=CategoryScore(**a["source"]),
+        ambiguity=CategoryScore(**{k: v for k, v in a["ambiguity"].items() if k != "excel_0_2"}),
+        source=CategoryScore(**{k: v for k, v in a["source"].items() if k != "excel_0_2"}),
         liquidity=CategoryScore(score=liq, rationale=liq_why, null_reason=liq_null,
                                 citation_ids=[e["id"] for e in m["rules_excerpts"] if "prices" in e["field_or_rule"]]),
-        correlation=CategoryScore(**a["correlation"]),
+        correlation=CategoryScore(**{k: v for k, v in a["correlation"].items() if k != "excel_0_2"}),
     )
-    rating = rate(scores)
+    rating = rate(
+        scores,
+        price_quality_excel=pq_excel,
+        researchable=m.get("researchable"),
+    )
 
     if rating.complete:
         action = _ACTION[rating.final_rating]  # type: ignore[index]
@@ -120,18 +137,23 @@ def get_risk_analysis(contract_id: str, ctx: Optional[FixtureContext] = None) ->
         unresolved.append("Which Gemini event ticker and instrument symbol is this market?")
 
     conflicts = list(GLOBAL_WORKBOOK_CONFLICTS)
-    wb = m.get("workbook")          # only fixtures carry a workbook row to compare with
+    wb = m.get("workbook")
     if wb and wb["scores"]["liquidity"] != liq:
         conflicts.append(f"Row {m['workbook_row']} liquidity is {wb['scores']['liquidity']}; the code computes {liq} from the same quotes.")
     if wb and rating.raw_total is not None and wb["total"] != rating.raw_total:
-        conflicts.append(f"Row {m['workbook_row']} total is {wb['total']}; the code computes {rating.raw_total}.")
+        conflicts.append(f"Row {m['workbook_row']} ASLC total is {wb['total']}; schema sum is {rating.raw_total} (Excel action may differ).")
     if m["contract_id"] in ROW_CONFLICTS:
         conflicts.append(ROW_CONFLICTS[m["contract_id"]])
 
     label = rating.final_rating or f"incomplete ({rating.possible_range[0]}-{rating.possible_range[1]})"  # type: ignore[index]
-    summary = (f"{label} resolution risk (total {rating.raw_total if rating.complete else str(rating.known_total) + '+?'}). "
-               f"Research action: {action}. "
-               + (f"{len(unresolved)} open question(s)." if unresolved else "No open resolution questions."))
+    excel_action = {
+        "Low": "Trade normally", "Medium": "Investigate", "High": "Avoid",
+    }.get(rating.final_rating or "", "incomplete")
+    summary = (
+        f"{label} ({excel_action}). "
+        f"Research action: {action}. "
+        + (f"{len(unresolved)} open question(s)." if unresolved else "No open resolution questions.")
+    )
 
     return RiskAnalysisV1(
         contract_id=contract_id,

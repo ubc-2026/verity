@@ -1,22 +1,26 @@
-"""Workbook rubric (Framework sheet), 1-3 per category.
+"""Gemini Market Risk Analysis.xlsx Framework scoring.
 
-Bands, from the workbook: total 4-6 Low, 7-8 Medium, 9-12 High.
-Overrides, applied separately from the raw total (mix of the older ASLC
-sheet and the newer Gemini Market Risk Analysis Excel):
-  * Any 3 in Ambiguity or Source  -> rating is at least Medium.
-  * Source >= 2                   -> at least Medium (settlement edge worth
-    investigating; Excel "Investigate" when settlement edge >= 1).
-  * Source >= 2 and Ambiguity >= 2 -> at least High (unclear criteria plus
-    a soft/proxy source).
-  * 3 in Correlation              -> at least High (overlapping markets).
-  * 3 in Liquidity                -> at least Medium (Excel Avoid / untradeable
-    books still elevate research attention).
-  * Any two categories at 3       -> at least High.
-  * Liquidity 3 also keeps the research note that the quoted price is an
-    unreliable signal (Verity places no trades).
+Excel factors are 0 / 1 / 2. They are stored on RiskAnalysisV1 as 1 / 2 / 3
+(excel + 1) so the existing schema stays stable:
 
-READING_RUBRIC is the checklist for ambiguity, source, and correlation.
-Those three are stored on each fixture. Liquidity is computed by liquidity_score.
+  ambiguity  <- Resolution criteria
+  source     <- Source reliability
+  liquidity  <- Liquidity
+  correlation<- Outside events  (context; not in either composite)
+
+Composites (Excel):
+  settlement_edge = resolution_criteria + source_reliability   (0..4)
+  execution_risk  = liquidity + price_and_data_quality         (0..4)
+
+Action (Excel Scores!J formula):
+  Avoid           if liquidity==2 OR execution_risk>=3 OR researchable==No
+  Investigate     else if settlement_edge>=1 (and researchable)
+  Trade normally  else
+
+Mapped onto Low / Medium / High for the rest of Verity:
+  Trade normally -> Low    -> no_further_research
+  Investigate    -> Medium -> investigate  (research buys allowed)
+  Avoid          -> High   -> flag_for_human_review (no research buy)
 """
 from __future__ import annotations
 
@@ -27,44 +31,52 @@ from .schemas import AppliedOverride, CategoryScore, OverallRating, Rating, Scor
 
 _ORDER: dict[Rating, int] = {"Low": 0, "Medium": 1, "High": 2}
 
-# Checklist for the three scores a person writes. Liquidity is not in this list.
+# Human-readable checklist (Excel Framework factor table).
 READING_RUBRIC = """
-Ambiguity: could two careful readers disagree on the outcome?
-  1: The outcome, the measurement, the cutoff, and the tie rule are all explicit.
-     A game winner, or a price at 5pm ET.
-  2: The outcome is clear, but a rule is missing or hard to find.
-     A missing cutoff or time zone, a missing rounding rule, a missing tie rule,
-     a band edge, an empty event terms link, or a title that names a different
-     place/measure than the settlement rule (Chicago vs Midway).
-     A missing cancellation or postponement rule is a 2.
-  3: The outcome depends on a judgment, a name, or a setting.
-     "Top-ranked", a leaderboard toggle, or company versus model.
-     The exchange may set the payout itself, for example after a cancellation.
-  A conflict between the contract wording and the settlement source is recorded
-  on the snapshot. It is not also scored here.
+Resolution criteria (stored as Ambiguity, Excel 0-2 -> schema 1-3):
+  0/1: Clear threshold, exact time, named source, simple fallback.
+  1/2: Needs judgment: rounding, ties, a missing outcome, or a title that
+       names a different place than the rule (Chicago vs Midway).
+  2/3: The rule contradicts the title or leaves the outcome undefined.
 
-Source: is the settlement source official, stable, and checkable?
-  1: An official primary source with named fallbacks.
-     A league, the Federal Reserve, or a stated price index (Lukka BTC/ETH).
-  2: Official but revisable, or a proxy/thinner feed of the real thing.
-     An NWS daily report, economic data that is revised, or a Kaiko/Hyperliquid
-     crypto perpetual standing in for oil/silver/gas.
-  3: A third-party ranking that changes continuously or can be gamed,
-     or a private/nowcast index (LM Arena, Mecone nowcast).
-  null: No settlement source is named. Do not guess a score.
+Source reliability (stored as Source):
+  0/1: Official source that measures the thing itself (NWS, league, Lukka).
+  1/2: Index with a thinner feed, or a third-party copy of an official number.
+  2/3: Proxy or private source: crypto perp for oil, Mecone nowcast for GDP.
 
-Correlation: do other contracts overlap this one? This is not a portfolio score.
-  1: The outcome stands alone. Routine news does not count.
-     Sibling buckets of the same question, such as other temperature bands, stay 1.
-     News that moves the price but not the settlement rule stays 1.
-  2: Scheduled data or named news drives the settlement.
-     CPI, jobs, Fed speakers, or injury reports.
-  3: The contract overlaps other markets, or one announcement can flip several.
-     A spread plus a moneyline plus a total, or a model launch that changes who is number one.
+Liquidity (Excel cutoffs):
+  0/1: Bid and ask quoted, spread 5c or less, volume $1,000 or more.
+  1/2: Spread 6 to 15c, or volume under $1,000 (including zero).
+  2/3: No bid or no ask, or spread over 15c.
+
+Price and data quality (used in execution risk; not a stored ASLC column):
+  0: Thresholds priced in order, last trade near the quotes.
+  1: Last trade stale, never traded, or one side missing.
+  2: Prices contradict each other, or no prices at all.
+
+Outside events (stored as Correlation; context only, not in either score):
+  0/1: Nothing pending that could swing or delay it.
+  1/2: Normal news risk before expiry (injuries, volatility).
+  2/3: Depends on a data release that could be delayed.
 """.strip()
 
 
+def to_schema(excel_0_2: int) -> int:
+    """Excel 0-2 -> schema 1-3."""
+    if excel_0_2 not in (0, 1, 2):
+        raise ValueError(f"excel factor must be 0-2, got {excel_0_2}")
+    return excel_0_2 + 1
+
+
+def to_excel(schema_1_3: int) -> int:
+    """Schema 1-3 -> Excel 0-2."""
+    if schema_1_3 not in (1, 2, 3):
+        raise ValueError(f"schema score must be 1-3, got {schema_1_3}")
+    return schema_1_3 - 1
+
+
 def band(total: int) -> Rating:
+    """Legacy ASLC band helper kept for unit tests that still sum 4-12."""
     if not 4 <= total <= 12:
         raise ValueError(f"total {total} is outside 4-12")
     if total <= 6:
@@ -79,7 +91,6 @@ def _max(a: Rating, b: Optional[Rating]) -> Rating:
 
 
 def _volume_phrase(volume_usd: Decimal, volume_basis: Optional[str]) -> str:
-    """Name the volume window. total and 24h are not converted into each other."""
     if volume_basis == "24h":
         return f"24h volume ${volume_usd}"
     if volume_basis == "total":
@@ -94,13 +105,12 @@ def liquidity_score(
     some_strikes_unquoted: bool = False,
     volume_basis: Optional[str] = None,
 ) -> tuple[Optional[int], str, Optional[str]]:
-    """How reliable the quoted price is. Returns (score, rationale, null_reason).
+    """Excel Liquidity 0-2, returned as schema 1-3.
 
-    Aligned with Gemini Market Risk Analysis Framework liquidity cutoffs:
     null: no bid, no ask, and no volume. Or both prices present and volume missing.
-    3: either price is missing, or the spread is over 15c (Excel Liquidity 2 / Avoid).
-    1: volume is at least $1000, the spread is at most 5c, and every strike has a bid.
-    2: any other two-sided quote (thin volume or 6-15c spread; Excel Liquidity 1).
+    3 (excel 2): no two-sided quote, or spread over 15c.
+    1 (excel 0): volume >= $1000, spread <= 5c, every strike quoted.
+    2 (excel 1): any other two-sided quote.
     """
     volume = _volume_phrase(volume_usd, volume_basis) if volume_usd is not None else None
 
@@ -123,7 +133,105 @@ def liquidity_score(
     return 2, f"{volume}, {spread}.", None
 
 
-def rate(scores: Scores) -> OverallRating:
+def price_data_quality_score(
+    volume_usd: Optional[Decimal],
+    best_bid: Optional[Decimal],
+    best_ask: Optional[Decimal],
+    last_trade: Optional[Decimal] = None,
+    prices_contradict: bool = False,
+) -> tuple[int, str]:
+    """Excel Price and data quality 0-2 (not stored; feeds execution risk)."""
+    if prices_contradict:
+        return 2, "Prices contradict each other across contracts."
+    if best_bid is None and best_ask is None:
+        return 2, "No prices at all."
+    if best_bid is None or best_ask is None:
+        return 1, "One side of the book is missing."
+    if volume_usd is not None and volume_usd == 0:
+        return 1, "Never traded (volume is zero)."
+    if last_trade is not None:
+        mid = (best_bid + best_ask) / 2
+        if abs(last_trade - mid) > Decimal("0.15"):
+            return 1, "Last trade is more than 15c from the midpoint (Excel rule 3)."
+    return 0, "Two-sided quotes look orderly."
+
+
+def excel_action(
+    resolution: int,
+    source: int,
+    liquidity: int,
+    price_quality: int,
+    researchable: Optional[bool],
+) -> tuple[str, int, int, list[AppliedOverride]]:
+    """Return (action, settlement_edge, execution_risk, overrides). Factors are Excel 0-2."""
+    settlement_edge = resolution + source
+    execution_risk = liquidity + price_quality
+    overrides: list[AppliedOverride] = [
+        AppliedOverride(
+            rule="settlement_edge = resolution_criteria + source_reliability",
+            triggered_by="ambiguity",
+            effect=f"settlement_edge={settlement_edge}",
+        ),
+        AppliedOverride(
+            rule="execution_risk = liquidity + price_and_data_quality",
+            triggered_by="liquidity",
+            effect=f"execution_risk={execution_risk}",
+        ),
+    ]
+
+    # Excel: Avoid if Liquidity==2 OR execution>=3 OR researchable==No
+    if liquidity == 2:
+        overrides.append(AppliedOverride(
+            rule="Avoid when Liquidity is 2 (no quote / spread over 15c)",
+            triggered_by="liquidity",
+            effect="action Avoid; market cannot really be traded",
+        ))
+        return "Avoid", settlement_edge, execution_risk, overrides
+    if execution_risk >= 3:
+        overrides.append(AppliedOverride(
+            rule="Avoid when execution_risk >= 3",
+            triggered_by="liquidity",
+            effect="action Avoid; even a settlement edge cannot be traded cleanly",
+        ))
+        return "Avoid", settlement_edge, execution_risk, overrides
+    if researchable is False:
+        overrides.append(AppliedOverride(
+            rule="Avoid when the ambiguity is not researchable",
+            triggered_by="ambiguity",
+            effect="action Avoid; research cannot settle the question",
+        ))
+        return "Avoid", settlement_edge, execution_risk, overrides
+
+    if settlement_edge >= 1:
+        overrides.append(AppliedOverride(
+            rule="Investigate when settlement_edge >= 1 and the market is tradeable",
+            triggered_by="source" if source >= resolution else "ambiguity",
+            effect="action Investigate; buy research on the settlement edge",
+        ))
+        return "Investigate", settlement_edge, execution_risk, overrides
+
+    overrides.append(AppliedOverride(
+        rule="Trade normally when settlement_edge is 0 and the market is tradeable",
+        triggered_by="ambiguity",
+        effect="action Trade normally; no settlement edge",
+    ))
+    return "Trade normally", settlement_edge, execution_risk, overrides
+
+
+_ACTION_TO_RATING: dict[str, Rating] = {
+    "Trade normally": "Low",
+    "Investigate": "Medium",
+    "Avoid": "High",
+}
+
+
+def rate(
+    scores: Scores,
+    *,
+    price_quality_excel: int = 0,
+    researchable: Optional[bool] = None,
+) -> OverallRating:
+    """Excel decision engine. Schema scores are 1-3; converted to Excel 0-2 inside."""
     cats: dict[str, CategoryScore] = {
         "ambiguity": scores.ambiguity,
         "source": scores.source,
@@ -131,81 +239,51 @@ def rate(scores: Scores) -> OverallRating:
         "correlation": scores.correlation,
     }
     known = {k: v.score for k, v in cats.items() if v.score is not None}
-    missing = [k for k in cats if k not in known]
-    known_total = sum(known.values())
-
-    overrides: list[AppliedOverride] = []
-    floor: Optional[Rating] = None
-
-    for cat in ("ambiguity", "source"):
-        if known.get(cat) == 3:
-            floor = _max("Medium", floor)
-            overrides.append(AppliedOverride(
-                rule="Any High (3) in Ambiguity or Source -> at least Medium",
-                triggered_by=cat,
-                effect="rating floor Medium; always seek evidence on the settlement rule",
-            ))
-
-    src = known.get("source")
-    amb = known.get("ambiguity")
-    if src is not None and src >= 2:
-        floor = _max("Medium", floor)
-        overrides.append(AppliedOverride(
-            rule="Source >= 2 -> at least Medium",
-            triggered_by="source",
-            effect="rating floor Medium; settlement edge worth investigating (Excel)",
-        ))
-    if src is not None and amb is not None and src >= 2 and amb >= 2:
-        floor = _max("High", floor)
-        overrides.append(AppliedOverride(
-            rule="Source >= 2 and Ambiguity >= 2 -> at least High",
-            triggered_by="source",
-            effect="rating floor High; soft/proxy source plus unclear criteria",
-        ))
-
-    if known.get("correlation") == 3:
-        floor = _max("High", floor)
-        overrides.append(AppliedOverride(
-            rule="High (3) in Correlation -> at least High",
-            triggered_by="correlation",
-            effect="rating floor High; overlapping markets can flip together",
-        ))
-
-    if known.get("liquidity") == 3:
-        floor = _max("Medium", floor)
-        overrides.append(AppliedOverride(
-            rule="High (3) in Liquidity -> at least Medium",
-            triggered_by="liquidity",
-            effect="rating floor Medium; untradeable/wide book (Excel Avoid) still elevates research attention",
-        ))
-        overrides.append(AppliedOverride(
-            rule="High (3) in Liquidity -> never trade more than top-of-book",
-            triggered_by="liquidity",
-            effect="research translation: treat the quoted price as an unreliable signal",
-        ))
-
-    threes = [k for k, v in known.items() if v == 3]
-    if len(threes) >= 2:
-        floor = _max("High", floor)
-        overrides.append(AppliedOverride(
-            rule="Any two categories at High (3) -> at least High",
-            triggered_by=threes[0],
-            effect=f"rating floor High; stacked risk in {', '.join(threes)}",
-        ))
+    missing = [k for k in ("ambiguity", "source", "liquidity") if k not in known]
+    # Outside events (correlation) is context-only; incompleteness ignores it for action.
+    known_total = sum(v for v in known.values())
 
     if missing:
-        lo = known_total + len(missing) * 1
-        hi = known_total + len(missing) * 3
         return OverallRating(
             complete=False, known_total=known_total, raw_total=None, raw_rating=None,
-            rating_floor=floor, final_rating=None,
-            possible_range=(_max(band(lo), floor), _max(band(hi), floor)),
-            overrides=overrides,
+            rating_floor=None, final_rating=None,
+            possible_range=("Low", "High"),
+            overrides=[],
         )
 
-    raw = band(known_total)
+    resolution = to_excel(known["ambiguity"])
+    source = to_excel(known["source"])
+    liquidity = to_excel(known["liquidity"])
+    if price_quality_excel not in (0, 1, 2):
+        raise ValueError(f"price_quality_excel must be 0-2, got {price_quality_excel}")
+
+    # If settlement edge is 0, researchable is n/a (treated as None / not blocking).
+    edge = resolution + source
+    res_flag = researchable
+    if edge == 0:
+        res_flag = None
+    elif res_flag is None:
+        # Default: researchable when there is an edge, unless resolution is undefined (excel 2).
+        res_flag = resolution < 2
+
+    action, settlement_edge, execution_risk, overrides = excel_action(
+        resolution, source, liquidity, price_quality_excel, res_flag,
+    )
+    final = _ACTION_TO_RATING[action]
+    # raw_total kept as schema sum for continuity in samples; raw_rating follows action.
     return OverallRating(
-        complete=True, known_total=known_total, raw_total=known_total, raw_rating=raw,
-        rating_floor=floor, final_rating=_max(raw, floor), possible_range=None,
-        overrides=overrides,
+        complete=True,
+        known_total=known_total,
+        raw_total=known_total,
+        raw_rating=final,
+        rating_floor=None,
+        final_rating=final,
+        possible_range=None,
+        overrides=overrides + [
+            AppliedOverride(
+                rule=f"Excel action '{action}' (settlement_edge={settlement_edge}, execution_risk={execution_risk})",
+                triggered_by="ambiguity",
+                effect=f"final_rating {final}",
+            ),
+        ],
     )

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-1QT-O7",
     "question": "Baltimore vs Carolina: 1st Quarter Point Total",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:27:23Z",
+    "analyzed_at_utc": "2026-11-19T06:51:18Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:27:23Z",
-      "snapshot_hash": "sha256:793f67e57a1a462f5627df1dacbdc2f05e9ae43179289bf5faf9e8d3fbd4d02f",
+      "snapshot_time_utc": "2026-11-19T06:51:18Z",
+      "snapshot_hash": "sha256:ed246ef94681b98163a38ebabf4a16cd9636444156cc0abfdd5759e30541aaf4",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,12 +24,12 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:27:23Z"
+      "observed_time_utc": "2026-11-19T06:51:18Z"
     },
     "scores": {
       "ambiguity": {
         "score": 1,
-        "rationale": "Objective outcome; the terms were read and name the rule.",
+        "rationale": "Clear threshold, exact time, named source, simple fallback.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 1,
-        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
+        "rationale": "Official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -57,7 +57,7 @@
       },
       "correlation": {
         "score": 1,
-        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -74,10 +74,31 @@
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": []
+      "overrides": [
+        {
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=0"
+        },
+        {
+          "rule": "execution_risk = liquidity + price_and_data_quality",
+          "triggered_by": "liquidity",
+          "effect": "execution_risk=2"
+        },
+        {
+          "rule": "Trade normally when settlement_edge is 0 and the market is tradeable",
+          "triggered_by": "ambiguity",
+          "effect": "action Trade normally; no settlement edge"
+        },
+        {
+          "rule": "Excel action 'Trade normally' (settlement_edge=0, execution_risk=2)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating Low"
+        }
+      ]
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low (Trade normally). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,19 +128,18 @@
     "evidence_gaps": [],
     "unresolved_questions": [],
     "data_quality_flags": [
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NFL-2611221800-BAL-CAR-1QT-O7] no purchase: rating is Low; research buys are limited to High-risk markets."
+    "[GEMI-NFL-2611221800-BAL-CAR-1QT-O7] no purchase: rating is Low (Excel action needs Investigate); research buys follow the Excel Investigate path."
   ]
 }

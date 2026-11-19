@@ -1,0 +1,1360 @@
+{
+  "id": "475196",
+  "title": "Oregon State vs Oregon",
+  "slug": "oregon-state-vs-oregon",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611200200-ORST-ORE-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:06:43.754Z",
+  "contracts": [
+    {
+      "id": "475196-1196254",
+      "label": "Oregon",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon wins the men's college basketball game between Oregon and Oregon State originally scheduled for November 19, 2026 at 9:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.55",
+          "no": "0.46"
+        },
+        "sell": {
+          "yes": "0.54",
+          "no": "0.45"
+        },
+        "bestBid": "0.54",
+        "bestAsk": "0.55"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:43.754Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "ORE",
+      "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-M-ORE",
+      "marketState": "open",
+      "abbreviatedName": "ORE",
+      "color": "#154733",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+      "expiryDate": "2026-11-22T02:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "1da70895-f77f-44ef-b216-d63c02e696eb",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475196-1196252",
+      "label": "Oregon State",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Oregon State wins the men's college basketball game between Oregon State and Oregon originally scheduled for November 19, 2026 at 9:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.46",
+          "no": "0.55"
+        },
+        "sell": {
+          "yes": "0.45",
+          "no": "0.54"
+        },
+        "bestBid": "0.45",
+        "bestAsk": "0.46",
+        "lastTradePrice": "0.46"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:43.754Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "ORST",
+      "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-M-ORST",
+      "marketState": "open",
+      "abbreviatedName": "ORST",
+      "color": "#000203",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_State_BeaversDark_b0c63633-4605-4902-ab20-9067b1c5a04c.png",
+      "expiryDate": "2026-11-22T02:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "532d3874-b4b3-4c5c-acc6-749a6db26c8f",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:06:43.754Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "728",
+      "name": "Oregon Ducks",
+      "abbreviation": "ORE",
+      "side": "home"
+    },
+    {
+      "id": "729",
+      "name": "Oregon State Beavers",
+      "abbreviation": "ORST",
+      "side": "away"
+    }
+  ],
+  "description": "Oregon State vs Oregon",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "676.13",
+  "volume24h": "676.13",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-22T02:00:00.000Z",
+  "startTime": "2026-11-20T02:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "events": [
+    {
+      "id": "478882",
+      "title": "Oregon State vs Oregon: Total Points",
+      "slug": "oregon-state-vs-oregon-total-points",
+      "type": "categorical",
+      "category": "Sports",
+      "ticker": "NCAAM-2611200200-ORST-ORE-T",
+      "status": "active",
+      "createdAt": "2026-11-19T00:27:16.180Z",
+      "contracts": [
+        {
+          "id": "478882-1214267",
+          "label": "More than 152.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 152.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O152",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O152",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 0,
+          "strike": {
+            "type": "over",
+            "value": "152.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214268",
+          "label": "More than 176.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 176.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O176",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O176",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 1,
+          "strike": {
+            "type": "over",
+            "value": "176.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214270",
+          "label": "More than 148.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 148.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O148",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O148",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 2,
+          "strike": {
+            "type": "over",
+            "value": "148.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214274",
+          "label": "More than 143.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 143.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O143",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O143",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 3,
+          "strike": {
+            "type": "over",
+            "value": "143.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214277",
+          "label": "More than 172.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 172.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O172",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O172",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 4,
+          "strike": {
+            "type": "over",
+            "value": "172.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214279",
+          "label": "More than 156.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 156.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O156",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O156",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 5,
+          "strike": {
+            "type": "over",
+            "value": "156.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214282",
+          "label": "More than 159.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 159.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O159",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O159",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 6,
+          "strike": {
+            "type": "over",
+            "value": "159.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214285",
+          "label": "More than 162.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 162.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O162",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O162",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 7,
+          "strike": {
+            "type": "over",
+            "value": "162.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214290",
+          "label": "More than 169.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 169.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O169",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O169",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 8,
+          "strike": {
+            "type": "over",
+            "value": "169.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214291",
+          "label": "More than 164.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 164.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O164",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O164",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 9,
+          "strike": {
+            "type": "over",
+            "value": "164.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214292",
+          "label": "More than 166.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 166.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O166",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O166",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 10,
+          "strike": {
+            "type": "over",
+            "value": "166.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214293",
+          "label": "More than 180.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 180.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O180",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O180",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 11,
+          "strike": {
+            "type": "over",
+            "value": "180.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1214295",
+          "label": "More than 185.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 185.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O185",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O185",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 12,
+          "strike": {
+            "type": "over",
+            "value": "185.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478882-1220108",
+          "label": "More than 142.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Oregon State and Oregon collectively score over 142.5 total points in the men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T00:27:16.180Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O142",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-T-O142",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 14,
+          "strike": {
+            "type": "over",
+            "value": "142.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        }
+      ],
+      "effectiveDate": "2026-11-19T00:27:16.180Z",
+      "isLive": false,
+      "participants": [
+        {
+          "id": "728",
+          "name": "Oregon Ducks",
+          "abbreviation": "ORE",
+          "side": "home"
+        },
+        {
+          "id": "729",
+          "name": "Oregon State Beavers",
+          "abbreviation": "ORST",
+          "side": "away"
+        }
+      ],
+      "description": "How many points will be scored?",
+      "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+      "tags": [
+        "College Basketball"
+      ],
+      "expiryDate": "2026-11-22T02:00:00.000Z",
+      "startTime": "2026-11-20T02:00:00.000Z",
+      "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+      "subcategory": {
+        "id": 15,
+        "slug": "sports_basketball_college-basketball",
+        "name": "College Basketball",
+        "path": [
+          "Sports",
+          "Basketball",
+          "College Basketball"
+        ]
+      },
+      "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+      "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+      "template": "sports-total",
+      "gameId": "bcdbd169-9b3e-4203-b4f6-09aa6dd03fbb",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "sportsMarket": {
+        "sport": "basketball",
+        "type": "total",
+        "subject": "contest",
+        "scope": {
+          "type": "full_contest"
+        },
+        "metric": "points"
+      }
+    },
+    {
+      "id": "479013",
+      "title": "Oregon State vs Oregon: Point Spread",
+      "slug": "oregon-state-vs-oregon-point-spread",
+      "type": "categorical",
+      "category": "Sports",
+      "ticker": "NCAAM-2611200200-ORST-ORE-S",
+      "status": "active",
+      "createdAt": "2026-11-19T01:17:35.708Z",
+      "contracts": [
+        {
+          "id": "479013-1214869",
+          "label": "Oregon State wins by more than 5.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon State in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon State's score minus Oregon's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORST5",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORST5",
+          "marketState": "open",
+          "abbreviatedName": "Oregon State",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_State_BeaversDark_b0c63633-4605-4902-ab20-9067b1c5a04c.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 0,
+          "strike": {
+            "type": "spread",
+            "value": "5.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214870",
+          "label": "Oregon wins by more than 14.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 14.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon's score minus Oregon State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORE14",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORE14",
+          "marketState": "open",
+          "abbreviatedName": "Oregon",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 1,
+          "strike": {
+            "type": "spread",
+            "value": "14.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214871",
+          "label": "Oregon State wins by more than 1.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon State in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon State's score minus Oregon's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORST1",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORST1",
+          "marketState": "open",
+          "abbreviatedName": "Oregon State",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_State_BeaversDark_b0c63633-4605-4902-ab20-9067b1c5a04c.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 2,
+          "strike": {
+            "type": "spread",
+            "value": "1.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214872",
+          "label": "Oregon State wins by more than 20.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon State in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 20.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon State's score minus Oregon's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORST20",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORST20",
+          "marketState": "open",
+          "abbreviatedName": "Oregon State",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_State_BeaversDark_b0c63633-4605-4902-ab20-9067b1c5a04c.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 3,
+          "strike": {
+            "type": "spread",
+            "value": "20.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214873",
+          "label": "Oregon wins by more than 5.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon's score minus Oregon State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORE5",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORE5",
+          "marketState": "open",
+          "abbreviatedName": "Oregon",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 4,
+          "strike": {
+            "type": "spread",
+            "value": "5.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214874",
+          "label": "Oregon State wins by more than 10.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon State in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon State's score minus Oregon's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORST10",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORST10",
+          "marketState": "open",
+          "abbreviatedName": "Oregon State",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_State_BeaversDark_b0c63633-4605-4902-ab20-9067b1c5a04c.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 5,
+          "strike": {
+            "type": "spread",
+            "value": "10.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214875",
+          "label": "Oregon wins by more than 24.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 24.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon's score minus Oregon State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORE24",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORE24",
+          "marketState": "open",
+          "abbreviatedName": "Oregon",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 6,
+          "strike": {
+            "type": "spread",
+            "value": "24.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214876",
+          "label": "Oregon State wins by more than 15.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon State in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 15.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon State's score minus Oregon's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORST15",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORST15",
+          "marketState": "open",
+          "abbreviatedName": "Oregon State",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_State_BeaversDark_b0c63633-4605-4902-ab20-9067b1c5a04c.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 7,
+          "strike": {
+            "type": "spread",
+            "value": "15.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214877",
+          "label": "Oregon wins by more than 19.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 19.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon's score minus Oregon State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORE19",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORE19",
+          "marketState": "open",
+          "abbreviatedName": "Oregon",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 8,
+          "strike": {
+            "type": "spread",
+            "value": "19.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214878",
+          "label": "Oregon wins by more than 9.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 9.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon's score minus Oregon State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORE9",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORE9",
+          "marketState": "open",
+          "abbreviatedName": "Oregon",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 9,
+          "strike": {
+            "type": "spread",
+            "value": "9.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479013-1214879",
+          "label": "Oregon wins by more than 2.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Oregon in the entire men's college basketball game between Oregon State and Oregon scheduled for 2026-11-19 at 8:00 p.m. CT is above 2.5. Otherwise, it resolves to No. The Underlying is the score differential (Oregon's score minus Oregon State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:17:35.708Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "ORE2",
+          "instrumentSymbol": "GEMI-NCAAM-2611200200-ORST-ORE-S-ORE2",
+          "marketState": "open",
+          "abbreviatedName": "Oregon",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Oregon_bb156a8d-33db-4127-bf65-efb7818d6ccd.png",
+          "expiryDate": "2026-11-22T02:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 10,
+          "strike": {
+            "type": "spread",
+            "value": "2.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        }
+      ],
+      "effectiveDate": "2026-11-19T01:17:35.708Z",
+      "isLive": false,
+      "participants": [
+        {
+          "id": "728",
+          "name": "Oregon Ducks",
+          "abbreviation": "ORE",
+          "side": "home"
+        },
+        {
+          "id": "729",
+          "name": "Oregon State Beavers",
+          "abbreviation": "ORST",
+          "side": "away"
+        }
+      ],
+      "description": "What will the point difference be?",
+      "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+      "tags": [
+        "College Basketball"
+      ],
+      "expiryDate": "2026-11-22T02:00:00.000Z",
+      "startTime": "2026-11-20T02:00:00.000Z",
+      "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "subcategory": {
+        "id": 15,
+        "slug": "sports_basketball_college-basketball",
+        "name": "College Basketball",
+        "path": [
+          "Sports",
+          "Basketball",
+          "College Basketball"
+        ]
+      },
+      "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+      "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+      "template": "sports-spread",
+      "gameId": "bcdbd169-9b3e-4203-b4f6-09aa6dd03fbb",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "sportsMarket": {
+        "sport": "basketball",
+        "type": "spread",
+        "subject": "team",
+        "scope": {
+          "type": "full_contest"
+        },
+        "metric": "points"
+      }
+    }
+  ],
+  "template": "sports-game",
+  "gameId": "bcdbd169-9b3e-4203-b4f6-09aa6dd03fbb",
+  "eventTags": [
+    {
+      "id": 7354,
+      "name": "Big Ten",
+      "slug": "big-ten"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 26320,
+      "name": "Oregon Ducks",
+      "slug": "oregon-ducks"
+    },
+    {
+      "id": 26287,
+      "name": "Oregon State Beavers",
+      "slug": "oregon-state-beavers"
+    },
+    {
+      "id": 31248,
+      "name": "West Coast",
+      "slug": "west-coast"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "ORE",
+      "name": "Oregon Ducks",
+      "externalIds": {
+        "sportradarId": "1da70895-f77f-44ef-b216-d63c02e696eb"
+      }
+    }
+  }
+}

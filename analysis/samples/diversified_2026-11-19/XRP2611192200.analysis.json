@@ -1,35 +1,35 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-XRP2611192200-HI0D98",
+    "contract_id": "GEMI-XRP2611192200-HI1",
     "event_ticker": "XRP2611192200",
-    "instrument_symbol": "GEMI-XRP2611192200-HI0D98",
+    "instrument_symbol": "GEMI-XRP2611192200-HI1",
     "question": "XRP price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:28:11Z",
+    "analyzed_at_utc": "2026-11-19T06:52:00Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:28:11Z",
-      "snapshot_hash": "sha256:7ed21788b4f11d45e68a09602ce4bad423ce634881fcb4d4c063ca23402b1129",
+      "snapshot_time_utc": "2026-11-19T06:52:00Z",
+      "snapshot_hash": "sha256:aa94ff1ddce6fffe2dc5634853ae8aec76780b462044f319f952271c83098e16",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$0.98 or above",
-      "best_bid": "0.43",
-      "best_ask": "0.46",
-      "mid": "0.445",
-      "implied_probability": "0.445",
+      "outcome_label": "$1 or above",
+      "best_bid": "0.21",
+      "best_ask": "0.24",
+      "mid": "0.225",
+      "implied_probability": "0.225",
       "volume_usd": "411.87",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:28:11Z"
+      "observed_time_utc": "2026-11-19T06:52:00Z"
     },
     "scores": {
       "ambiguity": {
         "score": 2,
-        "rationale": "Clear outcome, but numeric band edges decide the outcome.",
+        "rationale": "Needs judgment: numeric band edges decide the outcome.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 1,
-        "rationale": "Settlement source looks like official primary source (matched 'lukka').",
+        "rationale": "Official primary source (matched 'lukka').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -57,7 +57,7 @@
       },
       "correlation": {
         "score": 1,
-        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -70,14 +70,35 @@
       "complete": true,
       "known_total": 6,
       "raw_total": 6,
-      "raw_rating": "Low",
+      "raw_rating": "Medium",
       "rating_floor": null,
-      "final_rating": "Low",
+      "final_rating": "Medium",
       "possible_range": null,
-      "overrides": []
+      "overrides": [
+        {
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=1"
+        },
+        {
+          "rule": "execution_risk = liquidity + price_and_data_quality",
+          "triggered_by": "liquidity",
+          "effect": "execution_risk=1"
+        },
+        {
+          "rule": "Investigate when settlement_edge >= 1 and the market is tradeable",
+          "triggered_by": "ambiguity",
+          "effect": "action Investigate; buy research on the settlement edge"
+        },
+        {
+          "rule": "Excel action 'Investigate' (settlement_edge=1, execution_risk=1)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating Medium"
+        }
+      ]
     },
-    "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "research_action": "investigate",
+    "summary": "Medium (Investigate). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -89,7 +110,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XRP2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of XRP is $0.98 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XRPUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/xrp_68683757-6484-4a53-8a7f-7d9afc5b1747.pdf)."
+        "quote": "If the price of XRP is $1 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XRPUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/xrp_68683757-6484-4a53-8a7f-7d9afc5b1747.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -101,25 +122,25 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XRP2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.43, bestAsk 0.46; event volume 411.87"
+        "quote": "bestBid 0.21, bestAsk 0.24; event volume 411.87"
       }
     ],
     "evidence_gaps": [],
     "unresolved_questions": [],
     "data_quality_flags": [
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)",
+      "researchable=Yes"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-XRP2611192200-HI0D98] no purchase: rating is Low; research buys are limited to High-risk markets."
+    "[GEMI-XRP2611192200-HI1] no purchase: no material resolution gap (research action: investigate)."
   ]
 }

@@ -25,12 +25,12 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.96"
+          "yes": "0.94"
         },
         "sell": {
-          "no": "0.04"
+          "no": "0.06"
         },
-        "bestAsk": "0.96"
+        "bestAsk": "0.94"
       },
       "status": "active",
       "createdAt": "2026-11-19T03:14:06.659Z",
@@ -72,15 +72,12 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.47",
-          "no": "0.65"
+          "yes": "0.48"
         },
         "sell": {
-          "yes": "0.35",
-          "no": "0.53"
+          "no": "0.52"
         },
-        "bestBid": "0.35",
-        "bestAsk": "0.47"
+        "bestAsk": "0.48"
       },
       "status": "active",
       "createdAt": "2026-11-19T03:14:06.659Z",

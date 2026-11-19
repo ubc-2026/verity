@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK7",
     "question": "Clemson vs Duke: 1st Quarter Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:27:36Z",
+    "analyzed_at_utc": "2026-11-19T06:51:20Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:27:36Z",
-      "snapshot_hash": "sha256:f68a33c1de73f09770e40f2eddc8655fb9a11ad1ab0e8d16b3f72f6005c29ffc",
+      "snapshot_time_utc": "2026-11-19T06:51:20Z",
+      "snapshot_hash": "sha256:35e8a0322eb4ccd58c9df1066a86a2c7e358690837a84117ee28c72999711b77",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,12 +24,12 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:27:36Z"
+      "observed_time_utc": "2026-11-19T06:51:20Z"
     },
     "scores": {
       "ambiguity": {
         "score": 1,
-        "rationale": "Objective outcome; the terms were read and name the rule.",
+        "rationale": "Clear threshold, exact time, named source, simple fallback.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 1,
-        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
+        "rationale": "Official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -57,7 +57,7 @@
       },
       "correlation": {
         "score": 1,
-        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -70,25 +70,35 @@
       "complete": true,
       "known_total": 6,
       "raw_total": 6,
-      "raw_rating": "Low",
-      "rating_floor": "Medium",
-      "final_rating": "Medium",
+      "raw_rating": "High",
+      "rating_floor": null,
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Liquidity -> at least Medium",
-          "triggered_by": "liquidity",
-          "effect": "rating floor Medium; untradeable/wide book (Excel Avoid) still elevates research attention"
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=0"
         },
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "rule": "execution_risk = liquidity + price_and_data_quality",
           "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal"
+          "effect": "execution_risk=4"
+        },
+        {
+          "rule": "Avoid when Liquidity is 2 (no quote / spread over 15c)",
+          "triggered_by": "liquidity",
+          "effect": "action Avoid; market cannot really be traded"
+        },
+        {
+          "rule": "Excel action 'Avoid' (settlement_edge=0, execution_risk=4)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating High"
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 6). Research action: investigate. No open resolution questions.",
+    "research_action": "flag_for_human_review",
+    "summary": "High (Avoid). Research action: flag_for_human_review. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -118,19 +128,18 @@
     "evidence_gaps": [],
     "unresolved_questions": [],
     "data_quality_flags": [
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK7] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK7] no purchase: rating is High (Excel action needs Investigate); research buys follow the Excel Investigate path."
   ]
 }

@@ -180,11 +180,13 @@ def generate_purchase_request(
         _record(decision_log, f"[{ra.contract_id}] no purchase: {left} to expiry is under 1h (Agent rule 11).")
         return None
 
-    if ra.rating.final_rating != "High":
+    # Excel Framework: buy research on Investigate (Medium). Avoid (High) does not buy.
+    if ra.rating.final_rating != "Medium" and ra.research_action != "investigate":
         label = ra.rating.final_rating or "incomplete"
         _record(
             decision_log,
-            f"[{ra.contract_id}] no purchase: rating is {label}; research buys are limited to High-risk markets.",
+            f"[{ra.contract_id}] no purchase: rating is {label} (Excel action needs Investigate); "
+            f"research buys follow the Excel Investigate path.",
         )
         return None
 

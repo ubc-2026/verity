@@ -6,30 +6,30 @@
     "instrument_symbol": "GEMI-COPPER2611192200-HI5D72",
     "question": "Copper price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:28:11Z",
+    "analyzed_at_utc": "2026-11-19T06:51:59Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:28:11Z",
-      "snapshot_hash": "sha256:d56a5201c5ce095b58a01518c28c744171b58b3e5b282ec15107e7c0992bb1e1",
+      "snapshot_time_utc": "2026-11-19T06:51:59Z",
+      "snapshot_hash": "sha256:6ca40293597559200a81fc6c3c83157b09219d6205e5a43e6a330ea719e13ba4",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$5.72 or above",
-      "best_bid": "0.65",
-      "best_ask": "0.69",
-      "mid": "0.67",
-      "implied_probability": "0.67",
+      "best_bid": "0.63",
+      "best_ask": "0.67",
+      "mid": "0.65",
+      "implied_probability": "0.65",
       "volume_usd": "275",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:28:11Z"
+      "observed_time_utc": "2026-11-19T06:51:59Z"
     },
     "scores": {
       "ambiguity": {
         "score": 2,
-        "rationale": "Clear outcome, but numeric band edges decide the outcome.",
+        "rationale": "Needs judgment: numeric band edges decide the outcome.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like a proxy/thinner feed of the real underlying (matched 'kaiko-equities').",
+        "score": 3,
+        "rationale": "Proxy source: crypto perp / RFR index (matched 'kaiko-equities').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -57,7 +57,7 @@
       },
       "correlation": {
         "score": 1,
-        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,27 +68,37 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
+      "known_total": 8,
+      "raw_total": 8,
       "raw_rating": "Medium",
-      "rating_floor": "High",
-      "final_rating": "High",
+      "rating_floor": null,
+      "final_rating": "Medium",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "Source >= 2 -> at least Medium",
-          "triggered_by": "source",
-          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=3"
         },
         {
-          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "rule": "execution_risk = liquidity + price_and_data_quality",
+          "triggered_by": "liquidity",
+          "effect": "execution_risk=1"
+        },
+        {
+          "rule": "Investigate when settlement_edge >= 1 and the market is tradeable",
           "triggered_by": "source",
-          "effect": "rating floor High; soft/proxy source plus unclear criteria"
+          "effect": "action Investigate; buy research on the settlement edge"
+        },
+        {
+          "rule": "Excel action 'Investigate' (settlement_edge=3, execution_risk=1)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating Medium"
         }
       ]
     },
-    "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
+    "research_action": "investigate",
+    "summary": "Medium (Investigate). Research action: investigate. 2 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -112,40 +122,50 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/COPPER2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.65, bestAsk 0.69; event volume 275"
+        "quote": "bestBid 0.63, bestAsk 0.67; event volume 275"
       }
     ],
     "evidence_gaps": [
       {
         "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "question": "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline?",
         "gap_type": "settlement_source_version",
         "affects": "resolution_risk",
         "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "why": "Source reliability is elevated: revisable official data or a proxy feed.",
         "free_checks": [
           "commodity-settlement-version"
         ]
+      },
+      {
+        "id": "GAP-2",
+        "question": "Which view and timestamp of the ranking or private index settles the contract?",
+        "gap_type": "leaderboard_snapshot",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The ranking/index can move or diverge from the official print.",
+        "free_checks": []
       }
     ],
     "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+      "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline?",
+      "Which view and timestamp of the ranking or private index settles the contract?"
     ],
     "data_quality_flags": [
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)",
+      "researchable=Yes"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
   "purchase_proposal": {
     "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-14562319fcf8",
+    "proposal_id": "prop-634ae5eb1ff9",
     "contract_id": "GEMI-COPPER2611192200-HI5D72",
     "evidence_gap_id": "GAP-1",
     "catalog_item_id": "cat-commodity-settlement-version-v1",
@@ -154,13 +174,13 @@
       "provider": "",
       "date": "2026-11-19"
     },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
+    "rationale": "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline? Source reliability is elevated: revisable official data or a proxy feed. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
     "max_amount_base_units": "50000",
     "asset": "USDC",
     "network_label": "arc-testnet",
     "fixture_label": null,
     "signed": false,
-    "created_at_utc": "2026-11-19T06:28:11Z"
+    "created_at_utc": "2026-11-19T06:51:59Z"
   },
   "decision_log": [
     "[GEMI-COPPER2611192200-HI5D72] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for Copper as published on the CME Group website, or the offici",

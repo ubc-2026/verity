@@ -6,30 +6,30 @@
     "instrument_symbol": "GEMI-WXHIGH-BOS-2611200459-63TO64",
     "question": "Highest temperature in Boston on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:28:09Z",
+    "analyzed_at_utc": "2026-11-19T06:51:57Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:28:09Z",
-      "snapshot_hash": "sha256:3a198811b5e6afc8a4bc9cc5e7fa2ad6d6cf8e1511e3053616690ac12b714181",
+      "snapshot_time_utc": "2026-11-19T06:51:57Z",
+      "snapshot_hash": "sha256:6b12638dc2841e577a37054956bf4d1803558d389a1c070c3ddb6c265baf1a50",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "63°F to 64°F",
-      "best_bid": "0.53",
-      "best_ask": "0.65",
+      "best_bid": "0.56",
+      "best_ask": "0.62",
       "mid": "0.59",
       "implied_probability": "0.59",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:28:09Z"
+      "observed_time_utc": "2026-11-19T06:51:57Z"
     },
     "scores": {
       "ambiguity": {
         "score": 2,
-        "rationale": "Clear outcome, but event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+        "rationale": "Needs judgment: event-level terms link is empty; numeric band edges decide the outcome.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 2,
-        "rationale": "Settlement source looks like official but revisable data, or a proxy/thinner feed of the real underlying (matched 'National Weather Service').",
+        "rationale": "Settlement source looks like thinner feed, third-party copy, or revisable official data (matched 'National Weather Service').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 2,
-        "rationale": "event-total volume $0, 12c spread.",
+        "rationale": "event-total volume $0, 6c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -57,7 +57,7 @@
       },
       "correlation": {
         "score": 1,
-        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -71,24 +71,34 @@
       "known_total": 7,
       "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": "High",
-      "final_rating": "High",
+      "rating_floor": null,
+      "final_rating": "Medium",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "Source >= 2 -> at least Medium",
-          "triggered_by": "source",
-          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=2"
         },
         {
-          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "rule": "execution_risk = liquidity + price_and_data_quality",
+          "triggered_by": "liquidity",
+          "effect": "execution_risk=2"
+        },
+        {
+          "rule": "Investigate when settlement_edge >= 1 and the market is tradeable",
           "triggered_by": "source",
-          "effect": "rating floor High; soft/proxy source plus unclear criteria"
+          "effect": "action Investigate; buy research on the settlement edge"
+        },
+        {
+          "rule": "Excel action 'Investigate' (settlement_edge=2, execution_risk=2)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating Medium"
         }
       ]
     },
-    "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
+    "research_action": "investigate",
+    "summary": "Medium (Investigate). Research action: investigate. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -112,41 +122,41 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-BOS-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.53, bestAsk 0.65; event volume 0"
+        "quote": "bestBid 0.56, bestAsk 0.62; event volume 0"
       }
     ],
     "evidence_gaps": [
       {
         "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "question": "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline?",
         "gap_type": "settlement_source_version",
         "affects": "resolution_risk",
         "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "why": "Source reliability is elevated: revisable official data or a proxy feed.",
         "free_checks": [
           "bos-settlement-version"
         ]
       }
     ],
     "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+      "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline?"
     ],
     "data_quality_flags": [
       "event_terms_url_empty",
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)",
+      "researchable=Yes"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
   "purchase_proposal": {
     "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-1bf4c7ed5edb",
+    "proposal_id": "prop-508f2ceb4e00",
     "contract_id": "GEMI-WXHIGH-BOS-2611200459-63TO64",
     "evidence_gap_id": "GAP-1",
     "catalog_item_id": "cat-nws-cli-settlement-version-v1",
@@ -154,13 +164,13 @@
       "station": "Boston, MA (CLIBOS)",
       "date": "2026-11-19"
     },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+    "rationale": "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline? Source reliability is elevated: revisable official data or a proxy feed. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
     "max_amount_base_units": "50000",
     "asset": "USDC",
     "network_label": "arc-testnet",
     "fixture_label": null,
     "signed": false,
-    "created_at_utc": "2026-11-19T06:28:09Z"
+    "created_at_utc": "2026-11-19T06:51:57Z"
   },
   "decision_log": [
     "[GEMI-WXHIGH-BOS-2611200459-63TO64] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=BOX&product=CLI&issuedby=BOS&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",

@@ -25,13 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.79",
-          "no": "0.21"
+          "yes": "0.91",
+          "no": "0.13"
         },
         "sell": {
-          "yes": "0.79",
-          "no": "0.21"
+          "yes": "0.87",
+          "no": "0.09"
         },
+        "bestBid": "0.87",
+        "bestAsk": "0.91",
         "lastTradePrice": "0.79"
       },
       "status": "active",
@@ -73,13 +75,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.76",
-          "no": "0.24"
+          "yes": "0.79",
+          "no": "0.25"
         },
         "sell": {
-          "yes": "0.76",
-          "no": "0.24"
+          "yes": "0.75",
+          "no": "0.21"
         },
+        "bestBid": "0.75",
+        "bestAsk": "0.79",
         "lastTradePrice": "0.76"
       },
       "status": "active",
@@ -170,13 +174,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.22",
-          "no": "0.78"
+          "yes": "0.37",
+          "no": "0.67"
         },
         "sell": {
-          "yes": "0.22",
-          "no": "0.78"
+          "yes": "0.33",
+          "no": "0.63"
         },
+        "bestBid": "0.33",
+        "bestAsk": "0.37",
         "lastTradePrice": "0.22"
       },
       "status": "active",
@@ -218,15 +224,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.2",
+          "yes": "0.21",
           "no": "0.84"
         },
         "sell": {
           "yes": "0.16",
-          "no": "0.8"
+          "no": "0.79"
         },
         "bestBid": "0.16",
-        "bestAsk": "0.2",
+        "bestAsk": "0.21",
         "lastTradePrice": "0.12"
       },
       "status": "active",
@@ -268,11 +274,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.09"
+          "yes": "0.09",
+          "no": "0.95"
         },
         "sell": {
+          "yes": "0.05",
           "no": "0.91"
         },
+        "bestBid": "0.05",
         "bestAsk": "0.09"
       },
       "status": "active",

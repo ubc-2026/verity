@@ -237,63 +237,6 @@
       }
     },
     {
-      "id": "475847-1199364",
-      "label": "Christian McCaffrey 15+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Christian McCaffrey records 15 or more Receiving Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.86",
-          "no": "0.29"
-        },
-        "sell": {
-          "yes": "0.71",
-          "no": "0.14"
-        },
-        "bestBid": "0.71",
-        "bestAsk": "0.86"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:15:11.381Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "CMCCAFFREYO14",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-CMCCAFFREYO14",
-      "marketState": "open",
-      "color": "#AA0000",
-      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 8,
-      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
-      "strike": {
-        "type": "over",
-        "value": "14.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Christian McCaffrey",
-        "externalIds": {
-          "sportradar": "f96db0af-5e25-42d1-a07a-49b4e065b364"
-        }
-      }
-    },
-    {
       "id": "475847-1199413",
       "label": "Justin Jefferson 50+ Receiving Yards",
       "description": {
@@ -347,6 +290,63 @@
         "name": "Justin Jefferson",
         "externalIds": {
           "sportradar": "4131d4ee-0318-4bb5-832a-4dec80668a4f"
+        }
+      }
+    },
+    {
+      "id": "475847-1199364",
+      "label": "Christian McCaffrey 15+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Christian McCaffrey records 15 or more Receiving Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.85",
+          "no": "0.29"
+        },
+        "sell": {
+          "yes": "0.71",
+          "no": "0.15"
+        },
+        "bestBid": "0.71",
+        "bestAsk": "0.85"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:15:11.381Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "CMCCAFFREYO14",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-CMCCAFFREYO14",
+      "marketState": "open",
+      "color": "#AA0000",
+      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 8,
+      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Christian McCaffrey",
+        "externalIds": {
+          "sportradar": "f96db0af-5e25-42d1-a07a-49b4e065b364"
         }
       }
     },
@@ -595,15 +595,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.7",
+          "yes": "0.69",
           "no": "0.44"
         },
         "sell": {
           "yes": "0.56",
-          "no": "0.3"
+          "no": "0.31"
         },
         "bestBid": "0.56",
-        "bestAsk": "0.7"
+        "bestAsk": "0.69"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:15:11.381Z",
@@ -1052,13 +1052,13 @@
       "prices": {
         "buy": {
           "yes": "0.53",
-          "no": "0.58"
+          "no": "0.55"
         },
         "sell": {
-          "yes": "0.42",
+          "yes": "0.45",
           "no": "0.47"
         },
-        "bestBid": "0.42",
+        "bestBid": "0.45",
         "bestAsk": "0.53"
       },
       "status": "active",
@@ -1566,13 +1566,13 @@
       "prices": {
         "buy": {
           "yes": "0.33",
-          "no": "0.84"
+          "no": "0.83"
         },
         "sell": {
-          "yes": "0.16",
+          "yes": "0.17",
           "no": "0.67"
         },
-        "bestBid": "0.16",
+        "bestBid": "0.17",
         "bestAsk": "0.33"
       },
       "status": "active",
@@ -2250,13 +2250,13 @@
       "prices": {
         "buy": {
           "yes": "0.18",
-          "no": "0.97"
+          "no": "0.99"
         },
         "sell": {
-          "yes": "0.03",
+          "yes": "0.01",
           "no": "0.82"
         },
-        "bestBid": "0.03",
+        "bestBid": "0.01",
         "bestAsk": "0.18"
       },
       "status": "active",
@@ -2306,11 +2306,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.18"
+          "yes": "0.18",
+          "no": "0.97"
         },
         "sell": {
+          "yes": "0.03",
           "no": "0.82"
         },
+        "bestBid": "0.03",
         "bestAsk": "0.18"
       },
       "status": "active",

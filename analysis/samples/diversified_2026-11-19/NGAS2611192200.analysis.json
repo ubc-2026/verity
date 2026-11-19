@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NGAS2611192200-HI3D850",
     "question": "Natural Gas price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:28:06Z",
+    "analyzed_at_utc": "2026-11-19T06:51:54Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:28:06Z",
-      "snapshot_hash": "sha256:340564e7096710838247898c859f1c3bf0b9647222c518111c44f930394af634",
+      "snapshot_time_utc": "2026-11-19T06:51:54Z",
+      "snapshot_hash": "sha256:0879851a364a5b693ebca8b0ffb17843de3b8f047ddf026b89fd4a6155c978d8",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,12 +24,12 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:28:06Z"
+      "observed_time_utc": "2026-11-19T06:51:54Z"
     },
     "scores": {
       "ambiguity": {
         "score": 2,
-        "rationale": "Clear outcome, but numeric band edges decide the outcome.",
+        "rationale": "Needs judgment: numeric band edges decide the outcome.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 2,
-        "rationale": "Settlement source looks like a proxy/thinner feed of the real underlying (matched 'kaiko-equities').",
+        "score": 3,
+        "rationale": "Proxy source: crypto perp / RFR index (matched 'kaiko-equities').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -57,7 +57,7 @@
       },
       "correlation": {
         "score": 1,
-        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,37 +68,37 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
-      "raw_rating": "Medium",
-      "rating_floor": "High",
+      "known_total": 9,
+      "raw_total": 9,
+      "raw_rating": "High",
+      "rating_floor": null,
       "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "Source >= 2 -> at least Medium",
-          "triggered_by": "source",
-          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=3"
         },
         {
-          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
-          "triggered_by": "source",
-          "effect": "rating floor High; soft/proxy source plus unclear criteria"
-        },
-        {
-          "rule": "High (3) in Liquidity -> at least Medium",
+          "rule": "execution_risk = liquidity + price_and_data_quality",
           "triggered_by": "liquidity",
-          "effect": "rating floor Medium; untradeable/wide book (Excel Avoid) still elevates research attention"
+          "effect": "execution_risk=4"
         },
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "rule": "Avoid when Liquidity is 2 (no quote / spread over 15c)",
           "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal"
+          "effect": "action Avoid; market cannot really be traded"
+        },
+        {
+          "rule": "Excel action 'Avoid' (settlement_edge=3, execution_risk=4)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating High"
         }
       ]
     },
     "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 8). Research action: flag_for_human_review. 1 open question(s).",
+    "summary": "High (Avoid). Research action: flag_for_human_review. 2 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -128,52 +128,43 @@
     "evidence_gaps": [
       {
         "id": "GAP-1",
-        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "question": "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline?",
         "gap_type": "settlement_source_version",
         "affects": "resolution_risk",
         "material": true,
-        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "why": "Source reliability is elevated: revisable official data or a proxy feed.",
         "free_checks": [
           "commodity-settlement-version"
         ]
+      },
+      {
+        "id": "GAP-2",
+        "question": "Which view and timestamp of the ranking or private index settles the contract?",
+        "gap_type": "leaderboard_snapshot",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The ranking/index can move or diverge from the official print.",
+        "free_checks": []
       }
     ],
     "unresolved_questions": [
-      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+      "Which issuance / underlying does Gemini use to settle, and how does it differ from the headline?",
+      "Which view and timestamp of the ranking or private index settles the contract?"
     ],
     "data_quality_flags": [
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)",
+      "researchable=Yes"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-38925ac4fde5",
-    "contract_id": "GEMI-NGAS2611192200-HI3D850",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-commodity-settlement-version-v1",
-    "catalog_parameters": {
-      "index": "NGAS",
-      "provider": "commodity index",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T06:28:06Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NGAS2611192200-HI3D850] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/NATGAS1_Terms_and_Conditions_74071889-27c7-4398-9fc7-203097d4d2c2.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for Natural Gas as published on the CME Group website, or the o",
-    "[GEMI-NGAS2611192200-HI3D850] PROPOSE cat-commodity-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NGAS2611192200-HI3D850] no purchase: rating is High (Excel action needs Investigate); research buys follow the Excel Investigate path."
   ]
 }

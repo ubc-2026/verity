@@ -9,6 +9,53 @@
   "createdAt": "2026-11-18T00:03:53.303Z",
   "contracts": [
     {
+      "id": "475163-1195958",
+      "label": "More than 7.5 points scored in the 2nd half",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 7.5 points during the 2nd half of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd half of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.99",
+          "no": "0.11"
+        },
+        "sell": {
+          "yes": "0.89",
+          "no": "0.01"
+        },
+        "bestBid": "0.89",
+        "bestAsk": "0.99"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:03:53.303Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O7",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-2HT-O7",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "475163-1195955",
       "label": "More than 10.5 points scored in the 2nd half",
       "description": {
@@ -401,15 +448,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.15",
+          "yes": "0.14",
           "no": "0.99"
         },
         "sell": {
           "yes": "0.01",
-          "no": "0.85"
+          "no": "0.86"
         },
         "bestBid": "0.01",
-        "bestAsk": "0.15"
+        "bestAsk": "0.14"
       },
       "status": "active",
       "createdAt": "2026-11-18T00:03:53.303Z",
@@ -448,12 +495,12 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.12"
+          "yes": "0.11"
         },
         "sell": {
-          "no": "0.88"
+          "no": "0.89"
         },
-        "bestAsk": "0.12"
+        "bestAsk": "0.11"
       },
       "status": "active",
       "createdAt": "2026-11-18T00:03:53.303Z",
@@ -467,45 +514,6 @@
       "strike": {
         "type": "over",
         "value": "38.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "475163-1195951",
-      "label": "More than 3.5 points scored in the 2nd half",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 3.5 points during the 2nd half of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd half of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T00:03:53.303Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
-      "ticker": "O3",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-2HT-O3",
-      "marketState": "open",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "strike": {
-        "type": "over",
-        "value": "3.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -530,8 +538,13 @@
         "nodeType": "document"
       },
       "prices": {
-        "buy": {},
-        "sell": {}
+        "buy": {
+          "yes": "0.09"
+        },
+        "sell": {
+          "no": "0.91"
+        },
+        "bestAsk": "0.09"
       },
       "status": "active",
       "createdAt": "2026-11-18T00:03:53.303Z",
@@ -554,15 +567,15 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "475163-1195958",
-      "label": "More than 7.5 points scored in the 2nd half",
+      "id": "475163-1195951",
+      "label": "More than 3.5 points scored in the 2nd half",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 7.5 points during the 2nd half of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd half of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 3.5 points during the 2nd half of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd half of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
             "nodeType": "text"
           }
         ],
@@ -570,25 +583,25 @@
       },
       "prices": {
         "buy": {
-          "no": "0.12"
+          "no": "0.09"
         },
         "sell": {
-          "yes": "0.88"
+          "yes": "0.91"
         },
-        "bestBid": "0.88"
+        "bestBid": "0.91"
       },
       "status": "active",
       "createdAt": "2026-11-18T00:03:53.303Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
-      "ticker": "O7",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-2HT-O7",
+      "ticker": "O3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-2HT-O3",
       "marketState": "open",
       "color": "#4CAF50",
       "expiryDate": "2026-11-24T06:00:00.000Z",
       "effectiveDate": "2026-11-16T00:00:04.000Z",
       "strike": {
         "type": "over",
-        "value": "7.5"
+        "value": "3.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

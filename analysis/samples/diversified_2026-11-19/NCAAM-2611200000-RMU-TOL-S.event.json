@@ -1,0 +1,561 @@
+{
+  "id": "478849",
+  "title": "Robert Morris vs Toledo: Point Spread",
+  "slug": "robert-morris-vs-toledo-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611200000-RMU-TOL-S",
+  "status": "active",
+  "createdAt": "2026-11-19T00:19:00.407Z",
+  "contracts": [
+    {
+      "id": "478849-1214110",
+      "label": "Toledo wins by more than 4.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 4.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.66",
+          "no": "0.47"
+        },
+        "sell": {
+          "yes": "0.53",
+          "no": "0.34"
+        },
+        "bestBid": "0.53",
+        "bestAsk": "0.66",
+        "lastTradePrice": "0.66"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL4",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL4",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "spread",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214106",
+      "label": "Toledo wins by more than 7.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 7.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.51",
+          "no": "0.56"
+        },
+        "sell": {
+          "yes": "0.44",
+          "no": "0.49"
+        },
+        "bestBid": "0.44",
+        "bestAsk": "0.51"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL7",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL7",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214108",
+      "label": "Toledo wins by more than 10.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.45",
+          "no": "0.7"
+        },
+        "sell": {
+          "yes": "0.3",
+          "no": "0.55"
+        },
+        "bestBid": "0.3",
+        "bestAsk": "0.45"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL10",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL10",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214103",
+      "label": "Robert Morris wins by more than 3.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Robert Morris in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 3.5. Otherwise, it resolves to No. The Underlying is the score differential (Robert Morris's score minus Toledo's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.26",
+          "no": "0.87"
+        },
+        "sell": {
+          "yes": "0.13",
+          "no": "0.74"
+        },
+        "bestBid": "0.13",
+        "bestAsk": "0.26"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "RMU3",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-RMU3",
+      "marketState": "open",
+      "abbreviatedName": "Robert Morris",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Robert_Morris_ColonialsDark_61548de4-35c3-4041-86a2-d390e6f44cba.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214100",
+      "label": "Toledo wins by more than 24.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 24.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL24",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL24",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "spread",
+        "value": "24.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214101",
+      "label": "Robert Morris wins by more than 13.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Robert Morris in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 13.5. Otherwise, it resolves to No. The Underlying is the score differential (Robert Morris's score minus Toledo's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "RMU13",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-RMU13",
+      "marketState": "open",
+      "abbreviatedName": "Robert Morris",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Robert_Morris_ColonialsDark_61548de4-35c3-4041-86a2-d390e6f44cba.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "spread",
+        "value": "13.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214102",
+      "label": "Robert Morris wins by more than 8.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Robert Morris in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Robert Morris's score minus Toledo's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "RMU8",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-RMU8",
+      "marketState": "open",
+      "abbreviatedName": "Robert Morris",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Robert_Morris_ColonialsDark_61548de4-35c3-4041-86a2-d390e6f44cba.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "spread",
+        "value": "8.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214104",
+      "label": "Toledo wins by more than 19.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 19.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL19",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL19",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "spread",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214105",
+      "label": "Toledo wins by more than 29.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 29.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL29",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL29",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "spread",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214107",
+      "label": "Toledo wins by more than 14.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 14.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL14",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL14",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "spread",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478849-1214109",
+      "label": "Toledo wins by more than 1.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Toledo in the entire men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Toledo's score minus Robert Morris's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:00.407Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TOL1",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-S-TOL1",
+      "marketState": "open",
+      "abbreviatedName": "Toledo",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 9,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-19T00:19:00.407Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "801",
+      "name": "Toledo Rockets",
+      "abbreviation": "TOL",
+      "side": "home"
+    },
+    {
+      "id": "753",
+      "name": "Robert Morris Colonials",
+      "abbreviation": "RMU",
+      "side": "away"
+    }
+  ],
+  "description": "What will the point difference be?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "16.27",
+  "volume24h": "16.27",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-22T00:00:00.000Z",
+  "startTime": "2026-11-20T00:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-spread",
+  "gameId": "b72b2558-c9ed-446b-ab3f-f0c5daecdc8b",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "points"
+  }
+}

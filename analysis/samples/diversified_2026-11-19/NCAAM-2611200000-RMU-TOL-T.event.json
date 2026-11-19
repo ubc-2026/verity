@@ -58,15 +58,15 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "478850-1214123",
-      "label": "More than 144.5 points scored",
+      "id": "478850-1214118",
+      "label": "More than 147.5 points scored",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if Robert Morris and Toledo collectively score over 144.5 total points in the men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+            "value": "This market resolves to Yes if Robert Morris and Toledo collectively score over 147.5 total points in the men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
             "nodeType": "text"
           }
         ],
@@ -74,30 +74,30 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.53",
-          "no": "0.56"
+          "yes": "0.48",
+          "no": "0.67"
         },
         "sell": {
-          "yes": "0.44",
-          "no": "0.47"
+          "yes": "0.33",
+          "no": "0.52"
         },
-        "bestBid": "0.44",
-        "bestAsk": "0.53"
+        "bestBid": "0.33",
+        "bestAsk": "0.48"
       },
       "status": "active",
       "createdAt": "2026-11-19T00:19:37.164Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
-      "ticker": "O144",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-T-O144",
+      "ticker": "O147",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-T-O147",
       "marketState": "open",
       "color": "#0f9ee7",
       "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
       "expiryDate": "2026-11-22T00:00:00.000Z",
       "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 11,
+      "sortOrder": 7,
       "strike": {
         "type": "over",
-        "value": "144.5"
+        "value": "147.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -394,52 +394,6 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "478850-1214118",
-      "label": "More than 147.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Robert Morris and Toledo collectively score over 147.5 total points in the men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "no": "0.67"
-        },
-        "sell": {
-          "yes": "0.33"
-        },
-        "bestBid": "0.33"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:19:37.164Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
-      "ticker": "O147",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-T-O147",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 7,
-      "strike": {
-        "type": "over",
-        "value": "147.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "478850-1214121",
       "label": "More than 165.5 points scored",
       "description": {
@@ -513,6 +467,47 @@
       "strike": {
         "type": "over",
         "value": "157.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478850-1214123",
+      "label": "More than 144.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Robert Morris and Toledo collectively score over 144.5 total points in the men's college basketball game between Robert Morris and Toledo scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:19:37.164Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+      "ticker": "O144",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-T-O144",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 11,
+      "strike": {
+        "type": "over",
+        "value": "144.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

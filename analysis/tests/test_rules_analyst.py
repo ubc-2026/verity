@@ -1,5 +1,6 @@
-"""Rules-analyst scoring fixes: Source false positives and band siblings."""
-from verity.rules_analyst import _correlation, _source, rules_analyst
+"""Excel Framework rules-analyst: resolution / source / outside-events."""
+from verity.rules_analyst import _outside_events, _resolution, _source, rules_analyst
+from verity.scoring import to_excel
 
 
 def _record(**kw):
@@ -25,27 +26,34 @@ def _record(**kw):
     return base
 
 
-def test_boilerplate_revisions_does_not_force_source_2():
-    """Bare 'Revisions' in PDF boilerplate used to match 'revis' and score Source=2."""
+def test_boilerplate_revisions_does_not_force_source_elevated():
     src = _source(
         _record(),
         _record()["rules_excerpts"][0]["quote"],
         ["C-TERMS"],
     )
-    assert src["score"] == 1
-    assert "statscore" in src["rationale"].lower()
+    assert src["score"] == 1  # excel 0
+    assert to_excel(src["score"]) == 0
 
 
-def test_nws_still_scores_source_2():
+def test_nws_scores_source_reliability_1():
     src = _source(
-        {
-            "settlement_source": "NWS / CLINYC",
-            "rules_excerpts": [],
-        },
+        {"settlement_source": "NWS / CLINYC", "rules_excerpts": []},
         "Settles on the National Weather Service Climatological Report (Daily).",
         ["C-TERMS"],
     )
-    assert src["score"] == 2
+    assert src["score"] == 2  # excel 1
+    assert to_excel(src["score"]) == 1
+
+
+def test_kaiko_commodity_perp_is_proxy_source_2():
+    src = _source(
+        {"settlement_source": "kaiko-equities KK_RFR_BRENTOILUSDC", "rules_excerpts": []},
+        "Settles on a 60-second average of the Hyperliquid BRENTOIL-USDC perpetual.",
+        ["C-TERMS"],
+    )
+    assert src["score"] == 3  # excel 2
+    assert "proxy" in src["rationale"].lower() or "perp" in src["rationale"].lower()
 
 
 def test_primary_feed_upgrades_when_terms_name_issuance_revision():
@@ -54,29 +62,42 @@ def test_primary_feed_upgrades_when_terms_name_issuance_revision():
         "Settlement uses the preliminary official result subject to later revision.",
         ["C-TERMS"],
     )
-    assert src["score"] == 2
-    assert "revisable" in src["rationale"].lower() or "preliminary" in src["rationale"].lower()
+    assert src["score"] == 2  # excel 1
 
 
-def test_weather_band_siblings_are_correlation_1():
-    cor = _correlation(
+def test_clear_sports_resolution_is_0():
+    res = _resolution(
+        _record(),
+        _record()["rules_excerpts"][0]["quote"],
+        ["C-TERMS"],
+    )
+    assert res["score"] == 1  # excel 0
+
+
+def test_band_edges_need_judgment():
+    res = _resolution(
+        _record(outcome_label="62°F to 63°F", question="Highest temperature in NYC?"),
+        "Settles on NWS CLINYC. Yes if the max is 62 or 63°F.",
+        ["C-TERMS"],
+    )
+    assert res["score"] == 2  # excel 1
+
+
+def test_weather_band_siblings_are_outside_events_0():
+    cor = _outside_events(
         {
             "event_ticker": "WXHIGH-CHI-2611200459",
-            "sibling_events": [
-                "WXHIGH-CHI-2611200459-OTHER",
-                "WXHIGH-CHI-2611190459",
-            ],
+            "sibling_events": ["WXHIGH-CHI-2611200459-OTHER"],
             "question": "Highest temperature in Chicago?",
         },
         "",
         ["C-CONTRACT"],
     )
-    assert cor["score"] == 1
-    assert "same question" in cor["rationale"].lower()
+    assert cor["score"] == 1  # excel 0
 
 
-def test_sports_line_siblings_are_correlation_3():
-    cor = _correlation(
+def test_sports_line_siblings_are_outside_events_1():
+    cor = _outside_events(
         {
             "event_ticker": "NBA-2611190230-BOS-DEN-M",
             "sibling_events": [
@@ -88,24 +109,12 @@ def test_sports_line_siblings_are_correlation_3():
         "",
         ["C-CONTRACT"],
     )
-    assert cor["score"] == 3
+    assert cor["score"] == 2  # excel 1
 
 
-def test_rules_analyst_sports_record_no_longer_opens_version_gap_on_boilerplate():
+def test_rules_analyst_sports_record_no_gap_on_boilerplate():
     rec = rules_analyst(_record())
     assert rec["analyst"]["source"]["score"] == 1
     assert rec["evidence_gaps"] == []
-
-
-def test_kaiko_commodity_perp_scores_source_2():
-    """Excel: Kaiko/Hyperliquid commodity RFR is a proxy, not a primary feed."""
-    src = _source(
-        {
-            "settlement_source": "kaiko-equities KK_RFR_BRENTOILUSDC",
-            "rules_excerpts": [],
-        },
-        "Settles on a 60-second average of the Hyperliquid BRENTOIL-USDC perpetual.",
-        ["C-TERMS"],
-    )
-    assert src["score"] == 2
-    assert "proxy" in src["rationale"].lower() or "thinner" in src["rationale"].lower()
+    assert rec["researchable"] is None  # n/a — no settlement edge
+    assert rec["analyst_id"] == "verity-excel-v1"

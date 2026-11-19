@@ -1,4 +1,4 @@
-"""Measure High-only proposal rate on the diversified sample pack."""
+"""Measure Excel Investigate-gate proposal rate on the diversified sample pack."""
 from __future__ import annotations
 
 import json
@@ -71,7 +71,7 @@ def main() -> None:
 
     pct = round(100 * props / max(len(samples), 1), 1)
     print("ratings", dict(ratings))
-    print(f"High-only proposes: {props}/{len(samples)} ({pct}%)")
+    print(f"Investigate-gate proposes: {props}/{len(samples)} ({pct}%)")
     for r, (n, p) in sorted(by_rating_prop.items()):
         print(f"  {r}: {p}/{n}")
     print("buys:")
@@ -88,15 +88,15 @@ def main() -> None:
         "ratings": dict(ratings),
         "proposed": props,
         "propose_pct": pct,
-        "gate": "High-only",
+        "gate": "Excel Investigate (Medium)",
         "buys": high_rows,
     }
     (PACK / "HIGH_ONLY_100.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
 
     lines = [
-        "# 100-market pack — High-only buys",
+        "# 100-market pack — Excel Investigate buys",
         "",
-        f"Pack: **{len(samples)}** markets (80/20). Gate: **High-only**.",
+        f"Pack: **{len(samples)}** markets (80/20). Gate: **Investigate (Medium)**.",
         f"Proposals: **{props}/{len(samples)}** ({pct}%).",
         "",
         "## Rating mix",

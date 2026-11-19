@@ -1,0 +1,146 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-NFL-2611221800-ARI-KC-PPRYDS-ALLGEIERO39",
+    "event_ticker": "NFL-2611221800-ARI-KC-PPRYDS",
+    "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPRYDS-ALLGEIERO39",
+    "question": "Arizona vs Kansas City: Player Rushing Yards",
+    "expiry_utc": "2026-11-24T06:00:00.000Z",
+    "analyzed_at_utc": "2026-11-19T06:50:58Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T06:50:58Z",
+      "snapshot_hash": "sha256:32551bfd19d34b9e59c9bee9795d552f540af40c17acebb447ac254411e508c1",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "Tyler Allgeier 40+ Rushing Yards",
+      "best_bid": "0.13",
+      "best_ask": "0.31",
+      "mid": "0.22",
+      "implied_probability": "0.22",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T06:50:58Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 2,
+        "rationale": "Needs judgment: numeric band edges decide the outcome.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 1,
+        "rationale": "Official primary source (matched 'sportradar').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "18c spread is over 15c.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "Nothing pending that looks likely to swing or delay settlement.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 7,
+      "raw_total": 7,
+      "raw_rating": "High",
+      "rating_floor": null,
+      "final_rating": "High",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=1"
+        },
+        {
+          "rule": "execution_risk = liquidity + price_and_data_quality",
+          "triggered_by": "liquidity",
+          "effect": "execution_risk=3"
+        },
+        {
+          "rule": "Avoid when Liquidity is 2 (no quote / spread over 15c)",
+          "triggered_by": "liquidity",
+          "effect": "action Avoid; market cannot really be traded"
+        },
+        {
+          "rule": "Excel action 'Avoid' (settlement_edge=1, execution_risk=3)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating High"
+        }
+      ]
+    },
+    "research_action": "flag_for_human_review",
+    "summary": "High (Avoid). Research action: flag_for_human_review. No open resolution questions.",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPRYDS",
+        "field_or_rule": "event.description",
+        "quote": "How many rushing yards will each player record?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPRYDS",
+        "field_or_rule": "contract.description",
+        "quote": "This market resolves to Yes if Tyler Allgeier records 40 or more Rushing Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf)."
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPRYDS",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Terms\n \nand\n \nConditions\n \nRule\n \nText\n \nfor\n \nthe\n \nEvent\n \nContract\n \nSeries\n \n“Will\n \n{running\n \nback}\n \nrecord\n \n{above/below/\n \nexactly/at\n \nleast/between}\n \n{count}\n \nRushing\n \nYards\n \nin\n \n{NFL\n \ngame}?”\n \n(NFL\n \nGames)\n \n(a)\n \nGeneral\n \n(1)\n \nThese\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \nthe\n \nevent\n \ncontract\n \nseries\n \n“Will\n \n{running\n \nback}\n \nrecord\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \nRushing\n \nYards\n \nin\n \n{NFL\n \ngame}?”\n \n(“NFLRUSHINGYDS1”\n \nor\n \nthe\n \n“Contracts”),\n \napplicable\n \nsolely\n \nto\n \nNFL\n \ngames,\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContracts\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n(2)\n \nThis\n \nRule\n \ndefines\n \na\n \nclass\n \nof\n \nContracts\n \ncertified\n \npursuant\n \nto\n \n17\n \nC.F.R.\n \n§\n \n40.2(d),\n \neach\n \nof\n \nwhich\n \nshares\n \nan\n \nidentical\n \nsettlement\n \nsource,\n \nformula,\n \nprocedure,\n \nand\n \nmethodology\n \nwith\n \nthe\n \nContract\n \nreferenced\n \nin\n \nthe\n \nExchange’s\n \n§\n \n40.2(a)\n \ncertification\n \nof\n \n“Will\n \nRhamondre\n \nStevenson\n \nrecord\n \nat\n \nleast\n \n50\n \nRushing\n \nYards\n \nin\n \nthe\n \nNew\n \nEngland\n \nPatriots\n \nat\n \nSeattle\n \nSeahawks\n \ngame\n \non\n \nSeptember\n \n9,\n \n2026?”.\n \n(3)\n \nThe\n \nstatistic\n \nreferenced\n \nby\n \nthis\n \nRule\n \nis\n \nfixed\n \nas\n \nrushing\n \nyards\n \nrecorded\n \nby\n \nplayer,\n \nwhether\n \nstarting\n \nor\n \nentering\n \nas\n \na\n \nsubstitute.\n \nThis\n \nRule\n \ndoes\n \nnot\n \nadmit\n \nof\n \nvariation\n \nin\n \nthe\n \nunderlying\n \nstatistic;\n \na\n \nseries\n \nreferencing\n \nany\n \nother\n \nstatistic\n \n(including\n \nrushing\n \ntouchdowns,\n \nreceiving\n \nyards,\n \npassing\n \nyards,\n \nor\n \npassing\n \ntouchdowns)\n \nwould\n \nbe\n \ncertified\n \nseparately.\n \n(4)\n \nCapitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nExchange\n \nRulebook.\n \n(b)\n \nUnderlying\n \n(1)\n \nThe\n \nUnderlying\n \nfor\n \neach\n \nContract\n \nis\n \nwhether\n \n{running\n \nback}\n \nofficially\n \nrecords\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \nrushing\n \nyard(s)\n \nat\n \nthe\n \nrunning\n \nback\n \nposition\n \nduring\n \n{NFL\n \ngame},\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency,\n \nregardless\n \nof\n \nwhether\n \n{running\n \nback}\n \nbegins\n \n{NFL\n \ngame}\n \nas\n \nthe\n \nstarter\n \nor\n \nenters\n \nas\n \na\n \nsubstitute.\n \nThe\n \nUnderlying\n \nreflects\n \nthe\n \ncumulative\n \nrushing\n \nyards\n \nrecorded\n \nby\n \n{running\n \nback}\n \nduring\n \nthe\n \nentirety\n \nof\n \n{NFL\n \ngame},\n \nincluding\n \nany\n \novertime\n \nperiod.\n \nRushing\n \nyards\n \ncredited\n \nto\n \nany\n \nother\n \nplayer\n \nappearing\n \nin\n \n{NFL\n \ngame}\n \ndo\n \nnot\n \ncount\n \ntoward\n \nthe\n \nUnderlying.\n \nYards\n \ngained\n \nby\n \n{running\n \nback}\n \nthrough\n \nreceiving,\n \npassing,\n \na\n \nlateral\n \nfollowing\n \na\n \nreception,\n \nor\n \non\n \na\n \nkickoff,\n \npunt,\n \nor\n \nother\n \nreturn\n \ndo\n \nnot\n \ncount\n \ntoward\n \nthe\n \nUnderlying;\n \nonly\n \nrushing\n \nyards\n \nrecorded\n \non\n \na\n \ndesignated\n \nrushing\n \nattempt,\n \nas\n \nreflected\n \nin\n \nthe\n \nofficial\n \nstatistics\n \nmaintained\n \nby\n \nthe\n \nSource\n \nAgency,\n \ncount\n \ntoward\n \nthe\n \n\n \nUnderlying.\n \nRevisions\n \nto\n \nthe\n \nUnderlying\n \nmade\n \nafter\n \nExpiration\n \nwill\n \nnot\n \nbe\n \naccounted\n \nfor\n \nin\n \ndetermining\n \nthe\n \nExpiration\n \nValue.\n \n(2)\n \nCash-settled\n \nContracts\n \nare\n \navailable\n \nfor\n \nany\n \n{running\n \nback}\n \nand\n \n{NFL\n \ngame}\n \nlisted\n \nby\n \nthe\n \nExchange,\n \nprovided\n \n{running\n \nback}\n \nis\n \non\n \nthe\n \nactive\n \nroster\n \nof\n \none\n \nof\n \nthe\n \nparticipating\n \nteams\n \nin\n \n{NFL\n \ngame}\n \nand\n \nappears\n \nin\n \n{NFL\n \ngame},\n \nwhether\n \nas\n \nthe\n \nstarter\n \nor\n \nas\n \na\n \nsubstitute,\n \nas\n \nreflected\n \nin\n \nthe\n \nofficial\n \ngame\n \nstatistics\n \nmaintained\n \nby\n \nthe\n \nSource\n \nAgency,\n \nand\n \n{NFL\n \ngame}\n \nis\n \na\n \nregular-season\n \nor\n \npostseason\n \ngame\n \nof\n \nthe\n \nNational\n \nFootball\n \nLeague\n \n(collectively,\n \nthe\n \n“Contracts”).\n \n(3)\n \nThe\n \nSource\n \nAgency\n \nis\n \nNFL.com\n \nand\n \nthe\n \nNFL’s\n \nofficial\n \nGame\n \nStatistics\n \nand\n \nInformation\n \nSystem\n \n(“GSIS”).\n \nIf\n \nthe\n \nSource\n \nAgency\n \nis\n \nnot\n \navailable,\n \nthe\n \nExchange\n \nmay\n \nuse\n \nthe\n \nfollowing,\n \nin\n \nhierarchical\n \norder,\n \nas\n \na\n \nbackup:\n \n(i)\n \nESPN\n \nand\n \n(ii)\n \nNBC,\n \nCBS,\n \nFOX,\n \nAmazon\n \nPrime\n \nVideo,\n \nPeacock,\n \nNetflix,\n \nor\n \nthe\n \nofficial\n \nbroadcast\n \nor\n \nstreaming\n \npartner\n \nof\n \n{NFL\n \ngame}.\n \nThis\n \nSource\n \nAgency\n \nhierarchy\n \nis\n \nidentical\n \nto\n \nthe\n \nhierarchy\n \ncertified\n \nin\n \nthe\n \nReferenced\n \nContract.\n \n(4)\n \nThe\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n \n(c)\n \nIssuance\n \n(1)\n \nContract\n \niterations\n \nwill\n \nbe\n \nissued\n \non\n \na\n \nrecurring\n \nbasis\n \non\n \nthe\n \nfollowing\n \nparameters:\n \n(i)\n \n{running\n \nback}\n \nrefers\n \nto\n \nan\n \nindividual\n \nplayer\n \nwho\n \nappears\n \nin\n \n{NFL\n \ngame}\n \nfor\n \none\n \nof\n \nthe\n \nparticipating\n \nteams,\n \nwhether\n \nas\n \nthe\n \nstarter\n \nor\n \nas\n \na\n \nsubstitute,\n \nas\n \nidentified\n \nby\n \nthe\n \nExchange;\n \n(ii)\n \n{above/below/exactly/at\n \nleast/between}\n \nrefers\n \nto\n \ncomparison\n \noperators,\n \nas\n \ndefined\n \nin\n \nthe\n \nReferenced\n \nContract;\n \n(iii)\n \n{count}\n \nrefers\n \nto\n \na\n \nnumerical\n \nthreshold\n \nspecified\n \nby\n \nthe\n \nExchange,\n \nwhich\n \nmay\n \ninclude\n \nwhole\n \nor\n \nhalf\n \nnumbers\n \nor\n \n0;\n \nand\n \n(iv)\n \n{NFL\n \ngame}\n \nrefers\n \nto\n \na\n \nscheduled\n \nNFL\n \nregular-season\n \nor\n \npostseason\n \ngame\n \nidentified\n \nby\n \nthe\n \nExchange\n \nat\n \nthe\n \ntime\n \nof\n \nlisting.\n \n(2)\n \nThe\n \nExchange\n \nwill\n \nidentify\n \nthe\n \nspecific\n \nrunning\n \nback,\n \nthreshold,\n \ncomparator,\n \nand\n \ngame\n \nat\n \nthe\n \ntime\n \neach\n \nContract\n \nis\n \nlisted,\n \nconsistent\n \nwith\n \nthe\n \nspecificity\n \nof\n \nthe\n \nReferenced\n \nContract.\n \n(d)\n \nContract\n \nSize\n \n(1)\n \nThe\n \nContract\n \nhas\n \na\n \nnotional\n \nsize\n \nof\n \none\n \ndollar\n \n($1.00).\n \n(e)\n \nSettlement\n \nand\n \nExpiration\n \n \n(1)\n \nThe\n \nPayout\n \nCriterion\n \nfor\n \neach\n \nContract\n \nis\n \nwhether\n \n{running\n \nback}’s\n \nofficially\n \nrecorded\n \nrushing\n \nyards\n \ntotal\n \nin\n \n{NFL\n \ngame}\n \nis\n \n{above/below/exactly/at\n \nleast/between}\n \n{count},\n \nsubject\n \nt"
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPRYDS",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.13, bestAsk 0.31; event volume 0"
+      }
+    ],
+    "evidence_gaps": [],
+    "unresolved_questions": [],
+    "data_quality_flags": [
+      "analyst=verity-excel-v1 (code rules, no LLM)",
+      "researchable=Yes"
+    ],
+    "workbook_conflicts": [
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
+    ]
+  },
+  "purchase_proposal": null,
+  "decision_log": [
+    "[GEMI-NFL-2611221800-ARI-KC-PPRYDS-ALLGEIERO39] no purchase: rating is High (Excel action needs Investigate); research buys follow the Excel Investigate path."
+  ]
+}

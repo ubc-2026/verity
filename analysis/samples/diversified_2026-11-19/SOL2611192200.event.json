@@ -9,57 +9,6 @@
   "createdAt": "2026-11-18T20:58:01.736Z",
   "contracts": [
     {
-      "id": "478206-1212053",
-      "label": "$70 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Solana (SOL) is $70 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-SOLNUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/sol_9cceb1a1-4177-401a-82dc-097ad2676bc2.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.99",
-          "no": "0.05"
-        },
-        "sell": {
-          "yes": "0.95",
-          "no": "0.01"
-        },
-        "bestBid": "0.95",
-        "bestAsk": "0.99",
-        "lastTradePrice": "0.88"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:58:01.736Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/sol_9cceb1a1-4177-401a-82dc-097ad2676bc2.pdf",
-      "ticker": "HI70",
-      "instrumentSymbol": "GEMI-SOL2611192200-HI70",
-      "marketState": "open",
-      "abbreviatedName": ">$70",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 1,
-      "strike": {
-        "type": "above",
-        "value": "70"
-      },
-      "source": "LS-LRRR-SOLNUSD",
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "478206-1212055",
       "label": "$71 or above",
       "description": {
@@ -77,13 +26,13 @@
       "prices": {
         "buy": {
           "yes": "0.98",
-          "no": "0.09"
+          "no": "0.08"
         },
         "sell": {
-          "yes": "0.91",
+          "yes": "0.92",
           "no": "0.02"
         },
-        "bestBid": "0.91",
+        "bestBid": "0.92",
         "bestAsk": "0.98",
         "lastTradePrice": "0.79"
       },
@@ -128,13 +77,13 @@
       "prices": {
         "buy": {
           "yes": "0.94",
-          "no": "0.16"
+          "no": "0.14"
         },
         "sell": {
-          "yes": "0.84",
+          "yes": "0.86",
           "no": "0.06"
         },
-        "bestBid": "0.84",
+        "bestBid": "0.86",
         "bestAsk": "0.94"
       },
       "status": "active",
@@ -161,6 +110,56 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "478206-1212053",
+      "label": "$70 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Solana (SOL) is $70 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-SOLNUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/sol_9cceb1a1-4177-401a-82dc-097ad2676bc2.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.88",
+          "no": "0.05"
+        },
+        "sell": {
+          "yes": "0.95",
+          "no": "0.12"
+        },
+        "bestBid": "0.95",
+        "lastTradePrice": "0.88"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:58:01.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/sol_9cceb1a1-4177-401a-82dc-097ad2676bc2.pdf",
+      "ticker": "HI70",
+      "instrumentSymbol": "GEMI-SOL2611192200-HI70",
+      "marketState": "open",
+      "abbreviatedName": ">$70",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "above",
+        "value": "70"
+      },
+      "source": "LS-LRRR-SOLNUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "478206-1212058",
       "label": "$73 or above",
       "description": {
@@ -177,15 +176,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.82",
-          "no": "0.26"
+          "yes": "0.84",
+          "no": "0.23"
         },
         "sell": {
-          "yes": "0.74",
-          "no": "0.18"
+          "yes": "0.77",
+          "no": "0.16"
         },
-        "bestBid": "0.74",
-        "bestAsk": "0.82"
+        "bestBid": "0.77",
+        "bestAsk": "0.84"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:58:01.736Z",
@@ -227,15 +226,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.68",
-          "no": "0.41"
+          "yes": "0.7",
+          "no": "0.38"
         },
         "sell": {
-          "yes": "0.59",
-          "no": "0.32"
+          "yes": "0.62",
+          "no": "0.3"
         },
-        "bestBid": "0.59",
-        "bestAsk": "0.68"
+        "bestBid": "0.62",
+        "bestAsk": "0.7"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:58:01.736Z",
@@ -277,15 +276,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.47",
-          "no": "0.59"
+          "yes": "0.49",
+          "no": "0.55"
         },
         "sell": {
-          "yes": "0.41",
-          "no": "0.53"
+          "yes": "0.45",
+          "no": "0.51"
         },
-        "bestBid": "0.41",
-        "bestAsk": "0.47"
+        "bestBid": "0.45",
+        "bestAsk": "0.49"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:58:01.736Z",
@@ -327,15 +326,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.3",
-          "no": "0.76"
+          "yes": "0.32",
+          "no": "0.73"
         },
         "sell": {
-          "yes": "0.24",
-          "no": "0.7"
+          "yes": "0.27",
+          "no": "0.68"
         },
-        "bestBid": "0.24",
-        "bestAsk": "0.3"
+        "bestBid": "0.27",
+        "bestAsk": "0.32"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:58:01.736Z",

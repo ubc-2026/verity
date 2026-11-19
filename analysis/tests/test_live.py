@@ -103,7 +103,7 @@ def test_analyze_live_end_to_end_with_fakes():
 
     log = []
     assert generate_purchase_request(ra, ctx, log) is None
-    assert any("limited to High-risk markets" in line for line in log)
+    assert any("Investigate" in line for line in log)
 
 
 def test_real_okc_response_shape_is_parsed():
@@ -130,10 +130,10 @@ def test_live_rules_analyst_scores_nyc_by_default():
     ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F", http_get=fake_get, now=NOW)
     s = ra.scores
     assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (2, 2, 2, 1)
-    # raw 7 Medium; Source>=2 + Ambiguity>=2 floors final to High
-    assert ra.rating.complete and ra.rating.raw_total == 7 and ra.rating.final_rating == "High"
-    assert ra.research_action == "flag_for_human_review"
-    assert "analyst=verity-rules-v1 (code rules, no LLM)" in ra.data_quality_flags
+    # Excel: settlement_edge>=1 + tradeable -> Investigate (Medium)
+    assert ra.rating.complete and ra.rating.final_rating == "Medium"
+    assert ra.research_action == "investigate"
+    assert "analyst=verity-excel-v1 (code rules, no LLM)" in ra.data_quality_flags
     assert not any(f.startswith("reading_scores_unscored") for f in ra.data_quality_flags)
     gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
     assert gap.material and gap.free_checks == ["nyc-settlement-version"]   # hooks into research.py
@@ -203,11 +203,11 @@ def test_live_rules_analyst_on_real_okc_response():
     finally:
         live.fetch_terms_text = orig
     s = ra.scores
-    assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (1, 1, 1, 3)
-    # raw 6 is Low, but Correlation 3 floors final rating to High
-    assert ra.rating.raw_total == 6 and ra.rating.raw_rating == "Low"
-    assert ra.rating.rating_floor == "High" and ra.rating.final_rating == "High"
-    assert ra.research_action == "flag_for_human_review"
+    # Outside events (siblings) is context-only; clear sports rules -> Trade normally
+    assert (s.ambiguity.score, s.source.score, s.liquidity.score) == (1, 1, 1)
+    assert s.correlation.score in (1, 2)  # mild outside-events context from siblings
+    assert ra.rating.final_rating == "Low"
+    assert ra.research_action == "no_further_research"
     assert generate_purchase_request(ra, ctx) is None
 
 

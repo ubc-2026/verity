@@ -254,13 +254,13 @@
       "prices": {
         "buy": {
           "yes": "0.89",
-          "no": "0.27"
+          "no": "0.23"
         },
         "sell": {
-          "yes": "0.73",
+          "yes": "0.77",
           "no": "0.11"
         },
-        "bestBid": "0.73",
+        "bestBid": "0.77",
         "bestAsk": "0.89"
       },
       "status": "active",
@@ -310,15 +310,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.88",
+          "yes": "0.87",
           "no": "0.28"
         },
         "sell": {
           "yes": "0.72",
-          "no": "0.12"
+          "no": "0.13"
         },
         "bestBid": "0.72",
-        "bestAsk": "0.88"
+        "bestAsk": "0.87"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -367,15 +367,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.83",
+          "yes": "0.84",
           "no": "0.31"
         },
         "sell": {
           "yes": "0.69",
-          "no": "0.17"
+          "no": "0.16"
         },
         "bestBid": "0.69",
-        "bestAsk": "0.83"
+        "bestAsk": "0.84"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -425,13 +425,13 @@
       "prices": {
         "buy": {
           "yes": "0.81",
-          "no": "0.36"
+          "no": "0.37"
         },
         "sell": {
-          "yes": "0.64",
+          "yes": "0.63",
           "no": "0.19"
         },
-        "bestBid": "0.64",
+        "bestBid": "0.63",
         "bestAsk": "0.81"
       },
       "status": "active",
@@ -538,15 +538,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.65",
+          "yes": "0.66",
           "no": "0.48"
         },
         "sell": {
           "yes": "0.52",
-          "no": "0.35"
+          "no": "0.34"
         },
         "bestBid": "0.52",
-        "bestAsk": "0.65"
+        "bestAsk": "0.66"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -595,15 +595,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.61",
+          "yes": "0.6",
           "no": "0.49"
         },
         "sell": {
           "yes": "0.51",
-          "no": "0.39"
+          "no": "0.4"
         },
         "bestBid": "0.51",
-        "bestAsk": "0.61"
+        "bestAsk": "0.6"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -632,63 +632,6 @@
         "name": "Karl-Anthony Towns",
         "externalIds": {
           "sportradar": "ab532a66-9314-4d57-ade7-bb54a70c65ad"
-        }
-      }
-    },
-    {
-      "id": "479884-1219680",
-      "label": "LaMelo Ball 20+ Points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "Subject to the settlement exceptions below, this market resolves to Yes if LaMelo Ball records 20 or more Points in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Points credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Points, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Points following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Points_Class_0d6c1b1d-d3d2-4e96-82a6-fc089dc8416e.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.57",
-          "no": "0.61"
-        },
-        "sell": {
-          "yes": "0.39",
-          "no": "0.43"
-        },
-        "bestBid": "0.39",
-        "bestAsk": "0.57"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T05:22:03.213Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Points_Class_0d6c1b1d-d3d2-4e96-82a6-fc089dc8416e.pdf",
-      "ticker": "LAMELOO19",
-      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPPTS-LAMELOO19",
-      "marketState": "post_only",
-      "color": "#0C2340",
-      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 17,
-      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
-      "strike": {
-        "type": "over",
-        "value": "19.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "LaMelo Ball",
-        "externalIds": {
-          "sportradar": "be53f27f-c666-4bd2-8fcd-0713f963aa2b"
         }
       }
     },
@@ -750,6 +693,63 @@
       }
     },
     {
+      "id": "479884-1219680",
+      "label": "LaMelo Ball 20+ Points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "Subject to the settlement exceptions below, this market resolves to Yes if LaMelo Ball records 20 or more Points in the NBA game between New York and Minnesota originally scheduled for November 19, 2026 at 8:00 PM ET, including any overtime periods. Otherwise, it resolves to No. The Underlying is the official Points credited to the specified player in that game. The Source Agency is NBA.com and its official Stats platform (nba.com/stats). If unavailable, the Exchange may use, in hierarchical order, (i) ESPN and (ii) ABC, NBC, Amazon Prime Video, or the official broadcast or streaming partner of the game.\n\nIf the player records no playing time in the Source Agency's official box score for any reason, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If the player appears, settlement uses the actual credited Points, regardless of playing time or subsequent removal from the game.\n\nIf the game is postponed before it begins, the Contract remains open and active and expires one hour after the Source Agency reports the official final statistics of the rescheduled game. If the game is not made up by the final scheduled day of the applicable NBA regular season or postseason round, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If postponed by more than two weeks, the Exchange may resolve the Contract to the last fair price in its sole discretion under Rule 7.2. If the game is officially cancelled with no result declared and no make-up game scheduled, the Contract resolves to the last fair price determined in the sole discretion of the Exchange. If a suspended game is later completed, settlement uses the player's cumulative recorded Points following completion.\n\nExcept as otherwise provided by these settlement exceptions, the Contract expires one hour after official final statistics are available from the Source Agency. Revisions after expiration do not affect settlement. Before settlement, the Exchange may initiate the Market Outcome Review Process under Rule 7.1. If an Expiration Value cannot be determined on the Expiration Date in a scenario not described above, the Exchange may determine payouts pursuant to Rule 7.1. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Points_Class_0d6c1b1d-d3d2-4e96-82a6-fc089dc8416e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.56",
+          "no": "0.61"
+        },
+        "sell": {
+          "yes": "0.39",
+          "no": "0.44"
+        },
+        "bestBid": "0.39",
+        "bestAsk": "0.56"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T05:22:03.213Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Player_Points_Class_0d6c1b1d-d3d2-4e96-82a6-fc089dc8416e.pdf",
+      "ticker": "LAMELOO19",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-PPPTS-LAMELOO19",
+      "marketState": "post_only",
+      "color": "#0C2340",
+      "imageUrl": "https://assets.gemini.com/predictions/images/MIN_785101e4-755a-4850-a4ff-4bed91f39e81.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 17,
+      "teamId": "583eca2f-fb46-11e1-82cb-f4ce4684ea4c",
+      "strike": {
+        "type": "over",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "LaMelo Ball",
+        "externalIds": {
+          "sportradar": "be53f27f-c666-4bd2-8fcd-0713f963aa2b"
+        }
+      }
+    },
+    {
       "id": "479884-1219697",
       "label": "Rudy Gobert 10+ Points",
       "description": {
@@ -767,13 +767,13 @@
       "prices": {
         "buy": {
           "yes": "0.5",
-          "no": "0.63"
+          "no": "0.62"
         },
         "sell": {
-          "yes": "0.37",
+          "yes": "0.38",
           "no": "0.5"
         },
-        "bestBid": "0.37",
+        "bestBid": "0.38",
         "bestAsk": "0.5"
       },
       "status": "active",
@@ -823,15 +823,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.44",
-          "no": "0.73"
+          "yes": "0.43",
+          "no": "0.74"
         },
         "sell": {
-          "yes": "0.27",
-          "no": "0.56"
+          "yes": "0.26",
+          "no": "0.57"
         },
-        "bestBid": "0.27",
-        "bestAsk": "0.44"
+        "bestBid": "0.26",
+        "bestAsk": "0.43"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -880,15 +880,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.43",
-          "no": "0.71"
+          "yes": "0.42",
+          "no": "0.72"
         },
         "sell": {
-          "yes": "0.29",
-          "no": "0.57"
+          "yes": "0.28",
+          "no": "0.58"
         },
-        "bestBid": "0.29",
-        "bestAsk": "0.43"
+        "bestBid": "0.28",
+        "bestAsk": "0.42"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -937,15 +937,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.38",
+          "yes": "0.39",
           "no": "0.78"
         },
         "sell": {
           "yes": "0.22",
-          "no": "0.62"
+          "no": "0.61"
         },
         "bestBid": "0.22",
-        "bestAsk": "0.38"
+        "bestAsk": "0.39"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -1051,15 +1051,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.34",
+          "yes": "0.33",
           "no": "0.79"
         },
         "sell": {
           "yes": "0.21",
-          "no": "0.66"
+          "no": "0.67"
         },
         "bestBid": "0.21",
-        "bestAsk": "0.34"
+        "bestAsk": "0.33"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",
@@ -1280,13 +1280,13 @@
       "prices": {
         "buy": {
           "yes": "0.2",
-          "no": "0.95"
+          "no": "0.96"
         },
         "sell": {
-          "yes": "0.05",
+          "yes": "0.04",
           "no": "0.8"
         },
-        "bestBid": "0.05",
+        "bestBid": "0.04",
         "bestAsk": "0.2"
       },
       "status": "active",
@@ -1337,13 +1337,13 @@
       "prices": {
         "buy": {
           "yes": "0.19",
-          "no": "0.97"
+          "no": "0.96"
         },
         "sell": {
-          "yes": "0.03",
+          "yes": "0.04",
           "no": "0.81"
         },
-        "bestBid": "0.03",
+        "bestBid": "0.04",
         "bestAsk": "0.19"
       },
       "status": "active",
@@ -1393,15 +1393,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.19",
+          "yes": "0.18",
           "no": "0.97"
         },
         "sell": {
           "yes": "0.03",
-          "no": "0.81"
+          "no": "0.82"
         },
         "bestBid": "0.03",
-        "bestAsk": "0.19"
+        "bestAsk": "0.18"
       },
       "status": "active",
       "createdAt": "2026-11-19T05:22:03.213Z",

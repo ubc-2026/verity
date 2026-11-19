@@ -25,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.88",
+          "yes": "0.87",
           "no": "0.17"
         },
         "sell": {
           "yes": "0.83",
-          "no": "0.12"
+          "no": "0.13"
         },
         "bestBid": "0.83",
-        "bestAsk": "0.88"
+        "bestAsk": "0.87"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -74,15 +74,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.83",
-          "no": "0.21"
+          "yes": "0.81",
+          "no": "0.23"
         },
         "sell": {
-          "yes": "0.79",
-          "no": "0.17"
+          "yes": "0.77",
+          "no": "0.19"
         },
-        "bestBid": "0.79",
-        "bestAsk": "0.83"
+        "bestBid": "0.77",
+        "bestAsk": "0.81"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -123,15 +123,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.76",
-          "no": "0.28"
+          "yes": "0.74",
+          "no": "0.3"
         },
         "sell": {
-          "yes": "0.72",
-          "no": "0.24"
+          "yes": "0.7",
+          "no": "0.26"
         },
-        "bestBid": "0.72",
-        "bestAsk": "0.76",
+        "bestBid": "0.7",
+        "bestAsk": "0.74",
         "lastTradePrice": "0.79"
       },
       "status": "active",
@@ -173,15 +173,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.69",
-          "no": "0.35"
+          "yes": "0.67",
+          "no": "0.37"
         },
         "sell": {
-          "yes": "0.65",
-          "no": "0.31"
+          "yes": "0.63",
+          "no": "0.33"
         },
-        "bestBid": "0.65",
-        "bestAsk": "0.69",
+        "bestBid": "0.63",
+        "bestAsk": "0.67",
         "lastTradePrice": "0.79"
       },
       "status": "active",
@@ -223,15 +223,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.6",
-          "no": "0.44"
+          "yes": "0.58",
+          "no": "0.46"
         },
         "sell": {
-          "yes": "0.56",
-          "no": "0.4"
+          "yes": "0.54",
+          "no": "0.42"
         },
-        "bestBid": "0.56",
-        "bestAsk": "0.6"
+        "bestBid": "0.54",
+        "bestAsk": "0.58"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -272,15 +272,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.5",
-          "no": "0.54"
+          "yes": "0.48",
+          "no": "0.56"
         },
         "sell": {
-          "yes": "0.46",
-          "no": "0.5"
+          "yes": "0.44",
+          "no": "0.52"
         },
-        "bestBid": "0.46",
-        "bestAsk": "0.5"
+        "bestBid": "0.44",
+        "bestAsk": "0.48"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -296,55 +296,6 @@
       "strike": {
         "type": "above",
         "value": "5.76"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478188-1211970",
-      "label": "$5.78 or above",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "If the price of Copper is $5.78 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.41",
-          "no": "0.63"
-        },
-        "sell": {
-          "yes": "0.37",
-          "no": "0.59"
-        },
-        "bestBid": "0.37",
-        "bestAsk": "0.41"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T20:56:28.199Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
-      "ticker": "HI5D78",
-      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D78",
-      "marketState": "open",
-      "abbreviatedName": ">$5.78",
-      "color": "#4CAF50",
-      "expiryDate": "2026-11-19T22:00:00.000Z",
-      "effectiveDate": "2026-11-18T21:00:00.000Z",
-      "sortOrder": 3,
-      "strike": {
-        "type": "above",
-        "value": "5.78"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -370,15 +321,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.32",
-          "no": "0.72"
+          "yes": "0.3",
+          "no": "0.74"
         },
         "sell": {
-          "yes": "0.28",
-          "no": "0.68"
+          "yes": "0.26",
+          "no": "0.7"
         },
-        "bestBid": "0.28",
-        "bestAsk": "0.32"
+        "bestBid": "0.26",
+        "bestAsk": "0.3"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -419,15 +370,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.24",
-          "no": "0.8"
+          "yes": "0.21",
+          "no": "0.83"
         },
         "sell": {
-          "yes": "0.2",
-          "no": "0.76"
+          "yes": "0.17",
+          "no": "0.79"
         },
-        "bestBid": "0.2",
-        "bestAsk": "0.24"
+        "bestBid": "0.17",
+        "bestAsk": "0.21"
       },
       "status": "active",
       "createdAt": "2026-11-18T20:56:28.199Z",
@@ -468,15 +419,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.18",
-          "no": "0.86"
+          "yes": "0.16",
+          "no": "0.88"
         },
         "sell": {
-          "yes": "0.14",
-          "no": "0.82"
+          "yes": "0.12",
+          "no": "0.84"
         },
-        "bestBid": "0.14",
-        "bestAsk": "0.18",
+        "bestBid": "0.12",
+        "bestAsk": "0.16",
         "lastTradePrice": "0.18"
       },
       "status": "active",
@@ -493,6 +444,47 @@
       "strike": {
         "type": "above",
         "value": "5.84"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478188-1211970",
+      "label": "$5.78 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Copper is $5.78 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_COPPERUSDC index. This index provides a 60 second average of the [COPPER-USDC](https://app.hyperliquid.xyz/trade/xyz:COPPER) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:28.199Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/copper_0ebd7c1e-0d3f-4120-8aa6-57f9f97699ba.pdf",
+      "ticker": "HI5D78",
+      "instrumentSymbol": "GEMI-COPPER2611192200-HI5D78",
+      "marketState": "open",
+      "abbreviatedName": ">$5.78",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "above",
+        "value": "5.78"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

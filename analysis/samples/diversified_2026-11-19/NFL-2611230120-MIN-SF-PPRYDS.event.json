@@ -709,15 +709,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.65",
+          "yes": "0.66",
           "no": "0.51"
         },
         "sell": {
           "yes": "0.49",
-          "no": "0.35"
+          "no": "0.34"
         },
         "bestBid": "0.49",
-        "bestAsk": "0.65"
+        "bestAsk": "0.66"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:12:13.513Z",
@@ -746,63 +746,6 @@
         "name": "Jordan Mason",
         "externalIds": {
           "sportradar": "af9f7390-ca80-11ec-97ae-e1573849d1a6"
-        }
-      }
-    },
-    {
-      "id": "475838-1199335",
-      "label": "Kaelon Black 25+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Kaelon Black records 25 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.65",
-          "no": "0.47"
-        },
-        "sell": {
-          "yes": "0.53",
-          "no": "0.35"
-        },
-        "bestBid": "0.53",
-        "bestAsk": "0.65"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:12:13.513Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "KBLACKO24",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-KBLACKO24",
-      "marketState": "open",
-      "color": "#AA0000",
-      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 41,
-      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
-      "strike": {
-        "type": "over",
-        "value": "24.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Kaelon Black",
-        "externalIds": {
-          "sportradar": "4dea3ae1-8c53-4ef1-bd72-e2d2dfb3fa97"
         }
       }
     },
@@ -860,6 +803,63 @@
         "name": "Brock Purdy",
         "externalIds": {
           "sportradar": "d5aef708-ad61-4ab8-a637-62ff96e92040"
+        }
+      }
+    },
+    {
+      "id": "475838-1199335",
+      "label": "Kaelon Black 25+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Kaelon Black records 25 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.6",
+          "no": "0.47"
+        },
+        "sell": {
+          "yes": "0.53",
+          "no": "0.4"
+        },
+        "bestBid": "0.53",
+        "bestAsk": "0.6"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:12:13.513Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "KBLACKO24",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-KBLACKO24",
+      "marketState": "open",
+      "color": "#AA0000",
+      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 41,
+      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
+      "strike": {
+        "type": "over",
+        "value": "24.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Kaelon Black",
+        "externalIds": {
+          "sportradar": "4dea3ae1-8c53-4ef1-bd72-e2d2dfb3fa97"
         }
       }
     },
@@ -978,63 +978,6 @@
       }
     },
     {
-      "id": "475838-1217857",
-      "label": "Deebo Samuel Sr. 10+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Deebo Samuel Sr. records 10 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.52",
-          "no": "0.69"
-        },
-        "sell": {
-          "yes": "0.31",
-          "no": "0.48"
-        },
-        "bestBid": "0.31",
-        "bestAsk": "0.52"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:12:13.513Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "TSAMUELO9",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-TSAMUELO9",
-      "marketState": "open",
-      "color": "#AA0000",
-      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 53,
-      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
-      "strike": {
-        "type": "over",
-        "value": "9.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Deebo Samuel Sr.",
-        "externalIds": {
-          "sportradar": "628a6a0a-4fde-4024-8d7c-28674953d5af"
-        }
-      }
-    },
-    {
       "id": "475838-1199324",
       "label": "Jordan Mason 50+ Rushing Yards",
       "description": {
@@ -1092,6 +1035,63 @@
       }
     },
     {
+      "id": "475838-1217857",
+      "label": "Deebo Samuel Sr. 10+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Deebo Samuel Sr. records 10 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.51",
+          "no": "0.69"
+        },
+        "sell": {
+          "yes": "0.31",
+          "no": "0.49"
+        },
+        "bestBid": "0.31",
+        "bestAsk": "0.51"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:12:13.513Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "TSAMUELO9",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-TSAMUELO9",
+      "marketState": "open",
+      "color": "#AA0000",
+      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 53,
+      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
+      "strike": {
+        "type": "over",
+        "value": "9.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Deebo Samuel Sr.",
+        "externalIds": {
+          "sportradar": "628a6a0a-4fde-4024-8d7c-28674953d5af"
+        }
+      }
+    },
+    {
       "id": "475838-1199336",
       "label": "Kaelon Black 30+ Rushing Yards",
       "description": {
@@ -1109,12 +1109,13 @@
       "prices": {
         "buy": {
           "yes": "0.49",
-          "no": "0.48"
+          "no": "0.57"
         },
         "sell": {
-          "yes": "0.52",
+          "yes": "0.43",
           "no": "0.51"
         },
+        "bestBid": "0.43",
         "bestAsk": "0.49",
         "lastTradePrice": "0.52"
       },
@@ -1166,13 +1167,13 @@
       "prices": {
         "buy": {
           "yes": "0.47",
-          "no": "0.65"
+          "no": "0.64"
         },
         "sell": {
-          "yes": "0.35",
+          "yes": "0.36",
           "no": "0.53"
         },
-        "bestBid": "0.35",
+        "bestBid": "0.36",
         "bestAsk": "0.47"
       },
       "status": "active",
@@ -1222,15 +1223,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.44",
+          "yes": "0.41",
           "no": "0.68"
         },
         "sell": {
           "yes": "0.32",
-          "no": "0.56"
+          "no": "0.59"
         },
         "bestBid": "0.32",
-        "bestAsk": "0.44"
+        "bestAsk": "0.41"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:12:13.513Z",
@@ -1320,63 +1321,6 @@
       }
     },
     {
-      "id": "475838-1217862",
-      "label": "Deebo Samuel Sr. 15+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Deebo Samuel Sr. records 15 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.39",
-          "no": "0.77"
-        },
-        "sell": {
-          "yes": "0.23",
-          "no": "0.61"
-        },
-        "bestBid": "0.23",
-        "bestAsk": "0.39"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:12:13.513Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "TSAMUELO14",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-TSAMUELO14",
-      "marketState": "open",
-      "color": "#AA0000",
-      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 54,
-      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
-      "strike": {
-        "type": "over",
-        "value": "14.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Deebo Samuel Sr.",
-        "externalIds": {
-          "sportradar": "628a6a0a-4fde-4024-8d7c-28674953d5af"
-        }
-      }
-    },
-    {
       "id": "475838-1199325",
       "label": "Jordan Mason 60+ Rushing Yards",
       "description": {
@@ -1430,6 +1374,63 @@
         "name": "Jordan Mason",
         "externalIds": {
           "sportradar": "af9f7390-ca80-11ec-97ae-e1573849d1a6"
+        }
+      }
+    },
+    {
+      "id": "475838-1217862",
+      "label": "Deebo Samuel Sr. 15+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Deebo Samuel Sr. records 15 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.38",
+          "no": "0.77"
+        },
+        "sell": {
+          "yes": "0.23",
+          "no": "0.62"
+        },
+        "bestBid": "0.23",
+        "bestAsk": "0.38"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:12:13.513Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "TSAMUELO14",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-TSAMUELO14",
+      "marketState": "open",
+      "color": "#AA0000",
+      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 54,
+      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Deebo Samuel Sr.",
+        "externalIds": {
+          "sportradar": "628a6a0a-4fde-4024-8d7c-28674953d5af"
         }
       }
     },
@@ -1565,13 +1566,13 @@
       "prices": {
         "buy": {
           "yes": "0.31",
-          "no": "0.85"
+          "no": "0.81"
         },
         "sell": {
-          "yes": "0.15",
+          "yes": "0.19",
           "no": "0.69"
         },
-        "bestBid": "0.15",
+        "bestBid": "0.19",
         "bestAsk": "0.31"
       },
       "status": "active",
@@ -1679,13 +1680,13 @@
       "prices": {
         "buy": {
           "yes": "0.28",
-          "no": "0.91"
+          "no": "0.88"
         },
         "sell": {
-          "yes": "0.09",
+          "yes": "0.12",
           "no": "0.72"
         },
-        "bestBid": "0.09",
+        "bestBid": "0.12",
         "bestAsk": "0.28"
       },
       "status": "active",
@@ -2004,6 +2005,60 @@
       }
     },
     {
+      "id": "475838-1199338",
+      "label": "Kaelon Black 50+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Kaelon Black records 50 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.22"
+        },
+        "sell": {
+          "no": "0.78"
+        },
+        "bestAsk": "0.22"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:12:13.513Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "KBLACKO49",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-KBLACKO49",
+      "marketState": "open",
+      "color": "#AA0000",
+      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 44,
+      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
+      "strike": {
+        "type": "over",
+        "value": "49.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Kaelon Black",
+        "externalIds": {
+          "sportradar": "4dea3ae1-8c53-4ef1-bd72-e2d2dfb3fa97"
+        }
+      }
+    },
+    {
       "id": "475838-1199327",
       "label": "Jordan Mason 80+ Rushing Yards",
       "description": {
@@ -2061,6 +2116,63 @@
       }
     },
     {
+      "id": "475838-1199343",
+      "label": "Kirk Cousins 15+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Kirk Cousins records 15 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.21",
+          "no": "0.98"
+        },
+        "sell": {
+          "yes": "0.02",
+          "no": "0.79"
+        },
+        "bestBid": "0.02",
+        "bestAsk": "0.21"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:12:13.513Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "COUSINSO14",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-COUSINSO14",
+      "marketState": "open",
+      "color": "#4F2683",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Minnesota_Vikings_1_092c0864-e622-47bd-88c7-9c91461f4bbe.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 49,
+      "teamId": "33405046-04ee-4058-a950-d606f8c30852",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Kirk Cousins",
+        "externalIds": {
+          "sportradar": "bbd0942c-6f77-4f83-a6d0-66ec6548019e"
+        }
+      }
+    },
+    {
       "id": "475838-1199277",
       "label": "Aaron Jones 60+ Rushing Yards",
       "description": {
@@ -2114,63 +2226,6 @@
         "name": "Aaron Jones",
         "externalIds": {
           "sportradar": "27dd5b6e-ea65-4622-a6b4-460fd144407c"
-        }
-      }
-    },
-    {
-      "id": "475838-1199343",
-      "label": "Kirk Cousins 15+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Kirk Cousins records 15 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.2",
-          "no": "0.98"
-        },
-        "sell": {
-          "yes": "0.02",
-          "no": "0.8"
-        },
-        "bestBid": "0.02",
-        "bestAsk": "0.2"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:12:13.513Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "COUSINSO14",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-COUSINSO14",
-      "marketState": "open",
-      "color": "#4F2683",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Minnesota_Vikings_1_092c0864-e622-47bd-88c7-9c91461f4bbe.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 49,
-      "teamId": "33405046-04ee-4058-a950-d606f8c30852",
-      "strike": {
-        "type": "over",
-        "value": "14.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Kirk Cousins",
-        "externalIds": {
-          "sportradar": "bbd0942c-6f77-4f83-a6d0-66ec6548019e"
         }
       }
     },
@@ -2306,13 +2361,13 @@
       "prices": {
         "buy": {
           "yes": "0.16",
-          "no": "0.98"
+          "no": "0.95"
         },
         "sell": {
-          "yes": "0.02",
+          "yes": "0.05",
           "no": "0.84"
         },
-        "bestBid": "0.02",
+        "bestBid": "0.05",
         "bestAsk": "0.16"
       },
       "status": "active",
@@ -3317,55 +3372,6 @@
         "name": "Deebo Samuel Sr.",
         "externalIds": {
           "sportradar": "628a6a0a-4fde-4024-8d7c-28674953d5af"
-        }
-      }
-    },
-    {
-      "id": "475838-1199338",
-      "label": "Kaelon Black 50+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Kaelon Black records 50 or more Rushing Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:12:13.513Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "KBLACKO49",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRYDS-KBLACKO49",
-      "marketState": "open",
-      "color": "#AA0000",
-      "imageUrl": "https://assets.gemini.com/predictions/images/San_Francisco_49ersDark_ef5787fb-8d10-4d68-9694-f73857c67673.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 44,
-      "teamId": "f0e724b0-4cbf-495a-be47-013907608da9",
-      "strike": {
-        "type": "over",
-        "value": "49.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Kaelon Black",
-        "externalIds": {
-          "sportradar": "4dea3ae1-8c53-4ef1-bd72-e2d2dfb3fa97"
         }
       }
     }

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200030-COFC-DRKE-M-COFC",
     "question": "Charleston vs Drake",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:27:00Z",
+    "analyzed_at_utc": "2026-11-19T06:50:57Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:27:00Z",
-      "snapshot_hash": "sha256:fafb81e306099757ad3ab99121505f47c5db1562705182bccd414675cbb5e299",
+      "snapshot_time_utc": "2026-11-19T06:50:57Z",
+      "snapshot_hash": "sha256:fcfb146598f1344e8904b602a3d3b31cebc74762d8a2c5be35c1253c93e8d9bc",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,12 +24,12 @@
       "volume_usd": "13.52",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:27:00Z"
+      "observed_time_utc": "2026-11-19T06:50:57Z"
     },
     "scores": {
       "ambiguity": {
         "score": 1,
-        "rationale": "Objective outcome; the terms were read and name the rule.",
+        "rationale": "Clear threshold, exact time, named source, simple fallback.",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 1,
-        "rationale": "Settlement source looks like official primary source (matched 'statscore').",
+        "rationale": "Official primary source (matched 'statscore').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -56,8 +56,8 @@
         ]
       },
       "correlation": {
-        "score": 3,
-        "rationale": "2 sibling event(s) on the same underlying (Agent rule 7).",
+        "score": 2,
+        "rationale": "2 sibling event(s) on the same underlying (exposure context).",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -68,22 +68,37 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
-      "rating_floor": "High",
-      "final_rating": "High",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
+      "rating_floor": null,
+      "final_rating": "Low",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Correlation -> at least High",
-          "triggered_by": "correlation",
-          "effect": "rating floor High; overlapping markets can flip together"
+          "rule": "settlement_edge = resolution_criteria + source_reliability",
+          "triggered_by": "ambiguity",
+          "effect": "settlement_edge=0"
+        },
+        {
+          "rule": "execution_risk = liquidity + price_and_data_quality",
+          "triggered_by": "liquidity",
+          "effect": "execution_risk=1"
+        },
+        {
+          "rule": "Trade normally when settlement_edge is 0 and the market is tradeable",
+          "triggered_by": "ambiguity",
+          "effect": "action Trade normally; no settlement edge"
+        },
+        {
+          "rule": "Excel action 'Trade normally' (settlement_edge=0, execution_risk=1)",
+          "triggered_by": "ambiguity",
+          "effect": "final_rating Low"
         }
       ]
     },
-    "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. No open resolution questions.",
+    "research_action": "no_further_research",
+    "summary": "Low (Trade normally). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -113,19 +128,18 @@
     "evidence_gaps": [],
     "unresolved_questions": [],
     "data_quality_flags": [
-      "analyst=verity-rules-v1 (code rules, no LLM)"
+      "analyst=verity-excel-v1 (code rules, no LLM)"
     ],
     "workbook_conflicts": [
-      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
-      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
-      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
-      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
-      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
-      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+      "Scoring now follows Gemini Market Risk Analysis.xlsx: factors 0-2, settlement_edge and execution_risk, actions Trade normally / Investigate / Avoid.",
+      "Schema still stores factors as 1-3 (Excel + 1). Ambiguity=resolution criteria, Source=source reliability, Correlation=outside events.",
+      "Excel actions map to ratings: Trade normally->Low, Investigate->Medium, Avoid->High.",
+      "Research buys fire on Investigate (Medium), not Avoid (High).",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm."
     ]
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611200030-COFC-DRKE-M-COFC] no purchase: no material resolution gap (research action: flag_for_human_review)."
+    "[GEMI-NCAAM-2611200030-COFC-DRKE-M-COFC] no purchase: rating is Low (Excel action needs Investigate); research buys follow the Excel Investigate path."
   ]
 }
