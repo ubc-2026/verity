@@ -1,6 +1,8 @@
 # Overdue delivery incidents
 
-This is the input contract for the Grok Bot overdue-delivery incident workflow described in the [README](../../README.md#grok-bot-overdue-delivery-incidents). The reconciliation ledger is not in this repository yet. The workflow runs on labeled fixtures. Payments and security (Decong) connects the real ledger by implementing the event and read-back interfaces below.
+This is the input contract for the Grok Bot overdue-delivery incident workflow described in the [README](../../README.md#overdue-delivery-incidents-grok-bot). The reconciliation ledger is not in this repository yet. The workflow runs on labeled fixtures. Payments and security (Decong) connects the real ledger by implementing the event and read-back interfaces below.
+
+Every safeguard on this page is enforced by the Grok Bot routine. The routine's code and fixtures live in the Grok Bot runtime, outside this repository, so nothing here enforces or tests them. Treat this page as the contract the routine and the ledger must both meet.
 
 Grok Bot runs Verity's overdue-delivery incident workflow. When the reconciliation ledger reports that an Arc Testnet USDC payment is confirmed but the merchant missed its deadline to deliver verified evidence, it POSTs a `verity.overdue_delivery.v1` event to a Grok Bot webhook routine. Grok Bot rechecks the latest purchase state in the ledger, then opens at most one card per purchase on a private incident Page, using an `environment:purchaseId:exceptionType` key so replays and restarts never create duplicates. The card records missing verified delivery, which is overdue evidence and not a finding about the merchant's conduct, and it points the owner to the purchase's delivery record. Grok Bot only reads the ledger and only writes to the incident Page, so wallet keys and raw evidence stay inside Verity.
 
@@ -51,7 +53,48 @@ The ledger emits this event when a delivery deadline passes. The routine consume
 }
 ```
 
-POST this object as the body of the routine webhook when a delivery deadline passes. Authenticate with the sender key using whatever authentication the Grok Bot webhook trigger requires. The webhook URL and sender key are provided privately by the Grok Bot owner. The event carries none of the wallet keys, raw evidence, or private contract data.
+POST this object as the body of the routine webhook when a delivery deadline passes. The event carries none of the wallet keys, raw evidence, or private contract data.
+
+## Webhook authentication
+
+The routine's Webhook trigger issues a URL and a key that starts with `crsr_`. The sender passes the key as a bearer token:
+
+```http
+POST {GROK_BOT_WEBHOOK_URL}
+Authorization: Bearer {GROK_BOT_WEBHOOK_KEY}
+Content-Type: application/json
+
+{ ...one verity.overdue_delivery.v1 object... }
+```
+
+- The key is static. The trigger does not sign the body and does not check a timestamp or a delivery ID. Anyone who holds the URL and key can send any body, and a captured request can be sent again.
+- Treat the URL and key as one password. The Grok Bot owner hands them over privately. They go in the sender's runtime secrets and never in this repository, a log, or an incident card. Rotate the key in the routine if it is exposed.
+- A `200` response with `{"success":true,"runUuid":"..."}` means a run started. It does not mean a card was created. A `401` means the key is wrong or missing. A `400` can mean the routine is switched off. The trigger does not queue refused requests, so the sender retries with backoff until it gets a `200`. Retries are safe because of the incident key.
+- Because the transport proves only that the sender holds the key, the routine treats an event as a prompt to look, not as evidence. The safeguards are the strict schema check, the ledger recheck, and the incident key described below.
+
+This trigger behavior comes from third-party guides and Cursor's community forum, checked on 2026-11-18. Cursor has no reference page for it yet. Confirm the header and responses in the routine's trigger panel before wiring the sender.
+
+## Replays and retries
+
+- A retried, replayed, or duplicated POST reaches the same `incidentKey` and updates the existing card (`replayCount`, `lastSeenUtc`). It never adds a second card. A process restart behaves the same way.
+- `eventId` is not a deduplication key. Two emissions for one purchase share one incident.
+- An event cannot open a card by itself. The routine opens one only when the latest ledger record still shows `Paid, delivery missing` for the same purchase, transaction, and amount. A replay that arrives after delivery is verified ends as `skipped_delivery_verified`.
+- A forged event for a purchase that is not overdue fails the same recheck and creates no card. It still starts a run, because the trigger does not filter requests.
+- Eligibility does not use `emittedAtUtc`. An old event is judged by the current ledger record, not by its age.
+
+## Fixture and live data
+
+| | Fixture | Live |
+| --- | --- | --- |
+| `environment` on the event | `fixture` | `arc-testnet` |
+| Ledger the routine rechecks | Fixture store in the Grok Bot runtime, used when `VERITY_LEDGER_URL` is unset | `GET {VERITY_LEDGER_URL}/purchases/{purchaseId}` |
+| `txHash` | Placeholder such as `0xaaaa…a1`, not a real transaction | Real Arc Testnet transaction |
+| Card | Labeled `FIXTURE` | Not labeled |
+| Incident key prefix | `fixture:` | `arc-testnet:` |
+
+The environment is part of the incident key, so a fixture card and a live card never merge.
+
+Open item: the routine chooses its ledger from `VERITY_LEDGER_URL`, not from the event's `environment`. This contract does not yet require the two to agree. As written, a runtime without `VERITY_LEDGER_URL` would check an `arc-testnet` event against fixture data, and a runtime with it would check a `fixture` event against the live ledger. Before live events are sent, the routine should reject an event whose `environment` does not match its ledger, and the ledger should return `environment` on every record.
 
 ## Ledger recheck: `GET /purchases/{purchaseId}`
 
@@ -136,7 +179,7 @@ The processor prints one JSON line:
 
 The real ledger is not wired yet. Payments and security (Decong) connects it by:
 
-1. Emitting a `verity.overdue_delivery.v1` event when a delivery deadline passes. POST it to the Grok Bot routine webhook, authenticated with that routine's sender key. The webhook URL and sender key are provided privately by the Grok Bot owner. This repository does not create the routine.
+1. Emitting a `verity.overdue_delivery.v1` event when a delivery deadline passes. POST it to the Grok Bot routine webhook with the routine key as a bearer token (see [Webhook authentication](#webhook-authentication)), and retry with backoff until the response is `200`. The webhook URL and key are provided privately by the Grok Bot owner. This repository does not create the routine.
 2. Exposing a read-only `GET /purchases/{purchaseId}` that returns the latest record using the field contract above. The bot runtime calls it at `{VERITY_LEDGER_URL}/purchases/{purchaseId}`.
 3. Issuing a read-only bearer token (`VERITY_LEDGER_TOKEN`) scoped to that incident feed. The token grants no write access, no wallet access, and no evidence access.
 4. Giving the bot runtime `VERITY_LEDGER_URL` and `VERITY_LEDGER_TOKEN`. Optionally set `VERITY_EXPLORER_BASE` when the Arc Testnet explorer is not `https://explorer.testnet.arc.io`.
@@ -144,9 +187,11 @@ The real ledger is not wired yet. Payments and security (Decong) connects it by:
 
 ## Fixture status
 
-The workflow is fixture-tested in the Grok Bot runtime. This repository does not contain those fixtures.
+The workflow is fixture-tested in the Grok Bot runtime. This repository does not contain those fixtures, so these results are reported by the routine owner and are not rerun here.
 
 - An overdue confirmed payment creates one card.
 - A replay or restart keeps one card.
 - Delivery verified before processing creates zero cards.
 - A pending payment, a future deadline, and an unavailable ledger create none.
+
+Not yet tested: an event with the wrong key, a forged event for a purchase that is not overdue, and an event whose `environment` does not match the ledger the routine reads. No live event has been sent.
