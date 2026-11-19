@@ -169,3 +169,19 @@ def test_all_five_fixtures_validate_and_match_workbook_totals():
 
 def test_snapshot_hash_is_stable():
     assert get_risk_analysis(OKC, ctx()).snapshot.snapshot_hash == get_risk_analysis(OKC, ctx()).snapshot.snapshot_hash
+
+
+def test_nyc_observed_check_is_inconclusive_and_labeled_observed():
+    c = ctx(free_check_scenario="observed-2026-11-18")
+    log = []
+    p = generate_purchase_request(get_risk_analysis(NYC, c), c, log)
+    assert p is not None and p.catalog_item_id == "cat-nws-cli-settlement-version-v1"
+    assert p.fixture_label.startswith("OBSERVED") and "FIXTURE" not in p.fixture_label
+    assert any("first published version" in l for l in log)
+
+
+def test_nyc_fixture_quotes_real_terms():
+    m = ctx().markets[NYC]
+    q = {e["id"]: e["quote"] for e in m["rules_excerpts"]}
+    assert "first published version" in q["C-NYC-4"]
+    assert len(q["C-NYC-4"].split()) < 15

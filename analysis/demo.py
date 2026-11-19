@@ -101,4 +101,4 @@ if __name__ == "__main__":
         raise SystemExit(0)
     run("OKC moneyline: clear rules", "fx-okc-moneyline-20261118", None, "okc_moneyline.json")
     run("NYC high temp: free check answers (FIXTURE)", "fx-nyc-high-20261118", "free-check-answers", None)
-    run("NYC high temp: gap remains (FIXTURE)", "fx-nyc-high-20261118", "free-check-inconclusive", "nyc_high_gap_remains.json")
+    run("NYC high temp: gap remains (OBSERVED terms + NWS, 2026-11-18)", "fx-nyc-high-20261118", "observed-2026-11-18", "nyc_high_gap_remains.json")

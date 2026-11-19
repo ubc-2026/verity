@@ -26,6 +26,19 @@ EVENT = {
     ],
 }
 
+GAME = {
+    "ticker": "NBA-2611190100-ATL-OKC-M",
+    "title": "Atlanta vs Oklahoma City",
+    "description": "Pays Yes if the named team wins the game, per the official NBA result.",
+    "expiryDate": "2026-11-20T13:00:00.000Z",
+    "volume": 1071,
+    "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/nba.pdf",
+    "sourceDetails": {"agency": "NBA"},
+    "contracts": [{"label": "Oklahoma City", "instrumentSymbol": "GEMI-NBA-OKC",
+                   "prices": {"bestBid": "0.69", "bestAsk": "0.70"}}],
+    "events": [{"ticker": "NBA-2611190100-ATL-OKC-T"}],
+}
+
 
 class FakeResp:
     def __init__(self, payload=None, content=b"", status=200):
@@ -91,3 +104,16 @@ def test_analyze_live_end_to_end_with_fakes():
     log = []
     assert generate_purchase_request(ra, ctx, log) is None
     assert any("no material resolution gap" in line for line in log)
+
+
+def test_real_okc_response_shape_is_parsed():
+    """Trimmed copy of a real Gemini Exchange response captured 2026-11-18."""
+    import json, pathlib
+    ev = json.loads((pathlib.Path(__file__).parent / "live_okc_event_2026-11-18.json").read_text(encoding="utf-8"))
+    r = build_live_record(ev, "Oklahoma City", now=NOW)
+    contract = next(e for e in r["rules_excerpts"] if e["id"] == "C-CONTRACT")
+    assert contract["quote"].startswith("If Oklahoma City wins") and "nodeType" not in contract["quote"]
+    assert r["event_terms_url_present"] is True          # live API uses "termsLink"
+    assert r["instrument_symbol"] == "GEMI-NBA-2611190100-ATL-OKC-M-OKC"
+    assert len(r["sibling_events"]) == 5
+    assert (r["market"]["best_bid"], r["market"]["best_ask"]) == ("0.69", "0.7")

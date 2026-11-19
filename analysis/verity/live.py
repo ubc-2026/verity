@@ -54,6 +54,11 @@ def _s(x: Any) -> Optional[str]:
     return None if x in (None, "") else str(x)
 
 
+def _event_terms_url(event: dict[str, Any]) -> Optional[str]:
+    # The live API puts the event-level link in "termsLink"; older docs used "termsAndConditionsUrl".
+    return _s(event.get("termsLink")) or _s(event.get("termsAndConditionsUrl"))
+
+
 def _plain_text(value: Any) -> Optional[str]:
     """Exchange descriptions are a string, or a small document tree with text nodes."""
     if value in (None, ""):
@@ -101,7 +106,7 @@ def build_live_record(
     c = matches[0]
     p = c.get("prices") or {}
     url = f"{BASE}/events/{event.get('ticker')}"
-    terms_url = _s(c.get("termsAndConditionsUrl")) or _s(event.get("termsAndConditionsUrl"))
+    terms_url = _s(c.get("termsAndConditionsUrl")) or _event_terms_url(event)
 
     excerpts = []
     event_text = _plain_text(event.get("description"))
@@ -140,7 +145,7 @@ def build_live_record(
         },
         "settlement_source": " / ".join(str(v) for v in (sd.get("agency"), sd.get("index")) if v) or None,
         "terms_url": terms_url,
-        "event_terms_url_present": bool(_s(event.get("termsAndConditionsUrl"))),
+        "event_terms_url_present": bool(_event_terms_url(event)),
         "terms_problem": terms_problem,
         "rules_excerpts": excerpts,
         "sibling_events": [e.get("ticker") for e in (event.get("events") or []) if e.get("ticker")],
@@ -173,7 +178,7 @@ def analyze_live(
     now = now or datetime.now(timezone.utc)
     event = fetch_event(event_ticker, http_get)
     contract = next((c for c in event.get("contracts") or [] if c.get("label") == outcome_label), {})
-    terms_url = contract.get("termsAndConditionsUrl") or event.get("termsAndConditionsUrl")
+    terms_url = _s(contract.get("termsAndConditionsUrl")) or _event_terms_url(event)
     text, problem = (None, "no terms URL in the event") if not terms_url else (
         fetch_terms_text(terms_url, http_get) if read_terms else (None, "terms reading disabled"))
     record = build_live_record(event, outcome_label, now=now, terms_text=text, terms_problem=problem)

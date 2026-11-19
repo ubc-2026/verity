@@ -1,5 +1,5 @@
 {
-  "note": "Free official-source checks run before any purchase. The NYC outcomes are FIXTURE ASSUMPTIONS: the contract's terms PDF and the NWS CLINYC product were not read for this slice. Replace them with the live check before relying on either result.",
+  "note": "Free official-source checks run before any purchase. 'observed-2026-11-18' is a real reading of the weather terms PDF and the NWS CLINYC product. The two 'free-check-*' scenarios are FIXTURE ASSUMPTIONS kept for tests and the demo.",
   "checks": {
     "nyc-settlement-version": {
       "sources": [
@@ -8,6 +8,16 @@
       ],
       "cost_base_units": "0",
       "scenarios": {
+        "observed-2026-11-18": {
+          "result": "inconclusive",
+          "finding": "Rule 13.111(i)(2) settles on the first published version that confirms the value, so later revisions and corrections do not count. But the rule text is missing a word after 'confirmation of the', and NWS publishes a same-day CLINYC before the full-day one (Nov 17: issued 4:38 PM EST, valid as of 4:00 PM, max 57F at 3:55 PM). The terms do not say whether that partial-day report counts as the first published version, so the gap stays open.",
+          "fixture_assumption": false,
+          "observed_utc": "2026-11-18T05:50:00Z",
+          "source_urls": [
+            "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "https://forecast.weather.gov/product.php?site=OKX&product=CLI&issuedby=NYC"
+          ]
+        },
         "free-check-answers": {
           "result": "answered",
           "finding": "FIXTURE ASSUMPTION: the terms name the specific CLI issuance used for settlement, so no purchase is needed.",

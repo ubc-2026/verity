@@ -1,7 +1,7 @@
 # Verity analysis: risk scoring and evidence proposals
 
 Market fixture → `get_risk_analysis()` → `generate_purchase_request()` → an unsigned proposal, or `null` with a logged reason.
-Fixture mode (the default) uses no network, no API key and no wallet. Live mode is optional and is described below.
+Fixture mode (the default) uses no network, no API key and no wallet. Live mode is optional and is described below. Neither mode uses an LLM.
 
 ## Run it
 
@@ -49,7 +49,7 @@ fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
   free_checks.json          free official-source checks; NYC outcomes are labeled assumptions
-tests/test_slice.py, tests/test_live.py (both APIs faked)
+tests/test_slice.py, test_live.py, test_exchange.py (all external APIs faked)
 demo.py
 samples/                    generated outputs (OKC, NYC gap-remains)
 ```
@@ -64,6 +64,16 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 - **Ambiguity, source, and correlation** follow `READING_RUBRIC` in `verity/scoring.py`. Fixture files store those three scores. A live snapshot leaves them null. An empty terms link is at least ambiguity 2. No named settlement source is a null source score, not a guess. Correlation measures overlap between contracts. Sibling buckets of the same question stay 1. A wording conflict with the source is a snapshot flag, not a second score.
 - **Liquidity** is computed from the quotes. Volume under $100, a spread over 5¢, or a missing bid or ask is 3. Volume of at least $1,000, a spread of at most 2¢, and a bid on every strike is 1. Anything else with two prices is 2. No data at all is null. Both prices with no volume is null. `total` and `24h` volume are labeled and are not converted.
 - **Research actions:** Low → `no_further_research`, Medium → `investigate`, High → `flag_for_human_review`. This replaces the workbook's trading verbs.
+
+## Live rules (`rules_analyst.py`)
+
+| Category | 3 | 2 | 1 | null |
+|---|---|---|---|---|
+| Ambiguity | rules mention a setting, ranking or judgment ("style control", "top-ranked", "at its discretion") | terms PDF not read, event terms link empty (Agent rule 3), or numeric band edges decide it | terms read, objective outcome | no rule text |
+| Source | leaderboard, LM Arena, social metrics | NWS / climate report, BLS, CPI, GDP, anything preliminary or revisable | league, NCAA, Federal Reserve, official result | no source, or one the rules don't recognize |
+| Correlation | sibling events on the same underlying (Agent rule 7) | scheduled data or news (CPI, jobs, FOMC, injuries, earnings) | neither | — |
+
+Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. Both have no free check yet, so live purchases stay blocked.
 
 ## Proposal gates
 
@@ -91,12 +101,14 @@ All five rows reproduce the workbook's totals.
 
 ## What still needs live data
 
-- **NYC free check:** both outcomes are FIXTURE ASSUMPTIONS. Read the weather terms PDF and the NWS CLINYC product, then record the real result. That PDF's URL is inferred, because the event-level `termsAndConditionsUrl` was empty.
+- **Live OKC result (2026-11-18, terms not read):** Ambiguity 2, Source 1, Liquidity 1 ($1,392 volume, 1¢ spread), Correlation 3, total 7, Medium, `investigate`, no purchase. The live event has 5 sibling events (spread, totals, 3 player props), so Correlation is 3, not the workbook's 1. With the terms PDF read (`pypdf`), Ambiguity should drop to 1 and the total to 6, Low.
+- **NYC free check:** done on 2026-11-18 as scenario `observed-2026-11-18` in `free_checks.json`, which the demo now uses. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later corrections don't count. The rule text is missing a word, though, and NWS publishes a same-day partial CLINYC (valid to 4 PM) before the full-day report, so whether that partial report counts is still unstated. The result is `inconclusive` and the 0.05 USDC proposal still stands, now labeled `OBSERVED`. The two `free-check-*` scenarios remain as labeled fixture assumptions. The terms PDF URL was inferred but resolves.
+- **NYC expiry:** the terms set expiry at the first 11:00 PM ET after the data are available. That is later than the fixture's `2026-11-19T04:59:00Z` from the API, which is probably the trading close. Confirm against a live response.
 - **Snapshot time:** the workbook stores only the date (2026-11-17). Live reads should store the UTC time.
 - **Instrument symbols** are missing in the OKC and NYC fixtures. Live mode records them.
 - **Field names:** `verity/live.py` reads the public event payload. Contract descriptions may arrive as a document tree; the loader flattens those to plain text.
 - **Tickers** are missing for the Fed and Best AI rows, which came from CoinRithm rather than Gemini. They are flagged, and purchases for them are blocked.
-- **Rules text** is a paraphrase of the API descriptions. Fetch the terms PDFs so citations quote the actual rules.
+- **Rules text** is a paraphrase of the API descriptions, except NYC, which now cites the real terms (`C-NYC-4`, `C-NYC-5`). Fetch the OKC and MSU terms PDFs the same way.
 - **Expiry:** every fixture market expires between Nov 19 and Jan 1. After that, keep the fixture clock or take a new snapshot.
 - **Reading scores:** a live snapshot does not assign ambiguity, source, or correlation. Fixture files still carry the workbook scores for those three.
 - **Free checks in live mode:** to let a live gap lead to a purchase, add a free-check source for each type of gap (for example, read the terms PDF for the settlement rule).

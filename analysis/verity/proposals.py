@@ -75,7 +75,9 @@ def _emit_proposal(
         catalog_parameters=_catalog_params(ra, item),
         rationale=_proposal_rationale(gap.question, gap.why, item["title"], research_note),
         max_amount_base_units=item["price_base_units"],
-        fixture_label=f"FIXTURE: free-check scenario '{ctx.free_check_scenario}' (assumed, not observed)" if ctx.free_check_scenario else None,
+        fixture_label=_free_check_label(ctx.free_check_scenario, next(
+            (ctx.free_checks[c]["scenarios"].get(ctx.free_check_scenario or "")
+             for c in gap.free_checks if c in ctx.free_checks), None)),
         created_at_utc=created,
     )
     _record(decision_log, f"[{ra.contract_id}] PROPOSE {item['id']} for {gap.id}: max {item['price_base_units']} base units (= {int(item['price_base_units']) / 1_000_000:.2f} USDC), unsigned.")
@@ -86,6 +88,14 @@ def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
     # Fixture mapping for the NWS item; other items take their params from the contract.
     known = {"station": "Central Park, NY (CLINYC)", "date": "2026-11-18"} if ra.event_ticker and ra.event_ticker.startswith("WXHIGH-NYC") else {}
     return {p: known.get(p, "") for p in item["parameters"]}
+
+
+def _free_check_label(scenario: Optional[str], res: Optional[dict[str, Any]]) -> Optional[str]:
+    if not scenario:
+        return None
+    if res is not None and res.get("fixture_assumption") is False:
+        return f"OBSERVED: free-check scenario '{scenario}' read from the official sources at {res.get('observed_utc')}"
+    return f"FIXTURE: free-check scenario '{scenario}' (assumed, not observed)"
 
 
 def generate_purchase_request(
