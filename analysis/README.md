@@ -9,7 +9,7 @@ Fixture mode (the default) uses no network, no API key and no wallet. Live mode 
 cd analysis
 python3 -m venv .venv && . .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python -m pytest -q        # 45 passed
+python -m pytest -q        # 49 passed
 python demo.py             # 3 runs; writes samples/*.json
 ```
 
@@ -32,7 +32,8 @@ python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 - `analyze_live()` returns the analysis and its context. Pass both to `generate_purchase_request()`.
 - The output is written to `samples/live_last_run.json`, which git ignores.
 - **Purchases stay blocked in live mode.** The free official-source checks are only wired up for fixtures so far. A live gap with no free check is logged and skipped.
-- **API status, 2026-11-18 00:40 ET:** every `/v1/prediction-markets/...` path on `api.gemini.com` returned HTTP 500 ("An unexpected error occurred"), including the single-event lookup for all three fixture tickers and the events list. Other public endpoints (`/v1/symbols`, `/v1/pubticker/btcusd`) returned 200. Retry before the demo, and check the path against Gemini's current docs if it keeps failing.
+- **No key needed.** Market data comes from Gemini Exchange's public endpoints. `GEMINI_EXCHANGE_API_KEY` is only for `exchange.py` (placing orders), which the analysis never uses.
+- **Checked against the real API on 2026-11-18 (19:05 ET).** Two field names differed from the docs and are fixed: contract `description` is a rich-text document, not a string, and the event-level terms link is `termsLink`. `tests/live_okc_event_2026-11-18.json` is a trimmed copy of that real response, used as a regression test. (The prediction-market endpoints returned HTTP 500 for several hours earlier that day, so retry if you see that.)
 
 ## Exchange actions (guarded)
 
@@ -135,7 +136,7 @@ All five rows reproduce the workbook's totals.
 
 ## What still needs live data
 
-- **Gemini Exchange API:** the prediction-market endpoints returned HTTP 500 on 2026-11-18 (see Live mode). Nobody has completed a live call yet, so `verity/live.py`'s field names still need checking against one real response.
+- **Live OKC result (2026-11-18, terms not read):** Ambiguity 2, Source 1, Liquidity 1 ($1,392 volume, 1¢ spread), Correlation 3, total 7, Medium, `investigate`, no purchase. The live event has 5 sibling events (spread, totals, 3 player props), so Correlation is 3, not the workbook's 1. With the terms PDF read (`pypdf`), Ambiguity should drop to 1 and the total to 6, Low.
 - **NYC free check:** done on 2026-11-18 as scenario `observed-2026-11-18` in `free_checks.json`, which the demo now uses. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later corrections don't count. The rule text is missing a word, though, and NWS publishes a same-day partial CLINYC (valid to 4 PM) before the full-day report, so whether that partial report counts is still unstated. The result is `inconclusive` and the 0.05 USDC proposal still stands, now labeled `OBSERVED`. The two `free-check-*` scenarios remain as labeled fixture assumptions. The terms PDF URL was inferred but resolves.
 - **NYC expiry:** the terms set expiry at the first 11:00 PM ET after the data are available. That is later than the fixture's `2026-11-19T04:59:00Z` from the API, which is probably the trading close. Confirm against a live response.
 - **Snapshot time:** the workbook stores only the date (2026-11-17). Live reads should store the UTC time.
