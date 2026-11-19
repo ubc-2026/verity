@@ -49,14 +49,14 @@ QuickNode reconciliation is **not claimed** for Gateway purchases. Gateway settl
 
 ## What the mock checks, and what the live run showed
 
-The fixture `MockGatewayProvider` (`scripts/e2e/mockGateway.ts`) checks the signature under the GatewayWalletBatched domain, requirements against the authorization, the 7-day minimum, a Gateway balance, and nonce reuse. It could not confirm four assumptions. The LIVE run on 2026-11-19 (below) settled three of them:
+The fixture `MockGatewayProvider` (`scripts/e2e/mockGateway.ts`) checks the signature under the GatewayWalletBatched domain, requirements against the authorization, the 7-day minimum, a Gateway balance, and nonce reuse. It could not confirm four assumptions. The LIVE run on 2026-11-19 (below) confirmed all four:
 
 | # | Assumption | LIVE result (2026-11-19) |
 | --- | --- | --- |
 | 1 | Gateway accepts Verity's derived nonce (the SDK normally uses a random one) | **Confirmed.** `verify` returned `isValid: true` and `settle` returned `success: true` for nonce `0xa532…cee2`. |
 | 2 | What `settle().transaction` contains | **Circle's transfer UUID** (`018a216c-72ff-454b-94b1-9bfbdf637f2d`), the same value as the transfer `id`. It is not an onchain tx hash. Verity already stores it as an opaque reference. |
 | 3 | `searchTransfers({ nonce })` finds the transfer right after `settle()` | **Confirmed.** The first lookup, 1 s after settle, found it (status `received`). The merchant answered `200` on the first request; the `202` retry path was not needed. |
-| 4 | The transfer record exposes `txHash` for the batch | **Still open.** The transfer stayed `received` with `txHash: null` for the 4-minute poll window. Run `npm run arc:gateway -- refresh` later to record the batch status and tx. |
+| 4 | The transfer record exposes `txHash` for the batch | **Confirmed.** `received` with `txHash: null` for the first 4 minutes; about 10 minutes after settle, `refresh` saw `completed` with batch tx `0x3b31471543ae1a1bd08cdff377c57b9586c1c8ae7bd759703b5a1c3ebcaebd82`. |
 
 ## Live run (Arc Testnet, LIVE)
 
@@ -86,7 +86,8 @@ What is LIVE and what is FIXTURE in `pay`:
 | Circle transfer (`paymentRef`) | `018a216c-72ff-454b-94b1-9bfbdf637f2d` |
 | Delivery | `200` on the first paid request; DeliveryReceiptV2 and body hash verified by the buyer; ledger `accepted_by_gateway` |
 | Payer Gateway balance | 0.01 to 0.009 USDC available |
-| Batch settlement | `received`, no batch tx yet after 4 minutes (`pending_batch`) |
+| Batch settlement | `completed`, batch tx `0x3b31471543ae1a1bd08cdff377c57b9586c1c8ae7bd759703b5a1c3ebcaebd82`. Buyer ledger `batch_settled`, reservation `spent`; merchant record `completed` with the same tx (`samples/arc-gateway-live-refresh.json`). |
+| Seller Gateway balance | 0 to 0.001 USDC available after the batch |
 | QuickNode | `not_claimed` (unchanged policy) |
 
 Two earlier attempts in the same session were refused before any money moved, and both stay as safeguards. The buyer rejected an unlisted merchant ID, then a `payTo` that disagreed with the catalog.
