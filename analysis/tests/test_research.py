@@ -33,15 +33,33 @@ def _nyc(pages, **overrides):
     return ctx, get_risk_analysis(NYC, ctx)
 
 
+def _with_high_rating(ra):
+    """Spend-control tests: buys require High; NYC fixture is Medium by default."""
+    return ra.model_copy(update={
+        "rating": ra.rating.model_copy(update={
+            "final_rating": "High", "raw_rating": "High", "raw_total": 9, "complete": True,
+        }),
+        "research_action": "flag_for_human_review",
+    })
+
+
 def test_named_issuance_requires_an_explicit_phrase():
     assert named_issuance(NAMED)
     assert named_issuance(UNNAMED) is None
 
 
+def test_medium_rating_does_not_propose_even_when_gap_is_open():
+    ctx, ra = _nyc({TERMS: (UNNAMED, None), NWS_CLINYC_URL: (REPORT, None)})
+    assert ra.rating.final_rating == "Medium"
+    log = []
+    assert generate_purchase_request(ra, ctx, log) is None
+    assert any("limited to High-risk markets" in line for line in log)
+
+
 def test_free_read_resolves_the_gap_and_proposes_nothing():
     ctx, ra = _nyc({TERMS: (NAMED, None), NWS_CLINYC_URL: (REPORT, None)})
     log = []
-    assert generate_purchase_request(ra, ctx, log) is None
+    assert generate_purchase_request(_with_high_rating(ra), ctx, log) is None
     assert any("free research resolved" in line for line in log)
     assert any(TERMS in line and NWS_CLINYC_URL in line for line in log)
     assert any("final issuance" in line for line in log)
@@ -50,7 +68,7 @@ def test_free_read_resolves_the_gap_and_proposes_nothing():
 def test_inconclusive_read_proposes_the_existing_unsigned_item():
     ctx, ra = _nyc({TERMS: (UNNAMED, None), NWS_CLINYC_URL: (REPORT, None)})
     log = []
-    proposal = generate_purchase_request(ra, ctx, log)
+    proposal = generate_purchase_request(_with_high_rating(ra), ctx, log)
     assert isinstance(proposal, PurchaseProposalV1)
     assert proposal.catalog_item_id == "cat-nws-cli-settlement-version-v1"
     assert proposal.max_amount_base_units == "50000" and proposal.signed is False
@@ -70,7 +88,7 @@ def test_missing_catalog_match_proposes_nothing():
         why="The description and the terms name different agencies.",
         free_checks=["okc-source-list"],
     )
-    ra = ra.model_copy(update={"evidence_gaps": [gap]})
+    ra = _with_high_rating(ra.model_copy(update={"evidence_gaps": [gap]}))
     log = []
     assert generate_purchase_request(ra, ctx, log) is None
     assert any("not_configured" in line for line in log)
@@ -82,7 +100,7 @@ def test_missing_catalog_match_proposes_nothing():
 def test_unreadable_source_does_not_propose():
     ctx, ra = _nyc({TERMS: (None, "fetch failed: HTTPError"), NWS_CLINYC_URL: (REPORT, None)})
     log = []
-    assert generate_purchase_request(ra, ctx, log) is None
+    assert generate_purchase_request(_with_high_rating(ra), ctx, log) is None
     assert any("free research failed" in line for line in log)
     assert any("gap was not validated" in line for line in log)
 
@@ -123,7 +141,7 @@ def test_midway_free_check_inconclusive_proposes_nws_catalog_item():
     })
     ctx.markets[ra.contract_id] = {**ctx.markets[ra.contract_id], "terms_url": TERMS}
     log = []
-    proposal = generate_purchase_request(ra, ctx, log)
+    proposal = generate_purchase_request(_with_high_rating(ra), ctx, log)
     assert isinstance(proposal, PurchaseProposalV1)
     assert proposal.catalog_item_id == "cat-midway-vs-title-station-pack-v1"
     assert proposal.catalog_parameters.get("station") == "Chicago-Midway, IL (CLIMDW)"
@@ -162,7 +180,7 @@ def test_model_unresolved_quote_proposes_the_existing_item():
 
     ctx.complete_json = lambda system, user, schema: answer(system, user, schema)
     log = []
-    proposal = generate_purchase_request(ra, ctx, log)
+    proposal = generate_purchase_request(_with_high_rating(ra), ctx, log)
     assert isinstance(proposal, PurchaseProposalV1)
     assert proposal.catalog_item_id == "cat-nws-cli-settlement-version-v1"
     assert proposal.max_amount_base_units == "50000" and proposal.signed is False
@@ -181,12 +199,12 @@ def test_model_resolved_quote_proposes_nothing():
         "sources": [],
         "excerpts": [quote[:48]],
     }
-    assert generate_purchase_request(ra, ctx, []) is None
+    assert generate_purchase_request(_with_high_rating(ra), ctx, []) is None
 
 
 def test_invented_excerpt_or_url_or_bad_json_proposes_nothing():
     ctx = _model_ctx(None)
-    ra = get_risk_analysis(NYC, ctx)
+    ra = _with_high_rating(get_risk_analysis(NYC, ctx))
     for bad in (
         {"resolved": False, "conclusion": "x", "reasoning": "y", "sources": [], "excerpts": ["not in the documents"]},
         {"resolved": False, "conclusion": "x", "reasoning": "y", "sources": ["https://example.com/not-fetched"], "excerpts": []},
@@ -212,7 +230,7 @@ def test_model_without_a_catalog_match_proposes_nothing():
         why="The description and the terms name different agencies.",
         free_checks=[],
     )
-    ra = ra.model_copy(update={"evidence_gaps": [gap]})
+    ra = _with_high_rating(ra.model_copy(update={"evidence_gaps": [gap]}))
     ctx.complete_json = lambda system, user, schema: {
         "resolved": False,
         "conclusion": "The two lists disagree.",
@@ -231,7 +249,7 @@ def test_fixture_scenario_wins_over_the_model():
         free_check_scenario="free-check-inconclusive",
         complete_json=lambda system, user, schema: called.append(1),
     )
-    proposal = generate_purchase_request(get_risk_analysis(NYC, ctx), ctx, [])
+    proposal = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, ctx)), ctx, [])
     assert called == []
     assert proposal is not None and proposal.catalog_item_id == "cat-nws-cli-settlement-version-v1"
 
@@ -248,10 +266,10 @@ def test_sports_terms_inconclusive_proposes_sports_catalog_item():
 
     ctx, ra = _nyc({TERMS: (sports_terms, None)})
     gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
-    ra = ra.model_copy(update={
+    ra = _with_high_rating(ra.model_copy(update={
         "event_ticker": "NBA-2611190230-BOS-DEN-S",
         "evidence_gaps": [gap.model_copy(update={"free_checks": [SPORTS_CHECK]})],
-    })
+    }))
     ctx.markets[ra.contract_id] = {**ctx.markets[ra.contract_id], "terms_url": TERMS}
     log = []
     proposal = generate_purchase_request(ra, ctx, log)

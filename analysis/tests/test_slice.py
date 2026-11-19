@@ -14,6 +14,15 @@ def ctx(**kw):
     return FixtureContext.default(**kw)
 
 
+def _with_high_rating(ra):
+    return ra.model_copy(update={
+        "rating": ra.rating.model_copy(update={
+            "final_rating": "High", "raw_rating": "High", "raw_total": 9, "complete": True,
+        }),
+        "research_action": "flag_for_human_review",
+    })
+
+
 # --- scoring -------------------------------------------------------------
 
 def test_bands():
@@ -83,7 +92,11 @@ def test_okc_low_and_no_purchase():
     assert ra.research_action == "no_further_research"
     log = []
     assert generate_purchase_request(ra, c, log) is None
-    assert any("no material resolution gap" in l for l in log)
+    assert any("limited to High-risk markets" in l for l in log)
+    # Even if forced High, OKC has no material resolution gap to buy for.
+    log2 = []
+    assert generate_purchase_request(_with_high_rating(ra), c, log2) is None
+    assert any("no material resolution gap" in l for l in log2)
 
 
 def test_price_is_separate_from_risk():
@@ -104,14 +117,23 @@ def test_nyc_medium_with_liquidity_note():
 def test_nyc_free_check_answers_means_no_purchase():
     c = ctx(free_check_scenario="free-check-answers")
     log = []
-    assert generate_purchase_request(get_risk_analysis(NYC, c), c, log) is None
+    assert generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c, log) is None
     assert any("free official-source check" in l for l in log)
     assert any("GAP-NYC-FORECAST" in l and "not settlement risk" in l for l in log)
 
 
+def test_nyc_medium_does_not_propose_research_buy():
+    c = ctx(free_check_scenario="free-check-inconclusive")
+    ra = get_risk_analysis(NYC, c)
+    assert ra.rating.final_rating == "Medium"
+    log = []
+    assert generate_purchase_request(ra, c, log) is None
+    assert any("limited to High-risk markets" in line for line in log)
+
+
 def test_nyc_gap_remains_proposes_005_usdc_unsigned():
     c = ctx(free_check_scenario="free-check-inconclusive")
-    p = generate_purchase_request(get_risk_analysis(NYC, c), c)
+    p = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c)
     assert isinstance(p, PurchaseProposalV1)
     assert p.max_amount_base_units == "50000" and p.signed is False
     assert p.evidence_gap_id == "GAP-NYC-SETTLE"
@@ -121,7 +143,7 @@ def test_nyc_gap_remains_proposes_005_usdc_unsigned():
 
 def test_forecast_item_is_never_proposed():
     c = ctx(free_check_scenario="free-check-inconclusive")
-    p = generate_purchase_request(get_risk_analysis(NYC, c), c)
+    p = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c)
     assert p.catalog_item_id != "cat-point-forecast-v1"
 
 
@@ -174,7 +196,7 @@ def test_snapshot_hash_is_stable():
 def test_nyc_observed_check_is_inconclusive_and_labeled_observed():
     c = ctx(free_check_scenario="observed-2026-11-18")
     log = []
-    p = generate_purchase_request(get_risk_analysis(NYC, c), c, log)
+    p = generate_purchase_request(_with_high_rating(get_risk_analysis(NYC, c)), c, log)
     assert p is not None and p.catalog_item_id == "cat-nws-cli-settlement-version-v1"
     assert p.fixture_label.startswith("OBSERVED") and "FIXTURE" not in p.fixture_label
     assert any("first published version" in l for l in log)

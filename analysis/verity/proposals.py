@@ -3,7 +3,8 @@
 Gates, in order (every rejection is logged with its reason):
   1. The analysis has a confirmed ticker (unconfirmed markets cannot be bought for).
   2. The market is at least 1 hour from expiry on the fixture clock (Agent rule 11).
-  3. Per material gap that affects *resolution* risk:
+  3. The rating is High (spend control: Low/Medium and incomplete ratings do not buy).
+  4. Per material gap that affects *resolution* risk:
        a. no cached evidence already answers it,
        b. the free official-source check does not answer it,
        c. an allowlisted catalog item answers that gap type.
@@ -177,6 +178,14 @@ def generate_purchase_request(
     left = parse_utc(ra.expiry_utc) - now
     if left < MIN_TIME_TO_EXPIRY:
         _record(decision_log, f"[{ra.contract_id}] no purchase: {left} to expiry is under 1h (Agent rule 11).")
+        return None
+
+    if ra.rating.final_rating != "High":
+        label = ra.rating.final_rating or "incomplete"
+        _record(
+            decision_log,
+            f"[{ra.contract_id}] no purchase: rating is {label}; research buys are limited to High-risk markets.",
+        )
         return None
 
     material = [g for g in ra.evidence_gaps if g.material and g.affects == "resolution_risk"]

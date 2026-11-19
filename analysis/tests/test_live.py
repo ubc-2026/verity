@@ -103,7 +103,7 @@ def test_analyze_live_end_to_end_with_fakes():
 
     log = []
     assert generate_purchase_request(ra, ctx, log) is None
-    assert any("no material resolution gap" in line for line in log)
+    assert any("limited to High-risk markets" in line for line in log)
 
 
 def test_real_okc_response_shape_is_parsed():
