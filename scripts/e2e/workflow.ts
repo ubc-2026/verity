@@ -66,14 +66,14 @@ export function findPython(analysisDir: string): string {
   throw new Error("No Python 3.11+ with pydantic found. Set VERITY_PYTHON or create analysis/.venv (see analysis/README.md).");
 }
 
-interface AnalyzeOutput {
+export interface AnalyzeOutput {
   research: Record<string, unknown> & { coverage: { status: string }; price_trend: { status: string } };
   risk_analysis: RiskAnalysis;
   purchase_proposal: (Record<string, unknown> & { contract_id: string; evidence_gap_id: string; catalog_item_id: string; evidence_type: string; max_amount_base_units: string; proposal_id: string }) | null;
   no_purchase_reason: string | null;
   decision_log: string[];
 }
-interface RiskAnalysis {
+export interface RiskAnalysis {
   contract_id: string;
   rating: { final_rating: string | null; raw_total: number | null };
   research_action: string;
@@ -81,7 +81,7 @@ interface RiskAnalysis {
   evidence_gaps: { id: string; material: boolean; affects: string }[];
   citations: { id: string }[];
 }
-interface Reassessment {
+export interface Reassessment {
   status: "revised" | "unchanged" | "evidence_rejected";
   reason: string;
   revised: RiskAnalysis;
@@ -89,7 +89,7 @@ interface Reassessment {
   evidence_citation: { id: string; source: string; quote: string } | null;
 }
 
-class Analyst {
+export class Analyst {
   readonly python: string;
   readonly dir: string;
   constructor(python: string, dir: string) {
@@ -106,8 +106,12 @@ class Analyst {
     });
     return JSON.parse(out);
   }
-  analyze(contract: string, scenario?: string): AnalyzeOutput {
-    return this.#run(["analyze", "--contract", contract, ...(scenario ? ["--free-check-scenario", scenario] : [])]) as AnalyzeOutput;
+  analyze(contract: string, scenario?: string, rail?: "arc-eip3009" | "circle-gateway-batched"): AnalyzeOutput {
+    return this.#run([
+      "analyze", "--contract", contract,
+      ...(scenario ? ["--free-check-scenario", scenario] : []),
+      ...(rail ? ["--rail", rail] : []),
+    ]) as AnalyzeOutput;
   }
   reassess(riskAnalysis: RiskAnalysis, body: Uint8Array, provenance: Record<string, string>): Reassessment {
     const input = JSON.stringify({ risk_analysis: riskAnalysis, body_b64: Buffer.from(body).toString("base64"), provenance });
@@ -341,7 +345,7 @@ function provenance(proposal: NonNullable<AnalyzeOutput["purchase_proposal"]>, r
   };
 }
 
-const summaryOf = (ra: RiskAnalysis) => ({
+export const summaryOf = (ra: RiskAnalysis) => ({
   final_rating: ra.rating.final_rating,
   raw_total: ra.rating.raw_total,
   research_action: ra.research_action,

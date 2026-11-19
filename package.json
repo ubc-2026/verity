@@ -13,7 +13,8 @@
     "quicknode:token": "node scripts/quicknode-token.ts",
     "webhook:serve": "node scripts/webhook-server.ts",
     "delivery:demo": "node scripts/delivery-demo.ts",
-    "e2e": "node scripts/e2e.ts"
+    "e2e": "node scripts/e2e.ts",
+    "e2e:nano": "node scripts/e2e-nano.ts"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,10 @@
   },
   "homepage": "https://github.com/ubc-2026/verity#readme",
   "dependencies": {
+    "@circle-fin/x402-batching": "4.0.0",
     "@humanwhocodes/momoa": "^3.3.13",
+    "@x402/core": "2.31.0",
+    "@x402/evm": "2.31.0",
     "canonicalize": "^5.1.0",
     "viem": "^2.57.13",
     "zod": "^4.6.7"

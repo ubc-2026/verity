@@ -1,6 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 import type { Hex } from "viem";
-import { APPROVAL_MAX, AUTO_MAX, AUTO_MIN, GAP_MAX, MISSION_BUDGET, verifyOwnerApproval } from "./policy.ts";
+import type { PaymentRail } from "./circleGateway.ts";
+import { APPROVAL_MAX, AUTO_MAX, AUTO_MIN, GAP_MAX, MISSION_BUDGET, NANOPAYMENT_POLICY, verifyOwnerApproval } from "./policy.ts";
 import {
   commitResearchRequest,
   computeRequestHash,
@@ -52,6 +53,8 @@ export interface StoredAuthorization {
   signature: Hex | null;
   status: AuthorizationStatus;
   txHash: Hex | null;
+  /** Rail recorded with the reservation; it fixes the signing domain for every retry. */
+  rail: PaymentRail;
 }
 
 export class PolicyError extends Error {
@@ -80,6 +83,10 @@ CREATE TABLE IF NOT EXISTS reservations (
   amount      TEXT NOT NULL,
   status      TEXT NOT NULL CHECK (status IN ('held', 'spent', 'released')),
   updated_at  INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS purchase_rails (
+  purchase_id TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
+  rail        TEXT NOT NULL CHECK (rail IN ('arc-eip3009', 'circle-gateway-batched'))
 ) STRICT;
 CREATE TABLE IF NOT EXISTS owner_approvals (
   purchase_id  TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
@@ -147,7 +154,9 @@ export class PaymentStore {
   get(purchaseId: string): StoredAuthorization | undefined {
     const row = this.#db
       .prepare(
-        `SELECT a.*, p.mission_id FROM authorizations a JOIN purchases p USING (purchase_id) WHERE purchase_id = ?`,
+        `SELECT a.*, p.mission_id, COALESCE(r.rail, 'arc-eip3009') AS rail
+         FROM authorizations a JOIN purchases p USING (purchase_id) LEFT JOIN purchase_rails r USING (purchase_id)
+         WHERE purchase_id = ?`,
       )
       .get(purchaseId) as Row | undefined;
     return row ? toStored(row) : undefined;
@@ -179,6 +188,8 @@ export class PaymentStore {
     now: number;
     /** True only when the analyst left a material resolution gap with no free or cached evidence. */
     materialUnresolvedGap?: boolean;
+    /** Defaults to the direct EIP-3009 rail. The Gateway rail uses the explicit nanopayment policy. */
+    rail?: PaymentRail;
     saltSource?: () => Hex;
   }): { record: StoredAuthorization; reused: boolean } {
     const { missionId, request, now } = input;
@@ -197,9 +208,17 @@ export class PaymentStore {
 
       const amount = BigInt(request.amount);
       const policy = this.#policy;
-      if (amount < policy.minAmount) throw new PolicyError("amount below policy minimum");
+      const rail: PaymentRail = input.rail ?? "arc-eip3009";
+      if (rail === "circle-gateway-batched") {
+        if (amount < NANOPAYMENT_POLICY.minAmount || amount > NANOPAYMENT_POLICY.maxAmount) {
+          throw new PolicyError("nanopayments are limited to 0.001 USDC per purchase");
+        }
+        if (input.materialUnresolvedGap !== true) {
+          throw new PolicyError("nanopayments require a material unresolved gap with no free or cached evidence");
+        }
+      } else if (amount < policy.minAmount) throw new PolicyError("amount below policy minimum");
       if (amount > policy.purchaseCap) throw new PolicyError("amount above purchase cap");
-      if (amount > policy.autoApproveMax && amount <= policy.gapMax && input.materialUnresolvedGap !== true) {
+      if (rail === "arc-eip3009" && amount > policy.autoApproveMax && amount <= policy.gapMax && input.materialUnresolvedGap !== true) {
         throw new PolicyError("this tier requires a material unresolved gap with no free or cached evidence");
       }
       if (this.committedSpend(missionId) + amount > policy.missionBudget) {
@@ -251,6 +270,7 @@ export class PaymentStore {
           initialStatus,
           now,
         );
+      this.#db.prepare(`INSERT INTO purchase_rails (purchase_id, rail) VALUES (?, ?)`).run(request.purchaseId, rail);
       return { record: this.get(request.purchaseId)!, reused: false };
     });
   }
@@ -331,5 +351,6 @@ function toStored(row: Row): StoredAuthorization {
     signature: (row.signature as Hex | null) ?? null,
     status: row.status as AuthorizationStatus,
     txHash: (row.tx_hash as Hex | null) ?? null,
+    rail: row.rail as PaymentRail,
   };
 }
