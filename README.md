@@ -48,6 +48,20 @@ The backend links the onchain transaction to the purchase record using the payme
 | Different amount, recipient, or content digest | Mismatch |
 | A second transfer for the same purchase | Duplicate payment |
 
+### Overdue delivery incidents (Grok Bot)
+
+When a confirmed payment reaches its delivery deadline with no verified delivery (`Paid, delivery missing`), the ledger is planned to POST a `verity.overdue_delivery.v1` event to a Grok Bot webhook routine. Grok Bot treats the event only as a prompt to look. It rereads the purchase from a read-only ledger endpoint and opens at most one card per `environment:purchaseId:exceptionType` key on a private incident Page. It writes nothing back to Verity.
+
+- **Authentication.** The webhook checks a static bearer key. It does not sign the body or check a timestamp, so the event proves only that the sender holds the key. The URL and key stay in the sender's runtime secrets, never in this repository.
+- **Replays.** A replayed, retried, or forged event cannot open a card unless the latest ledger record still shows the overdue payment. Repeats update the existing card instead of adding one.
+- **Fixture and live data.** Fixture events use `environment: "fixture"`, are checked against a fixture ledger in the Grok Bot runtime, and produce cards labeled `FIXTURE`. Live events use `arc-testnet` and the real ledger endpoint.
+
+Status: the routine is fixture-tested in the Grok Bot runtime, which is outside this repository. The Verity side (the overdue event and the read-only `GET /purchases/{purchaseId}` feed) is built in `src/alerts/` and checked against a contract model of the routine in `npm run e2e`. Neither is deployed, and no live event has been sent. Field contract and wiring steps: [Overdue delivery incidents](docs/grok-bot/overdue-delivery-incidents.md).
+
+## Connected fixture workflow
+
+`npm run e2e` runs one market from research through risk analysis, an evidence purchase, and the updated assessment. Settlement is stubbed and nothing leaves the machine. Commands, scenarios, and what is fixture versus live: [Connected fixture workflow](docs/integration.md).
+
 ## Demo plan
 
 1. Open a prediction-market contract and highlight a specific ambiguity in its resolution rules.

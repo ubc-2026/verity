@@ -1,0 +1,20 @@
+{
+  "note": "Coverage samples per contract. CAPTURED entries are real Exa search results recorded once through the Exa connector on 2026-11-18 and stored here; the repository's own Exa client did not make that call. Contracts not listed have no coverage sample, and the research output says so.",
+  "contracts": {
+    "fx-nyc-high-20261118": {
+      "data_label": "CAPTURED",
+      "captured_utc": "2026-11-18T04:02:50Z",
+      "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+      "results": [
+        {"title": "NYC weather check: no NWS alerts, sunny forecast through Nov. 18, 2026", "url": "https://how2newyork.com/nyc-storm-weather-rain-forecast-november-2026/", "published_utc": "2026-11-12T13:50:25Z"},
+        {"title": "New York City wind and rain make way for a cool and cloudy weekend", "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend", "published_utc": "2026-11-13T13:05:00Z"},
+        {"title": "Cold, rainy weather in NYC continues before drying out for the weekend", "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/", "published_utc": "2026-11-13T18:01:28Z"},
+        {"title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead", "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/", "published_utc": "2026-11-15T21:18:27Z"},
+        {"title": "NYC weather: Rain, thunderstorms expected before cooler, drier weekend", "url": "https://www.silive.com/weather/2026/11/nyc-weather-rain-thunderstorms-expected-before-cooler-drier-weekend.html", "published_utc": "2026-11-12T22:28:31Z"},
+        {"title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48", "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11", "published_utc": "2026-11-10T14:11:56Z"},
+        {"title": "Rain Thursday and Friday, Then a Cooler, Clearer Weekend in NYC and NJ", "url": "https://dailybaonews.lovable.app/news/nyc-nj-weekend-weather-rain-then-cooler-nov13-15-2026", "published_utc": null},
+        {"title": "Central Park, NY Monthly Weather", "url": "https://www.accuweather.com/en/us/central-park/10028/november-weather/2627448", "published_utc": null}
+      ]
+    }
+  }
+}

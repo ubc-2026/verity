@@ -1,0 +1,175 @@
+{
+  "fixture_set": "workbook-2026-11-17",
+  "workbook": "Prediction market risk analysis (Markets, Framework, Agent rules), revision 5",
+  "note": "Prices were captured on 2026-11-17 (US Eastern). The workbook records the date only, so snapshot_time_utc is null. Rule text below paraphrases the Gemini API description fields as captured; the terms PDFs were not fetched.",
+  "markets": [
+    {
+      "contract_id": "fx-okc-moneyline-20261118",
+      "workbook_row": 2,
+      "source": {
+        "mode": "fixture",
+        "label": "Gemini Exchange public events list, captured via the workbook",
+        "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "snapshot_date": "2026-11-17",
+        "snapshot_time_utc": null
+      },
+      "event_ticker": "NBA-2611190100-ATL-OKC-M",
+      "ticker_status": "confirmed",
+      "instrument_symbol": null,
+      "question": "Atlanta vs Oklahoma City, NBA moneyline (game Nov 18, 2026, 8:00 PM ET): will Oklahoma City win?",
+      "outcome_label": "Oklahoma City",
+      "expiry_utc": "2026-11-20T13:00:00Z",
+      "market": {"best_bid": "0.69", "best_ask": "0.70", "volume_usd": "1071", "volume_basis": "total", "some_strikes_unquoted": false},
+      "settlement_source": "League governing body, then ESPN, Fox Sports, and the broadcast partner",
+      "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "event_terms_url_present": true,
+      "rules_excerpts": [
+        {"id": "C-OKC-1", "field_or_rule": "event.description (paraphrased)", "quote": "Moneyline for the game scheduled Nov 18, 2026 at 8:00 PM ET; pays Yes if the named team wins."},
+        {"id": "C-OKC-2", "field_or_rule": "sourceDetails / contract rules (paraphrased)", "quote": "Sources in order: the league governing body, ESPN, Fox Sports, and the broadcast partner."},
+        {"id": "C-OKC-3", "field_or_rule": "contracts[OKC].prices", "quote": "bestBid 0.69, bestAsk 0.70; event volume 1071"}
+      ],
+      "sibling_events": [],
+      "analyst": {
+        "ambiguity": {"score": 1, "rationale": "Binary win/lose outcome tied to a scheduled game.", "citation_ids": ["C-OKC-1"]},
+        "source": {"score": 1, "rationale": "Official league result with named fallbacks.", "citation_ids": ["C-OKC-2"]},
+        "correlation": {"score": 1, "rationale": "No sibling markets captured; injury news moves the odds but not how the contract settles.", "citation_ids": []}
+      },
+      "evidence_gaps": [],
+      "workbook": {"scores": {"ambiguity": 1, "source": 1, "liquidity": 1, "correlation": 1}, "total": 4, "rating": "Low", "action": "Proceed"}
+    },
+    {
+      "contract_id": "fx-nyc-high-20261118",
+      "workbook_row": 3,
+      "source": {
+        "mode": "fixture",
+        "label": "Gemini Exchange public events list, captured via the workbook",
+        "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "snapshot_date": "2026-11-17",
+        "snapshot_time_utc": null
+      },
+      "event_ticker": "WXHIGH-NYC-2611190459",
+      "ticker_status": "confirmed",
+      "instrument_symbol": null,
+      "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+      "outcome_label": "62°F to 63°F",
+      "expiry_utc": "2026-11-19T04:59:00Z",
+      "market": {"best_bid": "0.54", "best_ask": "0.58", "volume_usd": "7", "volume_basis": "total", "some_strikes_unquoted": true},
+      "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+      "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+      "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+      "event_terms_url_present": false,
+      "rules_excerpts": [
+        {"id": "C-NYC-1", "field_or_rule": "event.description (paraphrased)", "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."},
+        {"id": "C-NYC-2", "field_or_rule": "event.termsAndConditionsUrl", "quote": "(empty)"},
+        {"id": "C-NYC-4", "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf", "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18", "quote": "only the first published version that includes confirmation of the will be used"},
+        {"id": "C-NYC-5", "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf", "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)", "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."},
+        {"id": "C-NYC-3", "field_or_rule": "contracts[62-63F].prices", "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"}
+      ],
+      "sibling_events": [],
+      "analyst": {
+        "ambiguity": {"score": 2, "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.", "citation_ids": ["C-NYC-1", "C-NYC-2"]},
+        "source": {"score": 2, "rationale": "Official NWS source, but the daily climate report can be issued preliminarily and corrected later (Agent rule 9).", "citation_ids": ["C-NYC-1"]},
+        "correlation": {"score": 1, "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.", "citation_ids": []}
+      },
+      "evidence_gaps": [
+        {
+          "id": "GAP-NYC-SETTLE",
+          "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+          "gap_type": "settlement_source_version",
+          "affects": "resolution_risk",
+          "material": true,
+          "why": "If a correction moves the max across a 2°F band edge, the version used decides the outcome.",
+          "free_checks": ["nyc-settlement-version"]
+        },
+        {
+          "id": "GAP-NYC-FORECAST",
+          "question": "What maximum temperature is likely at Central Park on Nov 18?",
+          "gap_type": "outcome_forecast",
+          "affects": "outcome_probability",
+          "material": false,
+          "why": "A forecast changes the estimated chance of the event, not the risk of how the contract settles. Verity is research-only and places no trades.",
+          "free_checks": []
+        }
+      ],
+      "workbook": {"scores": {"ambiguity": 2, "source": 2, "liquidity": 3, "correlation": 1}, "total": 8, "rating": "Medium", "action": "Investigate"}
+    },
+    {
+      "contract_id": "fx-msu-spread-20261117",
+      "workbook_row": 4,
+      "source": {"mode": "fixture", "label": "Gemini Exchange public events list, captured via the workbook", "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100", "snapshot_date": "2026-11-17", "snapshot_time_utc": null},
+      "event_ticker": "NCAAM-2611180200-MSU-TENN-S",
+      "ticker_status": "confirmed",
+      "instrument_symbol": "GEMI-NCAAM-2611180200-MSU-TENN-S-MSU1",
+      "question": "Michigan State vs Tennessee point spread: MSU wins by more than 1.5?",
+      "outcome_label": "MSU wins by >1.5",
+      "expiry_utc": "2026-11-20T02:00:00Z",
+      "market": {"best_bid": "0.51", "best_ask": "0.54", "volume_usd": "857.53", "volume_basis": "total", "some_strikes_unquoted": true},
+      "settlement_source": "NCAA, then ESPN, Fox Sports, and the broadcast partner",
+      "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "event_terms_url_present": true,
+      "rules_excerpts": [
+        {"id": "C-MSU-1", "field_or_rule": "event.description (paraphrased)", "quote": "Pays Yes if the named team's margin of victory exceeds the stated number of points, based on the final score differential."}
+      ],
+      "sibling_events": ["NCAAM-2611180200-MSU-TENN-M", "NCAAM-2611180200-MSU-TENN-T"],
+      "analyst": {
+        "ambiguity": {"score": 1, "rationale": "Margin from the final score.", "citation_ids": ["C-MSU-1"]},
+        "source": {"score": 1, "rationale": "Official league source with fallbacks.", "citation_ids": ["C-MSU-1"]},
+        "correlation": {"score": 3, "rationale": "Moneyline and totals on the same game are sibling events (Agent rule 7).", "citation_ids": []}
+      },
+      "evidence_gaps": [],
+      "workbook": {"scores": {"ambiguity": 1, "source": 1, "liquidity": 2, "correlation": 3}, "total": 7, "rating": "Medium", "action": "Proceed, small size"}
+    },
+    {
+      "contract_id": "fx-fed-dec-hike25-2026",
+      "workbook_row": 5,
+      "source": {"mode": "fixture", "label": "CoinRithm aggregator quoting Gemini", "url": "https://www.coinrithm.com/en/prediction-markets/gemini/fed-decision-in-december", "snapshot_date": "2026-11-15", "snapshot_time_utc": null},
+      "event_ticker": null,
+      "ticker_status": "missing",
+      "instrument_symbol": null,
+      "question": "Fed decision in December? Hike 25bps",
+      "outcome_label": "Hike 25bps",
+      "expiry_utc": "2026-12-11T05:00:00Z",
+      "market": {"best_bid": null, "best_ask": null, "volume_usd": "20", "volume_basis": "24h", "some_strikes_unquoted": false, "reported_probability": "0.824", "reported_spread_points": "7"},
+      "settlement_source": "Federal Reserve FOMC decision",
+      "terms_url": null,
+      "event_terms_url_present": false,
+      "rules_excerpts": [
+        {"id": "C-FED-1", "field_or_rule": "rules as quoted by CoinRithm", "quote": "If the Federal Reserve increases rates by 25bps on December 9, 2026, then the market resolves to Yes."}
+      ],
+      "sibling_events": [],
+      "analyst": {
+        "ambiguity": {"score": 1, "rationale": "Named meeting, named outcome, cancellation rule stated.", "citation_ids": ["C-FED-1"]},
+        "source": {"score": 1, "rationale": "Federal Reserve is the source.", "citation_ids": ["C-FED-1"]},
+        "correlation": {"score": 2, "rationale": "Driven by scheduled data and Fed speakers.", "citation_ids": []}
+      },
+      "evidence_gaps": [],
+      "workbook": {"scores": {"ambiguity": 1, "source": 1, "liquidity": 3, "correlation": 2}, "total": 7, "rating": "Medium", "action": "Investigate"}
+    },
+    {
+      "contract_id": "fx-best-ai-2026-gemini",
+      "workbook_row": 6,
+      "source": {"mode": "fixture", "label": "CoinRithm aggregator quoting Gemini (reported stale)", "url": "https://www.coinrithm.com/en/prediction-markets/gemini/best-ai-at-the-end-of-2026", "snapshot_date": "2026-11-16", "snapshot_time_utc": null},
+      "event_ticker": null,
+      "ticker_status": "missing",
+      "instrument_symbol": null,
+      "question": "Best AI at the end of 2026? Gemini (Google)",
+      "outcome_label": "Gemini (Google)",
+      "expiry_utc": "2027-01-01T04:59:00Z",
+      "market": {"best_bid": null, "best_ask": null, "volume_usd": "252", "volume_basis": "24h", "some_strikes_unquoted": false, "reported_spread_points": "5"},
+      "settlement_source": "LM Arena text leaderboard (Remove Style Controls)",
+      "terms_url": null,
+      "event_terms_url_present": false,
+      "rules_excerpts": [
+        {"id": "C-AI-1", "field_or_rule": "rules as quoted by CoinRithm", "quote": "If Google has the top-ranked LLM on Dec 31, 2026, then the market resolves to Yes. Outcome verified from LM Arena Leaderboard (Remove Style Controls)."}
+      ],
+      "sibling_events": [],
+      "analyst": {
+        "ambiguity": {"score": 3, "rationale": "Hinges on a leaderboard toggle and tie-breaks; no check time given.", "citation_ids": ["C-AI-1"]},
+        "source": {"score": 2, "rationale": "Third-party leaderboard; the workbook row scores 2 although the Framework describes this case as 3.", "citation_ids": ["C-AI-1"]},
+        "correlation": {"score": 3, "rationale": "One model launch can flip #1.", "citation_ids": []}
+      },
+      "evidence_gaps": [],
+      "workbook": {"scores": {"ambiguity": 3, "source": 2, "liquidity": 3, "correlation": 3}, "total": 11, "rating": "High", "action": "Flag as too risky"}
+    }
+  ]
+}

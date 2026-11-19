@@ -1,0 +1,39 @@
+{
+  "catalog_version": "verity-catalog-v1",
+  "merchant_allowlist": ["verity-demo-merchant"],
+  "items": [
+    {
+      "id": "cat-nws-cli-settlement-version-v1",
+      "evidence_type": "settlement_source_version",
+      "merchant_id": "verity-demo-merchant",
+      "title": "NWS daily climate report: settlement-version check",
+      "answers_gap_types": ["settlement_source_version"],
+      "affects": "resolution_risk",
+      "price_base_units": "50000",
+      "parameters": ["station", "date"],
+      "description": "Reports which issuance of the NWS CLI product (preliminary, final, correction) carries the official max temperature for a station and date, with issuance times, and quotes the exchange rule that names the version."
+    },
+    {
+      "id": "cat-point-forecast-v1",
+      "evidence_type": "outcome_forecast",
+      "merchant_id": "verity-demo-merchant",
+      "title": "Point temperature forecast",
+      "answers_gap_types": ["outcome_forecast"],
+      "affects": "outcome_probability",
+      "price_base_units": "20000",
+      "parameters": ["station", "date"],
+      "description": "Model forecast of the daily max. Changes the event probability, not the settlement risk."
+    },
+    {
+      "id": "cat-lm-arena-snapshot-v1",
+      "evidence_type": "leaderboard_snapshot",
+      "merchant_id": "verity-demo-merchant",
+      "title": "LM Arena leaderboard snapshot (style control off)",
+      "answers_gap_types": ["leaderboard_snapshot"],
+      "affects": "resolution_risk",
+      "price_base_units": "50000",
+      "parameters": ["board", "timestamp"],
+      "description": "Timestamped capture of the leaderboard view a contract settles on."
+    }
+  ]
+}
