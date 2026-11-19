@@ -1,0 +1,147 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ",
+    "event_ticker": "LIGAMX-2611210300-ATL-TIJ-M",
+    "instrument_symbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ",
+    "question": "Atlante vs Tijuana",
+    "expiry_utc": "2026-11-21T11:00:00.000Z",
+    "analyzed_at_utc": "2026-11-19T05:02:49Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T05:02:49Z",
+      "snapshot_hash": "sha256:e18883bf599b002c455165ef2c2a5c4cec4830d5f38d8d31cf50c1278f6def1c",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "Tijuana",
+      "best_bid": "0.59",
+      "best_ask": "0.6",
+      "mid": "0.595",
+      "implied_probability": "0.595",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T05:02:49Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 1,
+        "rationale": "Objective outcome; the terms were read and name the rule.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "event-total volume $0 is under $100 (1c spread).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 7,
+      "raw_total": 7,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/LIGAMX-2611210300-ATL-TIJ-M",
+        "field_or_rule": "event.description",
+        "quote": "Atlante vs Tijuana"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/LIGAMX-2611210300-ATL-TIJ-M",
+        "field_or_rule": "contract.description",
+        "quote": "This market resolves to Yes if Tijuana wins the Liga MX match between Tijuana and Atlante scheduled for November 20, 2026 at 10:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the Liga MX governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)"
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/LIGAMX-2611210300-ATL-TIJ-M",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Soccer\n \nMatch\n \nTerms\n \nand\n \nConditions\n \nRule\n \nText\n \nfor\n \n“Will\n \n{team}\n \n{win/lose/draw}\n \n{soccer\n \nmatch}?”\n \n \nRule\n \n13.167\n \n(a)\n \nGeneral\n \n(1)\n \nThese\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \n“Will\n \n{team}\n \n{win/lose/draw}\n \n{soccer\n \nmatch}?”\n \n(“SOCCER\n \n1”\n \nor\n \nthe\n \n“Contract”)\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContract\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n(2)\n \nCapitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nExchange\n \nRulebook.\n \n(b)\n \nUnderlying\n \n(1)\n \nThe\n \nUnderlying\n \nfor\n \neach\n \nContract\n \nis\n \nthe\n \nofficial\n \nresult\n \nof\n \n{team}\n \nin\n \nthe\n \nspecified\n \n{soccer\n \nmatch},\n \ndetermined\n \nin\n \naccordance\n \nwith\n \nthe\n \nsettlement\n \nscope\n \napplicable\n \nto\n \nthe\n \nstrikes\n \nlisted\n \nfor\n \nthat\n \niteration\n \nas\n \ndescribed\n \nin\n \nsection\n \n(c)\n \nbelow.\n \n(2)\n \nCash-settled\n \nContracts\n \nare\n \navailable\n \nfor\n \nany\n \n{team}\n \nlisted\n \nby\n \nthe\n \nExchange\n \n(collectively,\n \nthe\n \n“Contracts”).\n \n(3)\n \nThe\n \nSource\n \nAgencies\n \nare,\n \nin\n \nhierarchical\n \norder:\n \n(i)\n \nthe\n \nleague,\n \norganization,\n \nor\n \nassociation\n \ngoverning\n \n{soccer\n \nmatch}\n \n(e.g.,\n \nFIFA,\n \nUEFA,\n \nor\n \nthe\n \napplicable\n \ndomestic\n \nleague\n \nor\n \ncup\n \ngoverning\n \nbody);\n \n(ii)\n \nESPN;\n \nand\n \n(iii)\n \nNBC/Peacock,\n \nCBS/Paramount+,\n \nFox\n \nSports,\n \nor\n \nthe\n \nofficial\n \nbroadcast\n \nor\n \nstreaming\n \npartner\n \nof\n \n{soccer\n \nmatch}.\n \n(4)\n \nThe\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n \n(5)\n \nRevisions\n \nto\n \nthe\n \nUnderlying\n \nmade\n \nafter\n \nExpiration\n \nwill\n \nnot\n \nbe\n \naccounted\n \nfor\n \nin\n \ndetermining\n \nthe\n \nExpiration\n \nValue.\n \n(c)\n \nIssuance\n \n(1)\n \nThe\n \nContract\n \nis\n \nbased\n \non\n \nthe\n \noutcome\n \nof\n \na\n \nsoccer\n \nmatch,\n \nwhich\n \nrecurs\n \nfrom\n \ntime\n \nto\n \ntime.\n \nThus,\n \nContract\n \niterations\n \nwill\n \nbe\n \nissued\n \non\n \na\n \nrecurring\n \nbasis\n \nbased\n \non\n \nthe\n \nfollowing\n \nparameters:\n \n(i)\n \n{team}\n \nrefers\n \nto\n \nthe\n \nparticipating\n \nsoccer\n \nteam\n \nidentified\n \nby\n \nthe\n \nExchange;\n \n \n(ii)\n \n{win/lose/draw}\n \nrefers\n \nto\n \nthe\n \nofficial\n \noutcome\n \nof\n \nthe\n \nsporting\n \nevent,\n \nand\n \nmay\n \nbe\n \nlisted\n \nin\n \nany\n \nof\n \nthe\n \nfollowing\n \ncombinations\n \nfor\n \na\n \ngiven\n \niteration,\n \nsubject\n \nto\n \nthe\n \nfollowing\n \nrules:\n \n•\n \nWin,\n \nLose,\n \nand\n \nDraw\n \n-\n \nresult\n \nat\n \nthe\n \nconclusion\n \nof\n \nregulation\n \n \ntime\n \nplus\n \nstoppage\n \ntime\n \n(90\n \nminutes\n \nplus\n \nstoppage\n \ntime),\n \nexcluding\n \nextra\n \ntime\n \nand\n \npenalty\n \nshootouts,\n \nif\n \nany,\n \nwhich\n \nis\n \napplicable\n \nto\n \nany\n \nmatch,\n \nincluding\n \ngroup\n \nstage,\n \nregular\n \nseason,\n \nfriendly,\n \nand\n \nknockout\n \nor\n \nelimination\n \nmatches;\n \nand\n \n•\n \nWin\n \nand\n \nLose\n \nonly\n \n(no\n \nDraw)\n \n-\n \nofficial\n \nfinal\n \nresult\n \nfollowing\n \nconclusion\n \nof\n \nall\n \nperiods\n \nof\n \nplay,\n \nincluding\n \nregulation\n \ntime\n \nplus\n \nstoppage\n \ntime\n \nand,\n \nwhere\n \napplicable,\n \nextra\n \ntime\n \nand\n \nany\n \npenalty\n \nshootouts,\n \nwhich\n \nis\n \napplicable\n \nonly\n \nto\n \nknockout\n \nor\n \nelimination\n \nmatches\n \n(i.e.,\n \nmatches\n \nin\n \nwhich\n \nthe\n \ncompetition\n \nrules\n \nrequire\n \na\n \ndecisive\n \nwinner\n \nto\n \nbe\n \ndetermined).\n  \nThe\n \nExchange\n \nwill\n \nnot\n \nlist\n \nWin/Lose-only\n \niterations\n \nfor\n \nmatches\n \nin\n \nwhich\n \na\n \ndraw\n \nis\n \na\n \npermissible\n \nfinal\n \nresult;\n \nand\n \n(iii)\n \n{soccer\n \nmatch}\n \nrefers\n \nto\n \na\n \nscheduled\n \nassociation\n \nfootball\n \n(soccer)\n \nmatch\n \nbetween\n \ntwo\n \nteams,\n \nincluding,\n \nbut\n \nnot\n \nlimited\n \nto,\n \nleague\n \nmatches,\n \ncup\n \nmatches,\n \ninternational\n \nfriendlies,\n \ngroup\n \nstage\n \nmatches,\n \nand\n \nknockout\n \nmatches,\n \nas\n \nspecified\n \nby\n \nthe\n \nExchange.\n \n(2)\n \nFor\n \navoidance\n \nof\n \ndoubt:\n \n(A)\n \nthe\n \nExchange\n \nmay\n \nlist\n \nWin/Lose/Draw\n \nstrikes\n \nor\n \nWin/Lose-only\n \nstrikes\n \nfor\n \na\n \nknockout\n \nor\n \nelimination\n \nmatch\n \nat\n \nits\n \ndiscretion;\n \n(B)\n \nwhen\n \nthe\n \nExchange\n \nlists\n \nboth\n \nWin/Lose/Draw\n \nand\n \nWin/Lose-only\n \niterations\n \nfor\n \nthe\n \nsame\n \nknockout\n \nmatch,\n \neach\n \niteration\n \nsettles\n \nindependently\n \naccording\n \nto\n \nits\n \nown\n \napplicable\n \nsettlement\n \nscope;\n \nand\n \n(C)\n \nthe\n \nsettlement\n \nscope\n \nis\n \ndetermined\n \nby\n \nthe\n \nstrikes\n \nlisted\n \nat\n \nissuance\n \nand\n \ndoes\n \nnot\n \nchange\n \nafter\n \na\n \nContract\n \niteration\n \nis\n \nlisted;\n \nand\n \n(d)\n \nContract\n \nSize\n \n(1)\n \nEach\n \nContract\n \nhas\n \na\n \nnotional\n \nsize\n \nof\n \none\n \ndollar\n \n($1.00).\n \n(e)\n \nSettlement\n \nand\n \nExpiration\n \n(1)\n \nThe\n \nPayout\n \nCriterion\n \nfor\n \nthe\n \nContract\n \nencompasses\n \nthe\n \nExpiration\n \nValues\n \nin\n \nwhich\n \n{team}\n \nachieves\n \nthe\n \nspecified\n \nresult\n \nin\n \n{soccer\n \nmatch},\n \nsubject\n \nto\n \nthe\n \nsettlement\n \nscope\n \napplicable\n \nto\n \nthe\n \nstrikes\n \nlisted\n \nfor\n \nthat\n \niteration\n \nas\n \ndescribed\n \nin\n \nsection\n \n(c)\n \nabove\n \nand\n \nthe\n \nfollowing\n \nrules:\n \n(i)\n \nFor\n \nWin/Lose/Draw\n \niterations:\n \nsettlement\n \nis\n \nbased\n \nsolely\n \non\n \nthe\n \nresult\n \nat\n \nthe\n \nconclusion\n \nof\n \nregulation\n \ntime\n \nplus\n \nstoppage\n \ntime.\n  \nExtra\n \ntime\n \nand\n \npenalty\n \nshootout\n \nresults,\n \nif\n \nany,\n \nare\n \ndisregarded\n \nfor\n \nsettlement\n \npurposes.\n  \nA\n \nresult\n \nof\n \nDraw\n \nsettles\n \nYes\n \nfor\n \nthe\n \nDraw\n \nstrike\n \nand\n \nNo\n \nfor\n \nthe\n \nWin\n \nand\n \nLose\n \nstrikes.\n \n(ii)\n \nFor\n \nWin/Lose-only\n \niterations:\n \nsettlement\n \nis\n \nbased\n \non\n \nthe\n \nofficial\n \nfinal\n \nresult\n \nof\n \nthe\n \nmatch\n \nas\n \ndetermined\n \nby\n \nthe\n \nSource\n \nAgency\n \nfollowing\n \nthe\n \nconclusion\n \nof\n \nall\n \nperiods\n \nof\n \nplay,\n \nincluding\n \nregulation\n \ntime\n \nplus\n \nstoppage\n \ntime\n \nand,\n \nwhere\n \napplicable,\n \nextra\n \ntime\n \nand\n \nany\n \npenalty\n \nshootout.\n  \nThe\n \n \nteam\n \ndeclared\n \nthe\n \nwinner\n \nafter\n \nall\n \nsuch\n \nperiods\n \nsettles\n \nYes\n \nfor\n \nWin\n \nand\n \nNo\n \nfor\n \nLose\n \n(and\n \nvice\n \nversa\n \nfor\n \nthe\n \nopposing\n \nteam’s\n \nstrikes).\n \n(iii)\n \nIf\n \n{soccer\n \nmatch}\n \nis\n \npostponed\n \nbefore\n \nor\n \nduring\n \nplay\n \nfor\n \nany\n \nreason\n \n(i"
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/LIGAMX-2611210300-ATL-TIJ-M",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.59, bestAsk 0.6; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "sports-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": null,
+  "decision_log": [
+    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] GAP-1: free research resolved. The terms name which StatsScore / Sportradar / league official result issuance settles the contract. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf. Excerpt: endly, and knockout or elimination matches; and • Win and Lose only (no Draw) - official final result following conclusion of all periods of play, including reg",
+    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] skip GAP-1: answered by the free check; nothing to buy.",
+    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] no purchase: every material gap was answered, cached, or had no catalog match."
+  ]
+}

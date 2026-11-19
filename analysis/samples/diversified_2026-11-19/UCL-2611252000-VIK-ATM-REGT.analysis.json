@@ -1,0 +1,164 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-UCL-2611252000-VIK-ATM-REGT-O5",
+    "event_ticker": "UCL-2611252000-VIK-ATM-REGT",
+    "instrument_symbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O5",
+    "question": "Viking vs Atlético: Total Goals",
+    "expiry_utc": "2026-11-27T08:00:00.000Z",
+    "analyzed_at_utc": "2026-11-19T05:03:15Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T05:03:15Z",
+      "snapshot_hash": "sha256:b66240ee5ffe5837c06951321e7f9536a44632713baa8e22464912cf3e488730",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "Reg Time: More than 5.5 goals scored",
+      "best_bid": "0.21",
+      "best_ask": "0.23",
+      "mid": "0.22",
+      "implied_probability": "0.22",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T05:03:15Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 1,
+        "rationale": "Objective outcome; the terms were read and name the rule.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "event-total volume $0 is under $100 (2c spread).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 7,
+      "raw_total": 7,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/UCL-2611252000-VIK-ATM-REGT",
+        "field_or_rule": "event.description",
+        "quote": "How many goals will be scored?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/UCL-2611252000-VIK-ATM-REGT",
+        "field_or_rule": "contract.description",
+        "quote": "If Viking and Atlético collectively score more than 5.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf)."
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/UCL-2611252000-VIK-ATM-REGT",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Attachment\n \nA\n \nRule\n \nText\n \nfor\n \n“Will\n \nthe\n \n{points}\n \nrecorded\n \nin\n \n{time\n \nperiod}\n \nof\n \n{event}\n \nbe\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \n{points}”\n \n \nRule\n \n13.129\n \n(a)\n \nGeneral\n \n(1)\n \nThese\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \n“\nWill\n \nthe\n \n{points}\n \nrecorded\n \nin\n \n{time\n \nperiod}\n \nof\n \n{event}\n \nbe\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \n{points}\n”\n \n(“\nSPORTSTOTAL1\n”\n \nor\n \nthe\n \n“\nContract\n”)\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContract\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n(2)\n \nCapitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nExchange\n \nRulebook.\n \n(b)\n \nUnderlying\n \n(1)\n \nThe\n \nUnderlying\n \nfor\n \neach\n \nSPORTSTOTAL1\n \nis\n \nthe\n \nofficial\n \nvalue\n \nof\n \nthe\n \nnumber\n \nof\n \npoints\n \nrecorded\n \nduring\n \n{time\n \nperiod}\n \nof\n \nthe\n \nspecified\n \nsporting\n \n{event}.\n  \nPoints\n \nrecorded\n \nfrom\n \nall\n \nparticipating\n \nteams\n \nin\n \nthe\n \n{event}\n \nare\n \ncombined.\n  \nStatistics\n \nrecorded\n \nduring\n \nregulation\n \ntime\n \nand\n \novertime\n \nperiods\n \nshall\n \ncount\n \ntoward\n \nthe\n \nUnderlying,\n \nunless\n \n{time\n \nperiod}\n \nspecifies\n \notherwise.\n  \nRevisions\n \nto\n \nthe\n \nUnderlying\n \nmade\n \nafter\n \nExpiration\n \nwill\n \nnot\n \nbe\n \naccounted\n \nfor\n \nin\n \ndetermining\n \nthe\n \nExpiration\n \nValue.\n \n(2)\n \nCash-settled\n \nSPORTSTOTAL1\n \nContracts\n \nare\n \navailable\n \nfor\n \nany\n \n{event}\n \nlisted\n \nby\n \nthe\n \nExchange\n \n(collectively,\n \nthe\n \n“Contracts”).\n \n(3)\n \nThe\n \nSource\n \nAgencies\n \nare,\n \nin\n \nhierarchical\n \norder,\n \nthe\n \nleague\n \ngoverning\n \n{event},\n \nESPN,\n \nFox\n \nSports,\n \nand\n \nthe\n \nofficial\n \nbroadcast\n \npartner\n \nof\n \n{event}.\n \n(4)\n \nThe\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n \n(c)\n \nIssuance\n \n(1)\n \nThe\n \nContract\n \nis\n \nbased\n \non\n \nthe\n \noutcome\n \nof\n \none\n \nor\n \nmore\n \nsporting\n \nevents,\n \nwhich\n \nrecur\n \nfrom\n \ntime\n \nto\n \ntime.\n \nThus,\n \nContract\n \niterations\n \nwill\n \nbe\n \nissued\n \non\n \na\n \nrecurring\n \nbasis.\n \n(i)\n \n{points}\n \nrefers\n \nto\n \nan\n \nofficial\n \nscoring\n \nunit\n \nawarded\n \nin\n \nthe\n \nspecified\n \nsporting\n \n{event},\n \nas\n \nrecognized\n \nby\n \nthe\n \ngoverning\n \nbody\n \nof\n \nthe\n \ncompetition\n \n(e.g.,\n \nNFL,\n \nMLB,\n \nor\n \nNHL),\n \nincluding,\n \nbut\n \nnot\n \nlimited\n \nto\n \npoints,\n \ngoals,\n \nruns,\n \ntotal\n \ngames,\n \ntotal\n \nsets,\n \nstrokes,\n \nscore\n \nrelative\n \npar,\n \nand\n \nlaps.\n  \nUnless\n \notherwise\n \nspecified,\n \n{points}\n \nshall\n \nbe\n \nunderstood\n \nto\n \nrefer\n \nto\n \nthe\n \ntotal\n \ncombined\n \npoints\n \nof\n \nall\n \nparticipating\n \nteams\n \nor\n \nindividuals–that\n \nis,\n \nthe\n \nsum\n \nof\n \nthe\n \npoints\n \nscored\n \nin\n \n{time\n \nperiod}.\n  \n{points}\n \nmay\n \nalso\n \nrefer,\n \nwhere\n \nspecified,\n \nto:\n \n•\n \nthe\n \ntotal\n \npoints\n \nscored\n \nby\n \na\n \ngroup\n \nof\n \nteams\n \nidentified\n \nby\n \nname\n \nor\n \ndistinguishing\n \ncharacteristics\n \nwith\n \nAND/OR\n \nlogic,\n \nor\n \n•\n \nthe\n \ntotal\n \npoints\n \nscored\n \nby\n \na\n \ngroup\n \nof\n \nplayers\n \nidentified\n \nby\n \nname\n \nor\n \ndistinguishing\n \ncharacteristics\n \nwith\n \nAND/OR\n \nlogic.\n \n \n \nOvertime\n \npoints\n \nare\n \nincluded\n \nunless\n \nexplicitly\n \nexcluded.\n  \nOnly\n \nofficial\n \n \n \n \nscoring\n \nrecorded\n \nby\n \nthe\n \nSource\n \nAgency\n \nwill\n \nbe\n \nconsidered\n \nvalid\n \nfor\n \n \n \n \nsettlement;\n \n \n \n(ii)\n \n{time\n \nperiod}refers\n \nto\n \na\n \nsegment\n \nof\n \nthe\n \nspecified\n \n{event}\n \nor\n \nthe\n \ntournament\n \nat\n \nwhich\n \n{event}\n \nis\n \nplayed,\n \nas\n \nspecified\n \nby\n \nthe\n \nExchange.\n  \n{time\n \nperiod}\n \nmay\n \ntake,\n \nbut\n \nis\n \nnot\n \nlimited\n \nto,\n \nthe\n \nfollowing\n \nforms:\n \n•\n \nEntire\n \ngame,\n \nwhich\n \nrefers\n \nto\n \nthe\n \ntime\n \nperiod\n \nencapsulating\n \nregulation\n \ntime\n \nand\n \novertime;\n \n•\n \nEntire\n \ngame\n \nexcluding\n \novertime\n \n(i.e.,\n \nregulation\n \ntime\n \nonly),\n \nwhich\n \nrefers\n \nto\n \nregulation\n \ntime\n \nwith\n \nno\n \novertime;\n \n•\n \nOvertime\n \nonly;\n \n•\n \nA\n \nquarter,\n \nhalf,\n \nor\n \nsubsegment\n \nof\n \nthe\n \ngame\n \nspecified\n \nin\n \nthe\n \nsingular\n \nor\n \nin\n \nthe\n \nplural\n \nwhen\n \nused\n \nwith\n \nAND/OR\n \noperators\n \n(e.g.,\n \nQ1,\n \nor\n \nQ1\n \nand\n \nQ2);\n \n•\n \nAny\n \nquarter\n \nor\n \nhalf\n \nacross\n \nthe\n \nentire\n \ngame\n \nor\n \nsubset\n \nof\n \nthe\n \ngame,\n \nwhich\n \nmay\n \nbe\n \nsatisfied\n \nif\n \nat\n \nleast\n \none\n \nof\n \nthe\n \naforementioned\n \nsegments\n \nof\n \nthe\n \ngame\n \nmeets\n \nthe\n \nstated\n \nPayout\n \nCriterion;\n \n•\n \nEach\n \nquarter\n \nor\n \nhalf\n \nacross\n \nthe\n \nentire\n \ngame,\n \nor\n \neach\n \nsubset\n \nof\n \nthe\n \ngame,\n \nwhich\n \nmay\n \nbe\n \nsatisfied\n \nif\n \nALL\n \nof\n \nthe\n \naforementioned\n \nsegments\n \nof\n \nthe\n \ngame\n \nmeet\n \nthe\n \nstated\n \nPayout\n \nCriterion;\n \n•\n \nA\n \ngiven\n \ntime\n \nperiod\n \ndenoted\n \nin\n \nhours\n \nand/or\n \nminutes\n \nand/or\n \nseconds\n \nof\n \npure\n \nmatchplay,\n \nor\n \nconstrained\n \nby\n \na\n \ngiven\n \ntime\n \nin\n \na\n \nstated\n \ntimezone\n \n(e.g.,\n \nprior\n \nto\n \nto\n \n7PM\n \nEDT).\n \n \n \n{time\n \nperiod}\n \nmay\n \nalso\n \ntake\n \nthe\n \nforms\n \nof\n \nany\n \nsegment\n \nin\n \na\n \nset\n \nrange,\n \nrefer\n \n \n \n \nin\n \nthe\n \nsingular\n \nor\n \nmultiple,\n \nby\n \ndistinguishing\n \ncharacteristics\n \n(e.g.,\n \nany\n \n \n \n \nbasketball\n \ngame\n \ninvolving\n \na\n \nteam\n \nfrom\n \nNew\n \nYork),\n \n“Any,”\n \nor\n \n“None.”\n  \n \n \n \nWhere\n \nnot\n \nspecified\n \notherwise,\n \n{time\n \nperiod}\n \nshall\n \nbe\n \nunderstood\n \nto\n \nrefer\n \n \n \n \nto\n \nthe\n \nsum\n \nof\n \nregulation\n \ntime\n \nand\n \novertime;\n \n \n(iii)\n \n{event}\n \nrefers\n \nto\n \na\n \nscheduled\n \nsporting\n \nevent\n \n(e.g.,\n \na\n \ngame,\n \nmatch,\n \nbout,\n \nrace,\n \ntournament,\n \nor\n \nmeet)\n \nas\n \nspecified\n \nby\n \nthe\n \nExchange;\n \n(iv)\n \n{above/below/exactly/at\n \nleast/between}\n \nrefers\n \nto\n \ncomparison\n \noperators.\n \n“Above”\n \nmeans\n \ngreater\n \nthan\n \n(>),\n \n“below”\n \nmeans\n \nless\n \nthan\n \n(<),\n \n“exactly”\n \nmeans\n \nequal\n \nto\n \n(=)\n \nwhen\n \nrounded\n \nto\n \ntwo\n \ndecimal\n \nplaces\n \n(or\n \nother\n \ndegree\n \nof\n \nprecision\n \nspecified\n \nby\n \nthe\n \nExchange),\n \n“at\n \nleast”\n \nmeans\n \ngreater\n \nthan\n \nor\n \nequal\n \nto\n \n(≥),\n \nand\n \n“between”\n \nmeans\n \nwithin\n \nan\n \ninclusive\n \nrange\n \n(≥\n \nlower\n \nbou"
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/UCL-2611252000-VIK-ATM-REGT",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.21, bestAsk 0.23; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "sports-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-5eff0ea75745",
+    "contract_id": "GEMI-UCL-2611252000-VIK-ATM-REGT-O5",
+    "evidence_gap_id": "GAP-1",
+    "catalog_item_id": "cat-sports-settlement-version-v1",
+    "catalog_parameters": {
+      "league": "UCL",
+      "provider": "sports data provider",
+      "event": "UCL-2611252000-VIK-ATM-REGT"
+    },
+    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": null,
+    "signed": false,
+    "created_at_utc": "2026-11-19T05:03:15Z"
+  },
+  "decision_log": [
+    "[GEMI-UCL-2611252000-VIK-ATM-REGT-O5] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf. Excerpt: iration will not be accounted for in determining the Expiration Value. (2) Cash-settled SPORTSTOTAL1 Contracts are available for any {event} listed by the Excha",
+    "[GEMI-UCL-2611252000-VIK-ATM-REGT-O5] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+  ]
+}

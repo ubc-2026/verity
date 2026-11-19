@@ -1,0 +1,266 @@
+{
+  "id": "478049",
+  "title": "Roma vs PSG: Point Spread",
+  "slug": "roma-vs-psg-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "UCL-2611252000-ROM-PSG-REGS",
+  "status": "active",
+  "createdAt": "2026-11-18T20:15:25.725Z",
+  "contracts": [
+    {
+      "id": "478049-1211566",
+      "label": "Reg Time: PSG wins by more than 1.5 goals",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Paris Saint-Germain beats Roma by more than 1.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the score differential (Paris Saint-Germain's goals minus Roma's goals) of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.53",
+          "no": "0.5"
+        },
+        "sell": {
+          "yes": "0.5",
+          "no": "0.47"
+        },
+        "bestBid": "0.5",
+        "bestAsk": "0.53"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:25.725Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf",
+      "ticker": "PSG1",
+      "instrumentSymbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-PSG1",
+      "marketState": "open",
+      "abbreviatedName": "PSG",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Champions-PSG-Dark_f954fe69-a7e4-4847-87b3-b7cc6d0ac0c1.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478049-1211564",
+      "label": "Reg Time: PSG wins by more than 2.5 goals",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Paris Saint-Germain beats Roma by more than 2.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the score differential (Paris Saint-Germain's goals minus Roma's goals) of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.32",
+          "no": "0.71"
+        },
+        "sell": {
+          "yes": "0.29",
+          "no": "0.68"
+        },
+        "bestBid": "0.29",
+        "bestAsk": "0.32"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:25.725Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf",
+      "ticker": "PSG2",
+      "instrumentSymbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2",
+      "marketState": "open",
+      "abbreviatedName": "PSG",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Champions-PSG-Dark_f954fe69-a7e4-4847-87b3-b7cc6d0ac0c1.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478049-1211568",
+      "label": "Reg Time: Roma wins by more than 1.5 goals",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Roma beats Paris Saint-Germain by more than 1.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the score differential (Roma's goals minus Paris Saint-Germain's goals) of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.06",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.94"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.06"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:25.725Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf",
+      "ticker": "ROM1",
+      "instrumentSymbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-ROM1",
+      "marketState": "open",
+      "abbreviatedName": "Roma",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Roma_573259d3-8bb0-487b-b1f3-8d5f5e55c159.avif",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478049-1211562",
+      "label": "Reg Time: Roma wins by more than 2.5 goals",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Roma beats Paris Saint-Germain by more than 2.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the score differential (Roma's goals minus Paris Saint-Germain's goals) of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.04",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.96"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.04"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:25.725Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf",
+      "ticker": "ROM2",
+      "instrumentSymbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-ROM2",
+      "marketState": "open",
+      "abbreviatedName": "Roma",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Roma_573259d3-8bb0-487b-b1f3-8d5f5e55c159.avif",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T20:15:25.725Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "984",
+      "name": "Paris Saint-Germain",
+      "abbreviation": "PSG",
+      "side": "home"
+    },
+    {
+      "id": "1458",
+      "name": "Roma",
+      "abbreviation": "ROM",
+      "side": "away"
+    }
+  ],
+  "description": "What will the goal difference be?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_eb4baf30-095c-4b92-ae46-f6bf5061a57d.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Champions League"
+  ],
+  "expiryDate": "2026-11-27T08:00:00.000Z",
+  "startTime": "2026-11-25T20:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf",
+  "subcategory": {
+    "id": 82,
+    "slug": "sports_soccer_champions-league",
+    "name": "Champions League",
+    "path": [
+      "Sports",
+      "Soccer",
+      "Champions League"
+    ]
+  },
+  "socialImageUrl": "https://images.ctfassets.net/jg6lo9a2ukvr/2gE4t2mrkdGgMLDHvzEmtO/03532b5b4f320366bc660a130923b40d/Meta_Image__49_.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Soccer_9c531b71-ba9e-4bd1-8950-5d90afae5f8f.avif",
+  "template": "sports-spread",
+  "gameId": "sr:sport_event:74166046",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Soccer"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "soccer",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "regulation"
+    },
+    "metric": "goals"
+  }
+}

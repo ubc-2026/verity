@@ -61,8 +61,8 @@
       "rules_excerpts": [
         {"id": "C-NYC-1", "field_or_rule": "event.description (paraphrased)", "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."},
         {"id": "C-NYC-2", "field_or_rule": "event.termsAndConditionsUrl", "quote": "(empty)"},
-        {"id": "C-NYC-4", "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf", "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18", "quote": "only the first published version that includes confirmation of the will be used"},
-        {"id": "C-NYC-5", "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf", "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)", "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."},
+        {"id": "C-NYC-4", "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18", "quote": "only the first published version that includes confirmation of the will be used"},
+        {"id": "C-NYC-5", "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)", "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."},
         {"id": "C-NYC-3", "field_or_rule": "contracts[62-63F].prices", "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"}
       ],
       "sibling_events": [],

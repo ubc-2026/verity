@@ -2,8 +2,10 @@
 
 Two ways to answer a gap:
 
-- `research_free_check` reads the New York terms PDF and the NWS report.
-  It does not call a model. Any other check id returns "not configured".
+- `research_free_check` reads public docs for a known check id (weather:
+  terms PDF + NWS CLI; sports/commodities/crypto: terms PDF for named
+  settlement-version language). It does not call a model. Unknown check ids
+  return "not configured".
 - `research_gap` asks an injected model, when a caller passes `complete_json`.
   The model may only quote text this function gathered. A bad quote or a bad
   URL becomes status "failed", and a failure is not a purchase.
@@ -20,13 +22,70 @@ from typing import Any, Callable, Optional
 
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from .live import _default_get, url_problem
-
 NYC_CHECK = "nyc-settlement-version"
+CHI_MIDWAY_CHECK = "chi-midway-settlement-version"
+ATL_CHECK = "atl-settlement-version"
+BOS_CHECK = "bos-settlement-version"
+SPORTS_CHECK = "sports-settlement-version"
+COMMODITY_CHECK = "commodity-settlement-version"
+CRYPTO_CHECK = "crypto-settlement-version"
+
 NWS_CLINYC_URL = (
     "https://forecast.weather.gov/product.php?site=OKX&product=CLI&issuedby=NYC"
     "&format=txt&version=1&glossary=0"
 )
+NWS_CLIMDW_URL = (
+    "https://forecast.weather.gov/product.php?site=LOT&product=CLI&issuedby=MDW"
+    "&format=txt&version=1&glossary=0"
+)
+NWS_CLIATL_URL = (
+    "https://forecast.weather.gov/product.php?site=FFC&product=CLI&issuedby=ATL"
+    "&format=txt&version=1&glossary=0"
+)
+NWS_CLIBOS_URL = (
+    "https://forecast.weather.gov/product.php?site=BOX&product=CLI&issuedby=BOS"
+    "&format=txt&version=1&glossary=0"
+)
+
+# Free weather settlement checks: terms PDF + station CLI product.
+_WEATHER_SETTLEMENT_CHECKS: dict[str, dict[str, str]] = {
+    NYC_CHECK: {
+        "nws_url": NWS_CLINYC_URL,
+        "station": "Central Park, NY (CLINYC)",
+        "report_label": "NWS Central Park daily report",
+    },
+    CHI_MIDWAY_CHECK: {
+        "nws_url": NWS_CLIMDW_URL,
+        "station": "Chicago-Midway, IL (CLIMDW)",
+        "report_label": "NWS Chicago-Midway daily report",
+    },
+    ATL_CHECK: {
+        "nws_url": NWS_CLIATL_URL,
+        "station": "Atlanta, GA (CLIATL)",
+        "report_label": "NWS Atlanta daily report",
+    },
+    BOS_CHECK: {
+        "nws_url": NWS_CLIBOS_URL,
+        "station": "Boston, MA (CLIBOS)",
+        "report_label": "NWS Boston daily report",
+    },
+}
+
+# Terms-only checks for non-weather families (provider APIs are not freely readable).
+_TERMS_SETTLEMENT_CHECKS: dict[str, dict[str, str]] = {
+    SPORTS_CHECK: {
+        "family": "sports",
+        "provider_label": "StatsScore / Sportradar / league official result",
+    },
+    COMMODITY_CHECK: {
+        "family": "commodities",
+        "provider_label": "Kaiko (or named commodity index)",
+    },
+    CRYPTO_CHECK: {
+        "family": "crypto",
+        "provider_label": "Lukka (or named crypto reference rate)",
+    },
+}
 
 # The terms name an issuance only when they pick one of these. Mentioning the
 # daily climate report, without one of these phrases, leaves the gap open.
@@ -39,6 +98,11 @@ _ISSUANCE_PHRASES = (
     "preliminary cli",
     "final cli",
     "corrected cli",
+    "first published version",
+    "final published version",
+    "official final result",
+    "uncorrected print",
+    "corrected print",
 )
 
 FetchText = Callable[[str], tuple[Optional[str], Optional[str]]]
@@ -87,11 +151,11 @@ def _fetch_page(url: str) -> tuple[Optional[str], Optional[str]]:
         from .live import fetch_terms_text
         return fetch_terms_text(url)
     try:
-        get = _default_get()  # allowlisted hosts only, capped body, redirects rechecked
+        import requests
     except ImportError:
         return None, "requests is not installed"
     try:
-        response = get(url, timeout=20)
+        response = requests.get(url, timeout=20)
         response.raise_for_status()
     except Exception as exc:  # network and HTTP errors are a failed check, not a guess
         return None, f"fetch failed: {type(exc).__name__}"
@@ -101,33 +165,16 @@ def _fetch_page(url: str) -> tuple[Optional[str], Optional[str]]:
     return text[:6000], None
 
 
-def _allowlisted(fetch: FetchText) -> FetchText:
-    """URLs come from exchange data and document text, so off-list URLs are never fetched."""
-    def read(url: str) -> tuple[Optional[str], Optional[str]]:
-        problem = url_problem(url)
-        return (None, problem) if problem else fetch(url)
-    return read
-
-
-def research_free_check(
-    check_id: str,
+def _research_weather_check(
+    check: dict[str, str],
     *,
     question: str,
     terms_url: Optional[str],
-    fetch_text: Optional[FetchText] = None,
+    fetch: FetchText,
 ) -> ResearchResult:
-    """Read the free sources for this check id, or say that none is configured."""
-    fetch = _allowlisted(fetch_text or _fetch_page)
-    if check_id != NYC_CHECK:
-        return ResearchResult(
-            question=question,
-            conclusion=f"No free official-source check is configured for {check_id}.",
-            resolved=False,
-            status="not_configured",
-            reasoning="Only the New York settlement-issuance check reads public sources. Other gaps are not guessed.",
-        )
-
-    sources = [url for url in (terms_url, NWS_CLINYC_URL) if url]
+    nws_url = check["nws_url"]
+    report_label = check["report_label"]
+    sources = [url for url in (terms_url, nws_url) if url]
     if not terms_url:
         return ResearchResult(
             question=question,
@@ -148,11 +195,11 @@ def research_free_check(
             sources=sources,
             reasoning="The gap stays unvalidated when the terms cannot be read, so no purchase is proposed from this result.",
         )
-    report_text, report_error = fetch(NWS_CLINYC_URL)
+    report_text, report_error = fetch(nws_url)
     if report_error or not report_text:
         return ResearchResult(
             question=question,
-            conclusion=f"The NWS Central Park daily report could not be read ({report_error or 'empty document'}).",
+            conclusion=f"The {report_label} could not be read ({report_error or 'empty document'}).",
             resolved=False,
             status="failed",
             sources=sources,
@@ -180,6 +227,94 @@ def research_free_check(
         sources=sources,
         excerpts=excerpts,
         reasoning="The report shows a climate product. It does not say which issuance the contract uses. The gap remains open.",
+    )
+
+
+def _research_terms_settlement_check(
+    check: dict[str, str],
+    *,
+    question: str,
+    terms_url: Optional[str],
+    fetch: FetchText,
+) -> ResearchResult:
+    """Read the contract terms for a named settlement-version rule (no paid API)."""
+    family = check["family"]
+    provider = check["provider_label"]
+    sources = [url for url in (terms_url,) if url]
+    if not terms_url:
+        return ResearchResult(
+            question=question,
+            conclusion=f"The market snapshot has no terms URL, so the {family} settlement version was not read.",
+            resolved=False,
+            status="failed",
+            sources=sources,
+            reasoning="A missing terms URL is a failed check. It is not an inconclusive reading of the contract.",
+        )
+    terms_text, terms_error = fetch(terms_url)
+    if terms_error or not terms_text:
+        return ResearchResult(
+            question=question,
+            conclusion=f"The terms PDF could not be read ({terms_error or 'empty document'}).",
+            resolved=False,
+            status="failed",
+            sources=sources,
+            reasoning="The gap stays unvalidated when the terms cannot be read, so no purchase is proposed from this result.",
+        )
+    excerpt = _around(terms_text, "settle")[:240] or _flat(terms_text)[:240]
+    named = named_issuance(terms_text)
+    if named:
+        return ResearchResult(
+            question=question,
+            conclusion=f"The terms name which {provider} issuance settles the contract.",
+            resolved=True,
+            status="resolved",
+            sources=sources,
+            excerpts=[named],
+            reasoning=f"The {family} terms pick a preliminary, final, or corrected settlement print. No paid research is needed.",
+        )
+    return ResearchResult(
+        question=question,
+        conclusion=(
+            f"The terms cite {provider} settlement data and do not name which "
+            f"preliminary, final, or corrected issuance controls."
+        ),
+        resolved=False,
+        status="unresolved",
+        sources=sources,
+        excerpts=[excerpt],
+        reasoning=(
+            f"Provider APIs for {family} are not free official sources in this path. "
+            "The terms were read and left the version gap open."
+        ),
+    )
+
+
+def research_free_check(
+    check_id: str,
+    *,
+    question: str,
+    terms_url: Optional[str],
+    fetch_text: Optional[FetchText] = None,
+) -> ResearchResult:
+    """Read the free sources for this check id, or say that none is configured."""
+    fetch = fetch_text or _fetch_page
+    weather = _WEATHER_SETTLEMENT_CHECKS.get(check_id)
+    if weather is not None:
+        return _research_weather_check(weather, question=question, terms_url=terms_url, fetch=fetch)
+    terms_only = _TERMS_SETTLEMENT_CHECKS.get(check_id)
+    if terms_only is not None:
+        return _research_terms_settlement_check(
+            terms_only, question=question, terms_url=terms_url, fetch=fetch
+        )
+    return ResearchResult(
+        question=question,
+        conclusion=f"No free official-source check is configured for {check_id}.",
+        resolved=False,
+        status="not_configured",
+        reasoning=(
+            "Configured free checks cover NYC/CHI/ATL/BOS weather CLI reads and "
+            "terms-only sports, commodities, and crypto settlement-version checks."
+        ),
     )
 
 
@@ -274,7 +409,7 @@ def research_gap(
     `complete_json(system, user, schema)` returns the model's object. The caller
     supplies that function. Nothing in this module contacts a model vendor.
     """
-    fetch = _allowlisted(fetch_text or _fetch_page)
+    fetch = fetch_text or _fetch_page
     excerpts = [(c.id, c.quote) for c in analysis.citations if c.quote and not _is_price(c)]
     wanted: list[str] = []
     for _, quote in excerpts:

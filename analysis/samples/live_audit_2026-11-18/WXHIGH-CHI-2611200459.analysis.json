@@ -1,0 +1,138 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+    "event_ticker": "WXHIGH-CHI-2611200459",
+    "instrument_symbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+    "question": "Highest temperature in Chicago on November 19, 2026?",
+    "expiry_utc": "2026-11-20T04:59:59.000Z",
+    "analyzed_at_utc": "2026-11-19T04:30:55Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T04:30:55Z",
+      "snapshot_hash": "sha256:982eb11b02e59a27102dd1f4ab16c5e7c4bc34666d534a3510de1c2f0a64f75e",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "66°F to 67°F",
+      "best_bid": "0.61",
+      "best_ask": "0.66",
+      "mid": "0.635",
+      "implied_probability": "0.635",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:30:55Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 2,
+        "rationale": "Clear outcome, but terms PDF not read; event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "event-total volume $0 is under $100 (5c spread).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 8,
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "event.description",
+        "quote": "Highest temperature in Chicago on November 19, 2026?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "contract.description",
+        "quote": "This market will resolve based on the highest temperature recorded at Chicago-Midway, IL on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Chicago-Midway, IL.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Chicago-Midway on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf)."
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.61, bestAsk 0.66; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "event_terms_url_empty",
+      "terms_url_missing",
+      "terms_not_read: no terms URL in the event",
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": null,
+  "decision_log": [
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] no purchase: every material gap was answered, cached, or had no catalog match."
+  ]
+}

@@ -104,16 +104,42 @@ def _gaps(source: dict[str, Any], ambiguity: dict[str, Any], hay: str) -> list[d
     return gaps
 
 
-# Free checks research.py can run for a live gap, by event-ticker prefix and gap type.
-_LIVE_FREE_CHECKS = {("WXHIGH-NYC", "settlement_source_version"): "nyc-settlement-version"}
+# Free checks research.py can run for a live gap, by event-ticker family.
+_WEATHER_FREE_CHECKS = {
+    "WXHIGH-NYC": "nyc-settlement-version",
+    "WXHIGH-CHI": "chi-midway-settlement-version",
+    "WXHIGH-ATL": "atl-settlement-version",
+    "WXHIGH-BOS": "bos-settlement-version",
+}
+_SPORTS_PREFIXES = (
+    "NBA-", "NFL-", "NHL-", "MLB-", "NCAAM-", "NCAAF-", "NCAA-", "MLS-",
+    "UCL-", "LIGAMX-", "EPL-", "ATP-", "WTA-", "UFC-", "F1-",
+)
+_COMMODITY_PREFIXES = ("BRENT", "WTI", "XAG", "XAU", "NGAS", "OIL", "COPPER", "CORN", "SOY", "WHEAT")
+_CRYPTO_PREFIXES = ("BTC", "ETH", "SOL", "XRP", "DOGE", "ADA", "AVAX")
+
+
+def _check_for_ticker(ticker: str, gap_type: str) -> Optional[str]:
+    if gap_type != "settlement_source_version" or not ticker:
+        return None
+    for prefix, check in _WEATHER_FREE_CHECKS.items():
+        if ticker.startswith(prefix):
+            return check
+    if any(ticker.startswith(p) for p in _SPORTS_PREFIXES):
+        return "sports-settlement-version"
+    if any(ticker.startswith(p) for p in _COMMODITY_PREFIXES):
+        return "commodity-settlement-version"
+    if any(ticker.startswith(p) for p in _CRYPTO_PREFIXES):
+        return "crypto-settlement-version"
+    return None
 
 
 def _attach_free_checks(record: dict[str, Any], gaps: list[dict[str, Any]]) -> None:
     ticker = record.get("event_ticker") or ""
     for g in gaps:
-        for (prefix, gap_type), check in _LIVE_FREE_CHECKS.items():
-            if ticker.startswith(prefix) and g["gap_type"] == gap_type:
-                g["free_checks"] = [check]
+        check = _check_for_ticker(ticker, g["gap_type"])
+        if check:
+            g["free_checks"] = [check]
 
 
 def rules_analyst(record: dict[str, Any]) -> dict[str, Any]:

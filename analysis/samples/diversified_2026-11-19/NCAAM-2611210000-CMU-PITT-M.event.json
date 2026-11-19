@@ -1,0 +1,196 @@
+{
+  "id": "475219",
+  "title": "Central Michigan vs Pittsburgh",
+  "slug": "central-michigan-vs-pittsburgh",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611210000-CMU-PITT-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:09:09.554Z",
+  "contracts": [
+    {
+      "id": "475219-1196345",
+      "label": "Pittsburgh",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Pittsburgh wins the men's college basketball game between Pittsburgh and Central Michigan originally scheduled for November 20, 2026 at 7:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.98",
+          "no": "0.07"
+        },
+        "sell": {
+          "yes": "0.93",
+          "no": "0.02"
+        },
+        "bestBid": "0.93",
+        "bestAsk": "0.98"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:09:09.554Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "PITT",
+      "instrumentSymbol": "GEMI-NCAAM-2611210000-CMU-PITT-M-PITT",
+      "marketState": "open",
+      "abbreviatedName": "PITT",
+      "color": "#003594",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Pittsburgh_7a690697-ce02-4815-b6a5-5196192e81ac.png",
+      "expiryDate": "2026-11-23T00:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "24051034-96bb-4f78-a3a6-312f3258780f",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475219-1196343",
+      "label": "Central Michigan",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Central Michigan wins the men's college basketball game between Central Michigan and Pittsburgh originally scheduled for November 20, 2026 at 7:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.05",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.95"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.05",
+        "lastTradePrice": "0.05"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:09:09.554Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "CMU",
+      "instrumentSymbol": "GEMI-NCAAM-2611210000-CMU-PITT-M-CMU",
+      "marketState": "open",
+      "abbreviatedName": "CMU",
+      "color": "#780006",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Central_Michigan_ChippewasDark_3c6ee257-f452-44cf-8e93-77109a32e67c.png",
+      "expiryDate": "2026-11-23T00:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "472c22e0-843d-472c-a871-f1593fb0725d",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:09:09.554Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "737",
+      "name": "Pittsburgh Panthers",
+      "abbreviation": "PITT",
+      "side": "home"
+    },
+    {
+      "id": "572",
+      "name": "Central Michigan Chippewas",
+      "abbreviation": "CMU",
+      "side": "away"
+    }
+  ],
+  "description": "Central Michigan vs Pittsburgh",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "14",
+  "volume24h": "14",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-23T00:00:00.000Z",
+  "startTime": "2026-11-21T00:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "f0835c89-7a54-4d33-8e55-6d52f9edc6aa",
+  "eventTags": [
+    {
+      "id": 7352,
+      "name": "ACC",
+      "slug": "acc"
+    },
+    {
+      "id": 26180,
+      "name": "Central Michigan Chippewas",
+      "slug": "central-michigan-chippewas"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 31235,
+      "name": "Mid-American",
+      "slug": "mid-american"
+    },
+    {
+      "id": 26086,
+      "name": "Pittsburgh Panthers",
+      "slug": "pittsburgh-panthers"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "CMU",
+      "name": "Central Michigan Chippewas",
+      "externalIds": {
+        "sportradarId": "472c22e0-843d-472c-a871-f1593fb0725d"
+      }
+    }
+  }
+}

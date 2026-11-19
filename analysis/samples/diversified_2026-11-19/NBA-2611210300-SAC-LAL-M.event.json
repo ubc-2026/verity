@@ -1,0 +1,368 @@
+{
+  "id": "475107",
+  "title": "Sacramento vs Los Angeles L",
+  "slug": "sacramento-vs-los-angeles-l",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611210300-SAC-LAL-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:02:23.468Z",
+  "contracts": [
+    {
+      "id": "475107-1195326",
+      "label": "Los Angeles L",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Los Angeles L wins the Pro Basketball game between Los Angeles L and Sacramento originally scheduled for November 20, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.9",
+          "no": "0.12"
+        },
+        "sell": {
+          "yes": "0.88",
+          "no": "0.1"
+        },
+        "bestBid": "0.88",
+        "bestAsk": "0.9",
+        "lastTradePrice": "0.87"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:23.468Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "LAL",
+      "instrumentSymbol": "GEMI-NBA-2611210300-SAC-LAL-M-LAL",
+      "marketState": "open",
+      "abbreviatedName": "LAL",
+      "color": "#552583",
+      "imageUrl": "https://assets.gemini.com/predictions/images/LAL_b9eaf22e-3646-42fa-aec4-8f64cfda7f76.png",
+      "expiryDate": "2026-11-22T15:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:08.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "583ecae2-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Los Angeles Lakers",
+        "externalIds": {
+          "sportradar": "583ecae2-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    },
+    {
+      "id": "475107-1195265",
+      "label": "Sacramento",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Sacramento wins the Pro Basketball game between Sacramento and Los Angeles L originally scheduled for November 20, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12",
+          "no": "0.89"
+        },
+        "sell": {
+          "yes": "0.11",
+          "no": "0.88"
+        },
+        "bestBid": "0.11",
+        "bestAsk": "0.12",
+        "lastTradePrice": "0.13"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:23.468Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "SAC",
+      "instrumentSymbol": "GEMI-NBA-2611210300-SAC-LAL-M-SAC",
+      "marketState": "open",
+      "abbreviatedName": "SAC",
+      "color": "#63727A",
+      "imageUrl": "https://assets.gemini.com/predictions/images/SAC_015354ea-8108-4e38-a08f-b5cb6fd3df6b.png",
+      "expiryDate": "2026-11-22T15:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:08.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "583ed0ac-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Sacramento Kings",
+        "externalIds": {
+          "sportradar": "583ed0ac-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:02:23.468Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "478",
+      "name": "Los Angeles Lakers",
+      "abbreviation": "LAL",
+      "side": "home"
+    },
+    {
+      "id": "485",
+      "name": "Sacramento Kings",
+      "abbreviation": "SAC",
+      "side": "away"
+    }
+  ],
+  "description": "Sacramento vs Los Angeles L",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "46.23",
+  "volume24h": "46.23",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-22T15:00:00.000Z",
+  "startTime": "2026-11-21T03:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "7b06f295-a855-4103-9e2f-29fcef8f8e18",
+  "eventTags": [
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 32,
+      "name": "Kings",
+      "slug": "kings"
+    },
+    {
+      "id": 43,
+      "name": "Lakers",
+      "slug": "lakers"
+    },
+    {
+      "id": 13877,
+      "name": "Western",
+      "slug": "western"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "LAL",
+      "name": "Los Angeles Lakers",
+      "externalIds": {
+        "sportradarId": "583ecae2-fb46-11e1-82cb-f4ce4684ea4c"
+      }
+    }
+  },
+  "combos": [
+    {
+      "contract": {
+        "contractId": "1212447",
+        "contractName": "Los Angeles L Yes + Florida Yes + 2 more",
+        "contractTicker": "CMB",
+        "eventTicker": "CMB-261122-9F1A410BD5CA8A4C",
+        "eventName": "",
+        "category": "Basketball",
+        "contractStatus": "Active",
+        "eventType": "binary",
+        "instrumentSymbol": "GEMI-CMB-261122-9F1A410BD5CA8A4C-CMB",
+        "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_6c686009-b224-4e06-8686-f5ddafc52ba8.avif",
+        "expiryDate": "2026-11-22T15:00:00.000Z",
+        "description": "Los Angeles L-Pro Basketball-Yes, Florida-College Basketball-Yes, Detroit-Pro Basketball-Yes, Arizona-College Basketball-Yes [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_Combos_Class_c3a4c1f2-a3fe-4d21-976a-2643cabf017f.pdf)"
+      },
+      "legs": [
+        {
+          "comboId": 1212447,
+          "legIndex": 0,
+          "contractId": "1195326",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1195326",
+            "contractName": "Los Angeles L",
+            "contractTicker": "LAL",
+            "eventTicker": "NBA-2611210300-SAC-LAL-M",
+            "eventName": "Sacramento vs Los Angeles L",
+            "category": "Pro Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NBA-2611210300-SAC-LAL-M-LAL",
+            "imageUrl": "https://assets.gemini.com/predictions/images/LAL_b9eaf22e-3646-42fa-aec4-8f64cfda7f76.png",
+            "expiryDate": "2026-11-22T15:00:00.000Z",
+            "description": "If Los Angeles L wins the Pro Basketball game between Los Angeles L and Sacramento originally scheduled for November 20, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "sortOrder": 2,
+            "target": {
+              "type": "team",
+              "name": "Los Angeles Lakers",
+              "externalIds": {
+                "sportradar": "583ecae2-fb46-11e1-82cb-f4ce4684ea4c"
+              }
+            },
+            "gameId": "7b06f295-a855-4103-9e2f-29fcef8f8e18",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1212447,
+          "legIndex": 1,
+          "contractId": "1209313",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1209313",
+            "contractName": "Florida",
+            "contractTicker": "FLA",
+            "eventTicker": "NCAAM-2611182130-FLA-HOU-M",
+            "eventName": "Florida vs Houston",
+            "category": "College Basketball",
+            "contractStatus": "Under Review",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611182130-FLA-HOU-M-FLA",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Florida_a2280604-5ce0-49e8-8be5-62c0de68fbfc.png",
+            "expiryDate": "2026-11-20T21:30:00.000Z",
+            "description": "This market resolves to Yes if Florida wins the men's college basketball game between Florida and Houston originally scheduled for November 18, 2026 at 4:30 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 1,
+            "gameId": "5aa7d859-acd3-4cea-be41-075688222b4d",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1212447,
+          "legIndex": 2,
+          "contractId": "1167107",
+          "requiredOutcome": "Yes",
+          "legOutcome": "Pass",
+          "resolvedAt": "2026-11-19T03:34:14.439Z",
+          "contract": {
+            "contractId": "1167107",
+            "contractName": "Detroit",
+            "contractTicker": "DET",
+            "eventTicker": "NBA-2611190100-DET-NOP-M",
+            "eventName": "Detroit vs New Orleans",
+            "category": "Pro Basketball",
+            "contractStatus": "Settled",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NBA-2611190100-DET-NOP-M-DET",
+            "imageUrl": "https://assets.gemini.com/predictions/images/DET_e9740772-1cda-47ef-9008-874e76666b0c.png",
+            "expiryDate": "2026-11-20T13:00:00.000Z",
+            "resolvedAt": "2026-11-19T03:32:46.980Z",
+            "description": "If Detroit wins the Pro Basketball game between Detroit and New Orleans originally scheduled for November 18, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "resolutionSide": "yes",
+            "sortOrder": 1,
+            "target": {
+              "type": "team",
+              "name": "Detroit Pistons",
+              "externalIds": {
+                "sportradar": "583ec928-fb46-11e1-82cb-f4ce4684ea4c"
+              }
+            },
+            "gameId": "729ed543-c261-4a32-a52c-d1b99f797666",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1212447,
+          "legIndex": 3,
+          "contractId": "1181334",
+          "requiredOutcome": "Yes",
+          "legOutcome": "Pass",
+          "resolvedAt": "2026-11-19T04:50:25.560Z",
+          "contract": {
+            "contractId": "1181334",
+            "contractName": "Arizona",
+            "contractTicker": "ARI",
+            "eventTicker": "NCAAM-2611190200-UCONN-ARI-M",
+            "eventName": "UConn vs Arizona",
+            "category": "College Basketball",
+            "contractStatus": "Settled",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611190200-UCONN-ARI-M-ARI",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_e0b80abe-5f4f-41c7-8b29-e177a15a9133.png",
+            "expiryDate": "2026-11-21T02:00:00.000Z",
+            "resolvedAt": "2026-11-19T04:50:00.109Z",
+            "description": "This market resolves to Yes if Arizona wins the men's college basketball game between Arizona and UConn originally scheduled for November 18, 2026 at 9:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "resolutionSide": "yes",
+            "sortOrder": 2,
+            "gameId": "a78b847d-636e-4c34-8d1c-c56a4ad480da",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

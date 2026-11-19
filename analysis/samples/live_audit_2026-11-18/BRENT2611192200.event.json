@@ -1,0 +1,328 @@
+{
+  "id": "478183",
+  "title": "Oil (Brent) price on November 19?",
+  "slug": "oil-brent-price-on-november-19",
+  "type": "categorical",
+  "category": "Commodities",
+  "ticker": "BRENT2611192200",
+  "status": "active",
+  "createdAt": "2026-11-18T20:55:46.477Z",
+  "contracts": [
+    {
+      "id": "478183-1211934",
+      "label": "$87 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (Brent) is $87 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.79",
+          "no": "0.21"
+        },
+        "sell": {
+          "yes": "0.79",
+          "no": "0.21"
+        },
+        "lastTradePrice": "0.79"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:46.477Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+      "ticker": "HI87",
+      "instrumentSymbol": "GEMI-BRENT2611192200-HI87",
+      "marketState": "open",
+      "abbreviatedName": ">$87",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "above",
+        "value": "87"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478183-1211936",
+      "label": "$88 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (Brent) is $88 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.76",
+          "no": "0.24"
+        },
+        "sell": {
+          "yes": "0.76",
+          "no": "0.24"
+        },
+        "lastTradePrice": "0.76"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:46.477Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+      "ticker": "HI88",
+      "instrumentSymbol": "GEMI-BRENT2611192200-HI88",
+      "marketState": "open",
+      "abbreviatedName": ">$88",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "above",
+        "value": "88"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478183-1211940",
+      "label": "$90 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (Brent) is $90 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.22",
+          "no": "0.78"
+        },
+        "sell": {
+          "yes": "0.22",
+          "no": "0.78"
+        },
+        "lastTradePrice": "0.22"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:46.477Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+      "ticker": "HI90",
+      "instrumentSymbol": "GEMI-BRENT2611192200-HI90",
+      "marketState": "open",
+      "abbreviatedName": ">$90",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "above",
+        "value": "90"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478183-1211942",
+      "label": "$91 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (Brent) is $91 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12",
+          "no": "0.88"
+        },
+        "sell": {
+          "yes": "0.12",
+          "no": "0.88"
+        },
+        "lastTradePrice": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:46.477Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+      "ticker": "HI91",
+      "instrumentSymbol": "GEMI-BRENT2611192200-HI91",
+      "marketState": "open",
+      "abbreviatedName": ">$91",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "above",
+        "value": "91"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478183-1211938",
+      "label": "$89 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (Brent) is $89 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:46.477Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+      "ticker": "HI89",
+      "instrumentSymbol": "GEMI-BRENT2611192200-HI89",
+      "marketState": "open",
+      "abbreviatedName": ">$89",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "above",
+        "value": "89"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478183-1216198",
+      "label": "$92 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (Brent) is $92 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:46.477Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+      "ticker": "HI92",
+      "instrumentSymbol": "GEMI-BRENT2611192200-HI92",
+      "marketState": "open",
+      "abbreviatedName": ">$92",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "above",
+        "value": "92"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T20:55:46.477Z",
+  "isLive": true,
+  "participants": [],
+  "description": "Interval Brent price prediction event expiring on November 19, 2026 at 5pm ET",
+  "imageUrl": "https://assets.gemini.com/predictions/images/oil_thumb_b051e146-0bb8-480e-9a08-14ebbc9aa70c.avif",
+  "series": "BRENT",
+  "volume": "79.32",
+  "volume24h": "79.32",
+  "tags": [
+    "Oil (Brent)"
+  ],
+  "expiryDate": "2026-11-19T22:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+  "subcategory": {
+    "id": 122,
+    "slug": "commodities_oil-(brent)",
+    "name": "Oil (Brent)",
+    "path": [
+      "Commodities",
+      "Oil (Brent)"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/oil_thumb_1f27f368-ddc9-4d44-9133-86ff93838bba.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Commodities_fb1be9e3-ddb9-4fb4-b28f-b6a541976078.avif",
+  "template": "prices-ladder",
+  "eventTags": [
+    {
+      "id": 14,
+      "name": "Daily",
+      "slug": "daily"
+    },
+    {
+      "id": 18,
+      "name": "Reference",
+      "slug": "reference"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "kaiko-equities",
+    "index": "KK_RFR_BRENTOILUSDC"
+  },
+  "volumeDelta24hPct": "0"
+}

@@ -1,6 +1,15 @@
 """Free research uses injected document text. No network and no model."""
 from verity import FixtureContext, generate_purchase_request, get_risk_analysis
-from verity.research import NWS_CLINYC_URL, named_issuance, research_free_check
+from verity.research import (
+    ATL_CHECK,
+    CHI_MIDWAY_CHECK,
+    NWS_CLIATL_URL,
+    NWS_CLIMDW_URL,
+    NWS_CLINYC_URL,
+    SPORTS_CHECK,
+    named_issuance,
+    research_free_check,
+)
 from verity.schemas import EvidenceGap, PurchaseProposalV1
 
 NYC = "fx-nyc-high-20261118"
@@ -90,6 +99,35 @@ def test_research_result_records_sources_and_excerpts():
     assert len(found.excerpts) == 2
     assert "Climatological Report" in found.excerpts[0]
     assert found.question == "Which issuance settles the contract?"
+
+
+def test_midway_free_check_inconclusive_proposes_nws_catalog_item():
+    """Chicago-Midway uses the same issuance logic against the Midway CLI URL."""
+    midway_report = "CLIMDW climatological report for Chicago-Midway. Latest daily issuance."
+    found = research_free_check(
+        CHI_MIDWAY_CHECK,
+        question="Which Midway issuance settles the contract?",
+        terms_url=TERMS,
+        fetch_text=_fetch({TERMS: (UNNAMED, None), NWS_CLIMDW_URL: (midway_report, None)}),
+    )
+    assert found.status == "unresolved" and found.resolved is False
+    assert found.sources == [TERMS, NWS_CLIMDW_URL]
+
+    # Attach Midway free-check onto the NYC fixture row shape isn't needed: call research path via a
+    # live-style ctx by swapping the NYC gap's free_checks list.
+    ctx, ra = _nyc({TERMS: (UNNAMED, None), NWS_CLIMDW_URL: (midway_report, None)})
+    gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
+    ra = ra.model_copy(update={
+        "event_ticker": "WXHIGH-CHI-2611200459",
+        "evidence_gaps": [gap.model_copy(update={"free_checks": [CHI_MIDWAY_CHECK]})],
+    })
+    ctx.markets[ra.contract_id] = {**ctx.markets[ra.contract_id], "terms_url": TERMS}
+    log = []
+    proposal = generate_purchase_request(ra, ctx, log)
+    assert isinstance(proposal, PurchaseProposalV1)
+    assert proposal.catalog_item_id == "cat-midway-vs-title-station-pack-v1"
+    assert proposal.catalog_parameters.get("station") == "Chicago-Midway, IL (CLIMDW)"
+    assert any("free research unresolved" in line for line in log)
 
 
 def _model_ctx(answer, calls=None):
@@ -196,3 +234,38 @@ def test_fixture_scenario_wins_over_the_model():
     proposal = generate_purchase_request(get_risk_analysis(NYC, ctx), ctx, [])
     assert called == []
     assert proposal is not None and proposal.catalog_item_id == "cat-nws-cli-settlement-version-v1"
+
+
+def test_sports_terms_inconclusive_proposes_sports_catalog_item():
+    sports_terms = "Settles on the StatsScore official result. Revisions may occur after first publication."
+    found = research_free_check(
+        SPORTS_CHECK,
+        question="Which sports feed version settles?",
+        terms_url=TERMS,
+        fetch_text=_fetch({TERMS: (sports_terms, None)}),
+    )
+    assert found.status == "unresolved" and found.resolved is False
+
+    ctx, ra = _nyc({TERMS: (sports_terms, None)})
+    gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
+    ra = ra.model_copy(update={
+        "event_ticker": "NBA-2611190230-BOS-DEN-S",
+        "evidence_gaps": [gap.model_copy(update={"free_checks": [SPORTS_CHECK]})],
+    })
+    ctx.markets[ra.contract_id] = {**ctx.markets[ra.contract_id], "terms_url": TERMS}
+    log = []
+    proposal = generate_purchase_request(ra, ctx, log)
+    assert isinstance(proposal, PurchaseProposalV1)
+    assert proposal.catalog_item_id == "cat-sports-settlement-version-v1"
+    assert any("free research unresolved" in line for line in log)
+
+
+def test_atl_weather_free_check_reads_atlanta_cli():
+    atl_report = "CLIATL climatological report for Atlanta. Latest daily issuance."
+    found = research_free_check(
+        ATL_CHECK,
+        question="Which Atlanta issuance settles?",
+        terms_url=TERMS,
+        fetch_text=_fetch({TERMS: (UNNAMED, None), NWS_CLIATL_URL: (atl_report, None)}),
+    )
+    assert found.status == "unresolved" and found.sources == [TERMS, NWS_CLIATL_URL]

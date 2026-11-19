@@ -10,7 +10,47 @@
       "affects": "resolution_risk",
       "price_base_units": "50000",
       "parameters": ["station", "date"],
-      "description": "Reports which issuance of the NWS CLI product (preliminary, final, correction) carries the official max temperature for a station and date, with issuance times, and quotes the exchange rule that names the version."
+      "description": "Reports which issuance of the NWS CLI product (preliminary, final, correction) carries the official max temperature for a station and date, with issuance times, and quotes the exchange rule that names the version. Used for NYC Central Park (CLINYC), Chicago-Midway (CLIMDW), Atlanta (CLIATL), and Boston (CLIBOS)."
+    },
+    {
+      "id": "cat-midway-vs-title-station-pack-v1",
+      "merchant_id": "verity-demo-merchant",
+      "title": "Chicago Midway station pack (title vs settlement)",
+      "answers_gap_types": ["settlement_source_version", "station_title_mismatch"],
+      "affects": "resolution_risk",
+      "price_base_units": "50000",
+      "parameters": ["station", "date"],
+      "description": "Confirms the contract settles on Chicago-Midway (not O'Hare), returns the Midway NWS CLI issuance used for the date, and quotes the title-vs-rule mismatch. Demo SKU for the Midway edge story."
+    },
+    {
+      "id": "cat-sports-settlement-version-v1",
+      "merchant_id": "verity-demo-merchant",
+      "title": "Sports settlement-version pack",
+      "answers_gap_types": ["settlement_source_version"],
+      "affects": "resolution_risk",
+      "price_base_units": "50000",
+      "parameters": ["league", "provider", "event"],
+      "description": "Quotes which StatsScore / Sportradar / league official-result feed version (including corrections) Gemini uses to settle a sports contract, with the rule language that names it."
+    },
+    {
+      "id": "cat-commodity-settlement-version-v1",
+      "merchant_id": "verity-demo-merchant",
+      "title": "Commodity index settlement-version pack",
+      "answers_gap_types": ["settlement_source_version"],
+      "affects": "resolution_risk",
+      "price_base_units": "50000",
+      "parameters": ["index", "provider", "date"],
+      "description": "Reports which Kaiko (or named) index print and correction policy settles a commodity contract, with issuance timing and the exchange rule that picks the version."
+    },
+    {
+      "id": "cat-crypto-settlement-version-v1",
+      "merchant_id": "verity-demo-merchant",
+      "title": "Crypto reference-rate settlement-version pack",
+      "answers_gap_types": ["settlement_source_version"],
+      "affects": "resolution_risk",
+      "price_base_units": "50000",
+      "parameters": ["asset", "provider", "date"],
+      "description": "Reports which Lukka (or named) reference-rate print and correction policy settles a crypto contract, with issuance timing and the exchange rule that picks the version."
     },
     {
       "id": "cat-point-forecast-v1",

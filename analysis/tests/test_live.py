@@ -135,6 +135,55 @@ def test_live_rules_analyst_scores_nyc_by_default():
     assert not any(f.startswith("reading_scores_unscored") for f in ra.data_quality_flags)
     gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
     assert gap.material and gap.free_checks == ["nyc-settlement-version"]   # hooks into research.py
+    assert ctx.live_research is True
+
+
+def test_live_rules_analyst_attaches_midway_free_check_for_chicago():
+    """Chicago weather title vs Midway settlement uses the Midway free-check id."""
+    chi = {
+        "ticker": "WXHIGH-CHI-2611200459",
+        "title": "Highest temperature in Chicago on November 19, 2026?",
+        "termsLink": "",
+        "volume": "10",
+        "contracts": [
+            {"label": "66°F to 67°F", "instrumentSymbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+             "prices": {"bestBid": "0.61", "bestAsk": "0.66"},
+             "description": {"value": "Settles on the highest temperature at Chicago-Midway, IL from the NWS Climatological Report (Daily)."},
+             "expiryDate": "2026-11-20T04:59:59.000Z"},
+        ],
+        "sourceDetails": {},
+        "events": [],
+    }
+
+    def get(url, timeout=None):
+        if url.endswith("/events/WXHIGH-CHI-2611200459"):
+            return FakeResp(chi)
+        raise AssertionError(url)
+
+    import verity.live as live
+    orig = live.fetch_terms_text
+    live.fetch_terms_text = lambda url, http_get=None: (
+        "Weather terms. Settles on the NWS Climatological Report (Daily) for Chicago-Midway.", None)
+    try:
+        ra, ctx = analyze_live("WXHIGH-CHI-2611200459", "66°F to 67°F", http_get=get, now=NOW)
+    finally:
+        live.fetch_terms_text = orig
+    gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
+    assert gap.free_checks == ["chi-midway-settlement-version"]
+    assert ra.event_ticker.startswith("WXHIGH-CHI")
+    # Live WXHIGH events often omit termsLink; fallback keeps free research runnable.
+    assert ctx.markets[ra.contract_id]["terms_url"].endswith(
+        "Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf")
+
+
+def test_live_rules_analyst_attaches_family_free_checks():
+    """Sports / commodity / crypto / Atlanta weather get their free-check ids."""
+    from verity.rules_analyst import _check_for_ticker
+    assert _check_for_ticker("NBA-2611190230-BOS-DEN-S", "settlement_source_version") == "sports-settlement-version"
+    assert _check_for_ticker("BRENT2611192200", "settlement_source_version") == "commodity-settlement-version"
+    assert _check_for_ticker("BTC2611192200", "settlement_source_version") == "crypto-settlement-version"
+    assert _check_for_ticker("WXHIGH-ATL-2611200459", "settlement_source_version") == "atl-settlement-version"
+    assert _check_for_ticker("WXHIGH-BOS-2611200459", "settlement_source_version") == "bos-settlement-version"
 
 
 def test_live_rules_analyst_on_real_okc_response():

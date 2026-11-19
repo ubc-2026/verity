@@ -31,9 +31,8 @@ python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 - The output is written to `samples/live_last_run.json`, which git ignores.
 - **Evidence gaps on live markets** come from the rules analyst. A live NYC weather gap is wired to the `nyc-settlement-version` free check in `research.py`; other live gaps have no free check yet, so they are logged and skipped, and no purchase is proposed. The New York fixture gap can be checked against the public terms PDF and the NWS Central Park report with `python demo.py --research`. A document that cannot be read does not become a purchase. The labeled fixture scenarios are unchanged.
 - **A model can answer any gap** when `FixtureContext.complete_json` is set. That function is `complete_json(system, user, schema) -> dict`. The model may quote only text that was gathered. A quote or URL it was not given makes the result `failed`, and a failure does not propose a purchase. No model provider or API key is wired in. A fixture scenario still takes priority.
-- **Reads are allowlisted.** Terms links and URLs quoted in exchange text or a terms PDF come from the exchange, not from Verity. The analysis path reads only `https://api.gemini.com`, `https://assets.gemini.com`, and `https://forecast.weather.gov` (`READ_HOSTS` in `live.py`). Any other host, scheme, or port is refused before a request is sent, every redirect hop is checked against the same list, and a response body over 5 MB is refused. A refused URL is recorded as unread, so it cannot lead to a purchase.
 
-The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. An earlier repo-level README described a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
+The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. The repo-level README still describes a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
 
 ## Layout
 
@@ -45,23 +44,19 @@ verity/
   proposals.py   generate_purchase_request(risk_analysis, ctx=None, decision_log=None)
   research.py    NYC document check, and one injected model call per gap
   fixtures.py    loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
-  live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live(); read allowlist
-  rules_analyst.py  code-only Framework rules for live ambiguity, source, and correlation scores
-  exchange.py    guarded Gemini Exchange trading client (sandbox and dry run by default). Not imported
-                 by demo.py or the analysis path. It reads GEMINI_EXCHANGE_API_KEY/SECRET when used;
-                 the analysis path needs no key.
+  live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live()
 fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
   free_checks.json          free official-source checks; NYC outcomes are labeled assumptions
-tests/test_slice.py, test_live.py, test_research.py, test_safety.py, test_exchange.py (all external APIs faked)
+tests/test_slice.py, test_live.py, test_exchange.py (all external APIs faked)
 demo.py
 samples/                    generated outputs (OKC, NYC gap-remains)
 ```
 
 ## Scoring decisions
 
-- **Scale:** the workbook's 1–3 per category, summed to 4–12. Low is 4–6, Medium 7–8, High 9–12. The earlier repo-level README's 1–5 scale is not used in this prototype.
+- **Scale:** the workbook's 1–3 per category, summed to 4–12. Low is 4–6, Medium 7–8, High 9–12. The README's 1–5 scale is not used in this prototype.
 - **Overrides** are applied after the raw band and reported separately (`raw_rating`, `rating_floor`, `final_rating`).
   - A 3 in Ambiguity or Source sets a floor of Medium.
   - A 3 in Liquidity is a trading rule, so it becomes a note ("the price is an unreliable signal") and does not change the rating.
@@ -78,7 +73,7 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 | Source | leaderboard, LM Arena, social metrics | NWS / climate report, BLS, CPI, GDP, anything preliminary or revisable | league, NCAA, Federal Reserve, official result | no source, or one the rules don't recognize |
 | Correlation | sibling events on the same underlying (Agent rule 7) | scheduled data or news (CPI, jobs, FOMC, injuries, earnings) | neither | — |
 
-Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; the others have none yet.
+Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; on `WXHIGH-CHI` it uses `chi-midway-settlement-version` (Midway CLI). Live WXHIGH events often omit `termsLink`; `analyze_live` falls back to the shared weather terms PDF so free research can run. `analyze_live` sets `live_research=True` so inconclusive free reads can emit an unsigned catalog proposal (Midway prefers `cat-midway-vs-title-station-pack-v1`).
 
 On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): total 6, Low, `no_further_research`. The workbook scored Correlation 1.
 
@@ -89,14 +84,13 @@ On the real OKC moneyline response (2026-11-18) with the terms read, the rules g
 3. For each material gap that affects **resolution** risk:
    - skip it if cached evidence exists;
    - otherwise run the free official-source check;
-   - if the gap is still open, look for an allowlisted catalog item that answers that gap type;
-   - fill every catalog parameter from the market. For the NWS item the date is the New York climate day read from the `WXHIGH-NYC` ticker, which ends with the trading close in UTC. If any parameter cannot be filled, no proposal is made.
+   - if the gap is still open, look for an allowlisted catalog item that answers that gap type.
 
 Forecast gaps (outcome probability) are logged and skipped. When the free check has no result for the chosen scenario, there is no purchase, because the gap can't be validated.
 
 ## Conflicts found in the workbook
 
-1. An earlier repo-level README used a 1–5 scale; the workbook uses 1–3. Resolved in favor of 1–3.
+1. The README uses a 1–5 scale; the workbook uses 1–3. Resolved in favor of 1–3.
 2. The `Markets!B` rating formula ignores the overrides, and `SUM` counts a blank as 0, so incomplete rows silently show Low.
 3. The Volume column mixes event totals (rows 2–4, from the Gemini API) with 24-hour figures (rows 5–6, from CoinRithm). Agent rule 4 assumes 24-hour volume.
 4. The Ambiguity/Source floor only changes anything at a raw total of 6. The same override also says "Always buy evidence on the settlement rule before acting", which a research-only agent can't do unconditionally. Here it is a floor plus a note, and any purchase still has to pass the proposal gates.

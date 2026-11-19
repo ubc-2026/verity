@@ -1,0 +1,436 @@
+{
+  "id": "456479",
+  "title": "Atlante vs Tijuana",
+  "slug": "atlante-vs-tijuana",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "LIGAMX-2611210300-ATL-TIJ-M",
+  "status": "active",
+  "createdAt": "2026-11-13T14:40:11.093Z",
+  "contracts": [
+    {
+      "id": "456479-1130394",
+      "label": "Tijuana",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Tijuana wins the Liga MX match between Tijuana and Atlante scheduled for November 20, 2026 at 10:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the Liga MX governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.6",
+          "no": "0.41"
+        },
+        "sell": {
+          "yes": "0.59",
+          "no": "0.4"
+        },
+        "bestBid": "0.59",
+        "bestAsk": "0.6"
+      },
+      "status": "active",
+      "createdAt": "2026-11-13T14:40:11.093Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf",
+      "ticker": "TIJ",
+      "instrumentSymbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ",
+      "marketState": "open",
+      "abbreviatedName": "TIJ",
+      "color": "#CE1126",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tijuana_Xolos_aea97551-1859-4df3-8dea-025020ee47a5.avif",
+      "expiryDate": "2026-11-21T11:00:00.000Z",
+      "effectiveDate": "2026-11-20T14:00:00.000Z",
+      "sortOrder": 1,
+      "sportsSide": "home",
+      "teamId": "sr:competitor:36525",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "456479-1130398",
+      "label": "Tie",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the Liga MX match between Tijuana and Atlante scheduled for November 20, 2026 at 10:00 PM ET ends in a tie after regulation time plus stoppage time, excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the Liga MX governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withties, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.21",
+          "no": "0.8"
+        },
+        "sell": {
+          "yes": "0.2",
+          "no": "0.79"
+        },
+        "bestBid": "0.2",
+        "bestAsk": "0.21"
+      },
+      "status": "active",
+      "createdAt": "2026-11-13T14:40:11.093Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf",
+      "ticker": "D",
+      "instrumentSymbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-D",
+      "marketState": "open",
+      "abbreviatedName": "D",
+      "color": "#808080",
+      "expiryDate": "2026-11-21T11:00:00.000Z",
+      "effectiveDate": "2026-11-20T14:00:00.000Z",
+      "sortOrder": 3,
+      "sportsSide": "tie",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "456479-1130396",
+      "label": "Atlante",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Atlante wins the Liga MX match between Atlante and Tijuana scheduled for November 20, 2026 at 10:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the Liga MX governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.2",
+          "no": "0.81"
+        },
+        "sell": {
+          "yes": "0.19",
+          "no": "0.8"
+        },
+        "bestBid": "0.19",
+        "bestAsk": "0.2"
+      },
+      "status": "active",
+      "createdAt": "2026-11-13T14:40:11.093Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf",
+      "ticker": "ATL",
+      "instrumentSymbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-ATL",
+      "marketState": "open",
+      "abbreviatedName": "ATL",
+      "color": "#0B2D5B",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Atlante_cec383f0-935f-43da-aac9-d0f57ca561d7.avif",
+      "expiryDate": "2026-11-21T11:00:00.000Z",
+      "effectiveDate": "2026-11-20T14:00:00.000Z",
+      "sortOrder": 2,
+      "sportsSide": "away",
+      "teamId": "sr:competitor:1943",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-13T14:40:11.093Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "1431",
+      "name": "Club Tijuana de Caliente",
+      "abbreviation": "TIJ",
+      "side": "home"
+    },
+    {
+      "id": "1418",
+      "name": "Atlante FC",
+      "abbreviation": "ATL",
+      "side": "away"
+    }
+  ],
+  "description": "Atlante vs Tijuana",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_eb4baf30-095c-4b92-ae46-f6bf5061a57d.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Liga MX"
+  ],
+  "expiryDate": "2026-11-21T11:00:00.000Z",
+  "startTime": "2026-11-21T03:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf",
+  "subcategory": {
+    "id": 196,
+    "slug": "sports_soccer_liga-mx",
+    "name": "Liga MX",
+    "path": [
+      "Sports",
+      "Soccer",
+      "Liga MX"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Soccer_eb4baf30-095c-4b92-ae46-f6bf5061a57d.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Soccer_eb4baf30-095c-4b92-ae46-f6bf5061a57d.png",
+  "template": "sports-game",
+  "gameId": "sr:sport_event:72055320",
+  "eventTags": [
+    {
+      "id": 11289,
+      "name": "Atlante",
+      "slug": "atlante"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 11290,
+      "name": "Group APERTURA",
+      "slug": "group-apertura"
+    },
+    {
+      "id": 11313,
+      "name": "Tijuana",
+      "slug": "tijuana"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Soccer"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "soccer",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "regulation"
+    },
+    "team": {
+      "symbol": "TIJ",
+      "name": "Club Tijuana de Caliente",
+      "externalIds": {
+        "sportradarId": "sr:competitor:36525"
+      }
+    }
+  },
+  "combos": [
+    {
+      "contract": {
+        "contractId": "1171100",
+        "contractName": "Athletic Yes + Tijuana Yes + 4 more",
+        "contractTicker": "CMB",
+        "eventTicker": "CMB-261123-203C2C405334043F",
+        "eventName": "",
+        "category": "Soccer",
+        "contractStatus": "Active",
+        "eventType": "binary",
+        "instrumentSymbol": "GEMI-CMB-261123-203C2C405334043F-CMB",
+        "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_9c531b71-ba9e-4bd1-8950-5d90afae5f8f.avif",
+        "expiryDate": "2026-11-23T03:00:00.000Z",
+        "description": "Athletic-La Liga-Yes, Tijuana-Liga MX-Yes, Atlas-Liga MX-Yes, Man City-EPL-Yes, Alav\u00e9s-La Liga-Yes, Aston Villa-EPL-Yes [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_Combos_Class_c3a4c1f2-a3fe-4d21-976a-2643cabf017f.pdf)"
+      },
+      "legs": [
+        {
+          "comboId": 1171100,
+          "legIndex": 0,
+          "contractId": "1130349",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1130349",
+            "contractName": "Athletic",
+            "contractTicker": "ATH",
+            "eventTicker": "LALIGA-2611202000-ESY-ATH-M",
+            "eventName": "Espanyol vs Athletic",
+            "category": "La Liga",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-LALIGA-2611202000-ESY-ATH-M-ATH",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Champions-ATH-Dark_a9ac6336-5829-4bfa-84ca-ad713f53152f.png",
+            "expiryDate": "2026-11-22T08:00:00.000Z",
+            "description": "This market resolves to Yes if Athletic wins the LaLiga match between Athletic and Espanyol scheduled for November 20, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (LaLiga), ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "sortOrder": 1,
+            "gameId": "sr:sport_event:72478708",
+            "sportsMarket": {
+              "sport": "soccer",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "regulation"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1171100,
+          "legIndex": 1,
+          "contractId": "1130394",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1130394",
+            "contractName": "Tijuana",
+            "contractTicker": "TIJ",
+            "eventTicker": "LIGAMX-2611210300-ATL-TIJ-M",
+            "eventName": "Atlante vs Tijuana",
+            "category": "Liga MX",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Tijuana_Xolos_aea97551-1859-4df3-8dea-025020ee47a5.avif",
+            "expiryDate": "2026-11-21T11:00:00.000Z",
+            "description": "This market resolves to Yes if Tijuana wins the Liga MX match between Tijuana and Atlante scheduled for November 20, 2026 at 10:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the Liga MX governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "sortOrder": 1,
+            "gameId": "sr:sport_event:72055320",
+            "sportsMarket": {
+              "sport": "soccer",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "regulation"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1171100,
+          "legIndex": 2,
+          "contractId": "1130389",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1130389",
+            "contractName": "Atlas",
+            "contractTicker": "ALA",
+            "eventTicker": "LIGAMX-2611210300-ALA-JUA-M",
+            "eventName": "Atlas vs Ju\u00e1rez",
+            "category": "Liga MX",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-LIGAMX-2611210300-ALA-JUA-M-ALA",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Atlas_948a4bc2-e9bb-4310-99c2-981cd7a401e1.avif",
+            "expiryDate": "2026-11-21T11:00:00.000Z",
+            "description": "This market resolves to Yes if Atlas wins the Liga MX match between Atlas and Ju\u00e1rez scheduled for November 20, 2026 at 10:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the Liga MX governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "sortOrder": 2,
+            "gameId": "sr:sport_event:72055318",
+            "sportsMarket": {
+              "sport": "soccer",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "regulation"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1171100,
+          "legIndex": 3,
+          "contractId": "1072391",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1072391",
+            "contractName": "Man City",
+            "contractTicker": "MCI",
+            "eventTicker": "EPL-2611211230-FUL-MCI-M",
+            "eventName": "Fulham vs Man City",
+            "category": "EPL",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-EPL-2611211230-FUL-MCI-M-MCI",
+            "imageUrl": "https://assets.gemini.com/predictions/images/EPL-MCI-Dark_31681d0e-554c-4df1-b018-2ce548a1821c.png",
+            "expiryDate": "2026-11-23T00:30:00.000Z",
+            "description": "If Man City wins the English Premier League match between Man City and Fulham originally scheduled for November 21, 2026 at 7:30 AM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Premier League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "sortOrder": 1,
+            "gameId": "sr:sport_event:72221406",
+            "sportsMarket": {
+              "sport": "soccer",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "regulation"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1171100,
+          "legIndex": 4,
+          "contractId": "1130359",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1130359",
+            "contractName": "Alav\u00e9s",
+            "contractTicker": "ALA",
+            "eventTicker": "LALIGA-2611211300-DEP-ALA-M",
+            "eventName": "Deportivo vs Alav\u00e9s",
+            "category": "La Liga",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-LALIGA-2611211300-DEP-ALA-M-ALA",
+            "imageUrl": "https://images.ctfassets.net/jg6lo9a2ukvr/3UDZ1TOfBkLslvXlVWjSL/1ec7ef87051f3f1002a8371aaf231bbc/Alave%C3%8C_s.png",
+            "expiryDate": "2026-11-23T01:00:00.000Z",
+            "description": "This market resolves to Yes if Alav\u00e9s wins the LaLiga match between Alav\u00e9s and Deportivo scheduled for November 21, 2026 at 8:00 AM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (LaLiga), ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "sortOrder": 1,
+            "gameId": "sr:sport_event:72478706",
+            "sportsMarket": {
+              "sport": "soccer",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "regulation"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1171100,
+          "legIndex": 5,
+          "contractId": "1072397",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1072397",
+            "contractName": "Aston Villa",
+            "contractTicker": "AVL",
+            "eventTicker": "EPL-2611211500-SUN-AVL-M",
+            "eventName": "Sunderland vs Aston Villa",
+            "category": "EPL",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-EPL-2611211500-SUN-AVL-M-AVL",
+            "imageUrl": "https://assets.gemini.com/predictions/images/EPL-AVL-Dark_3000c363-9b47-4a2c-9611-c3c941799e39.png",
+            "expiryDate": "2026-11-23T03:00:00.000Z",
+            "description": "If Aston Villa wins the English Premier League match between Aston Villa and Sunderland originally scheduled for November 21, 2026 at 10:00 AM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Premier League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. Read the full contract [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf)",
+            "sortOrder": 1,
+            "gameId": "sr:sport_event:72221392",
+            "sportsMarket": {
+              "sport": "soccer",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "regulation"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "id": "475188",
+  "title": "Iowa State vs UCF: 2nd Quarter Point Spread",
+  "slug": "iowa-state-vs-ucf-2nd-quarter-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAF-2611202300-ISU-UCF-2QS",
+  "status": "active",
+  "createdAt": "2026-11-18T00:06:19.992Z",
+  "contracts": [
+    {
+      "id": "475188-1196172",
+      "label": "UCF -10.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UCF covers a -10.5 point spread against Iowa State during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning UCF scores more than 10.5 points more than Iowa State during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "UCF10",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-UCF10",
+      "marketState": "post_only",
+      "abbreviatedName": "UCF",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/UCF_Knights_fb007df0-067d-4cfe-8896-400cd5e87e46.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196174",
+      "label": "UCF -3.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UCF covers a -3.5 point spread against Iowa State during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning UCF scores more than 3.5 points more than Iowa State during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "UCF3",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-UCF3",
+      "marketState": "post_only",
+      "abbreviatedName": "UCF",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/UCF_Knights_fb007df0-067d-4cfe-8896-400cd5e87e46.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196175",
+      "label": "Iowa State -2.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State covers a -2.5 point spread against UCF during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning Iowa State scores more than 2.5 points more than UCF during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ISU2",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-ISU2",
+      "marketState": "post_only",
+      "abbreviatedName": "Iowa State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Iowa_State_Cyclones_9dffdd2b-b059-4b52-94f8-08b9745c6aed.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196177",
+      "label": "Iowa State -10.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State covers a -10.5 point spread against UCF during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning Iowa State scores more than 10.5 points more than UCF during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ISU10",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-ISU10",
+      "marketState": "post_only",
+      "abbreviatedName": "Iowa State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Iowa_State_Cyclones_9dffdd2b-b059-4b52-94f8-08b9745c6aed.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196178",
+      "label": "Iowa State -7.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State covers a -7.5 point spread against UCF during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning Iowa State scores more than 7.5 points more than UCF during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ISU7",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-ISU7",
+      "marketState": "post_only",
+      "abbreviatedName": "Iowa State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Iowa_State_Cyclones_9dffdd2b-b059-4b52-94f8-08b9745c6aed.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196179",
+      "label": "UCF -7.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UCF covers a -7.5 point spread against Iowa State during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning UCF scores more than 7.5 points more than Iowa State during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "UCF7",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-UCF7",
+      "marketState": "post_only",
+      "abbreviatedName": "UCF",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/UCF_Knights_fb007df0-067d-4cfe-8896-400cd5e87e46.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196180",
+      "label": "UCF -2.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UCF covers a -2.5 point spread against Iowa State during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning UCF scores more than 2.5 points more than Iowa State during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "UCF2",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-UCF2",
+      "marketState": "post_only",
+      "abbreviatedName": "UCF",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/UCF_Knights_fb007df0-067d-4cfe-8896-400cd5e87e46.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196181",
+      "label": "UCF -6.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UCF covers a -6.5 point spread against Iowa State during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning UCF scores more than 6.5 points more than Iowa State during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "UCF6",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-UCF6",
+      "marketState": "post_only",
+      "abbreviatedName": "UCF",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/UCF_Knights_fb007df0-067d-4cfe-8896-400cd5e87e46.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196183",
+      "label": "Iowa State -6.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State covers a -6.5 point spread against UCF during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning Iowa State scores more than 6.5 points more than UCF during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ISU6",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-ISU6",
+      "marketState": "post_only",
+      "abbreviatedName": "Iowa State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Iowa_State_Cyclones_9dffdd2b-b059-4b52-94f8-08b9745c6aed.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475188-1196187",
+      "label": "Iowa State -3.5 in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State covers a -3.5 point spread against UCF during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET, meaning Iowa State scores more than 3.5 points more than UCF during the 2nd quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 2nd quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:19.992Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "ISU3",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QS-ISU3",
+      "marketState": "post_only",
+      "abbreviatedName": "Iowa State",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Iowa_State_Cyclones_9dffdd2b-b059-4b52-94f8-08b9745c6aed.avif",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:06:19.992Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "name": "UCF",
+      "abbreviation": "UCF",
+      "side": "home"
+    },
+    {
+      "id": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "name": "UCF",
+      "abbreviation": "UCF",
+      "side": "home"
+    },
+    {
+      "id": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "name": "Iowa State",
+      "abbreviation": "ISU",
+      "side": "away"
+    },
+    {
+      "id": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "name": "Iowa State",
+      "abbreviation": "ISU",
+      "side": "away"
+    },
+    {
+      "id": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "name": "Iowa State",
+      "abbreviation": "ISU",
+      "side": "away"
+    },
+    {
+      "id": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "name": "UCF",
+      "abbreviation": "UCF",
+      "side": "home"
+    },
+    {
+      "id": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "name": "UCF",
+      "abbreviation": "UCF",
+      "side": "home"
+    },
+    {
+      "id": "53aaad5a-b81b-490e-b04a-b650156cd1db",
+      "name": "UCF",
+      "abbreviation": "UCF",
+      "side": "home"
+    },
+    {
+      "id": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "name": "Iowa State",
+      "abbreviation": "ISU",
+      "side": "away"
+    },
+    {
+      "id": "d335c726-44aa-4b69-8271-59d42d691cba",
+      "name": "Iowa State",
+      "abbreviation": "ISU",
+      "side": "away"
+    }
+  ],
+  "description": "Which team will cover the point spread in the 2nd quarter?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Football"
+  ],
+  "expiryDate": "2026-11-21T23:00:00.000Z",
+  "startTime": "2026-11-20T23:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+  "subcategory": {
+    "id": 13,
+    "slug": "sports_football_college-football",
+    "name": "College Football",
+    "path": [
+      "Sports",
+      "Football",
+      "College Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.avif",
+  "template": "sports-spread",
+  "gameId": "e8679097-f40e-4f6e-852c-4772f6f6f865",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Am. football"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "quarter",
+      "ordinal": 2
+    },
+    "metric": "points",
+    "team": {
+      "symbol": "UCF",
+      "name": "UCF Knights",
+      "externalIds": {
+        "sportradarId": "53aaad5a-b81b-490e-b04a-b650156cd1db"
+      }
+    }
+  }
+}

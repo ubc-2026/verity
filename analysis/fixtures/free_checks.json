@@ -1,5 +1,5 @@
 {
-  "note": "Free official-source checks run before any purchase. 'observed-2026-11-18' is a real reading of the weather terms PDF and the NWS CLINYC product. The two 'free-check-*' scenarios are FIXTURE ASSUMPTIONS kept for tests and the demo.",
+  "note": "Free official-source checks run before any purchase. Weather checks read the terms PDF plus the matching NWS CLI product. Sports/commodities/crypto checks read the contract terms for whether a settlement data version/issuance is named. 'observed-*' scenarios are real readings; 'free-check-*' scenarios are FIXTURE ASSUMPTIONS for tests and demos.",
   "checks": {
     "nyc-settlement-version": {
       "sources": [
@@ -26,6 +26,120 @@
         "free-check-inconclusive": {
           "result": "inconclusive",
           "finding": "FIXTURE ASSUMPTION: the terms cite 'NWS Climatological Report (Daily)' without naming which issuance controls, and the free CLINYC page shows only the latest issuance, not the exchange's rule.",
+          "fixture_assumption": true
+        }
+      }
+    },
+    "chi-midway-settlement-version": {
+      "sources": [
+        "Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "NWS Climatological Report (Daily) for Chicago-Midway, product CLIMDW"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the terms name the specific CLI issuance used for Midway settlement, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the market title says Chicago but settlement is Chicago-Midway; the terms cite the NWS daily climate report without naming which issuance controls, so the gap stays open.",
+          "fixture_assumption": true
+        }
+      }
+    },
+    "atl-settlement-version": {
+      "sources": [
+        "Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "NWS Climatological Report (Daily) for Atlanta, product CLIATL"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the terms name the specific CLI issuance used for Atlanta settlement, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the terms cite the NWS daily climate report without naming which issuance controls, so the gap stays open.",
+          "fixture_assumption": true
+        }
+      }
+    },
+    "bos-settlement-version": {
+      "sources": [
+        "Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "NWS Climatological Report (Daily) for Boston, product CLIBOS"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the terms name the specific CLI issuance used for Boston settlement, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the terms cite the NWS daily climate report without naming which issuance controls, so the gap stays open.",
+          "fixture_assumption": true
+        }
+      }
+    },
+    "sports-settlement-version": {
+      "sources": [
+        "Contract terms PDF for the sports market class",
+        "Named settlement provider in the event record (StatsScore / Sportradar / league official result)"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the sports terms name which provider feed version or official result issuance settles the contract, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the sports terms cite a data provider but do not name which feed version or corrected issuance controls settlement, so the gap stays open.",
+          "fixture_assumption": true
+        }
+      }
+    },
+    "commodity-settlement-version": {
+      "sources": [
+        "Contract terms PDF for the commodity market class",
+        "Named index provider in the event record (Kaiko / similar)"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the commodity terms name which index print or corrected issuance settles the contract, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the commodity terms cite an index without naming which print or correction controls settlement, so the gap stays open.",
+          "fixture_assumption": true
+        }
+      }
+    },
+    "crypto-settlement-version": {
+      "sources": [
+        "Contract terms PDF for the crypto market class",
+        "Named reference rate provider in the event record (Lukka / similar)"
+      ],
+      "cost_base_units": "0",
+      "scenarios": {
+        "free-check-answers": {
+          "result": "answered",
+          "finding": "FIXTURE ASSUMPTION: the crypto terms name which reference-rate print or corrected issuance settles the contract, so no purchase is needed.",
+          "fixture_assumption": true
+        },
+        "free-check-inconclusive": {
+          "result": "inconclusive",
+          "finding": "FIXTURE ASSUMPTION: the crypto terms cite a reference rate without naming which print or correction controls settlement, so the gap stays open.",
           "fixture_assumption": true
         }
       }

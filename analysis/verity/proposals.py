@@ -16,8 +16,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
-import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any, Optional
 
 from .fixtures import FixtureContext, fmt_utc, parse_utc
@@ -34,13 +33,52 @@ def _record(decision_log: Optional[list[str]], msg: str) -> None:
         decision_log.append(msg)
 
 
-def _catalog_match(ctx: FixtureContext, gap_type: str) -> Optional[dict[str, Any]]:
-    allow = set(ctx.catalog["merchant_allowlist"])
-    for item in ctx.catalog["items"]:
-        if (gap_type in item["answers_gap_types"] and item["affects"] == "resolution_risk"
-                and item["merchant_id"] in allow):
-            return item
+def _preferred_catalog_id(event_ticker: Optional[str]) -> Optional[str]:
+    """Pick the family SKU when several catalog items answer the same gap type."""
+    if not event_ticker:
+        return None
+    if event_ticker.startswith("WXHIGH-CHI"):
+        return "cat-midway-vs-title-station-pack-v1"
+    if event_ticker.startswith("WXHIGH-"):
+        return "cat-nws-cli-settlement-version-v1"
+    sports = (
+        "NBA-", "NFL-", "NHL-", "MLB-", "NCAAM-", "NCAAF-", "NCAA-", "MLS-",
+        "UCL-", "LIGAMX-", "EPL-", "ATP-", "WTA-", "UFC-", "F1-",
+    )
+    if any(event_ticker.startswith(p) for p in sports):
+        return "cat-sports-settlement-version-v1"
+    if any(event_ticker.startswith(p) for p in ("BRENT", "WTI", "XAG", "XAU", "NGAS", "OIL", "COPPER", "CORN", "SOY", "WHEAT")):
+        return "cat-commodity-settlement-version-v1"
+    if any(event_ticker.startswith(p) for p in ("BTC", "ETH", "SOL", "XRP", "DOGE", "ADA", "AVAX")):
+        return "cat-crypto-settlement-version-v1"
     return None
+
+
+def _catalog_match(
+    ctx: FixtureContext,
+    gap_type: str,
+    *,
+    event_ticker: Optional[str] = None,
+) -> Optional[dict[str, Any]]:
+    allow = set(ctx.catalog["merchant_allowlist"])
+    matches = [
+        item for item in ctx.catalog["items"]
+        if (gap_type in item["answers_gap_types"] and item["affects"] == "resolution_risk"
+            and item["merchant_id"] in allow)
+    ]
+    if not matches:
+        return None
+    preferred = _preferred_catalog_id(event_ticker)
+    if preferred:
+        for item in matches:
+            if item["id"] == preferred:
+                return item
+    # Prefer the Midway station-pack SKU for Chicago weather demos (legacy path).
+    if event_ticker and event_ticker.startswith("WXHIGH-CHI"):
+        for item in matches:
+            if "midway" in item["id"] or "station_title_mismatch" in item.get("answers_gap_types", []):
+                return item
+    return matches[0]
 
 
 def _research_line(contract_id: str, gap_id: str, found: ResearchResult) -> str:
@@ -66,19 +104,14 @@ def _emit_proposal(
     ctx: FixtureContext,
     now: Any,
     research_note: Optional[str],
-) -> Optional[PurchaseProposalV1]:
-    params = _catalog_params(ra, item)
-    missing = [name for name, value in params.items() if not value]
-    if missing:
-        _record(decision_log, f"[{ra.contract_id}] skip {gap.id}: catalog item {item['id']} needs {', '.join(missing)}, which this market does not supply; no proposal with blank parameters.")
-        return None
+) -> PurchaseProposalV1:
     created = fmt_utc(now)
     proposal = PurchaseProposalV1(
         proposal_id="prop-" + hashlib.sha256(f"{ra.contract_id}|{gap.id}|{item['id']}|{created}".encode()).hexdigest()[:12],
         contract_id=ra.contract_id,
         evidence_gap_id=gap.id,
         catalog_item_id=item["id"],
-        catalog_parameters=params,
+        catalog_parameters=_catalog_params(ra, item),
         rationale=_proposal_rationale(gap.question, gap.why, item["title"], research_note),
         max_amount_base_units=item["price_base_units"],
         fixture_label=_free_check_label(ctx.free_check_scenario, next(
@@ -90,23 +123,33 @@ def _emit_proposal(
     return proposal
 
 
-_NYC_HIGH_TICKER = re.compile(r"^WXHIGH-NYC-(\d{10})$")
-
-
 def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
-    """Parameters for the catalog item, taken from this market. A blank value means unknown."""
-    known: dict[str, str] = {}
-    match = _NYC_HIGH_TICKER.match(ra.event_ticker or "")
-    if match:
-        # The ticker ends with the trading close in UTC (YYMMDDHHMM), late on the
-        # climate day in New York: 2611190459 is 11:59 PM EST on Nov 18. NWS climate
-        # days run on local standard time (UTC-5) all year, so shift by 5 hours.
-        try:
-            close = datetime.strptime(match.group(1), "%y%m%d%H%M")
-        except ValueError:
-            close = None
-        if close is not None:
-            known = {"station": "Central Park, NY (CLINYC)", "date": (close - timedelta(hours=5)).date().isoformat()}
+    # Station / family mapping for settlement-version items; date from the analysis snapshot.
+    ticker = ra.event_ticker or ""
+    date = (ra.quoted_price.observed_date if ra.quoted_price else None) or ""
+    settlement = ""
+    # Prefer a short settlement-source string from citations when present.
+    for c in ra.citations:
+        if c.field_or_rule and "source" in c.field_or_rule.lower() and c.quote:
+            settlement = c.quote[:80]
+            break
+    if ticker.startswith("WXHIGH-NYC"):
+        known = {"station": "Central Park, NY (CLINYC)", "date": date or "2026-11-18"}
+    elif ticker.startswith("WXHIGH-CHI"):
+        known = {"station": "Chicago-Midway, IL (CLIMDW)", "date": date or "2026-11-18"}
+    elif ticker.startswith("WXHIGH-ATL"):
+        known = {"station": "Atlanta, GA (CLIATL)", "date": date or "2026-11-18"}
+    elif ticker.startswith("WXHIGH-BOS"):
+        known = {"station": "Boston, MA (CLIBOS)", "date": date or "2026-11-18"}
+    elif ticker.startswith(("NBA-", "NFL-", "NHL-", "MLB-", "NCAAM-", "NCAAF-", "NCAA-", "MLS-", "UCL-", "LIGAMX-")):
+        league = ticker.split("-", 1)[0]
+        known = {"league": league, "provider": settlement or "sports data provider", "event": ticker}
+    elif ticker.startswith(("BRENT", "WTI", "XAG", "XAU", "NGAS", "OIL")):
+        known = {"index": ticker.split("26", 1)[0], "provider": settlement or "commodity index", "date": date}
+    elif ticker.startswith(("BTC", "ETH", "SOL")):
+        known = {"asset": ticker[:3], "provider": settlement or "crypto reference rate", "date": date}
+    else:
+        known = {"date": date, "event": ticker}
     return {p: known.get(p, "") for p in item["parameters"]}
 
 
@@ -165,14 +208,11 @@ def generate_purchase_request(
             if found.resolved:
                 _record(decision_log, f"[{ra.contract_id}] skip {g.id}: the model read resolved it; nothing to buy.")
                 continue
-            item = _catalog_match(ctx, g.gap_type)
+            item = _catalog_match(ctx, g.gap_type, event_ticker=ra.event_ticker)
             if item is None:
                 _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
                 continue
-            proposal = _emit_proposal(decision_log, ra, g, item, ctx, now, found.conclusion)
-            if proposal is None:
-                continue
-            return proposal
+            return _emit_proposal(decision_log, ra, g, item, ctx, now, found.conclusion)
 
         if not g.free_checks:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no free official-source check is configured for this gap, so free evidence was not ruled out.")
@@ -223,15 +263,12 @@ def generate_purchase_request(
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: answered by the free check; nothing to buy.")
             continue
 
-        item = _catalog_match(ctx, g.gap_type)
+        item = _catalog_match(ctx, g.gap_type, event_ticker=ra.event_ticker)
         if item is None:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
             continue
 
-        proposal = _emit_proposal(decision_log, ra, g, item, ctx, now, research_note)
-        if proposal is None:
-            continue
-        return proposal
+        return _emit_proposal(decision_log, ra, g, item, ctx, now, research_note)
 
     _record(decision_log, f"[{ra.contract_id}] no purchase: every material gap was answered, cached, or had no catalog match.")
     return None

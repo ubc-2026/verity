@@ -1,0 +1,622 @@
+[
+  {
+    "ticker": "WXHIGH-CHI-2611200459",
+    "title": "Highest temperature in Chicago on November 19, 2026?",
+    "outcome": "66°F to 67°F",
+    "category": "Weather",
+    "volume": "0",
+    "sourceDetails": null,
+    "termsLink": "",
+    "outcome_rule_excerpt": "This market will resolve based on the highest temperature recorded at Chicago-Midway, IL on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Chicago-Midway, IL.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Chicago-Midway on November 19, 2026, as reported in the first pu",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but terms PDF not read; event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "event_terms_url_empty",
+      "terms_url_missing",
+      "terms_not_read: no terms URL in the event",
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-WXHIGH-CHI-2611200459-66TO67] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-WXHIGH-CHI-2611200459-66TO67] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "66°F to 67°F",
+      "best_bid": "0.61",
+      "best_ask": "0.66",
+      "mid": "0.635",
+      "implied_probability": "0.635",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:30:55Z"
+    }
+  },
+  {
+    "ticker": "WXHIGH-NYC-2611200459",
+    "title": "Highest temperature in NYC on November 19, 2026?",
+    "outcome": "65°F to 66°F",
+    "category": "Weather",
+    "volume": "0",
+    "sourceDetails": null,
+    "termsLink": "",
+    "outcome_rule_excerpt": "This market will resolve based on the highest temperature recorded at Central Park NY, NY on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Central Park NY, NY.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Central Park NY on November 19, 2026, as reported in the first",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but terms PDF not read; event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "event_terms_url_empty",
+      "terms_url_missing",
+      "terms_not_read: no terms URL in the event",
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "nyc-settlement-version"
+        ]
+      }
+    ],
+    "decision_log": [
+      "[GEMI-WXHIGH-NYC-2611200459-65TO66] GAP-1: free check 'nyc-settlement-version' has no result for scenario None; cannot validate the gap, so no purchase."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "65°F to 66°F",
+      "best_bid": "0.45",
+      "best_ask": "0.48",
+      "mid": "0.465",
+      "implied_probability": "0.465",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:30:56Z"
+    }
+  },
+  {
+    "ticker": "BRENT2611192200",
+    "title": "Oil (Brent) price on November 19?",
+    "outcome": "$91 or above",
+    "category": "Commodities",
+    "volume": "79.32",
+    "sourceDetails": {
+      "agency": "kaiko-equities",
+      "index": "KK_RFR_BRENTOILUSDC"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf",
+    "outcome_rule_excerpt": "If the price of Oil (Brent) is $91 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://ap",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-BRENT2611192200-HI91] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-BRENT2611192200-HI91] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "$91 or above",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
+      "volume_usd": "79.32",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:30:57Z"
+    }
+  },
+  {
+    "ticker": "XAG2611192200",
+    "title": "Silver price on November 19?",
+    "outcome": "$46 or above",
+    "category": "Commodities",
+    "volume": "12",
+    "sourceDetails": {
+      "agency": "kaiko-equities",
+      "index": "KK_RFR_XAGUSDC"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/silver_bf12c4df-32c2-45bf-8790-d068bc5c2763.pdf",
+    "outcome_rule_excerpt": "If the price of Silver is $46 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAGUSDC index. This index provides a 60 second average of the [SILVER-USDC](https://app.hyperliqui",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-XAG2611192200-HI46] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-XAG2611192200-HI46] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "$46 or above",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
+      "volume_usd": "12",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:30:58Z"
+    }
+  },
+  {
+    "ticker": "NGAS2611192200",
+    "title": "Natural Gas price on November 19?",
+    "outcome": "$3.85 or above",
+    "category": "Commodities",
+    "volume": "0",
+    "sourceDetails": {
+      "agency": "kaiko-equities",
+      "index": "KK_RFR_NATGASUSDC"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/NATGAS1_Terms_and_Conditions_74071889-27c7-4398-9fc7-203097d4d2c2.pdf",
+    "outcome_rule_excerpt": "If the price of Natural Gas is $3.85 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_NATGASUSDC index. This index provides a 60 second average of the [NATGAS-USDC](https://app.",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-NGAS2611192200-HI3D850] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-NGAS2611192200-HI3D850] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "$3.85 or above",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:31:01Z"
+    }
+  },
+  {
+    "ticker": "WTI2611192200",
+    "title": "Oil (WTI) price on November 19?",
+    "outcome": "$84 or above",
+    "category": "Commodities",
+    "volume": "84",
+    "sourceDetails": {
+      "agency": "kaiko-equities",
+      "index": "KK_RFR_WTIUSDC"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+    "outcome_rule_excerpt": "If the price of Oil (WTI) is $84 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperli",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-WTI2611192200-HI84] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-WTI2611192200-HI84] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "$84 or above",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
+      "volume_usd": "84",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:31:02Z"
+    }
+  },
+  {
+    "ticker": "BTC2611192200",
+    "title": "BTC price on November 19",
+    "outcome": "$63,500 or above",
+    "category": "Crypto",
+    "volume": "19765.15",
+    "sourceDetails": {
+      "agency": "lukka",
+      "index": "LS-LRRR-XBTUSD"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf",
+    "outcome_rule_excerpt": "If the price of Bitcoin (BTC) is $63,500 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_co",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 2,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 7,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-BTC2611192200-HI63500] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-BTC2611192200-HI63500] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "$63,500 or above",
+      "best_bid": "0.43",
+      "best_ask": "0.47",
+      "mid": "0.45",
+      "implied_probability": "0.45",
+      "volume_usd": "19765.15",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:31:03Z"
+    }
+  },
+  {
+    "ticker": "BTC05M2611190430",
+    "title": "BTC price today at 11:30pm EST",
+    "outcome": "Up",
+    "category": "Crypto",
+    "volume": "60.9",
+    "sourceDetails": {
+      "agency": "lukka",
+      "index": "LS-LRRR-XBTUSD"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf",
+    "outcome_rule_excerpt": "If the price of Bitcoin (BTC) is greater than or equal to the price specified in the title on November 18, 2026 at 11:30pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-BTC05M2611190430-UP] no purchase: -1 day, 23:58:57 to expiry is under 1h (Agent rule 11)."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "Up",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
+      "volume_usd": "60.9",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:31:03Z"
+    }
+  },
+  {
+    "ticker": "LIGAMX-2611210300-ALA-JUA-M",
+    "title": "Atlas vs Juárez",
+    "outcome": "Atlas",
+    "category": "Sports",
+    "volume": "9.66",
+    "sourceDetails": {
+      "agency": "statscore-rest-api",
+      "index": "Soccer"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf",
+    "outcome_rule_excerpt": "This market resolves to Yes if Atlas wins the Liga MX match between Atlas and Juárez scheduled for November 20, 2026 at 10:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are ",
+    "scores": {
+      "ambiguity": 1,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Objective outcome; the terms were read and name the rule.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 7,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-LIGAMX-2611210300-ALA-JUA-M-ALA] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-LIGAMX-2611210300-ALA-JUA-M-ALA] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "Atlas",
+      "best_bid": "0.46",
+      "best_ask": "0.47",
+      "mid": "0.465",
+      "implied_probability": "0.465",
+      "volume_usd": "9.66",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:31:04Z"
+    }
+  },
+  {
+    "ticker": "ETH2611192200",
+    "title": "ETH price on November 19",
+    "outcome": "$1,800 or above",
+    "category": "Crypto",
+    "volume": "96.6",
+    "sourceDetails": {
+      "agency": "lukka",
+      "index": "LS-LRRR-ETHUSD"
+    },
+    "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+    "outcome_rule_excerpt": "If the price of Ether (ETH) is $1,800 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_condi",
+    "scores": {
+      "ambiguity": 2,
+      "source": 2,
+      "liquidity": 3,
+      "correlation": 1,
+      "ambiguity_reason": "Clear outcome, but numeric band edges decide the outcome.",
+      "source_reason": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+      "ambiguity_null": null,
+      "source_null": null,
+      "correlation_null": null
+    },
+    "rating": {
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "final_rating": "Medium",
+      "complete": true,
+      "action": "investigate"
+    },
+    "flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": []
+      }
+    ],
+    "decision_log": [
+      "[GEMI-ETH2611192200-HI1800] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+      "[GEMI-ETH2611192200-HI1800] no purchase: every material gap was answered, cached, or had no catalog match."
+    ],
+    "has_proposal": false,
+    "proposal": null,
+    "quoted_price": {
+      "outcome_label": "$1,800 or above",
+      "best_bid": "0.43",
+      "best_ask": "0.49",
+      "mid": "0.46",
+      "implied_probability": "0.46",
+      "volume_usd": "96.6",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T04:31:06Z"
+    }
+  }
+]

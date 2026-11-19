@@ -1,0 +1,448 @@
+{
+  "id": "478199",
+  "title": "ETH price on November 19",
+  "slug": "eth-price-on-november-19",
+  "type": "categorical",
+  "category": "Crypto",
+  "ticker": "ETH2611192200",
+  "status": "active",
+  "createdAt": "2026-11-18T20:57:24.389Z",
+  "contracts": [
+    {
+      "id": "478199-1212006",
+      "label": "$1,720 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,720 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.95",
+          "no": "0.11"
+        },
+        "sell": {
+          "yes": "0.89",
+          "no": "0.05"
+        },
+        "bestBid": "0.89",
+        "bestAsk": "0.95"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1720",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1720",
+      "marketState": "open",
+      "abbreviatedName": ">$1,720",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "above",
+        "value": "1720"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212007",
+      "label": "$1,760 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,760 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.81",
+          "no": "0.25"
+        },
+        "sell": {
+          "yes": "0.75",
+          "no": "0.19"
+        },
+        "bestBid": "0.75",
+        "bestAsk": "0.81"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1760",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1760",
+      "marketState": "open",
+      "abbreviatedName": ">$1,760",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "above",
+        "value": "1760"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212026",
+      "label": "$1,800 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,800 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.49",
+          "no": "0.55"
+        },
+        "sell": {
+          "yes": "0.45",
+          "no": "0.51"
+        },
+        "bestBid": "0.45",
+        "bestAsk": "0.49",
+        "lastTradePrice": "0.5"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1800",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1800",
+      "marketState": "open",
+      "abbreviatedName": ">$1,800",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "above",
+        "value": "1800"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212043",
+      "label": "$1,840 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,840 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.23",
+          "no": "0.83"
+        },
+        "sell": {
+          "yes": "0.17",
+          "no": "0.77"
+        },
+        "bestBid": "0.17",
+        "bestAsk": "0.23"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1840",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1840",
+      "marketState": "open",
+      "abbreviatedName": ">$1,840",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "above",
+        "value": "1840"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212045",
+      "label": "$1,880 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,880 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1",
+          "no": "0.96"
+        },
+        "sell": {
+          "yes": "0.04",
+          "no": "0.9"
+        },
+        "bestBid": "0.04",
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1880",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1880",
+      "marketState": "open",
+      "abbreviatedName": ">$1,880",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "above",
+        "value": "1880"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212000",
+      "label": "$1,600 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,600 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.04"
+        },
+        "sell": {
+          "yes": "0.96"
+        },
+        "bestBid": "0.96"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1600",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1600",
+      "marketState": "open",
+      "abbreviatedName": ">$1,600",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "above",
+        "value": "1600"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212002",
+      "label": "$1,640 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,640 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.04"
+        },
+        "sell": {
+          "yes": "0.96"
+        },
+        "bestBid": "0.96"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1640",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1640",
+      "marketState": "open",
+      "abbreviatedName": ">$1,640",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "above",
+        "value": "1640"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478199-1212004",
+      "label": "$1,680 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Ether (ETH) is $1,680 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-ETHUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.05"
+        },
+        "sell": {
+          "yes": "0.95"
+        },
+        "bestBid": "0.95"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:57:24.389Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+      "ticker": "HI1680",
+      "instrumentSymbol": "GEMI-ETH2611192200-HI1680",
+      "marketState": "open",
+      "abbreviatedName": ">$1,680",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "above",
+        "value": "1680"
+      },
+      "source": "LS-LRRR-ETHUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T20:57:24.389Z",
+  "isLive": true,
+  "participants": [],
+  "description": "Interval ETH price prediction event expiring on November 19, 2026 at 5pm ET",
+  "imageUrl": "https://assets.gemini.com/predictions/images/eth_427f68cf-9bf1-4b52-9738-6e906c1e2146.avif",
+  "series": "ETH1H",
+  "volume": "96.6",
+  "volume24h": "96.6",
+  "tags": [
+    "Ether"
+  ],
+  "expiryDate": "2026-11-19T22:00:00.000Z",
+  "startTime": "2026-11-18T21:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf",
+  "subcategory": {
+    "id": 33,
+    "slug": "crypto_ether",
+    "name": "Ether",
+    "path": [
+      "Crypto",
+      "Ether"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/eth_ad2adf62-6fe8-4b44-9191-0f6ac0124f9c.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Top_10_-_ETH_1_16c5f932-572c-46fe-b1f9-33d65ee671fb.avif",
+  "template": "prices-ladder",
+  "eventTags": [
+    {
+      "id": 14,
+      "name": "Daily",
+      "slug": "daily"
+    },
+    {
+      "id": 18,
+      "name": "Reference",
+      "slug": "reference"
+    }
+  ],
+  "source": "LS-LRRR-ETHUSD",
+  "sourceDetails": {
+    "agency": "lukka",
+    "index": "LS-LRRR-ETHUSD"
+  },
+  "volumeDelta24hPct": "0"
+}

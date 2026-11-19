@@ -1,0 +1,534 @@
+{
+  "id": "475800",
+  "title": "Arizona vs Kansas City: Quarterback Passing Touchdowns",
+  "slug": "arizona-vs-kansas-city-quarterback-passing-touchdowns",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NFL-2611221800-ARI-KC-PPPASSTD",
+  "status": "active",
+  "createdAt": "2026-11-18T02:07:54.736Z",
+  "contracts": [
+    {
+      "id": "475800-1199097",
+      "label": "Patrick Mahomes 1+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Patrick Mahomes records 1 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.95",
+          "no": "0.18"
+        },
+        "sell": {
+          "yes": "0.82",
+          "no": "0.05"
+        },
+        "bestBid": "0.82",
+        "bestAsk": "0.95"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "MAHOMESO0",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-MAHOMESO0",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 0,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "0.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Patrick Mahomes",
+        "externalIds": {
+          "sportradar": "11cad59d-90dd-449c-a839-dddaba4fe16c"
+        }
+      }
+    },
+    {
+      "id": "475800-1199099",
+      "label": "Patrick Mahomes 2+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Patrick Mahomes records 2 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.69",
+          "no": "0.43"
+        },
+        "sell": {
+          "yes": "0.57",
+          "no": "0.31"
+        },
+        "bestBid": "0.57",
+        "bestAsk": "0.69"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "MAHOMESO1",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-MAHOMESO1",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 1,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Patrick Mahomes",
+        "externalIds": {
+          "sportradar": "11cad59d-90dd-449c-a839-dddaba4fe16c"
+        }
+      }
+    },
+    {
+      "id": "475800-1200846",
+      "label": "Carson Beck 1+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carson Beck records 1 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.6",
+          "no": "0.52"
+        },
+        "sell": {
+          "yes": "0.48",
+          "no": "0.4"
+        },
+        "bestBid": "0.48",
+        "bestAsk": "0.6"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BECKO0",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-BECKO0",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 5,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "0.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Carson Beck",
+        "externalIds": {
+          "sportradar": "a67c28ce-9e03-46f1-9fb6-b5ef70eb20db"
+        }
+      }
+    },
+    {
+      "id": "475800-1199103",
+      "label": "Patrick Mahomes 3+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Patrick Mahomes records 3 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.39",
+          "no": "0.73"
+        },
+        "sell": {
+          "yes": "0.27",
+          "no": "0.61"
+        },
+        "bestBid": "0.27",
+        "bestAsk": "0.39"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "MAHOMESO2",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-MAHOMESO2",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 2,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Patrick Mahomes",
+        "externalIds": {
+          "sportradar": "11cad59d-90dd-449c-a839-dddaba4fe16c"
+        }
+      }
+    },
+    {
+      "id": "475800-1200847",
+      "label": "Carson Beck 2+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carson Beck records 2 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.25",
+          "no": "0.88"
+        },
+        "sell": {
+          "yes": "0.12",
+          "no": "0.75"
+        },
+        "bestBid": "0.12",
+        "bestAsk": "0.25"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BECKO1",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-BECKO1",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 6,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Carson Beck",
+        "externalIds": {
+          "sportradar": "a67c28ce-9e03-46f1-9fb6-b5ef70eb20db"
+        }
+      }
+    },
+    {
+      "id": "475800-1199104",
+      "label": "Patrick Mahomes 4+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Patrick Mahomes records 4 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.18",
+          "no": "0.96"
+        },
+        "sell": {
+          "yes": "0.04",
+          "no": "0.82"
+        },
+        "bestBid": "0.04",
+        "bestAsk": "0.18"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "MAHOMESO3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-MAHOMESO3",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 3,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Patrick Mahomes",
+        "externalIds": {
+          "sportradar": "11cad59d-90dd-449c-a839-dddaba4fe16c"
+        }
+      }
+    },
+    {
+      "id": "475800-1199108",
+      "label": "Patrick Mahomes 5+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Patrick Mahomes records 5 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.11"
+        },
+        "sell": {
+          "no": "0.89"
+        },
+        "bestAsk": "0.11"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "MAHOMESO4",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-MAHOMESO4",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 4,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Patrick Mahomes",
+        "externalIds": {
+          "sportradar": "11cad59d-90dd-449c-a839-dddaba4fe16c"
+        }
+      }
+    },
+    {
+      "id": "475800-1200855",
+      "label": "Carson Beck 3+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carson Beck records 3 or more Passing Touchdowns in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1"
+        },
+        "sell": {
+          "no": "0.9"
+        },
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:07:54.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BECKO2",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPPASSTD-BECKO2",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 7,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Carson Beck",
+        "externalIds": {
+          "sportradar": "a67c28ce-9e03-46f1-9fb6-b5ef70eb20db"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T02:07:54.736Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "439",
+      "name": "Kansas City Chiefs",
+      "abbreviation": "KC",
+      "side": "home"
+    },
+    {
+      "id": "454",
+      "name": "Arizona Cardinals",
+      "abbreviation": "ARI",
+      "side": "away"
+    }
+  ],
+  "description": "How many passing touchdowns will each quarterback throw?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Football"
+  ],
+  "expiryDate": "2026-11-24T06:00:00.000Z",
+  "startTime": "2026-11-22T18:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+  "subcategory": {
+    "id": 12,
+    "slug": "sports_football_pro-football",
+    "name": "Pro Football",
+    "path": [
+      "Sports",
+      "Football",
+      "Pro Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Football_square_1_7660ad42-c561-4e8b-8bc7-175a1c63ae5c.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-18T101349482_3eca341e-eaaf-4842-a5ac-ed7c6784042a.avif",
+  "template": "sports-player-props",
+  "gameId": "11a2523d-bace-4fd9-80ab-66a1b5096dc7",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "American Football Player Props"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "prop",
+    "subject": "player",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "passing_touchdowns",
+    "team": {
+      "symbol": "KC",
+      "name": "Kansas City Chiefs",
+      "externalIds": {
+        "sportradarId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2"
+      }
+    },
+    "player": {
+      "symbol": "MAHOMES",
+      "name": "Patrick Mahomes",
+      "externalIds": {
+        "sportradarId": "11cad59d-90dd-449c-a839-dddaba4fe16c",
+        "officialLeagueId": "00-0033873",
+        "officialLeagueSource": "nfl_gsis"
+      },
+      "position": "QB",
+      "number": "15"
+    }
+  }
+}

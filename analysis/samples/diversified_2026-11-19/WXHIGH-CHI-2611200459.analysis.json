@@ -1,0 +1,164 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+    "event_ticker": "WXHIGH-CHI-2611200459",
+    "instrument_symbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+    "question": "Highest temperature in Chicago on November 19, 2026?",
+    "expiry_utc": "2026-11-20T04:59:59.000Z",
+    "analyzed_at_utc": "2026-11-19T05:03:21Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T05:03:21Z",
+      "snapshot_hash": "sha256:1dd962795a5ef86c63438c6d8e7f70c8987c6ff950503ceac4dc3a89a09e909e",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "66°F to 67°F",
+      "best_bid": "0.62",
+      "best_ask": "0.67",
+      "mid": "0.645",
+      "implied_probability": "0.645",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T05:03:21Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 2,
+        "rationale": "Clear outcome, but event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "event-total volume $0 is under $100 (5c spread).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 8,
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "event.description",
+        "quote": "Highest temperature in Chicago on November 19, 2026?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "contract.description",
+        "quote": "This market will resolve based on the highest temperature recorded at Chicago-Midway, IL on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Chicago-Midway, IL.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Chicago-Midway on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf)."
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Attachment\n \nA\n \nRule\n \nText\n \nfor\n \n“Will\n \n{weather\n \nindicator}\n \nfor\n \n{location}\n \nduring\n \n{period}\n \nbe\n \n{above/below/at\n \nleast/between}\n \n{value}?”\n \n \nRule\n \n13.111\n \n(a)\n \nGeneral\n \n(1)\n \nThese\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \n“\nWill\n \n{weather\n \nindicator}\n \nfor\n \n{location}\n \nduring\n \n{period}\n \nbe\n \n{above/below/at\n \nleast/between}\n \n{value}?\n”\n \n(“\nWEATHER1\n”\n \nor\n \nthe\n \n“\nContract\n”)\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContract\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n(2)\n \nCapitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nExchange\n \nRulebook.\n \n(b)\n \nUnderlying\n \n(1)\n \nThe\n \nUnderlying\n \nfor\n \neach\n \nWEATHER1\n \nis\n \nthe\n \nextent\n \nof\n \noccurrence\n \nof\n \n{weather\n \nindicator}\n \nin\n \n{location}\n \nduring\n \n{period}\n \nas\n \nreported\n \nby\n \nthe\n \nNational\n \nWeather\n \nService,\n \nfor\n \na\n \n{location}\n \nwithin\n \nthe\n \nUnited\n \nStates,\n \nor\n \nanalogous\n \nweather\n \nservice\n \nfor\n \na\n \n{location}\n \nelsewhere.\n \n(2)\n \nCash-settled\n \nWEATHER1\n \nContracts\n \nare\n \navailable\n \nfor\n \nany\n \n{weather\n \nindicator}\n \nlisted\n \nby\n \nthe\n \nExchange\n \n(collectively,\n \nthe\n \n“Contracts”).\n \n(3)\n \nThe\n \nSource\n \nAgencies\n \nfor\n \nany\n \n{location}\n \nin\n \nthe\n \nUnited\n \nStates\n \nare,\n \nin\n \nhierarchical\n \norder,\n \nunless\n \notherwise\n \nspecified\n \nby\n \nthe\n \nExchange\n \nat\n \nthe\n \ntime\n \nof\n \nlisting:\n \n(i)\n \nPrimary\n \nSource:\n \nthe\n \napplicable\n \nNational\n \nWeather\n \nService\n \n(“NWS”)\n \nClimatological\n \nReport,\n \nincluding\n \nthe\n \nLocal\n \nClimatological\n \nData\n \n(“LC”)\n \npublication,\n \nfor\n \nthe\n \nrelevant\n \n{location};\n \n(ii)\n \nSecondary\n \nSources:\n \nWeather\n \nUnderground\n \n(\nwunderground.com\n)\n \nor\n \nThe\n \nWeather\n \nCompany\n \n(\nweather.com\n);\n \nand\n \n(iii)\n \nTertiary\n \nSources:\n \nNOAA\n \nClimate\n \nData\n \nOnline\n \n(“CDO”)\n \nor\n \nthe\n \nIowa\n \nEnvironmental\n \nMesonet\n \n(“IEM”)\n \nASOS/AWOS\n \nstation\n \ndata\n \nportal.\n  \nThe\n \nSource\n \nAgency\n \nfor\n \nany\n \n{location}\n \noutside\n \nthe\n \nUnited\n \nStates\n \nis\n  \nis\n \none\n \nor\n \nmore\n \nofficial\n \ngovernmental,\n \nquasi-governmental,\n \nnational,\n \nor\n \nregional\n \nmeteorological\n \nauthorities\n \nwith\n \nreporting\n \njurisdiction\n \nover\n \nthe\n \napplicable\n \n{location}.\n \n(4)\n \nThe\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n \n(c)\n \nIssuance\n \n(1)\n \nAfter\n \nthe\n \ninitial\n \nContract,\n \nContract\n \niterations\n \nwill\n \nbe\n \nlisted\n \non\n \nan\n \nas-needed\n \nbasis\n \nat\n \nthe\n \ndiscretion\n \nof\n \nthe\n \nExchange\n \nand\n \ncorresponding\n \nto\n \nthe\n \nrisk\n \nmanagement\n \nneeds\n \nof\n \nMembers.\n \n(i)\n \n{weather\n \nindicator}\n \nrefers\n \nto\n \nan\n \nempirical\n \nmeasurement\n \nof\n \na\n \nparticular\n \nmeteorological\n \nphenomenon\n \n(e.g.,\n \ntotal\n \nrainfall,\n \nnumber\n \nof\n \nobserved\n \ntornadoes,\n \nor\n \nmaximum/minimum/mean\n \ntemperature)\n \nidentified\n \nby\n \nthe\n \nExchange;\n \n \n(ii)\n \n{location}\n \nrefers\n \nto\n \na\n \nspecific\n \nplace,\n \nregion,\n \nor\n \nset\n \nof\n \nplaces\n \nand/or\n \nregions\n \n(e.g.,\n \nthe\n \nState\n \nof\n \nVermont,\n \nor\n \nthe\n \nset\n \nof\n \nU.S.\n \nstate-capital\n \ncities),\n \nspecified\n \nby\n \nthe\n \nExchange;\n \n(iii)\n \n{period}\n \nrefers\n \nto\n \na\n \nperiod\n \nof\n \ntime\n \nspecified\n \nby\n \nthe\n \nExchange.\n \nIn\n \ndescriptions\n \nof\n \n{period},\n \n“between”\n \nis\n \ninclusive\n \nof\n \nboth\n \nendpoints,\n \nwhile\n \n“before”\n \nand\n \n“after”\n \nexclude\n \nthe\n \nspecified\n \ndate\n \nunless\n \nstated\n \notherwise.\n \n(iv)\n \n{value}\n \nrefers\n \nto\n \na\n \nmeasurement\n \ngermane\n \nto\n \nthe\n \n{weather\n \nindicator}\n \nunderlying\n \nthe\n \nContract\n \nand\n \nrecorded\n \nby\n \nthe\n \nSource\n \nAgency\n \n(e.g.,\n \ninches\n \nof\n \nmercury\n \nfor\n \natmospheric\n \npressure).\n \n(d)\n \nContract\n \nSize\n \n(1)\n \nEach\n \nWEATHER1\n \nhas\n \na\n \nnotional\n \nsize\n \nof\n \none\n \ndollar\n \n($1.00).\n \n(e)\n \nSettlement\n \nand\n \nExpiration\n \n(1)\n \nThe\n \nPayout\n \nCriterion\n \nfor\n \nthe\n \nContract\n \nencompasses\n \nthe\n \nExpiration\n \nValues\n \nthat\n \n{value}\n \nis\n \n{above/below/at\n \nleast/between}\n \nthe\n \nspecified\n \nvalue\n \nfor\n \n{period}.\n \n \n(2)\n \nThe\n \nSettlement\n \nDate\n \nof\n \nthe\n \nContract\n \nshall\n \nbe\n \nno\n \nlater\n \nthan\n \nthe\n \nday\n \nafter\n \nthe\n \nExpiration\n \nDate,\n \nunless\n \nthe\n \nMarket\n \nOutcome\n \nis\n \nunder\n \nreview\n \npursuant\n \nto\n \nRule\n \n7.1\n \nof\n \nthe\n \nRulebook.\n \n(3)\n \nThe\n \nExpiration\n \nDate\n \nof\n \nthe\n \nContract\n \nshall\n \nbe\n \nthe\n \nsooner\n \nof\n \n(i)\n \nthe\n \nfirst\n \n11:00PM\n \nEastern\n \nTime\n \nafter\n \ndata\n \nare\n \navailable\n \nfor\n \n{value}\n \nor\n \n(ii)\n \none\n \nweek\n \nafter\n \nthe\n \nlast\n \nday\n \nwithin\n \n{period}.\n \n(4)\n \nThe\n \nExpiration\n \nTime\n \nof\n \nthe\n \nContract\n \nshall\n \nbe\n \n11:00\n \nPM\n \nEastern\n \nTime.\n \n(f)\n \nListing\n \nand\n \nTrading\n \nHours\n \n(1)\n \nContracts\n \nare\n \nlisted\n \nby\n \nthe\n \nExchange\n \nbased\n \non\n \nthe\n \nofficial\n \nschedule\n \npublished\n \nby\n \nthe\n \nSource\n \nAgency\n \nfor\n \nthe\n \ngiven\n \n{award}.\n \n(2)\n \nAs\n \noutlined\n \nin\n \nRule\n \n5.16\n \nof\n \nthe\n \nRulebook,\n \ntrading\n \nshall\n \nbe\n \navailable\n \nat\n \nall\n \ntimes\n \noutside\n \nof\n \nany\n \nmaintenance\n \nwindows,\n \nwhich\n \nwill\n \nbe\n \nannounced\n \nin\n \nadvance\n \nby\n \nthe\n \nExchange.\n \n(3)\n \nThe\n \nLast\n \nTrading\n \nDate\n \nof\n \nthe\n \nContract\n \nwill\n \nbe\n \nthe\n \nsame\n \nas\n \nthe\n \nExpiration\n \nDate.\n \nThe\n \nLast\n \nTrading\n \nTime\n \nwill\n \nbe\n \nthe\n \nsame\n \nas\n \nthe\n \nExpiration\n \nTime.\n \n(g)\n \nPrice\n \nLimits\n \nand\n \nMinimum\n \nQuote\n \nIncrement\n \n(1)\n \nThe\n \nMinimum\n \nQuote\n \nIncrement\n \nfor\n \neach\n \nContract\n \nis\n \n$0.01\n \nper\n \nContract.\n \n(2)\n \nThere\n \nshall\n \nbe\n \nno\n \nOrders\n \nfor\n \ntransactions\n \nin\n \nWEATHER1\n \nat\n \na\n \nprice\n \nless\n \nthan\n \none\n \ncent\n \n($0.01)\n \nor\n \nmore\n \nthan\n \nninety-nine\n \ncents\n \n($0.99).\n \n(h)\n \nPosition\n \nAccountability\n \nand\n \nPosition\n \nLimits\n \n(1)\n \nThe\n \nposition\n \naccountability\n \nlevel\n \nshall\n \nbe\n \n$25,000\n \nof\n \nnotional\n \nexposure.\n \n(2)\n \nNo\n \nposition\n \nlimits\n \napply.\n \nWEATHER1\n \nare\n \nnot\n \nconsidered\n \neconomically\n \nequivalent\n \nswaps\n \nunder\n \n17\n \nC.F.R.\n \n§150.1.\n \n(i)\n \nAdditional\n \nSettlement\n \nContingencies\n \n(1)\n \n"
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.62, bestAsk 0.67; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "chi-midway-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "event_terms_url_empty",
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-35b9ca30f4f7",
+    "contract_id": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+    "evidence_gap_id": "GAP-1",
+    "catalog_item_id": "cat-midway-vs-title-station-pack-v1",
+    "catalog_parameters": {
+      "station": "Chicago-Midway, IL (CLIMDW)",
+      "date": "2026-11-19"
+    },
+    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'Chicago Midway station pack (title vs settlement)' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": null,
+    "signed": false,
+    "created_at_utc": "2026-11-19T05:03:21Z"
+  },
+  "decision_log": [
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=LOT&product=CLI&issuedby=MDW&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] PROPOSE cat-midway-vs-title-station-pack-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+  ]
+}

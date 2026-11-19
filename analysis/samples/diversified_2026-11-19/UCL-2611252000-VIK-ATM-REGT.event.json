@@ -1,0 +1,360 @@
+{
+  "id": "478047",
+  "title": "Viking vs Atl\u00e9tico: Total Goals",
+  "slug": "viking-vs-atltico-total-goals",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "UCL-2611252000-VIK-ATM-REGT",
+  "status": "active",
+  "createdAt": "2026-11-18T20:15:04.481Z",
+  "contracts": [
+    {
+      "id": "478047-1211559",
+      "label": "Reg Time: More than 0.5 goals scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Viking and Atl\u00e9tico collectively score more than 0.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.99",
+          "no": "0.06"
+        },
+        "sell": {
+          "yes": "0.94",
+          "no": "0.01"
+        },
+        "bestBid": "0.94",
+        "bestAsk": "0.99"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:04.481Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+      "ticker": "O0",
+      "instrumentSymbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O0",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_58712f80-3b9b-43dc-8d0c-32aa2d971f22.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "over",
+        "value": "0.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478047-1211556",
+      "label": "Reg Time: More than 1.5 goals scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Viking and Atl\u00e9tico collectively score more than 1.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.92",
+          "no": "0.1"
+        },
+        "sell": {
+          "yes": "0.9",
+          "no": "0.08"
+        },
+        "bestBid": "0.9",
+        "bestAsk": "0.92"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:04.481Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+      "ticker": "O1",
+      "instrumentSymbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O1",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_58712f80-3b9b-43dc-8d0c-32aa2d971f22.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478047-1211557",
+      "label": "Reg Time: More than 2.5 goals scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Viking and Atl\u00e9tico collectively score more than 2.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.78",
+          "no": "0.25"
+        },
+        "sell": {
+          "yes": "0.75",
+          "no": "0.22"
+        },
+        "bestBid": "0.75",
+        "bestAsk": "0.78"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:04.481Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+      "ticker": "O2",
+      "instrumentSymbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O2",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_58712f80-3b9b-43dc-8d0c-32aa2d971f22.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "over",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478047-1211555",
+      "label": "Reg Time: More than 3.5 goals scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Viking and Atl\u00e9tico collectively score more than 3.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.58",
+          "no": "0.45"
+        },
+        "sell": {
+          "yes": "0.55",
+          "no": "0.42"
+        },
+        "bestBid": "0.55",
+        "bestAsk": "0.58"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:04.481Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+      "ticker": "O3",
+      "instrumentSymbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O3",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_58712f80-3b9b-43dc-8d0c-32aa2d971f22.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "over",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478047-1211561",
+      "label": "Reg Time: More than 4.5 goals scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Viking and Atl\u00e9tico collectively score more than 4.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.38",
+          "no": "0.65"
+        },
+        "sell": {
+          "yes": "0.35",
+          "no": "0.62"
+        },
+        "bestBid": "0.35",
+        "bestAsk": "0.38"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:04.481Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+      "ticker": "O4",
+      "instrumentSymbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O4",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_58712f80-3b9b-43dc-8d0c-32aa2d971f22.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "over",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478047-1211558",
+      "label": "Reg Time: More than 5.5 goals scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Viking and Atl\u00e9tico collectively score more than 5.5 goals in the UEFA Champions League scheduled for November 25, 2026 at 3:00 PM ET, based only on regulation time plus stoppage time and excluding extra time and penalties, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the total goals scored by both teams in the specified sporting event after regulation time plus stoppage time only. Source Agencies, in order, are the league governing the event (Champions League), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date, including because the event is cancelled or a team forfeits, withdraws, or is disqualified, the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.23",
+          "no": "0.79"
+        },
+        "sell": {
+          "yes": "0.21",
+          "no": "0.77"
+        },
+        "bestBid": "0.21",
+        "bestAsk": "0.23"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:15:04.481Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+      "ticker": "O5",
+      "instrumentSymbol": "GEMI-UCL-2611252000-VIK-ATM-REGT-O5",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_58712f80-3b9b-43dc-8d0c-32aa2d971f22.png",
+      "expiryDate": "2026-11-27T08:00:00.000Z",
+      "effectiveDate": "2026-11-13T14:37:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "over",
+        "value": "5.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T20:15:04.481Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "977",
+      "name": "Atl\u00e9tico Madrid",
+      "abbreviation": "ATM",
+      "side": "home"
+    },
+    {
+      "id": "1454",
+      "name": "Viking",
+      "abbreviation": "VIK",
+      "side": "away"
+    }
+  ],
+  "description": "How many goals will be scored?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Soccer_eb4baf30-095c-4b92-ae46-f6bf5061a57d.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Champions League"
+  ],
+  "expiryDate": "2026-11-27T08:00:00.000Z",
+  "startTime": "2026-11-25T20:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Total_Terms_and_Conditions_a9f7a715-3e0c-4b4e-a2d6-78d8f246be19.pdf",
+  "subcategory": {
+    "id": 82,
+    "slug": "sports_soccer_champions-league",
+    "name": "Champions League",
+    "path": [
+      "Sports",
+      "Soccer",
+      "Champions League"
+    ]
+  },
+  "socialImageUrl": "https://images.ctfassets.net/jg6lo9a2ukvr/2gE4t2mrkdGgMLDHvzEmtO/03532b5b4f320366bc660a130923b40d/Meta_Image__49_.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Soccer_9c531b71-ba9e-4bd1-8950-5d90afae5f8f.avif",
+  "template": "sports-total",
+  "gameId": "sr:sport_event:74166036",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Soccer"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "soccer",
+    "type": "total",
+    "subject": "contest",
+    "scope": {
+      "type": "regulation"
+    },
+    "metric": "goals"
+  }
+}

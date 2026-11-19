@@ -1,0 +1,353 @@
+{
+  "id": "478181",
+  "title": "Oil (WTI) price on November 19?",
+  "slug": "oil-wti-price-on-november-19",
+  "type": "categorical",
+  "category": "Commodities",
+  "ticker": "WTI2611192200",
+  "status": "active",
+  "createdAt": "2026-11-18T20:55:21.617Z",
+  "contracts": [
+    {
+      "id": "478181-1211924",
+      "label": "$80 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (WTI) is $80 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.91",
+          "no": "0.13"
+        },
+        "sell": {
+          "yes": "0.87",
+          "no": "0.09"
+        },
+        "bestBid": "0.87",
+        "bestAsk": "0.91",
+        "lastTradePrice": "0.83"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:21.617Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+      "ticker": "HI80",
+      "instrumentSymbol": "GEMI-WTI2611192200-HI80",
+      "marketState": "open",
+      "abbreviatedName": ">$80",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "above",
+        "value": "80"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478181-1211926",
+      "label": "$81 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (WTI) is $81 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.79",
+          "no": "0.25"
+        },
+        "sell": {
+          "yes": "0.75",
+          "no": "0.21"
+        },
+        "bestBid": "0.75",
+        "bestAsk": "0.79",
+        "lastTradePrice": "0.77"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:21.617Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+      "ticker": "HI81",
+      "instrumentSymbol": "GEMI-WTI2611192200-HI81",
+      "marketState": "open",
+      "abbreviatedName": ">$81",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "above",
+        "value": "81"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478181-1211928",
+      "label": "$82 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (WTI) is $82 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.58",
+          "no": "0.46"
+        },
+        "sell": {
+          "yes": "0.54",
+          "no": "0.42"
+        },
+        "bestBid": "0.54",
+        "bestAsk": "0.58",
+        "lastTradePrice": "0.73"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:21.617Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+      "ticker": "HI82",
+      "instrumentSymbol": "GEMI-WTI2611192200-HI82",
+      "marketState": "open",
+      "abbreviatedName": ">$82",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "above",
+        "value": "82"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478181-1211930",
+      "label": "$83 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (WTI) is $83 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.34",
+          "no": "0.7"
+        },
+        "sell": {
+          "yes": "0.3",
+          "no": "0.66"
+        },
+        "bestBid": "0.3",
+        "bestAsk": "0.34",
+        "lastTradePrice": "0.26"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:21.617Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+      "ticker": "HI83",
+      "instrumentSymbol": "GEMI-WTI2611192200-HI83",
+      "marketState": "open",
+      "abbreviatedName": ">$83",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "above",
+        "value": "83"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478181-1211932",
+      "label": "$84 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (WTI) is $84 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.18",
+          "no": "0.87"
+        },
+        "sell": {
+          "yes": "0.13",
+          "no": "0.82"
+        },
+        "bestBid": "0.13",
+        "bestAsk": "0.18",
+        "lastTradePrice": "0.15"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:21.617Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+      "ticker": "HI84",
+      "instrumentSymbol": "GEMI-WTI2611192200-HI84",
+      "marketState": "open",
+      "abbreviatedName": ">$84",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "above",
+        "value": "84"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478181-1214884",
+      "label": "$85 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Oil (WTI) is $85 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.09",
+          "no": "0.95"
+        },
+        "sell": {
+          "yes": "0.05",
+          "no": "0.91"
+        },
+        "bestBid": "0.05",
+        "bestAsk": "0.09"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:55:21.617Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+      "ticker": "HI85",
+      "instrumentSymbol": "GEMI-WTI2611192200-HI85",
+      "marketState": "open",
+      "abbreviatedName": ">$85",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "above",
+        "value": "85"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T20:55:21.617Z",
+  "isLive": true,
+  "participants": [],
+  "description": "Interval WTI price prediction event expiring on November 19, 2026 at 5pm ET",
+  "imageUrl": "https://assets.gemini.com/predictions/images/oil_thumb_b051e146-0bb8-480e-9a08-14ebbc9aa70c.avif",
+  "series": "WTI",
+  "volume": "84",
+  "volume24h": "84",
+  "tags": [
+    "Oil (WTI)"
+  ],
+  "expiryDate": "2026-11-19T22:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf",
+  "subcategory": {
+    "id": 121,
+    "slug": "commodities_oil-(wti)",
+    "name": "Oil (WTI)",
+    "path": [
+      "Commodities",
+      "Oil (WTI)"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/oil_thumb_1f27f368-ddc9-4d44-9133-86ff93838bba.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Commodities_fb1be9e3-ddb9-4fb4-b28f-b6a541976078.avif",
+  "template": "prices-ladder",
+  "eventTags": [
+    {
+      "id": 14,
+      "name": "Daily",
+      "slug": "daily"
+    },
+    {
+      "id": 18,
+      "name": "Reference",
+      "slug": "reference"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "kaiko-equities",
+    "index": "KK_RFR_WTIUSDC"
+  },
+  "volumeDelta24hPct": "0"
+}

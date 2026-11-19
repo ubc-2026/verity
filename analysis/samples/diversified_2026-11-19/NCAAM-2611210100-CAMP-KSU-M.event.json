@@ -1,0 +1,197 @@
+{
+  "id": "475262",
+  "title": "Campbell vs Kansas State",
+  "slug": "campbell-vs-kansas-state",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611210100-CAMP-KSU-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:11:43.662Z",
+  "contracts": [
+    {
+      "id": "475262-1196489",
+      "label": "Kansas State",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Kansas State wins the men's college basketball game between Kansas State and Campbell originally scheduled for November 20, 2026 at 8:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.96",
+          "no": "0.09"
+        },
+        "sell": {
+          "yes": "0.91",
+          "no": "0.04"
+        },
+        "bestBid": "0.91",
+        "bestAsk": "0.96",
+        "lastTradePrice": "0.86"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:11:43.662Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "KSU",
+      "instrumentSymbol": "GEMI-NCAAM-2611210100-CAMP-KSU-M-KSU",
+      "marketState": "open",
+      "abbreviatedName": "KSU",
+      "color": "#512888",
+      "imageUrl": "https://assets.gemini.com/predictions/images/KansasState_7d0c0be5-81cb-46f6-a6fb-2482ae610ff6.png",
+      "expiryDate": "2026-11-23T01:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "d203f38a-a166-4258-bca2-e161b591ecfb",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475262-1196486",
+      "label": "Campbell",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Campbell wins the men's college basketball game between Campbell and Kansas State originally scheduled for November 20, 2026 at 8:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.07",
+          "no": "0.97"
+        },
+        "sell": {
+          "yes": "0.03",
+          "no": "0.93"
+        },
+        "bestBid": "0.03",
+        "bestAsk": "0.07",
+        "lastTradePrice": "0.05"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:11:43.662Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "CAMP",
+      "instrumentSymbol": "GEMI-NCAAM-2611210100-CAMP-KSU-M-CAMP",
+      "marketState": "open",
+      "abbreviatedName": "CAMP",
+      "color": "#000000",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Campbell_Fighting_CamelsDark_86a96cdf-f780-4fd2-bda4-68215f9ba2fd.png",
+      "expiryDate": "2026-11-23T01:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "6e5dfe2c-28cc-411f-b846-af8436093ab2",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:11:43.662Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "653",
+      "name": "Kansas State Wildcats",
+      "abbreviation": "KSU",
+      "side": "home"
+    },
+    {
+      "id": "558",
+      "name": "Campbell Fighting Camels",
+      "abbreviation": "CAMP",
+      "side": "away"
+    }
+  ],
+  "description": "Campbell vs Kansas State",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "35",
+  "volume24h": "35",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-23T01:00:00.000Z",
+  "startTime": "2026-11-21T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "7e4e915b-12e9-4acd-a0b9-235595c0814e",
+  "eventTags": [
+    {
+      "id": 7353,
+      "name": "Big 12",
+      "slug": "big-12"
+    },
+    {
+      "id": 26162,
+      "name": "Campbell Fighting Camels",
+      "slug": "campbell-fighting-camels"
+    },
+    {
+      "id": 31229,
+      "name": "Coastal",
+      "slug": "coastal"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 27726,
+      "name": "Kansas State Wildcats",
+      "slug": "kansas-state-wildcats"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "KSU",
+      "name": "Kansas State Wildcats",
+      "externalIds": {
+        "sportradarId": "d203f38a-a166-4258-bca2-e161b591ecfb"
+      }
+    }
+  }
+}
