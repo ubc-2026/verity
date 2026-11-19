@@ -88,7 +88,7 @@ The pinned README does not specify the following. Each is narrow on purpose and 
 - **`X-Verity-Binding` encoding.** The value is RFC 8785 JSON: `{"purchaseId":…,"quoteId":…,"salt":"0x…"}`. Merchant workstream to confirm.
 - **Quote shape.** `VerityQuote` in `src/payments/quote.ts` is the minimum this slice needs. Merchant workstream to confirm.
 - **Authorization window.** The buyer default is a 300 s window with `validAfter` backdated 30 s, capped at quote expiry. The merchant rejects windows longer than `maxAuthorizationWindowSeconds` (600 s in the fixture).
-- **Token EIP-712 domain.** The fixture uses `{ name: "USDC", version: "2" }` as a placeholder. Read the real Arc Testnet USDC domain from the contract during facilitator qualification.
+- **Token EIP-712 domain.** Confirmed on chain as `{ name: "USDC", version: "2" }`. See [Arc Testnet evidence purchase](arc-testnet-purchase.md).
 
 ## Pending
 
