@@ -88,7 +88,7 @@ def test_unknown_outcome_lists_labels():
 
 
 def test_analyze_live_end_to_end_with_fakes():
-    ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F", http_get=fake_get, now=NOW)
+    ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F", http_get=fake_get, now=NOW, analyst="none")
     assert ra.snapshot.source_mode == "live"
     assert ra.scores.ambiguity.score is None
     assert ra.scores.source.score is None
@@ -117,3 +117,47 @@ def test_real_okc_response_shape_is_parsed():
     assert r["instrument_symbol"] == "GEMI-NBA-2611190100-ATL-OKC-M-OKC"
     assert len(r["sibling_events"]) == 5
     assert (r["market"]["best_bid"], r["market"]["best_ask"]) == ("0.69", "0.7")
+
+
+# --- rules analyst on live markets ------------------------------------------
+
+def _real_okc_event():
+    import json, pathlib
+    return json.loads((pathlib.Path(__file__).parent / "live_okc_event_2026-11-18.json").read_text(encoding="utf-8"))
+
+
+def test_live_rules_analyst_scores_nyc_by_default():
+    ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F", http_get=fake_get, now=NOW)
+    s = ra.scores
+    assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (2, 2, 3, 1)
+    assert ra.rating.complete and ra.rating.raw_total == 8 and ra.rating.final_rating == "Medium"
+    assert "analyst=verity-rules-v1 (code rules, no LLM)" in ra.data_quality_flags
+    assert not any(f.startswith("reading_scores_unscored") for f in ra.data_quality_flags)
+    gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")
+    assert gap.material and gap.free_checks == ["nyc-settlement-version"]   # hooks into research.py
+
+
+def test_live_rules_analyst_on_real_okc_response():
+    ev = _real_okc_event()
+    pdf_text = "Settles on the official result of the game between Oklahoma City and Atlanta."
+
+    def get(url, timeout=None):
+        return FakeResp(ev)
+
+    import verity.live as live
+    orig = live.fetch_terms_text
+    live.fetch_terms_text = lambda url, http_get=None: (pdf_text, None)
+    try:
+        ra, ctx = analyze_live("NBA-2611190100-ATL-OKC-M", "Oklahoma City", http_get=get, now=NOW)
+    finally:
+        live.fetch_terms_text = orig
+    s = ra.scores
+    assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (1, 1, 1, 3)
+    assert ra.rating.raw_total == 6 and ra.rating.final_rating == "Low"
+    assert ra.research_action == "no_further_research"
+    assert generate_purchase_request(ra, ctx) is None
+
+
+def test_unknown_analyst_is_rejected():
+    with pytest.raises(ValueError):
+        analyze_live("X", "Y", http_get=fake_get, now=NOW, analyst="gpt")
