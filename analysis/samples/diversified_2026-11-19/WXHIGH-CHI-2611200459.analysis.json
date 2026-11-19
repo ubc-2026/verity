@@ -6,30 +6,30 @@
     "instrument_symbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
     "question": "Highest temperature in Chicago on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:27Z",
+    "analyzed_at_utc": "2026-11-19T06:27:58Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:27Z",
-      "snapshot_hash": "sha256:a2a2484c2e78505d85483620c6a6d148c8d09f90136eada9e7b157bab928a4c5",
+      "snapshot_time_utc": "2026-11-19T06:27:58Z",
+      "snapshot_hash": "sha256:ea25c25bf31ffca9ab59847a139e8d85b3965e04e1ea5149268e296a2756433d",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "66°F to 67°F",
-      "best_bid": "0.63",
-      "best_ask": "0.67",
-      "mid": "0.65",
-      "implied_probability": "0.65",
+      "best_bid": "0.62",
+      "best_ask": "0.65",
+      "mid": "0.635",
+      "implied_probability": "0.635",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:27Z"
+      "observed_time_utc": "2026-11-19T06:27:58Z"
     },
     "scores": {
       "ambiguity": {
         "score": 2,
-        "rationale": "Clear outcome, but event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+        "rationale": "Clear outcome, but event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome; title names a city/measure that may differ from the settlement station (Excel rule 6).",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+        "rationale": "Settlement source looks like official but revisable data, or a proxy/thinner feed of the real underlying (matched 'National Weather Service').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 3c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,27 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "rule": "Source >= 2 -> at least Medium",
+          "triggered_by": "source",
+          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+        },
+        {
+          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "triggered_by": "source",
+          "effect": "rating floor High; soft/proxy source plus unclear criteria"
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +112,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-CHI-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.63, bestAsk 0.67; event volume 0"
+        "quote": "bestBid 0.62, bestAsk 0.65; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -139,8 +144,26 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": null,
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-cac6f97cf327",
+    "contract_id": "GEMI-WXHIGH-CHI-2611200459-66TO67",
+    "evidence_gap_id": "GAP-1",
+    "catalog_item_id": "cat-midway-vs-title-station-pack-v1",
+    "catalog_parameters": {
+      "station": "Chicago-Midway, IL (CLIMDW)",
+      "date": "2026-11-19"
+    },
+    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'Chicago Midway station pack (title vs settlement)' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": null,
+    "signed": false,
+    "created_at_utc": "2026-11-19T06:27:58Z"
+  },
   "decision_log": [
-    "[GEMI-WXHIGH-CHI-2611200459-66TO67] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=LOT&product=CLI&issuedby=MDW&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] PROPOSE cat-midway-vs-title-station-pack-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
   ]
 }

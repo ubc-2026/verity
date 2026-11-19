@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-WXHIGH-BOS-2611200459-65TO66",
+    "contract_id": "GEMI-WXHIGH-BOS-2611200459-63TO64",
     "event_ticker": "WXHIGH-BOS-2611200459",
-    "instrument_symbol": "GEMI-WXHIGH-BOS-2611200459-65TO66",
+    "instrument_symbol": "GEMI-WXHIGH-BOS-2611200459-63TO64",
     "question": "Highest temperature in Boston on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:38Z",
+    "analyzed_at_utc": "2026-11-19T06:28:09Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:38Z",
-      "snapshot_hash": "sha256:a82b4b9ad44570c1c54c44be5ef1feda8e85ea057c3c42a9c7f7c3a341f6f8b3",
+      "snapshot_time_utc": "2026-11-19T06:28:09Z",
+      "snapshot_hash": "sha256:3a198811b5e6afc8a4bc9cc5e7fa2ad6d6cf8e1511e3053616690ac12b714181",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "65°F to 66°F",
-      "best_bid": "0.18",
-      "best_ask": "0.26",
-      "mid": "0.22",
-      "implied_probability": "0.22",
+      "outcome_label": "63°F to 64°F",
+      "best_bid": "0.53",
+      "best_ask": "0.65",
+      "mid": "0.59",
+      "implied_probability": "0.59",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:38Z"
+      "observed_time_utc": "2026-11-19T06:28:09Z"
     },
     "scores": {
       "ambiguity": {
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+        "rationale": "Settlement source looks like official but revisable data, or a proxy/thinner feed of the real underlying (matched 'National Weather Service').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (8c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 12c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,27 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "rule": "Source >= 2 -> at least Medium",
+          "triggered_by": "source",
+          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+        },
+        {
+          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "triggered_by": "source",
+          "effect": "rating floor High; soft/proxy source plus unclear criteria"
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +112,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-BOS-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.18, bestAsk 0.26; event volume 0"
+        "quote": "bestBid 0.53, bestAsk 0.65; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -139,8 +144,26 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": null,
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-1bf4c7ed5edb",
+    "contract_id": "GEMI-WXHIGH-BOS-2611200459-63TO64",
+    "evidence_gap_id": "GAP-1",
+    "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+    "catalog_parameters": {
+      "station": "Boston, MA (CLIBOS)",
+      "date": "2026-11-19"
+    },
+    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": null,
+    "signed": false,
+    "created_at_utc": "2026-11-19T06:28:09Z"
+  },
   "decision_log": [
-    "[GEMI-WXHIGH-BOS-2611200459-65TO66] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-WXHIGH-BOS-2611200459-63TO64] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=BOX&product=CLI&issuedby=BOS&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
+    "[GEMI-WXHIGH-BOS-2611200459-63TO64] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
   ]
 }

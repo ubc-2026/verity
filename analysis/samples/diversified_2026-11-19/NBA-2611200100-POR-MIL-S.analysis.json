@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611200100-POR-MIL-S-POR9",
     "question": "Portland vs Milwaukee: Point Spread",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:04Z",
+    "analyzed_at_utc": "2026-11-19T06:27:41Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:04Z",
-      "snapshot_hash": "sha256:b307b42d5b5cbc0cd7fba3cd338ab6dab9cc5dbc4ace3d3bc8636cee66a4c8ad",
+      "snapshot_time_utc": "2026-11-19T06:27:41Z",
+      "snapshot_hash": "sha256:0f2dab9f75b96f14a90527604d2c3224a3ed4054e36aabad8dd61dc2c9856cf4",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Portland wins by more than 9.5 points",
       "best_bid": "0.48",
-      "best_ask": "0.52",
-      "mid": "0.50",
-      "implied_probability": "0.50",
+      "best_ask": "0.53",
+      "mid": "0.505",
+      "implied_probability": "0.505",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:04Z"
+      "observed_time_utc": "2026-11-19T06:27:41Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 5c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-POR-MIL-S",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.48, bestAsk 0.52; event volume 0"
+        "quote": "bestBid 0.48, bestAsk 0.53; event volume 0"
       }
     ],
     "evidence_gaps": [],

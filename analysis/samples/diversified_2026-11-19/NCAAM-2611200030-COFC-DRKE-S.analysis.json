@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE8",
+    "contract_id": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE1",
     "event_ticker": "NCAAM-2611200030-COFC-DRKE-S",
-    "instrument_symbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE8",
+    "instrument_symbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE1",
     "question": "Charleston vs Drake: Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:53Z",
+    "analyzed_at_utc": "2026-11-19T06:27:36Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:53Z",
-      "snapshot_hash": "sha256:eddf1eb1adda10efac60dbcbf28201f95b00df2454ca73182141f4cee84385b1",
+      "snapshot_time_utc": "2026-11-19T06:27:36Z",
+      "snapshot_hash": "sha256:32d5a0a958455d52c28cc1fee2c8b8333ea8a7c68586871c0f5676924ae22669",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "Drake wins by more than 8.5 points",
-      "best_bid": "0.16",
-      "best_ask": "0.32",
-      "mid": "0.24",
-      "implied_probability": "0.24",
+      "outcome_label": "Drake wins by more than 1.5 points",
+      "best_bid": "0.44",
+      "best_ask": "0.5",
+      "mid": "0.47",
+      "implied_probability": "0.47",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:53Z"
+      "observed_time_utc": "2026-11-19T06:27:36Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (16c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 6c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +89,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200030-COFC-DRKE-S",
         "field_or_rule": "contract.description",
-        "quote": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf)."
+        "quote": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200030-COFC-DRKE-S",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.16, bestAsk 0.32; event volume 0"
+        "quote": "bestBid 0.44, bestAsk 0.5; event volume 0"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE8] no purchase: rating is Low; research buys are limited to High-risk markets."
+    "[GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE1] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

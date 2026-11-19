@@ -46,12 +46,23 @@ def test_correlation_3_floors_rating_at_high():
     assert any(o.triggered_by == "correlation" for o in r.overrides)
 
 
+def test_source_2_and_ambiguity_2_floor_high():
+    """Excel-style settlement edge with unclear criteria -> High research attention."""
+    r = rate(_s(2, 2, 1, 1))
+    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (6, "Low", "High", "High")
+
+
+def test_liquidity_3_floors_at_medium():
+    r = rate(_s(1, 1, 3, 1))
+    assert (r.raw_total, r.raw_rating, r.rating_floor, r.final_rating) == (6, "Low", "Medium", "Medium")
+
+
 def test_incomplete_rating_is_not_silently_low():
     r = rate(_s(1, 1, None, 1))
     assert not r.complete and r.final_rating is None and r.raw_total is None
     assert r.possible_range == ("Low", "Low")
-    r2 = rate(_s(2, 2, None, 2))           # known 6, range 7..9
-    assert r2.possible_range == ("Medium", "High")
+    r2 = rate(_s(2, 2, None, 2))           # known 6, range 7..9; Source>=2+Amb>=2 floors High
+    assert r2.possible_range == ("High", "High") and r2.rating_floor == "High"
     r3 = rate(_s(3, 1, None, 1))           # known 5, range 6..8, floor Medium
     assert r3.possible_range == ("Medium", "Medium") and r3.rating_floor == "Medium"
 
@@ -63,7 +74,8 @@ def test_null_score_requires_reason():
 
 def test_liquidity_thresholds_match_framework():
     assert liquidity_score(Decimal("1071"), Decimal("0.69"), Decimal("0.70"))[0] == 1
-    assert liquidity_score(Decimal("7"), Decimal("0.54"), Decimal("0.58"))[0] == 3
+    # Thin but quoted with a tight spread is Excel Liquidity mid (our 2), not max.
+    assert liquidity_score(Decimal("7"), Decimal("0.54"), Decimal("0.58"))[0] == 2
     assert liquidity_score(Decimal("857.53"), Decimal("0.51"), Decimal("0.54"), True)[0] == 2
     assert liquidity_score(Decimal("20"), None, None)[0] == 3
     # Both prices missing is a 3 when any volume is present, and null only when nothing is present.
@@ -71,7 +83,9 @@ def test_liquidity_thresholds_match_framework():
     assert liquidity_score(None, Decimal("0.40"), Decimal("0.44"))[0] is None
     # A tight, busy book is still a 2 when some strikes have no bid.
     assert liquidity_score(Decimal("5000"), Decimal("0.40"), Decimal("0.41"), True)[0] == 2
-    # $100 and a 5c spread are the last values before a 3.
+    # Spread over 15c is Excel Avoid / our Liquidity 3.
+    assert liquidity_score(Decimal("500"), Decimal("0.40"), Decimal("0.60"))[0] == 3
+    # Thin volume with a two-sided <=15c quote stays 2.
     assert liquidity_score(Decimal("100"), Decimal("0.40"), Decimal("0.45"))[0] == 2
 
 
@@ -114,10 +128,12 @@ def test_price_is_separate_from_risk():
 
 # --- NYC -------------------------------------------------------------------
 
-def test_nyc_medium_with_liquidity_note():
+def test_nyc_source_ambiguity_floors_high():
+    """NWS + band edges: Source>=2 and Ambiguity>=2 floor final to High (Excel settlement edge)."""
     ra = get_risk_analysis(NYC, ctx())
-    assert (ra.rating.raw_total, ra.rating.final_rating, ra.research_action) == (8, "Medium", "investigate")
-    assert any(o.triggered_by == "liquidity" for o in ra.rating.overrides)
+    assert (ra.rating.raw_total, ra.rating.final_rating, ra.research_action) == (7, "High", "flag_for_human_review")
+    assert ra.rating.rating_floor == "High"
+    assert any("Source >= 2 and Ambiguity >= 2" in o.rule for o in ra.rating.overrides)
     assert "event_terms_url_empty" in ra.data_quality_flags
 
 
@@ -129,10 +145,23 @@ def test_nyc_free_check_answers_means_no_purchase():
     assert any("GAP-NYC-FORECAST" in l and "not settlement risk" in l for l in log)
 
 
-def test_nyc_medium_does_not_propose_research_buy():
+def test_nyc_high_proposes_when_free_check_inconclusive():
     c = ctx(free_check_scenario="free-check-inconclusive")
     ra = get_risk_analysis(NYC, c)
-    assert ra.rating.final_rating == "Medium"
+    assert ra.rating.final_rating == "High"
+    log = []
+    p = generate_purchase_request(ra, c, log)
+    assert p is not None and p.catalog_item_id == "cat-nws-cli-settlement-version-v1"
+
+
+def test_medium_rating_still_blocks_research_buy():
+    c = ctx(free_check_scenario="free-check-inconclusive")
+    ra = get_risk_analysis(NYC, c).model_copy(update={
+        "rating": get_risk_analysis(NYC, c).rating.model_copy(update={
+            "final_rating": "Medium", "raw_rating": "Medium", "rating_floor": None,
+        }),
+        "research_action": "investigate",
+    })
     log = []
     assert generate_purchase_request(ra, c, log) is None
     assert any("limited to High-risk markets" in line for line in log)
@@ -190,9 +219,12 @@ def test_missing_tickers_flagged_and_block_purchase():
 
 def test_all_five_fixtures_validate_and_match_workbook_totals():
     c = ctx()
+    # NYC workbook scored Liquidity 3; Excel-aligned thresholds compute 2 from the same quotes.
+    known_raw_drift = {"fx-nyc-high-20261118": 7}
     for cid, m in c.markets.items():
         ra = get_risk_analysis(cid, c)
-        assert ra.rating.raw_total == m["workbook"]["total"], cid
+        expected = known_raw_drift.get(cid, m["workbook"]["total"])
+        assert ra.rating.raw_total == expected, cid
         assert ra.snapshot.snapshot_hash.startswith("sha256:")
 
 

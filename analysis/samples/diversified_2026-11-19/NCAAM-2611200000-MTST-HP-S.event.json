@@ -9,56 +9,6 @@
   "createdAt": "2026-11-19T00:17:39.408Z",
   "contracts": [
     {
-      "id": "478847-1214081",
-      "label": "High Point wins by more than 8.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of High Point in the entire men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (High Point's score minus Montana State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.74",
-          "no": "0.46"
-        },
-        "sell": {
-          "yes": "0.54",
-          "no": "0.26"
-        },
-        "bestBid": "0.54",
-        "bestAsk": "0.74"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:17:39.408Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
-      "ticker": "HP8",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-MTST-HP-S-HP8",
-      "marketState": "open",
-      "abbreviatedName": "High Point",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/High_Point_PanthersDark_eb291927-347a-4a5b-b84b-c7203e31d52f.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 5,
-      "strike": {
-        "type": "spread",
-        "value": "8.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "478847-1214077",
       "label": "High Point wins by more than 12.5 points",
       "description": {
@@ -75,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.61",
+          "yes": "0.6",
           "no": "0.51"
         },
         "sell": {
           "yes": "0.49",
-          "no": "0.39"
+          "no": "0.4"
         },
         "bestBid": "0.49",
-        "bestAsk": "0.61"
+        "bestAsk": "0.6"
       },
       "status": "active",
       "createdAt": "2026-11-19T00:17:39.408Z",
@@ -125,15 +75,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.51",
-          "no": "0.6"
+          "yes": "0.5",
+          "no": "0.61"
         },
         "sell": {
-          "yes": "0.4",
-          "no": "0.49"
+          "yes": "0.39",
+          "no": "0.5"
         },
-        "bestBid": "0.4",
-        "bestAsk": "0.51"
+        "bestBid": "0.39",
+        "bestAsk": "0.5"
       },
       "status": "active",
       "createdAt": "2026-11-19T00:17:39.408Z",
@@ -175,15 +125,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.17",
+          "yes": "0.16",
           "no": "0.99"
         },
         "sell": {
           "yes": "0.01",
-          "no": "0.83"
+          "no": "0.84"
         },
         "bestBid": "0.01",
-        "bestAsk": "0.17"
+        "bestAsk": "0.16"
       },
       "status": "active",
       "createdAt": "2026-11-19T00:17:39.408Z",
@@ -200,53 +150,6 @@
       "strike": {
         "type": "spread",
         "value": "1.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478847-1214083",
-      "label": "Montana State wins by more than 6.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Montana State in the entire men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Montana State's score minus High Point's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.1"
-        },
-        "sell": {
-          "no": "0.9"
-        },
-        "bestAsk": "0.1"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:17:39.408Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
-      "ticker": "MTST6",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-MTST-HP-S-MTST6",
-      "marketState": "open",
-      "abbreviatedName": "Montana State",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Montana_State_BobcatsDark_f283eb37-ddda-4317-92db-427621c4ade0.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 7,
-      "strike": {
-        "type": "spread",
-        "value": "6.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -340,6 +243,48 @@
       "priceMinimum": "0.01"
     },
     {
+      "id": "478847-1214081",
+      "label": "High Point wins by more than 8.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of High Point in the entire men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (High Point's score minus Montana State's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:17:39.408Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "HP8",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-MTST-HP-S-HP8",
+      "marketState": "open",
+      "abbreviatedName": "High Point",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/High_Point_PanthersDark_eb291927-347a-4a5b-b84b-c7203e31d52f.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "spread",
+        "value": "8.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "478847-1214082",
       "label": "High Point wins by more than 37.5 points",
       "description": {
@@ -373,6 +318,48 @@
       "strike": {
         "type": "spread",
         "value": "37.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478847-1214083",
+      "label": "Montana State wins by more than 6.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Montana State in the entire men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Montana State's score minus High Point's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:17:39.408Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "MTST6",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-MTST-HP-S-MTST6",
+      "marketState": "open",
+      "abbreviatedName": "Montana State",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Montana_State_BobcatsDark_f283eb37-ddda-4317-92db-427621c4ade0.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -499,6 +486,48 @@
       "strike": {
         "type": "spread",
         "value": "27.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478847-1220049",
+      "label": "Montana State wins by more than 8.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Montana State in the entire men's college basketball game between Montana State and High Point scheduled for 2026-11-19 at 6:00 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Montana State's score minus High Point's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:17:39.408Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "MTST8",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-MTST-HP-S-MTST8",
+      "marketState": "open",
+      "abbreviatedName": "Montana State",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Montana_State_BobcatsDark_f283eb37-ddda-4317-92db-427621c4ade0.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 11,
+      "strike": {
+        "type": "spread",
+        "value": "8.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

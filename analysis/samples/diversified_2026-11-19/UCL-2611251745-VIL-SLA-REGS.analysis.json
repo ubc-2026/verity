@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611251745-VIL-SLA-REGS-VIL1",
     "question": "Villarreal vs Slavia Prague: Point Spread",
     "expiry_utc": "2026-11-27T05:45:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:11Z",
+    "analyzed_at_utc": "2026-11-19T06:26:52Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:11Z",
-      "snapshot_hash": "sha256:e448003590d794607a4a08d95b60f50b0244eea7304eedd97484ee68f69fe0bc",
+      "snapshot_time_utc": "2026-11-19T06:26:52Z",
+      "snapshot_hash": "sha256:831e3c9da3b13c0855b7b31ae52b8e3a4a9dcd64bb3508f8c5e1970e8b08e791",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:11Z"
+      "observed_time_utc": "2026-11-19T06:26:52Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (5c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 5c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",

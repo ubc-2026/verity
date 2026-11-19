@@ -82,15 +82,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.78",
+          "yes": "0.79",
           "no": "0.38"
         },
         "sell": {
           "yes": "0.62",
-          "no": "0.22"
+          "no": "0.21"
         },
         "bestBid": "0.62",
-        "bestAsk": "0.78"
+        "bestAsk": "0.79"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:09:59.571Z",
@@ -196,15 +196,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.71",
-          "no": "0.43"
+          "yes": "0.7",
+          "no": "0.49"
         },
         "sell": {
-          "yes": "0.57",
-          "no": "0.29"
+          "yes": "0.51",
+          "no": "0.3"
         },
-        "bestBid": "0.57",
-        "bestAsk": "0.71"
+        "bestBid": "0.51",
+        "bestAsk": "0.7"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:09:59.571Z",
@@ -351,6 +351,63 @@
       }
     },
     {
+      "id": "476611-1202801",
+      "label": "Chuba Hubbard 70+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 70 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.61",
+          "no": "0.58"
+        },
+        "sell": {
+          "yes": "0.42",
+          "no": "0.39"
+        },
+        "bestBid": "0.42",
+        "bestAsk": "0.61"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:09:59.571Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "CHUBBARDO69",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-CHUBBARDO69",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 7,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "69.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
+        }
+      }
+    },
+    {
       "id": "476611-1202902",
       "label": "Jacoby Brissett 5+ Rushing Yards",
       "description": {
@@ -404,63 +461,6 @@
         "name": "Jacoby Brissett",
         "externalIds": {
           "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
-        }
-      }
-    },
-    {
-      "id": "476611-1202801",
-      "label": "Chuba Hubbard 70+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 70 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.57",
-          "no": "0.6"
-        },
-        "sell": {
-          "yes": "0.4",
-          "no": "0.43"
-        },
-        "bestBid": "0.4",
-        "bestAsk": "0.57"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:09:59.571Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "CHUBBARDO69",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-CHUBBARDO69",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 7,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "69.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Chuba Hubbard",
-        "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
         }
       }
     },
@@ -538,15 +538,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.49",
+          "yes": "0.5",
           "no": "0.65"
         },
         "sell": {
           "yes": "0.35",
-          "no": "0.51"
+          "no": "0.5"
         },
         "bestBid": "0.35",
-        "bestAsk": "0.49"
+        "bestAsk": "0.5"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:09:59.571Z",
@@ -636,63 +636,6 @@
       }
     },
     {
-      "id": "476611-1202749",
-      "label": "Bryce Young 10+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Bryce Young records 10 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.46",
-          "no": "0.78"
-        },
-        "sell": {
-          "yes": "0.22",
-          "no": "0.54"
-        },
-        "bestBid": "0.22",
-        "bestAsk": "0.46"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:09:59.571Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "BYOUNGO9",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-BYOUNGO9",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 0,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "9.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Bryce Young",
-        "externalIds": {
-          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
-        }
-      }
-    },
-    {
       "id": "476611-1202877",
       "label": "Derrick Henry 80+ Rushing Yards",
       "description": {
@@ -709,15 +652,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.42",
+          "yes": "0.43",
           "no": "0.7"
         },
         "sell": {
           "yes": "0.3",
-          "no": "0.58"
+          "no": "0.57"
         },
         "bestBid": "0.3",
-        "bestAsk": "0.42"
+        "bestAsk": "0.43"
       },
       "status": "active",
       "createdAt": "2026-11-18T08:09:59.571Z",
@@ -746,6 +689,63 @@
         "name": "Derrick Henry",
         "externalIds": {
           "sportradar": "87c481c7-7414-43cc-82df-19ca0c2ae22e"
+        }
+      }
+    },
+    {
+      "id": "476611-1202811",
+      "label": "Chuba Hubbard 90+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Chuba Hubbard records 90 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.4",
+          "no": "0.79"
+        },
+        "sell": {
+          "yes": "0.21",
+          "no": "0.6"
+        },
+        "bestBid": "0.21",
+        "bestAsk": "0.4"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:09:59.571Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "CHUBBARDO89",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-CHUBBARDO89",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 9,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "89.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Chuba Hubbard",
+        "externalIds": {
+          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
         }
       }
     },
@@ -803,63 +803,6 @@
         "name": "Justice Hill",
         "externalIds": {
           "sportradar": "528e71ec-8fb3-4928-ace5-fc5ffbf26eb3"
-        }
-      }
-    },
-    {
-      "id": "476611-1202811",
-      "label": "Chuba Hubbard 90+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Chuba Hubbard records 90 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.39",
-          "no": "0.79"
-        },
-        "sell": {
-          "yes": "0.21",
-          "no": "0.61"
-        },
-        "bestBid": "0.21",
-        "bestAsk": "0.39"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:09:59.571Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "CHUBBARDO89",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-CHUBBARDO89",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 9,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "89.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Chuba Hubbard",
-        "externalIds": {
-          "sportradar": "32205e74-b23f-420a-b312-465b29260745"
         }
       }
     },
@@ -1149,63 +1092,6 @@
       }
     },
     {
-      "id": "476611-1202763",
-      "label": "Bryce Young 20+ Rushing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Bryce Young records 20 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.24",
-          "no": "0.95"
-        },
-        "sell": {
-          "yes": "0.05",
-          "no": "0.76"
-        },
-        "bestBid": "0.05",
-        "bestAsk": "0.24"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T08:09:59.571Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
-      "ticker": "BYOUNGO19",
-      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-BYOUNGO19",
-      "marketState": "open",
-      "color": "#0085CA",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 2,
-      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
-      "strike": {
-        "type": "over",
-        "value": "19.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Bryce Young",
-        "externalIds": {
-          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
-        }
-      }
-    },
-    {
       "id": "476611-1202828",
       "label": "Chuba Hubbard 110+ Rushing Yards",
       "description": {
@@ -1280,13 +1166,13 @@
       "prices": {
         "buy": {
           "yes": "0.24",
-          "no": "0.9"
+          "no": "0.98"
         },
         "sell": {
-          "yes": "0.1",
+          "yes": "0.02",
           "no": "0.76"
         },
-        "bestBid": "0.1",
+        "bestBid": "0.02",
         "bestAsk": "0.24"
       },
       "status": "active",
@@ -1316,6 +1202,63 @@
         "name": "Justice Hill",
         "externalIds": {
           "sportradar": "528e71ec-8fb3-4928-ace5-fc5ffbf26eb3"
+        }
+      }
+    },
+    {
+      "id": "476611-1202763",
+      "label": "Bryce Young 20+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 20 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.23",
+          "no": "0.95"
+        },
+        "sell": {
+          "yes": "0.05",
+          "no": "0.77"
+        },
+        "bestBid": "0.05",
+        "bestAsk": "0.23"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:09:59.571Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "BYOUNGO19",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-BYOUNGO19",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 2,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
         }
       }
     },
@@ -2078,6 +2021,60 @@
         "name": "Derrick Henry",
         "externalIds": {
           "sportradar": "87c481c7-7414-43cc-82df-19ca0c2ae22e"
+        }
+      }
+    },
+    {
+      "id": "476611-1202749",
+      "label": "Bryce Young 10+ Rushing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 10 or more Rushing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Rushing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Rushing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.78"
+        },
+        "sell": {
+          "yes": "0.22"
+        },
+        "bestBid": "0.22"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:09:59.571Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Rushing_Yards_766d41e9-0f08-4e19-b385-2cb1f2197262.pdf",
+      "ticker": "BYOUNGO9",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPRYDS-BYOUNGO9",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 0,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "9.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
         }
       }
     }

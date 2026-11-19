@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-BTC2611190700-HI63400",
+    "contract_id": "GEMI-BTC2611190700-HI63600",
     "event_ticker": "BTC2611190700",
-    "instrument_symbol": "GEMI-BTC2611190700-HI63400",
+    "instrument_symbol": "GEMI-BTC2611190700-HI63600",
     "question": "BTC price today at 2am EST",
     "expiry_utc": "2026-11-19T07:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:38Z",
+    "analyzed_at_utc": "2026-11-19T06:28:10Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:38Z",
-      "snapshot_hash": "sha256:94e5c03b45bbbeb355a28b9cc6c31b7d9c75791baee75904d329827227d87a09",
+      "snapshot_time_utc": "2026-11-19T06:28:10Z",
+      "snapshot_hash": "sha256:52dabce5fbc63162556a3cdc0f3b822aad7b5a8ab9eddf44e1b11ca56fb1c5e1",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$63,400 or above",
-      "best_bid": "0.51",
-      "best_ask": "0.6",
-      "mid": "0.555",
-      "implied_probability": "0.555",
+      "outcome_label": "$63,600 or above",
+      "best_bid": "0.15",
+      "best_ask": "0.29",
+      "mid": "0.22",
+      "implied_probability": "0.22",
       "volume_usd": "1013.7",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:38Z"
+      "observed_time_utc": "2026-11-19T06:28:10Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "9c spread is over 5c.",
+        "score": 2,
+        "rationale": "event-total volume $1013.7, 14c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +89,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190700",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Bitcoin (BTC) is $63,400 or above on November 19, 2026 at 2am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf)."
+        "quote": "If the price of Bitcoin (BTC) is $63,600 or above on November 19, 2026 at 2am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XBTUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/btc_398860b3-ea2f-47a7-b167-a8c6ad03d6d7.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BTC2611190700",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.51, bestAsk 0.6; event volume 1013.7"
+        "quote": "bestBid 0.15, bestAsk 0.29; event volume 1013.7"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-BTC2611190700-HI63400] no purchase: 0:43:22 to expiry is under 1h (Agent rule 11)."
+    "[GEMI-BTC2611190700-HI63600] no purchase: 0:31:50 to expiry is under 1h (Agent rule 11)."
   ]
 }

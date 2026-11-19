@@ -95,3 +95,17 @@ def test_rules_analyst_sports_record_no_longer_opens_version_gap_on_boilerplate(
     rec = rules_analyst(_record())
     assert rec["analyst"]["source"]["score"] == 1
     assert rec["evidence_gaps"] == []
+
+
+def test_kaiko_commodity_perp_scores_source_2():
+    """Excel: Kaiko/Hyperliquid commodity RFR is a proxy, not a primary feed."""
+    src = _source(
+        {
+            "settlement_source": "kaiko-equities KK_RFR_BRENTOILUSDC",
+            "rules_excerpts": [],
+        },
+        "Settles on a 60-second average of the Hyperliquid BRENTOIL-USDC perpetual.",
+        ["C-TERMS"],
+    )
+    assert src["score"] == 2
+    assert "proxy" in src["rationale"].lower() or "thinner" in src["rationale"].lower()

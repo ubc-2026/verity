@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611210230-PHX-UTA-M-UTA",
     "question": "Phoenix vs Utah",
     "expiry_utc": "2026-11-22T14:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:06Z",
+    "analyzed_at_utc": "2026-11-19T06:26:48Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:06Z",
-      "snapshot_hash": "sha256:60c708814ca22642cd85cb5c0a2351b01c8803c1e9876174f499a3a932957055",
+      "snapshot_time_utc": "2026-11-19T06:26:48Z",
+      "snapshot_hash": "sha256:b9456ce584018b53cb93bc204cf36c302be573180dd3f8c71301aba842031ef4",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Utah",
       "best_bid": "0.43",
-      "best_ask": "0.44",
-      "mid": "0.435",
-      "implied_probability": "0.435",
+      "best_ask": "0.45",
+      "mid": "0.44",
+      "implied_probability": "0.44",
       "volume_usd": "414.39",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:06Z"
+      "observed_time_utc": "2026-11-19T06:26:48Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 2,
-        "rationale": "event-total volume $414.39, 1c spread.",
+        "rationale": "event-total volume $414.39, 2c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -101,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611210230-PHX-UTA-M",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.43, bestAsk 0.44; event volume 414.39"
+        "quote": "bestBid 0.43, bestAsk 0.45; event volume 414.39"
       }
     ],
     "evidence_gaps": [],

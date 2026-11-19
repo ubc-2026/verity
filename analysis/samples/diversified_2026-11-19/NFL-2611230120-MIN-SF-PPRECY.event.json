@@ -25,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.94",
+          "yes": "0.93",
           "no": "0.21"
         },
         "sell": {
           "yes": "0.79",
-          "no": "0.06"
+          "no": "0.07"
         },
         "bestBid": "0.79",
-        "bestAsk": "0.94"
+        "bestAsk": "0.93"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:15:11.381Z",
@@ -237,63 +237,6 @@
       }
     },
     {
-      "id": "475847-1199413",
-      "label": "Justin Jefferson 50+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Justin Jefferson records 50 or more Receiving Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.87",
-          "no": "0.3"
-        },
-        "sell": {
-          "yes": "0.7",
-          "no": "0.13"
-        },
-        "bestBid": "0.7",
-        "bestAsk": "0.87"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:15:11.381Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "JJEFFERSONO49",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO49",
-      "marketState": "open",
-      "color": "#4F2683",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Minnesota_Vikings_1_092c0864-e622-47bd-88c7-9c91461f4bbe.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 34,
-      "teamId": "33405046-04ee-4058-a950-d606f8c30852",
-      "strike": {
-        "type": "over",
-        "value": "49.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Justin Jefferson",
-        "externalIds": {
-          "sportradar": "4131d4ee-0318-4bb5-832a-4dec80668a4f"
-        }
-      }
-    },
-    {
       "id": "475847-1199364",
       "label": "Christian McCaffrey 15+ Receiving Yards",
       "description": {
@@ -347,6 +290,63 @@
         "name": "Christian McCaffrey",
         "externalIds": {
           "sportradar": "f96db0af-5e25-42d1-a07a-49b4e065b364"
+        }
+      }
+    },
+    {
+      "id": "475847-1199413",
+      "label": "Justin Jefferson 50+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Justin Jefferson records 50 or more Receiving Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.86",
+          "no": "0.3"
+        },
+        "sell": {
+          "yes": "0.7",
+          "no": "0.14"
+        },
+        "bestBid": "0.7",
+        "bestAsk": "0.86"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:15:11.381Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "JJEFFERSONO49",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO49",
+      "marketState": "open",
+      "color": "#4F2683",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Minnesota_Vikings_1_092c0864-e622-47bd-88c7-9c91461f4bbe.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 34,
+      "teamId": "33405046-04ee-4058-a950-d606f8c30852",
+      "strike": {
+        "type": "over",
+        "value": "49.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Justin Jefferson",
+        "externalIds": {
+          "sportradar": "4131d4ee-0318-4bb5-832a-4dec80668a4f"
         }
       }
     },
@@ -766,15 +766,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.64",
+          "yes": "0.65",
           "no": "0.5"
         },
         "sell": {
           "yes": "0.5",
-          "no": "0.36"
+          "no": "0.35"
         },
         "bestBid": "0.5",
-        "bestAsk": "0.64"
+        "bestAsk": "0.65"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:15:11.381Z",
@@ -978,6 +978,63 @@
       }
     },
     {
+      "id": "475847-1217885",
+      "label": "Jauan Jennings 20+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jauan Jennings records 20 or more Receiving Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.55",
+          "no": "0.6"
+        },
+        "sell": {
+          "yes": "0.4",
+          "no": "0.45"
+        },
+        "bestBid": "0.4",
+        "bestAsk": "0.55"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T02:15:11.381Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "BJENNINGSO19",
+      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-BJENNINGSO19",
+      "marketState": "open",
+      "color": "#4F2683",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Minnesota_Vikings_1_092c0864-e622-47bd-88c7-9c91461f4bbe.avif",
+      "expiryDate": "2026-11-24T13:20:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:04.000Z",
+      "sortOrder": 49,
+      "teamId": "33405046-04ee-4058-a950-d606f8c30852",
+      "strike": {
+        "type": "over",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jauan Jennings",
+        "externalIds": {
+          "sportradar": "3ae9f0fa-c711-4663-80cf-4707856c07aa"
+        }
+      }
+    },
+    {
       "id": "475847-1199391",
       "label": "George Kittle 60+ Receiving Yards",
       "description": {
@@ -1031,63 +1088,6 @@
         "name": "George Kittle",
         "externalIds": {
           "sportradar": "2ada91b0-036e-454f-83c3-6d939ff584a9"
-        }
-      }
-    },
-    {
-      "id": "475847-1217885",
-      "label": "Jauan Jennings 20+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Jauan Jennings records 20 or more Receiving Yards in the game between Minnesota and San Francisco scheduled for November 22, 2026 at 8:20 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.53",
-          "no": "0.6"
-        },
-        "sell": {
-          "yes": "0.4",
-          "no": "0.47"
-        },
-        "bestBid": "0.4",
-        "bestAsk": "0.53"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T02:15:11.381Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "BJENNINGSO19",
-      "instrumentSymbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-BJENNINGSO19",
-      "marketState": "open",
-      "color": "#4F2683",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Minnesota_Vikings_1_092c0864-e622-47bd-88c7-9c91461f4bbe.avif",
-      "expiryDate": "2026-11-24T13:20:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:04.000Z",
-      "sortOrder": 49,
-      "teamId": "33405046-04ee-4058-a950-d606f8c30852",
-      "strike": {
-        "type": "over",
-        "value": "19.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Jauan Jennings",
-        "externalIds": {
-          "sportradar": "3ae9f0fa-c711-4663-80cf-4707856c07aa"
         }
       }
     },
@@ -1566,13 +1566,13 @@
       "prices": {
         "buy": {
           "yes": "0.33",
-          "no": "0.83"
+          "no": "0.84"
         },
         "sell": {
-          "yes": "0.17",
+          "yes": "0.16",
           "no": "0.67"
         },
-        "bestBid": "0.17",
+        "bestBid": "0.16",
         "bestAsk": "0.33"
       },
       "status": "active",
@@ -1623,13 +1623,13 @@
       "prices": {
         "buy": {
           "yes": "0.33",
-          "no": "0.78"
+          "no": "0.77"
         },
         "sell": {
-          "yes": "0.22",
+          "yes": "0.23",
           "no": "0.67"
         },
-        "bestBid": "0.22",
+        "bestBid": "0.23",
         "bestAsk": "0.33"
       },
       "status": "active",
@@ -1679,15 +1679,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.33",
+          "yes": "0.32",
           "no": "0.82"
         },
         "sell": {
           "yes": "0.18",
-          "no": "0.67"
+          "no": "0.68"
         },
         "bestBid": "0.18",
-        "bestAsk": "0.33"
+        "bestAsk": "0.32"
       },
       "status": "active",
       "createdAt": "2026-11-18T02:15:11.381Z",
@@ -2079,13 +2079,13 @@
       "prices": {
         "buy": {
           "yes": "0.22",
-          "no": "0.94"
+          "no": "0.93"
         },
         "sell": {
-          "yes": "0.06",
+          "yes": "0.07",
           "no": "0.78"
         },
-        "bestBid": "0.06",
+        "bestBid": "0.07",
         "bestAsk": "0.22"
       },
       "status": "active",
@@ -2306,14 +2306,11 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.18",
-          "no": "0.97"
+          "yes": "0.18"
         },
         "sell": {
-          "yes": "0.03",
           "no": "0.82"
         },
-        "bestBid": "0.03",
         "bestAsk": "0.18"
       },
       "status": "active",

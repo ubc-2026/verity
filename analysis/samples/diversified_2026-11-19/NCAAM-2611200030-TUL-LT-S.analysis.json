@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL1",
     "question": "Tulane vs Louisiana Tech: Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:03Z",
+    "analyzed_at_utc": "2026-11-19T06:27:47Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:03Z",
-      "snapshot_hash": "sha256:ea870ba27b506f00f92ddeead89387b90bda1ca9b20c0a0d22ea5d4dad759c5d",
+      "snapshot_time_utc": "2026-11-19T06:27:47Z",
+      "snapshot_hash": "sha256:fdc4711b00eb246dd4567270786e3ea1870ad1d243ea1f09d3d9526ba7c6b738",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Tulane wins by more than 1.5 points",
-      "best_bid": "0.44",
+      "best_bid": "0.45",
       "best_ask": "0.54",
-      "mid": "0.49",
-      "implied_probability": "0.49",
+      "mid": "0.495",
+      "implied_probability": "0.495",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:03Z"
+      "observed_time_utc": "2026-11-19T06:27:47Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (10c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 9c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611200030-TUL-LT-S",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.44, bestAsk 0.54; event volume 0"
+        "quote": "bestBid 0.45, bestAsk 0.54; event volume 0"
       }
     ],
     "evidence_gaps": [],

@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-PPREB-GOBERTO7",
     "question": "New York vs Minnesota: Player Rebounds",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:51Z",
+    "analyzed_at_utc": "2026-11-19T06:27:30Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:51Z",
-      "snapshot_hash": "sha256:90f5df0b279304f25e31c225e49edfb138e34fd0d0fec6dac89704940f3d9f15",
+      "snapshot_time_utc": "2026-11-19T06:27:30Z",
+      "snapshot_hash": "sha256:56a2f6b624a3603a67f345ebd3d0b088834ecd0bc63ca80b6cadf38becb2b533",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:51Z"
+      "observed_time_utc": "2026-11-19T06:27:30Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (14c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 14c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -126,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NBA-2611200100-NYK-MIN-PPREB-GOBERTO7] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NBA-2611200100-NYK-MIN-PPREB-GOBERTO7] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

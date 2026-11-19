@@ -26,13 +26,13 @@
       "prices": {
         "buy": {
           "yes": "0.9",
-          "no": "0.12"
+          "no": "0.13"
         },
         "sell": {
-          "yes": "0.88",
+          "yes": "0.87",
           "no": "0.1"
         },
-        "bestBid": "0.88",
+        "bestBid": "0.87",
         "bestAsk": "0.9"
       },
       "status": "active",

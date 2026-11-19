@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611200100-NYK-MIN-T-O229",
     "question": "New York vs Minnesota: Total Points",
     "expiry_utc": "2026-11-21T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:00Z",
+    "analyzed_at_utc": "2026-11-19T06:27:38Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:00Z",
-      "snapshot_hash": "sha256:08834609d2591b4a9900d820da3a5eba70e489a4f74137a543ef51f425d061e1",
+      "snapshot_time_utc": "2026-11-19T06:27:38Z",
+      "snapshot_hash": "sha256:859250b73187f44805f0291255f814151bc51c4756bd7e582e28f8fa63bd5204",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "More than 229.5 points scored",
-      "best_bid": "0.19",
-      "best_ask": "0.25",
-      "mid": "0.22",
-      "implied_probability": "0.22",
+      "best_bid": "0.2",
+      "best_ask": "0.27",
+      "mid": "0.235",
+      "implied_probability": "0.235",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:00Z"
+      "observed_time_utc": "2026-11-19T06:27:38Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (6c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 7c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611200100-NYK-MIN-T",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.19, bestAsk 0.25; event volume 0"
+        "quote": "bestBid 0.2, bestAsk 0.27; event volume 0"
       }
     ],
     "evidence_gaps": [],

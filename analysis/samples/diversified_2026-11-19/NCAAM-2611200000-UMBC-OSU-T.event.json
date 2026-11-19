@@ -9,6 +9,55 @@
   "createdAt": "2026-11-19T00:22:28.034Z",
   "contracts": [
     {
+      "id": "478864-1214179",
+      "label": "More than 154.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UMBC and Ohio State collectively score over 154.5 total points in the men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.65",
+          "no": "0.43"
+        },
+        "sell": {
+          "yes": "0.57",
+          "no": "0.35"
+        },
+        "bestBid": "0.57",
+        "bestAsk": "0.65"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:22:28.034Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+      "ticker": "O154",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O154",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "over",
+        "value": "154.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
       "id": "478864-1214178",
       "label": "More than 157.5 points scored",
       "description": {
@@ -25,15 +74,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.57",
+          "yes": "0.56",
           "no": "0.51"
         },
         "sell": {
           "yes": "0.49",
-          "no": "0.43"
+          "no": "0.44"
         },
         "bestBid": "0.49",
-        "bestAsk": "0.57"
+        "bestAsk": "0.56"
       },
       "status": "active",
       "createdAt": "2026-11-19T00:22:28.034Z",
@@ -49,55 +98,6 @@
       "strike": {
         "type": "over",
         "value": "157.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
-      "id": "478864-1214181",
-      "label": "More than 161.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if UMBC and Ohio State collectively score over 161.5 total points in the men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.5",
-          "no": "0.63"
-        },
-        "sell": {
-          "yes": "0.37",
-          "no": "0.5"
-        },
-        "bestBid": "0.37",
-        "bestAsk": "0.5"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:22:28.034Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
-      "ticker": "O161",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O161",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 12,
-      "strike": {
-        "type": "over",
-        "value": "161.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -484,47 +484,6 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "478864-1214179",
-      "label": "More than 154.5 points scored",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if UMBC and Ohio State collectively score over 154.5 total points in the men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {},
-        "sell": {}
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T00:22:28.034Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
-      "ticker": "O154",
-      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O154",
-      "marketState": "open",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
-      "expiryDate": "2026-11-22T00:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 10,
-      "strike": {
-        "type": "over",
-        "value": "154.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "478864-1214180",
       "label": "More than 144.5 points scored",
       "description": {
@@ -557,6 +516,52 @@
       "strike": {
         "type": "over",
         "value": "144.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478864-1214181",
+      "label": "More than 161.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if UMBC and Ohio State collectively score over 161.5 total points in the men's college basketball game between UMBC and Ohio State scheduled for 2026-11-19 at 6:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.63"
+        },
+        "sell": {
+          "yes": "0.37"
+        },
+        "bestBid": "0.37"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:22:28.034Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+      "ticker": "O161",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UMBC-OSU-T-O161",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 12,
+      "strike": {
+        "type": "over",
+        "value": "161.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",

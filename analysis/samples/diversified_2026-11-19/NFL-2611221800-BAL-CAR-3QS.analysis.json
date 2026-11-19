@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-3QS-CAR6",
     "question": "Baltimore vs Carolina: 3rd Quarter Point Spread",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:03Z",
+    "analyzed_at_utc": "2026-11-19T06:27:34Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:03Z",
-      "snapshot_hash": "sha256:d95abbd0da36cef4897a257bfb8c085a149bf377ab56c1a48f07cc8a1c7c16d7",
+      "snapshot_time_utc": "2026-11-19T06:27:34Z",
+      "snapshot_hash": "sha256:a418002b7c4da7b36fd2c16218b0193d0171871f1f081b1f4f80d2efe3ca7489",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Carolina -6.5 in the 3rd quarter",
       "best_bid": "0.16",
-      "best_ask": "0.27",
-      "mid": "0.215",
-      "implied_probability": "0.215",
+      "best_ask": "0.28",
+      "mid": "0.22",
+      "implied_probability": "0.22",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:03Z"
+      "observed_time_utc": "2026-11-19T06:27:34Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (11c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 12c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-3QS",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.16, bestAsk 0.27; event volume 0"
+        "quote": "bestBid 0.16, bestAsk 0.28; event volume 0"
       }
     ],
     "evidence_gaps": [],

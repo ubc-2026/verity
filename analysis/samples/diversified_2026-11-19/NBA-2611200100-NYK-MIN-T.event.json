@@ -271,13 +271,13 @@
       "prices": {
         "buy": {
           "yes": "0.73",
-          "no": "0.28"
+          "no": "0.29"
         },
         "sell": {
-          "yes": "0.72",
+          "yes": "0.71",
           "no": "0.27"
         },
-        "bestBid": "0.72",
+        "bestBid": "0.71",
         "bestAsk": "0.73"
       },
       "status": "active",
@@ -319,15 +319,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.7",
+          "yes": "0.69",
           "no": "0.32"
         },
         "sell": {
           "yes": "0.68",
-          "no": "0.3"
+          "no": "0.31"
         },
         "bestBid": "0.68",
-        "bestAsk": "0.7"
+        "bestAsk": "0.69"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -369,13 +369,13 @@
       "prices": {
         "buy": {
           "yes": "0.67",
-          "no": "0.36"
+          "no": "0.37"
         },
         "sell": {
-          "yes": "0.64",
+          "yes": "0.63",
           "no": "0.33"
         },
-        "bestBid": "0.64",
+        "bestBid": "0.63",
         "bestAsk": "0.67"
       },
       "status": "active",
@@ -418,13 +418,13 @@
       "prices": {
         "buy": {
           "yes": "0.61",
-          "no": "0.4"
+          "no": "0.42"
         },
         "sell": {
-          "yes": "0.6",
+          "yes": "0.58",
           "no": "0.39"
         },
-        "bestBid": "0.6",
+        "bestBid": "0.58",
         "bestAsk": "0.61"
       },
       "status": "active",
@@ -467,13 +467,13 @@
       "prices": {
         "buy": {
           "yes": "0.58",
-          "no": "0.46"
+          "no": "0.47"
         },
         "sell": {
-          "yes": "0.54",
+          "yes": "0.53",
           "no": "0.42"
         },
-        "bestBid": "0.54",
+        "bestBid": "0.53",
         "bestAsk": "0.58"
       },
       "status": "active",
@@ -565,13 +565,13 @@
       "prices": {
         "buy": {
           "yes": "0.48",
-          "no": "0.56"
+          "no": "0.54"
         },
         "sell": {
-          "yes": "0.44",
+          "yes": "0.46",
           "no": "0.52"
         },
-        "bestBid": "0.44",
+        "bestBid": "0.46",
         "bestAsk": "0.48"
       },
       "status": "active",
@@ -663,13 +663,13 @@
       "prices": {
         "buy": {
           "yes": "0.41",
-          "no": "0.63"
+          "no": "0.64"
         },
         "sell": {
-          "yes": "0.37",
+          "yes": "0.36",
           "no": "0.59"
         },
-        "bestBid": "0.37",
+        "bestBid": "0.36",
         "bestAsk": "0.41"
       },
       "status": "active",
@@ -712,13 +712,13 @@
       "prices": {
         "buy": {
           "yes": "0.37",
-          "no": "0.67"
+          "no": "0.68"
         },
         "sell": {
-          "yes": "0.33",
+          "yes": "0.32",
           "no": "0.63"
         },
-        "bestBid": "0.33",
+        "bestBid": "0.32",
         "bestAsk": "0.37"
       },
       "status": "active",
@@ -760,15 +760,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.33",
+          "yes": "0.34",
           "no": "0.7"
         },
         "sell": {
           "yes": "0.3",
-          "no": "0.67"
+          "no": "0.66"
         },
         "bestBid": "0.3",
-        "bestAsk": "0.33"
+        "bestAsk": "0.34"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -809,15 +809,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.29",
+          "yes": "0.3",
           "no": "0.77"
         },
         "sell": {
           "yes": "0.23",
-          "no": "0.71"
+          "no": "0.7"
         },
         "bestBid": "0.23",
-        "bestAsk": "0.29"
+        "bestAsk": "0.3"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -858,15 +858,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.25",
-          "no": "0.81"
+          "yes": "0.27",
+          "no": "0.8"
         },
         "sell": {
-          "yes": "0.19",
-          "no": "0.75"
+          "yes": "0.2",
+          "no": "0.73"
         },
-        "bestBid": "0.19",
-        "bestAsk": "0.25"
+        "bestBid": "0.2",
+        "bestAsk": "0.27"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -907,15 +907,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.24",
-          "no": "0.87"
+          "yes": "0.25",
+          "no": "0.86"
         },
         "sell": {
-          "yes": "0.13",
-          "no": "0.76"
+          "yes": "0.14",
+          "no": "0.75"
         },
-        "bestBid": "0.13",
-        "bestAsk": "0.24"
+        "bestBid": "0.14",
+        "bestAsk": "0.25"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -956,15 +956,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.21",
-          "no": "0.9"
+          "yes": "0.22",
+          "no": "0.89"
         },
         "sell": {
-          "yes": "0.1",
-          "no": "0.79"
+          "yes": "0.11",
+          "no": "0.78"
         },
-        "bestBid": "0.1",
-        "bestAsk": "0.21"
+        "bestBid": "0.11",
+        "bestAsk": "0.22"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -1054,15 +1054,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.16",
-          "no": "0.95"
+          "yes": "0.17",
+          "no": "0.94"
         },
         "sell": {
-          "yes": "0.05",
-          "no": "0.84"
+          "yes": "0.06",
+          "no": "0.83"
         },
-        "bestBid": "0.05",
-        "bestAsk": "0.16"
+        "bestBid": "0.06",
+        "bestAsk": "0.17"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",
@@ -1152,12 +1152,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.13"
+          "yes": "0.14",
+          "no": "0.97"
         },
         "sell": {
-          "no": "0.87"
+          "yes": "0.03",
+          "no": "0.86"
         },
-        "bestAsk": "0.13"
+        "bestBid": "0.03",
+        "bestAsk": "0.14"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:21:22.829Z",

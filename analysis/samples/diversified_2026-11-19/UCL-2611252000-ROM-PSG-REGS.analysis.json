@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2",
     "question": "Roma vs PSG: Point Spread",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:22Z",
+    "analyzed_at_utc": "2026-11-19T06:27:02Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:22Z",
-      "snapshot_hash": "sha256:a9d4868b419dbc4007b724f4e7f7834d24ef47ac9fa6e66b5026f23a59863f1e",
+      "snapshot_time_utc": "2026-11-19T06:27:02Z",
+      "snapshot_hash": "sha256:3f43797509d09096c8bca0d5ba4601def41f56a5f2e5fc8afc6ef936d1eaa330",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:22Z"
+      "observed_time_utc": "2026-11-19T06:27:02Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (3c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 3c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",

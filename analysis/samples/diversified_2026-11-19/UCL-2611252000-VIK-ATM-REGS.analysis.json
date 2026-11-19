@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-VIK-ATM-REGS-ATM2",
     "question": "Viking vs Atlético: Point Spread",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:31Z",
+    "analyzed_at_utc": "2026-11-19T06:27:11Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:31Z",
-      "snapshot_hash": "sha256:3fc9ebf845ae82da86a9b5e37c87f47237623b85c9cfdf9f525c49c8ef1efeae",
+      "snapshot_time_utc": "2026-11-19T06:27:11Z",
+      "snapshot_hash": "sha256:97297414b17e31d91fecd4de9681ec27de8ea98aa5ae84bc607a5e91e9c0a6e4",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:31Z"
+      "observed_time_utc": "2026-11-19T06:27:11Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 4c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",

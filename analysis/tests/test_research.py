@@ -50,7 +50,13 @@ def test_named_issuance_requires_an_explicit_phrase():
 
 def test_medium_rating_does_not_propose_even_when_gap_is_open():
     ctx, ra = _nyc({TERMS: (UNNAMED, None), NWS_CLINYC_URL: (REPORT, None)})
-    assert ra.rating.final_rating == "Medium"
+    # NYC now floors to High (Source>=2 + Ambiguity>=2); force Medium to test the gate.
+    ra = ra.model_copy(update={
+        "rating": ra.rating.model_copy(update={
+            "final_rating": "Medium", "raw_rating": "Medium", "rating_floor": "Medium",
+        }),
+        "research_action": "investigate",
+    })
     log = []
     assert generate_purchase_request(ra, ctx, log) is None
     assert any("limited to High-risk markets" in line for line in log)

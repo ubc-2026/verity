@@ -175,15 +175,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.67",
+          "yes": "0.68",
           "no": "0.39"
         },
         "sell": {
           "yes": "0.61",
-          "no": "0.33"
+          "no": "0.32"
         },
         "bestBid": "0.61",
-        "bestAsk": "0.67"
+        "bestAsk": "0.68"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:38:26.633Z",
@@ -275,15 +275,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.63",
-          "no": "0.48"
+          "yes": "0.6",
+          "no": "0.46"
         },
         "sell": {
-          "yes": "0.52",
-          "no": "0.37"
+          "yes": "0.54",
+          "no": "0.4"
         },
-        "bestBid": "0.52",
-        "bestAsk": "0.63"
+        "bestBid": "0.54",
+        "bestAsk": "0.6"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:38:26.633Z",
@@ -375,15 +375,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.52",
+          "yes": "0.53",
           "no": "0.52"
         },
         "sell": {
           "yes": "0.48",
-          "no": "0.48"
+          "no": "0.47"
         },
         "bestBid": "0.48",
-        "bestAsk": "0.52"
+        "bestAsk": "0.53"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:38:26.633Z",
@@ -559,56 +559,6 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "479777-1219307",
-      "label": "Portland wins by more than 13.5 points",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Portland in the entire NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT is above 13.5. Otherwise, it resolves to No. The Underlying is the score differential (Portland's score minus Milwaukee's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.41",
-          "no": "0.65"
-        },
-        "sell": {
-          "yes": "0.35",
-          "no": "0.59"
-        },
-        "bestBid": "0.35",
-        "bestAsk": "0.41"
-      },
-      "status": "active",
-      "createdAt": "2026-11-19T04:38:26.633Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
-      "ticker": "POR13",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-S-POR13",
-      "marketState": "open",
-      "abbreviatedName": "Portland",
-      "color": "#0f9ee7",
-      "imageUrl": "https://assets.gemini.com/predictions/images/POR_72e78369-fef1-49c0-913e-4fab2445cb5d.png",
-      "expiryDate": "2026-11-21T13:00:00.000Z",
-      "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 23,
-      "strike": {
-        "type": "spread",
-        "value": "13.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01"
-    },
-    {
       "id": "479777-1219309",
       "label": "Portland wins by more than 14.5 points",
       "description": {
@@ -659,15 +609,15 @@
       "priceMinimum": "0.01"
     },
     {
-      "id": "479777-1219313",
-      "label": "Portland wins by more than 17.5 points",
+      "id": "479777-1219307",
+      "label": "Portland wins by more than 13.5 points",
       "description": {
         "data": {},
         "content": [
           {
             "data": {},
             "marks": [],
-            "value": "This market resolves to Yes if the score differential recorded in favor of Portland in the entire NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT is above 17.5. Otherwise, it resolves to No. The Underlying is the score differential (Portland's score minus Milwaukee's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "value": "This market resolves to Yes if the score differential recorded in favor of Portland in the entire NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT is above 13.5. Otherwise, it resolves to No. The Underlying is the score differential (Portland's score minus Milwaukee's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
             "nodeType": "text"
           }
         ],
@@ -675,31 +625,31 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.34",
-          "no": "0.77"
-        },
-        "sell": {
-          "yes": "0.23",
+          "yes": "0.4",
           "no": "0.66"
         },
-        "bestBid": "0.23",
-        "bestAsk": "0.34"
+        "sell": {
+          "yes": "0.34",
+          "no": "0.6"
+        },
+        "bestBid": "0.34",
+        "bestAsk": "0.4"
       },
       "status": "active",
       "createdAt": "2026-11-19T04:38:26.633Z",
       "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
-      "ticker": "POR17",
-      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-S-POR17",
+      "ticker": "POR13",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-S-POR13",
       "marketState": "open",
       "abbreviatedName": "Portland",
       "color": "#0f9ee7",
       "imageUrl": "https://assets.gemini.com/predictions/images/POR_72e78369-fef1-49c0-913e-4fab2445cb5d.png",
       "expiryDate": "2026-11-21T13:00:00.000Z",
       "effectiveDate": "2026-11-17T00:00:07.000Z",
-      "sortOrder": 28,
+      "sortOrder": 23,
       "strike": {
         "type": "spread",
-        "value": "17.5"
+        "value": "13.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -750,6 +700,56 @@
       "strike": {
         "type": "spread",
         "value": "15.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479777-1219313",
+      "label": "Portland wins by more than 17.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Portland in the entire NBA game between Portland and Milwaukee scheduled for 2026-11-19 at 7:00 p.m. CT is above 17.5. Otherwise, it resolves to No. The Underlying is the score differential (Portland's score minus Milwaukee's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.29",
+          "no": "0.76"
+        },
+        "sell": {
+          "yes": "0.24",
+          "no": "0.71"
+        },
+        "bestBid": "0.24",
+        "bestAsk": "0.29"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:38:26.633Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "POR17",
+      "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-S-POR17",
+      "marketState": "open",
+      "abbreviatedName": "Portland",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/POR_72e78369-fef1-49c0-913e-4fab2445cb5d.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 28,
+      "strike": {
+        "type": "spread",
+        "value": "17.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
@@ -926,13 +926,13 @@
       "prices": {
         "buy": {
           "yes": "0.23",
-          "no": "0.83"
+          "no": "0.82"
         },
         "sell": {
-          "yes": "0.17",
+          "yes": "0.18",
           "no": "0.77"
         },
-        "bestBid": "0.17",
+        "bestBid": "0.18",
         "bestAsk": "0.23"
       },
       "status": "active",

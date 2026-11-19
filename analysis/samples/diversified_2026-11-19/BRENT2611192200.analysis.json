@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-BRENT2611192200-HI90",
+    "contract_id": "GEMI-BRENT2611192200-HI89",
     "event_ticker": "BRENT2611192200",
-    "instrument_symbol": "GEMI-BRENT2611192200-HI90",
+    "instrument_symbol": "GEMI-BRENT2611192200-HI89",
     "question": "Oil (Brent) price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:28Z",
+    "analyzed_at_utc": "2026-11-19T06:28:00Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:28Z",
-      "snapshot_hash": "sha256:fecdb35e0ad78d59f23349f4e2d4600635410725f9fc3fd5e07081e4eb4c5867",
+      "snapshot_time_utc": "2026-11-19T06:28:00Z",
+      "snapshot_hash": "sha256:5685fbcf7c4f7bcc60f8e9ac20526a9fbdf9b0de4535f743865c09cb5cebc6ae",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$90 or above",
-      "best_bid": "0.34",
-      "best_ask": "0.38",
-      "mid": "0.36",
-      "implied_probability": "0.36",
+      "outcome_label": "$89 or above",
+      "best_bid": "0.56",
+      "best_ask": "0.6",
+      "mid": "0.58",
+      "implied_probability": "0.58",
       "volume_usd": "79.32",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:28Z"
+      "observed_time_utc": "2026-11-19T06:28:00Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 1,
-        "rationale": "Settlement source looks like official primary source (matched 'kaiko').",
+        "score": 2,
+        "rationale": "Settlement source looks like a proxy/thinner feed of the real underlying (matched 'kaiko-equities').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $79.32 is under $100 (4c spread).",
+        "score": 2,
+        "rationale": "event-total volume $79.32, 4c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -71,19 +71,24 @@
       "known_total": 7,
       "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "rule": "Source >= 2 -> at least Medium",
+          "triggered_by": "source",
+          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+        },
+        {
+          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "triggered_by": "source",
+          "effect": "rating floor High; soft/proxy source plus unclear criteria"
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +100,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BRENT2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Oil (Brent) is $90 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf)."
+        "quote": "If the price of Oil (Brent) is $89 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_BRENTOILUSDC index. This index provides a 60 second average of the [BRENTOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:BRENTOIL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,11 +112,25 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BRENT2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.34, bestAsk 0.38; event volume 79.32"
+        "quote": "bestBid 0.56, bestAsk 0.6; event volume 79.32"
       }
     ],
-    "evidence_gaps": [],
-    "unresolved_questions": [],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "commodity-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -124,8 +143,27 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": null,
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-e97521a33cb2",
+    "contract_id": "GEMI-BRENT2611192200-HI89",
+    "evidence_gap_id": "GAP-1",
+    "catalog_item_id": "cat-commodity-settlement-version-v1",
+    "catalog_parameters": {
+      "index": "BRENT",
+      "provider": "commodity index",
+      "date": "2026-11-19"
+    },
+    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": null,
+    "signed": false,
+    "created_at_utc": "2026-11-19T06:28:00Z"
+  },
   "decision_log": [
-    "[GEMI-BRENT2611192200-HI90] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-BRENT2611192200-HI89] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for Brent Crude Oil as published on the CME Group website, or t",
+    "[GEMI-BRENT2611192200-HI89] PROPOSE cat-commodity-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
   ]
 }

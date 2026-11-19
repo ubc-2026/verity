@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-WORTHYO39",
     "question": "Arizona vs Kansas City: Player Receiving Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:25Z",
+    "analyzed_at_utc": "2026-11-19T06:27:06Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:25Z",
-      "snapshot_hash": "sha256:8db87a5f84f13a372d2e92ee6ee877a63827fb20f140d9f60713b74973b7698c",
+      "snapshot_time_utc": "2026-11-19T06:27:06Z",
+      "snapshot_hash": "sha256:62ffe31154f986b398a9cb28090dc67b1c4b57daca7fe397caa8560c6ef077c6",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:25Z"
+      "observed_time_utc": "2026-11-19T06:27:06Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (16c spread).",
+        "rationale": "16c spread is over 15c.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -71,14 +71,19 @@
       "known_total": 7,
       "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": null,
+      "rating_floor": "Medium",
       "final_rating": "Medium",
       "possible_range": null,
       "overrides": [
         {
+          "rule": "High (3) in Liquidity -> at least Medium",
+          "triggered_by": "liquidity",
+          "effect": "rating floor Medium; untradeable/wide book (Excel Avoid) still elevates research attention"
+        },
+        {
           "rule": "High (3) in Liquidity -> never trade more than top-of-book",
           "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "effect": "research translation: treat the quoted price as an unreliable signal"
         }
       ]
     },

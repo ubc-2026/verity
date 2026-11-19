@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-XAU2611192200-HI3775",
+    "contract_id": "GEMI-XAU2611192200-HI3750",
     "event_ticker": "XAU2611192200",
-    "instrument_symbol": "GEMI-XAU2611192200-HI3775",
+    "instrument_symbol": "GEMI-XAU2611192200-HI3750",
     "question": "Gold price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:44Z",
+    "analyzed_at_utc": "2026-11-19T06:28:19Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:44Z",
-      "snapshot_hash": "sha256:e89e2c927837504c0acd5334b29cc9390085637eb097c4b2f3e274afbcc9922a",
+      "snapshot_time_utc": "2026-11-19T06:28:19Z",
+      "snapshot_hash": "sha256:173520d7439965ceed79437bbbc6b8eeb736c7bedaba7d30e736a572b5497925",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$3,775 or above",
-      "best_bid": "0.19",
-      "best_ask": "0.24",
-      "mid": "0.215",
-      "implied_probability": "0.215",
+      "outcome_label": "$3,750 or above",
+      "best_bid": "0.36",
+      "best_ask": "0.4",
+      "mid": "0.38",
+      "implied_probability": "0.38",
       "volume_usd": "12",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:44Z"
+      "observed_time_utc": "2026-11-19T06:28:19Z"
     },
     "scores": {
       "ambiguity": {
@@ -38,8 +38,8 @@
         ]
       },
       "source": {
-        "score": 1,
-        "rationale": "Settlement source looks like official primary source (matched 'kaiko').",
+        "score": 2,
+        "rationale": "Settlement source looks like a proxy/thinner feed of the real underlying (matched 'kaiko-equities').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $12 is under $100 (5c spread).",
+        "score": 2,
+        "rationale": "event-total volume $12, 4c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -71,19 +71,24 @@
       "known_total": 7,
       "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "rule": "Source >= 2 -> at least Medium",
+          "triggered_by": "source",
+          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+        },
+        {
+          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "triggered_by": "source",
+          "effect": "rating floor High; soft/proxy source plus unclear criteria"
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -95,7 +100,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XAU2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Gold is $3,775 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf)."
+        "quote": "If the price of Gold is $3,750 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,11 +112,25 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/XAU2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.19, bestAsk 0.24; event volume 12"
+        "quote": "bestBid 0.36, bestAsk 0.4; event volume 12"
       }
     ],
-    "evidence_gaps": [],
-    "unresolved_questions": [],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "commodity-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
     "data_quality_flags": [
       "analyst=verity-rules-v1 (code rules, no LLM)"
     ],
@@ -124,8 +143,27 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": null,
+  "purchase_proposal": {
+    "version": "verity-purchase-proposal-v1",
+    "proposal_id": "prop-7a4859ca0942",
+    "contract_id": "GEMI-XAU2611192200-HI3750",
+    "evidence_gap_id": "GAP-1",
+    "catalog_item_id": "cat-commodity-settlement-version-v1",
+    "catalog_parameters": {
+      "index": "XAU",
+      "provider": "commodity index",
+      "date": "2026-11-19"
+    },
+    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
+    "max_amount_base_units": "50000",
+    "asset": "USDC",
+    "network_label": "arc-testnet",
+    "fixture_label": null,
+    "signed": false,
+    "created_at_utc": "2026-11-19T06:28:19Z"
+  },
   "decision_log": [
-    "[GEMI-XAU2611192200-HI3775] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-XAU2611192200-HI3750] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for Gold as published on the CME Group website. (4) The Expirat",
+    "[GEMI-XAU2611192200-HI3750] PROPOSE cat-commodity-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
   ]
 }

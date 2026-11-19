@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611210030-CLE-DUK-2QS-DUK7",
     "question": "Clemson vs Duke: 2nd Quarter Point Spread",
     "expiry_utc": "2026-11-22T00:30:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:45Z",
+    "analyzed_at_utc": "2026-11-19T06:27:50Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:45Z",
-      "snapshot_hash": "sha256:36869a56db080628f4cf5fa6d9182305e5dfbfe5bedc751010b27325262ce0cf",
+      "snapshot_time_utc": "2026-11-19T06:27:50Z",
+      "snapshot_hash": "sha256:399c144ffd8d9b92a715e4e316776c026d36a7a9917b7fb7789f0edce1616e02",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:45Z"
+      "observed_time_utc": "2026-11-19T06:27:50Z"
     },
     "scores": {
       "ambiguity": {
@@ -71,19 +71,24 @@
       "known_total": 6,
       "raw_total": 6,
       "raw_rating": "Low",
-      "rating_floor": null,
-      "final_rating": "Low",
+      "rating_floor": "Medium",
+      "final_rating": "Medium",
       "possible_range": null,
       "overrides": [
         {
+          "rule": "High (3) in Liquidity -> at least Medium",
+          "triggered_by": "liquidity",
+          "effect": "rating floor Medium; untradeable/wide book (Excel Avoid) still elevates research attention"
+        },
+        {
           "rule": "High (3) in Liquidity -> never trade more than top-of-book",
           "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "effect": "research translation: treat the quoted price as an unreliable signal"
         }
       ]
     },
-    "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 6). Research action: investigate. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -126,6 +131,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAF-2611210030-CLE-DUK-2QS-DUK7] no purchase: rating is Low; research buys are limited to High-risk markets."
+    "[GEMI-NCAAF-2611210030-CLE-DUK-2QS-DUK7] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

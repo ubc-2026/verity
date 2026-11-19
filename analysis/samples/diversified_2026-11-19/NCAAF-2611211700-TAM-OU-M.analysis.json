@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAF-2611211700-TAM-OU-M-TAM",
     "question": "Texas A&M vs Oklahoma",
     "expiry_utc": "2026-11-22T20:45:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:08Z",
+    "analyzed_at_utc": "2026-11-19T06:26:49Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:08Z",
-      "snapshot_hash": "sha256:98ec28139b1839feb297630b88569a65664ce1855bfdadb89a5e222668e49aae",
+      "snapshot_time_utc": "2026-11-19T06:26:49Z",
+      "snapshot_hash": "sha256:abda38fb611a0c2258d00e1763e7aea63508ed78477d70c668c53161f8af194a",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:08Z"
+      "observed_time_utc": "2026-11-19T06:26:49Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (1c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 1c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,8 +68,8 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
       "rating_floor": "High",
       "final_rating": "High",
@@ -79,16 +79,11 @@
           "rule": "High (3) in Correlation -> at least High",
           "triggered_by": "correlation",
           "effect": "rating floor High; overlapping markets can flip together"
-        },
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
         }
       ]
     },
     "research_action": "flag_for_human_review",
-    "summary": "High resolution risk (total 8). Research action: flag_for_human_review. No open resolution questions.",
+    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",

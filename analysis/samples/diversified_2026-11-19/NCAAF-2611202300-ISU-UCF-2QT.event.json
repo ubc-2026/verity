@@ -1,0 +1,483 @@
+{
+  "id": "475192",
+  "title": "Iowa State vs UCF: 2nd Quarter Point Total",
+  "slug": "iowa-state-vs-ucf-2nd-quarter-point-total",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAF-2611202300-ISU-UCF-2QT",
+  "status": "active",
+  "createdAt": "2026-11-18T00:06:27.736Z",
+  "contracts": [
+    {
+      "id": "475192-1196203",
+      "label": "More than 19.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 19.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O19",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O19",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196206",
+      "label": "More than 13.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 13.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O13",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O13",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "13.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196209",
+      "label": "More than 10.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 10.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O10",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O10",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196212",
+      "label": "More than 12.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 12.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O12",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O12",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "12.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196217",
+      "label": "More than 5.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 5.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O5",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O5",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "5.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196221",
+      "label": "More than 7.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 7.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O7",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O7",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196225",
+      "label": "More than 16.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 16.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O16",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O16",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "16.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196228",
+      "label": "More than 23.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 23.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O23",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O23",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "23.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196231",
+      "label": "More than 27.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 27.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O27",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O27",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "27.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196233",
+      "label": "More than 20.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 20.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O20",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O20",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "20.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475192-1196236",
+      "label": "More than 2.5 points scored in the 2nd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Iowa State and UCF collectively score more than 2.5 points during the 2nd quarter of the College Football game between Iowa State and UCF scheduled for November 20, 2026 at 6:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:06:27.736Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+      "ticker": "O2",
+      "instrumentSymbol": "GEMI-NCAAF-2611202300-ISU-UCF-2QT-O2",
+      "marketState": "post_only",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-21T23:00:00.000Z",
+      "effectiveDate": "2026-11-14T00:00:08.000Z",
+      "strike": {
+        "type": "over",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:06:27.736Z",
+  "isLive": false,
+  "participants": [],
+  "description": "How many total points will be scored in the 2nd quarter?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Football"
+  ],
+  "expiryDate": "2026-11-21T23:00:00.000Z",
+  "startTime": "2026-11-20T23:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf",
+  "subcategory": {
+    "id": 13,
+    "slug": "sports_football_college-football",
+    "name": "College Football",
+    "path": [
+      "Sports",
+      "Football",
+      "College Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.avif",
+  "template": "sports-total",
+  "gameId": "e8679097-f40e-4f6e-852c-4772f6f6f865",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Am. football"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "total",
+    "subject": "contest",
+    "scope": {
+      "type": "quarter",
+      "ordinal": 2
+    },
+    "metric": "points"
+  }
+}

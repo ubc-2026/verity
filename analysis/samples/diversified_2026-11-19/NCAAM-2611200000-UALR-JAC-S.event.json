@@ -1,0 +1,562 @@
+{
+  "id": "479550",
+  "title": "Little Rock vs Jacksonville: Point Spread",
+  "slug": "little-rock-vs-jacksonville-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611200000-UALR-JAC-S",
+  "status": "active",
+  "createdAt": "2026-11-19T03:14:06.659Z",
+  "contracts": [
+    {
+      "id": "479550-1218520",
+      "label": "Little Rock wins by more than 20.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Little Rock in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 20.5. Otherwise, it resolves to No. The Underlying is the score differential (Little Rock's score minus Jacksonville's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.96"
+        },
+        "sell": {
+          "no": "0.04"
+        },
+        "bestAsk": "0.96"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "UALR20",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-UALR20",
+      "marketState": "open",
+      "abbreviatedName": "Little Rock",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arkansas_Little_Rock_TrojansDark_539ed1f7-b1ea-453b-8e4d-b601d3ffb677.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "spread",
+        "value": "20.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218512",
+      "label": "Little Rock wins by more than 1.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Little Rock in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Little Rock's score minus Jacksonville's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.47",
+          "no": "0.65"
+        },
+        "sell": {
+          "yes": "0.35",
+          "no": "0.53"
+        },
+        "bestBid": "0.35",
+        "bestAsk": "0.47"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "UALR1",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-UALR1",
+      "marketState": "open",
+      "abbreviatedName": "Little Rock",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arkansas_Little_Rock_TrojansDark_539ed1f7-b1ea-453b-8e4d-b601d3ffb677.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218521",
+      "label": "Little Rock wins by more than 5.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Little Rock in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Little Rock's score minus Jacksonville's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.33",
+          "no": "0.8"
+        },
+        "sell": {
+          "yes": "0.2",
+          "no": "0.67"
+        },
+        "bestBid": "0.2",
+        "bestAsk": "0.33"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "UALR5",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-UALR5",
+      "marketState": "open",
+      "abbreviatedName": "Little Rock",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arkansas_Little_Rock_TrojansDark_539ed1f7-b1ea-453b-8e4d-b601d3ffb677.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "spread",
+        "value": "5.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218518",
+      "label": "Little Rock wins by more than 10.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Little Rock in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Little Rock's score minus Jacksonville's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.21",
+          "no": "0.92"
+        },
+        "sell": {
+          "yes": "0.08",
+          "no": "0.79"
+        },
+        "bestBid": "0.08",
+        "bestAsk": "0.21"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "UALR10",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-UALR10",
+      "marketState": "open",
+      "abbreviatedName": "Little Rock",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arkansas_Little_Rock_TrojansDark_539ed1f7-b1ea-453b-8e4d-b601d3ffb677.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218510",
+      "label": "Jacksonville wins by more than 14.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Jacksonville in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 14.5. Otherwise, it resolves to No. The Underlying is the score differential (Jacksonville's score minus Little Rock's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "JAC14",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-JAC14",
+      "marketState": "open",
+      "abbreviatedName": "Jacksonville",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "spread",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218515",
+      "label": "Jacksonville wins by more than 2.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Jacksonville in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 2.5. Otherwise, it resolves to No. The Underlying is the score differential (Jacksonville's score minus Little Rock's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.53"
+        },
+        "sell": {
+          "yes": "0.47"
+        },
+        "bestBid": "0.47"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "JAC2",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-JAC2",
+      "marketState": "open",
+      "abbreviatedName": "Jacksonville",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218517",
+      "label": "Jacksonville wins by more than 5.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Jacksonville in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Jacksonville's score minus Little Rock's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "JAC5",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-JAC5",
+      "marketState": "open",
+      "abbreviatedName": "Jacksonville",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "spread",
+        "value": "5.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218522",
+      "label": "Jacksonville wins by more than 24.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Jacksonville in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 24.5. Otherwise, it resolves to No. The Underlying is the score differential (Jacksonville's score minus Little Rock's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "JAC24",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-JAC24",
+      "marketState": "open",
+      "abbreviatedName": "Jacksonville",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "spread",
+        "value": "24.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218523",
+      "label": "Jacksonville wins by more than 19.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Jacksonville in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 19.5. Otherwise, it resolves to No. The Underlying is the score differential (Jacksonville's score minus Little Rock's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "JAC19",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-JAC19",
+      "marketState": "open",
+      "abbreviatedName": "Jacksonville",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "spread",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218524",
+      "label": "Little Rock wins by more than 15.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Little Rock in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 15.5. Otherwise, it resolves to No. The Underlying is the score differential (Little Rock's score minus Jacksonville's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "UALR15",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-UALR15",
+      "marketState": "open",
+      "abbreviatedName": "Little Rock",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arkansas_Little_Rock_TrojansDark_539ed1f7-b1ea-453b-8e4d-b601d3ffb677.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 9,
+      "strike": {
+        "type": "spread",
+        "value": "15.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479550-1218527",
+      "label": "Jacksonville wins by more than 9.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Jacksonville in the entire men's college basketball game between Little Rock and Jacksonville scheduled for 2026-11-19 at 6:00 p.m. CT is above 9.5. Otherwise, it resolves to No. The Underlying is the score differential (Jacksonville's score minus Little Rock's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T03:14:06.659Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "JAC9",
+      "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-S-JAC9",
+      "marketState": "open",
+      "abbreviatedName": "Jacksonville",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+      "expiryDate": "2026-11-22T00:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "spread",
+        "value": "9.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-19T03:14:06.659Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "647",
+      "name": "Jacksonville Dolphins",
+      "abbreviation": "JAC",
+      "side": "home"
+    },
+    {
+      "id": "809",
+      "name": "Arkansas Little Rock Trojans",
+      "abbreviation": "UALR",
+      "side": "away"
+    }
+  ],
+  "description": "What will the point difference be?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-22T00:00:00.000Z",
+  "startTime": "2026-11-20T00:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-spread",
+  "gameId": "ffe04238-cc4f-430f-83b9-32e640e1d978",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "points"
+  }
+}

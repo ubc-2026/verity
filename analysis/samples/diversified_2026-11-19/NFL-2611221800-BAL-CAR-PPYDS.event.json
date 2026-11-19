@@ -1,0 +1,1164 @@
+{
+  "id": "476610",
+  "title": "Baltimore vs Carolina: Quarterback Passing Yards",
+  "slug": "baltimore-vs-carolina-quarterback-passing-yards",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NFL-2611221800-BAL-CAR-PPYDS",
+  "status": "active",
+  "createdAt": "2026-11-18T08:08:55.668Z",
+  "contracts": [
+    {
+      "id": "476610-1202739",
+      "label": "Jacoby Brissett 150+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 150 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.94",
+          "no": "0.18"
+        },
+        "sell": {
+          "yes": "0.82",
+          "no": "0.06"
+        },
+        "bestBid": "0.82",
+        "bestAsk": "0.94"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO149",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO149",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 9,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "149.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202730",
+      "label": "Bryce Young 175+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 175 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.89",
+          "no": "0.24"
+        },
+        "sell": {
+          "yes": "0.76",
+          "no": "0.11"
+        },
+        "bestBid": "0.76",
+        "bestAsk": "0.89"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO174",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO174",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 0,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "174.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202740",
+      "label": "Jacoby Brissett 175+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 175 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.88",
+          "no": "0.25"
+        },
+        "sell": {
+          "yes": "0.75",
+          "no": "0.12"
+        },
+        "bestBid": "0.75",
+        "bestAsk": "0.88"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO174",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO174",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 10,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "174.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202731",
+      "label": "Bryce Young 200+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 200 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.8",
+          "no": "0.35"
+        },
+        "sell": {
+          "yes": "0.65",
+          "no": "0.2"
+        },
+        "bestBid": "0.65",
+        "bestAsk": "0.8"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO199",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO199",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 1,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "199.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202741",
+      "label": "Jacoby Brissett 200+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 200 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.77",
+          "no": "0.36"
+        },
+        "sell": {
+          "yes": "0.64",
+          "no": "0.23"
+        },
+        "bestBid": "0.64",
+        "bestAsk": "0.77"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO199",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO199",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 11,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "199.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202732",
+      "label": "Bryce Young 225+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 225 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.68",
+          "no": "0.44"
+        },
+        "sell": {
+          "yes": "0.56",
+          "no": "0.32"
+        },
+        "bestBid": "0.56",
+        "bestAsk": "0.68"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO224",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO224",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 2,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "224.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202742",
+      "label": "Jacoby Brissett 225+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 225 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.64",
+          "no": "0.49"
+        },
+        "sell": {
+          "yes": "0.51",
+          "no": "0.36"
+        },
+        "bestBid": "0.51",
+        "bestAsk": "0.64"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO224",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO224",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 12,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "224.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202733",
+      "label": "Bryce Young 250+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 250 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.53",
+          "no": "0.61"
+        },
+        "sell": {
+          "yes": "0.39",
+          "no": "0.47"
+        },
+        "bestBid": "0.39",
+        "bestAsk": "0.53"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO249",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO249",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 3,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "249.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202743",
+      "label": "Jacoby Brissett 250+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 250 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.48",
+          "no": "0.66"
+        },
+        "sell": {
+          "yes": "0.34",
+          "no": "0.52"
+        },
+        "bestBid": "0.34",
+        "bestAsk": "0.48"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO249",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO249",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 13,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "249.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202734",
+      "label": "Bryce Young 275+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 275 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.39",
+          "no": "0.74"
+        },
+        "sell": {
+          "yes": "0.26",
+          "no": "0.61"
+        },
+        "bestBid": "0.26",
+        "bestAsk": "0.39"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO274",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO274",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 4,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "274.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202744",
+      "label": "Jacoby Brissett 275+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 275 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.35",
+          "no": "0.78"
+        },
+        "sell": {
+          "yes": "0.22",
+          "no": "0.65"
+        },
+        "bestBid": "0.22",
+        "bestAsk": "0.35"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO274",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO274",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 14,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "274.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202735",
+      "label": "Bryce Young 300+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 300 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.28",
+          "no": "0.85"
+        },
+        "sell": {
+          "yes": "0.15",
+          "no": "0.72"
+        },
+        "bestBid": "0.15",
+        "bestAsk": "0.28"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO299",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO299",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 5,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "299.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202745",
+      "label": "Jacoby Brissett 300+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 300 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.23",
+          "no": "0.88"
+        },
+        "sell": {
+          "yes": "0.12",
+          "no": "0.77"
+        },
+        "bestBid": "0.12",
+        "bestAsk": "0.23"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO299",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO299",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 15,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "299.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202736",
+      "label": "Bryce Young 325+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 325 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.18",
+          "no": "0.94"
+        },
+        "sell": {
+          "yes": "0.06",
+          "no": "0.82"
+        },
+        "bestBid": "0.06",
+        "bestAsk": "0.18"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO324",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO324",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 6,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "324.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202746",
+      "label": "Jacoby Brissett 325+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 325 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.15",
+          "no": "0.94"
+        },
+        "sell": {
+          "yes": "0.06",
+          "no": "0.85"
+        },
+        "bestBid": "0.06",
+        "bestAsk": "0.15"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO324",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO324",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 16,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "324.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202737",
+      "label": "Bryce Young 350+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 350 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.88"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO349",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO349",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 7,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "349.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202747",
+      "label": "Jacoby Brissett 350+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 350 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.9"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO349",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO349",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 17,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "349.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476610-1202738",
+      "label": "Bryce Young 375+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 375 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.09",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.91"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.09"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BYOUNGO374",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BYOUNGO374",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 8,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "374.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476610-1202748",
+      "label": "Jacoby Brissett 375+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 375 or more Passing Yards in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.08"
+        },
+        "sell": {
+          "no": "0.92"
+        },
+        "bestAsk": "0.08"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:08:55.668Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BRISSETTO374",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPYDS-BRISSETTO374",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 18,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "374.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T08:08:55.668Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "451",
+      "name": "Carolina Panthers",
+      "abbreviation": "CAR",
+      "side": "home"
+    },
+    {
+      "id": "430",
+      "name": "Baltimore Ravens",
+      "abbreviation": "BAL",
+      "side": "away"
+    }
+  ],
+  "description": "How many passing yards will each player record?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Football"
+  ],
+  "expiryDate": "2026-11-24T06:00:00.000Z",
+  "startTime": "2026-11-22T18:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+  "subcategory": {
+    "id": 12,
+    "slug": "sports_football_pro-football",
+    "name": "Pro Football",
+    "path": [
+      "Sports",
+      "Football",
+      "Pro Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Football_square_1_7660ad42-c561-4e8b-8bc7-175a1c63ae5c.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-18T101349482_3eca341e-eaaf-4842-a5ac-ed7c6784042a.avif",
+  "template": "sports-player-props",
+  "gameId": "ac8037dd-465f-4488-a468-d4255e01986a",
+  "sourceDetails": {
+    "agency": "sportradar-rest-api",
+    "index": "American Football Player Props"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "prop",
+    "subject": "player",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "passing_yards",
+    "team": {
+      "symbol": "CAR",
+      "name": "Carolina Panthers",
+      "externalIds": {
+        "sportradarId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+      }
+    },
+    "player": {
+      "symbol": "BYOUNG",
+      "name": "Bryce Young",
+      "externalIds": {
+        "sportradarId": "38475bfa-9773-4c3b-9157-a0dbd576fa22",
+        "officialLeagueId": "00-0039150",
+        "officialLeagueSource": "nfl_gsis"
+      },
+      "position": "QB",
+      "number": "9"
+    }
+  }
+}

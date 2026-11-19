@@ -59,10 +59,14 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 - **Scale:** the workbook's 1–3 per category, summed to 4–12. Low is 4–6, Medium 7–8, High 9–12. The README's 1–5 scale is not used in this prototype.
 - **Overrides** are applied after the raw band and reported separately (`raw_rating`, `rating_floor`, `final_rating`).
   - A 3 in Ambiguity or Source sets a floor of Medium.
-  - A 3 in Liquidity is a trading rule, so it becomes a note ("the price is an unreliable signal") and does not change the rating.
+  - Source ≥ 2 sets a floor of Medium (Excel settlement edge / Investigate).
+  - Source ≥ 2 and Ambiguity ≥ 2 sets a floor of High.
+  - A 3 in Correlation sets a floor of High.
+  - A 3 in Liquidity sets a floor of Medium (Excel Avoid / untradeable) and keeps the note that the price is an unreliable signal.
+  - Any two categories at 3 sets a floor of High.
 - **Null** scores carry a reason. With any null, the rating is `complete: false` and `final_rating: null`, and the output shows the `possible_range`.
 - **Ambiguity, source, and correlation** follow `READING_RUBRIC` in `verity/scoring.py`. Fixture files store those three scores. A live snapshot leaves them null. An empty terms link is at least ambiguity 2. No named settlement source is a null source score, not a guess. Correlation measures overlap between contracts. Sibling buckets of the same question stay 1. A wording conflict with the source is a snapshot flag, not a second score.
-- **Liquidity** is computed from the quotes. Volume under $100, a spread over 5¢, or a missing bid or ask is 3. Volume of at least $1,000, a spread of at most 2¢, and a bid on every strike is 1. Anything else with two prices is 2. No data at all is null. Both prices with no volume is null. `total` and `24h` volume are labeled and are not converted.
+- **Liquidity** follows the Excel Framework cutoffs. A missing bid or ask, or a spread over 15¢, is 3. Volume of at least $1,000 with a spread of at most 5¢ and a bid on every strike is 1. Any other two-sided quote (including thin volume) is 2. No data at all is null. Both prices with no volume is null. `total` and `24h` volume are labeled and are not converted.
 - **Research actions:** Low → `no_further_research`, Medium → `investigate`, High → `flag_for_human_review`. This replaces the workbook's trading verbs.
 
 ## Live rules (`rules_analyst.py`)
@@ -70,7 +74,7 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 | Category | 3 | 2 | 1 | null |
 |---|---|---|---|---|
 | Ambiguity | rules mention a setting, ranking or judgment ("style control", "top-ranked", "at its discretion") | terms PDF not read, event terms link empty (Agent rule 3), or numeric band edges decide it | terms read, objective outcome | no rule text |
-| Source | leaderboard, LM Arena, social metrics | NWS / climate report, BLS, CPI, GDP, anything preliminary or revisable | league, NCAA, Federal Reserve, official result | no source, or one the rules don't recognize |
+| Source | leaderboard, LM Arena, Mecone/nowcast | NWS / climate report, BLS, CPI, GDP, Kaiko/Hyperliquid commodity perps (proxy) | league, NCAA, Federal Reserve, Lukka, official result | no source, or one the rules don't recognize |
 | Correlation | sibling events on the same underlying (Agent rule 7) | scheduled data or news (CPI, jobs, FOMC, injuries, earnings) | neither | — |
 
 Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; on `WXHIGH-CHI` it uses `chi-midway-settlement-version` (Midway CLI). Live WXHIGH events often omit `termsLink`; `analyze_live` falls back to the shared weather terms PDF so free research can run. `analyze_live` sets `live_research=True` so inconclusive free reads can emit an unsigned catalog proposal (Midway prefers `cat-midway-vs-title-station-pack-v1`).

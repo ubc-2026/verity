@@ -6,30 +6,30 @@
     "instrument_symbol": "GEMI-WXHIGH-AUS-2611200459-74TO75",
     "question": "Highest temperature in Austin on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:44Z",
+    "analyzed_at_utc": "2026-11-19T06:28:18Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:44Z",
-      "snapshot_hash": "sha256:85a59ec231eab7b0e60e8e8fe8bc3796b9d11759206dee4994c57bd0f9fb2266",
+      "snapshot_time_utc": "2026-11-19T06:28:18Z",
+      "snapshot_hash": "sha256:f8761f2e526f370bc3ad143b431fcda9d82fb4667e29365d8a13c8ff4a8ed8e9",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "74°F to 75°F",
       "best_bid": "0.48",
-      "best_ask": "0.53",
-      "mid": "0.505",
-      "implied_probability": "0.505",
+      "best_ask": "0.54",
+      "mid": "0.51",
+      "implied_probability": "0.51",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:44Z"
+      "observed_time_utc": "2026-11-19T06:28:18Z"
     },
     "scores": {
       "ambiguity": {
         "score": 2,
-        "rationale": "Clear outcome, but event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome.",
+        "rationale": "Clear outcome, but event-level terms link is empty (Agent rule 3); numeric band edges decide the outcome; title names a city/measure that may differ from the settlement station (Excel rule 6).",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -39,7 +39,7 @@
       },
       "source": {
         "score": 2,
-        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+        "rationale": "Settlement source looks like official but revisable data, or a proxy/thinner feed of the real underlying (matched 'National Weather Service').",
         "null_reason": null,
         "citation_ids": [
           "C-EVENT",
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (5c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 6c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,27 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 8,
-      "raw_total": 8,
+      "known_total": 7,
+      "raw_total": 7,
       "raw_rating": "Medium",
-      "rating_floor": null,
-      "final_rating": "Medium",
+      "rating_floor": "High",
+      "final_rating": "High",
       "possible_range": null,
       "overrides": [
         {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+          "rule": "Source >= 2 -> at least Medium",
+          "triggered_by": "source",
+          "effect": "rating floor Medium; settlement edge worth investigating (Excel)"
+        },
+        {
+          "rule": "Source >= 2 and Ambiguity >= 2 -> at least High",
+          "triggered_by": "source",
+          "effect": "rating floor High; soft/proxy source plus unclear criteria"
         }
       ]
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 7). Research action: flag_for_human_review. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +112,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-AUS-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.48, bestAsk 0.53; event volume 0"
+        "quote": "bestBid 0.48, bestAsk 0.54; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -139,6 +144,7 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WXHIGH-AUS-2611200459-74TO75] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-WXHIGH-AUS-2611200459-74TO75] skip GAP-1: no free official-source check is configured for this gap, so free evidence was not ruled out.",
+    "[GEMI-WXHIGH-AUS-2611200459-74TO75] no purchase: every material gap was answered, cached, or had no catalog match."
   ]
 }

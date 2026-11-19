@@ -1,13 +1,19 @@
 """Workbook rubric (Framework sheet), 1-3 per category.
 
 Bands, from the workbook: total 4-6 Low, 7-8 Medium, 9-12 High.
-Overrides, applied separately from the raw total:
+Overrides, applied separately from the raw total (mix of the older ASLC
+sheet and the newer Gemini Market Risk Analysis Excel):
   * Any 3 in Ambiguity or Source  -> rating is at least Medium.
-  * 3 in Correlation              -> rating is at least High (overlapping
-    markets can flip together; raw totals of 8 otherwise stall at Medium).
-  * 3 in Liquidity                -> trading rule ("never trade more than
-    top-of-book"). Verity places no trades, so it is translated into a research
-    note: the quoted price is unreliable as a signal. It does not move the rating.
+  * Source >= 2                   -> at least Medium (settlement edge worth
+    investigating; Excel "Investigate" when settlement edge >= 1).
+  * Source >= 2 and Ambiguity >= 2 -> at least High (unclear criteria plus
+    a soft/proxy source).
+  * 3 in Correlation              -> at least High (overlapping markets).
+  * 3 in Liquidity                -> at least Medium (Excel Avoid / untradeable
+    books still elevate research attention).
+  * Any two categories at 3       -> at least High.
+  * Liquidity 3 also keeps the research note that the quoted price is an
+    unreliable signal (Verity places no trades).
 
 READING_RUBRIC is the checklist for ambiguity, source, and correlation.
 Those three are stored on each fixture. Liquidity is computed by liquidity_score.
@@ -28,7 +34,8 @@ Ambiguity: could two careful readers disagree on the outcome?
      A game winner, or a price at 5pm ET.
   2: The outcome is clear, but a rule is missing or hard to find.
      A missing cutoff or time zone, a missing rounding rule, a missing tie rule,
-     a band edge, or an empty event terms link. An empty terms link is at least 2.
+     a band edge, an empty event terms link, or a title that names a different
+     place/measure than the settlement rule (Chicago vs Midway).
      A missing cancellation or postponement rule is a 2.
   3: The outcome depends on a judgment, a name, or a setting.
      "Top-ranked", a leaderboard toggle, or company versus model.
@@ -38,11 +45,12 @@ Ambiguity: could two careful readers disagree on the outcome?
 
 Source: is the settlement source official, stable, and checkable?
   1: An official primary source with named fallbacks.
-     A league, the Federal Reserve, or a stated price index.
-  2: Official, but preliminary, revisable, or delayed.
-     An NWS daily report, or economic data that is revised.
-  3: A third-party ranking that changes continuously or can be gamed.
-     LM Arena, or a social metric.
+     A league, the Federal Reserve, or a stated price index (Lukka BTC/ETH).
+  2: Official but revisable, or a proxy/thinner feed of the real thing.
+     An NWS daily report, economic data that is revised, or a Kaiko/Hyperliquid
+     crypto perpetual standing in for oil/silver/gas.
+  3: A third-party ranking that changes continuously or can be gamed,
+     or a private/nowcast index (LM Arena, Mecone nowcast).
   null: No settlement source is named. Do not guess a score.
 
 Correlation: do other contracts overlap this one? This is not a portfolio score.
@@ -88,10 +96,11 @@ def liquidity_score(
 ) -> tuple[Optional[int], str, Optional[str]]:
     """How reliable the quoted price is. Returns (score, rationale, null_reason).
 
-    null: no bid, no ask, and no volume. Or both prices are present and volume is missing.
-    3: either price is missing, volume is under $100, or the spread is over 5c.
-    1: volume is at least $1000, the spread is at most 2c, and every strike has a bid.
-    2: any other two-sided quote.
+    Aligned with Gemini Market Risk Analysis Framework liquidity cutoffs:
+    null: no bid, no ask, and no volume. Or both prices present and volume missing.
+    3: either price is missing, or the spread is over 15c (Excel Liquidity 2 / Avoid).
+    1: volume is at least $1000, the spread is at most 5c, and every strike has a bid.
+    2: any other two-sided quote (thin volume or 6-15c spread; Excel Liquidity 1).
     """
     volume = _volume_phrase(volume_usd, volume_basis) if volume_usd is not None else None
 
@@ -103,15 +112,13 @@ def liquidity_score(
 
     spread_cents = (best_ask - best_bid) * 100
     spread = f"{spread_cents:.0f}c spread"
-    if volume_usd is not None and volume_usd < 100:
-        return 3, f"{volume} is under $100 ({spread}).", None
-    if spread_cents > 5:
-        return 3, f"{spread} is over 5c.", None
+    if spread_cents > 15:
+        return 3, f"{spread} is over 15c.", None
     if volume_usd is None:
         return None, f"{spread}, but volume is missing.", "volume missing"
-    if volume_usd >= 1000 and spread_cents <= 2 and some_strikes_unquoted:
+    if volume_usd >= 1000 and spread_cents <= 5 and some_strikes_unquoted:
         return 2, f"{volume}, {spread}, but some strikes have no bid.", None
-    if volume_usd >= 1000 and spread_cents <= 2:
+    if volume_usd >= 1000 and spread_cents <= 5:
         return 1, f"{volume} with a {spread}.", None
     return 2, f"{volume}, {spread}.", None
 
@@ -129,14 +136,33 @@ def rate(scores: Scores) -> OverallRating:
 
     overrides: list[AppliedOverride] = []
     floor: Optional[Rating] = None
+
     for cat in ("ambiguity", "source"):
         if known.get(cat) == 3:
-            floor = "Medium"
+            floor = _max("Medium", floor)
             overrides.append(AppliedOverride(
                 rule="Any High (3) in Ambiguity or Source -> at least Medium",
                 triggered_by=cat,
                 effect="rating floor Medium; always seek evidence on the settlement rule",
             ))
+
+    src = known.get("source")
+    amb = known.get("ambiguity")
+    if src is not None and src >= 2:
+        floor = _max("Medium", floor)
+        overrides.append(AppliedOverride(
+            rule="Source >= 2 -> at least Medium",
+            triggered_by="source",
+            effect="rating floor Medium; settlement edge worth investigating (Excel)",
+        ))
+    if src is not None and amb is not None and src >= 2 and amb >= 2:
+        floor = _max("High", floor)
+        overrides.append(AppliedOverride(
+            rule="Source >= 2 and Ambiguity >= 2 -> at least High",
+            triggered_by="source",
+            effect="rating floor High; soft/proxy source plus unclear criteria",
+        ))
+
     if known.get("correlation") == 3:
         floor = _max("High", floor)
         overrides.append(AppliedOverride(
@@ -144,11 +170,27 @@ def rate(scores: Scores) -> OverallRating:
             triggered_by="correlation",
             effect="rating floor High; overlapping markets can flip together",
         ))
+
     if known.get("liquidity") == 3:
+        floor = _max("Medium", floor)
+        overrides.append(AppliedOverride(
+            rule="High (3) in Liquidity -> at least Medium",
+            triggered_by="liquidity",
+            effect="rating floor Medium; untradeable/wide book (Excel Avoid) still elevates research attention",
+        ))
         overrides.append(AppliedOverride(
             rule="High (3) in Liquidity -> never trade more than top-of-book",
             triggered_by="liquidity",
-            effect="research translation: treat the quoted price as an unreliable signal; rating unchanged",
+            effect="research translation: treat the quoted price as an unreliable signal",
+        ))
+
+    threes = [k for k, v in known.items() if v == 3]
+    if len(threes) >= 2:
+        floor = _max("High", floor)
+        overrides.append(AppliedOverride(
+            rule="Any two categories at High (3) -> at least High",
+            triggered_by=threes[0],
+            effect=f"rating floor High; stacked risk in {', '.join(threes)}",
         ))
 
     if missing:

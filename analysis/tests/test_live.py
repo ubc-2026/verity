@@ -93,7 +93,7 @@ def test_analyze_live_end_to_end_with_fakes():
     assert ra.scores.ambiguity.score is None
     assert ra.scores.source.score is None
     assert ra.scores.correlation.score is None
-    assert ra.scores.liquidity.score == 3  # computed in code from $7 volume
+    assert ra.scores.liquidity.score == 2  # thin volume, but two-sided 4c quote (Excel mid)
     assert ra.rating.complete is False
     assert ra.rating.final_rating is None
     assert ra.research_action == "flag_for_human_review"
@@ -129,8 +129,10 @@ def _real_okc_event():
 def test_live_rules_analyst_scores_nyc_by_default():
     ra, ctx = analyze_live("WXHIGH-NYC-2611190459", "62°F to 63°F", http_get=fake_get, now=NOW)
     s = ra.scores
-    assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (2, 2, 3, 1)
-    assert ra.rating.complete and ra.rating.raw_total == 8 and ra.rating.final_rating == "Medium"
+    assert (s.ambiguity.score, s.source.score, s.liquidity.score, s.correlation.score) == (2, 2, 2, 1)
+    # raw 7 Medium; Source>=2 + Ambiguity>=2 floors final to High
+    assert ra.rating.complete and ra.rating.raw_total == 7 and ra.rating.final_rating == "High"
+    assert ra.research_action == "flag_for_human_review"
     assert "analyst=verity-rules-v1 (code rules, no LLM)" in ra.data_quality_flags
     assert not any(f.startswith("reading_scores_unscored") for f in ra.data_quality_flags)
     gap = next(g for g in ra.evidence_gaps if g.gap_type == "settlement_source_version")

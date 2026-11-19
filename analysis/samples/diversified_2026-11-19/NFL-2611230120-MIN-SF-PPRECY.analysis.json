@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO89",
     "question": "Minnesota vs San Francisco: Player Receiving Yards",
     "expiry_utc": "2026-11-24T13:20:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:16Z",
+    "analyzed_at_utc": "2026-11-19T06:26:57Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:16Z",
-      "snapshot_hash": "sha256:f5064f737adc7e56fe5b468c4403ca9c317a10846d7fb7dd3ab13ff17f618477",
+      "snapshot_time_utc": "2026-11-19T06:26:57Z",
+      "snapshot_hash": "sha256:a4074a705b711f3bce9b1392f5653972124bd20ef4f6aeaccbe387830ad2a109",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "50",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:16Z"
+      "observed_time_utc": "2026-11-19T06:26:57Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $50 is under $100 (1c spread).",
+        "score": 2,
+        "rationale": "event-total volume $50, 1c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -126,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO89] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NFL-2611230120-MIN-SF-PPRECY-JJEFFERSONO89] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

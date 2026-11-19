@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NCAAM-2611200000-RMU-TOL-T-O144",
     "question": "Robert Morris vs Toledo: Total Points",
     "expiry_utc": "2026-11-22T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:15:42Z",
+    "analyzed_at_utc": "2026-11-19T06:27:25Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:15:42Z",
-      "snapshot_hash": "sha256:df97da4506b830e7c2c404972aef1b2fae961b93534bb1cf3425b4ad3d959e3f",
+      "snapshot_time_utc": "2026-11-19T06:27:25Z",
+      "snapshot_hash": "sha256:44fff6b908f91b4c94f87f30574c10080462880c7c951acb0544f6eb00fa420c",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:15:42Z"
+      "observed_time_utc": "2026-11-19T06:27:25Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (9c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 9c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 6,
-      "raw_total": 6,
+      "known_total": 5,
+      "raw_total": 5,
       "raw_rating": "Low",
       "rating_floor": null,
       "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
     "research_action": "no_further_research",
-    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
+    "summary": "Low resolution risk (total 5). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",

@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-SOL2611192200-HI76",
     "question": "SOL price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:34Z",
+    "analyzed_at_utc": "2026-11-19T06:28:06Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:34Z",
-      "snapshot_hash": "sha256:ca921730b5de80923e31b275c095a3a5a203c5b6c966834786a3f2a947bc82b7",
+      "snapshot_time_utc": "2026-11-19T06:28:06Z",
+      "snapshot_hash": "sha256:35c7e939feef6fea964e9843457a5b7a47a1a9b66d656b7da6fdb35dac3a5dfd",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$76 or above",
-      "best_bid": "0.25",
+      "best_bid": "0.24",
       "best_ask": "0.3",
-      "mid": "0.275",
-      "implied_probability": "0.275",
+      "mid": "0.27",
+      "implied_probability": "0.27",
       "volume_usd": "1436",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:34Z"
+      "observed_time_utc": "2026-11-19T06:28:06Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 2,
-        "rationale": "event-total volume $1436, 5c spread.",
+        "rationale": "event-total volume $1436, 6c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -101,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/SOL2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.25, bestAsk 0.3; event volume 1436"
+        "quote": "bestBid 0.24, bestAsk 0.3; event volume 1436"
       }
     ],
     "evidence_gaps": [],

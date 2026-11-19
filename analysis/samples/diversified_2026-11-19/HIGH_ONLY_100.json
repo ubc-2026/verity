@@ -8,12 +8,91 @@
     "non_sports_pct": 20.0
   },
   "ratings": {
-    "Low": 68,
-    "High": 4,
-    "Medium": 28
+    "Low": 61,
+    "High": 16,
+    "Medium": 23
   },
-  "proposed": 0,
-  "propose_pct": 0.0,
+  "proposed": 6,
+  "propose_pct": 6.0,
   "gate": "High-only",
-  "buys": []
+  "buys": [
+    {
+      "ticker": "BRENT2611192200",
+      "category": "Commodities",
+      "title": "Oil (Brent) price on November 19?",
+      "total": 7,
+      "item": "cat-commodity-settlement-version-v1",
+      "scores": {
+        "A": 2,
+        "S": 2,
+        "L": 2,
+        "C": 1
+      }
+    },
+    {
+      "ticker": "XAG2611192200",
+      "category": "Commodities",
+      "title": "Silver price on November 19?",
+      "total": 7,
+      "item": "cat-commodity-settlement-version-v1",
+      "scores": {
+        "A": 2,
+        "S": 2,
+        "L": 2,
+        "C": 1
+      }
+    },
+    {
+      "ticker": "WTI2611192200",
+      "category": "Commodities",
+      "title": "Oil (WTI) price on November 19?",
+      "total": 7,
+      "item": "cat-commodity-settlement-version-v1",
+      "scores": {
+        "A": 2,
+        "S": 2,
+        "L": 2,
+        "C": 1
+      }
+    },
+    {
+      "ticker": "NGAS2611192200",
+      "category": "Commodities",
+      "title": "Natural Gas price on November 19?",
+      "total": 8,
+      "item": "cat-commodity-settlement-version-v1",
+      "scores": {
+        "A": 2,
+        "S": 2,
+        "L": 3,
+        "C": 1
+      }
+    },
+    {
+      "ticker": "COPPER2611192200",
+      "category": "Commodities",
+      "title": "Copper price on November 19?",
+      "total": 7,
+      "item": "cat-commodity-settlement-version-v1",
+      "scores": {
+        "A": 2,
+        "S": 2,
+        "L": 2,
+        "C": 1
+      }
+    },
+    {
+      "ticker": "XAU2611192200",
+      "category": "Commodities",
+      "title": "Gold price on November 19?",
+      "total": 7,
+      "item": "cat-commodity-settlement-version-v1",
+      "scores": {
+        "A": 2,
+        "S": 2,
+        "L": 2,
+        "C": 1
+      }
+    }
+  ]
 }

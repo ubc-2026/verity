@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO1",
     "question": "Baltimore vs Carolina: Quarterback Passing Touchdowns",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T06:16:12Z",
+    "analyzed_at_utc": "2026-11-19T06:27:41Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T06:16:12Z",
-      "snapshot_hash": "sha256:96e4e656615022533602b933cc70b7498456a9bd884d754beeb5a7b9b23368a6",
+      "snapshot_time_utc": "2026-11-19T06:27:41Z",
+      "snapshot_hash": "sha256:1202fc4f7ebd9bfb4cdb4806b2ccf3a791e51abc4f5384e5711e8605aaf0372f",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Jacoby Brissett 2+ Passing Touchdowns",
-      "best_bid": "0.34",
-      "best_ask": "0.46",
-      "mid": "0.40",
-      "implied_probability": "0.40",
+      "best_bid": "0.35",
+      "best_ask": "0.44",
+      "mid": "0.395",
+      "implied_probability": "0.395",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T06:16:12Z"
+      "observed_time_utc": "2026-11-19T06:27:41Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 3,
-        "rationale": "event-total volume $0 is under $100 (12c spread).",
+        "score": 2,
+        "rationale": "event-total volume $0, 9c spread.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,22 +68,16 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
-      "raw_rating": "Medium",
+      "known_total": 6,
+      "raw_total": 6,
+      "raw_rating": "Low",
       "rating_floor": null,
-      "final_rating": "Medium",
+      "final_rating": "Low",
       "possible_range": null,
-      "overrides": [
-        {
-          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
-          "triggered_by": "liquidity",
-          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
-        }
-      ]
+      "overrides": []
     },
-    "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. No open resolution questions.",
+    "research_action": "no_further_research",
+    "summary": "Low resolution risk (total 6). Research action: no_further_research. No open resolution questions.",
     "citations": [
       {
         "id": "C-EVENT",
@@ -107,7 +101,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-PPPASSTD",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.34, bestAsk 0.46; event volume 0"
+        "quote": "bestBid 0.35, bestAsk 0.44; event volume 0"
       }
     ],
     "evidence_gaps": [],
@@ -126,6 +120,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO1] no purchase: rating is Medium; research buys are limited to High-risk markets."
+    "[GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO1] no purchase: rating is Low; research buys are limited to High-risk markets."
   ]
 }

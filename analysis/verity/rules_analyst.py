@@ -18,23 +18,29 @@ ANALYST_ID = "verity-rules-v1"
 # Framework Source row: (score, pattern, label). First match wins, highest risk first.
 # Do NOT use a bare "revis" stem — sports/commodity PDFs often say "Revisions" in
 # boilerplate and were falsely scored as revisable official data (Source=2).
+# Kaiko commodity RFR / Hyperliquid perps are proxies (Excel Source reliability 2),
+# not primary feeds — do not list bare "kaiko" as primary.
 _SOURCE_RULES: list[tuple[int, re.Pattern[str], str]] = [
-    (3, re.compile(r"leaderboard|lm ?arena|lmsys|social|followers|views|likes|ranking", re.I),
-     "third-party ranking that changes continuously or can be gamed"),
+    (3, re.compile(r"leaderboard|lm ?arena|lmsys|social|followers|views|likes|ranking|"
+                   r"\bmecone\b|nowcast", re.I),
+     "third-party ranking, private index, or nowcast that can diverge from the official print"),
     (2, re.compile(
         r"\bnws\b|national weather service|climatolog|\bcli[a-z]{3}\b|"
         r"\bpreliminary\b|subject to revision|later revision|data revisions?|"
         r"revised (print|figure|estimate|issuance)|revisable|"
-        r"\bbls\b|\bcpi\b|nonfarm|payrolls|\bgdp\b|bureau of",
+        r"\bbls\b|\bcpi\b|nonfarm|payrolls|\bgdp\b|bureau of|"
+        r"hyperliquid|perpetual|\bperp\b|KK_RFR_|kaiko",
         re.I,
-    ), "official but revisable or preliminary data"),
+    ), "official but revisable data, or a proxy/thinner feed of the real underlying"),
     (1, re.compile(
-        r"statscore|sportradar|lukka|kaiko|"
+        r"statscore|sportradar|lukka|"
         r"\bnba\b|\bnfl\b|\bnhl\b|\bmlb\b|\bncaa\b|\bmls\b|league|"
         r"federal reserve|\bfomc\b|governing body|official (result|score)",
         re.I,
     ), "official primary source"),
 ]
+_PROXY_SOURCE = re.compile(r"hyperliquid|perpetual|\bperp\b|KK_RFR_|kaiko-equities|\bmecone\b|nowcast", re.I)
+_TITLE_STATION = re.compile(r"\bmidway\b|\bo'?hare\b|\bairport\b", re.I)
 
 # Issuance-style revision language (used to upgrade a primary feed to Source=2).
 _REVISABLE_ISSUANCE = re.compile(
@@ -75,6 +81,13 @@ def _ambiguity(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, A
         missing.append("event-level terms link is empty (Agent rule 3)")
     if _BANDS.search(record.get("outcome_label", "") + "\n" + text):
         missing.append("numeric band edges decide the outcome")
+    # Excel Agent rule 6: title names a different place/measure than the rule.
+    title = record.get("question") or record.get("title") or ""
+    settlement = record.get("settlement_source") or ""
+    if _TITLE_STATION.search(text + " " + settlement) and re.search(
+        r"chicago|nyc|new york|boston|atlanta|temperature|high", title, re.I,
+    ):
+        missing.append("title names a city/measure that may differ from the settlement station (Excel rule 6)")
     if missing:
         return _cat(2, "Clear outcome, but " + "; ".join(missing) + ".", ids)
     return _cat(1, "Objective outcome; the terms were read and name the rule.", ids)
@@ -86,10 +99,22 @@ def _source(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, Any]
     if not hay.strip():
         return _cat(None, "No settlement source in the record.", [], "settlement source not stated")
 
+    # Proxy / private index first (Excel Source reliability 1-2): Kaiko RFR perps, Mecone.
+    proxy = _PROXY_SOURCE.search(settlement) or _PROXY_SOURCE.search(hay)
+    if proxy:
+        label = proxy.group(0)
+        if re.search(r"mecone|nowcast", label, re.I):
+            return _cat(3, f"Settlement source looks like a private/nowcast index (matched '{label}').", ids)
+        return _cat(
+            2,
+            f"Settlement source looks like a proxy/thinner feed of the real underlying (matched '{label}').",
+            ids,
+        )
+
     # Prefer the named Gemini agency/index when it is a primary feed. Only raise to
     # Source=2 if the terms actually discuss preliminary/revisable issuance.
     primary = re.search(
-        r"statscore|sportradar|lukka|kaiko|\bnba\b|\bnfl\b|\bnhl\b|\bmlb\b|\bncaa\b|\bmls\b",
+        r"statscore|sportradar|lukka|\bnba\b|\bnfl\b|\bnhl\b|\bmlb\b|\bncaa\b|\bmls\b",
         settlement,
         re.I,
     )
@@ -112,7 +137,6 @@ def _source(record: dict[str, Any], text: str, ids: list[str]) -> dict[str, Any]
             return _cat(score, f"Settlement source looks like {label} (matched '{m.group(0)}').", ids)
     return _cat(None, "Settlement source is named but matches no Framework rule.", ids,
                 "settlement source not recognized by the rules; a person should score it")
-
 
 def _same_question_band_siblings(ticker: str, siblings: list[str]) -> bool:
     """Framework: sibling temperature/price bands of the same question stay Correlation 1."""

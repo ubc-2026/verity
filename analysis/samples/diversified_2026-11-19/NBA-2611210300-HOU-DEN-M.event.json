@@ -25,15 +25,15 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.55",
+          "yes": "0.56",
           "no": "0.46"
         },
         "sell": {
           "yes": "0.54",
-          "no": "0.45"
+          "no": "0.44"
         },
         "bestBid": "0.54",
-        "bestAsk": "0.55"
+        "bestAsk": "0.56"
       },
       "status": "active",
       "createdAt": "2026-11-18T00:02:33.321Z",
