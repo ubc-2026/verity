@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NCAAM-2611210000-CMU-PITT-M-CMU",
     "question": "Central Michigan vs Pittsburgh",
     "expiry_utc": "2026-11-23T00:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:02:52Z",
+    "analyzed_at_utc": "2026-11-19T05:52:05Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:02:52Z",
-      "snapshot_hash": "sha256:2c6d2b6aa79fb8e7032406f33c57bd364e0e9cde86176103543699b41dd59d27",
+      "snapshot_time_utc": "2026-11-19T05:52:05Z",
+      "snapshot_hash": "sha256:056cebf11e1ecec1f2a82b717c79b1021da233da2225ab801ae79bc452aeed18",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Central Michigan",
-      "best_bid": "0.01",
+      "best_bid": "0.02",
       "best_ask": "0.05",
-      "mid": "0.03",
-      "implied_probability": "0.03",
+      "mid": "0.035",
+      "implied_probability": "0.035",
       "volume_usd": "14",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:02:52Z"
+      "observed_time_utc": "2026-11-19T05:52:05Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $14 is under $100 (4c spread).",
+        "rationale": "event-total volume $14 is under $100 (3c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAM-2611210000-CMU-PITT-M",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.01, bestAsk 0.05; event volume 14"
+        "quote": "bestBid 0.02, bestAsk 0.05; event volume 14"
       }
     ],
     "evidence_gaps": [
@@ -140,8 +140,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NCAAM-2611210000-CMU-PITT-M-CMU] GAP-1: free research resolved. The terms name which StatsScore / Sportradar / league official result issuance settles the contract. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf. Excerpt: ays of its originally scheduled tip-off, the Contract will resolve based on the official final result of the rescheduled {NCAA game",
-    "[GEMI-NCAAM-2611210000-CMU-PITT-M-CMU] skip GAP-1: answered by the free check; nothing to buy.",
-    "[GEMI-NCAAM-2611210000-CMU-PITT-M-CMU] no purchase: every material gap was answered, cached, or had no catalog match."
+    "[GEMI-NCAAM-2611210000-CMU-PITT-M-CMU] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

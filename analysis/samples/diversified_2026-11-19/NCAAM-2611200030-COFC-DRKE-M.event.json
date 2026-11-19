@@ -1,0 +1,1591 @@
+{
+  "id": "475178",
+  "title": "Charleston vs Drake",
+  "slug": "charleston-vs-drake",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611200030-COFC-DRKE-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:05:40.499Z",
+  "contracts": [
+    {
+      "id": "475178-1196152",
+      "label": "Drake",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Drake wins the men's college basketball game between Drake and Charleston originally scheduled for November 19, 2026 at 7:30 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.52",
+          "no": "0.5"
+        },
+        "sell": {
+          "yes": "0.5",
+          "no": "0.48"
+        },
+        "bestBid": "0.5",
+        "bestAsk": "0.52"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:05:40.499Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "DRKE",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-M-DRKE",
+      "marketState": "open",
+      "abbreviatedName": "DRKE",
+      "color": "#0053A0",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "aed211c3-23a4-4188-ad70-22c6eba7d765",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475178-1196150",
+      "label": "Charleston",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Charleston wins the men's college basketball game between Charleston and Drake originally scheduled for November 19, 2026 at 7:30 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.5",
+          "no": "0.52"
+        },
+        "sell": {
+          "yes": "0.48",
+          "no": "0.5"
+        },
+        "bestBid": "0.48",
+        "bestAsk": "0.5",
+        "lastTradePrice": "0.5"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:05:40.499Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "COFC",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-M-COFC",
+      "marketState": "open",
+      "abbreviatedName": "COFC",
+      "color": "#6A0018",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "8548dacb-3636-48a8-8c46-611ab0c15fc0",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:05:40.499Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "592",
+      "name": "Drake Bulldogs",
+      "abbreviation": "DRKE",
+      "side": "home"
+    },
+    {
+      "id": "573",
+      "name": "Charleston Cougars",
+      "abbreviation": "COFC",
+      "side": "away"
+    }
+  ],
+  "description": "Charleston vs Drake",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "13.52",
+  "volume24h": "13.52",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-22T00:30:00.000Z",
+  "startTime": "2026-11-20T00:30:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "events": [
+    {
+      "id": "478477",
+      "title": "Charleston vs Drake: Point Spread",
+      "slug": "charleston-vs-drake-point-spread",
+      "type": "categorical",
+      "category": "Sports",
+      "ticker": "NCAAM-2611200030-COFC-DRKE-S",
+      "status": "active",
+      "createdAt": "2026-11-18T22:30:51.490Z",
+      "contracts": [
+        {
+          "id": "478477-1213006",
+          "label": "Drake wins by more than 4.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 4.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.53"
+            },
+            "sell": {
+              "no": "0.47"
+            },
+            "bestAsk": "0.53"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "DRKE4",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE4",
+          "marketState": "open",
+          "abbreviatedName": "Drake",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 2,
+          "strike": {
+            "type": "spread",
+            "value": "4.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213013",
+          "label": "Drake wins by more than 1.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.5",
+              "no": "0.57"
+            },
+            "sell": {
+              "yes": "0.43",
+              "no": "0.5"
+            },
+            "bestBid": "0.43",
+            "bestAsk": "0.5"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "DRKE1",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE1",
+          "marketState": "open",
+          "abbreviatedName": "Drake",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 8,
+          "strike": {
+            "type": "spread",
+            "value": "1.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213012",
+          "label": "Charleston wins by more than 1.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.48",
+              "no": "0.58"
+            },
+            "sell": {
+              "yes": "0.42",
+              "no": "0.52"
+            },
+            "bestBid": "0.42",
+            "bestAsk": "0.48"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "COFC1",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC1",
+          "marketState": "open",
+          "abbreviatedName": "Charleston",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 7,
+          "strike": {
+            "type": "spread",
+            "value": "1.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213004",
+          "label": "Charleston wins by more than 5.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.41",
+              "no": "0.76"
+            },
+            "sell": {
+              "yes": "0.24",
+              "no": "0.59"
+            },
+            "bestBid": "0.24",
+            "bestAsk": "0.41"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "COFC5",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC5",
+          "marketState": "open",
+          "abbreviatedName": "Charleston",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 0,
+          "strike": {
+            "type": "spread",
+            "value": "5.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213008",
+          "label": "Charleston wins by more than 20.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 20.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.21"
+            },
+            "sell": {
+              "no": "0.79"
+            },
+            "bestAsk": "0.21"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "COFC20",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC20",
+          "marketState": "open",
+          "abbreviatedName": "Charleston",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 4,
+          "strike": {
+            "type": "spread",
+            "value": "20.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213005",
+          "label": "Drake wins by more than 8.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "DRKE8",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE8",
+          "marketState": "open",
+          "abbreviatedName": "Drake",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 1,
+          "strike": {
+            "type": "spread",
+            "value": "8.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213007",
+          "label": "Drake wins by more than 18.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 18.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "DRKE18",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE18",
+          "marketState": "open",
+          "abbreviatedName": "Drake",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 3,
+          "strike": {
+            "type": "spread",
+            "value": "18.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213010",
+          "label": "Drake wins by more than 13.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 13.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "DRKE13",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE13",
+          "marketState": "open",
+          "abbreviatedName": "Drake",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 5,
+          "strike": {
+            "type": "spread",
+            "value": "13.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213011",
+          "label": "Charleston wins by more than 15.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 15.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "COFC15",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC15",
+          "marketState": "open",
+          "abbreviatedName": "Charleston",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 6,
+          "strike": {
+            "type": "spread",
+            "value": "15.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213014",
+          "label": "Charleston wins by more than 10.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Charleston in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Charleston's score minus Drake's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "COFC10",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-COFC10",
+          "marketState": "open",
+          "abbreviatedName": "Charleston",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Charleston_CougarsDark_44fdb531-f45e-45de-8ae7-3cf41d82ca69.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 9,
+          "strike": {
+            "type": "spread",
+            "value": "10.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478477-1213015",
+          "label": "Drake wins by more than 23.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Drake in the entire men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT is above 23.5. Otherwise, it resolves to No. The Underlying is the score differential (Drake's score minus Charleston's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:30:51.490Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "DRKE23",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-S-DRKE23",
+          "marketState": "open",
+          "abbreviatedName": "Drake",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 10,
+          "strike": {
+            "type": "spread",
+            "value": "23.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        }
+      ],
+      "effectiveDate": "2026-11-18T22:30:51.490Z",
+      "isLive": false,
+      "participants": [
+        {
+          "id": "592",
+          "name": "Drake Bulldogs",
+          "abbreviation": "DRKE",
+          "side": "home"
+        },
+        {
+          "id": "573",
+          "name": "Charleston Cougars",
+          "abbreviation": "COFC",
+          "side": "away"
+        }
+      ],
+      "description": "What will the point difference be?",
+      "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+      "tags": [
+        "College Basketball"
+      ],
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "startTime": "2026-11-20T00:30:00.000Z",
+      "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "subcategory": {
+        "id": 15,
+        "slug": "sports_basketball_college-basketball",
+        "name": "College Basketball",
+        "path": [
+          "Sports",
+          "Basketball",
+          "College Basketball"
+        ]
+      },
+      "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+      "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+      "template": "sports-spread",
+      "gameId": "2d57c9ec-d056-4214-8ad8-99adaf11259c",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "sportsMarket": {
+        "sport": "basketball",
+        "type": "spread",
+        "subject": "team",
+        "scope": {
+          "type": "full_contest"
+        },
+        "metric": "points"
+      }
+    },
+    {
+      "id": "478479",
+      "title": "Charleston vs Drake: Total Points",
+      "slug": "charleston-vs-drake-total-points",
+      "type": "categorical",
+      "category": "Sports",
+      "ticker": "NCAAM-2611200030-COFC-DRKE-T",
+      "status": "active",
+      "createdAt": "2026-11-18T22:31:29.002Z",
+      "contracts": [
+        {
+          "id": "478479-1213019",
+          "label": "More than 156.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 156.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.63",
+              "no": "0.48"
+            },
+            "sell": {
+              "yes": "0.52",
+              "no": "0.37"
+            },
+            "bestBid": "0.52",
+            "bestAsk": "0.63"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O156",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O156",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 2,
+          "strike": {
+            "type": "over",
+            "value": "156.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213032",
+          "label": "More than 158.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 158.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.57",
+              "no": "0.52"
+            },
+            "sell": {
+              "yes": "0.48",
+              "no": "0.43"
+            },
+            "bestBid": "0.48",
+            "bestAsk": "0.57"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O158",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O158",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 10,
+          "strike": {
+            "type": "over",
+            "value": "158.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213023",
+          "label": "More than 160.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 160.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.52",
+              "no": "0.58"
+            },
+            "sell": {
+              "yes": "0.42",
+              "no": "0.48"
+            },
+            "bestBid": "0.42",
+            "bestAsk": "0.52"
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O160",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O160",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 4,
+          "strike": {
+            "type": "over",
+            "value": "160.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213016",
+          "label": "More than 137.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 137.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O137",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O137",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 0,
+          "strike": {
+            "type": "over",
+            "value": "137.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213018",
+          "label": "More than 142.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 142.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O142",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O142",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 1,
+          "strike": {
+            "type": "over",
+            "value": "142.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213021",
+          "label": "More than 166.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 166.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O166",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O166",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 3,
+          "strike": {
+            "type": "over",
+            "value": "166.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213025",
+          "label": "More than 170.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 170.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O170",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O170",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 5,
+          "strike": {
+            "type": "over",
+            "value": "170.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213026",
+          "label": "More than 146.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 146.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O146",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O146",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 6,
+          "strike": {
+            "type": "over",
+            "value": "146.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213028",
+          "label": "More than 153.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 153.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O153",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O153",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 7,
+          "strike": {
+            "type": "over",
+            "value": "153.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213029",
+          "label": "More than 163.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 163.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O163",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O163",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 8,
+          "strike": {
+            "type": "over",
+            "value": "163.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213031",
+          "label": "More than 150.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 150.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O150",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O150",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 9,
+          "strike": {
+            "type": "over",
+            "value": "150.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213034",
+          "label": "More than 174.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 174.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O174",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O174",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 11,
+          "strike": {
+            "type": "over",
+            "value": "174.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "478479-1213035",
+          "label": "More than 179.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Charleston and Drake collectively score over 179.5 total points in the men's college basketball game between Charleston and Drake scheduled for 2026-11-19 at 6:30 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-18T22:31:29.002Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O179",
+          "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-T-O179",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T00:30:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 12,
+          "strike": {
+            "type": "over",
+            "value": "179.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        }
+      ],
+      "effectiveDate": "2026-11-18T22:31:29.002Z",
+      "isLive": false,
+      "participants": [
+        {
+          "id": "592",
+          "name": "Drake Bulldogs",
+          "abbreviation": "DRKE",
+          "side": "home"
+        },
+        {
+          "id": "573",
+          "name": "Charleston Cougars",
+          "abbreviation": "COFC",
+          "side": "away"
+        }
+      ],
+      "description": "How many points will be scored?",
+      "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+      "tags": [
+        "College Basketball"
+      ],
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "startTime": "2026-11-20T00:30:00.000Z",
+      "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+      "subcategory": {
+        "id": 15,
+        "slug": "sports_basketball_college-basketball",
+        "name": "College Basketball",
+        "path": [
+          "Sports",
+          "Basketball",
+          "College Basketball"
+        ]
+      },
+      "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+      "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+      "template": "sports-total",
+      "gameId": "2d57c9ec-d056-4214-8ad8-99adaf11259c",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "sportsMarket": {
+        "sport": "basketball",
+        "type": "total",
+        "subject": "contest",
+        "scope": {
+          "type": "full_contest"
+        },
+        "metric": "points"
+      }
+    }
+  ],
+  "template": "sports-game",
+  "gameId": "2d57c9ec-d056-4214-8ad8-99adaf11259c",
+  "eventTags": [
+    {
+      "id": 34293,
+      "name": "Charleston Cougars",
+      "slug": "charleston-cougars"
+    },
+    {
+      "id": 31229,
+      "name": "Coastal",
+      "slug": "coastal"
+    },
+    {
+      "id": 31190,
+      "name": "Drake Bulldogs",
+      "slug": "drake-bulldogs"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 31236,
+      "name": "Missouri Valley",
+      "slug": "missouri-valley"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "COFC",
+      "name": "Charleston Cougars",
+      "externalIds": {
+        "sportradarId": "8548dacb-3636-48a8-8c46-611ab0c15fc0"
+      }
+    }
+  },
+  "combos": [
+    {
+      "contract": {
+        "contractId": "1219854",
+        "contractName": "Jacksonville Yes + Toledo Yes + 4 more",
+        "contractTicker": "CMB",
+        "eventTicker": "CMB-261122-C8F9FD91C74F8209",
+        "eventName": "",
+        "category": "Basketball",
+        "contractStatus": "Active",
+        "eventType": "binary",
+        "instrumentSymbol": "GEMI-CMB-261122-C8F9FD91C74F8209-CMB",
+        "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_6c686009-b224-4e06-8686-f5ddafc52ba8.avif",
+        "expiryDate": "2026-11-22T01:00:00.000Z",
+        "description": "Jacksonville-College Basketball-Yes, Toledo-College Basketball-Yes, Drake-College Basketball-Yes, San Antonio-Pro Basketball-Yes, Portland-Pro Basketball-Yes, Houston Christian-College Basketball-Yes [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_Combos_Class_c3a4c1f2-a3fe-4d21-976a-2643cabf017f.pdf)"
+      },
+      "legs": [
+        {
+          "comboId": 1219854,
+          "legIndex": 0,
+          "contractId": "1181713",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1181713",
+            "contractName": "Jacksonville",
+            "contractTicker": "JAC",
+            "eventTicker": "NCAAM-2611200000-UALR-JAC-M",
+            "eventName": "Little Rock vs Jacksonville",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-M-JAC",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+            "expiryDate": "2026-11-22T00:00:00.000Z",
+            "description": "This market resolves to Yes if Jacksonville wins the men's college basketball game between Jacksonville and Little Rock originally scheduled for November 19, 2026 at 7:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "ffe04238-cc4f-430f-83b9-32e640e1d978",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 1,
+          "contractId": "1181719",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1181719",
+            "contractName": "Toledo",
+            "contractTicker": "TOL",
+            "eventTicker": "NCAAM-2611200000-RMU-TOL-M",
+            "eventName": "Robert Morris vs Toledo",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-M-TOL",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+            "expiryDate": "2026-11-22T00:00:00.000Z",
+            "description": "This market resolves to Yes if Toledo wins the men's college basketball game between Toledo and Robert Morris originally scheduled for November 19, 2026 at 7:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "b72b2558-c9ed-446b-ab3f-f0c5daecdc8b",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 2,
+          "contractId": "1196152",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1196152",
+            "contractName": "Drake",
+            "contractTicker": "DRKE",
+            "eventTicker": "NCAAM-2611200030-COFC-DRKE-M",
+            "eventName": "Charleston vs Drake",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-M-DRKE",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+            "expiryDate": "2026-11-22T00:30:00.000Z",
+            "description": "This market resolves to Yes if Drake wins the men's college basketball game between Drake and Charleston originally scheduled for November 19, 2026 at 7:30 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "2d57c9ec-d056-4214-8ad8-99adaf11259c",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 3,
+          "contractId": "1180455",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1180455",
+            "contractName": "San Antonio",
+            "contractTicker": "SAS",
+            "eventTicker": "NBA-2611200100-LAC-SAS-M",
+            "eventName": "Los Angeles C vs San Antonio",
+            "category": "Pro Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NBA-2611200100-LAC-SAS-M-SAS",
+            "imageUrl": "https://assets.gemini.com/predictions/images/SAS_2eb39eb7-ca58-4ad8-b58d-36add7053fe6.png",
+            "expiryDate": "2026-11-21T13:00:00.000Z",
+            "description": "If San Antonio wins the Pro Basketball game between San Antonio and Los Angeles C originally scheduled for November 19, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "sortOrder": 2,
+            "target": {
+              "type": "team",
+              "name": "San Antonio Spurs",
+              "externalIds": {
+                "sportradar": "583ecd4f-fb46-11e1-82cb-f4ce4684ea4c"
+              }
+            },
+            "gameId": "de6bbffe-6c51-4761-b0fb-78e3c496bda9",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 4,
+          "contractId": "1180524",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1180524",
+            "contractName": "Portland",
+            "contractTicker": "POR",
+            "eventTicker": "NBA-2611200100-POR-MIL-M",
+            "eventName": "Portland vs Milwaukee",
+            "category": "Pro Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-M-POR",
+            "imageUrl": "https://assets.gemini.com/predictions/images/POR_72e78369-fef1-49c0-913e-4fab2445cb5d.png",
+            "expiryDate": "2026-11-21T13:00:00.000Z",
+            "description": "If Portland wins the Pro Basketball game between Portland and Milwaukee originally scheduled for November 19, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "sortOrder": 1,
+            "target": {
+              "type": "team",
+              "name": "Portland Trail Blazers",
+              "externalIds": {
+                "sportradar": "583ed056-fb46-11e1-82cb-f4ce4684ea4c"
+              }
+            },
+            "gameId": "445d9f3b-480b-4583-952d-33e9387ecaf7",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 5,
+          "contractId": "1196156",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1196156",
+            "contractName": "Houston Christian",
+            "contractTicker": "HCU",
+            "eventTicker": "NCAAM-2611200100-GSU-HCU-M",
+            "eventName": "Georgia Southern vs Houston Christian",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-M-HCU",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+            "expiryDate": "2026-11-22T01:00:00.000Z",
+            "description": "This market resolves to Yes if Houston Christian wins the men's college basketball game between Houston Christian and Georgia Southern originally scheduled for November 19, 2026 at 8:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "e0bd1887-df2e-46d7-a81a-23dba165d00a",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

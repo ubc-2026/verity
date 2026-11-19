@@ -1,0 +1,696 @@
+{
+  "id": "475100",
+  "title": "Baltimore vs Carolina: 1st Quarter Point Spread",
+  "slug": "baltimore-vs-carolina-1st-quarter-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NFL-2611221800-BAL-CAR-1QS",
+  "status": "active",
+  "createdAt": "2026-11-18T00:02:19.260Z",
+  "contracts": [
+    {
+      "id": "475100-1195280",
+      "label": "Carolina -2.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carolina covers a -2.5 point spread against Baltimore during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Carolina scores more than 2.5 points more than Baltimore during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.45",
+          "no": "0.66"
+        },
+        "sell": {
+          "yes": "0.34",
+          "no": "0.55"
+        },
+        "bestBid": "0.34",
+        "bestAsk": "0.45"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "CAR2",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-CAR2",
+      "marketState": "open",
+      "abbreviatedName": "Carolina",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "home",
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Carolina Panthers",
+        "externalIds": {
+          "sportradar": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+        }
+      }
+    },
+    {
+      "id": "475100-1195235",
+      "label": "Baltimore -2.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore covers a -2.5 point spread against Carolina during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Baltimore scores more than 2.5 points more than Carolina during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.39",
+          "no": "0.72"
+        },
+        "sell": {
+          "yes": "0.28",
+          "no": "0.61"
+        },
+        "bestBid": "0.28",
+        "bestAsk": "0.39"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "BAL2",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-BAL2",
+      "marketState": "open",
+      "abbreviatedName": "Baltimore",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "away",
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Baltimore Ravens",
+        "externalIds": {
+          "sportradar": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c"
+        }
+      }
+    },
+    {
+      "id": "475100-1195245",
+      "label": "Carolina -3.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carolina covers a -3.5 point spread against Baltimore during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Carolina scores more than 3.5 points more than Baltimore during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.35",
+          "no": "0.76"
+        },
+        "sell": {
+          "yes": "0.24",
+          "no": "0.65"
+        },
+        "bestBid": "0.24",
+        "bestAsk": "0.35"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "CAR3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-CAR3",
+      "marketState": "open",
+      "abbreviatedName": "Carolina",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "home",
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Carolina Panthers",
+        "externalIds": {
+          "sportradar": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+        }
+      }
+    },
+    {
+      "id": "475100-1195252",
+      "label": "Baltimore -3.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore covers a -3.5 point spread against Carolina during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Baltimore scores more than 3.5 points more than Carolina during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.31",
+          "no": "0.81"
+        },
+        "sell": {
+          "yes": "0.19",
+          "no": "0.69"
+        },
+        "bestBid": "0.19",
+        "bestAsk": "0.31"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "BAL3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-BAL3",
+      "marketState": "open",
+      "abbreviatedName": "Baltimore",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "away",
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Baltimore Ravens",
+        "externalIds": {
+          "sportradar": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c"
+        }
+      }
+    },
+    {
+      "id": "475100-1195240",
+      "label": "Carolina -6.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carolina covers a -6.5 point spread against Baltimore during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Carolina scores more than 6.5 points more than Baltimore during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.27",
+          "no": "0.84"
+        },
+        "sell": {
+          "yes": "0.16",
+          "no": "0.73"
+        },
+        "bestBid": "0.16",
+        "bestAsk": "0.27"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "CAR6",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-CAR6",
+      "marketState": "open",
+      "abbreviatedName": "Carolina",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "home",
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Carolina Panthers",
+        "externalIds": {
+          "sportradar": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+        }
+      }
+    },
+    {
+      "id": "475100-1195270",
+      "label": "Baltimore -6.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore covers a -6.5 point spread against Carolina during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Baltimore scores more than 6.5 points more than Carolina during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.24",
+          "no": "0.88"
+        },
+        "sell": {
+          "yes": "0.12",
+          "no": "0.76"
+        },
+        "bestBid": "0.12",
+        "bestAsk": "0.24"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "BAL6",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-BAL6",
+      "marketState": "open",
+      "abbreviatedName": "Baltimore",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "away",
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Baltimore Ravens",
+        "externalIds": {
+          "sportradar": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c"
+        }
+      }
+    },
+    {
+      "id": "475100-1195220",
+      "label": "Carolina -7.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carolina covers a -7.5 point spread against Baltimore during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Carolina scores more than 7.5 points more than Baltimore during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.14",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.86"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.14"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "CAR7",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-CAR7",
+      "marketState": "open",
+      "abbreviatedName": "Carolina",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "home",
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Carolina Panthers",
+        "externalIds": {
+          "sportradar": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+        }
+      }
+    },
+    {
+      "id": "475100-1195259",
+      "label": "Baltimore -7.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore covers a -7.5 point spread against Carolina during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Baltimore scores more than 7.5 points more than Carolina during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.13",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.87"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.13"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "BAL7",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-BAL7",
+      "marketState": "open",
+      "abbreviatedName": "Baltimore",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "away",
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Baltimore Ravens",
+        "externalIds": {
+          "sportradar": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c"
+        }
+      }
+    },
+    {
+      "id": "475100-1195225",
+      "label": "Baltimore -10.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore covers a -10.5 point spread against Carolina during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Baltimore scores more than 10.5 points more than Carolina during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1"
+        },
+        "sell": {
+          "no": "0.9"
+        },
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "BAL10",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-BAL10",
+      "marketState": "open",
+      "abbreviatedName": "Baltimore",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "away",
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Baltimore Ravens",
+        "externalIds": {
+          "sportradar": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c"
+        }
+      }
+    },
+    {
+      "id": "475100-1195229",
+      "label": "Carolina -10.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carolina covers a -10.5 point spread against Baltimore during the 1st quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, meaning Carolina scores more than 10.5 points more than Baltimore during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1"
+        },
+        "sell": {
+          "no": "0.9"
+        },
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:19.260Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+      "ticker": "CAR10",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-1QS-CAR10",
+      "marketState": "open",
+      "abbreviatedName": "Carolina",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sportsSide": "home",
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Carolina Panthers",
+        "externalIds": {
+          "sportradar": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:02:19.260Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "name": "Carolina",
+      "abbreviation": "CAR",
+      "side": "home"
+    },
+    {
+      "id": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "name": "Baltimore",
+      "abbreviation": "BAL",
+      "side": "away"
+    },
+    {
+      "id": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "name": "Carolina",
+      "abbreviation": "CAR",
+      "side": "home"
+    },
+    {
+      "id": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "name": "Baltimore",
+      "abbreviation": "BAL",
+      "side": "away"
+    },
+    {
+      "id": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "name": "Carolina",
+      "abbreviation": "CAR",
+      "side": "home"
+    },
+    {
+      "id": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "name": "Baltimore",
+      "abbreviation": "BAL",
+      "side": "away"
+    },
+    {
+      "id": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "name": "Carolina",
+      "abbreviation": "CAR",
+      "side": "home"
+    },
+    {
+      "id": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "name": "Baltimore",
+      "abbreviation": "BAL",
+      "side": "away"
+    },
+    {
+      "id": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "name": "Baltimore",
+      "abbreviation": "BAL",
+      "side": "away"
+    },
+    {
+      "id": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "name": "Carolina",
+      "abbreviation": "CAR",
+      "side": "home"
+    }
+  ],
+  "description": "Which team will cover the point spread in the 1st quarter?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Football"
+  ],
+  "expiryDate": "2026-11-24T06:00:00.000Z",
+  "startTime": "2026-11-22T18:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf",
+  "subcategory": {
+    "id": 12,
+    "slug": "sports_football_pro-football",
+    "name": "Pro Football",
+    "path": [
+      "Sports",
+      "Football",
+      "Pro Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Football_square_1_7660ad42-c561-4e8b-8bc7-175a1c63ae5c.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-18T101349482_3eca341e-eaaf-4842-a5ac-ed7c6784042a.avif",
+  "template": "sports-spread",
+  "gameId": "ac8037dd-465f-4488-a468-d4255e01986a",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Am. football"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "quarter",
+      "ordinal": 1
+    },
+    "metric": "points",
+    "team": {
+      "symbol": "BAL",
+      "name": "Baltimore Ravens",
+      "externalIds": {
+        "sportradarId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c"
+      }
+    }
+  }
+}

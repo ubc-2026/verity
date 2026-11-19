@@ -1,0 +1,209 @@
+{
+  "id": "478762",
+  "title": "Boston vs Sacramento",
+  "slug": "boston-vs-sacramento",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611220300-BOS-SAC-M",
+  "status": "active",
+  "createdAt": "2026-11-19T00:01:57.256Z",
+  "contracts": [
+    {
+      "id": "478762-1213855",
+      "label": "Boston",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Boston wins the Pro Basketball game between Boston and Sacramento originally scheduled for November 21, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.9",
+          "no": "0.12"
+        },
+        "sell": {
+          "yes": "0.88",
+          "no": "0.1"
+        },
+        "bestBid": "0.88",
+        "bestAsk": "0.9"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:01:57.256Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "BOS",
+      "instrumentSymbol": "GEMI-NBA-2611220300-BOS-SAC-M-BOS",
+      "marketState": "open",
+      "abbreviatedName": "BOS",
+      "color": "#007A33",
+      "imageUrl": "https://assets.gemini.com/predictions/images/BOS_0e8fb0cd-025c-406b-99dc-fb96158352bf.png",
+      "expiryDate": "2026-11-23T15:00:00.000Z",
+      "effectiveDate": "2026-11-19T00:00:08.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "583eccfa-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Boston Celtics",
+        "externalIds": {
+          "sportradar": "583eccfa-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    },
+    {
+      "id": "478762-1213859",
+      "label": "Sacramento",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Sacramento wins the Pro Basketball game between Sacramento and Boston originally scheduled for November 21, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12",
+          "no": "0.9"
+        },
+        "sell": {
+          "yes": "0.1",
+          "no": "0.88"
+        },
+        "bestBid": "0.1",
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:01:57.256Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "SAC",
+      "instrumentSymbol": "GEMI-NBA-2611220300-BOS-SAC-M-SAC",
+      "marketState": "open",
+      "abbreviatedName": "SAC",
+      "color": "#5A2D81",
+      "imageUrl": "https://assets.gemini.com/predictions/images/SAC_015354ea-8108-4e38-a08f-b5cb6fd3df6b.png",
+      "expiryDate": "2026-11-23T15:00:00.000Z",
+      "effectiveDate": "2026-11-19T00:00:08.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "583ed0ac-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Sacramento Kings",
+        "externalIds": {
+          "sportradar": "583ed0ac-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-19T00:01:57.256Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "485",
+      "name": "Sacramento Kings",
+      "abbreviation": "SAC",
+      "side": "home"
+    },
+    {
+      "id": "459",
+      "name": "Boston Celtics",
+      "abbreviation": "BOS",
+      "side": "away"
+    }
+  ],
+  "description": "Boston vs Sacramento",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-23T15:00:00.000Z",
+  "startTime": "2026-11-22T03:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "967a8771-1d7c-4f75-a965-60374e053dd9",
+  "eventTags": [
+    {
+      "id": 39,
+      "name": "Celtics",
+      "slug": "celtics"
+    },
+    {
+      "id": 13876,
+      "name": "Eastern",
+      "slug": "eastern"
+    },
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 32,
+      "name": "Kings",
+      "slug": "kings"
+    },
+    {
+      "id": 13877,
+      "name": "Western",
+      "slug": "western"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "SAC",
+      "name": "Sacramento Kings",
+      "externalIds": {
+        "sportradarId": "583ed0ac-fb46-11e1-82cb-f4ce4684ea4c"
+      }
+    }
+  }
+}

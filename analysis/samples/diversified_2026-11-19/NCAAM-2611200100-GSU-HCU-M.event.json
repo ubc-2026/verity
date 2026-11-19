@@ -1,0 +1,1545 @@
+{
+  "id": "475180",
+  "title": "Georgia Southern vs Houston Christian",
+  "slug": "georgia-southern-vs-houston-christian",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611200100-GSU-HCU-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:05:50.061Z",
+  "contracts": [
+    {
+      "id": "475180-1196156",
+      "label": "Houston Christian",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Houston Christian wins the men's college basketball game between Houston Christian and Georgia Southern originally scheduled for November 19, 2026 at 8:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.62",
+          "no": "0.4"
+        },
+        "sell": {
+          "yes": "0.6",
+          "no": "0.38"
+        },
+        "bestBid": "0.6",
+        "bestAsk": "0.62"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:05:50.061Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "HCU",
+      "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-M-HCU",
+      "marketState": "open",
+      "abbreviatedName": "HCU",
+      "color": "#002F87",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "95a27dc5-16d5-4745-9adb-34c41e1444e8",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475180-1196154",
+      "label": "Georgia Southern",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Georgia Southern wins the men's college basketball game between Georgia Southern and Houston Christian originally scheduled for November 19, 2026 at 8:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.39",
+          "no": "0.64"
+        },
+        "sell": {
+          "yes": "0.36",
+          "no": "0.61"
+        },
+        "bestBid": "0.36",
+        "bestAsk": "0.39"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:05:50.061Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+      "ticker": "GSU",
+      "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-M-GSU",
+      "marketState": "open",
+      "abbreviatedName": "GSU",
+      "color": "#9B8348",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Georgia_Southern_EaglesDark_ece6bca0-fadf-4db8-b0d2-d92783fc64fc.png",
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "6b955b96-b736-475e-bffd-e4acf2054169",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:05:50.061Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "632",
+      "name": "Houston Christian Huskies",
+      "abbreviation": "HCU",
+      "side": "home"
+    },
+    {
+      "id": "622",
+      "name": "Georgia Southern Eagles",
+      "abbreviation": "GSU",
+      "side": "away"
+    }
+  ],
+  "description": "Georgia Southern vs Houston Christian",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-22T01:00:00.000Z",
+  "startTime": "2026-11-20T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "events": [
+    {
+      "id": "479011",
+      "title": "Georgia Southern vs Houston Christian: Total Points",
+      "slug": "georgia-southern-vs-houston-christian-total-points",
+      "type": "categorical",
+      "category": "Sports",
+      "ticker": "NCAAM-2611200100-GSU-HCU-T",
+      "status": "active",
+      "createdAt": "2026-11-19T01:16:36.443Z",
+      "contracts": [
+        {
+          "id": "479011-1214842",
+          "label": "More than 154.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 154.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O154",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O154",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 0,
+          "strike": {
+            "type": "over",
+            "value": "154.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214844",
+          "label": "More than 128.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 128.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O128",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O128",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 1,
+          "strike": {
+            "type": "over",
+            "value": "128.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214846",
+          "label": "More than 141.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 141.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "no": "0.53"
+            },
+            "sell": {
+              "yes": "0.47"
+            },
+            "bestBid": "0.47"
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O141",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O141",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 2,
+          "strike": {
+            "type": "over",
+            "value": "141.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214848",
+          "label": "More than 147.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 147.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O147",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O147",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 3,
+          "strike": {
+            "type": "over",
+            "value": "147.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214850",
+          "label": "More than 149.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 149.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O149",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O149",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 4,
+          "strike": {
+            "type": "over",
+            "value": "149.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214852",
+          "label": "More than 144.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 144.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O144",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O144",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 5,
+          "strike": {
+            "type": "over",
+            "value": "144.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214854",
+          "label": "More than 151.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 151.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O151",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O151",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 6,
+          "strike": {
+            "type": "over",
+            "value": "151.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214856",
+          "label": "More than 165.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 165.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O165",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O165",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 7,
+          "strike": {
+            "type": "over",
+            "value": "165.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214858",
+          "label": "More than 137.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 137.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O137",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O137",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 8,
+          "strike": {
+            "type": "over",
+            "value": "137.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214860",
+          "label": "More than 161.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 161.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O161",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O161",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 9,
+          "strike": {
+            "type": "over",
+            "value": "161.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214861",
+          "label": "More than 157.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 157.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O157",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O157",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 10,
+          "strike": {
+            "type": "over",
+            "value": "157.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214863",
+          "label": "More than 170.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 170.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O170",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O170",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 11,
+          "strike": {
+            "type": "over",
+            "value": "170.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479011-1214865",
+          "label": "More than 133.5 points scored",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if Georgia Southern and Houston Christian collectively score over 133.5 total points in the men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T01:16:36.443Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+          "ticker": "O133",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-T-O133",
+          "marketState": "open",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 12,
+          "strike": {
+            "type": "over",
+            "value": "133.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        }
+      ],
+      "effectiveDate": "2026-11-19T01:16:36.443Z",
+      "isLive": false,
+      "participants": [
+        {
+          "id": "632",
+          "name": "Houston Christian Huskies",
+          "abbreviation": "HCU",
+          "side": "home"
+        },
+        {
+          "id": "622",
+          "name": "Georgia Southern Eagles",
+          "abbreviation": "GSU",
+          "side": "away"
+        }
+      ],
+      "description": "How many points will be scored?",
+      "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+      "tags": [
+        "College Basketball"
+      ],
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "startTime": "2026-11-20T01:00:00.000Z",
+      "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Total_Points_Classdocx_23430a8d-338c-4d9e-95bb-4b68b6a233d1.pdf",
+      "subcategory": {
+        "id": 15,
+        "slug": "sports_basketball_college-basketball",
+        "name": "College Basketball",
+        "path": [
+          "Sports",
+          "Basketball",
+          "College Basketball"
+        ]
+      },
+      "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+      "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+      "template": "sports-total",
+      "gameId": "e0bd1887-df2e-46d7-a81a-23dba165d00a",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "sportsMarket": {
+        "sport": "basketball",
+        "type": "total",
+        "subject": "contest",
+        "scope": {
+          "type": "full_contest"
+        },
+        "metric": "points"
+      }
+    },
+    {
+      "id": "479862",
+      "title": "Georgia Southern vs Houston Christian: Point Spread",
+      "slug": "georgia-southern-vs-houston-christian-point-spread",
+      "type": "categorical",
+      "category": "Sports",
+      "ticker": "NCAAM-2611200100-GSU-HCU-S",
+      "status": "active",
+      "createdAt": "2026-11-19T05:08:54.364Z",
+      "contracts": [
+        {
+          "id": "479862-1219595",
+          "label": "Houston Christian wins by more than 3.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 3.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {
+              "yes": "0.57",
+              "no": "0.56"
+            },
+            "sell": {
+              "yes": "0.44",
+              "no": "0.43"
+            },
+            "bestBid": "0.44",
+            "bestAsk": "0.57"
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU3",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU3",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 10,
+          "strike": {
+            "type": "spread",
+            "value": "3.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219585",
+          "label": "Houston Christian wins by more than 6.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU6",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU6",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 0,
+          "strike": {
+            "type": "spread",
+            "value": "6.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219586",
+          "label": "Georgia Southern wins by more than 7.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Georgia Southern in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 7.5. Otherwise, it resolves to No. The Underlying is the score differential (Georgia Southern's score minus Houston Christian's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "GSU7",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-GSU7",
+          "marketState": "open",
+          "abbreviatedName": "Georgia Southern",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Georgia_Southern_EaglesDark_ece6bca0-fadf-4db8-b0d2-d92783fc64fc.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 1,
+          "strike": {
+            "type": "spread",
+            "value": "7.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219587",
+          "label": "Houston Christian wins by more than 1.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU1",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU1",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 2,
+          "strike": {
+            "type": "spread",
+            "value": "1.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219588",
+          "label": "Houston Christian wins by more than 15.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 15.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU15",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU15",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 3,
+          "strike": {
+            "type": "spread",
+            "value": "15.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219589",
+          "label": "Houston Christian wins by more than 25.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 25.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU25",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU25",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 4,
+          "strike": {
+            "type": "spread",
+            "value": "25.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219590",
+          "label": "Houston Christian wins by more than 10.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU10",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU10",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 5,
+          "strike": {
+            "type": "spread",
+            "value": "10.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219591",
+          "label": "Georgia Southern wins by more than 2.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Georgia Southern in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 2.5. Otherwise, it resolves to No. The Underlying is the score differential (Georgia Southern's score minus Houston Christian's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "GSU2",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-GSU2",
+          "marketState": "open",
+          "abbreviatedName": "Georgia Southern",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Georgia_Southern_EaglesDark_ece6bca0-fadf-4db8-b0d2-d92783fc64fc.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 6,
+          "strike": {
+            "type": "spread",
+            "value": "2.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219592",
+          "label": "Houston Christian wins by more than 20.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Houston Christian in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 20.5. Otherwise, it resolves to No. The Underlying is the score differential (Houston Christian's score minus Georgia Southern's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "HCU20",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-HCU20",
+          "marketState": "open",
+          "abbreviatedName": "Houston Christian",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 7,
+          "strike": {
+            "type": "spread",
+            "value": "20.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219593",
+          "label": "Georgia Southern wins by more than 17.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Georgia Southern in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 17.5. Otherwise, it resolves to No. The Underlying is the score differential (Georgia Southern's score minus Houston Christian's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "GSU17",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-GSU17",
+          "marketState": "open",
+          "abbreviatedName": "Georgia Southern",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Georgia_Southern_EaglesDark_ece6bca0-fadf-4db8-b0d2-d92783fc64fc.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 8,
+          "strike": {
+            "type": "spread",
+            "value": "17.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        },
+        {
+          "id": "479862-1219594",
+          "label": "Georgia Southern wins by more than 12.5 points",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "This market resolves to Yes if the score differential recorded in favor of Georgia Southern in the entire men's college basketball game between Georgia Southern and Houston Christian scheduled for 2026-11-19 at 7:00 p.m. CT is above 12.5. Otherwise, it resolves to No. The Underlying is the score differential (Georgia Southern's score minus Houston Christian's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "prices": {
+            "buy": {},
+            "sell": {}
+          },
+          "status": "active",
+          "createdAt": "2026-11-19T05:08:54.364Z",
+          "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+          "ticker": "GSU12",
+          "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-S-GSU12",
+          "marketState": "open",
+          "abbreviatedName": "Georgia Southern",
+          "color": "#0f9ee7",
+          "imageUrl": "https://assets.gemini.com/predictions/images/Georgia_Southern_EaglesDark_ece6bca0-fadf-4db8-b0d2-d92783fc64fc.png",
+          "expiryDate": "2026-11-22T01:00:00.000Z",
+          "effectiveDate": "2026-11-18T00:00:14.000Z",
+          "sortOrder": 9,
+          "strike": {
+            "type": "spread",
+            "value": "12.5"
+          },
+          "isCombo": false,
+          "quantityIncrement": "0.01",
+          "quantityMinimum": "0.01",
+          "priceIncrement": "0.01",
+          "quoteAssetPrecision": 2,
+          "priceMinimum": "0.01"
+        }
+      ],
+      "effectiveDate": "2026-11-19T05:08:54.364Z",
+      "isLive": false,
+      "participants": [
+        {
+          "id": "632",
+          "name": "Houston Christian Huskies",
+          "abbreviation": "HCU",
+          "side": "home"
+        },
+        {
+          "id": "622",
+          "name": "Georgia Southern Eagles",
+          "abbreviation": "GSU",
+          "side": "away"
+        }
+      ],
+      "description": "What will the point difference be?",
+      "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+      "tags": [
+        "College Basketball"
+      ],
+      "expiryDate": "2026-11-22T01:00:00.000Z",
+      "startTime": "2026-11-20T01:00:00.000Z",
+      "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "subcategory": {
+        "id": 15,
+        "slug": "sports_basketball_college-basketball",
+        "name": "College Basketball",
+        "path": [
+          "Sports",
+          "Basketball",
+          "College Basketball"
+        ]
+      },
+      "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+      "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+      "template": "sports-spread",
+      "gameId": "e0bd1887-df2e-46d7-a81a-23dba165d00a",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "sportsMarket": {
+        "sport": "basketball",
+        "type": "spread",
+        "subject": "team",
+        "scope": {
+          "type": "full_contest"
+        },
+        "metric": "points"
+      }
+    }
+  ],
+  "template": "sports-game",
+  "gameId": "e0bd1887-df2e-46d7-a81a-23dba165d00a",
+  "eventTags": [
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 26128,
+      "name": "Georgia Southern Eagles",
+      "slug": "georgia-southern-eagles"
+    },
+    {
+      "id": 31101,
+      "name": "Houston Christian Huskies",
+      "slug": "houston-christian-huskies"
+    },
+    {
+      "id": 31243,
+      "name": "Southland",
+      "slug": "southland"
+    },
+    {
+      "id": 7359,
+      "name": "Sun Belt",
+      "slug": "sun-belt"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "GSU",
+      "name": "Georgia Southern Eagles",
+      "externalIds": {
+        "sportradarId": "6b955b96-b736-475e-bffd-e4acf2054169"
+      }
+    }
+  },
+  "combos": [
+    {
+      "contract": {
+        "contractId": "1219854",
+        "contractName": "Jacksonville Yes + Toledo Yes + 4 more",
+        "contractTicker": "CMB",
+        "eventTicker": "CMB-261122-C8F9FD91C74F8209",
+        "eventName": "",
+        "category": "Basketball",
+        "contractStatus": "Active",
+        "eventType": "binary",
+        "instrumentSymbol": "GEMI-CMB-261122-C8F9FD91C74F8209-CMB",
+        "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_6c686009-b224-4e06-8686-f5ddafc52ba8.avif",
+        "expiryDate": "2026-11-22T01:00:00.000Z",
+        "description": "Jacksonville-College Basketball-Yes, Toledo-College Basketball-Yes, Drake-College Basketball-Yes, San Antonio-Pro Basketball-Yes, Portland-Pro Basketball-Yes, Houston Christian-College Basketball-Yes [terms & conditions](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_Combos_Class_c3a4c1f2-a3fe-4d21-976a-2643cabf017f.pdf)"
+      },
+      "legs": [
+        {
+          "comboId": 1219854,
+          "legIndex": 0,
+          "contractId": "1181713",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1181713",
+            "contractName": "Jacksonville",
+            "contractTicker": "JAC",
+            "eventTicker": "NCAAM-2611200000-UALR-JAC-M",
+            "eventName": "Little Rock vs Jacksonville",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200000-UALR-JAC-M-JAC",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Jacksonville_DolphinsDark_ceea0452-17e4-4ff7-a3cb-196abdfcc983.png",
+            "expiryDate": "2026-11-22T00:00:00.000Z",
+            "description": "This market resolves to Yes if Jacksonville wins the men's college basketball game between Jacksonville and Little Rock originally scheduled for November 19, 2026 at 7:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "ffe04238-cc4f-430f-83b9-32e640e1d978",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 1,
+          "contractId": "1181719",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1181719",
+            "contractName": "Toledo",
+            "contractTicker": "TOL",
+            "eventTicker": "NCAAM-2611200000-RMU-TOL-M",
+            "eventName": "Robert Morris vs Toledo",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200000-RMU-TOL-M-TOL",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Toledo_RocketsDark_08a0a1dd-e7e4-4fb5-8ee7-3780300dd371.png",
+            "expiryDate": "2026-11-22T00:00:00.000Z",
+            "description": "This market resolves to Yes if Toledo wins the men's college basketball game between Toledo and Robert Morris originally scheduled for November 19, 2026 at 7:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "b72b2558-c9ed-446b-ab3f-f0c5daecdc8b",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 2,
+          "contractId": "1196152",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1196152",
+            "contractName": "Drake",
+            "contractTicker": "DRKE",
+            "eventTicker": "NCAAM-2611200030-COFC-DRKE-M",
+            "eventName": "Charleston vs Drake",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200030-COFC-DRKE-M-DRKE",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Drake_BulldogsDark_c9b12e5c-76a2-4bac-abed-81f894120fe7.png",
+            "expiryDate": "2026-11-22T00:30:00.000Z",
+            "description": "This market resolves to Yes if Drake wins the men's college basketball game between Drake and Charleston originally scheduled for November 19, 2026 at 7:30 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "2d57c9ec-d056-4214-8ad8-99adaf11259c",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 3,
+          "contractId": "1180455",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1180455",
+            "contractName": "San Antonio",
+            "contractTicker": "SAS",
+            "eventTicker": "NBA-2611200100-LAC-SAS-M",
+            "eventName": "Los Angeles C vs San Antonio",
+            "category": "Pro Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NBA-2611200100-LAC-SAS-M-SAS",
+            "imageUrl": "https://assets.gemini.com/predictions/images/SAS_2eb39eb7-ca58-4ad8-b58d-36add7053fe6.png",
+            "expiryDate": "2026-11-21T13:00:00.000Z",
+            "description": "If San Antonio wins the Pro Basketball game between San Antonio and Los Angeles C originally scheduled for November 19, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "sortOrder": 2,
+            "target": {
+              "type": "team",
+              "name": "San Antonio Spurs",
+              "externalIds": {
+                "sportradar": "583ecd4f-fb46-11e1-82cb-f4ce4684ea4c"
+              }
+            },
+            "gameId": "de6bbffe-6c51-4761-b0fb-78e3c496bda9",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 4,
+          "contractId": "1180524",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1180524",
+            "contractName": "Portland",
+            "contractTicker": "POR",
+            "eventTicker": "NBA-2611200100-POR-MIL-M",
+            "eventName": "Portland vs Milwaukee",
+            "category": "Pro Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NBA-2611200100-POR-MIL-M-POR",
+            "imageUrl": "https://assets.gemini.com/predictions/images/POR_72e78369-fef1-49c0-913e-4fab2445cb5d.png",
+            "expiryDate": "2026-11-21T13:00:00.000Z",
+            "description": "If Portland wins the Pro Basketball game between Portland and Milwaukee originally scheduled for November 19, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "sortOrder": 1,
+            "target": {
+              "type": "team",
+              "name": "Portland Trail Blazers",
+              "externalIds": {
+                "sportradar": "583ed056-fb46-11e1-82cb-f4ce4684ea4c"
+              }
+            },
+            "gameId": "445d9f3b-480b-4583-952d-33e9387ecaf7",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        },
+        {
+          "comboId": 1219854,
+          "legIndex": 5,
+          "contractId": "1196156",
+          "requiredOutcome": "Yes",
+          "contract": {
+            "contractId": "1196156",
+            "contractName": "Houston Christian",
+            "contractTicker": "HCU",
+            "eventTicker": "NCAAM-2611200100-GSU-HCU-M",
+            "eventName": "Georgia Southern vs Houston Christian",
+            "category": "College Basketball",
+            "contractStatus": "Active",
+            "eventType": "binary",
+            "instrumentSymbol": "GEMI-NCAAM-2611200100-GSU-HCU-M-HCU",
+            "imageUrl": "https://assets.gemini.com/predictions/images/Houston_Christian_HuskiesDark_6541a7be-e19a-4e84-9565-d00a6cee64af.png",
+            "expiryDate": "2026-11-22T01:00:00.000Z",
+            "description": "This market resolves to Yes if Houston Christian wins the men's college basketball game between Houston Christian and Georgia Southern originally scheduled for November 19, 2026 at 8:00 PM ET. Otherwise, it resolves to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing the event, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Win-Lose_Classdocx_893b1bbb-20f3-490c-81bb-650735bfb0f4.pdf)",
+            "sortOrder": 2,
+            "gameId": "e0bd1887-df2e-46d7-a81a-23dba165d00a",
+            "sportsMarket": {
+              "sport": "basketball",
+              "type": "moneyline",
+              "subject": "contest",
+              "scope": {
+                "type": "full_contest"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

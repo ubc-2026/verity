@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-WXHIGH-CHI-2611200459-66TO67",
     "question": "Highest temperature in Chicago on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:21Z",
+    "analyzed_at_utc": "2026-11-19T05:53:01Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:21Z",
-      "snapshot_hash": "sha256:1dd962795a5ef86c63438c6d8e7f70c8987c6ff950503ceac4dc3a89a09e909e",
+      "snapshot_time_utc": "2026-11-19T05:53:01Z",
+      "snapshot_hash": "sha256:66e5aa93022cd7e9389084c5bd9b20886064c4b2a6e005c917d770219a5e060b",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:21Z"
+      "observed_time_utc": "2026-11-19T05:53:01Z"
     },
     "scores": {
       "ambiguity": {
@@ -139,26 +139,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-35b9ca30f4f7",
-    "contract_id": "GEMI-WXHIGH-CHI-2611200459-66TO67",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-midway-vs-title-station-pack-v1",
-    "catalog_parameters": {
-      "station": "Chicago-Midway, IL (CLIMDW)",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'Chicago Midway station pack (title vs settlement)' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:21Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WXHIGH-CHI-2611200459-66TO67] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=LOT&product=CLI&issuedby=MDW&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
-    "[GEMI-WXHIGH-CHI-2611200459-66TO67] PROPOSE cat-midway-vs-title-station-pack-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-WXHIGH-CHI-2611200459-66TO67] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

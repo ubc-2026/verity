@@ -1,0 +1,204 @@
+{
+  "id": "475112",
+  "title": "Houston vs Denver",
+  "slug": "houston-vs-denver",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611210300-HOU-DEN-M",
+  "status": "active",
+  "createdAt": "2026-11-18T00:02:33.321Z",
+  "contracts": [
+    {
+      "id": "475112-1195380",
+      "label": "Denver",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Denver wins the Pro Basketball game between Denver and Houston originally scheduled for November 20, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.56",
+          "no": "0.46"
+        },
+        "sell": {
+          "yes": "0.54",
+          "no": "0.44"
+        },
+        "bestBid": "0.54",
+        "bestAsk": "0.56"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:33.321Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "DEN",
+      "instrumentSymbol": "GEMI-NBA-2611210300-HOU-DEN-M-DEN",
+      "marketState": "open",
+      "abbreviatedName": "DEN",
+      "color": "#0E2240",
+      "imageUrl": "https://assets.gemini.com/predictions/images/DEN_b0e0069c-ea3c-4dac-a63f-0d706bb78ecc.png",
+      "expiryDate": "2026-11-22T15:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:08.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "583ed102-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Denver Nuggets",
+        "externalIds": {
+          "sportradar": "583ed102-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    },
+    {
+      "id": "475112-1195361",
+      "label": "Houston",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If Houston wins the Pro Basketball game between Houston and Denver originally scheduled for November 20, 2026 at 10:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.46",
+          "no": "0.56"
+        },
+        "sell": {
+          "yes": "0.44",
+          "no": "0.54"
+        },
+        "bestBid": "0.44",
+        "bestAsk": "0.46"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:33.321Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "HOU",
+      "instrumentSymbol": "GEMI-NBA-2611210300-HOU-DEN-M-HOU",
+      "marketState": "open",
+      "abbreviatedName": "HOU",
+      "color": "#CE1141",
+      "imageUrl": "https://assets.gemini.com/predictions/images/HOU_55ffc374-c780-4aa2-9055-57351ab86be9.png",
+      "expiryDate": "2026-11-22T15:00:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:08.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "583ecb3a-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "Houston Rockets",
+        "externalIds": {
+          "sportradar": "583ecb3a-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:02:33.321Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "474",
+      "name": "Denver Nuggets",
+      "abbreviation": "DEN",
+      "side": "home"
+    },
+    {
+      "id": "476",
+      "name": "Houston Rockets",
+      "abbreviation": "HOU",
+      "side": "away"
+    }
+  ],
+  "description": "Houston vs Denver",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-22T15:00:00.000Z",
+  "startTime": "2026-11-21T03:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "531a653b-d2c7-4440-854b-79274904b9ac",
+  "eventTags": [
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 140,
+      "name": "Nuggets",
+      "slug": "nuggets"
+    },
+    {
+      "id": 44,
+      "name": "Rockets",
+      "slug": "rockets"
+    },
+    {
+      "id": 13877,
+      "name": "Western",
+      "slug": "western"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "HOU",
+      "name": "Houston Rockets",
+      "externalIds": {
+        "sportradarId": "583ecb3a-fb46-11e1-82cb-f4ce4684ea4c"
+      }
+    }
+  }
+}

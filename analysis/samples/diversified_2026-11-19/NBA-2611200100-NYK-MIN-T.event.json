@@ -1,0 +1,1359 @@
+{
+  "id": "479739",
+  "title": "New York vs Minnesota: Total Points",
+  "slug": "new-york-vs-minnesota-total-points",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611200100-NYK-MIN-T",
+  "status": "active",
+  "createdAt": "2026-11-19T04:21:22.829Z",
+  "contracts": [
+    {
+      "id": "479739-1219058",
+      "label": "More than 203.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 203.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.82",
+          "no": "0.25"
+        },
+        "sell": {
+          "yes": "0.75",
+          "no": "0.18"
+        },
+        "bestBid": "0.75",
+        "bestAsk": "0.82"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O203",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O203",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "over",
+        "value": "203.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219059",
+      "label": "More than 205.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 205.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.78",
+          "no": "0.29"
+        },
+        "sell": {
+          "yes": "0.71",
+          "no": "0.22"
+        },
+        "bestBid": "0.71",
+        "bestAsk": "0.78"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O205",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O205",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "over",
+        "value": "205.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219060",
+      "label": "More than 207.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 207.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.74",
+          "no": "0.32"
+        },
+        "sell": {
+          "yes": "0.68",
+          "no": "0.26"
+        },
+        "bestBid": "0.68",
+        "bestAsk": "0.74"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O207",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O207",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "over",
+        "value": "207.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219061",
+      "label": "More than 209.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 209.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.67",
+          "no": "0.37"
+        },
+        "sell": {
+          "yes": "0.63",
+          "no": "0.33"
+        },
+        "bestBid": "0.63",
+        "bestAsk": "0.67"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O209",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O209",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "over",
+        "value": "209.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219062",
+      "label": "More than 211.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 211.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.65",
+          "no": "0.4"
+        },
+        "sell": {
+          "yes": "0.6",
+          "no": "0.35"
+        },
+        "bestBid": "0.6",
+        "bestAsk": "0.65"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O211",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O211",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "over",
+        "value": "211.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219083",
+      "label": "More than 213.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 213.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.6",
+          "no": "0.45"
+        },
+        "sell": {
+          "yes": "0.55",
+          "no": "0.4"
+        },
+        "bestBid": "0.55",
+        "bestAsk": "0.6"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O213",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O213",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 26,
+      "strike": {
+        "type": "over",
+        "value": "213.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219063",
+      "label": "More than 215.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 215.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.56",
+          "no": "0.49"
+        },
+        "sell": {
+          "yes": "0.51",
+          "no": "0.44"
+        },
+        "bestBid": "0.51",
+        "bestAsk": "0.56"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O215",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O215",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 9,
+      "strike": {
+        "type": "over",
+        "value": "215.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219064",
+      "label": "More than 217.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 217.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.5",
+          "no": "0.52"
+        },
+        "sell": {
+          "yes": "0.48",
+          "no": "0.5"
+        },
+        "bestBid": "0.48",
+        "bestAsk": "0.5"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O217",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O217",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "over",
+        "value": "217.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219065",
+      "label": "More than 219.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 219.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.47",
+          "no": "0.58"
+        },
+        "sell": {
+          "yes": "0.42",
+          "no": "0.53"
+        },
+        "bestBid": "0.42",
+        "bestAsk": "0.47"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O219",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O219",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 11,
+      "strike": {
+        "type": "over",
+        "value": "219.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219066",
+      "label": "More than 221.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 221.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.43",
+          "no": "0.62"
+        },
+        "sell": {
+          "yes": "0.38",
+          "no": "0.57"
+        },
+        "bestBid": "0.38",
+        "bestAsk": "0.43"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O221",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O221",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 12,
+      "strike": {
+        "type": "over",
+        "value": "221.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219067",
+      "label": "More than 223.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 223.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.38",
+          "no": "0.65"
+        },
+        "sell": {
+          "yes": "0.35",
+          "no": "0.62"
+        },
+        "bestBid": "0.35",
+        "bestAsk": "0.38"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O223",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O223",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 13,
+      "strike": {
+        "type": "over",
+        "value": "223.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219068",
+      "label": "More than 225.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 225.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.34",
+          "no": "0.7"
+        },
+        "sell": {
+          "yes": "0.3",
+          "no": "0.66"
+        },
+        "bestBid": "0.3",
+        "bestAsk": "0.34"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O225",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O225",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 14,
+      "strike": {
+        "type": "over",
+        "value": "225.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219069",
+      "label": "More than 227.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 227.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.3",
+          "no": "0.77"
+        },
+        "sell": {
+          "yes": "0.23",
+          "no": "0.7"
+        },
+        "bestBid": "0.23",
+        "bestAsk": "0.3"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O227",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O227",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 15,
+      "strike": {
+        "type": "over",
+        "value": "227.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219054",
+      "label": "More than 193.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 193.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O193",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O193",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "over",
+        "value": "193.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219055",
+      "label": "More than 195.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 195.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O195",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O195",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "over",
+        "value": "195.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219056",
+      "label": "More than 197.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 197.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O197",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O197",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "over",
+        "value": "197.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219057",
+      "label": "More than 199.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 199.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O199",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O199",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "over",
+        "value": "199.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219070",
+      "label": "More than 229.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 229.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O229",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O229",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 16,
+      "strike": {
+        "type": "over",
+        "value": "229.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219071",
+      "label": "More than 231.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 231.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O231",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O231",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 17,
+      "strike": {
+        "type": "over",
+        "value": "231.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219072",
+      "label": "More than 233.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 233.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O233",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O233",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 18,
+      "strike": {
+        "type": "over",
+        "value": "233.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219074",
+      "label": "More than 235.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 235.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O235",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O235",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 19,
+      "strike": {
+        "type": "over",
+        "value": "235.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219075",
+      "label": "More than 239.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 239.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O239",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O239",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 20,
+      "strike": {
+        "type": "over",
+        "value": "239.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219077",
+      "label": "More than 241.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 241.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O241",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O241",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 21,
+      "strike": {
+        "type": "over",
+        "value": "241.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219078",
+      "label": "More than 243.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 243.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O243",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O243",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 22,
+      "strike": {
+        "type": "over",
+        "value": "243.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219080",
+      "label": "More than 245.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 245.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O245",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O245",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 23,
+      "strike": {
+        "type": "over",
+        "value": "245.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219081",
+      "label": "More than 189.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 189.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O189",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O189",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 24,
+      "strike": {
+        "type": "over",
+        "value": "189.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219082",
+      "label": "More than 191.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 191.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O191",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O191",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 25,
+      "strike": {
+        "type": "over",
+        "value": "191.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219084",
+      "label": "More than 237.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 237.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O237",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O237",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 27,
+      "strike": {
+        "type": "over",
+        "value": "237.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "479739-1219085",
+      "label": "More than 201.5 points scored",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if New York and Minnesota collectively score over 201.5 total points in the NBA game between New York and Minnesota scheduled for 2026-11-19 at 7:00 p.m. CT. Otherwise, it resolves to No. The Underlying is the total points scored by both teams for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:21:22.829Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+      "ticker": "O201",
+      "instrumentSymbol": "GEMI-NBA-2611200100-NYK-MIN-T-O201",
+      "marketState": "open",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Basketball_48baed80-84ab-4004-aba2-ed1eb5c4e2c9.png",
+      "expiryDate": "2026-11-21T13:00:00.000Z",
+      "effectiveDate": "2026-11-17T00:00:07.000Z",
+      "sortOrder": 28,
+      "strike": {
+        "type": "over",
+        "value": "201.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-19T04:21:22.829Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "480",
+      "name": "Minnesota Timberwolves",
+      "abbreviation": "MIN",
+      "side": "home"
+    },
+    {
+      "id": "468",
+      "name": "New York Knicks",
+      "abbreviation": "NYK",
+      "side": "away"
+    }
+  ],
+  "description": "How many points will be scored?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-21T13:00:00.000Z",
+  "startTime": "2026-11-20T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Point_Total_Class_83dd60df-d1ae-434e-8083-776a0713244a.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-total",
+  "gameId": "f974197a-fa84-4598-8fd4-4645710a6095",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "total",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "points"
+  }
+}

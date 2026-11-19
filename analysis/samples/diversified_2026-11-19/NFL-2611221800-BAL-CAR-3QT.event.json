@@ -1,0 +1,510 @@
+{
+  "id": "475114",
+  "title": "Baltimore vs Carolina: 3rd Quarter Point Total",
+  "slug": "baltimore-vs-carolina-3rd-quarter-point-total",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NFL-2611221800-BAL-CAR-3QT",
+  "status": "active",
+  "createdAt": "2026-11-18T00:02:35.752Z",
+  "contracts": [
+    {
+      "id": "475114-1195399",
+      "label": "More than 3.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 3.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.87",
+          "no": "0.32"
+        },
+        "sell": {
+          "yes": "0.68",
+          "no": "0.13"
+        },
+        "bestBid": "0.68",
+        "bestAsk": "0.87"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O3",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195386",
+      "label": "More than 6.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 6.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.75",
+          "no": "0.37"
+        },
+        "sell": {
+          "yes": "0.63",
+          "no": "0.25"
+        },
+        "bestBid": "0.63",
+        "bestAsk": "0.75"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O6",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O6",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195395",
+      "label": "More than 7.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 7.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.58",
+          "no": "0.53"
+        },
+        "sell": {
+          "yes": "0.47",
+          "no": "0.42"
+        },
+        "bestBid": "0.47",
+        "bestAsk": "0.58"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O7",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O7",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195378",
+      "label": "More than 10.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 10.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.4",
+          "no": "0.72"
+        },
+        "sell": {
+          "yes": "0.28",
+          "no": "0.6"
+        },
+        "bestBid": "0.28",
+        "bestAsk": "0.4"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O10",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O10",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195390",
+      "label": "More than 13.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 13.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.32",
+          "no": "0.8"
+        },
+        "sell": {
+          "yes": "0.2",
+          "no": "0.68"
+        },
+        "bestBid": "0.2",
+        "bestAsk": "0.32"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O13",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O13",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "13.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195369",
+      "label": "More than 14.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 14.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.22",
+          "no": "0.9"
+        },
+        "sell": {
+          "yes": "0.1",
+          "no": "0.78"
+        },
+        "bestBid": "0.1",
+        "bestAsk": "0.22"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O14",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O14",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195371",
+      "label": "More than 17.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 17.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.14",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.86"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.14"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O17",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O17",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "17.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195374",
+      "label": "More than 20.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 20.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12"
+        },
+        "sell": {
+          "no": "0.88"
+        },
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O20",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O20",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "20.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195382",
+      "label": "More than 21.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 21.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.09"
+        },
+        "sell": {
+          "no": "0.91"
+        },
+        "bestAsk": "0.09"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O21",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O21",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "21.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475114-1195376",
+      "label": "More than 24.5 points scored in the 3rd quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Baltimore and Carolina collectively score more than 24.5 points during the 3rd quarter of the Pro Football game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 3rd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T00:02:35.752Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+      "ticker": "O24",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-3QT-O24",
+      "marketState": "open",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "strike": {
+        "type": "over",
+        "value": "24.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T00:02:35.752Z",
+  "isLive": false,
+  "participants": [],
+  "description": "How many total points will be scored in the 3rd quarter?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Football"
+  ],
+  "expiryDate": "2026-11-24T06:00:00.000Z",
+  "startTime": "2026-11-22T18:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Total_ffe4af39-f890-48c8-8355-ac2652b3bd5e.pdf",
+  "subcategory": {
+    "id": 12,
+    "slug": "sports_football_pro-football",
+    "name": "Pro Football",
+    "path": [
+      "Sports",
+      "Football",
+      "Pro Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Football_square_1_7660ad42-c561-4e8b-8bc7-175a1c63ae5c.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-18T101349482_3eca341e-eaaf-4842-a5ac-ed7c6784042a.avif",
+  "template": "sports-total",
+  "gameId": "ac8037dd-465f-4488-a468-d4255e01986a",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Am. football"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "total",
+    "subject": "contest",
+    "scope": {
+      "type": "quarter",
+      "ordinal": 3
+    },
+    "metric": "points"
+  }
+}

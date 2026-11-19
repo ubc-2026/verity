@@ -1,30 +1,30 @@
 {
   "risk_analysis": {
     "version": "verity-risk-analysis-v1",
-    "contract_id": "GEMI-WTI2611192200-HI83",
+    "contract_id": "GEMI-WTI2611192200-HI82",
     "event_ticker": "WTI2611192200",
-    "instrument_symbol": "GEMI-WTI2611192200-HI83",
+    "instrument_symbol": "GEMI-WTI2611192200-HI82",
     "question": "Oil (WTI) price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:27Z",
+    "analyzed_at_utc": "2026-11-19T05:53:05Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:27Z",
-      "snapshot_hash": "sha256:f04f36d17ab0d8f421d6a0415d7a14cdff89eb0d31c9e5e0dfb19ce6d2ad3e8a",
+      "snapshot_time_utc": "2026-11-19T05:53:05Z",
+      "snapshot_hash": "sha256:d8ff66ff27a3a0f37eafb3a51f3d5b69e1752321c859b66bcfeeaf00e2dbd390",
       "hash_alg": "sha256"
     },
     "quoted_price": {
-      "outcome_label": "$83 or above",
-      "best_bid": "0.3",
-      "best_ask": "0.34",
-      "mid": "0.32",
-      "implied_probability": "0.32",
+      "outcome_label": "$82 or above",
+      "best_bid": "0.58",
+      "best_ask": "0.62",
+      "mid": "0.60",
+      "implied_probability": "0.60",
       "volume_usd": "84",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:27Z"
+      "observed_time_utc": "2026-11-19T05:53:05Z"
     },
     "scores": {
       "ambiguity": {
@@ -95,7 +95,7 @@
         "id": "C-CONTRACT",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WTI2611192200",
         "field_or_rule": "contract.description",
-        "quote": "If the price of Oil (WTI) is $83 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf)."
+        "quote": "If the price of Oil (WTI) is $82 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_WTIUSDC index. This index provides a 60 second average of the [WTIOIL-USDC](https://app.hyperliquid.xyz/trade/xyz:CL) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf)."
       },
       {
         "id": "C-TERMS",
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WTI2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.3, bestAsk 0.34; event volume 84"
+        "quote": "bestBid 0.58, bestAsk 0.62; event volume 84"
       }
     ],
     "evidence_gaps": [
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-0a5db70cfe15",
-    "contract_id": "GEMI-WTI2611192200-HI83",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-commodity-settlement-version-v1",
-    "catalog_parameters": {
-      "index": "WTI",
-      "provider": "commodity index",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:27Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WTI2611192200-HI83] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/wti_oil_bb9688a8-b518-47d3-b55b-ae6d83753268.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for WTI Crude Oil as published on the CME Group website, or the",
-    "[GEMI-WTI2611192200-HI83] PROPOSE cat-commodity-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-WTI2611192200-HI82] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

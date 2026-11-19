@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ",
     "question": "Atlante vs Tijuana",
     "expiry_utc": "2026-11-21T11:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:02:49Z",
+    "analyzed_at_utc": "2026-11-19T05:52:03Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:02:49Z",
-      "snapshot_hash": "sha256:e18883bf599b002c455165ef2c2a5c4cec4830d5f38d8d31cf50c1278f6def1c",
+      "snapshot_time_utc": "2026-11-19T05:52:03Z",
+      "snapshot_hash": "sha256:94c634b2f2cab74756062edebf7c2314dc1b79bd016daab68325b0ef823e01f5",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Tijuana",
-      "best_bid": "0.59",
-      "best_ask": "0.6",
-      "mid": "0.595",
-      "implied_probability": "0.595",
+      "best_bid": "0.6",
+      "best_ask": "0.61",
+      "mid": "0.605",
+      "implied_probability": "0.605",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:02:49Z"
+      "observed_time_utc": "2026-11-19T05:52:03Z"
     },
     "scores": {
       "ambiguity": {
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/LIGAMX-2611210300-ATL-TIJ-M",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.59, bestAsk 0.6; event volume 0"
+        "quote": "bestBid 0.6, bestAsk 0.61; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -140,8 +140,6 @@
   },
   "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] GAP-1: free research resolved. The terms name which StatsScore / Sportradar / league official result issuance settles the contract. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Soccer_Match_Terms_and_Conditions_d44ee81f-1008-4300-b572-0982b2d9c57f.pdf. Excerpt: endly, and knockout or elimination matches; and • Win and Lose only (no Draw) - official final result following conclusion of all periods of play, including reg",
-    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] skip GAP-1: answered by the free check; nothing to buy.",
-    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] no purchase: every material gap was answered, cached, or had no catalog match."
+    "[GEMI-LIGAMX-2611210300-ATL-TIJ-M-TIJ] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-BRENT2611192200-HI90",
     "question": "Oil (Brent) price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:24Z",
+    "analyzed_at_utc": "2026-11-19T05:53:02Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:24Z",
-      "snapshot_hash": "sha256:729052b5dc0fc6b7bb8869a2f2fd7fa6fe1358c3aae0674d47cb3491529bad87",
+      "snapshot_time_utc": "2026-11-19T05:53:02Z",
+      "snapshot_hash": "sha256:7c15ee2d0932319fc6c66dceff216ff3202156aa07f52413bc82701692ebf198",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$90 or above",
-      "best_bid": "0.33",
-      "best_ask": "0.37",
-      "mid": "0.35",
-      "implied_probability": "0.35",
+      "best_bid": "0.35",
+      "best_ask": "0.4",
+      "mid": "0.375",
+      "implied_probability": "0.375",
       "volume_usd": "79.32",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:24Z"
+      "observed_time_utc": "2026-11-19T05:53:02Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $79.32 is under $100 (4c spread).",
+        "rationale": "event-total volume $79.32 is under $100 (5c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/BRENT2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.33, bestAsk 0.37; event volume 79.32"
+        "quote": "bestBid 0.35, bestAsk 0.4; event volume 79.32"
       }
     ],
     "evidence_gaps": [
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-1b74d1e5293d",
-    "contract_id": "GEMI-BRENT2611192200-HI90",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-commodity-settlement-version-v1",
-    "catalog_parameters": {
-      "index": "BRENT",
-      "provider": "commodity index",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:24Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-BRENT2611192200-HI90] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/brent_oil_facb4f65-1d38-4473-9ab0-af5e5f6a6f7c.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for Brent Crude Oil as published on the CME Group website, or t",
-    "[GEMI-BRENT2611192200-HI90] PROPOSE cat-commodity-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-BRENT2611192200-HI90] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

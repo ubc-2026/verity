@@ -1,0 +1,1520 @@
+{
+  "id": "475630",
+  "title": "Atlanta vs Oklahoma City: Point Spread",
+  "slug": "atlanta-vs-oklahoma-city-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611190100-ATL-OKC-S",
+  "status": "settled",
+  "createdAt": "2026-11-18T01:27:03.773Z",
+  "contracts": [
+    {
+      "id": "475630-1198061",
+      "label": "Oklahoma City wins by more than 9.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 9.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC9",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC9",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.121Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "spread",
+        "value": "9.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198062",
+      "label": "Oklahoma City wins by more than 7.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 7.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC7",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC7",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:18:46.474Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198066",
+      "label": "Oklahoma City wins by more than 15.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 15.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC15",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC15",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.589Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "spread",
+        "value": "15.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198068",
+      "label": "Atlanta wins by more than 14.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 14.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL14",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL14",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.426Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "spread",
+        "value": "14.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198071",
+      "label": "Oklahoma City wins by more than 1.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC1",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC1",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.534Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198074",
+      "label": "Oklahoma City wins by more than 23.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 23.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC23",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC23",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.305Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "spread",
+        "value": "23.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198077",
+      "label": "Oklahoma City wins by more than 33.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 33.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC33",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC33",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.575Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "spread",
+        "value": "33.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198080",
+      "label": "Oklahoma City wins by more than 29.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 29.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC29",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC29",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.337Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "spread",
+        "value": "29.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198087",
+      "label": "Oklahoma City wins by more than 27.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 27.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC27",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC27",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.452Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "spread",
+        "value": "27.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198088",
+      "label": "Oklahoma City wins by more than 25.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 25.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC25",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC25",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.671Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 9,
+      "strike": {
+        "type": "spread",
+        "value": "25.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198094",
+      "label": "Atlanta wins by more than 12.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 12.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL12",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL12",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.291Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "spread",
+        "value": "12.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198096",
+      "label": "Atlanta wins by more than 18.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 18.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL18",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL18",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.424Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 11,
+      "strike": {
+        "type": "spread",
+        "value": "18.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198099",
+      "label": "Oklahoma City wins by more than 13.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 13.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC13",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC13",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.091Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 12,
+      "strike": {
+        "type": "spread",
+        "value": "13.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198103",
+      "label": "Oklahoma City wins by more than 5.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC5",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC5",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.455Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 13,
+      "strike": {
+        "type": "spread",
+        "value": "5.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198105",
+      "label": "Atlanta wins by more than 6.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL6",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL6",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.560Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 14,
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198109",
+      "label": "Atlanta wins by more than 8.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL8",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL8",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.499Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 15,
+      "strike": {
+        "type": "spread",
+        "value": "8.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198115",
+      "label": "Oklahoma City wins by more than 19.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 19.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC19",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC19",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.587Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 16,
+      "strike": {
+        "type": "spread",
+        "value": "19.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198116",
+      "label": "Oklahoma City wins by more than 2.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 2.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC2",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC2",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.115Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 17,
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198119",
+      "label": "Atlanta wins by more than 1.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL1",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL1",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "yes",
+      "resolvedAt": "2026-11-19T03:17:54.170Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 18,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198121",
+      "label": "Atlanta wins by more than 2.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 2.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL2",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL2",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "yes",
+      "resolvedAt": "2026-11-19T03:17:54.323Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 19,
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198124",
+      "label": "Oklahoma City wins by more than 31.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 31.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC31",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC31",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.569Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 20,
+      "strike": {
+        "type": "spread",
+        "value": "31.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198127",
+      "label": "Atlanta wins by more than 16.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 16.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL16",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL16",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.666Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 21,
+      "strike": {
+        "type": "spread",
+        "value": "16.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198130",
+      "label": "Oklahoma City wins by more than 6.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 6.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC6",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC6",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.083Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 22,
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198132",
+      "label": "Oklahoma City wins by more than 10.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC10",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC10",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.389Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 23,
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198136",
+      "label": "Oklahoma City wins by more than 11.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 11.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC11",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC11",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.133Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 24,
+      "strike": {
+        "type": "spread",
+        "value": "11.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198140",
+      "label": "Oklahoma City wins by more than 4.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 4.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC4",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC4",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.720Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 25,
+      "strike": {
+        "type": "spread",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198145",
+      "label": "Oklahoma City wins by more than 3.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 3.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC3",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC3",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.855Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 26,
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198147",
+      "label": "Oklahoma City wins by more than 12.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 12.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC12",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC12",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:53.776Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 27,
+      "strike": {
+        "type": "spread",
+        "value": "12.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198148",
+      "label": "Atlanta wins by more than 4.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 4.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL4",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL4",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "yes",
+      "resolvedAt": "2026-11-19T03:17:54.011Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 28,
+      "strike": {
+        "type": "spread",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198149",
+      "label": "Oklahoma City wins by more than 17.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 17.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC17",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC17",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.366Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 29,
+      "strike": {
+        "type": "spread",
+        "value": "17.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198150",
+      "label": "Oklahoma City wins by more than 8.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC8",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC8",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.142Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 30,
+      "strike": {
+        "type": "spread",
+        "value": "8.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198154",
+      "label": "Oklahoma City wins by more than 21.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Oklahoma City in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 21.5. Otherwise, it resolves to No. The Underlying is the score differential (Oklahoma City's score minus Atlanta's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "OKC21",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-OKC21",
+      "marketState": "closed",
+      "abbreviatedName": "Oklahoma City",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/OKC_13490fb9-a636-4e44-a1e1-919542958d96.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.099Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 31,
+      "strike": {
+        "type": "spread",
+        "value": "21.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "475630-1198157",
+      "label": "Atlanta wins by more than 10.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Atlanta in the entire NBA game between Atlanta and Oklahoma City scheduled for 2026-11-18 at 7:00 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Atlanta's score minus Oklahoma City's score) for the specified game. Source Agencies, in order, are the league governing the event (NBA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "settled",
+      "createdAt": "2026-11-18T01:27:03.773Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+      "ticker": "ATL10",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-S-ATL10",
+      "marketState": "closed",
+      "abbreviatedName": "Atlanta",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/ATL_9a65de7f-ea47-4d1e-910c-889ef04bcc9d.png",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "resolutionSide": "no",
+      "resolvedAt": "2026-11-19T03:17:52.104Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 32,
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T01:27:03.773Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "482",
+      "name": "Oklahoma City Thunder",
+      "abbreviation": "OKC",
+      "side": "home"
+    },
+    {
+      "id": "458",
+      "name": "Atlanta Hawks",
+      "abbreviation": "ATL",
+      "side": "away"
+    }
+  ],
+  "description": "What will the point difference be?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "resolvedAt": "2026-11-19T03:18:46.474Z",
+  "volume": "55168.42",
+  "volume24h": "55168.42",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-20T13:00:00.000Z",
+  "startTime": "2026-11-19T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Spread_Class_98459f6c-7941-4c33-9bc5-7202c53df230.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-spread",
+  "gameId": "4588e8d7-d5f9-4305-89d6-2a523ce3c3d6",
+  "settlement": {},
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "points"
+  }
+}

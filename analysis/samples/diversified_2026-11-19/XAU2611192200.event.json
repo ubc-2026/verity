@@ -1,0 +1,382 @@
+{
+  "id": "478184",
+  "title": "Gold price on November 19?",
+  "slug": "gold-price-on-november-19",
+  "type": "categorical",
+  "category": "Commodities",
+  "ticker": "XAU2611192200",
+  "status": "active",
+  "createdAt": "2026-11-18T20:56:07.590Z",
+  "contracts": [
+    {
+      "id": "478184-1218407",
+      "label": "$3,650 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,650 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.98",
+          "no": "0.06"
+        },
+        "sell": {
+          "yes": "0.94",
+          "no": "0.02"
+        },
+        "bestBid": "0.94",
+        "bestAsk": "0.98"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3650",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3650",
+      "marketState": "open",
+      "abbreviatedName": ">$3,650",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "above",
+        "value": "3650"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478184-1211947",
+      "label": "$3,700 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,700 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.84",
+          "no": "0.21"
+        },
+        "sell": {
+          "yes": "0.79",
+          "no": "0.16"
+        },
+        "bestBid": "0.79",
+        "bestAsk": "0.84"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3700",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3700",
+      "marketState": "open",
+      "abbreviatedName": ">$3.7K",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "above",
+        "value": "3700"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478184-1211948",
+      "label": "$3,725 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,725 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.65",
+          "no": "0.39"
+        },
+        "sell": {
+          "yes": "0.61",
+          "no": "0.35"
+        },
+        "bestBid": "0.61",
+        "bestAsk": "0.65"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3725",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3725",
+      "marketState": "open",
+      "abbreviatedName": ">$3.7K",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "above",
+        "value": "3725"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478184-1211952",
+      "label": "$3,775 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,775 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.24",
+          "no": "0.81"
+        },
+        "sell": {
+          "yes": "0.19",
+          "no": "0.76"
+        },
+        "bestBid": "0.19",
+        "bestAsk": "0.24",
+        "lastTradePrice": "0.19"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3775",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3775",
+      "marketState": "open",
+      "abbreviatedName": ">$3.8K",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "above",
+        "value": "3775"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478184-1213502",
+      "label": "$3,800 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,800 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1",
+          "no": "0.95"
+        },
+        "sell": {
+          "yes": "0.05",
+          "no": "0.9"
+        },
+        "bestBid": "0.05",
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3800",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3800",
+      "marketState": "open",
+      "abbreviatedName": ">$3,800",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "above",
+        "value": "3800"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478184-1211945",
+      "label": "$3,675 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,675 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3675",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3675",
+      "marketState": "open",
+      "abbreviatedName": ">$3.7K",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "above",
+        "value": "3675"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478184-1211950",
+      "label": "$3,750 or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of Gold is $3,750 or above on November 19, 2026 at 5pm ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the KK_RFR_XAUUSDC index. This index provides a 60 second average of the [GOLD-USDC](https://app.hyperliquid.xyz/trade/xyz:GOLD) price. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T20:56:07.590Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+      "ticker": "HI3750",
+      "instrumentSymbol": "GEMI-XAU2611192200-HI3750",
+      "marketState": "open",
+      "abbreviatedName": ">$3.8K",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T22:00:00.000Z",
+      "effectiveDate": "2026-11-18T21:00:00.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "above",
+        "value": "3750"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T20:56:07.590Z",
+  "isLive": true,
+  "participants": [],
+  "description": "Interval XAU price prediction event expiring on November 19, 2026 at 5pm ET",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Gold_a6abce51-478a-47b9-9873-0428ab6a9793.avif",
+  "series": "XAU",
+  "volume": "12",
+  "volume24h": "12",
+  "tags": [
+    "Gold"
+  ],
+  "expiryDate": "2026-11-19T22:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/gold_2a7cbe98-611e-4350-9ab4-e09937e7e4a0.pdf",
+  "subcategory": {
+    "id": 125,
+    "slug": "commodities_gold",
+    "name": "Gold",
+    "path": [
+      "Commodities",
+      "Gold"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Gold_a941c715-445c-4a2b-89f1-001f4afab547.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Commodities_fb1be9e3-ddb9-4fb4-b28f-b6a541976078.avif",
+  "template": "prices-ladder",
+  "eventTags": [
+    {
+      "id": 14,
+      "name": "Daily",
+      "slug": "daily"
+    },
+    {
+      "id": 18,
+      "name": "Reference",
+      "slug": "reference"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "kaiko-equities",
+    "index": "KK_RFR_XAUUSDC"
+  },
+  "volumeDelta24hPct": "0"
+}

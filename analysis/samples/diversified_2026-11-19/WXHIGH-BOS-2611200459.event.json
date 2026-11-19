@@ -1,0 +1,316 @@
+{
+  "id": "477270",
+  "title": "Highest temperature in Boston on November 19, 2026?",
+  "slug": "highest-temperature-in-boston-on-november-19-2026",
+  "type": "categorical",
+  "category": "Weather",
+  "ticker": "WXHIGH-BOS-2611200459",
+  "status": "active",
+  "createdAt": "2026-11-18T13:59:08.159Z",
+  "contracts": [
+    {
+      "id": "477270-1207151",
+      "label": "63\u00b0F to 64\u00b0F",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Boston MA, MA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Boston MA, MA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Boston MA on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.55",
+          "no": "0.5"
+        },
+        "sell": {
+          "yes": "0.5",
+          "no": "0.45"
+        },
+        "bestBid": "0.5",
+        "bestAsk": "0.55"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.159Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "63TO64",
+      "instrumentSymbol": "GEMI-WXHIGH-BOS-2611200459-63TO64",
+      "marketState": "open",
+      "abbreviatedName": "63\u00b0 to 64\u00b0",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 2,
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "477270-1207153",
+      "label": "65\u00b0F to 66\u00b0F",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Boston MA, MA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Boston MA, MA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Boston MA on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.27",
+          "no": "0.81"
+        },
+        "sell": {
+          "yes": "0.19",
+          "no": "0.73"
+        },
+        "bestBid": "0.19",
+        "bestAsk": "0.27"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.159Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "65TO66",
+      "instrumentSymbol": "GEMI-WXHIGH-BOS-2611200459-65TO66",
+      "marketState": "open",
+      "abbreviatedName": "65\u00b0 to 66\u00b0",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 3,
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "477270-1207149",
+      "label": "62\u00b0F or below",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Boston MA, MA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Boston MA, MA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Boston MA on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.19",
+          "no": "0.87"
+        },
+        "sell": {
+          "yes": "0.13",
+          "no": "0.81"
+        },
+        "bestBid": "0.13",
+        "bestAsk": "0.19"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.159Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "LO62",
+      "instrumentSymbol": "GEMI-WXHIGH-BOS-2611200459-LO62",
+      "marketState": "open",
+      "abbreviatedName": "62\u00b0 or below",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "below",
+        "value": "62"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "477270-1207155",
+      "label": "67\u00b0F to 68\u00b0F",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Boston MA, MA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Boston MA, MA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Boston MA on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.04",
+          "no": "0.99"
+        },
+        "sell": {
+          "yes": "0.01",
+          "no": "0.96"
+        },
+        "bestBid": "0.01",
+        "bestAsk": "0.04"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.159Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "67TO68",
+      "instrumentSymbol": "GEMI-WXHIGH-BOS-2611200459-67TO68",
+      "marketState": "open",
+      "abbreviatedName": "67\u00b0 to 68\u00b0",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 4,
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "477270-1207158",
+      "label": "69\u00b0F to 70\u00b0F",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Boston MA, MA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Boston MA, MA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Boston MA on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.04"
+        },
+        "sell": {
+          "no": "0.96"
+        },
+        "bestAsk": "0.04"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.159Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "69TO70",
+      "instrumentSymbol": "GEMI-WXHIGH-BOS-2611200459-69TO70",
+      "marketState": "open",
+      "abbreviatedName": "69\u00b0 to 70\u00b0",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 5,
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "477270-1207160",
+      "label": "71\u00b0F or above",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market will resolve based on the highest temperature recorded at Boston MA, MA on November 19, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Boston MA, MA.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Boston MA on November 19, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 19, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.01"
+        },
+        "sell": {
+          "no": "0.99"
+        },
+        "bestAsk": "0.01"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T13:59:08.159Z",
+      "termsAndConditionsUrl": "",
+      "ticker": "HI71",
+      "instrumentSymbol": "GEMI-WXHIGH-BOS-2611200459-HI71",
+      "marketState": "open",
+      "abbreviatedName": "71\u00b0 or above",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-20T04:59:59.000Z",
+      "effectiveDate": "2026-11-18T14:59:59.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "above",
+        "value": "71"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T13:59:08.159Z",
+  "isLive": false,
+  "participants": [],
+  "description": "Highest temperature in Boston on November 19, 2026?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Boston_f9814b4f-a53e-401c-99ee-ee4b720c5752.avif",
+  "series": "WXHIGH",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Daily Temperature"
+  ],
+  "expiryDate": "2026-11-20T04:59:59.000Z",
+  "termsLink": "",
+  "subcategory": {
+    "id": 153,
+    "slug": "weather_daily-temperature",
+    "name": "Daily Temperature",
+    "path": [
+      "Weather",
+      "Daily Temperature"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/bos_7a4c9f18-02dc-484d-901d-d94f9e44ae3d.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/bos_54041d70-a805-4619-9511-38d967da7257.avif",
+  "eventTags": [
+    {
+      "id": 20,
+      "name": "Boston",
+      "slug": "boston"
+    }
+  ],
+  "volumeDelta24hPct": "0"
+}

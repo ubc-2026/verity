@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NGAS2611192200-HI3D850",
     "question": "Natural Gas price on November 19?",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:29Z",
+    "analyzed_at_utc": "2026-11-19T05:53:07Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:29Z",
-      "snapshot_hash": "sha256:bf8be25fea98ca26d8f547943f650582557dff0ba5d8db011b9f76543b5f621e",
+      "snapshot_time_utc": "2026-11-19T05:53:07Z",
+      "snapshot_hash": "sha256:19041212d97c8f990d2ba7b37af80a25de93f84b44619f36d306b48dbaf49c60",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:29Z"
+      "observed_time_utc": "2026-11-19T05:53:07Z"
     },
     "scores": {
       "ambiguity": {
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-187199f55226",
-    "contract_id": "GEMI-NGAS2611192200-HI3D850",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-commodity-settlement-version-v1",
-    "catalog_parameters": {
-      "index": "NGAS",
-      "provider": "commodity index",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Commodity index settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:29Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NGAS2611192200-HI3D850] GAP-1: free research unresolved. The terms cite Kaiko (or named commodity index) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/NATGAS1_Terms_and_Conditions_74071889-27c7-4398-9fc7-203097d4d2c2.pdf. Excerpt:  backup Source Agency: a different independent index provider, the official CME settlement price for Natural Gas as published on the CME Group website, or the o",
-    "[GEMI-NGAS2611192200-HI3D850] PROPOSE cat-commodity-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NGAS2611192200-HI3D850] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

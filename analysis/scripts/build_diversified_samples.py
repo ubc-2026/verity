@@ -18,9 +18,9 @@ sys.path.insert(0, str(ROOT))
 from verity.live import analyze_live, fetch_event  # noqa: E402
 from verity.proposals import generate_purchase_request  # noqa: E402
 
-# 50 samples => 40 sports + 10 non-sports  (80/20)
-N_SPORTS = 40
-N_NON_SPORTS = 10
+# 100 samples => 80 sports + 20 non-sports  (80/20)
+N_SPORTS = 80
+N_NON_SPORTS = 20
 
 # Prefer these non-sports anchors when still live (demo-relevant).
 PREFERRED_NON_SPORTS = [
@@ -89,18 +89,33 @@ def sports_family(ticker: str) -> str:
     return head or "OTHER"
 
 
+def _unique(tickers: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for t in tickers:
+        if t in seen:
+            continue
+        seen.add(t)
+        out.append(t)
+    return out
+
+
 def choose_tickers(events: list[dict]) -> tuple[list[str], list[str]]:
     by_ticker = {e.get("ticker"): e for e in events if e.get("ticker")}
-    sports = [
-        e["ticker"]
-        for e in events
-        if e.get("category") == "Sports" and e.get("ticker") and has_tradeable_outcome(e)
-    ]
-    non = [
-        e["ticker"]
-        for e in events
-        if e.get("category") != "Sports" and e.get("ticker") and has_tradeable_outcome(e)
-    ]
+    sports = _unique(
+        [
+            e["ticker"]
+            for e in events
+            if e.get("category") == "Sports" and e.get("ticker") and has_tradeable_outcome(e)
+        ]
+    )
+    non = _unique(
+        [
+            e["ticker"]
+            for e in events
+            if e.get("category") != "Sports" and e.get("ticker") and has_tradeable_outcome(e)
+        ]
+    )
 
     # Prefer demo anchors for the non-sports 20%.
     non_selected: list[str] = []

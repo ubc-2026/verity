@@ -1,0 +1,145 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-NFL-2611221800-BAL-CAR-PPTD-XFLOWERSO0",
+    "event_ticker": "NFL-2611221800-BAL-CAR-PPTD",
+    "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-PPTD-XFLOWERSO0",
+    "question": "Baltimore vs Carolina: Player Touchdowns",
+    "expiry_utc": "2026-11-24T06:00:00.000Z",
+    "analyzed_at_utc": "2026-11-19T05:52:59Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T05:52:59Z",
+      "snapshot_hash": "sha256:32a47f9b7fba6e20849c7d5c18ce6590437079343307fb55567a37bbeb6ccd6d",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "Zay Flowers 1+ Touchdowns scored",
+      "best_bid": "0.26",
+      "best_ask": "0.35",
+      "mid": "0.305",
+      "implied_probability": "0.305",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T05:52:59Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 2,
+        "rationale": "Clear outcome, but numeric band edges decide the outcome.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "event-total volume $0 is under $100 (9c spread).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 8,
+      "raw_total": 8,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-PPTD",
+        "field_or_rule": "event.description",
+        "quote": "Will each player score a touchdown (excluding passing)?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-PPTD",
+        "field_or_rule": "contract.description",
+        "quote": "This market resolves to Yes if Zay Flowers records 1 or more Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Touchdowns recorded by the specified player for the specified game, regardless of position or unit, and excluding any touchdown pass thrown by that player. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports. If the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NFL_Anytime_TD_Scorer_Class_c0c98e8d-a544-4786-8061-5943dd3096d8.pdf)."
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-PPTD",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Terms\n \nand\n \nConditions\n \nRule\n \nText\n \nfor\n \nthe\n \nEvent\n \nContract\n \nSeries\n \n“Will\n \n{player}\n \nscore\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \nTouchdown(s)\n \nin\n \n{NFL\n \ngame}?”\n \n(NFL\n \nGames)\n \n(a)\n \nGeneral\n \n(1)\n \nThese\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \nthe\n \nevent\n \ncontract\n \nseries\n \n“Will\n \n{player}\n \nscore\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \nTouchdown(s)\n \nin\n \n{NFL\n \ngame}?”\n \n(“NFLANYTIMETD1”\n \nor\n \nthe\n \n“Contracts”),\n \napplicable\n \nsolely\n \nto\n \nNFL\n \ngames,\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContracts\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n(2)\n \nThis\n \nRule\n \ndefines\n \na\n \nclass\n \nof\n \nContracts\n \ncertified\n \npursuant\n \nto\n \n17\n \nC.F.R.\n \n§\n \n40.2(d),\n \neach\n \nof\n \nwhich\n \nshares\n \nan\n \nidentical\n \nsettlement\n \nsource,\n \nformula,\n \nprocedure,\n \nand\n \nmethodology\n \nwith\n \nthe\n \nContract\n \nreferenced\n \nin\n \nthe\n \nExchange’s\n \n§\n \n40.2(a)\n \ncertification\n \nof\n \n“Will\n \nTreVeyon\n \nHenderson\n \nscore\n \nat\n \nleast\n \n1\n \nTouchdown\n \nin\n \nthe\n \nNew\n \nEngland\n \nPatriots\n \nat\n \nSeattle\n \nSeahawks\n \ngame\n \non\n \nSeptember\n \n9,\n \n2026?”.\n \n(3)\n \nThe\n \nstatistic\n \nreferenced\n \nby\n \nthis\n \nRule\n \nis\n \nfixed\n \nas\n \ntouchdowns\n \nscored\n \nby\n \na\n \nplayer,\n \nexcluding\n \nany\n \ntouchdown\n \npass\n \nthrown\n \nby\n \nthat\n \nplayer,\n \nregardless\n \nof\n \nposition\n \nor\n \nunit\n \n(offense,\n \ndefense,\n \nor\n \nspecial\n \nteams)\n \nand\n \nregardless\n \nof\n \nwhether\n \nthe\n \nplayer\n \nis\n \nstarting\n \nor\n \nentering\n \nas\n \na\n \nsubstitute.\n \nThis\n \nRule\n \ndoes\n \nnot\n \nadmit\n \nof\n \nvariation\n \nin\n \nthe\n \nunderlying\n \nstatistic;\n \na\n \nseries\n \nreferencing\n \nany\n \nother\n \nstatistic\n \n(including\n \nrushing\n \nyards,\n \nreceiving\n \nyards,\n \npassing\n \nyards,\n \nor\n \npassing\n \ntouchdowns\n \nthrown)\n \nwould\n \nbe\n \ncertified\n \nseparately.\n \n(4)\n \nCapitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nExchange\n \nRulebook.\n \n(b)\n \nUnderlying\n \n(1)\n \nThe\n \nUnderlying\n \nfor\n \neach\n \nContract\n \nis\n \nwhether\n \n{player}\n \nis\n \nofficially\n \ncredited\n \nwith\n \nscoring\n \n{above/below/exactly/at\n \nleast/between}\n \n{count}\n \ntouchdown(s)\n \nduring\n \n{NFL\n \ngame},\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency.\n \nFor\n \npurposes\n \nof\n \nthe\n \nContract,\n \n{player}\n \nis\n \ncredited\n \nwith\n \nscoring\n \na\n \ntouchdown\n \nonly\n \nif\n \n{player}\n \nis\n \nthe\n \nplayer\n \nawarded\n \nthe\n \ntouchdown\n \nin\n \nthe\n \nSource\n \nAgency’s\n \nofficial\n \nstatistics\n \nas\n \nhaving\n \nlegally\n \ngained\n \npossession\n \nof\n \nthe\n \nball\n \nin\n \nthe\n \nend\n \nzone,\n \nor\n \notherwise\n \nsatisfied\n \nthe\n \nNFL’s\n \ntouchdown\n \ncriteria,\n \nwhether\n \non\n \na\n \nrushing\n \nplay,\n \na\n \npassing\n \nplay\n \non\n \nwhich\n \n{player}\n \nis\n \nthe\n \nreceiver,\n \nan\n \ninterception\n \nreturn,\n \na\n \nfumble\n \nreturn,\n \na\n \nblocked-kick\n \nreturn,\n \nor\n \na\n \nkickoff\n \nor\n \npunt\n \nreturn.\n \nA\n \ntouchdown\n \npass\n \nthrown\n \nby\n \n{player},\n \nif\n \nany,\n \nis\n \nnot\n \n\n \ncredited\n \nto\n \n{player}\n \nas\n \na\n \ntouchdown\n \nscored\n \nfor\n \npurposes\n \nof\n \nthe\n \nContract;\n \nonly\n \nthe\n \nreceiver\n \nof\n \nsuch\n \na\n \npass\n \nis\n \ncredited\n \nwith\n \nscoring\n \nthat\n \ntouchdown.\n \nA\n \ntwo-point\n \nconversion,\n \nextra\n \npoint,\n \nor\n \nother\n \ntry\n \nfollowing\n \na\n \ntouchdown\n \nis\n \nnot\n \nitself\n \na\n \ntouchdown\n \nand\n \ndoes\n \nnot\n \ncount\n \ntoward\n \nthe\n \nUnderlying.\n \nThe\n \nUnderlying\n \nreflects\n \nthe\n \ntotal\n \nnumber\n \nof\n \ntouchdowns\n \ncredited\n \nto\n \n{player}\n \nas\n \nthe\n \nscoring\n \nplayer\n \nduring\n \nthe\n \nentirety\n \nof\n \n{NFL\n \ngame},\n \nincluding\n \nany\n \novertime\n \nperiod.\n \nRevisions\n \nto\n \nthe\n \nUnderlying\n \nmade\n \nafter\n \nExpiration\n \nwill\n \nnot\n \nbe\n \naccounted\n \nfor\n \nin\n \ndetermining\n \nthe\n \nExpiration\n \nValue.\n \n(2)\n \nCash-settled\n \nContracts\n \nare\n \navailable\n \nfor\n \nany\n \n{player}\n \nand\n \n{NFL\n \ngame}\n \nlisted\n \nby\n \nthe\n \nExchange,\n \nprovided\n \n{player}\n \nis\n \non\n \nthe\n \nactive\n \nroster\n \nof\n \none\n \nof\n \nthe\n \nparticipating\n \nteams\n \nin\n \n{NFL\n \ngame}\n \nand\n \nappears\n \nin\n \n{NFL\n \ngame}\n \nin\n \nany\n \ncapacity\n \nor\n \nposition,\n \nwhether\n \nas\n \na\n \nstarter\n \nor\n \nas\n \na\n \nsubstitute,\n \nas\n \nreflected\n \nin\n \nthe\n \nofficial\n \ngame\n \nstatistics\n \nmaintained\n \nby\n \nthe\n \nSource\n \nAgency,\n \nand\n \n{NFL\n \ngame}\n \nis\n \na\n \nregular-season\n \nor\n \npostseason\n \ngame\n \nof\n \nthe\n \nNational\n \nFootball\n \nLeague\n \n(collectively,\n \nthe\n \n“Contracts”).\n \n(3)\n \nThe\n \nSource\n \nAgency\n \nis\n \nNFL.com\n \nand\n \nthe\n \nNFL’s\n \nofficial\n \nGame\n \nStatistics\n \nand\n \nInformation\n \nSystem\n \n(“GSIS”).\n \nIf\n \nthe\n \nSource\n \nAgency\n \nis\n \nnot\n \navailable,\n \nthe\n \nExchange\n \nmay\n \nuse\n \nthe\n \nfollowing,\n \nin\n \nhierarchical\n \norder,\n \nas\n \na\n \nbackup:\n \n(i)\n \nESPN\n \nand\n \n(ii)\n \nNBC,\n \nCBS,\n \nFOX,\n \nAmazon\n \nPrime\n \nVideo,\n \nPeacock,\n \nNetflix,\n \nor\n \nthe\n \nofficial\n \nbroadcast\n \nor\n \nstreaming\n \npartner\n \nof\n \n{NFL\n \ngame}.\n \nThis\n \nSource\n \nAgency\n \nhierarchy\n \nis\n \nidentical\n \nto\n \nthe\n \nhierarchy\n \ncertified\n \nin\n \nthe\n \nReferenced\n \nContract.\n \n(4)\n \nThe\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n \n(c)\n \nIssuance\n \n(1)\n \nContract\n \niterations\n \nwill\n \nbe\n \nissued\n \non\n \na\n \nrecurring\n \nbasis\n \non\n \nthe\n \nfollowing\n \nparameters:\n \n(i)\n \n{player}\n \nrefers\n \nto\n \nan\n \nindividual\n \nplayer\n \nwho\n \nappears\n \nin\n \n{NFL\n \ngame}\n \nfor\n \none\n \nof\n \nthe\n \nparticipating\n \nteams,\n \nin\n \nany\n \ncapacity\n \nor\n \nposition,\n \nwhether\n \nas\n \na\n \nstarter\n \nor\n \nas\n \na\n \nsubstitute,\n \nas\n \nidentified\n \nby\n \nthe\n \nExchange;\n \n(ii)\n \n{above/below/exactly/at\n \nleast/between}\n \nrefers\n \nto\n \ncomparison\n \noperators,\n \nas\n \ndefined\n \nin\n \nthe\n \nReferenced\n \nContract;\n \n(iii)\n \n{count}\n \nrefers\n \nto\n \na\n \nnumerical\n \nthreshold\n \nspecified\n \nby\n \nthe\n \nExchange,\n \nwhich\n \nmay\n \ninclude\n \nwhole\n \nor\n \nhalf\n \nnumbers\n \nor\n \n0;\n \nand\n \n(iv)\n \n{NFL\n \ngame}\n \nrefers\n \nto\n \na\n \nscheduled\n \nNFL\n \nregular-season\n \nor\n \npostseason\n \ngame\n \nidentified\n \nby\n \nthe\n \nExchange\n \nat\n \nthe\n \ntime\n \nof\n \nlisting.\n \n(2)\n \nThe\n \nExchange\n \nwill\n \nidentify\n \nthe\n"
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-BAL-CAR-PPTD",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.26, bestAsk 0.35; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "sports-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": null,
+  "decision_log": [
+    "[GEMI-NFL-2611221800-BAL-CAR-PPTD-XFLOWERSO0] no purchase: rating is Medium; research buys are limited to High-risk markets."
+  ]
+}

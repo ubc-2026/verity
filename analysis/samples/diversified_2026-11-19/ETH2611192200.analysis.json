@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-ETH2611192200-HI1800",
     "question": "ETH price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:26Z",
+    "analyzed_at_utc": "2026-11-19T05:53:05Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:26Z",
-      "snapshot_hash": "sha256:cac4b6f9e2fbf04f7e7c02298e08dd30e3e1cb4ec077850243ecce1a86dd74f9",
+      "snapshot_time_utc": "2026-11-19T05:53:05Z",
+      "snapshot_hash": "sha256:90399bb5faee2953864c7458fb0fe283d25fa6aaf20a6a1e946d6c458f42464c",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "96.6",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:26Z"
+      "observed_time_utc": "2026-11-19T05:53:05Z"
     },
     "scores": {
       "ambiguity": {
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-30621917c396",
-    "contract_id": "GEMI-ETH2611192200-HI1800",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-crypto-settlement-version-v1",
-    "catalog_parameters": {
-      "asset": "ETH",
-      "provider": "crypto reference rate",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Lukka (or named crypto reference rate) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Crypto reference-rate settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:26Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-ETH2611192200-HI1800] GAP-1: free research unresolved. The terms cite Lukka (or named crypto reference rate) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/eth_9eb0f142-3d78-49f4-8313-23c321836e79.pdf. Excerpt:  (d) Contract Size (1) Each ETH1 has a notional size of one dollar ($1.00). (e) Settlement and Expiration (1) Payout Criterion for the Contract encompasses the ",
-    "[GEMI-ETH2611192200-HI1800] PROPOSE cat-crypto-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-ETH2611192200-HI1800] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

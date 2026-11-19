@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9",
     "question": "Baltimore vs Carolina: 1st Half Point Spread",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:18Z",
+    "analyzed_at_utc": "2026-11-19T05:52:30Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:18Z",
-      "snapshot_hash": "sha256:d47c32e8e2598623114ece99462355611b9b0b289a5d9eb7d5a5665335ea7a29",
+      "snapshot_time_utc": "2026-11-19T05:52:30Z",
+      "snapshot_hash": "sha256:e24ea1cd489476e436463ce7ee9ba70de680915463314da3e62d20396c60af9f",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:18Z"
+      "observed_time_utc": "2026-11-19T05:52:30Z"
     },
     "scores": {
       "ambiguity": {
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-b51631b3fdec",
-    "contract_id": "GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-sports-settlement-version-v1",
-    "catalog_parameters": {
-      "league": "NFL",
-      "provider": "sports data provider",
-      "event": "NFL-2611221800-BAL-CAR-1HS"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:18Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/TC_-_NFL_Period_Spread_c21fa9d6-31eb-42c4-9b16-30c420003993.pdf. Excerpt: ts certified pursuant to 17 C.F.R. § 40.2(d), each of which shares an identical settlement source, formula, procedure, and methodology with the Contract referen",
-    "[GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NFL-2611221800-BAL-CAR-1HS-CAR9] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

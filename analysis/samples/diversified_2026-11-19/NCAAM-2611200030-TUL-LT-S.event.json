@@ -1,0 +1,559 @@
+{
+  "id": "478432",
+  "title": "Tulane vs Louisiana Tech: Point Spread",
+  "slug": "tulane-vs-louisiana-tech-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAM-2611200030-TUL-LT-S",
+  "status": "active",
+  "createdAt": "2026-11-18T22:11:34.485Z",
+  "contracts": [
+    {
+      "id": "478432-1212871",
+      "label": "Tulane wins by more than 1.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Tulane in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Tulane's score minus Louisiana Tech's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.54",
+          "no": "0.56"
+        },
+        "sell": {
+          "yes": "0.44",
+          "no": "0.46"
+        },
+        "bestBid": "0.44",
+        "bestAsk": "0.54"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TUL1",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL1",
+      "marketState": "open",
+      "abbreviatedName": "Tulane",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tulane_Green_WaveDark_ec0d5847-ceae-41b9-bb92-32762d46234c.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212875",
+      "label": "Louisiana Tech wins by more than 1.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Louisiana Tech in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 1.5. Otherwise, it resolves to No. The Underlying is the score differential (Louisiana Tech's score minus Tulane's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.49",
+          "no": "0.59"
+        },
+        "sell": {
+          "yes": "0.41",
+          "no": "0.51"
+        },
+        "bestBid": "0.41",
+        "bestAsk": "0.49"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "LT1",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-LT1",
+      "marketState": "open",
+      "abbreviatedName": "Louisiana Tech",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Louisiana_Tech_BulldogsDark_0fb0153b-b848-4c74-9d1b-7f8742b9cf0f.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 2,
+      "strike": {
+        "type": "spread",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212880",
+      "label": "Louisiana Tech wins by more than 15.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Louisiana Tech in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 15.5. Otherwise, it resolves to No. The Underlying is the score differential (Louisiana Tech's score minus Tulane's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.22"
+        },
+        "sell": {
+          "no": "0.78"
+        },
+        "bestAsk": "0.22"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "LT15",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-LT15",
+      "marketState": "open",
+      "abbreviatedName": "Louisiana Tech",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Louisiana_Tech_BulldogsDark_0fb0153b-b848-4c74-9d1b-7f8742b9cf0f.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 4,
+      "strike": {
+        "type": "spread",
+        "value": "15.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212882",
+      "label": "Louisiana Tech wins by more than 20.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Louisiana Tech in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 20.5. Otherwise, it resolves to No. The Underlying is the score differential (Louisiana Tech's score minus Tulane's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.21"
+        },
+        "sell": {
+          "no": "0.79"
+        },
+        "bestAsk": "0.21"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "LT20",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-LT20",
+      "marketState": "open",
+      "abbreviatedName": "Louisiana Tech",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Louisiana_Tech_BulldogsDark_0fb0153b-b848-4c74-9d1b-7f8742b9cf0f.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 5,
+      "strike": {
+        "type": "spread",
+        "value": "20.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212873",
+      "label": "Louisiana Tech wins by more than 10.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Louisiana Tech in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 10.5. Otherwise, it resolves to No. The Underlying is the score differential (Louisiana Tech's score minus Tulane's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.95"
+        },
+        "sell": {
+          "yes": "0.05"
+        },
+        "bestBid": "0.05"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "LT10",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-LT10",
+      "marketState": "open",
+      "abbreviatedName": "Louisiana Tech",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Louisiana_Tech_BulldogsDark_0fb0153b-b848-4c74-9d1b-7f8742b9cf0f.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 1,
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212878",
+      "label": "Tulane wins by more than 23.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Tulane in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 23.5. Otherwise, it resolves to No. The Underlying is the score differential (Tulane's score minus Louisiana Tech's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TUL23",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL23",
+      "marketState": "open",
+      "abbreviatedName": "Tulane",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tulane_Green_WaveDark_ec0d5847-ceae-41b9-bb92-32762d46234c.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 3,
+      "strike": {
+        "type": "spread",
+        "value": "23.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212884",
+      "label": "Tulane wins by more than 4.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Tulane in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 4.5. Otherwise, it resolves to No. The Underlying is the score differential (Tulane's score minus Louisiana Tech's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TUL4",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL4",
+      "marketState": "open",
+      "abbreviatedName": "Tulane",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tulane_Green_WaveDark_ec0d5847-ceae-41b9-bb92-32762d46234c.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 6,
+      "strike": {
+        "type": "spread",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212886",
+      "label": "Louisiana Tech wins by more than 5.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Louisiana Tech in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 5.5. Otherwise, it resolves to No. The Underlying is the score differential (Louisiana Tech's score minus Tulane's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "LT5",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-LT5",
+      "marketState": "open",
+      "abbreviatedName": "Louisiana Tech",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Louisiana_Tech_BulldogsDark_0fb0153b-b848-4c74-9d1b-7f8742b9cf0f.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 7,
+      "strike": {
+        "type": "spread",
+        "value": "5.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1212986",
+      "label": "Tulane wins by more than 8.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Tulane in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 8.5. Otherwise, it resolves to No. The Underlying is the score differential (Tulane's score minus Louisiana Tech's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TUL8",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL8",
+      "marketState": "open",
+      "abbreviatedName": "Tulane",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tulane_Green_WaveDark_ec0d5847-ceae-41b9-bb92-32762d46234c.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 9,
+      "strike": {
+        "type": "spread",
+        "value": "8.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1213675",
+      "label": "Tulane wins by more than 13.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Tulane in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 13.5. Otherwise, it resolves to No. The Underlying is the score differential (Tulane's score minus Louisiana Tech's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TUL13",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL13",
+      "marketState": "open",
+      "abbreviatedName": "Tulane",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tulane_Green_WaveDark_ec0d5847-ceae-41b9-bb92-32762d46234c.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 8,
+      "strike": {
+        "type": "spread",
+        "value": "13.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "478432-1214198",
+      "label": "Tulane wins by more than 18.5 points",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if the score differential recorded in favor of Tulane in the entire men's college basketball game between Tulane and Louisiana Tech scheduled for 2026-11-19 at 6:30 p.m. CT is above 18.5. Otherwise, it resolves to No. The Underlying is the score differential (Tulane's score minus Louisiana Tech's score) for the specified game. Source Agencies, in order, are the league governing the event (NCAA), ESPN, Fox Sports, and the official broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T22:11:34.485Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "ticker": "TUL18",
+      "instrumentSymbol": "GEMI-NCAAM-2611200030-TUL-LT-S-TUL18",
+      "marketState": "open",
+      "abbreviatedName": "Tulane",
+      "color": "#0f9ee7",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Tulane_Green_WaveDark_ec0d5847-ceae-41b9-bb92-32762d46234c.png",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-18T00:00:14.000Z",
+      "sortOrder": 10,
+      "strike": {
+        "type": "spread",
+        "value": "18.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T22:11:34.485Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "671",
+      "name": "Louisiana Tech Bulldogs",
+      "abbreviation": "LT",
+      "side": "home"
+    },
+    {
+      "id": "805",
+      "name": "Tulane Green Wave",
+      "abbreviation": "TUL",
+      "side": "away"
+    }
+  ],
+  "description": "What will the point difference be?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Basketball"
+  ],
+  "expiryDate": "2026-11-22T00:30:00.000Z",
+  "startTime": "2026-11-20T00:30:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+  "subcategory": {
+    "id": 15,
+    "slug": "sports_basketball_college-basketball",
+    "name": "College Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "College Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-spread",
+  "gameId": "d4133bbe-fc24-4f2a-81af-87cbcc2e85fa",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "points"
+  }
+}

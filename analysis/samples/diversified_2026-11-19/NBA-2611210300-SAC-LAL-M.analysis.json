@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NBA-2611210300-SAC-LAL-M-SAC",
     "question": "Sacramento vs Los Angeles L",
     "expiry_utc": "2026-11-22T15:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:10Z",
+    "analyzed_at_utc": "2026-11-19T05:52:04Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:10Z",
-      "snapshot_hash": "sha256:3e5f073b0631a424d96cbda6ad85c62839052b2b4aadb85899944d68fc8c7997",
+      "snapshot_time_utc": "2026-11-19T05:52:04Z",
+      "snapshot_hash": "sha256:2128305aeb0e7a8abf80651e7691446a884d1bd1c89581c9a35699b2ff641867",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Sacramento",
-      "best_bid": "0.11",
-      "best_ask": "0.12",
-      "mid": "0.115",
-      "implied_probability": "0.115",
+      "best_bid": "0.12",
+      "best_ask": "0.14",
+      "mid": "0.13",
+      "implied_probability": "0.13",
       "volume_usd": "46.23",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:10Z"
+      "observed_time_utc": "2026-11-19T05:52:04Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $46.23 is under $100 (1c spread).",
+        "rationale": "event-total volume $46.23 is under $100 (2c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NBA-2611210300-SAC-LAL-M",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.11, bestAsk 0.12; event volume 46.23"
+        "quote": "bestBid 0.12, bestAsk 0.14; event volume 46.23"
       }
     ],
     "evidence_gaps": [
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-b63b03898b5a",
-    "contract_id": "GEMI-NBA-2611210300-SAC-LAL-M-SAC",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-sports-settlement-version-v1",
-    "catalog_parameters": {
-      "league": "NBA",
-      "provider": "sports data provider",
-      "event": "NBA-2611210300-SAC-LAL-M"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:10Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NBA-2611210300-SAC-LAL-M-SAC] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf. Excerpt: ts certified pursuant to 17 C.F.R. § 40.2(d), each of which shares an identical settlement source, formula, procedure, and methodology with the contract (the “R",
-    "[GEMI-NBA-2611210300-SAC-LAL-M-SAC] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NBA-2611210300-SAC-LAL-M-SAC] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

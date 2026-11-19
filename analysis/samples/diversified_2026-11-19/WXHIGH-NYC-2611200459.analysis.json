@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-NYC-2611200459-65TO66",
     "question": "Highest temperature in NYC on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:23Z",
+    "analyzed_at_utc": "2026-11-19T05:53:02Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:23Z",
-      "snapshot_hash": "sha256:1b78030e2bf629de504e3d5e14ad66d65557a428dad8bb33521938fec1565be1",
+      "snapshot_time_utc": "2026-11-19T05:53:02Z",
+      "snapshot_hash": "sha256:2550f076177b300291750374ab1fb0e2251b4cc31eeb78f11c0d6937e311ec9c",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "65°F to 66°F",
-      "best_bid": "0.4",
-      "best_ask": "0.44",
-      "mid": "0.42",
-      "implied_probability": "0.42",
+      "best_bid": "0.39",
+      "best_ask": "0.48",
+      "mid": "0.435",
+      "implied_probability": "0.435",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:23Z"
+      "observed_time_utc": "2026-11-19T05:53:02Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "rationale": "event-total volume $0 is under $100 (9c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-NYC-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.4, bestAsk 0.44; event volume 0"
+        "quote": "bestBid 0.39, bestAsk 0.48; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -139,26 +139,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-9fdfc0bb87d9",
-    "contract_id": "GEMI-WXHIGH-NYC-2611200459-65TO66",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-nws-cli-settlement-version-v1",
-    "catalog_parameters": {
-      "station": "Central Park, NY (CLINYC)",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:23Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WXHIGH-NYC-2611200459-65TO66] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=OKX&product=CLI&issuedby=NYC&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
-    "[GEMI-WXHIGH-NYC-2611200459-65TO66] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-WXHIGH-NYC-2611200459-65TO66] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

@@ -938,13 +938,13 @@
       "prices": {
         "buy": {
           "yes": "0.68",
-          "no": "0.51"
+          "no": "0.47"
         },
         "sell": {
-          "yes": "0.49",
+          "yes": "0.53",
           "no": "0.32"
         },
-        "bestBid": "0.49",
+        "bestBid": "0.53",
         "bestAsk": "0.68"
       },
       "status": "active",
@@ -1434,6 +1434,63 @@
       }
     },
     {
+      "id": "476104-1204076",
+      "label": "Travis Kelce 40+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Travis Kelce records 40 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.57",
+          "no": "0.57"
+        },
+        "sell": {
+          "yes": "0.43",
+          "no": "0.43"
+        },
+        "bestBid": "0.43",
+        "bestAsk": "0.57"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "KELCEO39",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO39",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 69,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "39.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Travis Kelce",
+        "externalIds": {
+          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
+        }
+      }
+    },
+    {
       "id": "476104-1200789",
       "label": "Simi Fehoko 15+ Receiving Yards",
       "description": {
@@ -1487,63 +1544,6 @@
         "name": "Simi Fehoko",
         "externalIds": {
           "sportradar": "3860693c-99a2-4484-99db-1d43e3ff7fd4"
-        }
-      }
-    },
-    {
-      "id": "476104-1204076",
-      "label": "Travis Kelce 40+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Travis Kelce records 40 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.56",
-          "no": "0.57"
-        },
-        "sell": {
-          "yes": "0.43",
-          "no": "0.44"
-        },
-        "bestBid": "0.43",
-        "bestAsk": "0.56"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "KELCEO39",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO39",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 69,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "39.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Travis Kelce",
-        "externalIds": {
-          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
         }
       }
     },
@@ -1622,13 +1622,13 @@
       "prices": {
         "buy": {
           "yes": "0.53",
-          "no": "0.55"
+          "no": "0.54"
         },
         "sell": {
-          "yes": "0.45",
+          "yes": "0.46",
           "no": "0.47"
         },
-        "bestBid": "0.45",
+        "bestBid": "0.46",
         "bestAsk": "0.53"
       },
       "status": "active",
@@ -2306,13 +2306,13 @@
       "prices": {
         "buy": {
           "yes": "0.42",
-          "no": "0.79"
+          "no": "0.73"
         },
         "sell": {
-          "yes": "0.21",
+          "yes": "0.27",
           "no": "0.58"
         },
-        "bestBid": "0.21",
+        "bestBid": "0.27",
         "bestAsk": "0.42"
       },
       "status": "active",
@@ -3047,13 +3047,13 @@
       "prices": {
         "buy": {
           "yes": "0.33",
-          "no": "0.81"
+          "no": "0.8"
         },
         "sell": {
-          "yes": "0.19",
+          "yes": "0.2",
           "no": "0.67"
         },
-        "bestBid": "0.19",
+        "bestBid": "0.2",
         "bestAsk": "0.33"
       },
       "status": "active",
@@ -3275,13 +3275,13 @@
       "prices": {
         "buy": {
           "yes": "0.29",
-          "no": "0.89"
+          "no": "0.87"
         },
         "sell": {
-          "yes": "0.11",
+          "yes": "0.13",
           "no": "0.71"
         },
-        "bestBid": "0.11",
+        "bestBid": "0.13",
         "bestAsk": "0.29"
       },
       "status": "active",
@@ -3446,13 +3446,13 @@
       "prices": {
         "buy": {
           "yes": "0.27",
-          "no": "0.89"
+          "no": "0.88"
         },
         "sell": {
-          "yes": "0.11",
+          "yes": "0.12",
           "no": "0.73"
         },
-        "bestBid": "0.11",
+        "bestBid": "0.12",
         "bestAsk": "0.27"
       },
       "status": "active",
@@ -3674,13 +3674,13 @@
       "prices": {
         "buy": {
           "yes": "0.24",
-          "no": "0.9"
+          "no": "0.92"
         },
         "sell": {
-          "yes": "0.1",
+          "yes": "0.08",
           "no": "0.76"
         },
-        "bestBid": "0.1",
+        "bestBid": "0.08",
         "bestAsk": "0.24"
       },
       "status": "active",
@@ -4072,11 +4072,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.21"
+          "yes": "0.21",
+          "no": "0.94"
         },
         "sell": {
+          "yes": "0.06",
           "no": "0.79"
         },
+        "bestBid": "0.06",
         "bestAsk": "0.21"
       },
       "status": "active",
@@ -4126,14 +4129,11 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.21",
-          "no": "0.96"
+          "yes": "0.21"
         },
         "sell": {
-          "yes": "0.04",
           "no": "0.79"
         },
-        "bestBid": "0.04",
         "bestAsk": "0.21"
       },
       "status": "active",
@@ -4183,11 +4183,14 @@
       },
       "prices": {
         "buy": {
-          "yes": "0.19"
+          "yes": "0.19",
+          "no": "0.96"
         },
         "sell": {
+          "yes": "0.04",
           "no": "0.81"
         },
+        "bestBid": "0.04",
         "bestAsk": "0.19"
       },
       "status": "active",
@@ -4947,6 +4950,60 @@
       }
     },
     {
+      "id": "476104-1204086",
+      "label": "Travis Kelce 100+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Travis Kelce records 100 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.14"
+        },
+        "sell": {
+          "no": "0.86"
+        },
+        "bestAsk": "0.14"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "KELCEO99",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO99",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 75,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "99.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Travis Kelce",
+        "externalIds": {
+          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
+        }
+      }
+    },
+    {
       "id": "476104-1206042",
       "label": "Reggie Virgil 60+ Receiving Yards",
       "description": {
@@ -5271,60 +5328,6 @@
       }
     },
     {
-      "id": "476104-1204086",
-      "label": "Travis Kelce 100+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Travis Kelce records 100 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.12"
-        },
-        "sell": {
-          "no": "0.88"
-        },
-        "bestAsk": "0.12"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "KELCEO99",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO99",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 75,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "99.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Travis Kelce",
-        "externalIds": {
-          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
-        }
-      }
-    },
-    {
       "id": "476104-1206033",
       "label": "Devin Duvernay 60+ Receiving Yards",
       "description": {
@@ -5429,60 +5432,6 @@
         "name": "Xavier Worthy",
         "externalIds": {
           "sportradar": "52e049b1-0a7a-4e7f-9866-d2848e9cc478"
-        }
-      }
-    },
-    {
-      "id": "476104-1204087",
-      "label": "Travis Kelce 110+ Receiving Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Travis Kelce records 110 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.11"
-        },
-        "sell": {
-          "no": "0.89"
-        },
-        "bestAsk": "0.11"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T03:22:48.733Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
-      "ticker": "KELCEO109",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO109",
-      "marketState": "open",
-      "color": "#E31837",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 76,
-      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
-      "strike": {
-        "type": "over",
-        "value": "109.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Travis Kelce",
-        "externalIds": {
-          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
         }
       }
     },
@@ -5743,6 +5692,55 @@
         "name": "Tyler Allgeier",
         "externalIds": {
           "sportradar": "f4529909-1a02-4f4b-a1f3-315cad100683"
+        }
+      }
+    },
+    {
+      "id": "476104-1204087",
+      "label": "Travis Kelce 110+ Receiving Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Travis Kelce records 110 or more Receiving Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Receiving Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Receiving Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T03:22:48.733Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Receiving_Yards_fbe8c34e-0c64-4f42-baa9-403d4ced168c.pdf",
+      "ticker": "KELCEO109",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPRECY-KELCEO109",
+      "marketState": "open",
+      "color": "#E31837",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Kansas_City_ChiefsDark_da847ac3-f318-4350-ad32-73161e1948ec.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 76,
+      "teamId": "6680d28d-d4d2-49f6-aace-5292d3ec02c2",
+      "strike": {
+        "type": "over",
+        "value": "109.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Travis Kelce",
+        "externalIds": {
+          "sportradar": "c3859e06-5f23-4302-a71b-04820a899d5f"
         }
       }
     }

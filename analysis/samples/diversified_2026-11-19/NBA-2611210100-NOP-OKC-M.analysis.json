@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-NBA-2611210100-NOP-OKC-M-NOP",
     "question": "New Orleans vs Oklahoma City",
     "expiry_utc": "2026-11-22T13:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:15Z",
+    "analyzed_at_utc": "2026-11-19T05:52:07Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:15Z",
-      "snapshot_hash": "sha256:a3db728f6692c8e9e72209e6011f9e17bf0deeab0ddeed6c590927e343759c96",
+      "snapshot_time_utc": "2026-11-19T05:52:07Z",
+      "snapshot_hash": "sha256:d28ebc7b624d9112cb2a5455623a73b86e83114e2fb78af2eb1c4ba375b98113",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "5.52",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:15Z"
+      "observed_time_utc": "2026-11-19T05:52:07Z"
     },
     "scores": {
       "ambiguity": {
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-551cbdcac8bd",
-    "contract_id": "GEMI-NBA-2611210100-NOP-OKC-M-NOP",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-sports-settlement-version-v1",
-    "catalog_parameters": {
-      "league": "NBA",
-      "provider": "sports data provider",
-      "event": "NBA-2611210100-NOP-OKC-M"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:15Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NBA-2611210100-NOP-OKC-M-NOP] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf. Excerpt: ts certified pursuant to 17 C.F.R. § 40.2(d), each of which shares an identical settlement source, formula, procedure, and methodology with the contract (the “R",
-    "[GEMI-NBA-2611210100-NOP-OKC-M-NOP] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NBA-2611210100-NOP-OKC-M-NOP] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

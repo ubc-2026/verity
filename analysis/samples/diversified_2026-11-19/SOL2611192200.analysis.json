@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-SOL2611192200-HI76",
     "question": "SOL price on November 19",
     "expiry_utc": "2026-11-19T22:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:28Z",
+    "analyzed_at_utc": "2026-11-19T05:53:06Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:28Z",
-      "snapshot_hash": "sha256:029326c01a703ed2d084c4b02917dc49141a6bc618ae7d86b4d23df3ce906a78",
+      "snapshot_time_utc": "2026-11-19T05:53:06Z",
+      "snapshot_hash": "sha256:cf3bcfd28066d195b3a70100ae81073430c683b8413321ca45244ec88f5bf8d5",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "$76 or above",
-      "best_bid": "0.21",
+      "best_bid": "0.2",
       "best_ask": "0.26",
-      "mid": "0.235",
-      "implied_probability": "0.235",
+      "mid": "0.23",
+      "implied_probability": "0.23",
       "volume_usd": "1436",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:28Z"
+      "observed_time_utc": "2026-11-19T05:53:06Z"
     },
     "scores": {
       "ambiguity": {
@@ -48,8 +48,8 @@
         ]
       },
       "liquidity": {
-        "score": 2,
-        "rationale": "event-total volume $1436, 5c spread.",
+        "score": 3,
+        "rationale": "6c spread is over 5c.",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -68,16 +68,22 @@
     },
     "rating": {
       "complete": true,
-      "known_total": 7,
-      "raw_total": 7,
+      "known_total": 8,
+      "raw_total": 8,
       "raw_rating": "Medium",
       "rating_floor": null,
       "final_rating": "Medium",
       "possible_range": null,
-      "overrides": []
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
     },
     "research_action": "investigate",
-    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
     "citations": [
       {
         "id": "C-EVENT",
@@ -101,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/SOL2611192200",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.21, bestAsk 0.26; event volume 1436"
+        "quote": "bestBid 0.2, bestAsk 0.26; event volume 1436"
       }
     ],
     "evidence_gaps": [
@@ -132,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-fd1743b948ca",
-    "contract_id": "GEMI-SOL2611192200-HI76",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-crypto-settlement-version-v1",
-    "catalog_parameters": {
-      "asset": "SOL",
-      "provider": "crypto reference rate",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite Lukka (or named crypto reference rate) settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Crypto reference-rate settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:28Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-SOL2611192200-HI76] GAP-1: free research unresolved. The terms cite Lukka (or named crypto reference rate) settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/sol_9cceb1a1-4177-401a-82dc-097ad2676bc2.pdf. Excerpt:  (d) Contract Size (1) Each SOL1 has a notional size of one dollar ($1.00). (e) Settlement and Expiration (1) Payout Criterion for the Contract encompasses the ",
-    "[GEMI-SOL2611192200-HI76] PROPOSE cat-crypto-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-SOL2611192200-HI76] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

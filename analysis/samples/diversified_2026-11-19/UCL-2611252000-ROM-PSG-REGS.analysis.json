@@ -6,13 +6,13 @@
     "instrument_symbol": "GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2",
     "question": "Roma vs PSG: Point Spread",
     "expiry_utc": "2026-11-27T08:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:00Z",
+    "analyzed_at_utc": "2026-11-19T05:52:10Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:00Z",
-      "snapshot_hash": "sha256:9c9056406d15103adc9c7aefba402c5017a4723c7f0a2ae88003d459b902e403",
+      "snapshot_time_utc": "2026-11-19T05:52:10Z",
+      "snapshot_hash": "sha256:aa79f40ab9ac39e435bcb17b0262d8b0623f6bcd034f5f26cf56ab6ec2e239ad",
       "hash_alg": "sha256"
     },
     "quoted_price": {
@@ -24,7 +24,7 @@
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:00Z"
+      "observed_time_utc": "2026-11-19T05:52:10Z"
     },
     "scores": {
       "ambiguity": {
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-5081eae62cc4",
-    "contract_id": "GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-sports-settlement-version-v1",
-    "catalog_parameters": {
-      "league": "UCL",
-      "provider": "sports data provider",
-      "event": "UCL-2611252000-ROM-PSG-REGS"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:00Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Sporting_Score_Differential_Terms_and_Conditions_4804aecd-e4af-49cf-af57-0c1ba4d4f94d.pdf. Excerpt: iration will not be accounted for in determining the Expiration Value. (2) Cash-settled SPORTSSPREAD1 Contracts are available for any {team/player} listed by th",
-    "[GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-UCL-2611252000-ROM-PSG-REGS-PSG2] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

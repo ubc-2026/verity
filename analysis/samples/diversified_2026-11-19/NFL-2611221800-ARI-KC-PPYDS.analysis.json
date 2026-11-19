@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299",
     "question": "Arizona vs Kansas City: Quarterback Passing Yards",
     "expiry_utc": "2026-11-24T06:00:00.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:14Z",
+    "analyzed_at_utc": "2026-11-19T05:52:23Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:14Z",
-      "snapshot_hash": "sha256:4a255c3695490e833c0bbffc28da243b9f906440f2a3213db6530e131f42de28",
+      "snapshot_time_utc": "2026-11-19T05:52:23Z",
+      "snapshot_hash": "sha256:361c0bb42255ef5be9ff1b1368d7d23888cdd31c5d274efad588823499addd66",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "Patrick Mahomes 300+ Passing Yards",
-      "best_bid": "0.16",
+      "best_bid": "0.09",
       "best_ask": "0.31",
-      "mid": "0.235",
-      "implied_probability": "0.235",
+      "mid": "0.20",
+      "implied_probability": "0.20",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:14Z"
+      "observed_time_utc": "2026-11-19T05:52:23Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (15c spread).",
+        "rationale": "event-total volume $0 is under $100 (22c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/NFL-2611221800-ARI-KC-PPYDS",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.16, bestAsk 0.31; event volume 0"
+        "quote": "bestBid 0.09, bestAsk 0.31; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -138,27 +138,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-ad5475dc042f",
-    "contract_id": "GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-sports-settlement-version-v1",
-    "catalog_parameters": {
-      "league": "NFL",
-      "provider": "sports data provider",
-      "event": "NFL-2611221800-ARI-KC-PPYDS"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Catalog item 'Sports settlement-version pack' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:14Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299] GAP-1: free research unresolved. The terms cite StatsScore / Sportradar / league official result settlement data and do not name which preliminary, final, or corrected issuance controls. Sources: https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf. Excerpt: ts certified pursuant to 17 C.F.R. § 40.2(d), each of which shares an identical settlement source, formula, procedure, and methodology with the Contract referen",
-    "[GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299] PROPOSE cat-sports-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-NFL-2611221800-ARI-KC-PPYDS-MAHOMESO299] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

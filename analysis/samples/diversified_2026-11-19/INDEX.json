@@ -1,8 +1,8 @@
 {
   "mix": {
     "target": "80% sports / 20% non-sports (follow live Gemini board)",
-    "sports": 40,
-    "non_sports": 10,
+    "sports": 80,
+    "non_sports": 20,
     "sports_pct": 80.0,
     "non_sports_pct": 20.0
   },
@@ -42,14 +42,14 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
-      "ticker": "NBA-2611190230-BOS-DEN-S",
+      "ticker": "NBA-2611210230-PHX-UTA-M",
       "category": "Sports",
-      "title": "Boston vs Denver: Point Spread",
-      "outcome": "Denver wins by more than 2.5 points",
+      "title": "Phoenix vs Utah",
+      "outcome": "Utah",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -61,8 +61,8 @@
         "liquidity": 2,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "NCAAF-2611211700-TAM-OU-M",
@@ -118,8 +118,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "UCL-2611251745-VIL-SLA-REGS",
@@ -137,8 +137,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "LIGAMX-2611210300-ATL-TIJ-M",
@@ -175,14 +175,14 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
-      "ticker": "NBA-2611190300-UTA-LAL-T",
+      "ticker": "NBA-2611210300-SAC-LAL-M",
       "category": "Sports",
-      "title": "Utah vs Los Angeles L: Total Points",
-      "outcome": "More than 227.5 points scored",
+      "title": "Sacramento vs Los Angeles L",
+      "outcome": "Sacramento",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -194,8 +194,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "NCAAF-2611202300-ISU-UCF-1QS",
@@ -213,8 +213,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "NCAAM-2611210000-CMU-PITT-M",
@@ -251,8 +251,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "UCL-2611251745-VIL-SLA-REGT",
@@ -270,388 +270,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NBA-2611190230-BOS-DEN-T",
-      "category": "Sports",
-      "title": "Boston vs Denver: Total Points",
-      "outcome": "More than 218.5 points scored",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "no_further_research",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 2,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAF-2611202300-ISU-UCF-1QT",
-      "category": "Sports",
-      "title": "Iowa State vs UCF: 1st Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 1st quarter",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Am. football"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAM-2611190300-ULL-SF-T",
-      "category": "Sports",
-      "title": "Louisiana vs San Francisco: Total Points",
-      "outcome": "More than 133.5 points scored",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NFL-2611221800-ARI-KC-PPPASSTD",
-      "category": "Sports",
-      "title": "Arizona vs Kansas City: Quarterback Passing Touchdowns",
-      "outcome": "Patrick Mahomes 3+ Passing Touchdowns",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "American Football Player Props"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 2,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "UCL-2611252000-ROM-PSG-REGS",
-      "category": "Sports",
-      "title": "Roma vs PSG: Point Spread",
-      "outcome": "Reg Time: PSG wins by more than 2.5 goals",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Soccer"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NBA-2611190300-UTA-LAL-S",
-      "category": "Sports",
-      "title": "Utah vs Los Angeles L: Point Spread",
-      "outcome": "Los Angeles L wins by more than 7.5 points",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAF-2611202300-ISU-UCF-2HS",
-      "category": "Sports",
-      "title": "Iowa State vs UCF: 2nd Half Point Spread",
-      "outcome": "UCF -9.5 in the 2nd half",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Am. football"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAM-2611190330-CSUF-UCLA-S",
-      "category": "Sports",
-      "title": "Cal State Fullerton vs UCLA: Point Spread",
-      "outcome": "UCLA wins by more than 22.5 points",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NFL-2611221800-ARI-KC-PPRECY",
-      "category": "Sports",
-      "title": "Arizona vs Kansas City: Player Receiving Yards",
-      "outcome": "Xavier Worthy 40+ Receiving Yards",
-      "sourceDetails": {
-        "agency": "sportradar-rest-api",
-        "index": "American Football Player Props"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 2,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "UCL-2611252000-ROM-PSG-REGT",
-      "category": "Sports",
-      "title": "Roma vs PSG: Total Goals",
-      "outcome": "Reg Time: More than 4.5 goals scored",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Soccer"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NBA-2611190300-PHX-SAC-S",
-      "category": "Sports",
-      "title": "Phoenix vs Sacramento: Point Spread",
-      "outcome": "Phoenix wins by more than 8.5 points",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAF-2611202300-ISU-UCF-2HT",
-      "category": "Sports",
-      "title": "Iowa State vs UCF: 2nd Half Point Total",
-      "outcome": "More than 9.5 points scored in the 2nd half",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Am. football"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAM-2611190330-CSUF-UCLA-T",
-      "category": "Sports",
-      "title": "Cal State Fullerton vs UCLA: Total Points",
-      "outcome": "More than 167.5 points scored",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NFL-2611221800-ARI-KC-PPRYDS",
-      "category": "Sports",
-      "title": "Arizona vs Kansas City: Player Rushing Yards",
-      "outcome": "Tyler Allgeier 40+ Rushing Yards",
-      "sourceDetails": {
-        "agency": "sportradar-rest-api",
-        "index": "American Football Player Props"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 2,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "UCL-2611252000-VIK-ATM-REGS",
-      "category": "Sports",
-      "title": "Viking vs Atlético: Point Spread",
-      "outcome": "Reg Time: Atlético wins by more than 2.5 goals",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Soccer"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NBA-2611210300-SAC-LAL-M",
-      "category": "Sports",
-      "title": "Sacramento vs Los Angeles L",
-      "outcome": "Sacramento",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAF-2611202300-ISU-UCF-2QS",
-      "category": "Sports",
-      "title": "Iowa State vs UCF: 2nd Quarter Point Spread",
-      "outcome": "UCF -7.5 in the 2nd quarter",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Am. football"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NCAAM-2611200000-BUFF-SBU-S",
-      "category": "Sports",
-      "title": "Buffalo vs St. Bonaventure: Point Spread",
-      "outcome": "St. Bonaventure wins by more than 9.5 points",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "NFL-2611221800-ARI-KC-PPYDS",
-      "category": "Sports",
-      "title": "Arizona vs Kansas City: Quarterback Passing Yards",
-      "outcome": "Patrick Mahomes 300+ Passing Yards",
-      "sourceDetails": {
-        "agency": "sportradar-rest-api",
-        "index": "American Football Player Props"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 2,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
-    },
-    {
-      "ticker": "UCL-2611252000-VIK-ATM-REGT",
-      "category": "Sports",
-      "title": "Viking vs Atlético: Total Goals",
-      "outcome": "Reg Time: More than 5.5 goals scored",
-      "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Soccer"
-      },
-      "action": "investigate",
-      "scores": {
-        "ambiguity": 1,
-        "source": 2,
-        "liquidity": 3,
-        "correlation": 1
-      },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "NBA-2611210100-NOP-OKC-M",
@@ -669,14 +289,14 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-2QT",
+      "ticker": "NCAAF-2611202300-ISU-UCF-1QT",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 2nd Quarter Point Total",
-      "outcome": "More than 7.5 points scored in the 2nd quarter",
+      "title": "Iowa State vs UCF: 1st Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 1st quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -688,14 +308,71 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
-      "ticker": "NCAAM-2611200000-BUFF-SBU-T",
+      "ticker": "NCAAM-2611200030-COFC-DRKE-M",
       "category": "Sports",
-      "title": "Buffalo vs St. Bonaventure: Total Points",
-      "outcome": "More than 146.5 points scored",
+      "title": "Charleston vs Drake",
+      "outcome": "Charleston",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "flag_for_human_review",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 3
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-ARI-KC-PPPASSTD",
+      "category": "Sports",
+      "title": "Arizona vs Kansas City: Quarterback Passing Touchdowns",
+      "outcome": "Patrick Mahomes 3+ Passing Touchdowns",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "UCL-2611252000-ROM-PSG-REGS",
+      "category": "Sports",
+      "title": "Roma vs PSG: Point Spread",
+      "outcome": "Reg Time: PSG wins by more than 2.5 goals",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Soccer"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-GSW-MEM-S",
+      "category": "Sports",
+      "title": "Golden State vs Memphis: Point Spread",
+      "outcome": "Memphis wins by more than 9.5 points",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Basketball"
@@ -707,8 +384,331 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611202300-ISU-UCF-2HS",
+      "category": "Sports",
+      "title": "Iowa State vs UCF: 2nd Half Point Spread",
+      "outcome": "UCF -9.5 in the 2nd half",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-BUFF-SBU-T",
+      "category": "Sports",
+      "title": "Buffalo vs St. Bonaventure: Total Points",
+      "outcome": "More than 148.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-ARI-KC-PPRECY",
+      "category": "Sports",
+      "title": "Arizona vs Kansas City: Player Receiving Yards",
+      "outcome": "Xavier Worthy 40+ Receiving Yards",
+      "sourceDetails": {
+        "agency": "sportradar-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "UCL-2611252000-ROM-PSG-REGT",
+      "category": "Sports",
+      "title": "Roma vs PSG: Total Goals",
+      "outcome": "Reg Time: More than 4.5 goals scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Soccer"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-GSW-MEM-T",
+      "category": "Sports",
+      "title": "Golden State vs Memphis: Total Points",
+      "outcome": "More than 239.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611202300-ISU-UCF-2HT",
+      "category": "Sports",
+      "title": "Iowa State vs UCF: 2nd Half Point Total",
+      "outcome": "More than 9.5 points scored in the 2nd half",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-MTST-HP-S",
+      "category": "Sports",
+      "title": "Montana State vs High Point: Point Spread",
+      "outcome": "High Point wins by more than 15.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-ARI-KC-PPRYDS",
+      "category": "Sports",
+      "title": "Arizona vs Kansas City: Player Rushing Yards",
+      "outcome": "Tyler Allgeier 40+ Rushing Yards",
+      "sourceDetails": {
+        "agency": "sportradar-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "UCL-2611252000-VIK-ATM-REGS",
+      "category": "Sports",
+      "title": "Viking vs Atlético: Point Spread",
+      "outcome": "Reg Time: Atlético wins by more than 2.5 goals",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Soccer"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-LAC-SAS-S",
+      "category": "Sports",
+      "title": "Los Angeles C vs San Antonio: Point Spread",
+      "outcome": "San Antonio wins by more than 8.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611202300-ISU-UCF-2QS",
+      "category": "Sports",
+      "title": "Iowa State vs UCF: 2nd Quarter Point Spread",
+      "outcome": "UCF -7.5 in the 2nd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-MTST-HP-T",
+      "category": "Sports",
+      "title": "Montana State vs High Point: Total Points",
+      "outcome": "More than 147.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-ARI-KC-PPYDS",
+      "category": "Sports",
+      "title": "Arizona vs Kansas City: Quarterback Passing Yards",
+      "outcome": "Patrick Mahomes 300+ Passing Yards",
+      "sourceDetails": {
+        "agency": "sportradar-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "UCL-2611252000-VIK-ATM-REGT",
+      "category": "Sports",
+      "title": "Viking vs Atlético: Total Goals",
+      "outcome": "Reg Time: More than 5.5 goals scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Soccer"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-LAC-SAS-T",
+      "category": "Sports",
+      "title": "Los Angeles C vs San Antonio: Total Points",
+      "outcome": "More than 239.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611202300-ISU-UCF-3QT",
+      "category": "Sports",
+      "title": "Iowa State vs UCF: 3rd Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 3rd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-NE-BUT-T",
+      "category": "Sports",
+      "title": "Northeastern vs Butler: Total Points",
+      "outcome": "More than 166.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "NFL-2611221800-BAL-CAR-1HS",
@@ -726,33 +726,33 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
-      "ticker": "NBA-2611190300-PHX-SAC-T",
+      "ticker": "NBA-2611200100-NYK-MIN-PPAST",
       "category": "Sports",
-      "title": "Phoenix vs Sacramento: Total Points",
-      "outcome": "More than 245.5 points scored",
+      "title": "New York vs Minnesota: Player Assists",
+      "outcome": "Rudy Gobert 2+ Assists",
       "sourceDetails": {
-        "agency": "statscore-rest-api",
-        "index": "Basketball"
+        "agency": "sportradar-rest-api",
+        "index": "Basketball Player Props"
       },
       "action": "investigate",
       "scores": {
-        "ambiguity": 1,
+        "ambiguity": 2,
         "source": 2,
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
-      "ticker": "NCAAF-2611202300-ISU-UCF-3QS",
+      "ticker": "NCAAF-2611202300-ISU-UCF-4QS",
       "category": "Sports",
-      "title": "Iowa State vs UCF: 3rd Quarter Point Spread",
-      "outcome": "UCF -7.5 in the 3rd quarter",
+      "title": "Iowa State vs UCF: 4th Quarter Point Spread",
+      "outcome": "UCF -7.5 in the 4th quarter",
       "sourceDetails": {
         "agency": "statscore-rest-api",
         "index": "Am. football"
@@ -764,8 +764,768 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-sports-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-RMU-TOL-T",
+      "category": "Sports",
+      "title": "Robert Morris vs Toledo: Total Points",
+      "outcome": "More than 144.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-1HT",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: 1st Half Point Total",
+      "outcome": "More than 28.5 points scored in the 1st half",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-NYK-MIN-PPPTS",
+      "category": "Sports",
+      "title": "New York vs Minnesota: Player Points",
+      "outcome": "Rudy Gobert 5+ Points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611202300-ISU-UCF-4QT",
+      "category": "Sports",
+      "title": "Iowa State vs UCF: 4th Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 4th quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-UMBC-OSU-S",
+      "category": "Sports",
+      "title": "UMBC vs Ohio State: Point Spread",
+      "outcome": "Ohio State wins by more than 35.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-1QS",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: 1st Quarter Point Spread",
+      "outcome": "Carolina -6.5 in the 1st quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-NYK-MIN-PPREB",
+      "category": "Sports",
+      "title": "New York vs Minnesota: Player Rebounds",
+      "outcome": "Rudy Gobert 8+ Rebounds",
+      "sourceDetails": {
+        "agency": "sportradar-rest-api",
+        "index": "Basketball Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-1QS",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 1st Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 1st quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200000-UMBC-OSU-T",
+      "category": "Sports",
+      "title": "UMBC vs Ohio State: Total Points",
+      "outcome": "More than 161.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-1QT",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: 1st Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 1st quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-NYK-MIN-S",
+      "category": "Sports",
+      "title": "New York vs Minnesota: Point Spread",
+      "outcome": "New York wins by more than 9.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-1QT",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 1st Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 1st quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200030-COFC-DRKE-S",
+      "category": "Sports",
+      "title": "Charleston vs Drake: Point Spread",
+      "outcome": "Drake wins by more than 1.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-2HT",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: 2nd Half Point Total",
+      "outcome": "More than 28.5 points scored in the 2nd half",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-NYK-MIN-T",
+      "category": "Sports",
+      "title": "New York vs Minnesota: Total Points",
+      "outcome": "More than 227.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-2HS",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 2nd Half Point Spread",
+      "outcome": "Duke -9.5 in the 2nd half",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200030-COFC-DRKE-T",
+      "category": "Sports",
+      "title": "Charleston vs Drake: Total Points",
+      "outcome": "More than 160.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-3QS",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: 3rd Quarter Point Spread",
+      "outcome": "Carolina -6.5 in the 3rd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-POR-MIL-S",
+      "category": "Sports",
+      "title": "Portland vs Milwaukee: Point Spread",
+      "outcome": "Portland wins by more than 9.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-2HT",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 2nd Half Point Total",
+      "outcome": "More than 9.5 points scored in the 2nd half",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200030-TUL-LT-M",
+      "category": "Sports",
+      "title": "Tulane vs Louisiana Tech",
+      "outcome": "Tulane",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "flag_for_human_review",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 3
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-3QT",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: 3rd Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 3rd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611200100-POR-MIL-T",
+      "category": "Sports",
+      "title": "Portland vs Milwaukee: Total Points",
+      "outcome": "More than 239.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-2QS",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 2nd Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 2nd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200030-TUL-LT-S",
+      "category": "Sports",
+      "title": "Tulane vs Louisiana Tech: Point Spread",
+      "outcome": "Tulane wins by more than 1.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-PPPASSTD",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: Quarterback Passing Touchdowns",
+      "outcome": "Jacoby Brissett 2+ Passing Touchdowns",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611210300-HOU-DEN-M",
+      "category": "Sports",
+      "title": "Houston vs Denver",
+      "outcome": "Houston",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-2QT",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 2nd Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 2nd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200030-TUL-LT-T",
+      "category": "Sports",
+      "title": "Tulane vs Louisiana Tech: Total Points",
+      "outcome": "More than 144.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-PPRECY",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: Player Receiving Yards",
+      "outcome": "Zay Flowers 90+ Receiving Yards",
+      "sourceDetails": {
+        "agency": "sportradar-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611220100-NOP-SAS-M",
+      "category": "Sports",
+      "title": "New Orleans vs San Antonio",
+      "outcome": "San Antonio",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-3QS",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 3rd Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 3rd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200100-GSU-HCU-M",
+      "category": "Sports",
+      "title": "Georgia Southern vs Houston Christian",
+      "outcome": "Houston Christian",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "flag_for_human_review",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 3
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-PPRYDS",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: Player Rushing Yards",
+      "outcome": "Justice Hill 20+ Rushing Yards",
+      "sourceDetails": {
+        "agency": "sportradar-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611220300-BOS-SAC-M",
+      "category": "Sports",
+      "title": "Boston vs Sacramento",
+      "outcome": "Sacramento",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-3QT",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 3rd Quarter Point Total",
+      "outcome": "More than 7.5 points scored in the 3rd quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAM-2611200100-STET-LOU-T",
+      "category": "Sports",
+      "title": "Stetson vs Louisville: Total Points",
+      "outcome": "More than 157.5 points scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NFL-2611221800-BAL-CAR-PPTD",
+      "category": "Sports",
+      "title": "Baltimore vs Carolina: Player Touchdowns",
+      "outcome": "Zay Flowers 1+ Touchdowns scored",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "American Football Player Props"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NBA-2611190100-ATL-OKC-S",
+      "category": "Sports",
+      "title": "Atlanta vs Oklahoma City: Point Spread",
+      "outcome": "Oklahoma City wins by more than 9.5 points",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Basketball"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "NCAAF-2611210030-CLE-DUK-4QS",
+      "category": "Sports",
+      "title": "Clemson vs Duke: 4th Quarter Point Spread",
+      "outcome": "Duke -7.5 in the 4th quarter",
+      "sourceDetails": {
+        "agency": "statscore-rest-api",
+        "index": "Am. football"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 1,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "WXHIGH-CHI-2611200459",
@@ -780,8 +1540,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-midway-vs-title-station-pack-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "WXHIGH-NYC-2611200459",
@@ -796,8 +1556,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-nws-cli-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "BRENT2611192200",
@@ -815,8 +1575,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-commodity-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "BTC2611192200",
@@ -834,8 +1594,8 @@
         "liquidity": 2,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-crypto-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "XAG2611192200",
@@ -853,8 +1613,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-commodity-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "ETH2611192200",
@@ -872,14 +1632,14 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-crypto-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "WTI2611192200",
       "category": "Commodities",
       "title": "Oil (WTI) price on November 19?",
-      "outcome": "$83 or above",
+      "outcome": "$82 or above",
       "sourceDetails": {
         "agency": "kaiko-equities",
         "index": "KK_RFR_WTIUSDC"
@@ -891,8 +1651,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-commodity-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "SOL2611192200",
@@ -907,11 +1667,11 @@
       "scores": {
         "ambiguity": 2,
         "source": 2,
-        "liquidity": 2,
+        "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-crypto-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "NGAS2611192200",
@@ -929,8 +1689,8 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-commodity-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
     },
     {
       "ticker": "WXHIGH-ATL-2611200459",
@@ -945,8 +1705,189 @@
         "liquidity": 3,
         "correlation": 1
       },
-      "has_proposal": true,
-      "proposal_item": "cat-nws-cli-settlement-version-v1"
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "WXHIGH-BOS-2611200459",
+      "category": "Weather",
+      "title": "Highest temperature in Boston on November 19, 2026?",
+      "outcome": "65°F to 66°F",
+      "sourceDetails": null,
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "BTC2611190600",
+      "category": "Crypto",
+      "title": "BTC price today at 1am EST",
+      "outcome": "$63,300 or above",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-XBTUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 2,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "XRP2611192200",
+      "category": "Crypto",
+      "title": "XRP price on November 19",
+      "outcome": "$0.98 or above",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-XRPUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 2,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "COPPER2611192200",
+      "category": "Commodities",
+      "title": "Copper price on November 19?",
+      "outcome": "$5.84 or above",
+      "sourceDetails": {
+        "agency": "kaiko-equities",
+        "index": "KK_RFR_COPPERUSDC"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 2,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "WXHIGH-SFO-2611200459",
+      "category": "Weather",
+      "title": "Highest temperature in San Francisco on November 19, 2026?",
+      "outcome": "58°F to 59°F",
+      "sourceDetails": null,
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "XRP15M2611190600",
+      "category": "Crypto",
+      "title": "XRP price today at 1am EST",
+      "outcome": "Up",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-XRPUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "ETH15M2611190600",
+      "category": "Crypto",
+      "title": "ETH price today at 1am EST",
+      "outcome": "Up",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-ETHUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "WXHIGH-AUS-2611200459",
+      "category": "Weather",
+      "title": "Highest temperature in Austin on November 19, 2026?",
+      "outcome": "74°F to 75°F",
+      "sourceDetails": null,
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "BTC05M2611190555",
+      "category": "Crypto",
+      "title": "BTC price today at 12:55am EST",
+      "outcome": "Up",
+      "sourceDetails": {
+        "agency": "lukka",
+        "index": "LS-LRRR-XBTUSD"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
+    },
+    {
+      "ticker": "XAU2611192200",
+      "category": "Commodities",
+      "title": "Gold price on November 19?",
+      "outcome": "$3,775 or above",
+      "sourceDetails": {
+        "agency": "kaiko-equities",
+        "index": "KK_RFR_XAUUSDC"
+      },
+      "action": "investigate",
+      "scores": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "has_proposal": false,
+      "proposal_item": null
     }
   ]
 }

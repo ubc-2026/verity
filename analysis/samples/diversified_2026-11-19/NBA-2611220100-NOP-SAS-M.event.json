@@ -1,0 +1,204 @@
+{
+  "id": "478758",
+  "title": "New Orleans vs San Antonio",
+  "slug": "new-orleans-vs-san-antonio",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611220100-NOP-SAS-M",
+  "status": "active",
+  "createdAt": "2026-11-19T00:01:37.262Z",
+  "contracts": [
+    {
+      "id": "478758-1213850",
+      "label": "San Antonio",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If San Antonio wins the Pro Basketball game between San Antonio and New Orleans originally scheduled for November 21, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.91",
+          "no": "0.13"
+        },
+        "sell": {
+          "yes": "0.87",
+          "no": "0.09"
+        },
+        "bestBid": "0.87",
+        "bestAsk": "0.91"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:01:37.262Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "SAS",
+      "instrumentSymbol": "GEMI-NBA-2611220100-NOP-SAS-M-SAS",
+      "marketState": "open",
+      "abbreviatedName": "SAS",
+      "color": "#8A8D8F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/SAS_2eb39eb7-ca58-4ad8-b58d-36add7053fe6.png",
+      "expiryDate": "2026-11-23T13:00:00.000Z",
+      "effectiveDate": "2026-11-19T00:00:08.000Z",
+      "sortOrder": 2,
+      "sportsSide": "home",
+      "teamId": "583ecd4f-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "San Antonio Spurs",
+        "externalIds": {
+          "sportradar": "583ecd4f-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    },
+    {
+      "id": "478758-1213849",
+      "label": "New Orleans",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If New Orleans wins the Pro Basketball game between New Orleans and San Antonio originally scheduled for November 21, 2026 at 8:00 PM ET, this market will resolve to Yes. Otherwise, it will resolve to No. The Underlying is the official result of the specified sporting event. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules.](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf)",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12",
+          "no": "0.91"
+        },
+        "sell": {
+          "yes": "0.09",
+          "no": "0.88"
+        },
+        "bestBid": "0.09",
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T00:01:37.262Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "NOP",
+      "instrumentSymbol": "GEMI-NBA-2611220100-NOP-SAS-M-NOP",
+      "marketState": "open",
+      "abbreviatedName": "NOP",
+      "color": "#0C2340",
+      "imageUrl": "https://assets.gemini.com/predictions/images/NOP_c41d7638-06d6-4fda-93ba-769ba6d29a27.png",
+      "expiryDate": "2026-11-23T13:00:00.000Z",
+      "effectiveDate": "2026-11-19T00:00:08.000Z",
+      "sortOrder": 1,
+      "sportsSide": "away",
+      "teamId": "583ecc9a-fb46-11e1-82cb-f4ce4684ea4c",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "team",
+        "name": "New Orleans Pelicans",
+        "externalIds": {
+          "sportradar": "583ecc9a-fb46-11e1-82cb-f4ce4684ea4c"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-19T00:01:37.262Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "486",
+      "name": "San Antonio Spurs",
+      "abbreviation": "SAS",
+      "side": "home"
+    },
+    {
+      "id": "481",
+      "name": "New Orleans Pelicans",
+      "abbreviation": "NOP",
+      "side": "away"
+    }
+  ],
+  "description": "New Orleans vs San Antonio",
+  "imageUrl": "https://assets.gemini.com/predictions/images/bb_f53a7e9b-c0fc-4a5c-a011-d0bf655f8263.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Basketball"
+  ],
+  "expiryDate": "2026-11-23T13:00:00.000Z",
+  "startTime": "2026-11-22T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+  "subcategory": {
+    "id": 14,
+    "slug": "sports_basketball_pro-basketball",
+    "name": "Pro Basketball",
+    "path": [
+      "Sports",
+      "Basketball",
+      "Pro Basketball"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel__40__b3388226-c9ca-43be-9611-88185341baf0.avif",
+  "template": "sports-game",
+  "gameId": "bd3d663b-7c05-4b2f-933f-956209f964d5",
+  "eventTags": [
+    {
+      "id": 2,
+      "name": "Games",
+      "slug": "games"
+    },
+    {
+      "id": 13025,
+      "name": "Pelicans",
+      "slug": "pelicans"
+    },
+    {
+      "id": 41,
+      "name": "Spurs",
+      "slug": "spurs"
+    },
+    {
+      "id": 13877,
+      "name": "Western",
+      "slug": "western"
+    }
+  ],
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Basketball"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "basketball",
+    "type": "moneyline",
+    "subject": "contest",
+    "scope": {
+      "type": "full_contest"
+    },
+    "team": {
+      "symbol": "SAS",
+      "name": "San Antonio Spurs",
+      "externalIds": {
+        "sportradarId": "583ecd4f-fb46-11e1-82cb-f4ce4684ea4c"
+      }
+    }
+  }
+}

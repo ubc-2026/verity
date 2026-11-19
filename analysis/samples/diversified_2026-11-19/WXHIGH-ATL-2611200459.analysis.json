@@ -6,25 +6,25 @@
     "instrument_symbol": "GEMI-WXHIGH-ATL-2611200459-68TO69",
     "question": "Highest temperature in Atlanta on November 19, 2026?",
     "expiry_utc": "2026-11-20T04:59:59.000Z",
-    "analyzed_at_utc": "2026-11-19T05:03:30Z",
+    "analyzed_at_utc": "2026-11-19T05:53:07Z",
     "snapshot": {
       "source_mode": "live",
       "source_label": "Gemini Exchange events API",
       "snapshot_date": "2026-11-19",
-      "snapshot_time_utc": "2026-11-19T05:03:30Z",
-      "snapshot_hash": "sha256:d79c0351c50ae63fe3201baba43f4fe0893fc7610e49ee9852c9bb05b3ec574c",
+      "snapshot_time_utc": "2026-11-19T05:53:07Z",
+      "snapshot_hash": "sha256:d67760adf7e5c86603b76ad69d2c440da63b507ddddb26c34c49be5508bb29f9",
       "hash_alg": "sha256"
     },
     "quoted_price": {
       "outcome_label": "68°F to 69°F",
-      "best_bid": "0.43",
+      "best_bid": "0.4",
       "best_ask": "0.47",
-      "mid": "0.45",
-      "implied_probability": "0.45",
+      "mid": "0.435",
+      "implied_probability": "0.435",
       "volume_usd": "0",
       "volume_basis": "total",
       "observed_date": "2026-11-19",
-      "observed_time_utc": "2026-11-19T05:03:30Z"
+      "observed_time_utc": "2026-11-19T05:53:07Z"
     },
     "scores": {
       "ambiguity": {
@@ -49,7 +49,7 @@
       },
       "liquidity": {
         "score": 3,
-        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "rationale": "event-total volume $0 is under $100 (7c spread).",
         "null_reason": null,
         "citation_ids": [
           "C-PRICES"
@@ -107,7 +107,7 @@
         "id": "C-PRICES",
         "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-ATL-2611200459",
         "field_or_rule": "contract.prices",
-        "quote": "bestBid 0.43, bestAsk 0.47; event volume 0"
+        "quote": "bestBid 0.4, bestAsk 0.47; event volume 0"
       }
     ],
     "evidence_gaps": [
@@ -139,26 +139,8 @@
       "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
     ]
   },
-  "purchase_proposal": {
-    "version": "verity-purchase-proposal-v1",
-    "proposal_id": "prop-13e2339f6e9d",
-    "contract_id": "GEMI-WXHIGH-ATL-2611200459-68TO69",
-    "evidence_gap_id": "GAP-1",
-    "catalog_item_id": "cat-nws-cli-settlement-version-v1",
-    "catalog_parameters": {
-      "station": "Atlanta, GA (CLIATL)",
-      "date": "2026-11-19"
-    },
-    "rationale": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle? The source can be revised after first publication, and the version used can decide the outcome. Free research left it open: The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
-    "max_amount_base_units": "50000",
-    "asset": "USDC",
-    "network_label": "arc-testnet",
-    "fixture_label": null,
-    "signed": false,
-    "created_at_utc": "2026-11-19T05:03:30Z"
-  },
+  "purchase_proposal": null,
   "decision_log": [
-    "[GEMI-WXHIGH-ATL-2611200459-68TO69] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=FFC&product=CLI&issuedby=ATL&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
-    "[GEMI-WXHIGH-ATL-2611200459-68TO69] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    "[GEMI-WXHIGH-ATL-2611200459-68TO69] no purchase: rating is Medium; research buys are limited to High-risk markets."
   ]
 }

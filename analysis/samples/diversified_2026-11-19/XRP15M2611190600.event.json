@@ -1,0 +1,108 @@
+{
+  "id": "479795",
+  "title": "XRP price today at 1am EST",
+  "slug": "xrp-price-today-at-1am-est",
+  "type": "binary",
+  "category": "Crypto",
+  "ticker": "XRP15M2611190600",
+  "status": "active",
+  "createdAt": "2026-11-19T04:40:57.952Z",
+  "contracts": [
+    {
+      "id": "479795-1219340",
+      "label": "Up",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "If the price of XRP is greater than or equal to the price specified in the title on November 19, 2026 at 1am ET, this market will resolve to Yes. Otherwise, it will resolve to No. If no eligible trade occurs during the contract window, this contract will resolve based on the most recent traded price prior. Outcome verified against the LS-LRRR-XRPUSD index. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/xrp_68683757-6484-4a53-8a7f-7d9afc5b1747.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.83",
+          "no": "0.26"
+        },
+        "sell": {
+          "yes": "0.74",
+          "no": "0.17"
+        },
+        "bestBid": "0.74",
+        "bestAsk": "0.83",
+        "lastTradePrice": "0.4"
+      },
+      "status": "active",
+      "createdAt": "2026-11-19T04:40:57.952Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/xrp_68683757-6484-4a53-8a7f-7d9afc5b1747.pdf",
+      "ticker": "UP",
+      "instrumentSymbol": "GEMI-XRP15M2611190600-UP",
+      "marketState": "open",
+      "abbreviatedName": "Up",
+      "color": "#4CAF50",
+      "expiryDate": "2026-11-19T06:00:00.000Z",
+      "effectiveDate": "2026-11-19T05:45:00.000Z",
+      "sortOrder": 0,
+      "strike": {
+        "type": "reference",
+        "value": "0.9721920514166666",
+        "availableAt": "2026-11-19T05:45:00.000Z"
+      },
+      "source": "LS-LRRR-XRPUSD",
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-19T04:40:57.952Z",
+  "isLive": true,
+  "participants": [],
+  "description": "Interval XRP price prediction event expiring on November 19, 2026 at 1am ET",
+  "imageUrl": "https://assets.gemini.com/predictions/images/xrp_df628348-77d6-4859-bbd6-fdf14bb8b482.avif",
+  "series": "XRP15M",
+  "volume": "25.08",
+  "volume24h": "25.08",
+  "tags": [
+    "XRP"
+  ],
+  "expiryDate": "2026-11-19T06:00:00.000Z",
+  "startTime": "2026-11-19T05:45:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/xrp_68683757-6484-4a53-8a7f-7d9afc5b1747.pdf",
+  "subcategory": {
+    "id": 34,
+    "slug": "crypto_xrp",
+    "name": "XRP",
+    "path": [
+      "Crypto",
+      "XRP"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/xrp_43a62a7f-d135-4b0c-83ec-8b0e59109f6f.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Top_10_-_XRP_1_2015c61a-b016-4876-a3c6-8ab9558bdca7.avif",
+  "template": "crypto-up-down",
+  "eventTags": [
+    {
+      "id": 12,
+      "name": "Fifteen Minute",
+      "slug": "fifteen-minute"
+    },
+    {
+      "id": 19,
+      "name": "Up Down",
+      "slug": "up-down"
+    }
+  ],
+  "source": "LS-LRRR-XRPUSD",
+  "sourceDetails": {
+    "agency": "lukka",
+    "index": "LS-LRRR-XRPUSD"
+  },
+  "volumeDelta24hPct": "0"
+}

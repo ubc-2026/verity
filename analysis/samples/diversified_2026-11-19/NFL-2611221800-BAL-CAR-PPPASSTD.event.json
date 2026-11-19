@@ -1,0 +1,588 @@
+{
+  "id": "476622",
+  "title": "Baltimore vs Carolina: Quarterback Passing Touchdowns",
+  "slug": "baltimore-vs-carolina-quarterback-passing-touchdowns",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NFL-2611221800-BAL-CAR-PPPASSTD",
+  "status": "active",
+  "createdAt": "2026-11-18T08:12:16.883Z",
+  "contracts": [
+    {
+      "id": "476622-1203009",
+      "label": "Bryce Young 1+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 1 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.88",
+          "no": "0.26"
+        },
+        "sell": {
+          "yes": "0.74",
+          "no": "0.12"
+        },
+        "bestBid": "0.74",
+        "bestAsk": "0.88"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BYOUNGO0",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BYOUNGO0",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 0,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "0.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476622-1203019",
+      "label": "Jacoby Brissett 1+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 1 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.81",
+          "no": "0.31"
+        },
+        "sell": {
+          "yes": "0.69",
+          "no": "0.19"
+        },
+        "bestBid": "0.69",
+        "bestAsk": "0.81"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BRISSETTO0",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO0",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 5,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "0.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476622-1203011",
+      "label": "Bryce Young 2+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 2 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.54",
+          "no": "0.59"
+        },
+        "sell": {
+          "yes": "0.41",
+          "no": "0.46"
+        },
+        "bestBid": "0.41",
+        "bestAsk": "0.54"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BYOUNGO1",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BYOUNGO1",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 1,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476622-1203021",
+      "label": "Jacoby Brissett 2+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 2 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.46",
+          "no": "0.66"
+        },
+        "sell": {
+          "yes": "0.34",
+          "no": "0.54"
+        },
+        "bestBid": "0.34",
+        "bestAsk": "0.46"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BRISSETTO1",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO1",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 6,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "1.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476622-1203013",
+      "label": "Bryce Young 3+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 3 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.26",
+          "no": "0.86"
+        },
+        "sell": {
+          "yes": "0.14",
+          "no": "0.74"
+        },
+        "bestBid": "0.14",
+        "bestAsk": "0.26"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BYOUNGO2",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BYOUNGO2",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 2,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476622-1203023",
+      "label": "Jacoby Brissett 3+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 3 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.2",
+          "no": "0.91"
+        },
+        "sell": {
+          "yes": "0.09",
+          "no": "0.8"
+        },
+        "bestBid": "0.09",
+        "bestAsk": "0.2"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BRISSETTO2",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO2",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 7,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476622-1203015",
+      "label": "Bryce Young 4+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 4 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.12"
+        },
+        "sell": {
+          "no": "0.88"
+        },
+        "bestAsk": "0.12"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BYOUNGO3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BYOUNGO3",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 3,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    },
+    {
+      "id": "476622-1203025",
+      "label": "Jacoby Brissett 4+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Jacoby Brissett records 4 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.11"
+        },
+        "sell": {
+          "no": "0.89"
+        },
+        "bestAsk": "0.11"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BRISSETTO3",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BRISSETTO3",
+      "marketState": "open",
+      "color": "#241773",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Baltimore_RavensDark_f9713900-0a34-4846-b4ad-f3d29e44d5a2.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 8,
+      "teamId": "ebd87119-b331-4469-9ea6-d51fe3ce2f1c",
+      "strike": {
+        "type": "over",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Jacoby Brissett",
+        "externalIds": {
+          "sportradar": "ad2258ab-67f0-41c2-bcf3-f3ba145187dc"
+        }
+      }
+    },
+    {
+      "id": "476622-1203017",
+      "label": "Bryce Young 5+ Passing Touchdowns",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Bryce Young records 5 or more Passing Touchdowns in the game between Baltimore and Carolina scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Touchdowns recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Touchdowns recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "yes": "0.1"
+        },
+        "sell": {
+          "no": "0.9"
+        },
+        "bestAsk": "0.1"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T08:12:16.883Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+      "ticker": "BYOUNGO4",
+      "instrumentSymbol": "GEMI-NFL-2611221800-BAL-CAR-PPPASSTD-BYOUNGO4",
+      "marketState": "open",
+      "color": "#0085CA",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Carolina_PanthersDark_8362705d-2aa9-4384-b15b-105e623f42e1.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 4,
+      "teamId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314",
+      "strike": {
+        "type": "over",
+        "value": "4.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Bryce Young",
+        "externalIds": {
+          "sportradar": "38475bfa-9773-4c3b-9157-a0dbd576fa22"
+        }
+      }
+    }
+  ],
+  "effectiveDate": "2026-11-18T08:12:16.883Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "451",
+      "name": "Carolina Panthers",
+      "abbreviation": "CAR",
+      "side": "home"
+    },
+    {
+      "id": "430",
+      "name": "Baltimore Ravens",
+      "abbreviation": "BAL",
+      "side": "away"
+    }
+  ],
+  "description": "How many passing touchdowns will each quarterback throw?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "Pro Football"
+  ],
+  "expiryDate": "2026-11-24T06:00:00.000Z",
+  "startTime": "2026-11-22T18:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Touchdowns_434fc8c4-39c6-48bb-9488-18d65b1b99e8.pdf",
+  "subcategory": {
+    "id": 12,
+    "slug": "sports_football_pro-football",
+    "name": "Pro Football",
+    "path": [
+      "Sports",
+      "Football",
+      "Pro Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Football_square_1_7660ad42-c561-4e8b-8bc7-175a1c63ae5c.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-18T101349482_3eca341e-eaaf-4842-a5ac-ed7c6784042a.avif",
+  "template": "sports-player-props",
+  "gameId": "ac8037dd-465f-4488-a468-d4255e01986a",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "American Football Player Props"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "prop",
+    "subject": "player",
+    "scope": {
+      "type": "full_contest"
+    },
+    "metric": "passing_touchdowns",
+    "team": {
+      "symbol": "CAR",
+      "name": "Carolina Panthers",
+      "externalIds": {
+        "sportradarId": "f14bf5cc-9a82-4a38-bc15-d39f75ed5314"
+      }
+    },
+    "player": {
+      "symbol": "BYOUNG",
+      "name": "Bryce Young",
+      "externalIds": {
+        "sportradarId": "38475bfa-9773-4c3b-9157-a0dbd576fa22",
+        "officialLeagueId": "00-0039150",
+        "officialLeagueSource": "nfl_gsis"
+      },
+      "position": "QB",
+      "number": "9"
+    }
+  }
+}

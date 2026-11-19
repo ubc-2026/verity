@@ -1,0 +1,552 @@
+{
+  "id": "476436",
+  "title": "Clemson vs Duke: 1st Quarter Point Spread",
+  "slug": "clemson-vs-duke-1st-quarter-point-spread",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NCAAF-2611210030-CLE-DUK-1QS",
+  "status": "active",
+  "createdAt": "2026-11-18T07:40:10.998Z",
+  "contracts": [
+    {
+      "id": "476436-1201746",
+      "label": "Duke -10.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Duke covers a -10.5 point spread against Clemson during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Duke scores more than 10.5 points more than Clemson during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "DUK10",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK10",
+      "marketState": "post_only",
+      "abbreviatedName": "Duke",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Duke_Blue_Devils_8b2a3d3b-595c-442a-9147-e78c9e79fa76.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201748",
+      "label": "Clemson -10.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Clemson covers a -10.5 point spread against Duke during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Clemson scores more than 10.5 points more than Duke during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "CLE10",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-CLE10",
+      "marketState": "post_only",
+      "abbreviatedName": "Clemson",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Clemson_Tigers_f4f6f9e7-ee42-46a8-863e-ea17d2dbdc40.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "strike": {
+        "type": "spread",
+        "value": "10.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201750",
+      "label": "Duke -2.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Duke covers a -2.5 point spread against Clemson during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Duke scores more than 2.5 points more than Clemson during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "DUK2",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK2",
+      "marketState": "post_only",
+      "abbreviatedName": "Duke",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Duke_Blue_Devils_8b2a3d3b-595c-442a-9147-e78c9e79fa76.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201752",
+      "label": "Clemson -2.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Clemson covers a -2.5 point spread against Duke during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Clemson scores more than 2.5 points more than Duke during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "CLE2",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-CLE2",
+      "marketState": "post_only",
+      "abbreviatedName": "Clemson",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Clemson_Tigers_f4f6f9e7-ee42-46a8-863e-ea17d2dbdc40.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "strike": {
+        "type": "spread",
+        "value": "2.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201753",
+      "label": "Duke -6.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Duke covers a -6.5 point spread against Clemson during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Duke scores more than 6.5 points more than Clemson during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "DUK6",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK6",
+      "marketState": "post_only",
+      "abbreviatedName": "Duke",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Duke_Blue_Devils_8b2a3d3b-595c-442a-9147-e78c9e79fa76.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201754",
+      "label": "Duke -3.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Duke covers a -3.5 point spread against Clemson during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Duke scores more than 3.5 points more than Clemson during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "DUK3",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK3",
+      "marketState": "post_only",
+      "abbreviatedName": "Duke",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Duke_Blue_Devils_8b2a3d3b-595c-442a-9147-e78c9e79fa76.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201756",
+      "label": "Duke -7.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Duke covers a -7.5 point spread against Clemson during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Duke scores more than 7.5 points more than Clemson during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "DUK7",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-DUK7",
+      "marketState": "post_only",
+      "abbreviatedName": "Duke",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Duke_Blue_Devils_8b2a3d3b-595c-442a-9147-e78c9e79fa76.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "home",
+      "teamId": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201758",
+      "label": "Clemson -7.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Clemson covers a -7.5 point spread against Duke during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Clemson scores more than 7.5 points more than Duke during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "CLE7",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-CLE7",
+      "marketState": "post_only",
+      "abbreviatedName": "Clemson",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Clemson_Tigers_f4f6f9e7-ee42-46a8-863e-ea17d2dbdc40.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "strike": {
+        "type": "spread",
+        "value": "7.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201760",
+      "label": "Clemson -3.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Clemson covers a -3.5 point spread against Duke during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Clemson scores more than 3.5 points more than Duke during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "CLE3",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-CLE3",
+      "marketState": "post_only",
+      "abbreviatedName": "Clemson",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Clemson_Tigers_f4f6f9e7-ee42-46a8-863e-ea17d2dbdc40.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "strike": {
+        "type": "spread",
+        "value": "3.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    },
+    {
+      "id": "476436-1201762",
+      "label": "Clemson -6.5 in the 1st quarter",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Clemson covers a -6.5 point spread against Duke during the 1st quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET, meaning Clemson scores more than 6.5 points more than Duke during the 1st quarter. Otherwise, it resolves to No. The Underlying counts only points scored by each team during the 1st quarter, as documented by the official quarter-by-quarter scoring summary. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the game is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {},
+        "sell": {}
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T07:40:10.998Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+      "ticker": "CLE6",
+      "instrumentSymbol": "GEMI-NCAAF-2611210030-CLE-DUK-1QS-CLE6",
+      "marketState": "post_only",
+      "abbreviatedName": "Clemson",
+      "color": "#4CAF50",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Clemson_Tigers_f4f6f9e7-ee42-46a8-863e-ea17d2dbdc40.avif",
+      "expiryDate": "2026-11-22T00:30:00.000Z",
+      "effectiveDate": "2026-11-15T00:00:08.000Z",
+      "sportsSide": "away",
+      "teamId": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "strike": {
+        "type": "spread",
+        "value": "6.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01"
+    }
+  ],
+  "effectiveDate": "2026-11-18T07:40:10.998Z",
+  "isLive": false,
+  "participants": [
+    {
+      "id": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "name": "Duke",
+      "abbreviation": "DUK",
+      "side": "home"
+    },
+    {
+      "id": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "name": "Clemson",
+      "abbreviation": "CLE",
+      "side": "away"
+    },
+    {
+      "id": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "name": "Duke",
+      "abbreviation": "DUK",
+      "side": "home"
+    },
+    {
+      "id": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "name": "Clemson",
+      "abbreviation": "CLE",
+      "side": "away"
+    },
+    {
+      "id": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "name": "Duke",
+      "abbreviation": "DUK",
+      "side": "home"
+    },
+    {
+      "id": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "name": "Duke",
+      "abbreviation": "DUK",
+      "side": "home"
+    },
+    {
+      "id": "deb0920f-c4ca-414d-be4b-ca779e353bf0",
+      "name": "Duke",
+      "abbreviation": "DUK",
+      "side": "home"
+    },
+    {
+      "id": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "name": "Clemson",
+      "abbreviation": "CLE",
+      "side": "away"
+    },
+    {
+      "id": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "name": "Clemson",
+      "abbreviation": "CLE",
+      "side": "away"
+    },
+    {
+      "id": "95404613-f4f0-4280-ac27-85419215f8d1",
+      "name": "Clemson",
+      "abbreviation": "CLE",
+      "side": "away"
+    }
+  ],
+  "description": "Which team will cover the point spread in the 1st quarter?",
+  "imageUrl": "https://assets.gemini.com/predictions/images/Football_fb67fb13-3768-40c7-a99d-cbe2644d299e.avif",
+  "volume": "0",
+  "volume24h": "0",
+  "tags": [
+    "College Football"
+  ],
+  "expiryDate": "2026-11-22T00:30:00.000Z",
+  "startTime": "2026-11-21T00:30:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_-_NCAA_CFB_Period_Spread_Class_3b7f827c-60a3-4d7b-bd61-54f24c4ad84c.pdf",
+  "subcategory": {
+    "id": 13,
+    "slug": "sports_football_college-football",
+    "name": "College Football",
+    "path": [
+      "Sports",
+      "Football",
+      "College Football"
+    ]
+  },
+  "socialImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.png",
+  "featuredImageUrl": "https://assets.gemini.com/predictions/images/Card_Carousel_-_2026-08-30T231309788_65d010c8-004b-415c-bdae-6bbc819277b7.avif",
+  "template": "sports-spread",
+  "gameId": "8bd7ef9b-90bf-4f2e-91e7-e81cc2617fcb",
+  "sourceDetails": {
+    "agency": "statscore-rest-api",
+    "index": "Am. football"
+  },
+  "volumeDelta24hPct": "0",
+  "sportsMarket": {
+    "sport": "american_football",
+    "type": "spread",
+    "subject": "team",
+    "scope": {
+      "type": "quarter",
+      "ordinal": 1
+    },
+    "metric": "points",
+    "team": {
+      "symbol": "CLE",
+      "name": "Clemson Tigers",
+      "externalIds": {
+        "sportradarId": "95404613-f4f0-4280-ac27-85419215f8d1"
+      }
+    }
+  }
+}

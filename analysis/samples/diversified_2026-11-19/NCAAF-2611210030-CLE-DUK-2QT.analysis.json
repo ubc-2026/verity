@@ -1,0 +1,145 @@
+{
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-NCAAF-2611210030-CLE-DUK-2QT-O7",
+    "event_ticker": "NCAAF-2611210030-CLE-DUK-2QT",
+    "instrument_symbol": "GEMI-NCAAF-2611210030-CLE-DUK-2QT-O7",
+    "question": "Clemson vs Duke: 2nd Quarter Point Total",
+    "expiry_utc": "2026-11-22T00:30:00.000Z",
+    "analyzed_at_utc": "2026-11-19T05:52:53Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T05:52:53Z",
+      "snapshot_hash": "sha256:176e36584b65f193559a7663aca5f39266ed890191da760cc8565852e34ffbcb",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "More than 7.5 points scored in the 2nd quarter",
+      "best_bid": null,
+      "best_ask": null,
+      "mid": null,
+      "implied_probability": null,
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T05:52:53Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 1,
+        "rationale": "Objective outcome; the terms were read and name the rule.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'Revis').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "No two-sided quote. event-total volume $0 is on file.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 7,
+      "raw_total": 7,
+      "raw_rating": "Medium",
+      "rating_floor": null,
+      "final_rating": "Medium",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "investigate",
+    "summary": "Medium resolution risk (total 7). Research action: investigate. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAF-2611210030-CLE-DUK-2QT",
+        "field_or_rule": "event.description",
+        "quote": "How many total points will be scored in the 2nd quarter?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAF-2611210030-CLE-DUK-2QT",
+        "field_or_rule": "contract.description",
+        "quote": "This market resolves to Yes if Clemson and Duke collectively score more than 7.5 points during the 2nd quarter of the College Football game between Clemson and Duke scheduled for November 20, 2026 at 7:30 PM ET. Otherwise, it resolves to No. The Underlying is the total points scored by both teams during the 2nd quarter of the specified game, excluding all other periods and overtime. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event. If the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a team forfeits, withdraws, or is disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions-_NCAA_CFB_Period_Total_Class_5670bcd2-918f-4b3c-bc27-7714487e7ff9.pdf)."
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAF-2611210030-CLE-DUK-2QT",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Terms\n \nand\n \nConditions\n \nRule\n \nText\n \nfor\n \nthe\n \nEvent\n \nContract\n \nSeries\n \n“Will\n \nthe\n \ntotal\n \npoints\n \nscored\n \nin\n \n{period}\n \nof\n \n{FBS\n \ngame}\n \nbe\n \n{above/below/at\n \nleast/between}\n \n{count}?”\n \n(NCAA\n \nFBS\n \nFootball\n \nGames)\n \n(a)General\n \n(1)These\n \nContract\n \nRules\n \ngovern\n \nthe\n \ntrading\n \nof\n \nthe\n \nevent\n \ncontract\n \nseries\n \n“Will\n \nthe\n \ntotal\n \npoints\n \nscored\n \nin\n \n{period}\n \nof\n \n{FBS\n \ngame}\n \nbe\n \n{above/below/at\n \nleast/between}\n \n{count}?”\n \n(“CFBPERIODTOTAL1”\n \nor\n \nthe\n \n“Contracts”),\n \napplicable\n \nsolely\n \nto\n \ngames\n \nfeaturing\n \nat\n \nleast\n \none\n \nFootball\n \nBowl\n \nSubdivision\n \n(“FBS”)\n \nmember\n \ninstitution\n \nof\n \nthe\n \nNational\n \nCollegiate\n \nAthletic\n \nAssociation\n \n(“NCAA”),\n \non\n \nthe\n \nExchange\n \nand\n \nthe\n \nclearing\n \nof\n \nthe\n \nContracts\n \nthrough\n \nthe\n \nClearing\n \nHouse.\n \n(2)This\n \nRule\n \ndefines\n \na\n \nclass\n \nof\n \nContracts\n \ncertified\n \npursuant\n \nto\n \n17 C.F.R.\n \n§\n \n40.2(d),\n \neach\n \nof\n \nwhich\n \nshares\n \nan\n \nidentical\n \nsettlement\n \nsource,\n \nformula,\n \nprocedure,\n \nand\n \nmethodology\n \nwith\n \nthe\n \nContract\n \nreferenced\n \nin\n \nthe\n \nExchange’s\n \n§\n \n40.2(a)\n \ncertification\n \nof\n \n“Will\n \nthe\n \ntotal\n \npoints\n \nscored\n \nin\n \nthe\n \nfirst\n \nquarter\n \nof\n \nthe\n \nOklahoma\n \nSooners\n \nat\n \nMichigan\n \nWolverines\n \ngame\n \non\n \nSeptember\n \n12,\n \n2026\n \nbe\n \nabove\n \n10.5?”.\n \n(3)The\n \nstatistic\n \nreferenced\n \nby\n \nthis\n \nRule\n \nis\n \nfixed\n \nas\n \nthe\n \ntotal\n \ncombined\n \npoints\n \nscored\n \nby\n \nboth\n \nteams\n \nduring\n \na\n \nspecified\n \nperiod\n \nof\n \na\n \nspecified\n \ngame\n \nfeaturing\n \nat\n \nleast\n \none\n \nFBS\n \nmember\n \ninstitution.\n \nThis\n \nRule\n \ndoes\n \nnot\n \nadmit\n \nof\n \nvariation\n \nin\n \nthe\n \nunderlying\n \nstatistic;\n \na\n \nseries\n \nreferencing\n \nany\n \nother\n \nstatistic\n \n(including\n \nmargin\n \nof\n \nvictory\n \nor\n \nthe\n \nidentity\n \nof\n \nthe\n \ngame’s\n \nwinner),\n \nor\n \nany\n \nlevel\n \nof\n \ncompetition\n \nother\n \nthan\n \nNCAA\n \nFBS\n \nfootball,\n \nor\n \nany\n \nperiod\n \nthat\n \nincludes\n \nor\n \nextends\n \ninto\n \novertime,\n \nwould\n \nbe\n \ncertified\n \nseparately.\n \n(4)Capitalized\n \nTerms\n \nused,\n \nbut\n \nnot\n \ndefined\n \nherein,\n \nhave\n \nthe\n \nmeanings\n \nascribed\n \nto\n \nthem\n \nin\n \nthe\n \nExchange\n \nRulebook.\n \n(b)Underlying\n \n(1)The\n \nUnderlying\n \nfor\n \neach\n \nContract\n \nis\n \nthe\n \ntotal\n \nnumber\n \nof\n \npoints\n \nscored\n \nby\n \nboth\n \nteams\n \nduring\n \n{period}\n \nof\n \n{FBS\n \ngame},\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency.\n \nThe\n \nUnderlying\n \nreflects\n \nthe\n \ncumulative\n \npoints\n \nscored\n \nby\n \nboth\n \nparticipating\n \nteams\n \nduring\n \n{period}\n \nonly,\n \nand\n \ndoes\n \nnot\n \ninclude\n \npoints\n \nscored\n \nduring\n \nany\n \nother\n \nperiod\n \nof\n \n{FBS\n \ngame}.\n \nBecause\n \n{count}\n \nis\n \nalways\n \nfixed\n \nat\n \na\n \nhalf-point\n \n(.5)\n \nvalue,\n \nand\n \nthe\n \ntotal\n \nnumber\n \nof\n \npoints\n \nscored\n \nby\n \nboth\n \nteams\n \nis\n \nalways\n \na\n \nwhole\n \nnumber,\n \nthat\n \ntotal\n \ncan\n \nnever\n \nequal\n \n{count},\n \nand\n \n{period}\n \nof\n \n{FBS\n \ngame}\n \ntherefore\n \ncannot\n \nresult\n \nin\n \na\n \n“push.”\n \nRevisions\n \nto\n \n \n\nthe\n \nUnderlying\n \nmade\n \nafter\n \nExpiration\n \nwill\n \nnot\n \nbe\n \naccounted\n \nfor\n \nin\n \ndetermining\n \nthe\n \nExpiration\n \nValue.\n \n(2)Cash-settled\n \nContracts\n \nare\n \navailable\n \nfor\n \nany\n \n{period}\n \nand\n \n{FBS\n \ngame}\n \nlisted\n \nby\n \nthe\n \nExchange,\n \nprovided\n \n{period}\n \nis\n \none\n \nof\n \nthe\n \nperiods\n \nenumerated\n \nin\n \nsubsection\n \n(c)(1)(ii)\n \nbelow,\n \nand\n \n{FBS\n \ngame}\n \nis\n \na\n \nregular-season\n \nor\n \npostseason\n \ngame\n \nfeaturing\n \nat\n \nleast\n \none\n \nFootball\n \nBowl\n \nSubdivision\n \nmember\n \ninstitution\n \nof\n \nthe\n \nNCAA\n \n(collectively,\n \nthe\n \n“Contracts”).\n \n(3)The\n \nSource\n \nAgency\n \nis\n \nNCAA.com\n \nand\n \nthe\n \nNCAA’s\n \nofficial\n \nstatistics\n \ndatabase\n \nfor\n \nFootball\n \nBowl\n \nSubdivision\n \nfootball,\n \nincluding\n \nits\n \nofficial\n \nquarter-by-quarter\n \nscoring\n \nsummary.\n \nIf\n \nthe\n \nSource\n \nAgency\n \nis\n \nnot\n \navailable,\n \nthe\n \nExchange\n \nmay\n \nuse\n \nthe\n \nfollowing,\n \nin\n \nhierarchical\n \norder,\n \nas\n \na\n \nbackup:\n \n(i)\n \nESPN\n \nand\n \n(ii)\n \nFOX,\n \nABC,\n \nCBS,\n \nNBC,\n \nESPN2,\n \nPeacock,\n \nor\n \nthe\n \nofficial\n \nbroadcast\n \nor\n \nstreaming\n \npartner\n \nof\n \n{FBS\n \ngame}.\n \nThis\n \nSource\n \nAgency\n \nhierarchy\n \nis\n \nidentical\n \nto\n \nthe\n \nhierarchy\n \ncertified\n \nin\n \nthe\n \nReferenced\n \nContract.\n \n(4)The\n \nExpiration\n \nValue\n \nis\n \nthe\n \nvalue\n \nof\n \nthe\n \nUnderlying\n \nas\n \ndocumented\n \nby\n \nthe\n \nSource\n \nAgency\n \non\n \nthe\n \nExpiration\n \nDate\n \nat\n \nthe\n \nExpiration\n \nTime.\n \n(c)Issuance\n \n(1)Contract\n \niterations\n \nwill\n \nbe\n \nissued\n \non\n \na\n \nrecurring\n \nbasis\n \non\n \nthe\n \nfollowing\n \nparameters:\n \n(i){above/below/at\n \nleast/between}\n \nrefers\n \nto\n \ncomparison\n \noperators,\n \nas\n \ndefined\n \nin\n \nthe\n \nReferenced\n \nContract;\n \nthe\n \nExchange\n \nwill\n \nnot\n \nlist\n \nContracts\n \nusing\n \nan\n \n“exactly”\n \ncomparator\n \nunder\n \nthis\n \nSeries,\n \nbecause\n \na\n \nnumerical\n \nthreshold\n \nfixed\n \nat\n \na\n \nhalf-point\n \n(.5)\n \nvalue\n \ncan\n \nnever\n \nexactly\n \nequal\n \nthe\n \ntotal\n \ncombined\n \npoints\n \nscored,\n \nwhich\n \nis\n \nalways\n \na\n \nwhole\n \nnumber;\n \n(ii){period}\n \nrefers\n \nto\n \none\n \nof\n \nthe\n \nfollowing\n \nperiods\n \nof\n \n{FBS\n \ngame},\n \nas\n \nspecified\n \nby\n \nthe\n \nExchange:\n \nthe\n \nfirst\n \nquarter\n \n(“1Q”),\n \nthe\n \nsecond\n \nquarter\n \n(“2Q”),\n \nthe\n \nthird\n \nquarter\n \n(“3Q”),\n \nthe\n \nfourth\n \nquarter\n \n(“4Q”),\n \nthe\n \nfirst\n \nhalf\n \n(“1H”),\n \nthe\n \nsecond\n \nhalf\n \n(“2H”),\n \nor\n \nthe\n \nentirety\n \nof\n \nregulation\n \nplay\n \nexclusive\n \nof\n \nany\n \novertime\n \nperiod\n \n(“Full\n \nGame\n \n(Regulation)”);\n \nthe\n \nExchange\n \nwill\n \nnot\n \nlist\n \nContracts\n \nreferencing\n \nany\n \nperiod\n \nthat\n \nincludes\n \nor\n \nextends\n \ninto\n \novertime;\n \n(iii){count}\n \nrefers\n \nto\n \na\n \nfixed\n \nnumerical\n \nthreshold\n \nspecified\n \nby\n \nthe\n \nExchange,\n \nexpressed\n \nonly\n \nin\n \nhalf-point\n \n(.5)\n \nincrements\n \nand\n \nnever\n \nas\n \na\n \nwhole\n \nnumber\n \nor\n \nzero;\n \nand\n \n(iv){FBS\n \ngame}\n \nrefers\n \nto\n \na\n \nscheduled\n \nregular-season\n \nor\n \npostseason\n \ngame\n \nfeaturing\n \nat\n \nleast\n \none\n \nFBS\n \nmember\n \ninstitution\n \nidentified\n \nby\n \nthe\n \nExchange\n \nat\n \nthe\n \ntime\n \nof\n \nlisting.\n \n(2)The\n \nExchange\n \nwill\n \nidentify\n "
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/NCAAF-2611210030-CLE-DUK-2QT",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid None, bestAsk None; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "sports-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": null,
+  "decision_log": [
+    "[GEMI-NCAAF-2611210030-CLE-DUK-2QT-O7] no purchase: rating is Medium; research buys are limited to High-risk markets."
+  ]
+}

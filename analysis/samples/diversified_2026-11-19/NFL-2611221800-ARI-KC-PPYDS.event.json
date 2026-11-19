@@ -522,63 +522,6 @@
       }
     },
     {
-      "id": "476966-1205451",
-      "label": "Carson Beck 200+ Passing Yards",
-      "description": {
-        "data": {},
-        "content": [
-          {
-            "data": {},
-            "marks": [],
-            "value": "This market resolves to Yes if Carson Beck records 200 or more Passing Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
-            "nodeType": "text"
-          }
-        ],
-        "nodeType": "document"
-      },
-      "prices": {
-        "buy": {
-          "yes": "0.39",
-          "no": "0.76"
-        },
-        "sell": {
-          "yes": "0.24",
-          "no": "0.61"
-        },
-        "bestBid": "0.24",
-        "bestAsk": "0.39"
-      },
-      "status": "active",
-      "createdAt": "2026-11-18T11:10:59.671Z",
-      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
-      "ticker": "BECKO199",
-      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPYDS-BECKO199",
-      "marketState": "open",
-      "color": "#97233F",
-      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
-      "expiryDate": "2026-11-24T06:00:00.000Z",
-      "effectiveDate": "2026-11-16T00:00:04.000Z",
-      "sortOrder": 4,
-      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
-      "strike": {
-        "type": "over",
-        "value": "199.5"
-      },
-      "isCombo": false,
-      "quantityIncrement": "0.01",
-      "quantityMinimum": "0.01",
-      "priceIncrement": "0.01",
-      "quoteAssetPrecision": 2,
-      "priceMinimum": "0.01",
-      "target": {
-        "type": "player",
-        "name": "Carson Beck",
-        "externalIds": {
-          "sportradar": "a67c28ce-9e03-46f1-9fb6-b5ef70eb20db"
-        }
-      }
-    },
-    {
       "id": "476966-1205461",
       "label": "Patrick Mahomes 300+ Passing Yards",
       "description": {
@@ -596,13 +539,13 @@
       "prices": {
         "buy": {
           "yes": "0.31",
-          "no": "0.84"
+          "no": "0.91"
         },
         "sell": {
-          "yes": "0.16",
+          "yes": "0.09",
           "no": "0.69"
         },
-        "bestBid": "0.16",
+        "bestBid": "0.09",
         "bestAsk": "0.31"
       },
       "status": "active",
@@ -1007,6 +950,60 @@
       "strike": {
         "type": "over",
         "value": "299.5"
+      },
+      "isCombo": false,
+      "quantityIncrement": "0.01",
+      "quantityMinimum": "0.01",
+      "priceIncrement": "0.01",
+      "quoteAssetPrecision": 2,
+      "priceMinimum": "0.01",
+      "target": {
+        "type": "player",
+        "name": "Carson Beck",
+        "externalIds": {
+          "sportradar": "a67c28ce-9e03-46f1-9fb6-b5ef70eb20db"
+        }
+      }
+    },
+    {
+      "id": "476966-1205451",
+      "label": "Carson Beck 200+ Passing Yards",
+      "description": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "marks": [],
+            "value": "This market resolves to Yes if Carson Beck records 200 or more Passing Yards in the game between Arizona and Kansas City scheduled for November 22, 2026 at 1:00 PM ET, including overtime. Otherwise, it resolves to No. The Underlying is the number of Passing Yards recorded by the specified player for the specified game. Source Agencies, in order, are NFL.com, ESPN, and FOX Sports.\n\nIf the player is listed as active but does not enter the game, the Contract will resolve to the last fair price determined at the sole discretion of the Exchange. Once the player enters the game, the Contract resolves based on the player's official Passing Yards recorded as documented by the Source Agency. If the game is not played as scheduled and is not rescheduled within seven days, the Contract resolves to the last fair price determined at the sole discretion of the Exchange.\n\nIf the Expiration Value cannot be determined on the Expiration Date (including because the event is cancelled or a player has forfeited, withdrawn, or been disqualified), the Exchange may determine payouts pursuant to the Market Outcome Review Process. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf).",
+            "nodeType": "text"
+          }
+        ],
+        "nodeType": "document"
+      },
+      "prices": {
+        "buy": {
+          "no": "0.74"
+        },
+        "sell": {
+          "yes": "0.26"
+        },
+        "bestBid": "0.26"
+      },
+      "status": "active",
+      "createdAt": "2026-11-18T11:10:59.671Z",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/TC_Pro_Football_Passing_Yards_3a3d65c7-5a23-402e-9aa7-c8b6e99bc065.pdf",
+      "ticker": "BECKO199",
+      "instrumentSymbol": "GEMI-NFL-2611221800-ARI-KC-PPYDS-BECKO199",
+      "marketState": "open",
+      "color": "#97233F",
+      "imageUrl": "https://assets.gemini.com/predictions/images/Arizona_CardinalsDark_e1bbfcad-8ae0-46ce-96a0-a853e4d72a96.avif",
+      "expiryDate": "2026-11-24T06:00:00.000Z",
+      "effectiveDate": "2026-11-16T00:00:04.000Z",
+      "sortOrder": 4,
+      "teamId": "de760528-1dc0-416a-a978-b510d20692ff",
+      "strike": {
+        "type": "over",
+        "value": "199.5"
       },
       "isCombo": false,
       "quantityIncrement": "0.01",
