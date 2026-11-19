@@ -56,7 +56,9 @@ The fixture `MockGatewayProvider` (`scripts/e2e/mockGateway.ts`) checks the sign
 | 1 | Gateway accepts Verity's derived nonce (the SDK normally uses a random one) | **Confirmed.** `verify` returned `isValid: true` and `settle` returned `success: true` for nonce `0xa532…cee2`. |
 | 2 | What `settle().transaction` contains | **Circle's transfer UUID** (`018a216c-72ff-454b-94b1-9bfbdf637f2d`), the same value as the transfer `id`. It is not an onchain tx hash. Verity already stores it as an opaque reference. |
 | 3 | `searchTransfers({ nonce })` finds the transfer right after `settle()` | **Confirmed.** The first lookup, 1 s after settle, found it (status `received`). The merchant answered `200` on the first request; the `202` retry path was not needed. |
-| 4 | The transfer record exposes `txHash` for the batch | **Confirmed.** `received` with `txHash: null` for the first 4 minutes; about 10 minutes after settle, `refresh` saw `completed` with batch tx `0x3b31471543ae1a1bd08cdff377c57b9586c1c8ae7bd759703b5a1c3ebcaebd82`. |
+| 4 | The transfer record exposes `txHash` for the batch | **Confirmed.** `received` with `txHash: null` for the first 4 minutes; the batch transaction was mined at 05:27:02 UTC (block 72968478), 323 s after settle at 05:21:39 UTC, and `refresh` at 05:27:49 UTC saw `completed` with batch tx `0x3b31471543ae1a1bd08cdff377c57b9586c1c8ae7bd759703b5a1c3ebcaebd82`. |
+
+A redacted handoff example built from this purchase, with portal field names, is in `docs/payments/handoff.md`.
 
 ## Live run (Arc Testnet, LIVE)
 
