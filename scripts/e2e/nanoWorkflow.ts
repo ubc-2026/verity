@@ -114,6 +114,31 @@ function verify(world: NanoWorld, authorized: Authorized, attempt: { bytes: Uint
   });
 }
 
+/**
+ * The only route from a Gateway delivery to the analyst: bytes that failed buyer
+ * verification return null and are never passed to reassess. Paid and invalid scenarios share it.
+ */
+function reassessIfVerified(analyst: Analyst, analysis: AnalyzeOutput, proposal: Proposal, verdict: Awaited<ReturnType<typeof verify>>, body: Uint8Array) {
+  if (!verdict.ok) return null;
+  const { signature: _s, ...unsigned } = verdict.receipt;
+  return analyst.reassess(analysis.risk_analysis, body, {
+    purchase_id: verdict.receipt.purchaseId,
+    contract_id: proposal.contract_id,
+    evidence_gap_id: proposal.evidence_gap_id,
+    catalog_item_id: proposal.catalog_item_id,
+    merchant_id: verdict.receipt.merchantId,
+    request_hash: verdict.receipt.requestHash,
+    content_hash_keccak256: verdict.receipt.contentHash,
+    content_sha256: `0x${createHash("sha256").update(body).digest("hex")}`,
+    receipt_digest: verdict.digest,
+    receipt_signer: unsigned.merchant,
+    verified_by: "verifyGatewayDelivery",
+    data_label: "FIXTURE",
+    payment_rail: RAIL,
+    payment_ref: verdict.receipt.paymentRef,
+  });
+}
+
 export interface NanoScenarioReport {
   name: string;
   statuses: { analysis: string; payment: string; delivery: string; batchSettlement: string; quicknode: string };
@@ -177,23 +202,7 @@ async function paidNanopayment(analyst: Analyst): Promise<NanoScenarioReport> {
     r.checks.reservation_spent_after_confirmation = world.store.reservation(purchaseId)?.status === "spent";
 
     const body = attempt.bytes;
-    const { signature: _s, ...unsigned } = verdict.receipt;
-    const reassessed = analyst.reassess(analysis.risk_analysis, body, {
-      purchase_id: purchaseId,
-      contract_id: proposal.contract_id,
-      evidence_gap_id: proposal.evidence_gap_id,
-      catalog_item_id: proposal.catalog_item_id,
-      merchant_id: verdict.receipt.merchantId,
-      request_hash: verdict.receipt.requestHash,
-      content_hash_keccak256: verdict.receipt.contentHash,
-      content_sha256: `0x${createHash("sha256").update(body).digest("hex")}`,
-      receipt_digest: verdict.digest,
-      receipt_signer: unsigned.merchant,
-      verified_by: "verifyGatewayDelivery",
-      data_label: "FIXTURE",
-      payment_rail: RAIL,
-      payment_ref: verdict.receipt.paymentRef,
-    });
+    const reassessed = reassessIfVerified(analyst, analysis, proposal, verdict, body)!;
     r.checks.assessment_revised = reassessed.status === "revised" && reassessed.changes.some((c) => c.finding === "scores.source" && c.changed);
     r.statuses = {
       analysis: reassessed.status,
@@ -274,13 +283,16 @@ async function replay(analyst: Analyst): Promise<NanoScenarioReport> {
 
 async function invalidDelivery(analyst: Analyst): Promise<NanoScenarioReport> {
   const r = report("invalid_delivery_rejected");
-  const proposal = analyst.analyze(NYC, "observed-2026-11-18", RAIL).purchase_proposal!;
+  const analysis = analyst.analyze(NYC, "observed-2026-11-18", RAIL);
+  const proposal = analysis.purchase_proposal!;
   const world = await createNanoWorld("invalid", { tamperResponses: true });
   try {
     const { purchaseId, result } = await quoteAndAuthorize(world, proposal);
     if (result.status !== "authorized") throw new Error(result.status);
     const attempt = await sendPaid(world, result);
     const tampered = await verify(world, result, attempt);
+    const callsBefore = analyst.reassessCalls;
+    const reassessed = reassessIfVerified(analyst, analysis, proposal, tampered, attempt.bytes);
     const wrongKey = await verifyGatewayDelivery({
       receiptHeader: attempt.receiptHeader,
       body: attempt.bytes,
@@ -293,6 +305,7 @@ async function invalidDelivery(analyst: Analyst): Promise<NanoScenarioReport> {
     r.checks.tamper_rejected = !tampered.ok && tampered.code === "content_mismatch";
     r.checks.wrong_signer_rejected = !wrongKey.ok && wrongKey.code === "wrong_signer";
     r.checks.nothing_recorded_as_delivered = world.ledger.status(purchaseId) === undefined;
+    r.checks.analyst_not_called = reassessed === null && analyst.reassessCalls === callsBefore;
   } finally {
     await world.close();
   }

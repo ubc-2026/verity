@@ -113,7 +113,10 @@ export class Analyst {
       ...(rail ? ["--rail", rail] : []),
     ]) as AnalyzeOutput;
   }
+  /** Times evidence was handed to the analyst. Scenarios read it to prove rejected evidence never arrives. */
+  reassessCalls = 0;
   reassess(riskAnalysis: RiskAnalysis, body: Uint8Array, provenance: Record<string, string>): Reassessment {
+    this.reassessCalls += 1;
     const input = JSON.stringify({ risk_analysis: riskAnalysis, body_b64: Buffer.from(body).toString("base64"), provenance });
     return this.#run(["reassess"], input) as Reassessment;
   }
@@ -326,6 +329,20 @@ async function verifyAndRecord(world: World, purchaseId: string, attempt: PaidAt
   });
 }
 
+/**
+ * The only route from a delivery to the analyst: evidence that failed buyer verification
+ * returns null and is never passed to reassess. The paid and tampered scenarios share it.
+ */
+function reassessIfVerified(
+  analyst: Analyst,
+  analysis: AnalyzeOutput,
+  proposal: NonNullable<AnalyzeOutput["purchase_proposal"]>,
+  verdict: Awaited<ReturnType<typeof verifyAndRecord>>,
+): Reassessment | null {
+  if (!verdict.accepted) return null;
+  return analyst.reassess(analysis.risk_analysis, verdict.body, provenance(proposal, verdict.receipt, verdict.body));
+}
+
 function provenance(proposal: NonNullable<AnalyzeOutput["purchase_proposal"]>, receipt: SignedDeliveryReceiptV1, body: Uint8Array) {
   const { signature: _sig, ...unsigned } = receipt;
   return {
@@ -432,7 +449,7 @@ async function positive(analyst: Analyst): Promise<ScenarioReport> {
       settlementWebhookStatus: chain.status,
       settleCalls: world.settlement.settleCalls,
     };
-    const reassessed = analyst.reassess(analysis.risk_analysis, accepted.body, provenance(proposal, accepted.receipt, accepted.body));
+    const reassessed = reassessIfVerified(analyst, analysis, proposal, accepted)!;
     report.reassessment = { status: reassessed.status, reason: reassessed.reason, revised: summaryOf(reassessed.revised), changes: reassessed.changes, evidenceCitation: reassessed.evidence_citation };
     report.statuses.analysis = reassessed.status;
     report.checks.assessment_revised = reassessed.status === "revised" && reassessed.changes.some((c) => c.finding === "scores.source" && c.changed);
@@ -501,6 +518,8 @@ async function tamperedDelivery(analyst: Analyst): Promise<ScenarioReport> {
     if (result.status !== "authorized") throw new Error(`unexpected ${result.status}`);
     const attempt = await sendPaid(world, result);
     const verdict = await verifyAndRecord(world, purchaseId, attempt);
+    const callsBefore = analyst.reassessCalls;
+    const reassessed = reassessIfVerified(analyst, analysis, proposal, verdict);
     await world.observeOnChain();
     const record = purchaseRecord(world.store.database, purchaseId, world.feedOptions);
     report.statuses = {
@@ -512,7 +531,7 @@ async function tamperedDelivery(analyst: Analyst): Promise<ScenarioReport> {
     report.delivery = { httpStatus: attempt.status, accepted: verdict.accepted, reason: verdict.accepted ? null : verdict.reason, settleCalls: world.settlement.settleCalls };
     report.checks.tamper_rejected = !verdict.accepted && verdict.code === "content_mismatch";
     report.checks.ledger_shows_paid_delivery_missing = record?.ledgerStatus === "Paid, delivery missing";
-    report.checks.analyst_not_called = true; // the reassess call below is skipped when verification fails
+    report.checks.analyst_not_called = reassessed === null && analyst.reassessCalls === callsBefore;
   } finally {
     await world.close();
   }
