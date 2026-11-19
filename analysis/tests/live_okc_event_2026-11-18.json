@@ -1,0 +1,60 @@
+{
+  "_note": "Real GET /v1/prediction-markets/events/NBA-2611190100-ATL-OKC-M response, read 2026-11-18 ~19:05 ET. Trimmed: images, display fields and most sibling contracts removed; description text shortened.",
+  "id": "468023",
+  "title": "Atlanta vs Oklahoma City",
+  "type": "categorical",
+  "category": "Sports",
+  "ticker": "NBA-2611190100-ATL-OKC-M",
+  "status": "active",
+  "contracts": [
+    {
+      "id": "468023-1167151",
+      "label": "Oklahoma City",
+      "description": {"data": {}, "nodeType": "document", "content": [
+        {"data": {}, "marks": [], "nodeType": "text",
+         "value": "If Oklahoma City wins the Pro Basketball game ... this market will resolve to Yes. Source Agencies, in order, are the league governing body, ESPN, Fox Sports, and the broadcast partner of the event."}
+      ]},
+      "prices": {"buy": {"yes": "0.7", "no": "0.31"}, "sell": {"yes": "0.69", "no": "0.3"}, "bestBid": "0.69", "bestAsk": "0.7", "lastTradePrice": "0.7"},
+      "status": "active",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "OKC",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-M-OKC",
+      "marketState": "open",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "isCombo": false
+    },
+    {
+      "id": "468023-1167130",
+      "label": "Atlanta",
+      "description": {"data": {}, "nodeType": "document", "content": [
+        {"data": {}, "marks": [], "nodeType": "text", "value": "If Atlanta wins the Pro Basketball game ... this market will resolve to Yes."}
+      ]},
+      "prices": {"bestBid": "0.3", "bestAsk": "0.31", "lastTradePrice": "0.29"},
+      "status": "active",
+      "termsAndConditionsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "ticker": "ATL",
+      "instrumentSymbol": "GEMI-NBA-2611190100-ATL-OKC-M-ATL",
+      "marketState": "open",
+      "expiryDate": "2026-11-20T13:00:00.000Z",
+      "isCombo": false
+    }
+  ],
+  "isLive": true,
+  "description": "Atlanta vs Oklahoma City",
+  "volume": "1392.14",
+  "volume24h": "321.14",
+  "tags": ["Pro Basketball"],
+  "expiryDate": "2026-11-20T13:00:00.000Z",
+  "startTime": "2026-11-19T01:00:00.000Z",
+  "termsLink": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+  "events": [
+    {"ticker": "NBA-2611190100-ATL-OKC-S", "title": "Atlanta vs Oklahoma City: Point Spread", "template": "sports-spread"},
+    {"ticker": "NBA-2611190100-ATL-OKC-T", "title": "Atlanta vs Oklahoma City: Total Points", "template": "sports-total"},
+    {"ticker": "NBA-2611190100-ATL-OKC-PPPTS", "title": "Atlanta vs Oklahoma City: Player Points", "template": "sports-player-props"},
+    {"ticker": "NBA-2611190100-ATL-OKC-PPREB", "title": "Atlanta vs Oklahoma City: Player Rebounds", "template": "sports-player-props"},
+    {"ticker": "NBA-2611190100-ATL-OKC-PPAST", "title": "Atlanta vs Oklahoma City: Player Assists", "template": "sports-player-props"}
+  ],
+  "template": "sports-game",
+  "sourceDetails": {"agency": "statscore-rest-api", "index": "Basketball"},
+  "volumeDelta24hPct": "-66.65"
+}

@@ -133,3 +133,45 @@ def test_no_google_gemini_anywhere():
         if f.exists():
             body = f.read_text(encoding="utf-8")
             assert "google-genai" not in body and "from google" not in body and "GEMINI_API_KEY" not in body, f
+
+
+# --- real response shape (captured 2026-11-18) ---------------------------------
+
+def _real_okc():
+    import json, pathlib
+    return json.loads((pathlib.Path(__file__).parent / "live_okc_event_2026-11-18.json").read_text(encoding="utf-8"))
+
+
+def test_real_response_shape_is_parsed():
+    r = build_live_record(_real_okc(), "Oklahoma City", now=NOW)
+    contract = next(e for e in r["rules_excerpts"] if e["id"] == "C-CONTRACT")
+    assert contract["quote"].startswith("If Oklahoma City wins")      # rich-text document flattened
+    assert "nodeType" not in contract["quote"]
+    assert r["event_terms_url_present"] is True                       # live API uses "termsLink"
+    assert r["instrument_symbol"] == "GEMI-NBA-2611190100-ATL-OKC-M-OKC"
+    assert len(r["sibling_events"]) == 5
+    assert (r["market"]["best_bid"], r["market"]["best_ask"]) == ("0.69", "0.7")
+
+
+def test_real_okc_scores_end_to_end():
+    ev = _real_okc()
+    ra, ctx = analyze_live("NBA-2611190100-ATL-OKC-M", "Oklahoma City",
+                           http_get=lambda url, timeout=None: FakeResp(ev), read_terms=False, now=NOW)
+    s = ra.scores
+    assert (s.source.score, s.liquidity.score, s.correlation.score) == (1, 1, 3)
+    assert s.ambiguity.score == 2 and "terms PDF not read" in s.ambiguity.rationale
+    assert generate_purchase_request(ra, ctx) is None                 # no material resolution gap
+
+
+def test_team_names_between_and_are_not_band_edges():
+    from verity.rules_analyst import _BANDS
+    assert not _BANDS.search("the game between Oklahoma City and Atlanta")
+    assert _BANDS.search("62°F to 63°F") and _BANDS.search("between 62 and 63")
+    assert _BANDS.search("$61,500 or above")
+
+
+def test_real_okc_with_terms_read_is_low():
+    ev = _real_okc()
+    rec = rules_analyst(build_live_record(ev, "Oklahoma City", now=NOW,
+                                          terms_text="Settles on the official result of the game between Oklahoma City and Atlanta."))
+    assert rec["analyst"]["ambiguity"]["score"] == 1
