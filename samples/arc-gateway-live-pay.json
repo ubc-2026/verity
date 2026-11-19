@@ -1,0 +1,209 @@
+{
+  "workflow": "verity-circle-gateway-live",
+  "network": "eip155:5042002",
+  "payer": "0xDd50F276dE43DdFc4D8A4dACA59901c64207b4CB",
+  "payTo": "0x0B5343FD96AF324B789fbd980f177241B7455b05",
+  "gatewayWallet": "0x0077777d7eba4688bdef3e311b846f25870a19b9",
+  "labels": {
+    "live": [
+      "Circle Gateway facilitator verify/settle",
+      "Circle transfer lookups",
+      "Arc Testnet"
+    ],
+    "fixture": [
+      "NYC contract analysis",
+      "evidence bytes served by the in-process merchant"
+    ]
+  },
+  "purchaseId": "purchase-live-6c672f194930d40dae57d10d",
+  "balancesBefore": {
+    "payerGatewayAvailable": "0.01",
+    "merchantGatewayAvailable": "0"
+  },
+  "paidRequestAttempts": [
+    {
+      "status": 200,
+      "reason": null
+    }
+  ],
+  "receipt": {
+    "version": "verity-delivery-receipt-v2",
+    "paymentRail": "circle-gateway-batched",
+    "paymentRef": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+    "authorizationNonce": "0xa532476341ff999ed38cee1eaf52a3eef10caa98df7aecb5f5552a95a24ecee2",
+    "contentHash": "0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+    "digest": "0x28a8bbff5a9fe6d689b0e189077b1b9748f78bcef9872b853f459ad818bb693d"
+  },
+  "batchHistory": [
+    {
+      "at": 1795065699,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065714,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065729,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065744,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065759,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065774,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065789,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065804,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065819,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065834,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065849,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065864,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065880,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065895,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065910,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065925,
+      "status": "received",
+      "txHash": null
+    },
+    {
+      "at": 1795065940,
+      "status": "received",
+      "txHash": null
+    }
+  ],
+  "buyerLedger": {
+    "purchaseId": "purchase-live-6c672f194930d40dae57d10d",
+    "paymentRef": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+    "acceptance": "accepted_by_gateway",
+    "batch": {
+      "status": "received",
+      "txHash": null
+    },
+    "settlement": "pending_batch",
+    "quicknode": {
+      "status": "not_claimed",
+      "reason": "Gateway settles many payments in one batch transaction and Circle does not document a per-payment link inside it, so no QuickNode match is claimed for this purchase"
+    }
+  },
+  "merchantRecord": {
+    "purchaseId": "purchase-live-6c672f194930d40dae57d10d",
+    "requestHash": "0x248235cba2314bf90cf04b81c1dfe0ba91de9127a8816208b62b7f0298ee7cef",
+    "nonce": "0xa532476341ff999ed38cee1eaf52a3eef10caa98df7aecb5f5552a95a24ecee2",
+    "verifiedAt": 1795065698,
+    "status": "delivered",
+    "settleTransaction": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+    "paymentRef": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+    "batchStatus": "received",
+    "batchTxHash": null,
+    "receipt": {
+      "version": "verity-delivery-receipt-v2",
+      "merchantId": "verity-demo-merchant",
+      "merchant": "0x0b5343fd96af324b789fbd980f177241b7455b05",
+      "purchaseId": "purchase-live-6c672f194930d40dae57d10d",
+      "quoteId": "quote-6cf89c4748b5a49a42ee16ca",
+      "requestHash": "0x248235cba2314bf90cf04b81c1dfe0ba91de9127a8816208b62b7f0298ee7cef",
+      "contentHash": "0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+      "chainId": 5042002,
+      "paymentRail": "circle-gateway-batched",
+      "paymentRef": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+      "authorizationNonce": "0xa532476341ff999ed38cee1eaf52a3eef10caa98df7aecb5f5552a95a24ecee2",
+      "issuedAt": 1795065699,
+      "signature": "0x7a9a227939a5e548fdc65abc883c0224c155b9d4ce0cbc06dc19b15be919954a1e138190ece545ae23e977ea2358d5cfba9469a5bd17e662db72b37a0d32de3b1b"
+    }
+  },
+  "facilitator": {
+    "verify": [
+      {
+        "isValid": true,
+        "payer": "0xdd50f276de43ddfc4d8a4daca59901c64207b4cb"
+      }
+    ],
+    "settle": [
+      {
+        "success": true,
+        "payer": "0xdd50f276de43ddfc4d8a4daca59901c64207b4cb",
+        "transaction": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+        "network": "eip155:5042002"
+      }
+    ],
+    "transferByNonce": [
+      {
+        "at": 1795065699,
+        "found": {
+          "id": "018a216c-72ff-454b-94b1-9bfbdf637f2d",
+          "status": "received",
+          "amount": "1000",
+          "fromAddress": "0xdd50f276de43ddfc4d8a4daca59901c64207b4cb",
+          "toAddress": "0x0b5343fd96af324b789fbd980f177241b7455b05",
+          "nonce": "0xa532476341ff999ed38cee1eaf52a3eef10caa98df7aecb5f5552a95a24ecee2",
+          "txHash": null
+        }
+      }
+    ]
+  },
+  "assumptions": {
+    "1_derived_nonce_accepted": true,
+    "2_settle_transaction": [
+      "018a216c-72ff-454b-94b1-9bfbdf637f2d"
+    ],
+    "3_search_by_nonce_right_after_settle": [
+      "found 018a216c-72ff-454b-94b1-9bfbdf637f2d"
+    ],
+    "4_transfer_has_txHash": "not yet (status received)"
+  },
+  "balancesAfter": {
+    "payerGatewayAvailable": "0.009",
+    "merchantGatewayAvailable": "0"
+  },
+  "ranAt": "2026-11-19T05:25:40.492Z"
+}

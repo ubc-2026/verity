@@ -16,6 +16,12 @@ export type PaymentRail = "arc-eip3009" | "circle-gateway-batched";
 export const ARC_TESTNET_NETWORK = "eip155:5042002";
 /** Circle contract-addresses page, testnet, domain 26. */
 export const ARC_TESTNET_GATEWAY_WALLET: Hex = "0x0077777d7eba4688bdef3e311b846f25870a19b9";
+/**
+ * Circle Gateway testnet API. BatchFacilitatorClient defaults to the mainnet host
+ * (https://gateway-api.circle.com), which answers `unsupported_network` for Arc Testnet;
+ * the SDK's GatewayClient uses this host for testnet chains. The client appends /v1/x402/*.
+ */
+export const ARC_TESTNET_GATEWAY_API = "https://gateway-api-testnet.circle.com";
 export const GATEWAY_BATCHING_NAME = "GatewayWalletBatched";
 /** Version 1 is the USDC batching domain in the SDK (version 2 adds a salt and is for other assets). */
 export const GATEWAY_BATCHING_VERSION = "1";
@@ -124,12 +130,12 @@ function toTransfer(raw: Record<string, unknown>): GatewayTransfer {
 /**
  * Live provider, opt-in only. It is built only when VERITY_PAYMENT_RAIL=circle-gateway-batched
  * and a seller key is supplied by the caller; this module never reads a key itself.
- * Not exercised by any test or fixture command.
+ * Not exercised by any test or fixture command; used only by the LIVE runner scripts/arc-gateway.ts.
  */
 export async function createLiveGatewayProvider(args: { sellerPrivateKey: Hex; rpcUrl?: string }): Promise<GatewayProvider> {
   const server = await import("@circle-fin/x402-batching/server");
   const client = await import("@circle-fin/x402-batching/client");
-  const facilitator = new server.BatchFacilitatorClient();
+  const facilitator = new server.BatchFacilitatorClient({ url: ARC_TESTNET_GATEWAY_API });
   const seller = new client.GatewayClient({ chain: "arcTestnet", privateKey: args.sellerPrivateKey, ...(args.rpcUrl ? { rpcUrl: args.rpcUrl } : {}) });
   return {
     mode: "live",
