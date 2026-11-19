@@ -34,6 +34,8 @@ export interface CatalogItem {
   affects: "resolution_risk" | "outcome_probability";
   /** Catalog parameter names the merchant requires besides contractId. */
   requiredParameters: readonly string[];
+  /** Payment rail; absent means the direct EIP-3009 rail. */
+  rail?: "arc-eip3009" | "circle-gateway-batched";
 }
 
 /**
@@ -65,6 +67,8 @@ export interface BuildRequestInput {
   windowSeconds?: number;
   /** Backdating of validAfter to tolerate chain clock skew. */
   clockSkewSeconds?: number;
+  /** Gateway rail only: the authorization window may run past quote expiry (Circle requires 7 days). */
+  allowBeyondQuoteExpiry?: boolean;
 }
 
 function sameAddress(a: string, b: string): boolean {
@@ -113,7 +117,7 @@ export function buildResearchRequest(input: BuildRequestInput): ResearchRequestV
   if (amount > proposal.maxAmount) throw new ResearchRequestError("quote exceeds proposal price ceiling");
   if (quote.expiresAt <= now) throw new ResearchRequestError("quote expired");
 
-  const validBefore = Math.min(now + windowSeconds, quote.expiresAt);
+  const validBefore = input.allowBeyondQuoteExpiry ? now + windowSeconds : Math.min(now + windowSeconds, quote.expiresAt);
   return parseResearchRequest({
     version: RESEARCH_REQUEST_VERSION,
     purchaseId: input.purchaseId,

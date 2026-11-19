@@ -1,8 +1,11 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import type { Hex } from "viem";
-import { RESEARCH_RESOURCES, resourceByHash, resourceById } from "./catalog.ts";
+import { RESEARCH_RESOURCES, resourceByHash, resourceById, resourceByUrl } from "./catalog.ts";
+import { GATEWAY_AUTH_VALIDITY_SECONDS, gatewayAuthorizationDomain, type GatewayProvider } from "./circleGateway.ts";
+import { deliverGatewayPaidRequest, GatewayDeliveryStore, type GatewayDeliveryResponse } from "./gatewayDelivery.ts";
 import type { ReceiptSigner } from "./deliveryReceipt.ts";
+import type { GatewayReceiptSigner } from "./gatewayReceipt.ts";
 import type { MerchantConfig, PaidRequest, SavedQuote } from "./merchant.ts";
 import {
   deliverPaidRequest,
@@ -65,7 +68,7 @@ export class MerchantService {
   readonly deliveries: MerchantDeliveryStore;
   readonly #quotes: QuoteStore;
   readonly #config: MerchantConfig;
-  readonly #signer: ReceiptSigner;
+  readonly #signer: ReceiptSigner & GatewayReceiptSigner;
   readonly #settlement: DeliverySettlementAdapter;
   readonly #now: () => number;
   readonly #quoteTtlSeconds: number;
@@ -74,7 +77,7 @@ export class MerchantService {
 
   constructor(options: {
     config: MerchantConfig;
-    signer: ReceiptSigner;
+    signer: ReceiptSigner & GatewayReceiptSigner;
     settlement: DeliverySettlementAdapter;
     now: () => number;
     /** Bearer token -> buyer session. Tokens are compared by SHA-256 digest in constant time. */
@@ -84,6 +87,8 @@ export class MerchantService {
     quoteTtlSeconds?: number;
     /** Overrides the bytes served for a content hash. Tests use it to simulate a merchant fault. */
     artifact?: (contentHash: Hex) => Uint8Array | undefined;
+    /** Opt-in Circle Gateway rail for catalog items with rail "circle-gateway-batched". Absent: those items return 503. */
+    gateway?: GatewayProvider;
   }) {
     this.#config = options.config;
     this.#signer = options.signer;
@@ -95,10 +100,16 @@ export class MerchantService {
     const path = options.dbPath ?? ":memory:";
     this.deliveries = new MerchantDeliveryStore(path);
     this.#quotes = new QuoteStore(path);
+    this.#gateway = options.gateway;
+    this.gatewayDeliveries = new GatewayDeliveryStore(path);
   }
+
+  readonly gatewayDeliveries: GatewayDeliveryStore;
+  readonly #gateway: GatewayProvider | undefined;
 
   close() {
     this.deliveries.close();
+    this.gatewayDeliveries.close();
     this.#quotes.close();
   }
 
@@ -181,8 +192,35 @@ export class MerchantService {
     return saved;
   }
 
-  /** The only paid path. Verification, settlement, and the receipt all happen inside deliverPaidRequest. */
-  deliver(input: PaidRequest): Promise<DeliveryResponse> {
+  /**
+   * The only paid path. Direct-rail items go to deliverPaidRequest; Gateway-rail items go to
+   * deliverGatewayPaidRequest. Both verify the binding first and settle at most once per purchase.
+   */
+  async deliver(input: PaidRequest): Promise<DeliveryResponse | GatewayDeliveryResponse> {
+    let rail: string | undefined;
+    try {
+      rail = resourceByUrl(new URL(input.target, this.#config.origin).href)?.item.rail;
+    } catch {
+      rail = undefined; // verifyPaidRequest reports the bad target
+    }
+    if (rail === "circle-gateway-batched") {
+      if (!this.#gateway) return { status: 503, reason: "Circle Gateway rail is not enabled on this merchant" };
+      return deliverGatewayPaidRequest(input, {
+        config: {
+          ...this.#config,
+          authorizationDomain: gatewayAuthorizationDomain(),
+          authorizationMayOutliveQuote: true,
+          maxAuthorizationWindowSeconds: GATEWAY_AUTH_VALIDITY_SECONDS + 60,
+        },
+        loadQuote: (quoteId) => this.#quotes.get(quoteId),
+        hasArtifact: (contentHash) => resourceByHash(contentHash) !== undefined,
+        now: this.#now,
+        gateway: this.#gateway,
+        deliveries: this.gatewayDeliveries,
+        loadArtifact: (contentHash) => this.#artifact(contentHash),
+        receiptSigner: this.#signer,
+      });
+    }
     return deliverPaidRequest(input, {
       config: this.#config,
       loadQuote: (quoteId) => this.#quotes.get(quoteId),

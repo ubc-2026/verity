@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { dirname, join } from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
+import { runNanoWorkflow } from "../scripts/e2e/nanoWorkflow.ts";
 import { findPython, runWorkflow } from "../scripts/e2e/workflow.ts";
 
 const analysisDir = join(dirname(fileURLToPath(import.meta.url)), "..", "analysis");
@@ -30,5 +31,16 @@ describe("connected fixture workflow", () => {
     const positive = report.scenarios[0]!;
     assert.equal(positive.statuses.ledger, "Reconciled");
     assert.equal(positive.reassessment?.status, "revised");
+  });
+
+  it("runs the Circle Gateway nanopayment loop with mocked settlement", { skip, timeout: 120_000 }, async () => {
+    const report = await runNanoWorkflow({ analysisDir, python });
+    assert.deepEqual(report.failedChecks, []);
+    assert.deepEqual(report.scenarios.map((s) => s.name), [
+      "free_evidence_resolves_gap",
+      "paid_nanopayment_changes_assessment",
+      "replay_without_second_charge",
+      "invalid_delivery_rejected",
+    ]);
   });
 });

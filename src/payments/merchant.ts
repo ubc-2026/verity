@@ -22,6 +22,17 @@ export interface MerchantConfig {
   /** The token's EIP-712 domain. Arc Testnet USDC values are pending qualification. */
   tokenDomain: { name: string; version: string };
   maxAuthorizationWindowSeconds: number;
+  /**
+   * Domain the EIP-3009 authorization is signed under when it is not the token's own
+   * (Circle Gateway: GatewayWalletBatched v1, verifyingContract = Gateway Wallet).
+   */
+  authorizationDomain?: { name: string; version: string; verifyingContract: Hex };
+  /**
+   * Gateway rail only: Circle requires authorizations valid for 7 days, longer than any
+   * quote. The quote must still be unexpired when the paid request arrives, and the window
+   * is still capped by maxAuthorizationWindowSeconds.
+   */
+  authorizationMayOutliveQuote?: boolean;
 }
 
 export interface SavedQuote extends VerityQuote {
@@ -145,7 +156,7 @@ export async function verifyPaidRequest(input: PaidRequest, deps: MerchantDeps):
   if (now <= validAfter || now >= validBefore) return fail(402, "authorization not currently valid");
   if (now >= quote.expiresAt) return fail(410, "quote expired");
   // The buyer caps validBefore at quote expiry; enforce it independently here.
-  if (validBefore > quote.expiresAt) return fail(402, "authorization outlives quote");
+  if (validBefore > quote.expiresAt && config.authorizationMayOutliveQuote !== true) return fail(402, "authorization outlives quote");
 
   // Rebuild and commit. Values come from the quote, route, body, and authorization.
   let request: ResearchRequestV1;
@@ -178,7 +189,9 @@ export async function verifyPaidRequest(input: PaidRequest, deps: MerchantDeps):
   let signer: Hex;
   try {
     signer = await recoverTypedDataAddress({
-      domain: { ...config.tokenDomain, chainId: config.chainId, verifyingContract: config.token },
+      domain: config.authorizationDomain
+        ? { ...config.authorizationDomain, chainId: config.chainId }
+        : { ...config.tokenDomain, chainId: config.chainId, verifyingContract: config.token },
       types: transferWithAuthorizationTypes,
       primaryType: "TransferWithAuthorization",
       message: {

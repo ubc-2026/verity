@@ -1,6 +1,7 @@
 import { randomBytes } from "node:crypto";
 import type { Hex } from "viem";
 import { buildResearchRequest, type CatalogItem } from "./buyer.ts";
+import { GATEWAY_AUTH_VALIDITY_SECONDS } from "./circleGateway.ts";
 import { explainDecision, type DecisionExplanation } from "./explain.ts";
 import { authorizeStoredPurchase, type AuthorizedPayment, type PaymentSigner } from "./paymentService.ts";
 import { approvalTypedData, assessPolicy, parseQuoteAmount, type PolicyDecision } from "./policy.ts";
@@ -89,7 +90,9 @@ export class BuyerService {
     if (existing) return this.#continue(existing.request, input);
 
     const amount = parseQuoteAmount(quote.amount);
+    const rail = this.#catalog.get(accepted.selection.catalogItemId)?.rail ?? "arc-eip3009";
     const decision = assessPolicy({
+      rail,
       amount,
       now,
       expiresAt: quote.expiresAt,
@@ -120,12 +123,15 @@ export class BuyerService {
         catalogParameters: accepted.catalogParameters,
         payer: this.#signer.address,
         now,
+        // Circle requires Gateway authorizations valid for 7 days; the merchant still refuses an expired quote.
+        ...(rail === "circle-gateway-batched" ? { windowSeconds: GATEWAY_AUTH_VALIDITY_SECONDS, allowBeyondQuoteExpiry: true } : {}),
       });
       this.#store.reserveAndRecord({
         missionId: this.#missionId,
         request,
         now,
         materialUnresolvedGap: accepted.materialUnresolvedGap,
+        rail,
         ...(this.#saltSource ? { saltSource: this.#saltSource } : {}),
       });
     } catch (error) {
@@ -146,7 +152,9 @@ export class BuyerService {
     const limits = this.#store.policy;
     const effective: PolicyDecision =
       decision ??
-      (amount > limits.gapMax
+      (record.rail === "circle-gateway-batched"
+        ? { decision: "allow", tier: "nanopayment" }
+        : amount > limits.gapMax
         ? { decision: "needs_approval", tier: "owner" }
         : { decision: "allow", tier: amount > limits.autoApproveMax ? "gap" : "auto" });
 

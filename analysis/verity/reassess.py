@@ -92,7 +92,11 @@ def _settlement_version(original: RiskAnalysisV1, gap: EvidenceGap, doc: Any, pr
     citation = Citation(
         id=cid,
         source=f"merchant {prov.merchant_id}, purchase {prov.purchase_id}, receipt {prov.receipt_digest}",
-        field_or_rule=f"{prov.data_label} evidence from catalog item {prov.catalog_item_id} (DeliveryReceiptV1 verified, tx {prov.tx_hash})",
+        field_or_rule=(
+            f"{prov.data_label} evidence from catalog item {prov.catalog_item_id} "
+            + (f"(DeliveryReceiptV1 verified, tx {prov.tx_hash})" if prov.payment_rail == "arc-eip3009"
+               else f"(DeliveryReceiptV2 verified, Circle Gateway transfer {prov.payment_ref})")
+        ),
         quote=ev.summary,
     )
 
