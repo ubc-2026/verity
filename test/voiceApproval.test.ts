@@ -216,6 +216,17 @@ describe("one-time spoken code (stranger answers the phone)", () => {
     const result = await new ElevenLabsOwnerCaller({ config, fetch, sleep: async (ms) => void (now += ms), clock: () => now, pollMs: 1000 }).call({ purchaseId: PURCHASE, summary: "x", timeoutMs: 60_000 });
     assert.equal(result.spokenCode, "4821");
   });
+
+  it("keeps leading zeros when the spoken code arrives as a number", async () => {
+    const config = { apiKey: "k", agentId: "a", agentPhoneNumberId: "p", ownerPhoneNumber: "+1" };
+    const fetch = async (url: string) =>
+      url.endsWith("/outbound-call")
+        ? { ok: true, status: 200, json: async () => ({ success: true, conversation_id: "c" }) }
+        : { ok: true, status: 200, json: async () => ({ status: "done", analysis: { data_collection_results: { owner_decision: { value: "yes" }, spoken_code: { value: 42 } } } }) };
+    let now = 0;
+    const result = await new ElevenLabsOwnerCaller({ config, fetch, sleep: async (ms) => void (now += ms), clock: () => now, pollMs: 1000 }).call({ purchaseId: PURCHASE, summary: "x", timeoutMs: 60_000 });
+    assert.equal(result.spokenCode, "0042");
+  });
 });
 
 describe("code registration for the live check", () => {
@@ -353,6 +364,22 @@ describe("ElevenLabs owner caller", () => {
     const caller = new ElevenLabsOwnerCaller({ config, fetch, sleep: async (ms) => void (sleeps.push(ms), (now += ms)), clock: () => now, pollMs: 4000 });
     await caller.call({ purchaseId: PURCHASE, summary: "buy X", timeoutMs: 10_000 });
     assert.equal(sleeps.reduce((a, b) => a + b, 0), 10_000);
+  });
+
+  it("refuses a zero poll interval and passes a timeout to each poll", async () => {
+    const sleeps: number[] = [];
+    const signals: unknown[] = [];
+    const fetch = async (url: string, init?: { signal?: AbortSignal }) => {
+      if (url.endsWith("/outbound-call")) return { ok: true, status: 200, json: async () => ({ success: true, conversation_id: "conv-x" }) };
+      signals.push(init?.signal);
+      return { ok: true, status: 200, json: async () => ({ status: "in-progress" }) };
+    };
+    let now = 0;
+    const caller = new ElevenLabsOwnerCaller({ config, fetch, sleep: async (ms) => void (sleeps.push(ms), (now += ms)), clock: () => now, pollMs: 0 });
+    await caller.call({ purchaseId: PURCHASE, summary: "buy X", timeoutMs: 9_000 });
+    assert.ok(sleeps.every((ms) => ms > 0), "no zero-length sleeps");
+    assert.ok(sleeps.length <= 3, "falls back to the 3 s default");
+    assert.ok(signals.length > 0 && signals.every((s) => s instanceof AbortSignal));
   });
 
   it("gives up at the timeout when the call never finishes", async () => {

@@ -147,8 +147,12 @@ it("rejects invalid input and returns a safe error when the history connection i
 it("falls back to the terms PDF in a weather contract description", () => {
   const pdf = "https://assets.gemini.com/predictions/terms_and_conditions/Weather.pdf";
   assert.equal(termsUrlOf({ description: `Rules: ${pdf}` }, {}), pdf);
-  assert.equal(termsUrlOf({ termsAndConditionsUrl: "https://a/c.pdf", description: pdf }, { termsLink: "https://a/e.pdf" }), "https://a/c.pdf");
-  assert.equal(termsUrlOf({ description: pdf }, { termsLink: "https://a/e.pdf" }), "https://a/e.pdf");
+  const c = "https://assets.gemini.com/c.pdf";
+  const e = "https://assets.gemini.com/e.pdf";
+  assert.equal(termsUrlOf({ termsAndConditionsUrl: c, description: pdf }, { termsLink: e }), c);
+  assert.equal(termsUrlOf({ description: pdf }, { termsLink: e }), e);
+  assert.equal(termsUrlOf({ termsAndConditionsUrl: "javascript:alert(1)", description: pdf }, {}), pdf, "a non-https link is dropped");
+  assert.equal(termsUrlOf({ termsAndConditionsUrl: "https://evil.example/t.pdf" }, { termsLink: "http://assets.gemini.com/t.pdf" }), null, "only https on assets.gemini.com");
   assert.equal(termsUrlOf({ description: `${pdf} https://assets.gemini.com/predictions/terms_and_conditions/B.pdf` }, {}), null);
   assert.equal(termsUrlOf({}, {}), null);
 });

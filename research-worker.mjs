@@ -187,10 +187,21 @@ function upstreamFailure(source, fetchedAt) {
 
 const TERMS_PDF = /https:\/\/assets\.gemini\.com\/predictions\/terms_and_conditions\/[^\s"'()<>\\]+?\.pdf/gi;
 
+function geminiTermsUrl(value) {
+  if (typeof value !== "string" || !value) return null;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === "assets.gemini.com" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
 // Gemini weather events leave termsLink and termsAndConditionsUrl empty and link the terms PDF only in the
-// contract description. Use that link when exactly one terms PDF appears, as analysis/verity/live.py does.
+// contract description. Use that link when exactly one terms PDF appears. Feed links are kept only when
+// they are https on assets.gemini.com, since the UI renders them as links.
 export function termsUrlOf(contract, event) {
-  const direct = contract?.termsAndConditionsUrl || event?.termsLink;
+  const direct = geminiTermsUrl(contract?.termsAndConditionsUrl) || geminiTermsUrl(event?.termsLink);
   if (direct) return direct;
   const found = new Set(JSON.stringify(contract?.description ?? "").match(TERMS_PDF) ?? []);
   return found.size === 1 ? [...found][0] : null;

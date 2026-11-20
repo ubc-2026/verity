@@ -198,7 +198,7 @@ export function ownerCallerFromEnv(env: Record<string, string | undefined>): Ele
   return config ? new ElevenLabsOwnerCaller({ config }) : undefined;
 }
 
-type Fetch = (url: string, init?: { method?: string; headers?: Record<string, string>; body?: string }) => Promise<{
+type Fetch = (url: string, init?: { method?: string; headers?: Record<string, string>; body?: string; signal?: AbortSignal }) => Promise<{
   ok: boolean;
   status: number;
   json(): Promise<unknown>;
@@ -230,7 +230,9 @@ export class ElevenLabsOwnerCaller implements OwnerCaller {
     this.#fetch = options.fetch ?? (globalThis.fetch as unknown as Fetch);
     this.#sleep = options.sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
     this.#clock = options.clock ?? Date.now;
-    this.#pollMs = options.pollMs ?? 3000;
+    // A zero or invalid interval would poll in a tight loop until the deadline.
+    const pollMs = options.pollMs ?? 3000;
+    this.#pollMs = Number.isFinite(pollMs) && pollMs >= 250 ? pollMs : 3000;
   }
 
   async call(args: { purchaseId: string; summary: string; timeoutMs: number }): Promise<OwnerCallResult> {
@@ -265,7 +267,9 @@ export class ElevenLabsOwnerCaller implements OwnerCaller {
         analysis?: { data_collection_results?: Record<string, { value?: unknown } | undefined> };
       };
       try {
-        const response = await this.#fetch(`${base}/v1/convai/conversations/${encodeURIComponent(conversationId)}`, { headers });
+        // A stalled request must not outlive the deadline.
+        const signal = AbortSignal.timeout(Math.max(1, Math.min(10_000, deadline - this.#clock())));
+        const response = await this.#fetch(`${base}/v1/convai/conversations/${encodeURIComponent(conversationId)}`, { headers, signal });
         if (!response.ok) continue;
         body = (await response.json()) as typeof body;
       } catch {
@@ -276,7 +280,8 @@ export class ElevenLabsOwnerCaller implements OwnerCaller {
       const value = body.analysis?.data_collection_results?.[field]?.value;
       const verbal = typeof value === "string" ? value.trim().toLowerCase() : "";
       const rawCode = body.analysis?.data_collection_results?.[this.#config.codeField ?? "spoken_code"]?.value;
-      const spokenCode = typeof rawCode === "string" || typeof rawCode === "number" ? String(rawCode) : null;
+      // A numeric value loses leading zeros ("0042" arrives as 42); codes are four digits.
+      const spokenCode = typeof rawCode === "string" ? rawCode : typeof rawCode === "number" && Number.isInteger(rawCode) && rawCode >= 0 ? String(rawCode).padStart(4, "0") : null;
       return { verbal: verbal === "yes" ? "yes" : verbal === "no" ? "no" : "no_answer", conversationId, spokenCode };
     }
     return { verbal: "no_answer", conversationId };
