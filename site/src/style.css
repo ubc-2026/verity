@@ -599,7 +599,7 @@ html.landing .lp{display:block}
 .signin,.signout{display:none}
 html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 .mobile-menu .signin,.mobile-menu .signout{width:100%}
-@media (max-width:1440px){html.demo-mode .nav-cta a[href="#spec"],html.signed-in .nav-cta a[href="#spec"]{display:none}}
+@media (max-width:1440px){.nav-cta a[href="#spec"]{display:none}} /* room for the account button the edge adds */
 .lp-only-in{display:none}html.signed-in .lp-only-in{display:inline}html.signed-in p.lp-only-in{display:block}html.signed-in .lp-only-out{display:none!important}
 .lp-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--margin)}
 .lp-bar{position:sticky;top:0;z-index:20;background:rgba(9,12,16,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border-hairline)}
