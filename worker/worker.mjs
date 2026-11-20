@@ -35,7 +35,7 @@ let chosenModel = null;
 let candidates = null;
 let lastGemini = { model: null, outcome: null, ms: null, at: null };
 async function listModels(env) {
-  if (candidates) return candidates;
+  if (candidates && candidates.length) return candidates;
   try {
     const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', {
       redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'x-goog-api-key': env.GEMINI_API_KEY },

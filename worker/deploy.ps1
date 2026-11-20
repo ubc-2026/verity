@@ -1,4 +1,4 @@
-# Redeploys the verity-gemini Worker (v7):
+# Redeploys the verity-gemini Worker (v8):
 #   1. Fixes the Google Gemini call (Workers only allow redirect 'follow' or 'manual').
 #   2. If the Gemini model name is retired (404), picks the newest available Flash model automatically.
 #   3. Adds a 'forecast' mode: Google Gemini AND Workers AI each estimate the outcome
@@ -9,7 +9,9 @@
 #      Forecasts also read Exa research about the market when the key is set.
 #   6. v7: turns Gemini 'thinking' down so answers return in seconds, tries the next model on a
 #      timeout, and adds GET /status (which model is in use; never shows keys).
-#   7. Adds Cloudflare Workers AI as the backup LLM. If Google Gemini fails, is out of
+#   7. v8: default model is gemini-3.5-flash-lite (the one Google now serves for this key), and a
+#      failed model lookup is never cached, so fresh Worker instances don't hit 404s.
+#   8. Adds Cloudflare Workers AI as the backup LLM. If Google Gemini fails, is out of
 #      quota, or has no key, the Worker answers with @cf/meta/llama-3.3-70b-instruct-fp8-fast.
 # Run it in PowerShell from any folder. It does NOT ask for your API key again:
 # the GEMINI_API_KEY secret you saved earlier stays attached to the Worker.
@@ -29,7 +31,7 @@ preview_urls = false
 
 [vars]
 SITE_ORIGIN = "https://verityresearch.us"
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
 [ai]
@@ -82,7 +84,7 @@ let chosenModel = null;
 let candidates = null;
 let lastGemini = { model: null, outcome: null, ms: null, at: null };
 async function listModels(env) {
-  if (candidates) return candidates;
+  if (candidates && candidates.length) return candidates;
   try {
     const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', {
       redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'x-goog-api-key': env.GEMINI_API_KEY },
@@ -383,7 +385,7 @@ export default {
             throw 'Deployment failed.'
         }
         # The GEMINI_API_KEY secret you already saved stays in place across deploys.
-        $answer = Read-Host 'Add or replace your Exa API key now? Type y to paste it into Wrangler (hidden), or press Enter to skip'
+        $answer = Read-Host 'Add or replace your Exa API key now? Press Enter to keep the saved key, or type y to paste a new one into Wrangler (hidden)'
         if ($answer -eq 'y') {
             npx.cmd --yes wrangler@4 secret put EXA_API_KEY --config "$config"
             if ($LASTEXITCODE -ne 0) { throw 'Saving the Exa key failed.' }
