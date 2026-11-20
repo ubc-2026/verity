@@ -93,7 +93,8 @@ def test_unknown_outcome_lists_labels():
         build_live_record(EVENT, "Nope", now=NOW)
 
 
-def _sfo_research(monkeypatch, *, selection="The first published version of the applicable report is used.", report_status=200):
+def _sfo_research(monkeypatch, *, selection="The first published version of the applicable report is used.",
+                  report_status=200, climate_date="NOVEMBER 19 2026", terms_text="Gemini's official weather terms."):
     event = deepcopy(EVENT)
     event["ticker"] = "WXHIGH-SFO-2611200459"
     event["title"] = "Highest temperature in San Francisco on November 19, 2026?"
@@ -111,12 +112,16 @@ def _sfo_research(monkeypatch, *, selection="The first published version of the 
         if target.endswith("/events/" + event["ticker"]):
             return FakeResp(event)
         assert target == NWS_CLISFO_URL
-        return FakeResp(content=b"CLISFO\nSAN FRANCISCO AIRPORT CLIMATE SUMMARY\nVALID TODAY AS OF 0400 PM LOCAL TIME.", status=report_status)
+        summary = "THE SAN FRANCISCO AIRPORT CLIMATE SUMMARY"
+        if climate_date:
+            summary += f" FOR {climate_date}..."
+        report = f"CLISFO\n138 AM PST FRI NOV 20 2026\n{summary}\nVALID TODAY AS OF 0400 PM LOCAL TIME."
+        return FakeResp(content=report.encode(), status=report_status)
 
     def terms(target, _get):
         assert target == url
         calls.append(target)
-        return "Gemini's official weather terms.", None
+        return terms_text, None
 
     monkeypatch.setattr("verity.live.fetch_terms_text", terms)
     risk, ctx = analyze_live(event["ticker"], contract["label"], http_get=get, now=NOW)
@@ -166,6 +171,9 @@ def test_sfo_live_free_sources_precede_exact_live_catalog(monkeypatch):
 
 @pytest.mark.parametrize("selection,report_status,status", [
     ("Settlement shall use the first full-day NWS daily report.", 200, "resolved"),
+    ("Settlement must use the first full-day NWS daily report.", 200, "resolved"),
+    ("Settlement shall use the first full-day NWS daily report. If the maximum temperature is 58°F, Yes pays out.",
+     200, "resolved"),
     ("The first published version of the applicable report is used.", 404, "failed"),
 ])
 def test_sfo_recognizes_resolved_or_failed_official_checks(monkeypatch, selection, report_status, status):
@@ -174,6 +182,53 @@ def test_sfo_recognizes_resolved_or_failed_official_checks(monkeypatch, selectio
     log = []
     assert generate_purchase_request(risk, ctx, log) is None
     assert any(f"free research {status}" in line for line in log)
+
+
+@pytest.mark.parametrize("terms_text", [
+    "If the full-day report is unavailable, the intraday report controls.",
+    "The intraday report controls.",
+    "Settlement will use the final full-day NWS daily report.",
+])
+def test_sfo_keeps_conditional_or_conflicting_issuances_unresolved(monkeypatch, terms_text):
+    first = "Settlement shall use the first full-day NWS daily report."
+    for selection, terms in [(f"{first} {terms_text}", "Unrelated terms."), (first, terms_text)]:
+        risk, ctx, _calls = _sfo_research(monkeypatch, selection=selection, terms_text=terms)
+        ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+
+        log = []
+        assert generate_purchase_request(risk, ctx, log) is not None
+        assert any("free research unresolved" in line for line in log)
+
+        ctx.complete_json = lambda *_args: pytest.fail("An unresolved issuance condition needs supporting evidence")
+        assert generate_purchase_request(risk, ctx) is not None
+
+
+@pytest.mark.parametrize("climate_date", ["NOVEMBER 18 2026", "NOVEMBER 20 2026", "NOVEMBER 31 2026", None])
+@pytest.mark.parametrize("use_model", [False, True])
+def test_sfo_requires_report_for_exact_climate_date(monkeypatch, climate_date, use_model):
+    risk, ctx, _calls = _sfo_research(monkeypatch, climate_date=climate_date)
+    ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+    if use_model:
+        ctx.complete_json = lambda *_args: pytest.fail("The model must not run before the SFO report date is verified")
+
+    log = []
+    assert generate_purchase_request(risk, ctx, log) is None
+    assert any("free research failed" in line and "2026-11-19" in line for line in log)
+
+
+def test_sfo_can_use_model_after_matching_official_check(monkeypatch):
+    risk, ctx, calls = _sfo_research(monkeypatch)
+    ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+    model_calls = []
+
+    def complete(*_args):
+        assert calls[-1] == NWS_CLISFO_URL
+        model_calls.append(1)
+        return {"resolved": False, "conclusion": "Issuance is unclear.", "reasoning": "No explicit selection."}
+
+    ctx.complete_json = complete
+    assert generate_purchase_request(risk, ctx) is not None
+    assert model_calls == [1]
 
 
 def test_analyze_live_end_to_end_with_fakes():

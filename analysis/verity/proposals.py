@@ -22,7 +22,7 @@ from decimal import Decimal
 from typing import Any, Optional
 
 from .fixtures import FixtureContext, fmt_utc, parse_utc
-from .research import ResearchResult, research_free_check, research_gap
+from .research import SFO_CHECK, ResearchResult, research_free_check, research_gap
 from .schemas import PurchaseProposalV1, RiskAnalysisV1
 
 log = logging.getLogger("verity.decisions")
@@ -103,20 +103,23 @@ _WEATHER_HIGH_TICKER = re.compile(r"WXHIGH-(NYC|SFO)-(\d{10})")
 _WEATHER_STATIONS = {"NYC": ("Central Park, NY (CLINYC)", 5), "SFO": ("San Francisco Airport, CA (CLISFO)", 8)}
 
 
+def _weather_market_params(event_ticker: Optional[str]) -> dict[str, str]:
+    match = _WEATHER_HIGH_TICKER.fullmatch(event_ticker or "")
+    if not match:
+        return {}
+    city, ticker_time = match.groups()
+    station, offset = _WEATHER_STATIONS[city]
+    # The ticker ends in a UTC close time during the station's climate day.
+    try:
+        close = datetime.strptime(ticker_time, "%y%m%d%H%M")
+    except ValueError:
+        return {}
+    return {"station": station, "date": (close - timedelta(hours=offset)).date().isoformat()}
+
+
 def _catalog_params(ra: RiskAnalysisV1, item: dict[str, Any]) -> dict[str, str]:
     """Parameters for the catalog item, taken from this market. A blank value means unknown."""
-    known: dict[str, str] = {}
-    match = _WEATHER_HIGH_TICKER.fullmatch(ra.event_ticker or "")
-    if match:
-        city, ticker_time = match.groups()
-        station, offset = _WEATHER_STATIONS[city]
-        # The ticker ends in a UTC close time during the station's climate day.
-        try:
-            close = datetime.strptime(ticker_time, "%y%m%d%H%M")
-        except ValueError:
-            close = None
-        if close is not None:
-            known = {"station": station, "date": (close - timedelta(hours=offset)).date().isoformat()}
+    known = _weather_market_params(ra.event_ticker)
     return {p: known.get(p, "") for p in item["parameters"]}
 
 
@@ -154,44 +157,24 @@ def generate_purchase_request(
         _record(decision_log, f"[{ra.contract_id}] no purchase: no material resolution gap (research action: {ra.research_action}).")
         return None
 
+    complete_json = ctx.complete_json if ctx.free_check_scenario is None else None
     for g in material:
         cached = ctx.cached_evidence.get((ra.contract_id, g.id))
         if cached:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: cached evidence already answers it ({cached}).")
             continue
 
-        if ctx.complete_json is not None and ctx.free_check_scenario is None:
-            market = ctx.markets.get(ra.contract_id) or {}
-            found = research_gap(
-                ra, g,
-                terms_url=market.get("terms_url"),
-                fetch_text=ctx.fetch_text,
-                complete_json=ctx.complete_json,
-            )
-            _record(decision_log, _research_line(ra.contract_id, g.id, found))
-            if found.status == "failed":
-                _record(decision_log, f"[{ra.contract_id}] no purchase: model research failed, so the gap was not validated.")
-                return None
-            if found.resolved:
-                _record(decision_log, f"[{ra.contract_id}] skip {g.id}: the model read resolved it; nothing to buy.")
-                continue
-            item = _catalog_match(ctx, ra, g.gap_type)
-            if item is None:
-                _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no allowlisted catalog item answers gap type {g.gap_type!r}.")
-                continue
-            proposal = _emit_proposal(decision_log, ra, g, item, ctx, now, found.conclusion)
-            if proposal is None:
-                continue
-            return proposal
-
-        if not g.free_checks:
+        if not g.free_checks and complete_json is None:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: no free official-source check is configured for this gap, so free evidence was not ruled out.")
             continue
 
         answered = False
         research_note: Optional[str] = None
         skip_gap = False
+        needs_issuance_confirmation = False
         for check_id in g.free_checks:
+            if complete_json is not None and not (ctx.live_research and check_id == SFO_CHECK):
+                continue
             if ctx.live_research and ctx.free_check_scenario is None:
                 market = ctx.markets.get(ra.contract_id) or {}
                 found = research_free_check(
@@ -200,6 +183,7 @@ def generate_purchase_request(
                     terms_url=market.get("terms_url"),
                     fetch_text=ctx.fetch_text,
                     contract_text=next((c.quote for c in ra.citations if c.id == "C-CONTRACT"), ""),
+                    market_date=_weather_market_params(ra.event_ticker).get("date") if check_id == SFO_CHECK else None,
                 )
                 _record(decision_log, _research_line(ra.contract_id, g.id, found))
                 if found.status == "failed":
@@ -213,6 +197,7 @@ def generate_purchase_request(
                     answered = True
                     break
                 research_note = found.conclusion
+                needs_issuance_confirmation |= found.needs_issuance_confirmation
                 continue
 
             check = ctx.free_checks.get(check_id)
@@ -233,6 +218,23 @@ def generate_purchase_request(
         if answered:
             _record(decision_log, f"[{ra.contract_id}] skip {g.id}: answered by the free check; nothing to buy.")
             continue
+
+        if complete_json is not None and not needs_issuance_confirmation:
+            market = ctx.markets.get(ra.contract_id) or {}
+            found = research_gap(
+                ra, g,
+                terms_url=market.get("terms_url"),
+                fetch_text=ctx.fetch_text,
+                complete_json=complete_json,
+            )
+            _record(decision_log, _research_line(ra.contract_id, g.id, found))
+            if found.status == "failed":
+                _record(decision_log, f"[{ra.contract_id}] no purchase: model research failed, so the gap was not validated.")
+                return None
+            if found.resolved:
+                _record(decision_log, f"[{ra.contract_id}] skip {g.id}: the model read resolved it; nothing to buy.")
+                continue
+            research_note = found.conclusion
 
         item = _catalog_match(ctx, ra, g.gap_type)
         if item is None:

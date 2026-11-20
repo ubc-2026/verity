@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { describe, it, mock } from "node:test";
 import type { Hex } from "viem";
 import { buildResearchRequest } from "../src/payments/buyer.ts";
 import { catalogById } from "../src/payments/catalog.ts";
@@ -8,7 +8,7 @@ import { deliverGatewayPaidRequest, GatewayDeliveryStore, type GatewayDeliveryDe
 import { GatewayLedger } from "../src/payments/gatewayLedger.ts";
 import { verifyGatewayDelivery } from "../src/payments/gatewayReceipt.ts";
 import type { PaidRequest } from "../src/payments/merchant.ts";
-import { authorizeStoredPurchase } from "../src/payments/paymentService.ts";
+import { authorizeStoredPurchase, type PaymentSigner } from "../src/payments/paymentService.ts";
 import { assessPolicy, MISSION_BUDGET } from "../src/payments/policy.ts";
 import { parseQuote } from "../src/payments/quote.ts";
 import { hashContent } from "../src/payments/researchRequest.ts";
@@ -247,8 +247,12 @@ describe("expired or declined quotes never submit payment", () => {
   });
 
   it("buyer: an expired quote or a policy decline signs nothing and stores no authorization", async () => {
+    const signTypedData = mock.fn<PaymentSigner["signTypedData"]>(async () => {
+      throw new Error("A rejected purchase must never reach the signer");
+    });
+    const signer = { address: DEMO_PAYER.address, signTypedData };
     const buyer = (store: PaymentStore) =>
-      new BuyerService({ store, catalog, owner: DEMO_PAYER.address, signer: DEMO_PAYER, tokenDomain: { name: "USDC", version: "2" }, missionId: "m-safeguard" });
+      new BuyerService({ store, catalog, owner: DEMO_PAYER.address, signer, tokenDomain: { name: "USDC", version: "2" }, missionId: "m-safeguard" });
     const accepted = {
       selection: { catalogItemId: NANO, parameters, maxAmount: 1000n },
       groupKey: "fx-nyc-high-20261118:GAP-NYC-SETTLE",
@@ -261,6 +265,7 @@ describe("expired or declined quotes never submit payment", () => {
     assert.equal(expired.status, "rejected");
     assert.match(expired.status === "rejected" ? expired.reason : "", /quote expired/);
     assert.equal(expiredStore.get("purchase-expired"), undefined);
+    assert.equal(signTypedData.mock.callCount(), 0);
 
     const { buyerSessionId: _s2, ...wire2 } = nanoQuote("purchase-over-budget");
     const declinedStore = new PaymentStore(":memory:", { ...DEMO_POLICY, missionBudget: 999n });
@@ -273,5 +278,6 @@ describe("expired or declined quotes never submit payment", () => {
     assert.equal(declined.status, "rejected");
     assert.match(declined.status === "rejected" ? declined.reason : "", /mission budget exceeded/);
     assert.equal(declinedStore.get("purchase-over-budget"), undefined);
+    assert.equal(signTypedData.mock.callCount(), 0);
   });
 });

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from datetime import datetime
 from html import unescape
 from typing import Any, Callable, Optional
 
@@ -35,11 +36,20 @@ NWS_CLISFO_URL = (
 )
 _NWS_CHECKS = {NYC_CHECK: ("Central Park", NWS_CLINYC_URL), SFO_CHECK: ("San Francisco Airport", NWS_CLISFO_URL)}
 _SFO_FULL_DAY_RULE = re.compile(
-    r"(?:^|(?<=[.!?]) )(?:(?:the |this )?(?:contract|market) (?:shall|will) (?:settle|resolve) (?:on|using)|"
-    r"settlement (?:shall|will) use) (?:the )?(?:first (?:published )?|final )?full[- ]day "
-    r"(?:NWS (?:daily )?)?(?:issuance|report)\.(?= |$)", re.I,
+    r"(?:(?:the |this )?(?:contract|market) (?:shall|will|must) (?:settle|resolve) (?:on|using)|"
+    r"settlement (?:shall|will|must) use) (?:the )?(?:(?P<order>first|final)(?: published)? )?full[- ]day "
+    r"(?:NWS (?:daily )?)?(?:issuance|report)\.", re.I,
 )
+_SFO_REPORT_REFERENCE = re.compile(r"\b(?:reports?|issuances?|versions?|bulletins?|CLISFO|full[- ]day|intra[- ]?day)\b", re.I)
+_SFO_ISSUANCE_CONDITION = re.compile(r"\b(?:if|unless|except|otherwise|provided that|subject to|in the event)\b", re.I)
+_SFO_ALTERNATE_ISSUANCE = re.compile(
+    r"\b(?:intra[- ]?day|preliminary|final|amended|corrected|revised|latest|first (?:published )?(?:report|issuance|version))\b", re.I,
+)
+_SFO_BINDING_RULE = re.compile(r"\b(?:controls?|governs?|settl\w+|resolv\w+|use[sd]?|takes precedence)\b", re.I)
 _INTRADAY_CUTOFF = re.compile(r"\bvalid today as of \d{3,4} [ap]m local time\b", re.I)
+_SFO_CLIMATE_DATE = re.compile(
+    r"\bTHE SAN FRANCISCO AIRPORT CLIMATE SUMMARY FOR ([A-Z]+ \d{1,2} \d{4})(?=\s|\.|$)", re.I,
+)
 
 # The terms name an issuance only when they pick one of these. Mentioning the
 # daily climate report, without one of these phrases, leaves the gap open.
@@ -68,6 +78,7 @@ class ResearchResult:
     sources: list[str] = field(default_factory=list)
     excerpts: list[str] = field(default_factory=list)
     reasoning: str = ""
+    needs_issuance_confirmation: bool = False
 
 
 def _flat(text: str) -> str:
@@ -82,6 +93,38 @@ def _around(text: str, phrase: str) -> str:
     start = max(0, at - 80)
     end = min(len(flat), at + len(phrase) + 80)
     return flat[start:end]
+
+
+def _sfo_climate_date(report: str) -> Optional[str]:
+    match = _SFO_CLIMATE_DATE.search(report)
+    if not match:
+        return None
+    try:
+        return datetime.strptime(match.group(1), "%B %d %Y").date().isoformat()
+    except ValueError:
+        return None
+
+
+def _sfo_full_day_issuance(*documents: str) -> tuple[Optional[str], Optional[str]]:
+    """Return a clear full-day rule or the text that leaves its application uncertain."""
+    selected = None
+    selected_order = None
+    alternate = None
+    for document in documents:
+        for sentence in re.split(r"(?<=[.!?])\s+", document):
+            match = _SFO_FULL_DAY_RULE.fullmatch(sentence)
+            if match:
+                order = match["order"].lower() if match["order"] else None
+                if order and selected_order and order != selected_order:
+                    return None, sentence
+                selected_order = order or selected_order
+                selected = selected or sentence
+            elif _SFO_REPORT_REFERENCE.search(sentence):
+                if _SFO_ISSUANCE_CONDITION.search(sentence):
+                    return None, sentence
+                if _SFO_ALTERNATE_ISSUANCE.search(sentence) and _SFO_BINDING_RULE.search(sentence):
+                    alternate = alternate or sentence
+    return (None, alternate) if selected and alternate else (selected, None)
 
 
 def named_issuance(text: str) -> Optional[str]:
@@ -134,6 +177,7 @@ def research_free_check(
     terms_url: Optional[str],
     fetch_text: Optional[FetchText] = None,
     contract_text: str = "",
+    market_date: Optional[str] = None,
 ) -> ResearchResult:
     """Read the free sources for this check id, or say that none is configured."""
     fetch = _allowlisted(fetch_text or _fetch_page)
@@ -191,12 +235,23 @@ def research_free_check(
         if "san francisco airport" not in rule.lower() or not re.search(r"\bNWS\b|National Weather Service", rule, re.I):
             return _failed(question, "The exchange contract did not identify the SFO station and NWS source.",
                            "The product cannot be attributed to this market from its ticker alone.", sources)
+        report_date = _sfo_climate_date(report)
+        if not market_date or report_date != market_date:
+            return _failed(question,
+                           f"The NWS CLISFO climate date ({report_date or 'unverified'}) did not match the market date ({market_date or 'unverified'}).",
+                           "The climate summary date must match the market before the gap can be evaluated.", sources)
         cutoff = _INTRADAY_CUTOFF.search(report)
         excerpts = [_around(rule, "first published"), cutoff.group() if cutoff else _around(report, "clisfo")]
-        full_day = _SFO_FULL_DAY_RULE.search(rule) or _SFO_FULL_DAY_RULE.search(_flat(terms_text))
+        full_day, uncertain_clause = _sfo_full_day_issuance(rule, _flat(terms_text))
+        if uncertain_clause:
+            return ResearchResult(
+                question, "The exchange terms give a conditional or conflicting report selection.",
+                False, "unresolved", sources, [uncertain_clause[:240], excerpts[1]],
+                "The available evidence does not establish which rule applies.", needs_issuance_confirmation=True,
+            )
         if full_day:
             return ResearchResult(question, "The contract expressly selects a full-day NWS report.",
-                                  True, "resolved", sources, [full_day.group(), excerpts[1]])
+                                  True, "resolved", sources, [full_day, excerpts[1]])
         return ResearchResult(
             question, "The exchange rule does not establish whether an intraday CLISFO report qualifies as the settling issuance.",
             False, "unresolved", sources, excerpts,
