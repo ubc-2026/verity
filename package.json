@@ -10,6 +10,7 @@
     "arc:keygen": "node scripts/arc-keygen.ts",
     "arc:purchase": "node scripts/arc-purchase.ts",
     "arc:nws": "node scripts/arc-nws.ts",
+    "arc:nws:live": "node scripts/arc-nws-live.ts",
     "arc:qualify": "node scripts/arc-qualify.ts",
     "quicknode:backfill": "node scripts/quicknode-backfill.ts",
     "quicknode:token": "node scripts/quicknode-token.ts",

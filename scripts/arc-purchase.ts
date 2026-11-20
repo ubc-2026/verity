@@ -45,7 +45,6 @@ const USDC_EIP3009_ABI_FULL = [
 ] as const;
 
 console.log("== Arc Testnet purchase (settlement is live) ==");
-console.log(`rpc ${rpcUrl}`);
 
 // 1. Preflight: chain, token domain, keys, funding.
 const chainId = await publicClient.getChainId();
@@ -79,6 +78,7 @@ if (blockers.length > 0) {
   for (const blocker of blockers) console.log(`  - ${blocker}`);
   process.exit(2);
 }
+if (process.argv.includes("--preflight")) process.exit(0);
 
 // 2. Merchant artifact. VERITY_NWS_EVIDENCE_FILE serves the captured NWS document.
 //    Without it, the script sells the labeled demo resolution excerpt.
@@ -114,7 +114,7 @@ const item: CatalogItem = {
   requiredParameters: nws ? ["station", "date"] : [],
 };
 const savedQuote: SavedQuote = {
-  quoteId: `quote-${purchaseId}`,
+  quoteId: process.env.VERITY_ARC_QUOTE_ID ?? `quote-${purchaseId}`,
   purchaseId,
   merchantId: item.merchantId,
   catalogItemId: item.catalogItemId,
@@ -242,7 +242,7 @@ if (!accepted.accepted) {
   console.log(`\nBUYER REJECTED THE RECEIPT: ${accepted.reason}`);
   process.exit(1);
 }
-writeFileSync(".verity/last-arc-purchase.json", JSON.stringify({
+writeFileSync(process.env.VERITY_ARC_PURCHASE_FILE ?? ".verity/last-arc-purchase.json", JSON.stringify({
   purchaseId,
   txHash: receipt.txHash,
   blockNumber: Number(receipt.blockNumber),
