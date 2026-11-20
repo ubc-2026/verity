@@ -18,6 +18,7 @@ import { createQuickNodeWebhookHandler } from "../src/reconciliation/webhook.ts"
 
 if (existsSync(".env.quicknode")) process.loadEnvFile(".env.quicknode");
 const securityToken = process.env.VERITY_QN_SECURITY_TOKEN;
+const liveRunId = process.env.VERITY_ARC_LIVE_RUN_ID;
 if (!securityToken || securityToken.length < 32) {
   console.error("VERITY_QN_SECURITY_TOKEN missing or shorter than 32 chars; run `npm run quicknode:token`.");
   process.exit(2);
@@ -42,7 +43,7 @@ const handler = createQuickNodeWebhookHandler({
 const server = createServer(async (req, res) => {
   if (req.method === "GET" && req.url === "/healthz") {
     res.writeHead(200, { "content-type": "application/json" });
-    return res.end('{"ok":true}');
+    return res.end(JSON.stringify({ ok: true, ...(liveRunId ? { runId: liveRunId } : {}) }));
   }
   const started = new Date().toISOString();
   try {

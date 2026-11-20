@@ -1,5 +1,17 @@
 # Arc Testnet evidence purchase
 
+## Live NWS acceptance run
+
+From the repository root, install `npm ci` and the Python dependencies in `analysis/requirements-live.txt`. Use funded Arc Testnet buyer and merchant wallets in `.env.arc-testnet` or the local environment. Set the QuickNode Streams API key, matching webhook signing token, and dedicated HTTPS `VERITY_WEBHOOK_URL` in `.env.quicknode` or the environment. These files are ignored by Git.
+
+1. Run `npm run arc:nws:live -- prepare <Gemini-event> "<outcome>"`. This reads public data, requires an eligible 0.05 USDC proposal, and captures matching NWS evidence. It prints a run ID.
+2. Run `npm run arc:nws:live -- receive <run-id>` in a separate terminal. It binds to loopback port 8791 unless `VERITY_ARC_LIVE_PORT` is set. Give the receiver a dedicated HTTPS tunnel route for `/healthz` and `/webhooks/quicknode`. Preserve any existing audit portal route.
+3. Run `npm run arc:nws:live -- purchase <run-id>` within 15 minutes of preparation. This checks that the HTTPS route reaches this run's receiver, checks QuickNode access, validates the funded wallets, and permits one capped Arc Testnet payment attempt for the contract in this workspace. If payment status is uncertain, inspect the existing ledger before starting any new attempt.
+4. Run `npm run arc:nws:live -- stream <run-id>` to create the one-block, transaction-filtered QuickNode Streams backfill. This consumes QuickNode credits for that block. The run ID serves as the stream's idempotency key. Keep the receiver running until the provider delivers the signed event.
+5. Run `npm run arc:nws:live -- report <run-id>`. This requires the authenticated stream event and buyer-verified delivery for the same transaction. It rechecks the saved signature and evidence bytes, then reassesses the exact pre-purchase findings. Share the resulting `report.json`. A valid result can be `unchanged` if the NWS document leaves the settling issuance unknown.
+
+Use the acceptance runner's `stream` stage for this run. The separate `quicknode:backfill` command generates a local replay by default, which cannot satisfy the provider-delivery check.
+
 One 0.05 USDC evidence purchase through the allowlisted merchant, settled on Arc Testnet with EIP-3009. Builds on the [ResearchRequestV1 commitment](research-request-v1.md).
 
 ## Qualification (2026-11-17)
