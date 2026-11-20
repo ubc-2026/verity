@@ -18,6 +18,7 @@ const server = new PortalServer({
   store,
   readToken: process.env.PORTAL_READ_TOKEN!,
   writeToken: process.env.PORTAL_WRITE_TOKEN!,
+  allowedOrigins: (process.env.PORTAL_ALLOWED_ORIGINS ?? "").split(",").map((value) => value.trim()).filter(Boolean),
 });
 
 const port = numberEnv("PORT", 8788);

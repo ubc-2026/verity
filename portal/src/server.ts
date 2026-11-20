@@ -65,6 +65,8 @@ export interface PortalServerOptions {
   readToken: string;
   writeToken: string;
   now?: () => Date;
+  /** Browser origins allowed to read (GET) with the read token, such as the website. Empty: same-origin only. */
+  allowedOrigins?: readonly string[];
 }
 
 export class PortalServer {
@@ -72,6 +74,7 @@ export class PortalServer {
   readonly #readToken: string;
   readonly #writeToken: string;
   readonly #now: () => Date;
+  readonly #allowedOrigins: ReadonlySet<string>;
   readonly http: Server;
 
   constructor(options: PortalServerOptions) {
@@ -79,6 +82,7 @@ export class PortalServer {
     this.#readToken = options.readToken;
     this.#writeToken = options.writeToken;
     this.#now = options.now ?? (() => new Date());
+    this.#allowedOrigins = new Set(options.allowedOrigins ?? []);
     this.http = createHttpServer((request, response) => {
       void this.#handle(request, response);
     });
@@ -102,6 +106,25 @@ export class PortalServer {
     try {
       const url = new URL(request.url ?? "/", "http://localhost");
       const parts = url.pathname.split("/").filter(Boolean);
+      // Cross-origin access is read-only: listed origins may GET with the read token. Writes never get CORS headers.
+      const origin = header(request, "origin");
+      const allowedOrigin = origin !== undefined && this.#allowedOrigins.has(origin);
+      if (request.method === "OPTIONS") {
+        if (!allowedOrigin || header(request, "access-control-request-method") !== "GET") return this.#send(response, 403, { error: "origin not allowed" });
+        response.setHeader("access-control-allow-origin", origin!);
+        response.setHeader("vary", "Origin");
+        response.setHeader("access-control-allow-methods", "GET");
+        response.setHeader("access-control-allow-headers", "authorization");
+        response.setHeader("access-control-max-age", "600");
+        // Chrome asks before a public page reads a server on this machine (Private Network Access).
+        if (header(request, "access-control-request-private-network") === "true") response.setHeader("access-control-allow-private-network", "true");
+        response.writeHead(204);
+        return void response.end();
+      }
+      if (allowedOrigin && request.method === "GET") {
+        response.setHeader("access-control-allow-origin", origin!);
+        response.setHeader("vary", "Origin");
+      }
       if (request.method === "GET" && parts.length === 0) return this.#send(response, 200, portalHtml(), "text/html; charset=utf-8");
       if (request.method === "GET" && parts.length === 1 && parts[0] === "healthz") return this.#send(response, 200, { ok: true });
       if (request.method === "GET" && parts.length === 1 && parts[0] === "activity") {

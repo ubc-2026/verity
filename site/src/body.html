@@ -21,6 +21,7 @@
       <a href="#walkthrough">Live walkthrough</a>
       <a href="#modules">Modules</a>
       <a href="#reconciler">Reconciler</a>
+      <a href="#ledger">Ledger</a>
     </nav>
     <div class="nav-cta">
       <a class="btn ghost sm" href="#spec">Read specification</a>
@@ -34,6 +35,7 @@
     <a class="link" href="#walkthrough">Live walkthrough</a>
     <a class="link" href="#modules">Modules</a>
     <a class="link" href="#reconciler">Reconciler</a>
+    <a class="link" href="#ledger">Ledger</a>
     <a class="btn primary" href="#walkthrough" data-launch>Launch agent terminal</a>
     <a class="btn" href="#spec">Read specification</a>
   </div>
@@ -249,6 +251,41 @@
         </tr></thead>
         <tbody id="recBody"></tbody>
       </table>
+    </div>
+  </div>
+</section>
+<section class="section" id="ledger" aria-labelledby="ldgTitle">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">07 / Ledger</span><h2 id="ldgTitle">The ledger the stream fills, and the run console</h2><p>Both run on your machine. The ledger reads your payment portal with its read token. Nothing is fetched until you load it, and the token stays in this tab.</p></div>
+    <div class="ldg-grid">
+      <div class="panel ldg-card">
+        <span class="label">Audit ledger · QuickNode USDC logs on Arc Testnet</span>
+        <form id="ldgForm" class="ldg-form" autocomplete="off">
+          <label class="label" for="ldgUrl">Portal address</label>
+          <input id="ldgUrl" type="url" inputmode="url" spellcheck="false">
+          <label class="label" for="ldgToken">Read token</label>
+          <input id="ldgToken" type="password">
+          <button class="btn primary sm" type="submit">Load ledger</button>
+        </form>
+        <p class="label" id="ldgMsg" aria-live="polite">Start the portal with <code class="mono">cd portal &amp;&amp; npm start</code>. To read it from this page, set <code class="mono">PORTAL_ALLOWED_ORIGINS</code> to this page’s origin.</p>
+      </div>
+      <div class="panel ldg-card">
+        <span class="label">Run console · market to results to audit</span>
+        <p class="muted" style="font-size:.9rem;margin-top:8px">Pick a fixture or live Gemini Exchange market, run the analysis, step through a fixture purchase on Arc direct or Circle Gateway, and audit the run, purchase, receipt, Circle transfer, Arc batch and QuickNode confirmation.</p>
+        <p class="label" style="margin-top:10px">Run <code class="mono">npm run app</code> in the repository, then open it.</p>
+        <p style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn sm" href="http://127.0.0.1:8790/" target="_blank" rel="noopener">Open run console (127.0.0.1:8790)</a><span class="demo">FIXTURE PAYMENTS</span></p>
+      </div>
+    </div>
+    <div id="ldgOut" hidden>
+      <div class="ledger" style="margin-top:16px">
+        <table aria-label="USDC logs"><thead><tr><th scope="col">Block</th><th scope="col">Transaction</th><th scope="col">Log</th><th scope="col">From</th><th scope="col">To</th><th scope="col">USDC</th><th scope="col">Nonce</th></tr></thead><tbody id="ldgLogs"></tbody></table>
+      </div>
+      <button class="btn sm ghost" id="ldgMore" type="button" hidden style="margin-top:10px">Show more</button>
+      <h3 style="margin-top:28px">Purchases</h3>
+      <p class="muted" style="font-size:.9rem">A direct USDC payment can reconcile. QuickNode never claims a Gateway nanopayment; Circle names the transfer.</p>
+      <div class="ledger" style="margin-top:12px">
+        <table aria-label="Purchases"><thead><tr><th scope="col">Purchase</th><th scope="col">Rail</th><th scope="col">Status</th><th scope="col">USDC</th><th scope="col">Chain</th></tr></thead><tbody id="ldgPurch"></tbody></table>
+      </div>
     </div>
   </div>
 </section>
