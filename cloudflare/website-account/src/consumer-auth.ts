@@ -16,6 +16,9 @@ type RateLimit = { limit(options: { key: string }): Promise<{ success: boolean }
 // Read-only requests that are safe to send twice. /auth/callback is a GET too, but its code works only once.
 const RETRYABLE = new Set(["/auth/session", "/auth/signup-context"]);
 const RETRY_STATUS = new Set([502, 503, 504]);
+const RETRY_DELAY_MS = 250;
+// A retry starts only if this much of the request's deadline is left after the delay.
+const RETRY_MIN_MS = 1000;
 
 const routes = new Map([
   ["/auth/start", "POST"], ["/auth/callback", "GET"], ["/auth/session", "GET"], ["/auth/logout", "POST"],
@@ -32,7 +35,13 @@ function failure(status: number, error: string) {
 }
 
 /** Call from the same-origin website Worker before any static or API fallback. */
-export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorkerEnv, send: typeof fetch = fetch) {
+export async function proxyConsumerAuth(
+  request: Request,
+  env: ConsumerAuthWorkerEnv,
+  send: typeof fetch = fetch,
+  /** Total time for the upstream call, including any retry. Tests pass a short value. */
+  budgetMs?: number,
+) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/auth/")) return null;
   const method = routes.get(url.pathname);
@@ -76,20 +85,29 @@ export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorke
       const contentType = request.headers.get("content-type");
       if (contentType) headers.set("content-type", contentType);
     }
+    // One deadline covers the whole upstream exchange, retry included, so a slow Edge Function never makes
+    // a page wait longer than it did before retries existed.
+    const budget = budgetMs ?? (url.pathname === "/auth/signup" ? 22000 : 10000);
+    const deadline = Date.now() + budget;
+    const signal = AbortSignal.timeout(budget);
     const call = () => send(target, {
       method, headers, body: url.pathname === "/auth/start" || url.pathname === "/auth/signup" ? request.body : undefined,
-      redirect: "manual", signal: AbortSignal.timeout(url.pathname === "/auth/signup" ? 22000 : 10000),
+      redirect: "manual", signal,
     });
     let upstream: Response;
     if (RETRYABLE.has(url.pathname)) {
-      // The Edge Function restarts between bursts of traffic. A request that lands during a restart fails once,
+      // The Edge Function restarts between bursts of traffic. A request that lands during a restart fails fast,
       // so a read-only check gets one more try instead of telling a signed-in visitor that sign-in is down.
+      // A timeout uses up the deadline, so it is never retried.
       const first = await call().catch(() => undefined);
       if (first && !RETRY_STATUS.has(first.status)) {
         upstream = first;
       } else {
-        await first?.body?.cancel();
-        await new Promise((resolve) => setTimeout(resolve, 250));
+        await first?.body?.cancel().catch(() => undefined);
+        if (signal.aborted || deadline - Date.now() < RETRY_DELAY_MS + RETRY_MIN_MS) {
+          return failure(503, "signin_unavailable");
+        }
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
         upstream = await call();
       }
     } else {

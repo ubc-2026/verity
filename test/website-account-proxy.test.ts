@@ -24,16 +24,24 @@ function get(path: string) {
   return new Request(`${SITE}${path}`, { headers: { "cf-connecting-ip": "203.0.113.9", cookie: "__Host-verity-session=x" } });
 }
 
-// Plays back one outcome per upstream call: a status code, or "throw" for a network error.
-function upstream(outcomes: Array<number | "throw">) {
+// Plays back one outcome per upstream call: a status code, "throw" for a network error, or "hang" for an
+// Edge Function that never answers (the call ends only when the request's signal aborts).
+function upstream(outcomes: Array<number | "throw" | "hang">) {
   const calls: string[] = [];
-  const send = (async (url: string | URL | Request) => {
+  const signals: (AbortSignal | null | undefined)[] = [];
+  const send = (async (url: string | URL | Request, init?: RequestInit) => {
     calls.push(String(url));
+    signals.push(init?.signal);
     const next = outcomes.shift() ?? 200;
     if (next === "throw") throw new TypeError("connection reset");
+    if (next === "hang") {
+      return await new Promise<Response>((_, reject) => {
+        init?.signal?.addEventListener("abort", () => reject(init.signal?.reason), { once: true });
+      });
+    }
     return new Response(JSON.stringify(next === 200 ? { accountId: "acct" } : { error: "x" }), { status: next });
   }) as typeof fetch;
-  return { send, calls };
+  return { send, calls, signals };
 }
 
 describe("website-account auth proxy", () => {
@@ -62,6 +70,33 @@ describe("website-account auth proxy", () => {
       assert.equal((await proxyConsumerAuth(get("/auth/session"), env(), send))?.status, status);
       assert.equal(calls.length, 1, `status ${status}`);
     }
+  });
+
+  it("does not retry after a timeout, because the timeout used up the deadline", async () => {
+    const { send, calls } = upstream(["hang", 200]);
+    const started = Date.now();
+    const response = await proxyConsumerAuth(get("/auth/session"), env(), send, 100);
+    assert.equal(response?.status, 503);
+    assert.equal(calls.length, 1, "no second call after the deadline passed");
+    assert.ok(Date.now() - started < 1000, "answers once the single deadline passes");
+  });
+
+  it("skips the retry when too little of the deadline is left", async () => {
+    const { send, calls } = upstream([503, 200]);
+    const response = await proxyConsumerAuth(get("/auth/session"), env(), send, 1200);
+    assert.equal(response?.status, 503);
+    assert.equal(calls.length, 1);
+  });
+
+  it("keeps one deadline across both attempts instead of starting a new one for the retry", async () => {
+    const { send, calls, signals } = upstream([503, "hang"]);
+    const started = Date.now();
+    const response = await proxyConsumerAuth(get("/auth/session"), env(), send, 1500);
+    const elapsed = Date.now() - started;
+    assert.equal(response?.status, 503);
+    assert.equal(calls.length, 2);
+    assert.equal(signals[0], signals[1], "both attempts share one abort signal");
+    assert.ok(elapsed < 2000, `finished in ${elapsed} ms, within the 1500 ms deadline plus scheduling`);
   });
 
   it("never sends the one-time callback code twice", async () => {
