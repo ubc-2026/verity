@@ -25,7 +25,7 @@ export const fixtureVoice: VoiceExplainer = {
   },
 };
 
-function usdc(baseUnits: string): string {
+export function usdc(baseUnits: string): string {
   const value = BigInt(baseUnits);
   const whole = value / 1_000_000n;
   const fraction = (value % 1_000_000n).toString().padStart(6, "0").replace(/0+$/, "");

@@ -51,11 +51,14 @@ import { parseQuote } from "../src/payments/quote.ts";
 import { encodePaymentHeader, listen, PAYMENT_HEADER } from "../src/payments/server.ts";
 import { MerchantService } from "../src/payments/service.ts";
 import { PaymentStore } from "../src/payments/store.ts";
+import { ownerCallerFromEnv } from "../src/payments/voiceApproval.ts";
 import { Analyst, findPython } from "./e2e/workflow.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const envFile = process.env.VERITY_ENV_FILE ?? join(root, ".env.arc-testnet");
 if (existsSync(envFile)) process.loadEnvFile(envFile);
+const dotEnv = join(root, ".env"); // ElevenLabs voice settings live here; already-set variables win
+if (existsSync(dotEnv)) process.loadEnvFile(dotEnv);
 
 const command = process.argv[2] && !process.argv[2].startsWith("--") ? process.argv[2] : "balances";
 const live = process.argv.includes("--live");
@@ -79,6 +82,9 @@ if (!payerKey || !merchantKey) {
 }
 const payer = privateKeyToAccount(payerKey);
 const merchant = privateKeyToAccount(merchantKey);
+// Gateway purchases are nanopayments (0.001 USDC), which never need owner approval, so this call is only
+// placed if a purchase ever reaches the owner tier. It is wired here so the live runner uses the same buyer setup.
+const ownerCaller = ownerCallerFromEnv(process.env);
 const nowSeconds = () => Math.floor(Date.now() / 1000);
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -207,7 +213,7 @@ if (command === "balances") {
         return { status: response.status, headers: response.headers, bytes: new Uint8Array(await response.arrayBuffer()) };
       };
       try {
-        const buyer = new BuyerService({ store, catalog: liveCatalog(), owner: payer.address, signer: payer, tokenDomain: ARC_TESTNET.usdcDomain, missionId: "mission-arc-gateway-live" });
+        const buyer = new BuyerService({ store, catalog: liveCatalog(), owner: payer.address, signer: payer, tokenDomain: ARC_TESTNET.usdcDomain, missionId: "mission-arc-gateway-live", ...(ownerCaller ? { ownerCaller } : {}) });
         const accepted = acceptPurchaseProposal(proposal, liveCatalog());
         let result;
         const existing = store.get(purchaseId);
