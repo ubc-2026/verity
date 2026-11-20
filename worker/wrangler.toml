@@ -1,0 +1,21 @@
+name = "verity-gemini"
+main = "worker.mjs"
+compatibility_date = "2025-06-01"
+workers_dev = true
+preview_urls = false
+
+[vars]
+SITE_ORIGIN = "https://verityresearch.us"
+GEMINI_MODEL = "gemini-2.5-flash"
+BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+
+[ai]
+binding = "AI"
+
+[[ratelimits]]
+name = "REVIEW_LIMIT"
+namespace_id = "1001"
+
+[ratelimits.simple]
+limit = 6
+period = 60
