@@ -17,7 +17,13 @@
     "e2e:nano": "node scripts/e2e-nano.ts",
     "arc:gateway": "node scripts/arc-gateway.ts",
     "app": "node scripts/app-server.ts",
-    "app:snapshot": "node scripts/app-snapshot.ts"
+    "app:snapshot": "node scripts/app-snapshot.ts",
+    "research:migrate": "node scripts/research-migrate.ts",
+    "research:ingest": "node scripts/research-ingest.ts",
+    "research:capture": "node scripts/research-capture.ts",
+    "research:slice": "node scripts/research-slice.ts",
+    "research:eval": "node scripts/research-eval.ts",
+    "research:snapshot": "node scripts/research-snapshot.ts"
   },
   "repository": {
     "type": "git",
@@ -31,15 +37,18 @@
   "homepage": "https://github.com/ubc-2026/verity#readme",
   "dependencies": {
     "@circle-fin/x402-batching": "4.0.0",
+    "@electric-sql/pglite": "^0.5.17",
     "@humanwhocodes/momoa": "^3.3.13",
     "@x402/core": "2.31.0",
     "@x402/evm": "2.31.0",
     "canonicalize": "^5.1.0",
+    "pg": "^8.23.1",
     "viem": "^2.57.13",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
     "typescript": "^7.0.2"
   },
   "private": true,

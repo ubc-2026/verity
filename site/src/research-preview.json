@@ -1,0 +1,607 @@
+{
+  "label": "Recorded preview",
+  "alias": "fx-nyc-high-20261118",
+  "recordedAtUtc": "2026-11-20T02:16:42.862Z",
+  "detail": {
+    "instrument": {
+      "key": {
+        "exchange": "gemini",
+        "instrumentId": "WXHIGH-NYC-2611190459",
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+      "outcomeLabel": "62°F to 63°F",
+      "category": "weather",
+      "expiryUtc": "2026-11-19T04:59:00Z",
+      "settlementSource": "NWS Climatological Report (Daily), Central Park station",
+      "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+      "dataLabel": "FIXTURE"
+    },
+    "market": {
+      "kind": "exchange_implied_probability",
+      "note": "What the order book implied when it was read. It is not Verity's rating and does not change it.",
+      "staleAfterSeconds": 120,
+      "current": {
+        "freshness": "stale",
+        "quoteState": "closed",
+        "impliedProbability": null,
+        "asOf": "2026-11-20T02:01:23.170Z",
+        "note": "The latest reading is from 2026-11-20T02:01:23.170Z. It is history, not a current price."
+      },
+      "history": [
+        {
+          "snapshotId": 1,
+          "provider": "verity-fixture-workbook",
+          "dataLabel": "FIXTURE",
+          "capturedAt": null,
+          "capturedDate": "2026-11-17",
+          "venueTs": null,
+          "bestBid": "0.54",
+          "bestAsk": "0.58",
+          "lastTrade": null,
+          "marketState": "open",
+          "quoteState": "two_sided",
+          "impliedProbability": "0.56",
+          "ageSeconds": null,
+          "stale": false,
+          "labels": [
+            "FIXTURE",
+            "two_sided",
+            "date_only"
+          ],
+          "note": "Mid of the best bid and best ask."
+        },
+        {
+          "snapshotId": 2,
+          "provider": "gemini-exchange-public-api",
+          "dataLabel": "CAPTURED",
+          "capturedAt": "2026-11-20T02:01:02.370Z",
+          "capturedDate": null,
+          "venueTs": null,
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTrade": null,
+          "marketState": "settled",
+          "quoteState": "closed",
+          "impliedProbability": null,
+          "ageSeconds": 940,
+          "stale": true,
+          "labels": [
+            "CAPTURED",
+            "closed",
+            "stale"
+          ],
+          "note": "The contract is not open for trading."
+        },
+        {
+          "snapshotId": 3,
+          "provider": "gemini-exchange-public-api",
+          "dataLabel": "CAPTURED",
+          "capturedAt": "2026-11-20T02:01:23.170Z",
+          "capturedDate": null,
+          "venueTs": null,
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTrade": null,
+          "marketState": "settled",
+          "quoteState": "closed",
+          "impliedProbability": null,
+          "ageSeconds": 920,
+          "stale": true,
+          "labels": [
+            "CAPTURED",
+            "closed",
+            "stale"
+          ],
+          "note": "The contract is not open for trading."
+        }
+      ]
+    },
+    "resolutionRisk": {
+      "kind": "settlement_risk_rating",
+      "note": "How the contract could settle in an unexpected way, from the rules and the evidence. It is not a price forecast.",
+      "latest": {
+        "seq": 2,
+        "parentSeq": 1,
+        "assessedAt": "2026-11-18T01:02:00Z",
+        "dataLabel": "FIXTURE",
+        "schemaVersion": "verity-risk-analysis-v1",
+        "rubricVersion": "framework-sheet-rev5",
+        "analystId": "verity-reassess",
+        "quoteSnapshotId": 1,
+        "rating": {
+          "final": "Medium",
+          "total": 7,
+          "action": "investigate",
+          "complete": true
+        },
+        "scores": {
+          "source": {
+            "score": 1,
+            "rationale": "Official NWS source. The purchased document names the issuance that settles (first_full_day_cli) and states that later corrections do not count, so a revision can no longer change the outcome (Agent rule 9 no longer applies).",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-1",
+              "GAP-NYC-SETTLE-EV1"
+            ]
+          },
+          "ambiguity": {
+            "score": 2,
+            "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-1",
+              "C-NYC-2"
+            ]
+          },
+          "liquidity": {
+            "score": 3,
+            "rationale": "event-total volume $7 is under $100 (4c spread).",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-3"
+            ]
+          },
+          "correlation": {
+            "score": 1,
+            "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.",
+            "nullReason": null,
+            "citationIds": []
+          }
+        },
+        "citedClaims": [
+          {
+            "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.",
+            "category": "ambiguity",
+            "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+            "supported": true,
+            "citationId": "C-NYC-1",
+            "sourceVersion": 1
+          },
+          {
+            "quote": "(empty)",
+            "category": "ambiguity",
+            "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+            "supported": true,
+            "citationId": "C-NYC-2",
+            "sourceVersion": 1
+          },
+          {
+            "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.",
+            "category": "source",
+            "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+            "supported": true,
+            "citationId": "C-NYC-1",
+            "sourceVersion": 1
+          },
+          {
+            "quote": "FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count.",
+            "category": "source",
+            "sourceKey": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE",
+            "supported": true,
+            "citationId": "GAP-NYC-SETTLE-EV1",
+            "sourceVersion": 1
+          },
+          {
+            "quote": "bestBid 0.54, bestAsk 0.58; event volume 7",
+            "category": "liquidity",
+            "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+            "supported": true,
+            "citationId": "C-NYC-3",
+            "sourceVersion": 1
+          }
+        ],
+        "evidenceGap": {
+          "id": "GAP-NYC-SETTLE",
+          "gapType": "settlement_source_version",
+          "material": true,
+          "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+          "freeChecks": [
+            "nyc-settlement-version"
+          ]
+        },
+        "decision": "revised",
+        "decisionReason": "evidence applied",
+        "changes": [
+          {
+            "after": "closed",
+            "before": "open",
+            "reason": "the receipt-verified document names the settling issuance: first_full_day_cli",
+            "changed": true,
+            "finding": "evidence_gaps.GAP-NYC-SETTLE"
+          },
+          {
+            "after": "1",
+            "before": "2",
+            "reason": "revision risk resolved: settling issuance named and corrections excluded",
+            "changed": true,
+            "finding": "scores.source"
+          },
+          {
+            "after": "7",
+            "before": "8",
+            "reason": "sum of the four category scores",
+            "changed": true,
+            "finding": "rating.raw_total"
+          },
+          {
+            "after": "Medium",
+            "before": "Medium",
+            "reason": "total 7 is still in the Medium band; ambiguity 2, liquidity 3, correlation 1 are unchanged by this evidence",
+            "changed": false,
+            "finding": "rating.final_rating"
+          },
+          {
+            "after": "investigate",
+            "before": "investigate",
+            "reason": "follows the final rating",
+            "changed": false,
+            "finding": "research_action"
+          }
+        ],
+        "trigger": {
+          "sourceKey": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE",
+          "version": 1,
+          "kind": "evidence",
+          "verification": "verified",
+          "contentSha256": "0xd6a21d247d7eaa3d7c4c6db91a35497986a35fa22aa7da4e00a8c2ca6c49a6ea"
+        },
+        "sourceVersions": [
+          {
+            "role": "evidence",
+            "version": 1,
+            "source_key": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE"
+          },
+          {
+            "role": "rules",
+            "version": 1,
+            "source_key": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules"
+          }
+        ]
+      },
+      "versions": [
+        {
+          "seq": 1,
+          "parentSeq": null,
+          "assessedAt": "2026-11-18T01:00:00Z",
+          "dataLabel": "FIXTURE",
+          "schemaVersion": "verity-risk-analysis-v1",
+          "rubricVersion": "framework-sheet-rev5",
+          "analystId": "verity-workbook-analyst",
+          "quoteSnapshotId": 1,
+          "rating": {
+            "final": "Medium",
+            "total": 8,
+            "action": "investigate",
+            "complete": true
+          },
+          "scores": {
+            "source": {
+              "score": 2,
+              "rationale": "Official NWS source, but the daily climate report can be issued preliminarily and corrected later (Agent rule 9).",
+              "nullReason": null,
+              "citationIds": [
+                "C-NYC-1"
+              ]
+            },
+            "ambiguity": {
+              "score": 2,
+              "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.",
+              "nullReason": null,
+              "citationIds": [
+                "C-NYC-1",
+                "C-NYC-2"
+              ]
+            },
+            "liquidity": {
+              "score": 3,
+              "rationale": "event-total volume $7 is under $100 (4c spread).",
+              "nullReason": null,
+              "citationIds": [
+                "C-NYC-3"
+              ]
+            },
+            "correlation": {
+              "score": 1,
+              "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.",
+              "nullReason": null,
+              "citationIds": []
+            }
+          },
+          "citedClaims": [
+            {
+              "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.",
+              "category": "ambiguity",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-1",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "(empty)",
+              "category": "ambiguity",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-2",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.",
+              "category": "source",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-1",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "bestBid 0.54, bestAsk 0.58; event volume 7",
+              "category": "liquidity",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-3",
+              "sourceVersion": 1
+            }
+          ],
+          "evidenceGap": {
+            "id": "GAP-NYC-SETTLE",
+            "gapType": "settlement_source_version",
+            "material": true,
+            "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+            "freeChecks": [
+              "nyc-settlement-version"
+            ]
+          },
+          "decision": "buy",
+          "decisionReason": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+          "changes": [],
+          "trigger": null,
+          "sourceVersions": [
+            {
+              "role": "rules",
+              "version": 1,
+              "source_key": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "parentSeq": 1,
+          "assessedAt": "2026-11-18T01:02:00Z",
+          "dataLabel": "FIXTURE",
+          "schemaVersion": "verity-risk-analysis-v1",
+          "rubricVersion": "framework-sheet-rev5",
+          "analystId": "verity-reassess",
+          "quoteSnapshotId": 1,
+          "rating": {
+            "final": "Medium",
+            "total": 7,
+            "action": "investigate",
+            "complete": true
+          },
+          "scores": {
+            "source": {
+              "score": 1,
+              "rationale": "Official NWS source. The purchased document names the issuance that settles (first_full_day_cli) and states that later corrections do not count, so a revision can no longer change the outcome (Agent rule 9 no longer applies).",
+              "nullReason": null,
+              "citationIds": [
+                "C-NYC-1",
+                "GAP-NYC-SETTLE-EV1"
+              ]
+            },
+            "ambiguity": {
+              "score": 2,
+              "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.",
+              "nullReason": null,
+              "citationIds": [
+                "C-NYC-1",
+                "C-NYC-2"
+              ]
+            },
+            "liquidity": {
+              "score": 3,
+              "rationale": "event-total volume $7 is under $100 (4c spread).",
+              "nullReason": null,
+              "citationIds": [
+                "C-NYC-3"
+              ]
+            },
+            "correlation": {
+              "score": 1,
+              "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.",
+              "nullReason": null,
+              "citationIds": []
+            }
+          },
+          "citedClaims": [
+            {
+              "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.",
+              "category": "ambiguity",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-1",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "(empty)",
+              "category": "ambiguity",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-2",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.",
+              "category": "source",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-1",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count.",
+              "category": "source",
+              "sourceKey": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE",
+              "supported": true,
+              "citationId": "GAP-NYC-SETTLE-EV1",
+              "sourceVersion": 1
+            },
+            {
+              "quote": "bestBid 0.54, bestAsk 0.58; event volume 7",
+              "category": "liquidity",
+              "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+              "supported": true,
+              "citationId": "C-NYC-3",
+              "sourceVersion": 1
+            }
+          ],
+          "evidenceGap": {
+            "id": "GAP-NYC-SETTLE",
+            "gapType": "settlement_source_version",
+            "material": true,
+            "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+            "freeChecks": [
+              "nyc-settlement-version"
+            ]
+          },
+          "decision": "revised",
+          "decisionReason": "evidence applied",
+          "changes": [
+            {
+              "after": "closed",
+              "before": "open",
+              "reason": "the receipt-verified document names the settling issuance: first_full_day_cli",
+              "changed": true,
+              "finding": "evidence_gaps.GAP-NYC-SETTLE"
+            },
+            {
+              "after": "1",
+              "before": "2",
+              "reason": "revision risk resolved: settling issuance named and corrections excluded",
+              "changed": true,
+              "finding": "scores.source"
+            },
+            {
+              "after": "7",
+              "before": "8",
+              "reason": "sum of the four category scores",
+              "changed": true,
+              "finding": "rating.raw_total"
+            },
+            {
+              "after": "Medium",
+              "before": "Medium",
+              "reason": "total 7 is still in the Medium band; ambiguity 2, liquidity 3, correlation 1 are unchanged by this evidence",
+              "changed": false,
+              "finding": "rating.final_rating"
+            },
+            {
+              "after": "investigate",
+              "before": "investigate",
+              "reason": "follows the final rating",
+              "changed": false,
+              "finding": "research_action"
+            }
+          ],
+          "trigger": {
+            "sourceKey": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE",
+            "version": 1,
+            "kind": "evidence",
+            "verification": "verified",
+            "contentSha256": "0xd6a21d247d7eaa3d7c4c6db91a35497986a35fa22aa7da4e00a8c2ca6c49a6ea"
+          },
+          "sourceVersions": [
+            {
+              "role": "evidence",
+              "version": 1,
+              "source_key": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE"
+            },
+            {
+              "role": "rules",
+              "version": 1,
+              "source_key": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules"
+            }
+          ]
+        }
+      ],
+      "comparison": {
+        "before": {
+          "seq": 1,
+          "final": "Medium",
+          "total": 8
+        },
+        "after": {
+          "seq": 2,
+          "final": "Medium",
+          "total": 7
+        },
+        "changedFindings": [
+          {
+            "after": "closed",
+            "before": "open",
+            "reason": "the receipt-verified document names the settling issuance: first_full_day_cli",
+            "changed": true,
+            "finding": "evidence_gaps.GAP-NYC-SETTLE"
+          },
+          {
+            "after": "1",
+            "before": "2",
+            "reason": "revision risk resolved: settling issuance named and corrections excluded",
+            "changed": true,
+            "finding": "scores.source"
+          },
+          {
+            "after": "7",
+            "before": "8",
+            "reason": "sum of the four category scores",
+            "changed": true,
+            "finding": "rating.raw_total"
+          }
+        ],
+        "evidence": {
+          "sourceKey": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE",
+          "version": 1,
+          "kind": "evidence",
+          "verification": "verified",
+          "contentSha256": "0xd6a21d247d7eaa3d7c4c6db91a35497986a35fa22aa7da4e00a8c2ca6c49a6ea"
+        },
+        "traceable": true
+      }
+    },
+    "sources": [
+      {
+        "sourceKey": "evidence:fx-nyc-high-20261118:GAP-NYC-SETTLE",
+        "version": 1,
+        "kind": "evidence",
+        "dataLabel": "FIXTURE",
+        "retrievedAt": "2026-11-18T01:02:00Z",
+        "retrievedDate": null,
+        "contentSha256": "0xd6a21d247d7eaa3d7c4c6db91a35497986a35fa22aa7da4e00a8c2ca6c49a6ea",
+        "verification": "verified",
+        "text": null,
+        "textNote": "Purchased evidence is not published. Its hash and verification state are."
+      },
+      {
+        "sourceKey": "fixture:workbook-2026-11-17:fx-nyc-high-20261118:rules",
+        "version": 1,
+        "kind": "rules",
+        "dataLabel": "FIXTURE",
+        "retrievedAt": null,
+        "retrievedDate": "2026-11-17",
+        "contentSha256": "0x666ed809037060dfc4813d644a086ca2a4e598e24d4f2d960a5e449639590c80",
+        "verification": "not_required",
+        "text": "[C-NYC-1] event.description (paraphrased): Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive.\n[C-NYC-2] event.termsAndConditionsUrl: (empty)\n[C-NYC-4] Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18: only the first published version that includes confirmation of the will be used\n[C-NYC-5] Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased): Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends.\n[C-NYC-3] contracts[62-63F].prices: bestBid 0.54, bestAsk 0.58; event volume 7\n"
+      },
+      {
+        "sourceKey": "gemini:event:WXHIGH-NYC-2611190459:record",
+        "version": 1,
+        "kind": "venue_record",
+        "dataLabel": "CAPTURED",
+        "retrievedAt": "2026-11-20T02:01:02.370Z",
+        "retrievedDate": null,
+        "contentSha256": "0x7c8e0a4dd8c82ea01a8b43a3564c4750d860d39981b1d9ce0107deb4375ace61",
+        "verification": "not_required",
+        "text": "{\"category\":\"Weather\",\"contracts\":[{\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"id\":\"473677-1189150\",\"instrumentSymbol\":\"GEMI-WXHIGH-NYC-2611190459-LO57\",\"label\":\"57°F or below\",\"marketState\":\"closed\",\"prices\":{\"bestAsk\":null,\"bestBid\":null,\"lastTradePrice\":null},\"resolutionSide\":\"no\",\"status\":\"settled\",\"termsUrl\":null},{\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"id\":\"473677-1189151\",\"instrumentSymbol\":\"GEMI-WXHIGH-NYC-2611190459-58TO59\",\"label\":\"58°F to 59°F\",\"marketState\":\"closed\",\"prices\":{\"bestAsk\":null,\"bestBid\":null,\"lastTradePrice\":null},\"resolutionSide\":\"no\",\"status\":\"settled\",\"termsUrl\":null},{\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"id\":\"473677-1189152\",\"instrumentSymbol\":\"GEMI-WXHIGH-NYC-2611190459-60TO61\",\"label\":\"60°F to 61°F\",\"marketState\":\"closed\",\"prices\":{\"bestAsk\":null,\"bestBid\":null,\"lastTradePrice\":null},\"resolutionSide\":\"no\",\"status\":\"settled\",\"termsUrl\":null},{\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"id\":\"473677-1189153\",\"instrumentSymbol\":\"GEMI-WXHIGH-NYC-2611190459-62TO63\",\"label\":\"62°F to 63°F\",\"marketState\":\"closed\",\"prices\":{\"bestAsk\":null,\"bestBid\":null,\"lastTradePrice\":null},\"resolutionSide\":\"no\",\"status\":\"settled\",\"termsUrl\":null},{\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"id\":\"473677-1189154\",\"instrumentSymbol\":\"GEMI-WXHIGH-NYC-2611190459-64TO65\",\"label\":\"64°F to 65°F\",\"marketState\":\"closed\",\"prices\":{\"bestAsk\":null,\"bestBid\":null,\"lastTradePrice\":null},\"resolutionSide\":\"yes\",\"status\":\"settled\",\"termsUrl\":null},{\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"id\":\"473677-1189155\",\"instrumentSymbol\":\"GEMI-WXHIGH-NYC-2611190459-HI66\",\"label\":\"66°F or above\",\"marketState\":\"closed\",\"prices\":{\"bestAsk\":null,\"bestBid\":null,\"lastTradePrice\":null},\"resolutionSide\":\"no\",\"status\":\"settled\",\"termsUrl\":null}],\"description\":\"Highest temperature in NYC on November 18, 2026?\",\"expiryUtc\":\"2026-11-19T04:59:59.000Z\",\"resolvedAtUtc\":\"2026-11-19T11:02:04.297Z\",\"status\":\"settled\",\"termsUrl\":null,\"ticker\":\"WXHIGH-NYC-2611190459\",\"title\":\"Highest temperature in NYC on November 18, 2026?\"}"
+      }
+    ]
+  }
+}

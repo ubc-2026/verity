@@ -1,0 +1,746 @@
+{
+  "version": "research-eval-v1",
+  "created": "2026-11-19",
+  "purpose": "Research evaluation of Verity's market reading: instrument matching, quote handling, citation support, rubric agreement, abstention, and whether a risk change traces to verified evidence. It does not measure forecasting performance; that needs a separate backtest.",
+  "review": {
+    "status": "pending",
+    "reviewed_cases": 0,
+    "instructions": "A reviewer checks each case's summary, inputs and expected labels, then sets review.status to approved or changed, and fills reviewer, reviewed_at and notes. Cases with label_source 'team workbook' carry the team's human-entered scores; the case framing still needs review. Change the version when a label changes."
+  },
+  "labels": {
+    "FIXTURE": "Recorded or hand-made test data. Includes fixture records modified for a case.",
+    "CAPTURED": "A real response from the public Gemini Exchange API, saved to the repo with its fetch time.",
+    "LIVE": "Read from the API during the run. No case in v1 is live; see the runner's --live flag."
+  },
+  "rubric": "framework-sheet-rev5 (workbook-2026-11-17, Framework sheet). Each category 1 to 3.",
+  "cases": [
+    {
+      "id": "W01-nyc-band-buy",
+      "category": "weather",
+      "tags": [
+        "clear_rules",
+        "revisable_source",
+        "instrument_matching",
+        "buy"
+      ],
+      "summary": "NYC Central Park high 62-63°F band. Official but revisable source; the free check is inconclusive, so one purchase for the settlement-version gap.",
+      "label_source": "team workbook (workbook-2026-11-17 rev 5, row 3): human-entered category scores",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "instrument": {
+          "data": "CAPTURED",
+          "venue": "capture:samples/research/captures/WXHIGH-NYC-2611190459-2026-11-20T020102370Z.json",
+          "query": {
+            "exchange": "gemini",
+            "eventTicker": "WXHIGH-NYC-2611190459",
+            "outcomeLabel": "62°F to 63°F"
+          },
+          "expect": {
+            "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+          }
+        },
+        "quote": {
+          "data": "FIXTURE",
+          "engine": "classifyQuote",
+          "input": {
+            "bestBid": "0.54",
+            "bestAsk": "0.58",
+            "observedAtUtc": null,
+            "observedDate": "2026-11-17",
+            "now": "2026-11-18T01:00:00Z",
+            "open": true
+          },
+          "expect": {
+            "state": "two_sided",
+            "implied": "0.56"
+          }
+        },
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "free_check_scenario": "observed-2026-11-18",
+          "rubric": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "decision": "buy",
+          "gap_type": "settlement_source_version"
+        }
+      }
+    },
+    {
+      "id": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "tags": [
+        "free_evidence_answers_gap",
+        "abstain"
+      ],
+      "summary": "Same market; the free official-source check already answers the gap (fixture assumption), so nothing is bought.",
+      "label_source": "team workbook (workbook-2026-11-17 rev 5, row 3): human-entered category scores",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "free_check_scenario": "free-check-answers",
+          "rubric": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "decision": "abstain"
+        }
+      }
+    },
+    {
+      "id": "W03-nyc-verified-evidence",
+      "category": "weather",
+      "tags": [
+        "verified_evidence",
+        "risk_change"
+      ],
+      "summary": "Receipt-verified evidence names the settling issuance. The source score may fall from 2 to 1, and the change must cite the evidence.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "free_check_scenario": "observed-2026-11-18",
+          "decision": "buy"
+        },
+        "trace": {
+          "data": "FIXTURE",
+          "evidence": "slice",
+          "tamper": false,
+          "verification": "verified",
+          "expect": {
+            "status": "revised",
+            "changed": true,
+            "changed_finding": "scores.source"
+          }
+        }
+      }
+    },
+    {
+      "id": "W04-nyc-unverified-evidence",
+      "category": "weather",
+      "tags": [
+        "unverified_evidence",
+        "risk_change"
+      ],
+      "summary": "Delivered bytes differ from the receipt-verified hash. Nothing may change, and the database must refuse a changed finding on that evidence.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "free_check_scenario": "observed-2026-11-18",
+          "decision": "buy"
+        },
+        "trace": {
+          "data": "FIXTURE",
+          "evidence": "slice",
+          "tamper": true,
+          "verification": "rejected",
+          "expect": {
+            "status": "evidence_rejected",
+            "changed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "W05-nyc-one-sided",
+      "category": "weather",
+      "tags": [
+        "one_sided_quote"
+      ],
+      "summary": "Neighbouring 58-59°F band with an ask and no bid (hand-made test book). No implied price.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "quote": {
+          "data": "FIXTURE",
+          "engine": "classifyQuote",
+          "input": {
+            "bestBid": null,
+            "bestAsk": "0.03",
+            "observedAtUtc": null,
+            "observedDate": "2026-11-17",
+            "now": "2026-11-18T01:00:00Z",
+            "open": true
+          },
+          "expect": {
+            "state": "one_sided_ask",
+            "implied": null
+          }
+        },
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "patch_market": {
+            "best_bid": null,
+            "best_ask": "0.03"
+          },
+          "free_check_scenario": "observed-2026-11-18",
+          "quote_expect": {
+            "implied": null,
+            "mid": null
+          }
+        }
+      }
+    },
+    {
+      "id": "W06-nyc-stale",
+      "category": "weather",
+      "tags": [
+        "stale_quote"
+      ],
+      "summary": "A two-sided reading taken 300 s before the check, over the 120 s limit. It is history, not a current price.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "quote": {
+          "data": "FIXTURE",
+          "engine": "classifyQuote",
+          "input": {
+            "bestBid": "0.54",
+            "bestAsk": "0.58",
+            "observedAtUtc": "2026-11-18T01:00:00Z",
+            "now": "2026-11-18T01:05:00Z",
+            "open": true,
+            "staleAfterSeconds": 120
+          },
+          "expect": {
+            "state": "stale",
+            "implied": null
+          }
+        }
+      }
+    },
+    {
+      "id": "W07-nyc-crossed",
+      "category": "weather",
+      "tags": [
+        "crossed_quote"
+      ],
+      "summary": "Bid above ask. The quote is inconsistent: no midpoint anywhere, in the research store or in the analysis.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "quote": {
+          "data": "FIXTURE",
+          "engine": "classifyQuote",
+          "input": {
+            "bestBid": "0.60",
+            "bestAsk": "0.55",
+            "observedAtUtc": null,
+            "observedDate": "2026-11-17",
+            "now": "2026-11-18T01:00:00Z",
+            "open": true
+          },
+          "expect": {
+            "state": "crossed",
+            "implied": null
+          }
+        },
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "patch_market": {
+            "best_bid": "0.60",
+            "best_ask": "0.55"
+          },
+          "free_check_scenario": "observed-2026-11-18",
+          "quote_expect": {
+            "implied": null,
+            "mid": null
+          }
+        }
+      }
+    },
+    {
+      "id": "W08-nyc-terms-missing",
+      "category": "weather",
+      "tags": [
+        "missing_terms"
+      ],
+      "summary": "Terms link empty and the terms excerpts absent; only the event description is known. The free source (the terms) was not read, so a purchase is premature.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "low",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "patch": {
+            "terms_url": null,
+            "event_terms_url_present": false
+          },
+          "keep_excerpts": [
+            "C-NYC-1",
+            "C-NYC-3"
+          ],
+          "free_check_scenario": "observed-2026-11-18",
+          "rubric": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "decision": "abstain"
+        }
+      }
+    },
+    {
+      "id": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "tags": [
+        "contradictory_sources"
+      ],
+      "summary": "The settlement source says NWS, but the rules excerpt makes Weather Underground primary. Conflicting sources need a person.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "medium",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "edit_excerpts": {
+            "C-NYC-5": "Primary source is Weather Underground; the NWS Climatological Report is used only if Weather Underground is unavailable."
+          },
+          "free_check_scenario": "observed-2026-11-18",
+          "rubric": {
+            "ambiguity": 3,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "W10-nyc-discretion",
+      "category": "weather",
+      "tags": [
+        "ambiguous_rules"
+      ],
+      "summary": "Rules add exchange discretion when the report is late. Ambiguity is high.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "medium",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-nyc-high-20261118",
+          "edit_excerpts": {
+            "C-NYC-1": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. If the report is not published by expiry, Gemini will determine the outcome at its sole discretion."
+          },
+          "free_check_scenario": "observed-2026-11-18",
+          "rubric": {
+            "ambiguity": 3,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "W11-nyc-label-variants",
+      "category": "weather",
+      "tags": [
+        "instrument_matching"
+      ],
+      "summary": "Outcome labels must match exactly after normalising the degree sign and range words. '62 to 63' (no unit) is not '62°F to 63°F'; the hand-made test symbol B62 is not the real symbol.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "medium",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "instrument": {
+          "data": "CAPTURED",
+          "venue": "capture:samples/research/captures/WXHIGH-NYC-2611190459-2026-11-20T020102370Z.json",
+          "query": {
+            "exchange": "gemini",
+            "eventTicker": "WXHIGH-NYC-2611190459",
+            "outcomeLabel": "62 to 63"
+          },
+          "expect": {
+            "fail": "no_match"
+          }
+        },
+        "instrument_2": {
+          "data": "CAPTURED",
+          "venue": "capture:samples/research/captures/WXHIGH-NYC-2611190459-2026-11-20T020102370Z.json",
+          "query": {
+            "exchange": "gemini",
+            "eventTicker": "WXHIGH-NYC-2611190459",
+            "outcomeLabel": "62°F – 63°F"
+          },
+          "expect": {
+            "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+          }
+        }
+      }
+    },
+    {
+      "id": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "instrument_matching",
+        "abstain"
+      ],
+      "summary": "NBA moneyline with an official league source and named fallbacks. No material gap, nothing to buy.",
+      "label_source": "team workbook (workbook-2026-11-17 rev 5, row 2): human-entered category scores",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "instrument": {
+          "data": "CAPTURED",
+          "venue": "raw:analysis/tests/live_okc_event_2026-11-18.json",
+          "query": {
+            "exchange": "gemini",
+            "eventTicker": "NBA-2611190100-ATL-OKC-M",
+            "outcomeLabel": "Oklahoma City"
+          },
+          "expect": {
+            "outcomeId": "GEMI-NBA-2611190100-ATL-OKC-M-OKC"
+          }
+        },
+        "quote": {
+          "data": "CAPTURED",
+          "engine": "classifyQuote",
+          "input": {
+            "bestBid": "0.69",
+            "bestAsk": "0.7",
+            "observedAtUtc": null,
+            "observedDate": "2026-11-18",
+            "now": "2026-11-18T01:00:00Z",
+            "open": true
+          },
+          "expect": {
+            "state": "two_sided",
+            "implied": "0.695"
+          }
+        },
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-okc-moneyline-20261118",
+          "rubric": {
+            "ambiguity": 1,
+            "source": 1,
+            "liquidity": 1,
+            "correlation": 1
+          },
+          "decision": "abstain"
+        }
+      }
+    },
+    {
+      "id": "S02-okc-one-sided",
+      "category": "sports",
+      "tags": [
+        "one_sided_quote"
+      ],
+      "summary": "The Atlanta side with its ask removed (modified from the capture). Bid only: no implied price.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "quote": {
+          "data": "FIXTURE",
+          "engine": "classifyQuote",
+          "input": {
+            "bestBid": "0.3",
+            "bestAsk": null,
+            "observedAtUtc": null,
+            "observedDate": "2026-11-18",
+            "now": "2026-11-18T01:00:00Z",
+            "open": true
+          },
+          "expect": {
+            "state": "one_sided_bid",
+            "implied": null
+          }
+        }
+      }
+    },
+    {
+      "id": "S03-msu-spread-correlated",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "correlated",
+        "abstain"
+      ],
+      "summary": "NCAA spread with moneyline and total siblings on the same game. Correlation is high; the rules are objective.",
+      "label_source": "team workbook (workbook-2026-11-17 rev 5, row 4): human-entered category scores",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-msu-spread-20261117",
+          "rubric": {
+            "ambiguity": 1,
+            "source": 1,
+            "liquidity": 2,
+            "correlation": 3
+          },
+          "decision": "abstain"
+        }
+      }
+    },
+    {
+      "id": "S04-okc-terms-missing",
+      "category": "sports",
+      "tags": [
+        "missing_terms"
+      ],
+      "summary": "Event terms link empty and no terms PDF. The outcome is clear but the governing terms are unread (Agent rule 3).",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "medium",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-okc-moneyline-20261118",
+          "patch": {
+            "terms_url": null,
+            "event_terms_url_present": false
+          },
+          "rubric": {
+            "ambiguity": 2,
+            "source": 1,
+            "liquidity": 1,
+            "correlation": 1
+          },
+          "decision": "abstain"
+        }
+      }
+    },
+    {
+      "id": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "tags": [
+        "contradictory_sources"
+      ],
+      "summary": "The settlement source names the league first; the rules excerpt puts ESPN first. Conflicting source order needs a person.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "medium",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-okc-moneyline-20261118",
+          "edit_excerpts": {
+            "C-OKC-2": "Sources in order: ESPN, then the league governing body, then Fox Sports and the broadcast partner."
+          },
+          "rubric": {
+            "ambiguity": 3,
+            "source": 1,
+            "liquidity": 1,
+            "correlation": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "S06-okc-discretion",
+      "category": "sports",
+      "tags": [
+        "ambiguous_rules"
+      ],
+      "summary": "Rules give the exchange discretion over a suspended game. Ambiguity is high.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "analysis": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-okc-moneyline-20261118",
+          "edit_excerpts": {
+            "C-OKC-1": "Moneyline for the game scheduled Nov 18, 2026 at 8:00 PM ET; pays Yes if the named team wins. If the game is suspended, Gemini will settle at its sole discretion."
+          },
+          "rubric": {
+            "ambiguity": 3,
+            "source": 1,
+            "liquidity": 1,
+            "correlation": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "S07-okc-evidence-no-gap",
+      "category": "sports",
+      "tags": [
+        "unverified_evidence",
+        "risk_change"
+      ],
+      "summary": "Evidence arrives for a gap this analysis never opened. It must be rejected and change nothing.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "trace": {
+          "data": "FIXTURE",
+          "base": "fixture:fx-okc-moneyline-20261118",
+          "evidence": "slice",
+          "tamper": false,
+          "verification": "verified",
+          "contract_override": "fx-okc-moneyline-20261118",
+          "expect": {
+            "status": "evidence_rejected",
+            "changed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "S08-okc-wrong-game",
+      "category": "sports",
+      "tags": [
+        "instrument_matching"
+      ],
+      "summary": "Same teams, another game date, and a longer team name. Neither may match the captured event.",
+      "label_source": "drafted by Claude from the Framework sheet rules; needs a person to confirm",
+      "label_confidence": "high",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      },
+      "checks": {
+        "instrument": {
+          "data": "CAPTURED",
+          "venue": "raw:analysis/tests/live_okc_event_2026-11-18.json",
+          "query": {
+            "exchange": "gemini",
+            "eventTicker": "NBA-2611200100-ATL-OKC-M",
+            "outcomeLabel": "Oklahoma City"
+          },
+          "expect": {
+            "fail": "event_mismatch"
+          }
+        },
+        "instrument_2": {
+          "data": "CAPTURED",
+          "venue": "raw:analysis/tests/live_okc_event_2026-11-18.json",
+          "query": {
+            "exchange": "gemini",
+            "eventTicker": "NBA-2611190100-ATL-OKC-M",
+            "outcomeLabel": "Oklahoma City Thunder"
+          },
+          "expect": {
+            "fail": "no_match"
+          }
+        }
+      }
+    }
+  ]
+}

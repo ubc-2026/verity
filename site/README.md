@@ -19,6 +19,7 @@ npm run build    # checks that it builds; writes dist/index.html
 | The 3D coin | `src/Coin3D.tsx` |
 | The ledger page | `src/Portal.tsx`, opened at `#ledger` |
 | The run page (one market, end to end) | `src/Run.tsx`, opened at `#run`. It needs `npm run app` in the repo root, or shows the recorded fixture preview |
+| Recorded history on the run page | `src/ResearchHistory.tsx`, section V of `#run`. It reads `/api/research`, or shows `src/research-preview.json` (`npm run research:snapshot`) |
 
 Make changes on a branch and open a pull request, like the rest of this repo.
 

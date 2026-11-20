@@ -315,6 +315,8 @@ button.btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .timeline { margin-top: var(--space-md); }
 .gateway { margin-top: var(--space-lg); }
 .run-page code { font-family: var(--font-mono); color: var(--color-gold-hi); }
+.research-history .verdict-card, .research-history .run-two { margin-top: var(--space-lg); }
+.research-text { white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-ink); margin: var(--space-sm) 0; }
 @media (max-width: 64rem) {
   .run-strip, .run-two { grid-template-columns: minmax(0, 1fr); }
   .run-strip .state-cell + .state-cell { border-left: 0; border-top: 1px solid var(--color-rule); }

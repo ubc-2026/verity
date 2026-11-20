@@ -129,6 +129,25 @@ The fixture run sends nothing on chain. Its tx hashes are derived from the nonce
 | Grok overdue alert | FIXTURE | The real routine has not been called |
 | ElevenLabs voice | Blocked | Explanations are text only. No authorized integration has been captured |
 | Standard x402 | Blocked | The transport uses `X-Verity-*` headers. Interoperability has not been checked |
+| Research history store (instruments, quotes, sources, assessment versions) | FIXTURE and CAPTURED data on embedded Postgres; the same suite passed on Postgres 17 in local Docker | The Supabase project is not connected. The remaining steps are in [db/research/README.md](db/research/README.md) |
+| Research evaluation set (19 weather and sports cases) | FIXTURE and CAPTURED, plus 2 LIVE checks | 0 of 19 cases have been reviewed by a person. See [eval/research/v1/report.md](eval/research/v1/report.md) |
+
+## Research history (fixture first)
+
+The app server keeps market history in a private Postgres schema (`db/research/0001_research.up.sql`) and serves it read-only at `/api/research`. The run page shows it in section V, "Recorded history". Without credentials it uses embedded Postgres in `.verity/research-pg`, migrated and seeded on start. The payment stores stay in SQLite.
+
+- **Instruments** are keyed by exchange, event ticker and the outcome's instrument symbol. Quote snapshots keep the venue and capture times, provider, bid, ask, market state and provenance. A replayed input adds nothing.
+- **The market-implied probability** is the mid of a two-sided, uncrossed, open book only, and it is reported apart from the settlement-risk rating. Missing, one-sided, crossed, closed, stale and unavailable quotes are labeled.
+- **Assessments** are append-only versions. A reassessment points at its parent and records the rubric version, the quote snapshot, the source versions, the cited claims, the gap and the decision. The database refuses a changed finding unless the evidence was verified.
+- **Roles.** Only the ingest role can write. The reader role sees display views only. `anon`, `authenticated` and `service_role` get nothing. The research code imports nothing from the payment code.
+
+```bash
+npm run app                                   # migrates and seeds .verity/research-pg, then serves /api/research
+npm run research:eval                         # scores eval/research/v1 (needs VERITY_PYTHON); add --live for 2 live checks
+npm run research:migrate -- plan              # against VERITY_RESEARCH_MIGRATE_URL in .env.research; apply needs the reviewed checksum
+```
+
+The vertical slice is the NYC high-temperature market, outcome 62°F to 63°F (`GEMI-WXHIGH-NYC-2611190459-62TO63`). It has three quotes: the workbook snapshot from 2026-11-17 (FIXTURE, date only, 56¢ implied) and two reads of the settled event from the public API (CAPTURED 2026-11-20, closed, no implied price). Receipt-verified FIXTURE evidence moved the rating from 8 Medium to 7 Medium. Schema, roles, migration and rollback steps are in [db/research/README.md](db/research/README.md).
 
 ## Demo plan
 

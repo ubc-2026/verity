@@ -44,7 +44,8 @@ def _dec(x: Optional[str]) -> Optional[Decimal]:
 def _quoted_price(m: dict[str, Any]) -> QuotedPrice:
     mk = m["market"]
     bid, ask = _dec(mk.get("best_bid")), _dec(mk.get("best_ask"))
-    mid = (bid + ask) / 2 if bid is not None and ask is not None else None
+    # The mid of a two-sided, uncrossed book only. A missing, one-sided or crossed book has no midpoint.
+    mid = (bid + ask) / 2 if bid is not None and ask is not None and bid <= ask else None
     reported = mk.get("reported_probability")
     implied = str(mid) if mid is not None else reported
     return QuotedPrice(

@@ -1,0 +1,1343 @@
+{
+  "summary": {
+    "dataset": "research-eval-v1",
+    "ranAtUtc": "2026-11-20T02:15:05.173Z",
+    "code": "1344e90 plus uncommitted changes",
+    "python": "C:/Users/decon/Documents/GitHub/verity-nano/analysis/.venv/Scripts/python.exe",
+    "live": true,
+    "reviewedCases": 0,
+    "cases": 19,
+    "checks": 51,
+    "passed": 37
+  },
+  "results": [
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "tags": [
+        "clear_rules",
+        "revisable_source",
+        "instrument_matching",
+        "buy"
+      ],
+      "check": "instrument_matching",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "got": {
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "tags": [
+        "clear_rules",
+        "revisable_source",
+        "instrument_matching",
+        "buy"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "state": "two_sided",
+        "implied": "0.56"
+      },
+      "got": {
+        "state": "two_sided",
+        "implied": "0.56",
+        "stored": {
+          "quoteState": "two_sided",
+          "impliedProbability": "0.56"
+        }
+      },
+      "detail": "Mid of the best bid and best ask."
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "tags": [
+        "clear_rules",
+        "revisable_source",
+        "instrument_matching",
+        "buy"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "tags": [
+        "clear_rules",
+        "revisable_source",
+        "instrument_matching",
+        "buy"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "tags": [
+        "clear_rules",
+        "revisable_source",
+        "instrument_matching",
+        "buy"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "buy",
+        "gap_type": "settlement_source_version"
+      },
+      "got": {
+        "decision": "buy",
+        "proposal": {
+          "gap_id": "GAP-1",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1"
+        }
+      },
+      "detail": "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "tags": [
+        "free_evidence_answers_gap",
+        "abstain"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "tags": [
+        "free_evidence_answers_gap",
+        "abstain"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "tags": [
+        "free_evidence_answers_gap",
+        "abstain"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "abstain",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "abstain",
+        "proposal": null
+      },
+      "detail": "[fx-nyc-high-20261118] no purchase: every material gap was answered, cached, or had no catalog match."
+    },
+    {
+      "caseId": "W03-nyc-verified-evidence",
+      "category": "weather",
+      "tags": [
+        "verified_evidence",
+        "risk_change"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W03-nyc-verified-evidence",
+      "category": "weather",
+      "tags": [
+        "verified_evidence",
+        "risk_change"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "buy",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "buy",
+        "proposal": {
+          "gap_id": "GAP-1",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1"
+        }
+      },
+      "detail": "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    },
+    {
+      "caseId": "W03-nyc-verified-evidence",
+      "category": "weather",
+      "tags": [
+        "verified_evidence",
+        "risk_change"
+      ],
+      "check": "risk_change_traceability",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "status": "revised",
+        "changed": true,
+        "changed_finding": "scores.source",
+        "database": "accepted",
+        "forced_change_on_unverified": "n/a"
+      },
+      "got": {
+        "status": "revised",
+        "changed": true,
+        "changes": [
+          "evidence_gaps.GAP-1: open -> closed",
+          "scores.source: 2 -> 1",
+          "rating.raw_total: 8 -> 7"
+        ],
+        "evidence_cited": true,
+        "database": "accepted",
+        "forced_change_on_unverified": "not attempted"
+      },
+      "detail": "evidence applied"
+    },
+    {
+      "caseId": "W04-nyc-unverified-evidence",
+      "category": "weather",
+      "tags": [
+        "unverified_evidence",
+        "risk_change"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W04-nyc-unverified-evidence",
+      "category": "weather",
+      "tags": [
+        "unverified_evidence",
+        "risk_change"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "buy",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "buy",
+        "proposal": {
+          "gap_id": "GAP-1",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1"
+        }
+      },
+      "detail": "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    },
+    {
+      "caseId": "W04-nyc-unverified-evidence",
+      "category": "weather",
+      "tags": [
+        "unverified_evidence",
+        "risk_change"
+      ],
+      "check": "risk_change_traceability",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "status": "evidence_rejected",
+        "changed": false,
+        "database": "accepted",
+        "forced_change_on_unverified": "refused"
+      },
+      "got": {
+        "status": "evidence_rejected",
+        "changed": false,
+        "changes": [],
+        "evidence_cited": true,
+        "database": "accepted",
+        "forced_change_on_unverified": "refused"
+      },
+      "detail": "the bytes differ from the delivery the buyer verified"
+    },
+    {
+      "caseId": "W05-nyc-one-sided",
+      "category": "weather",
+      "tags": [
+        "one_sided_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "state": "one_sided_ask",
+        "implied": null
+      },
+      "got": {
+        "state": "one_sided_ask",
+        "implied": null,
+        "stored": {
+          "quoteState": "one_sided_ask",
+          "impliedProbability": null
+        }
+      },
+      "detail": "Ask only. A one-sided book gives no market-implied price."
+    },
+    {
+      "caseId": "W05-nyc-one-sided",
+      "category": "weather",
+      "tags": [
+        "one_sided_quote"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W05-nyc-one-sided",
+      "category": "weather",
+      "tags": [
+        "one_sided_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "analysis_quoted_price": {
+          "implied": null,
+          "mid": null
+        }
+      },
+      "got": {
+        "mid": null,
+        "implied": null
+      },
+      "detail": "analysis/verity/analysis.py _quoted_price"
+    },
+    {
+      "caseId": "W06-nyc-stale",
+      "category": "weather",
+      "tags": [
+        "stale_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "state": "stale",
+        "implied": null
+      },
+      "got": {
+        "state": "stale",
+        "implied": null,
+        "stored": null
+      },
+      "detail": "Read 300 s ago, older than the 120 s limit. No implied price is shown."
+    },
+    {
+      "caseId": "W07-nyc-crossed",
+      "category": "weather",
+      "tags": [
+        "crossed_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "state": "crossed",
+        "implied": null
+      },
+      "got": {
+        "state": "crossed",
+        "implied": null,
+        "stored": {
+          "quoteState": "crossed",
+          "impliedProbability": null
+        }
+      },
+      "detail": "Bid above ask. The quote is inconsistent and is not used."
+    },
+    {
+      "caseId": "W07-nyc-crossed",
+      "category": "weather",
+      "tags": [
+        "crossed_quote"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W07-nyc-crossed",
+      "category": "weather",
+      "tags": [
+        "crossed_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "analysis_quoted_price": {
+          "implied": null,
+          "mid": null
+        }
+      },
+      "got": {
+        "mid": null,
+        "implied": null
+      },
+      "detail": "analysis/verity/analysis.py _quoted_price"
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "tags": [
+        "missing_terms"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": "every cited excerpt exists and has text",
+      "got": "ok",
+      "detail": ""
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "tags": [
+        "missing_terms"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "tags": [
+        "missing_terms"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": {
+        "decision": "abstain",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "buy",
+        "proposal": {
+          "gap_id": "GAP-1",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1"
+        }
+      },
+      "detail": "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-1: max 50000 base units (= 0.05 USDC), unsigned."
+    },
+    {
+      "caseId": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "tags": [
+        "contradictory_sources"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "tags": [
+        "contradictory_sources"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": {
+        "ambiguity": 3,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "detail": "ambiguity: expected 3, got 2"
+    },
+    {
+      "caseId": "W10-nyc-discretion",
+      "category": "weather",
+      "tags": [
+        "ambiguous_rules"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "ambiguity cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "source cites C-NYC-2, which is empty, for a claim that is not about an absence",
+        "correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+      ],
+      "detail": "ambiguity cites C-NYC-2, which is empty, for a claim that is not about an absence; source cites C-NYC-2, which is empty, for a claim that is not about an absence; correlation cites C-NYC-2, which is empty, for a claim that is not about an absence"
+    },
+    {
+      "caseId": "W10-nyc-discretion",
+      "category": "weather",
+      "tags": [
+        "ambiguous_rules"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "ambiguity": 3,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 3,
+        "source": 2,
+        "liquidity": 3,
+        "correlation": 1
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "W11-nyc-label-variants",
+      "category": "weather",
+      "tags": [
+        "instrument_matching"
+      ],
+      "check": "instrument_matching",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "fail": "no_match"
+      },
+      "got": {
+        "fail": "no_match"
+      },
+      "detail": "no outcome labeled \"62 to 63\" in WXHIGH-NYC-2611190459"
+    },
+    {
+      "caseId": "W11-nyc-label-variants",
+      "category": "weather",
+      "tags": [
+        "instrument_matching"
+      ],
+      "check": "instrument_matching",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "got": {
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "instrument_matching",
+        "abstain"
+      ],
+      "check": "instrument_matching",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "outcomeId": "GEMI-NBA-2611190100-ATL-OKC-M-OKC"
+      },
+      "got": {
+        "outcomeId": "GEMI-NBA-2611190100-ATL-OKC-M-OKC"
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "instrument_matching",
+        "abstain"
+      ],
+      "check": "quote_correctness",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "state": "two_sided",
+        "implied": "0.695"
+      },
+      "got": {
+        "state": "two_sided",
+        "implied": "0.695",
+        "stored": {
+          "quoteState": "two_sided",
+          "impliedProbability": "0.695"
+        }
+      },
+      "detail": "Mid of the best bid and best ask."
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "instrument_matching",
+        "abstain"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": "every cited excerpt exists and has text",
+      "got": "ok",
+      "detail": ""
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "instrument_matching",
+        "abstain"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": {
+        "ambiguity": 1,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "detail": "ambiguity: expected 1, got 2"
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "instrument_matching",
+        "abstain"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "abstain",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "abstain",
+        "proposal": null
+      },
+      "detail": "[fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research)."
+    },
+    {
+      "caseId": "S02-okc-one-sided",
+      "category": "sports",
+      "tags": [
+        "one_sided_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "state": "one_sided_bid",
+        "implied": null
+      },
+      "got": {
+        "state": "one_sided_bid",
+        "implied": null,
+        "stored": {
+          "quoteState": "one_sided_bid",
+          "impliedProbability": null
+        }
+      },
+      "detail": "Bid only. A one-sided book gives no market-implied price."
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "correlated",
+        "abstain"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": "every cited excerpt exists and has text",
+      "got": [
+        "liquidity=2 cites nothing"
+      ],
+      "detail": "liquidity=2 cites nothing"
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "correlated",
+        "abstain"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": {
+        "ambiguity": 1,
+        "source": 1,
+        "liquidity": 2,
+        "correlation": 3
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 2,
+        "correlation": 3
+      },
+      "detail": "ambiguity: expected 1, got 2"
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "tags": [
+        "clear_rules",
+        "correlated",
+        "abstain"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "abstain",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "abstain",
+        "proposal": null
+      },
+      "detail": "[fx-msu-spread-20261117] no purchase: no material resolution gap (research action: investigate)."
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "tags": [
+        "missing_terms"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": "every cited excerpt exists and has text",
+      "got": "ok",
+      "detail": ""
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "tags": [
+        "missing_terms"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "tags": [
+        "missing_terms"
+      ],
+      "check": "abstention",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "decision": "abstain",
+        "gap_type": null
+      },
+      "got": {
+        "decision": "abstain",
+        "proposal": null
+      },
+      "detail": "[fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research)."
+    },
+    {
+      "caseId": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "tags": [
+        "contradictory_sources"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": "every cited excerpt exists and has text",
+      "got": "ok",
+      "detail": ""
+    },
+    {
+      "caseId": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "tags": [
+        "contradictory_sources"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": false,
+      "expected": {
+        "ambiguity": 3,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 2,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "detail": "ambiguity: expected 3, got 2"
+    },
+    {
+      "caseId": "S06-okc-discretion",
+      "category": "sports",
+      "tags": [
+        "ambiguous_rules"
+      ],
+      "check": "citation_support",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": "every cited excerpt exists and has text",
+      "got": "ok",
+      "detail": ""
+    },
+    {
+      "caseId": "S06-okc-discretion",
+      "category": "sports",
+      "tags": [
+        "ambiguous_rules"
+      ],
+      "check": "rubric_agreement",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "ambiguity": 3,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "got": {
+        "ambiguity": 3,
+        "source": 1,
+        "liquidity": 1,
+        "correlation": 1
+      },
+      "detail": ""
+    },
+    {
+      "caseId": "S07-okc-evidence-no-gap",
+      "category": "sports",
+      "tags": [
+        "unverified_evidence",
+        "risk_change"
+      ],
+      "check": "risk_change_traceability",
+      "data": "FIXTURE",
+      "pass": true,
+      "expected": {
+        "status": "evidence_rejected",
+        "changed": false,
+        "database": "accepted",
+        "forced_change_on_unverified": "n/a"
+      },
+      "got": {
+        "status": "evidence_rejected",
+        "changed": false,
+        "changes": [],
+        "evidence_cited": true,
+        "database": "accepted",
+        "forced_change_on_unverified": "not attempted"
+      },
+      "detail": "GAP-NONE is not an open gap on this analysis"
+    },
+    {
+      "caseId": "S08-okc-wrong-game",
+      "category": "sports",
+      "tags": [
+        "instrument_matching"
+      ],
+      "check": "instrument_matching",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "fail": "event_mismatch"
+      },
+      "got": {
+        "fail": "event_mismatch"
+      },
+      "detail": "event NBA-2611190100-ATL-OKC-M is not NBA-2611200100-ATL-OKC-M"
+    },
+    {
+      "caseId": "S08-okc-wrong-game",
+      "category": "sports",
+      "tags": [
+        "instrument_matching"
+      ],
+      "check": "instrument_matching",
+      "data": "CAPTURED",
+      "pass": true,
+      "expected": {
+        "fail": "no_match"
+      },
+      "got": {
+        "fail": "no_match"
+      },
+      "detail": "no outcome labeled \"Oklahoma City Thunder\" in NBA-2611190100-ATL-OKC-M"
+    },
+    {
+      "caseId": "L01-nyc-live-read",
+      "category": "weather",
+      "tags": [
+        "live",
+        "instrument_matching",
+        "closed_quote"
+      ],
+      "check": "instrument_matching",
+      "data": "LIVE",
+      "pass": true,
+      "expected": {
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "got": {
+        "exchange": "gemini",
+        "instrumentId": "WXHIGH-NYC-2611190459",
+        "outcomeId": "GEMI-WXHIGH-NYC-2611190459-62TO63"
+      },
+      "detail": "read 2026-11-20T02:15:04.885Z"
+    },
+    {
+      "caseId": "L01-nyc-live-read",
+      "category": "weather",
+      "tags": [
+        "live",
+        "instrument_matching",
+        "closed_quote"
+      ],
+      "check": "quote_correctness",
+      "data": "LIVE",
+      "pass": true,
+      "expected": {
+        "state": "closed",
+        "implied": null
+      },
+      "got": {
+        "state": "closed",
+        "implied": null,
+        "venueStatus": "settled"
+      },
+      "detail": "The contract is not open for trading."
+    }
+  ],
+  "rubricCells": [
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "dim": "ambiguity",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "dim": "source",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "dim": "liquidity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "W01-nyc-band-buy",
+      "category": "weather",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "dim": "ambiguity",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "dim": "source",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "dim": "liquidity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "W02-nyc-free-check-answers",
+      "category": "weather",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "dim": "ambiguity",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "dim": "source",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "dim": "liquidity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "W08-nyc-terms-missing",
+      "category": "weather",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "dim": "ambiguity",
+      "expected": 3,
+      "got": 2
+    },
+    {
+      "caseId": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "dim": "source",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "dim": "liquidity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "W09-nyc-contradictory-sources",
+      "category": "weather",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "W10-nyc-discretion",
+      "category": "weather",
+      "dim": "ambiguity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "W10-nyc-discretion",
+      "category": "weather",
+      "dim": "source",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "W10-nyc-discretion",
+      "category": "weather",
+      "dim": "liquidity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "W10-nyc-discretion",
+      "category": "weather",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "dim": "ambiguity",
+      "expected": 1,
+      "got": 2
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "dim": "source",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "dim": "liquidity",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S01-okc-moneyline-clear",
+      "category": "sports",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "dim": "ambiguity",
+      "expected": 1,
+      "got": 2
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "dim": "source",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "dim": "liquidity",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "S03-msu-spread-correlated",
+      "category": "sports",
+      "dim": "correlation",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "dim": "ambiguity",
+      "expected": 2,
+      "got": 2
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "dim": "source",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "dim": "liquidity",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S04-okc-terms-missing",
+      "category": "sports",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "dim": "ambiguity",
+      "expected": 3,
+      "got": 2
+    },
+    {
+      "caseId": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "dim": "source",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "dim": "liquidity",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S05-okc-contradictory-sources",
+      "category": "sports",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S06-okc-discretion",
+      "category": "sports",
+      "dim": "ambiguity",
+      "expected": 3,
+      "got": 3
+    },
+    {
+      "caseId": "S06-okc-discretion",
+      "category": "sports",
+      "dim": "source",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S06-okc-discretion",
+      "category": "sports",
+      "dim": "liquidity",
+      "expected": 1,
+      "got": 1
+    },
+    {
+      "caseId": "S06-okc-discretion",
+      "category": "sports",
+      "dim": "correlation",
+      "expected": 1,
+      "got": 1
+    }
+  ]
+}

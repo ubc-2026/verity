@@ -1,5 +1,6 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import preview from './fixture-preview.json';
+import ResearchHistory from './ResearchHistory';
 
 /* The run page: one Gemini Exchange market, read, scored, checked against free sources, then bought or not.
    Talks to the Verity app API (npm run app). Without it, shows the recorded fixture preview, read-only. */
@@ -584,6 +585,19 @@ export default function Run() {
             </div>
           ) : null}
           {config?.arc ? <p className="label ledger-note">Arc Testnet chain {config.arc.chainId} · USDC {config.arc.usdc} · Gateway Wallet {config.arc.gatewayWallet}</p> : null}
+        </div>
+      </section>
+
+      <section className="sec" id="research-history">
+        <div className="container">
+          <header className="sec-head">
+            <p className="sec-no">V</p>
+            <div>
+              <h2>Recorded history.</h2>
+              <p className="lead">Every quote and assessment version stored for the selected market. A reassessment is added, never written over.</p>
+            </div>
+          </header>
+          <ResearchHistory contractId={selected} />
         </div>
       </section>
     </main>
