@@ -14,7 +14,7 @@ export async function readHistory(sql, instrument) {
     WHERE i.venue = 'gemini-exchange'
       AND i.external_instrument_id = ${instrument}
       AND q.source_mode = 'live'
-    ORDER BY q.observed_at DESC
+    ORDER BY q.observed_at DESC, q.id DESC
     LIMIT 120
   `;
   return rows.reverse().map((row) => ({
