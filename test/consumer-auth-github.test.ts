@@ -34,8 +34,13 @@ function follow(url: string, ip = "203.0.113.7") {
   return new Request(url, { headers: { "x-forwarded-for": `${ip}, 10.0.0.1` } });
 }
 
-function setup(allow: (ticketId: string, ip: string) => Promise<boolean> = async () => true) {
+function setup(
+  allow: (ticketId: string, ip: string) => Promise<boolean> = async () => true,
+  close: (ticketId: string) => Promise<void> = async () => {},
+  send: typeof fetch = turnstile(),
+) {
   const calls: Array<{ ticketId: string; ip: string }> = [];
+  const closed: string[] = [];
   const handler = createConsumerAuth({
     ...base,
     githubSignup: {
@@ -43,9 +48,33 @@ function setup(allow: (ticketId: string, ip: string) => Promise<boolean> = async
         calls.push({ ticketId, ip });
         return allow(ticketId, ip);
       },
+      async closeProof(ticketId) {
+        closed.push(ticketId);
+        return close(ticketId);
+      },
     },
-  }, turnstile());
-  return { handler, calls };
+  }, send);
+  return { handler, calls, closed };
+}
+
+// Turnstile passes, and the PKCE code exchange returns a normal signed-in session.
+function signInServices(exchanges: string[] = []) {
+  return (async (url: string | URL | Request, init?: RequestInit) => {
+    const target = String(url);
+    if (target === "https://challenges.cloudflare.com/turnstile/v0/siteverify") {
+      return new Response(JSON.stringify({ success: true, hostname: "verityresearch.us", action: "verity_signin" }));
+    }
+    assert.equal(target, `${PROJECT}/auth/v1/token?grant_type=pkce`);
+    exchanges.push(String(init?.body));
+    return new Response(JSON.stringify({ access_token: "aaa.bbb.ccc", expires_in: 3600, user: { role: "authenticated" } }));
+  }) as typeof fetch;
+}
+
+function callback(cookie: string) {
+  const value = cookie.split(";")[0]!;
+  return new Request(`${PROJECT}/functions/v1/consumer-auth/callback?code=0b8f2c1e-4d3a-4b5c-9e6f-7a8b9c0d1e2f`, {
+    headers: { "x-verity-edge-key": EDGE_KEY, cookie: value },
+  });
 }
 
 async function githubTicketUrl(handler: (req: Request) => Promise<Response>) {
@@ -64,7 +93,7 @@ describe("consumer-auth GitHub signup", () => {
     assert.equal(next.pathname, "/functions/v1/consumer-auth/github");
     assert.deepEqual([...next.searchParams.keys()], ["ticket"]);
     assert.match(next.searchParams.get("ticket")!, /^[0-9a-f]{32}~[A-Za-z0-9_-]{43}\.\d{1,12}\.[0-9a-f]{64}$/);
-    assert.match(cookie, /^__Host-verity-pkce=[0-9a-f]{64}\.\d+\.[0-9a-f]{64}; Path=\/; Max-Age=600; Secure; HttpOnly; SameSite=Lax$/);
+    assert.match(cookie, /^__Host-verity-pkce=[0-9a-f]{64}~[0-9a-f]{32}\.\d+\.[0-9a-f]{64}; Path=\/; Max-Age=600; Secure; HttpOnly; SameSite=Lax$/);
   });
 
   it("records the proof for the gateway client address and continues to GitHub with the PKCE challenge", async () => {
@@ -77,7 +106,7 @@ describe("consumer-auth GitHub signup", () => {
     assert.equal(authorize.searchParams.get("provider"), "github");
     assert.equal(authorize.searchParams.get("redirect_to"), `${SITE}/auth/callback`);
     assert.equal(authorize.searchParams.get("code_challenge_method"), "s256");
-    const verifier = cookie.split("=")[1]!.split(".")[0]!;
+    const verifier = cookie.split("=")[1]!.split(".")[0]!.split("~")[0]!;
     const expected = createHash("sha256").update(verifier).digest("base64url");
     assert.equal(authorize.searchParams.get("code_challenge"), expected, "GitHub flow is bound to the PKCE cookie");
     assert.equal(calls.length, 1);
@@ -139,10 +168,50 @@ describe("consumer-auth GitHub signup", () => {
     assert.equal(next.searchParams.get("provider"), "google");
   });
 
+  it("closes the proof on the callback, for a new account and for a returning sign-in alike", async () => {
+    const exchanges: string[] = [];
+    const { handler, calls, closed } = setup(undefined, undefined, signInServices(exchanges));
+    const { url, cookie } = await githubTicketUrl(handler);
+    await handler(follow(url));
+    const response = await handler(callback(cookie));
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("location"), "/");
+    assert.deepEqual(closed, [calls[0]!.ticketId], "the same ticket that recorded the proof is closed");
+    const verifier = cookie.split("=")[1]!.split(".")[0]!.split("~")[0]!;
+    assert.deepEqual(JSON.parse(exchanges[0]!).code_verifier, verifier, "only the verifier goes to Supabase");
+    assert.doesNotMatch(exchanges[0]!, /~/);
+  });
+
+  it("still signs in when closing the proof fails", async () => {
+    const { handler, closed } = setup(undefined, async () => { throw new Error("db down"); }, signInServices());
+    const { url, cookie } = await githubTicketUrl(handler);
+    await handler(follow(url));
+    const response = await handler(callback(cookie));
+    assert.equal(response.headers.get("location"), "/");
+    assert.equal(closed.length, 1);
+  });
+
+  it("does not try to close a proof after a Google sign-in, and accepts a cookie set before this change", async () => {
+    const { handler, closed } = setup(undefined, undefined, signInServices());
+    const google = await handler(start({ challenge: "ok" }));
+    const cookie = google.headers.get("set-cookie") ?? "";
+    assert.match(cookie, /^__Host-verity-pkce=[0-9a-f]{64}\.\d+\.[0-9a-f]{64};/, "the Google cookie keeps its old shape");
+    assert.equal((await handler(callback(cookie))).headers.get("location"), "/");
+    assert.equal(closed.length, 0);
+  });
+
+  it("rejects a PKCE cookie whose ticket part was changed", async () => {
+    const { handler, closed } = setup(undefined, undefined, signInServices());
+    const { cookie } = await githubTicketUrl(handler);
+    const forged = cookie.replace(/~([0-9a-f])/, (_, c: string) => `~${c === "a" ? "b" : "a"}`);
+    assert.equal((await handler(callback(forged))).headers.get("location"), "/?signin=failed");
+    assert.equal(closed.length, 0);
+  });
+
   it("refuses GitHub when it is turned off and when the security check fails", async () => {
     const off = createConsumerAuth(base, turnstile());
     assert.equal((await off(start({ challenge: "ok", provider: "github" }))).status, 400);
-    const denied = createConsumerAuth({ ...base, githubSignup: { allowSignup: async () => true } },
+    const denied = createConsumerAuth({ ...base, githubSignup: { allowSignup: async () => true, closeProof: async () => {} } },
       turnstile({ success: true, hostname: "evil.example", action: "verity_signin" }));
     assert.equal((await denied(start({ challenge: "ok", provider: "github" }))).status, 403);
   });

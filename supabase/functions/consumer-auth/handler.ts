@@ -10,6 +10,8 @@ const START_BODY_LIMIT = 4096;
 const GITHUB_TICKET = "verity-github-ticket";
 const GITHUB_TICKET_TTL = 120;
 const TICKET = /^[0-9a-f]{32}~[A-Za-z0-9_-]{43}$/;
+// The PKCE cookie holds the verifier, and for GitHub also the ticket ID, so the callback can close the proof.
+const PKCE_VALUE = /^[0-9a-f]{64}(?:~[0-9a-f]{32})?$/;
 const PROVIDERS = new Set(["google", "github"]);
 const encoder = new TextEncoder();
 const endpoint = "/functions/v1/consumer-auth";
@@ -33,6 +35,12 @@ export interface ConsumerAuthConfig {
    */
   githubSignup?: {
     allowSignup(ticketId: string, clientIp: string): Promise<boolean>;
+    /**
+     * Marks the proof as used when the browser comes back, whether the visit created an account or signed in
+     * an existing one. Without this, a sign-in leaves an open proof that someone else on the same address
+     * could use.
+     */
+    closeProof(ticketId: string): Promise<void>;
   };
 }
 
@@ -288,8 +296,10 @@ export function createConsumerAuth(config: ConsumerAuthConfig, send: typeof fetc
         const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(verifier)));
         const pkceChallenge = btoa(String.fromCharCode(...digest)).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
         let next: URL;
+        let pkceValue = verifier;
         if (provider === "github") {
           const ticketId = hex(crypto.getRandomValues(new Uint8Array(16)));
+          pkceValue = `${verifier}~${ticketId}`;
           next = new URL(endpoint + "/github", project);
           next.search = new URLSearchParams({
             ticket: await sealCookie(GITHUB_TICKET, `${ticketId}~${pkceChallenge}`, GITHUB_TICKET_TTL),
@@ -301,15 +311,19 @@ export function createConsumerAuth(config: ConsumerAuthConfig, send: typeof fetc
           }).toString();
         }
         const response = reply(200, { url: next.href });
-        cookie(response, PKCE, await sealCookie(PKCE, verifier, 600), 600);
+        cookie(response, PKCE, await sealCookie(PKCE, pkceValue, 600), 600);
         return response;
       }
 
       if (operation === "GET /callback") {
         const code = url.searchParams.get("code");
         if (!code || !UUID.test(code) || url.searchParams.has("error")) return finish(false);
-        const verifier = await openCookie(req, PKCE, /^[0-9a-f]{64}$/);
-        if (!verifier) return finish(false);
+        const pkce = await openCookie(req, PKCE, PKCE_VALUE);
+        if (!pkce) return finish(false);
+        const [verifier, ticketId] = pkce.split("~") as [string, string | undefined];
+        // Supabase ran the signup hook before redirecting here, so the proof is no longer needed either way.
+        // A failure to close it must not block the sign-in: the hook still only accepts proofs under 5 minutes old.
+        if (ticketId && config.githubSignup) await config.githubSignup.closeProof(ticketId).catch(() => undefined);
         const result = await auth("token?grant_type=pkce", {
           method: "POST",
           body: JSON.stringify({ auth_code: code, code_verifier: verifier }),

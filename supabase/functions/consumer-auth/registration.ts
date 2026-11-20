@@ -63,5 +63,12 @@ export function githubRegistration(dbUrl: string): ConsumerAuthConfig["githubSig
         return rows.length === 1;
       });
     },
+    // The row stays until it expires, so the same ticket still cannot record a second proof.
+    async closeProof(ticketId) {
+      await sql`
+        UPDATE app_private.github_signup_proofs SET consumed_at = statement_timestamp()
+        WHERE ticket_hash = sha256(convert_to(${ticketId}, 'UTF8')) AND consumed_at IS NULL
+      `;
+    },
   };
 }

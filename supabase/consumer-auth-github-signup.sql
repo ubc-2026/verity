@@ -9,18 +9,25 @@
 --    stores one proof: a hash of the ticket (so the ticket works once) and a hash of the client address that
 --    the Supabase gateway reports.
 -- 3. When GitHub returns, Supabase Auth calls app_private.before_google_signup. A new GitHub user is allowed
---    only with a verified email and an unused, unexpired proof for the same client address, which the hook
---    marks as used.
+--    only with a verified email and an unused proof for the same client address that was written in the last
+--    5 minutes (the lifetime of a Supabase PKCE sign-in), which the hook marks as used.
+-- 4. When the browser reaches /auth/callback, the Edge Function marks the proof as used as well, so a sign-in
+--    by an existing GitHub user does not leave an open proof behind.
 --
 -- Addresses are stored only as SHA-256 hashes of the canonical inet text, and rows are deleted 10 minutes
--- after they are written.
+-- after they are written. Keeping a used row until then is what stops a ticket from being used twice.
 
 CREATE TABLE IF NOT EXISTS app_private.github_signup_proofs (
   ticket_hash bytea PRIMARY KEY,
   ip_hash bytea NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT statement_timestamp(),
   expires_at timestamptz NOT NULL,
   consumed_at timestamptz
 );
+-- For tables created before created_at existed. Existing rows get the time of this change; they are all
+-- older than 10 minutes and already expired, so none of them become usable.
+ALTER TABLE app_private.github_signup_proofs
+  ADD COLUMN IF NOT EXISTS created_at timestamptz NOT NULL DEFAULT statement_timestamp();
 CREATE INDEX IF NOT EXISTS github_signup_proofs_open
   ON app_private.github_signup_proofs (ip_hash, expires_at) WHERE consumed_at IS NULL;
 
@@ -78,6 +85,7 @@ BEGIN
       WHERE ticket_hash = (
         SELECT ticket_hash FROM app_private.github_signup_proofs
         WHERE ip_hash = address_hash AND consumed_at IS NULL AND expires_at > statement_timestamp()
+          AND created_at > statement_timestamp() - interval '5 minutes'
         ORDER BY expires_at
         LIMIT 1
         FOR UPDATE SKIP LOCKED
