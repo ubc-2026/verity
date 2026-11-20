@@ -1,36 +1,36 @@
-# Verity website
+# Verity website (`site/`)
 
-The source for the Verity landing page, live at **https://verityresearch.us**.
+The public site at https://verityresearch.us. It is one self-contained HTML file (vanilla HTML, CSS and JavaScript) built from the parts in `src/`. No framework, no npm install.
 
-## Edit it
+## Files
 
-```bash
-cd site
-npm install
-npm run dev      # local preview at the address it prints, usually http://localhost:5173
-npm run build    # checks that it builds; writes dist/index.html
-```
-
-| What you want to change | File |
+| File | What it holds |
 | --- | --- |
-| Text, numbers, sections | `src/App.tsx` (the data lists at the top hold most of the content) |
-| Layout and styling | `src/site.css` |
-| Colours, fonts, spacing | `src/tokens.css` |
-| The 3D coin | `src/Coin3D.tsx` |
-| The ledger page | `src/Portal.tsx`, opened at `#ledger` |
+| `src/style.css` | Design tokens and every style (see `DESIGN.md`) |
+| `src/body.html` | All page markup |
+| `src/app1.js` | Utilities, Nov 18 market data, nav, the Three.js coin, both terminal charts (including live Gemini Exchange candles) |
+| `src/live.js` | Live Gemini Exchange store (markets list, price feed), browser port of `verity-rules-v1`, the live market board and its topic tabs |
+| `src/ticker.js` | Top ticker (live markets) |
+| `src/app2.js` | Terminal score, inspector, market details and outcomes, walkthrough, architecture diagram, code tabs |
+| `src/gemini.js` | AI panel: Google Gemini review and questions, combined forecast, Exa market research, movable and resizable window |
+| `src/news.js` | Crypto news (publisher RSS via the Worker, Hacker News fallback) and Exa research search |
+| `src/app3.js` | Reconciler ledger, verification drawer, start-up |
+| `src/ledger.js` | Section 07: reads a running payment portal (`portal/`) with its read token, and links the run console |
+| `keccak.js` | keccak-256 for request hashes |
+| `build.sh` | Joins everything into `dist/index.html` (order matters; see the script) |
+| `dist/index.html` | The built site to publish. CI fails if it differs from `sh build.sh` |
 
-Make changes on a branch and open a pull request, like the rest of this repo.
+The AI, news and research features call the Cloudflare Worker in `../worker/`. The page never holds an API key.
 
-## Publishing
+## Edit and publish
 
-The live site is published from a separate repo, `ryanmarklin-arch/verityresearch-site`, whose GitHub Action rebuilds verityresearch.us on every push to its `main`. This folder is the team's copy of the same source. To publish a change, copy the changed files into that repo (or ask Ryan to), and push.
+1. Edit the files in `src/`, then run `sh build.sh`.
+2. Open `dist/index.html` to check it. Live data needs a real HTTPS origin, so test risky changes as `preview.html` on the live repo first.
+3. Copy `dist/index.html` to `index.html` in `ryanmarklin-arch/verityresearch-live` (keep `CNAME` and `.nojekyll`) and push to `main`. GitHub Pages serves it.
 
-## Rules for content
+## Data rules
 
-- Every number on the page comes from the real Nov 18, 2026 analysis. Don't add made-up metrics, quotes or logos.
-- "Gemini" means Gemini Exchange, the prediction-market exchange, never Google Gemini.
-- Write in sentence case with proper capitals (NYC, NWS, USDC).
-- Keep motion behind `prefers-reduced-motion` checks, as the existing code does.
-- Never commit API keys or other secrets.
-
-`CLAUDE.md` has the full project notes.
+- Quotes, candles and the crypto spot prices are live from the public Gemini Exchange API. "Gemini" alone means Gemini Exchange; the AI model is always written "Google Gemini".
+- The two Nov 18 markets use the real captured analysis with demo price paths, labelled.
+- The walkthrough and the reconciler ledger are simulations, labelled. No control can reach a wallet, signer or payment endpoint.
+- The AI forecast is an experimental model estimate, not trading advice. Verity places no trades.

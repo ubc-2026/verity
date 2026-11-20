@@ -9,7 +9,7 @@ npm run app          # http://127.0.0.1:8790/  (console at /, API under /api)
 
 The server prints an operator token for the session (or reads `VERITY_OPERATOR_TOKEN`). Visitors can start runs and read results. Payment steps need the operator token. Set `VERITY_PYTHON` if `analysis/.venv` is missing.
 
-The page follows the website's design system (`site/DESIGN.md` on the `website` branch): Space Grotesk and JetBrains Mono, the slate and blue tokens, and status tags that always carry a word and a glyph. It is one file, `ui/index.html`, with no build step, so it can be ported into the terminal site.
+The page follows the website's design system (`site/DESIGN.md`): Space Grotesk and JetBrains Mono, the slate and blue tokens, and status tags that always carry a word and a glyph. It is one file, `ui/index.html`, with no build step, and the terminal site links to it from its 07 / Ledger section.
 
 ## What is live and what is fixture
 
