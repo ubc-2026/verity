@@ -124,6 +124,42 @@ test("gzip webhook bodies are verified after decompression", async () => {
   }
 });
 
+test("a gzip body that expands past the size limit is refused, signed or not", async () => {
+  const now = new Date("2026-11-18T12:00:00Z");
+  const server = await start({ now: () => now });
+  try {
+    // 9 MB of zeros compresses to about 9 KB; the server limit is 8 MB of decompressed body.
+    const bomb = gzipSync(Buffer.alloc(9_000_000));
+    assert.ok(bomb.length < 100_000);
+    const url = `http://127.0.0.1:${server.address().port}/webhooks/quicknode`;
+    const unsigned = await fetch(url, { method: "POST", headers: { "content-type": "application/json", "content-encoding": "gzip" }, body: bomb });
+    assert.equal(unsigned.status, 200);
+    assert.equal((await unsigned.json()).check, true, "an unsigned request is answered without reading the body");
+    const timestamp = String(Math.floor(now.getTime() / 1000));
+    const headed = await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json", "content-encoding": "gzip", "x-qn-nonce": "n-3", "x-qn-timestamp": timestamp, "x-qn-signature": "00" },
+      body: bomb,
+    });
+    assert.equal(headed.status, 413);
+  } finally {
+    await server.close();
+  }
+});
+
+test("bearer tokens are compared in full, whatever their length", async () => {
+  const server = await start();
+  try {
+    const view = (token: string) => fetch(`http://127.0.0.1:${server.address().port}/purchases/purchase-1`, { headers: { authorization: `Bearer ${token}` } });
+    for (const wrong of ["", "r", "read-toke", "read-tokenX", "write-token", "READ-TOKEN"]) {
+      assert.equal((await view(wrong)).status, 401, `token ${JSON.stringify(wrong)}`);
+    }
+    assert.notEqual((await view(readToken)).status, 401);
+  } finally {
+    await server.close();
+  }
+});
+
 test("a verified delivery and a later sweep emit one overdue event", async () => {
   const sent: OverdueEvent[] = [];
   const now = new Date("2026-11-18T18:00:00Z");

@@ -1,3 +1,4 @@
+import { createHash, timingSafeEqual } from "node:crypto";
 import { createServer as createHttpServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { z } from "zod";
 import { portalHtml, publicPurchase, publicUnmatched } from "./page.ts";
@@ -215,12 +216,9 @@ export class PortalServer {
   #bearer(request: IncomingMessage, expected: string): boolean {
     const presented = header(request, "authorization");
     if (!presented?.startsWith("Bearer ") || !expected) return false;
-    const got = Buffer.from(presented.slice("Bearer ".length));
-    const want = Buffer.from(expected);
-    if (got.length !== want.length) return false;
-    let mismatch = 0;
-    for (let index = 0; index < got.length; index += 1) mismatch |= got[index]! ^ want[index]!;
-    return mismatch === 0;
+    // Compare fixed-length digests, so neither the contents nor the length of the token leaks through timing.
+    const digest = (value: string) => createHash("sha256").update(value, "utf8").digest();
+    return timingSafeEqual(digest(presented.slice("Bearer ".length)), digest(expected));
   }
 
   #send(response: ServerResponse, status: number, body: unknown, contentType = "application/json; charset=utf-8"): void {

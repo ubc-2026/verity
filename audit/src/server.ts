@@ -1,4 +1,5 @@
 import { createServer as createHttpServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
+import { createHash, timingSafeEqual } from "node:crypto";
 import { gunzipSync } from "node:zlib";
 import { z } from "zod";
 import { dashboardHtml, publicPurchase } from "./dashboard.ts";
@@ -166,14 +167,15 @@ export class AuditServer {
   }
 
   async #webhook(request: IncomingMessage, response: ServerResponse): Promise<void> {
-    const payload = (await this.#raw(request)).toString("utf8");
     const nonce = header(request, "x-qn-nonce");
     const timestamp = header(request, "x-qn-timestamp");
     const signature = header(request, "x-qn-signature");
     if (!nonce || !timestamp || !signature) {
       // QuickNode's Check Connection probe has no HMAC headers. Real deliveries always do.
+      // The body is not read, so an unsigned request cannot make the server decompress anything.
       return this.#send(response, 200, { ok: true, check: true });
     }
+    const payload = (await this.#raw(request)).toString("utf8");
     const valid = verifyWebhook({
       secret: this.#secret,
       nonce: nonce ?? "",
@@ -192,7 +194,11 @@ export class AuditServer {
     }
     const result = this.ledger.ingest(body);
     this.#send(response, 200, { ok: true, ...result });
-    if (this.#sweepOnWebhook) void this.sweep();
+    if (this.#sweepOnWebhook) {
+      void this.sweep().catch((error: unknown) => {
+        console.error(`overdue sweep failed: ${error instanceof Error ? error.message : "unknown error"}`);
+      });
+    }
     if (this.#report) {
       void this.#report(body).catch((error: unknown) => {
         console.error(`portal report failed: ${error instanceof Error ? error.message : "unknown error"}`);
@@ -220,8 +226,10 @@ export class AuditServer {
     const encoded = Buffer.concat(chunks);
     if (String(request.headers["content-encoding"] ?? "").toLowerCase() === "gzip") {
       try {
-        return gunzipSync(encoded);
-      } catch {
+        // The size limit applies to the decompressed body too, so a small gzip bomb cannot exhaust memory.
+        return gunzipSync(encoded, { maxOutputLength: this.#bodyLimit });
+      } catch (error) {
+        if ((error as { code?: string }).code === "ERR_BUFFER_TOO_LARGE") throw new HttpError(413, "payload too large");
         throw new HttpError(400, "invalid gzip payload");
       }
     }
@@ -231,12 +239,9 @@ export class AuditServer {
   #bearer(request: IncomingMessage, expected: string): boolean {
     const presented = header(request, "authorization");
     if (!presented?.startsWith("Bearer ") || !expected) return false;
-    const got = Buffer.from(presented.slice("Bearer ".length));
-    const want = Buffer.from(expected);
-    if (got.length !== want.length) return false;
-    let mismatch = 0;
-    for (let index = 0; index < got.length; index += 1) mismatch |= got[index]! ^ want[index]!;
-    return mismatch === 0;
+    // Compare fixed-length digests, so neither the contents nor the length of the token leaks through timing.
+    const digest = (value: string) => createHash("sha256").update(value, "utf8").digest();
+    return timingSafeEqual(digest(presented.slice("Bearer ".length)), digest(expected));
   }
 
   #send(response: ServerResponse, status: number, body: unknown, contentType = "application/json; charset=utf-8"): void {
