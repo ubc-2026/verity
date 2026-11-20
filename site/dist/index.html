@@ -712,6 +712,30 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 @media (max-width:640px){.lp-cta .btn.ghost{display:none}.lp-stats{grid-template-columns:1fr;gap:14px}.lp-steps,.lp-tiers,.lp-compare,.lp-foot-in{grid-template-columns:1fr}.lp-steps li,.lp-steps li+li{border-left:0;padding-left:0}.lp-scores{grid-template-columns:1fr 1fr}.lp-c-buy{margin-left:0}.lp-sec{padding-top:64px}}
 .lp-hero h1{max-width:20ch}
 @media (max-width:640px){.lp-c-head{flex-direction:column;gap:10px}.lp-c-price{text-align:left}}
+/* Front page art: live market constellation behind the hero, and the missing-word panel */
+.lp-art{position:relative;overflow:hidden;isolation:isolate}
+.lp-field{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.lp-art::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,var(--bg-void) 0%,rgba(9,12,16,.94) 38%,rgba(9,12,16,.45) 56%,rgba(9,12,16,0) 78%),linear-gradient(0deg,var(--bg-void) 0%,transparent 22%)}
+.lp-main{background:var(--bg-void)}
+.lp-hero{position:relative;min-height:min(86vh,820px);padding-top:96px;padding-bottom:40px}
+.lp-hero h1{font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:.98;letter-spacing:-.035em;max-width:16ch}
+.lp-contract{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:linear-gradient(180deg,rgba(22,29,41,.88),rgba(16,21,30,.92))}
+.lp-field-key{position:absolute;inset:12% 0 10% 0;pointer-events:none;font-family:var(--font-mono);font-size:.66rem;color:rgba(139,155,180,.55)}
+.lp-field-key span{position:absolute}.lp-field-key .k-top{top:0;right:var(--margin)}.lp-field-key .k-bot{bottom:0;right:var(--margin)}
+.lp-field-key .k-l{bottom:-22px;left:56%}.lp-field-key .k-r{bottom:-22px;right:var(--margin)}
+.lp-field-tip{position:absolute;margin:0;padding:6px 10px;border:1px solid var(--border-strong);border-radius:6px;background:rgba(9,12,16,.92);font-size:.78rem;max-width:260px;pointer-events:none;opacity:0;transition:opacity 120ms;z-index:2}
+.lp-field-tip.on{opacity:1}
+.lp-field-cap{position:relative;font-size:.76rem;color:var(--text-muted);margin:0 auto;padding-bottom:28px;text-align:right}
+.lp-quote{padding:120px 0 110px;background:radial-gradient(700px 380px at 50% 50%,rgba(245,158,11,.06),transparent 70%)}
+.lp-q-label{font-size:.9rem;font-weight:500;color:var(--signal-warn);margin:0 0 28px}
+.lp-q-text{font-size:clamp(1.8rem,4.4vw,3.7rem);line-height:1.12;letter-spacing:-.025em;font-weight:500;margin:0;max-width:24ch}
+.lp-q-blank{display:inline-grid;vertical-align:baseline;border-bottom:3px dashed var(--signal-warn);padding:0 .15em;color:var(--signal-warn)}
+.lp-q-opt{grid-area:1/1;animation:lpSwap 6s ease-in-out infinite}
+.lp-q-opt+.lp-q-opt{animation-delay:-3s}
+@keyframes lpSwap{0%{opacity:0;filter:blur(6px)}6%,44%{opacity:1;filter:blur(0)}50%,100%{opacity:0;filter:blur(6px)}}
+.lp-q-foot{margin:32px 0 0;color:var(--text-muted);max-width:60ch}
+@media (prefers-reduced-motion:reduce){.lp-q-blank{display:inline}.lp-q-opt{animation:none}.lp-q-opt+.lp-q-opt::before{content:" or "}}
+@media (max-width:1024px){.lp-art::before{background:rgba(9,12,16,.86)}.lp-hero{min-height:0}.lp-field-key{display:none}.lp-field-cap{text-align:left}}
 </style>
 </head>
 <body>
@@ -756,6 +780,10 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
   </header>
 
   <main class="lp-main">
+    <div class="lp-art">
+      <canvas class="lp-field" id="lpField" aria-hidden="true"></canvas>
+      <div class="lp-field-key" aria-hidden="true"><span class="k-top">100¢</span><span class="k-bot">0¢</span><span class="k-l">closes sooner</span><span class="k-r">closes later</span></div>
+      <p class="lp-field-tip" id="lpFieldTip" aria-hidden="true"></p>
     <section class="lp-hero lp-wrap" aria-labelledby="lpTitle">
       <div class="lp-hero-copy">
         <p class="lp-kicker"><span class="lp-dot" aria-hidden="true"></span>UBC 2026 prototype · research agent for prediction markets</p>
@@ -786,6 +814,8 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
         <figcaption id="lpCardCap" class="lp-c-cap">Real output of <code>verity-rules-v1</code> on Nov 18. Liquidity: $7 traded, 4¢ spread.</figcaption>
       </figure>
     </section>
+      <p class="lp-field-cap lp-wrap">Behind this text: every outcome in the active Gemini Exchange markets listed right now. Height is the live price, left to right is time to close in order, size is volume. Hover a dot to see which one.</p>
+    </div>
 
     <section class="lp-live" aria-labelledby="lpLiveT">
       <div class="lp-wrap lp-live-head">
@@ -797,6 +827,14 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
         <div><span class="lp-s-v" id="lpStatMarkets">—</span><span class="lp-s-l">active prediction markets</span></div>
         <div><span class="lp-s-v" id="lpStatVol">—</span><span class="lp-s-l">traded on the first 100 listed</span></div>
         <div><span class="lp-s-v" id="lpStatTop">—</span><span class="lp-s-l" id="lpStatTopL">most traded market</span></div>
+      </div>
+    </section>
+
+    <section class="lp-quote" aria-labelledby="lpQuoteT">
+      <div class="lp-wrap">
+        <h2 id="lpQuoteT" class="lp-q-label">One missing word, one open question</h2>
+        <p class="lp-q-text">“Only the first published version that includes confirmation of the <span class="lp-q-blank"><span class="lp-q-opt">partial 4 PM report</span><span class="lp-q-opt">full-day report</span></span> will be used.”</p>
+        <p class="lp-q-foot">The NYC contract on Nov 18 left the word out. The price was 56¢ either way. Verity scored the gap and proposed one 0.05 USDC report to settle which reading counts.</p>
       </div>
     </section>
 
@@ -893,7 +931,7 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 </div>
 <script>
 /* Front page: live strip and stats from the public Gemini Exchange API. Runs only while the front page is showing. */
-document.addEventListener('verity:landing',function(){
+(function(fn){if(document.documentElement.classList.contains('landing'))setTimeout(fn,0);else document.addEventListener('verity:landing',fn,{once:true});})(function(){
   var GXU='https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100',timer=0;
   function mid(c){var p=c&&c.prices;if(!p)return null;var b=p.bestBid!=null?+p.bestBid:null,a=p.bestAsk!=null?+p.bestAsk:null;if(b!=null&&a!=null)return (b+a)/2;return p.lastTradePrice!=null?+p.lastTradePrice:(b!=null?b:a);}
   function money(v){v=+v||0;return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e4?'$'+Math.round(v/1e3)+'k':v>=1e3?'$'+(v/1e3).toFixed(1)+'k':'$'+Math.round(v);}
@@ -916,7 +954,35 @@ document.addEventListener('verity:landing',function(){
       st.className='tick-status live';st.innerHTML='<span class="dot" aria-hidden="true"></span>Live · updated '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+' · <a href="https://api.gemini.com/v1/prediction-markets/events?status=active" target="_blank" rel="noopener noreferrer">source</a>';
     }).catch(function(e){st.className='tick-status stale';st.textContent='Gemini Exchange is not answering right now ('+e.message+'). The demo will keep retrying.';});}
   load();timer=setInterval(load,30000);
-},{once:true});
+  setTimeout(function(){window.__lpField&&window.__lpField.start();},0);
+});
+/* Constellation: real markets as dots. x = time to close (log), y = price, radius = volume. Motion is a slow shimmer only; positions are data. */
+window.__lpField=(function(){
+  var cv=document.getElementById('lpField'),tip=document.getElementById('lpFieldTip'),ctx=cv.getContext('2d'),pts=[],raf=0,hover=-1,t0=performance.now(),RM=matchMedia('(prefers-reduced-motion: reduce)').matches,W=0,H=0,dpr=1;
+  function mid(c){var p=c&&c.prices;if(!p)return null;var b=p.bestBid!=null?+p.bestBid:null,a=p.bestAsk!=null?+p.bestAsk:null;if(b!=null&&a!=null)return (b+a)/2;return p.lastTradePrice!=null?+p.lastTradePrice:(b!=null?b:a);}
+  function size(){var r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);place();}
+  function place(){var px=Math.max(40,W*.04),pt=H*.12,pb=H*.1;pts.forEach(function(p){p.x=px+(W-2*px)*p.u;p.y=pt+(H-pt-pb)*(1-p.p);});}
+  function build(ev){var now=Date.now(),out=[];ev.forEach(function(e){var cs=(e.contracts||[]).filter(function(c){return c.status==='active'&&mid(c)!=null;});
+      cs.forEach(function(c,i){if(i>5)return;var m=mid(c);if(m==null)return;var ms=Math.max(36e5,Date.parse(e.expiryDate||'')-now||0);
+        out.push({p:Math.max(0,Math.min(1,m)),h:Math.log(ms/36e5),v:+e.volume||0,t:e.title+(c.label&&c.label!==e.title?': '+c.label:''),ph:Math.random()*6.28,lead:i===0});});});
+    var hmax=Math.max.apply(null,out.map(function(o){return o.h;}).concat([1])),vmax=Math.max.apply(null,out.map(function(o){return o.v;}).concat([1]));
+    var hs=out.map(function(o){return o.h;}).sort(function(x,y){return x-y;});out.forEach(function(o){var lo=hs.indexOf(o.h),hi=hs.lastIndexOf(o.h);o.u=hs.length>1?((lo+hi)/2)/(hs.length-1):.5;o.u=Math.min(1,Math.max(0,o.u+(Math.random()-.5)*.012));o.r=1+5*Math.sqrt(o.v/vmax);});pts=out;place();}
+  function draw(now){ctx.clearRect(0,0,W,H);var k=(now-t0)/1000;
+    ctx.strokeStyle='rgba(139,155,180,.07)';ctx.lineWidth=1;[.25,.5,.75].forEach(function(f){var y=H*.12+(H*.78)*(1-f);ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();});
+    pts.forEach(function(p,i){var s=RM?1:.75+.25*Math.sin(k*.8+p.ph),on=i===hover;
+      var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);g.addColorStop(0,'rgba(46,92,255,'+(.22*s)+')');g.addColorStop(1,'rgba(46,92,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*5,0,6.29);ctx.fill();
+      ctx.fillStyle=on?'#F1F5F9':'rgba(170,190,255,'+(.45+.45*s)+')';ctx.beginPath();ctx.arc(p.x,p.y,on?p.r+2:p.r,0,6.29);ctx.fill();});
+    if(!RM)raf=requestAnimationFrame(draw);}
+  function onMove(e){var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=-1,bd=400;pts.forEach(function(p,i){var d=(p.x-x)*(p.x-x)+(p.y-y)*(p.y-y);if(d<bd){bd=d;best=i;}});
+    hover=best;if(best<0){tip.classList.remove('on');}else{var p=pts[best];tip.textContent=p.t+' · '+Math.round(p.p*100)+'¢';tip.style.left=Math.min(W-260,p.x+12)+'px';tip.style.top=Math.max(8,p.y-30)+'px';tip.classList.add('on');}
+    if(RM)draw(performance.now());}
+  function fetchAll(){Promise.all([0,100,200].map(function(o){return fetch('https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100&offset='+o,{cache:'no-store'}).then(function(r){return r.ok?r.json():{data:[]};}).catch(function(){return {data:[]};});}))
+    .then(function(js){var seen={},ev=[];js.forEach(function(j){(j.data||[]).forEach(function(e){if(!seen[e.ticker]){seen[e.ticker]=1;ev.push(e);}});});build(ev);if(RM)draw(performance.now());});}
+  return {start:function(){size();addEventListener('resize',size);var art=cv.parentNode;art.addEventListener('pointermove',onMove);art.addEventListener('pointerleave',function(){hover=-1;tip.classList.remove('on');});
+    fetchAll();setInterval(function(){if(document.documentElement.classList.contains('landing'))fetchAll();},60000);
+    if(!RM)raf=requestAnimationFrame(draw);
+    new MutationObserver(function(){if(!document.documentElement.classList.contains('landing')){cancelAnimationFrame(raf);}}).observe(document.documentElement,{attributes:true,attributeFilter:['class']});}};
+})();
 </script>
 
 <a class="skip" href="#main">Skip to content</a>
