@@ -140,6 +140,8 @@ export class GatewayLedger {
         | { payment_ref: string; batch_status: string | null }
         | undefined;
       if (row && row.payment_ref !== transfer.id) return { error: `transfer ${transfer.id} is not the one on the receipt (${row.payment_ref})` };
+      // No receipt row yet, so the transfer id is not bound to this purchase. A missing nonce cannot be checked.
+      if (!row && !transfer.nonce) return { error: `transfer ${transfer.id} does not match the stored authorization (nonce)` };
       const problem = transferMismatch(transfer, stored);
       if (problem) return { error: `transfer ${transfer.id} does not match the stored authorization (${problem})` };
       if (row) {

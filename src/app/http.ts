@@ -90,6 +90,21 @@ function gatewayPanel(repoRoot: string) {
   };
 }
 
+/** The app binds loopback only. Any other Host is refused, including a DNS-rebinding name on this port. */
+function loopbackHost(req: IncomingMessage): boolean {
+  const port = req.socket.localPort;
+  const host = req.headers.host;
+  if (!port || typeof host !== "string") return false;
+  const normalized = host.toLowerCase();
+  return normalized === `127.0.0.1:${port}` || normalized === `localhost:${port}`;
+}
+
+function isJsonContentType(req: IncomingMessage): boolean {
+  const header = req.headers["content-type"];
+  if (typeof header !== "string") return false;
+  return /^application\/json(?:\s*;|$)/i.test(header.trim());
+}
+
 function send(res: ServerResponse, status: number, body: unknown) {
   const bytes = Buffer.from(toJson(body), "utf8");
   res.writeHead(status, {
@@ -144,6 +159,8 @@ export function createAppHandler(deps: AppDeps) {
     const path = url.pathname;
     const method = req.method ?? "GET";
     try {
+      if (!loopbackHost(req)) return send(res, 403, { error: "forbidden" });
+      if (method === "POST" && !isJsonContentType(req)) return send(res, 403, { error: "content-type must be application/json" });
       if (method === "GET" && (path === "/" || path === "/index.html") && deps.siteIndex && existsSync(deps.siteIndex)) {
         const html = readFileSync(deps.siteIndex);
         res.writeHead(200, { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" });

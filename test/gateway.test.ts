@@ -429,6 +429,23 @@ describe("Gateway buyer verification and ledger", () => {
     assert.equal(ledger.receipt(id), undefined);
   });
 
+  it("refuses a Circle transfer that arrives before the receipt when it has no nonce", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const res = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(res.status, 200);
+    if (res.status !== 200) return;
+    const ledger = new GatewayLedger(t.store);
+    const real = await gateway.transferById(res.receipt.paymentRef);
+    assert.equal(ledger.receipt(t.request.purchaseId), undefined, "no receipt row yet");
+    assert.deepEqual(ledger.recordBatch(t.request.purchaseId, { ...real, nonce: null }, DEMO_NOW), {
+      error: `transfer ${real.id} does not match the stored authorization (nonce)`,
+    });
+    assert.equal(ledger.status(t.request.purchaseId), undefined, "a nonce-less transfer records nothing");
+    const observed = ledger.recordBatch(t.request.purchaseId, real, DEMO_NOW);
+    assert.ok(!("error" in observed));
+  });
+
   it("rejects a V2 receipt whose nonce is not the buyer's, or whose bytes were altered", async () => {
     const t = await setup();
     const res = await deliverGatewayPaidRequest(t.input, t.deps);

@@ -72,6 +72,37 @@ export interface Reassessment {
   evidence_citation: { id: string; source: string; quote: string } | null;
 }
 
+/** Environment names the analysis process may see. Everything else, including secrets, stays in this process. */
+const PYTHON_ENV_ALLOW = [
+  "PATH",
+  "HOME",
+  "USER",
+  "LOGNAME",
+  "LANG",
+  "LC_ALL",
+  "LC_CTYPE",
+  "TMPDIR",
+  "TMP",
+  "TEMP",
+  "SYSTEMROOT",
+  "WINDIR",
+  "PATHEXT",
+  "PYTHONPATH",
+  "PYTHONHOME",
+  "VIRTUAL_ENV",
+  "SSL_CERT_FILE",
+  "SSL_CERT_DIR",
+] as const;
+
+export function pythonChildEnv(source: NodeJS.ProcessEnv = process.env): NodeJS.ProcessEnv {
+  const env: NodeJS.ProcessEnv = { PYTHONIOENCODING: "utf-8", PYTHONUTF8: "1" };
+  for (const key of PYTHON_ENV_ALLOW) {
+    const value = source[key];
+    if (value !== undefined) env[key] = value;
+  }
+  return env;
+}
+
 export function findPython(analysisDir: string): string {
   const candidates = [
     process.env.VERITY_PYTHON,
@@ -82,7 +113,7 @@ export function findPython(analysisDir: string): string {
   ].filter((c): c is string => Boolean(c));
   for (const candidate of candidates) {
     if ((candidate.includes("/") || candidate.includes("\\")) && !existsSync(candidate)) continue;
-    const probe = spawnSync(candidate, ["-c", "import pydantic, sys; print(sys.version_info[:2] >= (3, 11))"], { encoding: "utf8", timeout: 20_000 });
+    const probe = spawnSync(candidate, ["-c", "import pydantic, sys; print(sys.version_info[:2] >= (3, 11))"], { encoding: "utf8", timeout: 20_000, env: pythonChildEnv() });
     if (probe.status === 0 && probe.stdout.trim() === "True") return candidate;
   }
   throw new Error("No Python 3.11+ with pydantic found. Set VERITY_PYTHON or create analysis/.venv (see analysis/README.md).");
@@ -103,7 +134,7 @@ export class Analyst {
     return new Promise((resolve, reject) => {
       const child = spawn(this.python, ["-m", "verity.cli", ...args], {
         cwd: this.dir,
-        env: { ...process.env, PYTHONIOENCODING: "utf-8", PYTHONUTF8: "1" },
+        env: pythonChildEnv(),
         stdio: ["pipe", "pipe", "pipe"],
       });
       const out: Buffer[] = [];

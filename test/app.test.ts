@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createServer, type Server } from "node:http";
+import { createServer, request as httpRequest, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 import { dirname, join } from "node:path";
 import { after, before, describe, it } from "node:test";
@@ -61,6 +61,46 @@ describe("app server (fixture)", { skip }, () => {
     assert.equal(result.status, 200, `${action}: ${JSON.stringify(result.json.error)}`);
     return result.json;
   }
+
+  function raw(method: string, path: string, headers: Record<string, string>, body?: string): Promise<{ status: number; json: Json }> {
+    const port = (server.address() as AddressInfo).port;
+    return new Promise((resolve, reject) => {
+      const req = httpRequest({ hostname: "127.0.0.1", port, path, method, headers }, (res) => {
+        const chunks: Buffer[] = [];
+        res.on("data", (chunk: Buffer) => chunks.push(chunk));
+        res.on("end", () => {
+          const text = Buffer.concat(chunks).toString("utf8");
+          resolve({ status: res.statusCode ?? 0, json: text ? (JSON.parse(text) as Json) : {} });
+        });
+      });
+      req.on("error", reject);
+      if (body !== undefined) req.write(body);
+      req.end();
+    });
+  }
+
+  it("refuses any host other than loopback and any POST that is not JSON", async () => {
+    const port = (server.address() as AddressInfo).port;
+    const health = await raw("GET", "/api/health", { host: `localhost:${port}` });
+    assert.equal(health.status, 200);
+    assert.equal(health.json.ok, true);
+    assert.equal((await raw("GET", "/api/health", { host: "evil.example" })).status, 403);
+    assert.equal((await raw("GET", "/api/health", { host: `127.0.0.1:${port + 1}` })).status, 403);
+    assert.equal((await raw("GET", "/api/health", { host: "127.0.0.1" })).status, 403);
+    const plain = await raw("POST", "/api/runs", { host: `127.0.0.1:${port}`, "content-type": "text/plain" }, "{}");
+    assert.equal(plain.status, 403);
+    assert.match(plain.json.error, /application\/json/);
+    const missing = await raw("POST", "/api/runs", { host: `127.0.0.1:${port}` }, "{}");
+    assert.equal(missing.status, 403);
+    const created = await raw(
+      "POST",
+      "/api/runs",
+      { host: `127.0.0.1:${port}`, "content-type": "application/json; charset=utf-8", authorization: `Bearer ${OPERATOR}` },
+      JSON.stringify({ marketId: NYC, scenario: "standard" }),
+    );
+    assert.equal(created.status, 201);
+    assert.equal(created.json.label, "FIXTURE");
+  });
 
   it("gives visitors a fixture run and refuses every operator step", async () => {
     const config = (await call("GET", "/api/config", undefined, null)).json;
