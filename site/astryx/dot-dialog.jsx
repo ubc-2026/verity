@@ -1,7 +1,7 @@
 /* Verity front page: the market pop-up for the constellation dots, built with Meta's Astryx design system.
-   Loaded on the first dot click. Exposes window.VerityDotDialog.open(market).
+   Loaded on the first dot click. Exposes window.VerityDotDialog.open(market, { onClose }).
    All values come from the public Gemini Exchange API response the front page already fetched. */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Theme, defineTheme } from '@astryxdesign/core/theme';
 // Same module instance as the theme barrel's Theme.js. Marking the tree as nested stops Theme from
@@ -93,9 +93,11 @@ function DotDialog({ market, onClose, onOpenTerminal }) {
 
 function App({ bus }) {
   const [market, setMarket] = useState(null);
-  useEffect(() => { bus.open = setMarket; }, [bus]);
+  const onCloseRef = useRef(null);
+  useEffect(() => { bus.open = (m, opts) => { onCloseRef.current = (opts && opts.onClose) || null; setMarket(m); }; }, [bus]);
+  const close = () => { setMarket(null); const f = onCloseRef.current; onCloseRef.current = null; if (f) f(); };
   const openTerminal = (m) => {
-    setMarket(null);
+    close();
     try { sessionStorage.setItem('verity.pick', JSON.stringify({ ticker: m.ticker, contract: m.contractId })); } catch (e) {}
     if (window.verityOpenDemo) window.verityOpenDemo();
     if (window.verityPickMarket) window.verityPickMarket();
@@ -103,7 +105,7 @@ function App({ bus }) {
   return (
     <ThemeNestingContext value={true}>
       <Theme theme={verityTheme} mode="dark">
-        <DotDialog market={market} onClose={() => setMarket(null)} onOpenTerminal={openTerminal} />
+        <DotDialog market={market} onClose={close} onOpenTerminal={openTerminal} />
       </Theme>
     </ThemeNestingContext>
   );
@@ -115,8 +117,8 @@ host.id = 'verity-astryx-root';
 document.body.appendChild(host);
 createRoot(host).render(<App bus={bus} />);
 window.VerityDotDialog = {
-  open(m) {
-    if (bus.open) bus.open(m);
-    else { const t = setInterval(() => { if (bus.open) { clearInterval(t); bus.open(m); } }, 20); }
+  open(m, opts) {
+    if (bus.open) bus.open(m, opts);
+    else { const t = setInterval(() => { if (bus.open) { clearInterval(t); bus.open(m, opts); } }, 20); }
   },
 };
