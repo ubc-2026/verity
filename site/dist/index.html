@@ -603,9 +603,322 @@ a.tick-item:hover .sym{color:var(--text-primary)}
 #ledger .ledger tbody tr{cursor:default}
 #ledger [hidden]{display:none!important}
 @media (max-width:820px){.ldg-grid{grid-template-columns:1fr}.ldg-form{grid-template-columns:1fr}.ldg-form button{grid-column:1}}
+
+/* Chart history provenance: state, timestamps, citation */
+.chart-meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:8px 16px 10px;border-top:1px solid var(--border-hairline);font-size:.74rem;color:var(--text-muted)}
+.chart-meta .tick-status{white-space:normal}
+.chart-meta a{color:var(--text-primary,inherit);text-decoration:underline;text-underline-offset:2px}
+
+
+/* ---------- Front page (optional; "Open the demo" skips it) ---------- */
+.lp{display:none}
+html.pre body>*:not(script){visibility:hidden}
+html.landing body>*:not(.lp):not(script){display:none!important}
+html.landing .lp{display:block}
+.signin,.signout{display:none}
+html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
+.mobile-menu .signin,.mobile-menu .signout{width:100%}
+@media (max-width:1440px){html.demo-mode .nav-cta a[href="#spec"],html.signed-in .nav-cta a[href="#spec"]{display:none}}
+.lp-only-in{display:none}html.signed-in .lp-only-in{display:inline}html.signed-in p.lp-only-in{display:block}html.signed-in .lp-only-out{display:none!important}
+.lp-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--margin)}
+.lp-bar{position:sticky;top:0;z-index:20;background:rgba(9,12,16,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border-hairline)}
+.lp-bar-in{display:flex;align-items:center;gap:24px;min-height:64px}
+.lp-links{display:flex;gap:22px;margin-left:auto}
+.lp-links a{color:var(--text-muted);text-decoration:none;font-size:.9rem}.lp-links a:hover{color:var(--text-primary)}
+.lp-cta{display:flex;gap:8px}
+.lp-main{background:radial-gradient(900px 520px at 88% 0%,rgba(46,92,255,.13),transparent 62%)}
+.lp-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center;padding-top:72px;padding-bottom:64px}
+.lp-kicker{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;color:var(--accent-blue-text);margin:0 0 22px}
+.lp-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-blue)}
+.lp-hero h1{font-size:clamp(2.1rem,4.6vw,3.7rem);line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0 0 22px;max-width:17ch;text-wrap:balance}
+.lp-lede{font-size:1.1rem;color:var(--text-muted);max-width:56ch;margin:0 0 30px}
+.lp-actions{display:flex;flex-wrap:wrap;gap:12px}
+.lp-big{min-height:50px;padding:0 22px;font-size:1rem}
+.lp-small{font-size:.84rem;color:var(--text-muted);margin:14px 0 0;max-width:60ch}
+.lp-contract{margin:0;padding:22px;border:1px solid var(--border-strong);border-radius:12px;background:linear-gradient(180deg,var(--bg-elevated),var(--bg-surface));box-shadow:0 30px 80px -40px rgba(46,92,255,.45)}
+.lp-c-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--border-hairline)}
+.lp-c-k{display:block;font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-bottom:4px}
+.lp-c-t{font-weight:600;font-size:1.05rem}
+.lp-c-price{text-align:right}.lp-c-price b{font-family:var(--font-mono);font-size:1.6rem;font-weight:500;color:var(--accent-blue-text)}
+.lp-rule{margin:18px 0 8px;font-size:1.06rem;line-height:1.55}
+.lp-rule mark{background:rgba(245,158,11,.14);color:var(--signal-warn);border:1px dashed var(--signal-warn);border-radius:4px;padding:0 2px;font-family:var(--font-mono)}
+.lp-c-note{font-size:.86rem;color:var(--text-muted);margin:0 0 18px}
+.lp-scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0;background:var(--border-hairline);border:1px solid var(--border-hairline);border-radius:8px;overflow:hidden}
+.lp-scores div{background:var(--bg-surface);padding:10px 12px}
+.lp-scores dt{font-size:.72rem;color:var(--text-muted)}
+.lp-scores dd{margin:4px 0 0;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.lp-scores b{font-family:var(--font-mono);font-size:1.25rem;font-weight:500}
+.lp-scores i{display:block;width:30px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--text-primary) var(--f),var(--border-strong) var(--f))}
+.lp-scores i.p1{--f:33%}.lp-scores i.p2{--f:66%}.lp-scores i.p3{--f:100%}
+.lp-c-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}
+.lp-total{font-family:var(--font-mono);font-size:1.5rem}
+.lp-c-buy{font-size:.86rem;color:var(--text-muted);margin-left:auto}
+.lp-c-cap{margin-top:14px;font-size:.76rem;color:var(--text-muted)}
+.lp-c-cap code{font-family:var(--font-mono);color:var(--text-primary)}
+.lp-live{border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:22px 0;background:var(--bg-surface)}
+.lp-live-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.lp-live-t{font-size:1rem;font-weight:600;margin:0}
+.lp-live .tick-status{white-space:normal}.lp-live .tick-status a{color:inherit}
+.lp-strip{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.lp-strip-track{display:flex;gap:10px;width:max-content;animation:lpScroll 90s linear infinite}
+.lp-strip:hover .lp-strip-track{animation-play-state:paused}
+@keyframes lpScroll{to{transform:translateX(-50%)}}
+.lp-chip{display:inline-flex;align-items:baseline;gap:8px;padding:8px 12px;border:1px solid var(--border-hairline);border-radius:8px;background:var(--bg-void);white-space:nowrap;font-size:.86rem}
+.lp-chip-c{color:var(--text-muted)}.lp-chip b{font-family:var(--font-mono);font-weight:500;color:var(--accent-blue-text)}
+.lp-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:20px}
+.lp-s-v{display:block;font-family:var(--font-mono);font-size:1.7rem}
+.lp-s-l{font-size:.84rem;color:var(--text-muted)}
+.lp-sec{padding-top:88px}
+.lp-sec-head{max-width:640px;margin-bottom:32px}
+.lp-sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem);letter-spacing:-.02em;line-height:1.1;margin:0 0 12px;font-weight:600}
+.lp-sec-head p{color:var(--text-muted);margin:0}
+.lp-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--border-strong)}
+.lp-steps li{padding:22px 22px 0 0;position:relative}
+.lp-steps li+li{padding-left:22px;border-left:1px solid var(--border-hairline)}
+.lp-n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(46,92,255,.16);color:var(--accent-blue-text);font-family:var(--font-mono);font-size:.8rem;margin-bottom:14px}
+.lp-steps h3{font-size:1.05rem;margin:0 0 8px}
+.lp-steps p{margin:0;color:var(--text-muted);font-size:.92rem}
+.lp-table table{width:100%;border-collapse:collapse;font-size:.92rem}
+.lp-table th,.lp-table td{padding:14px 12px;border-bottom:1px solid var(--border-hairline);text-align:left;vertical-align:top}
+.lp-table thead th{font-size:.78rem;color:var(--text-muted);font-weight:500}
+.lp-table tbody th{font-weight:500}
+.lp-tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.lp-tier{padding:18px;border:1px solid var(--border-hairline);border-radius:10px;background:var(--bg-surface);display:grid;gap:10px;align-content:start;justify-items:start}
+.lp-amt{font-family:var(--font-mono);font-size:1.2rem}
+.lp-tier p{margin:0;color:var(--text-muted);font-size:.9rem}
+.lp-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lp-plan{padding:24px;border:1px solid var(--border-strong);border-radius:12px;background:var(--bg-surface);display:flex;flex-direction:column;align-items:flex-start}
+.lp-plan h3{margin:0;font-size:1.3rem}
+.lp-plan-sub{margin:6px 0 16px;color:var(--text-muted);font-size:.9rem}
+.lp-plan ul{margin:0 0 22px;padding-left:18px;display:grid;gap:8px;font-size:.94rem;flex:1}
+.lp-plan li::marker{color:var(--accent-blue-text)}
+.lp-faq{display:grid;gap:0;border-top:1px solid var(--border-hairline);max-width:860px}
+.lp-faq details{border-bottom:1px solid var(--border-hairline)}
+.lp-faq summary{cursor:pointer;padding:18px 0;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.lp-faq summary::-webkit-details-marker{display:none}
+.lp-faq summary::after{content:"+";font-family:var(--font-mono);color:var(--text-muted)}
+.lp-faq details[open] summary::after{content:"−"}
+.lp-faq p{margin:0 0 18px;color:var(--text-muted);max-width:70ch}
+.lp-close{padding-top:96px;padding-bottom:96px;text-align:center;display:grid;justify-items:center;gap:24px}
+.lp-close h2{font-size:clamp(1.7rem,3.4vw,2.6rem);letter-spacing:-.02em;margin:0;font-weight:600}
+.lp-foot{border-top:1px solid var(--border-hairline);background:var(--bg-surface);padding:40px 0 48px}
+.lp-foot-in{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:32px}
+.lp-foot h3{font-size:.86rem;margin:0 0 8px}
+.lp-foot p{margin:8px 0 0;color:var(--text-muted);font-size:.86rem}
+.lp-foot-mark{display:inline-flex}
+.lp a:focus-visible,.lp button:focus-visible,.lp summary:focus-visible{outline:2px solid var(--accent-blue-text);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.lp-strip-track{animation:none;flex-wrap:wrap;width:auto}.lp-strip{mask-image:none;-webkit-mask-image:none}}
+@media (max-width:1024px){.lp-links{display:none}.lp-cta{margin-left:auto}.lp-hero{grid-template-columns:1fr;gap:40px;padding-top:48px}.lp-steps,.lp-tiers{grid-template-columns:1fr 1fr}.lp-steps li:nth-child(3){border-left:0;padding-left:0}.lp-steps li{padding-bottom:22px}}
+@media (max-width:640px){.lp-cta .btn.ghost{display:none}.lp-stats{grid-template-columns:1fr;gap:14px}.lp-steps,.lp-tiers,.lp-compare,.lp-foot-in{grid-template-columns:1fr}.lp-steps li,.lp-steps li+li{border-left:0;padding-left:0}.lp-scores{grid-template-columns:1fr 1fr}.lp-c-buy{margin-left:0}.lp-sec{padding-top:64px}}
+.lp-hero h1{max-width:20ch}
+@media (max-width:640px){.lp-c-head{flex-direction:column;gap:10px}.lp-c-price{text-align:left}}
 </style>
 </head>
 <body>
+<!-- 00 Front page. Optional: "Open the demo" needs no account. Signing in only adds saved research.
+     The session lives in an HttpOnly cookie set by /auth/*; this page only asks whether it exists. -->
+<script>
+(function(){
+  var root=document.documentElement,q=new URLSearchParams(location.search),local=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)||location.protocol==='file:';
+  var mode='';try{mode=sessionStorage.getItem('verity.mode')||'';}catch(e){}
+  var direct=!q.has('home')&&(q.has('demo')||mode==='demo'||(location.hash&&location.hash!=='#top'&&location.hash!=='#'));
+  var done;window.VERITY_GATE=new Promise(function(r){done=r;});
+  window.VERITY_ACCOUNT={signedIn:false};
+  function enter(how){root.classList.remove('pre','landing');root.classList.add(how==='account'?'signed-in':'demo-mode');
+    if(how==='demo'){try{sessionStorage.setItem('verity.mode','demo');}catch(e){}}done(how);}
+  window.verityOpenDemo=function(){if(q.has('home'))history.replaceState(null,'',location.pathname);enter(root.classList.contains('signed-in')?'account':'demo');if(!location.hash)window.scrollTo({top:0,behavior:'instant'});};
+  function showLanding(){if(!root.classList.contains('pre'))return;root.classList.remove('pre');root.classList.add('landing');document.dispatchEvent(new Event('verity:landing'));}
+  if(local){enter('demo');return;}
+  if(!direct)root.classList.add('pre');
+  var t=setTimeout(function(){direct?enter('demo'):showLanding();},1500);
+  fetch('/auth/session',{cache:'no-store',credentials:'same-origin',redirect:'error'}).then(function(r){
+    clearTimeout(t);
+    if(r.ok){window.VERITY_ACCOUNT.signedIn=true;if(q.has('home')){root.classList.add('signed-in');showLanding();}else enter('account');return;}
+    direct?enter('demo'):showLanding();
+  }).catch(function(){clearTimeout(t);direct?enter('demo'):showLanding();});
+})();
+</script>
+<div class="lp" id="lp">
+  <header class="lp-bar">
+    <div class="lp-wrap lp-bar-in">
+      <a class="wordmark" href="/?home" aria-label="Verity front page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h4.2L12 15.6 16.8 4H21l-7.4 16h-3.2z" fill="#F1F5F9"/><path d="M10.4 20h3.2l1.3-2.9H9.1z" fill="#2E5CFF"/></svg>
+        VERITY
+      </a>
+      <nav class="lp-links" aria-label="Front page">
+        <a href="#lp-how">How it works</a><a href="#lp-markets">Reference markets</a><a href="#lp-spend">Spending rules</a><a href="#lp-faq">Questions</a>
+      </nav>
+      <div class="lp-cta">
+        <a class="btn ghost sm lp-only-out" href="/auth/sign-in">Sign in</a>
+        <button class="btn primary sm" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo</span><span class="lp-only-in">Open Verity</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="lp-main">
+    <section class="lp-hero lp-wrap" aria-labelledby="lpTitle">
+      <div class="lp-hero-copy">
+        <p class="lp-kicker"><span class="lp-dot" aria-hidden="true"></span>UBC 2026 prototype · research agent for prediction markets</p>
+        <h1 id="lpTitle">A price tells you what the crowd expects. The rules decide who gets paid.</h1>
+        <p class="lp-lede">Verity reads how a prediction market settles, scores the resolution risk on its own 4 to 12 scale, and buys only the evidence that closes a gap. Every purchase stays inside the owner’s spending rules. It places no trades, and payments run on testnet USDC.</p>
+        <div class="lp-actions">
+          <button class="btn primary lp-big" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo, no account needed</span><span class="lp-only-in">Open Verity</span></button>
+          <a class="btn lp-big lp-only-out" href="/auth/sign-in">Sign in or create an account</a>
+        </div>
+        <p class="lp-small lp-only-out">The demo has every feature. An account adds saved research, kept with your Google sign-in.</p>
+        <p class="lp-small lp-only-in">You are signed in. Your saved research is kept with your account.</p>
+      </div>
+
+      <figure class="lp-contract" aria-labelledby="lpCardCap">
+        <div class="lp-c-head">
+          <div><span class="lp-c-k">Gemini Exchange · captured Nov 18, 2026</span><span class="lp-c-t">NYC high temperature, 62 to 63°F</span></div>
+          <div class="lp-c-price"><span class="lp-c-k">Mid price</span><b>56¢</b></div>
+        </div>
+        <blockquote class="lp-rule">“…only the first published version that includes confirmation of the <mark aria-label="missing word">&nbsp;___&nbsp;</mark> will be used.”</blockquote>
+        <p class="lp-c-note">A word is missing, so it is unclear which NWS report counts: the partial 4 PM report or the full-day one.</p>
+        <dl class="lp-scores">
+          <div><dt>Ambiguity</dt><dd><b>2</b><i class="p2" aria-hidden="true"></i></dd></div>
+          <div><dt>Source</dt><dd><b>2</b><i class="p2" aria-hidden="true"></i></dd></div>
+          <div><dt>Liquidity</dt><dd><b>3</b><i class="p3" aria-hidden="true"></i></dd></div>
+          <div><dt>Correlation</dt><dd><b>1</b><i class="p1" aria-hidden="true"></i></dd></div>
+        </dl>
+        <div class="lp-c-foot"><span class="lp-total">8 / 12</span><span class="tag warn">! Medium</span><span class="lp-c-buy">One 0.05 USDC report proposed</span></div>
+        <figcaption id="lpCardCap" class="lp-c-cap">Real output of <code>verity-rules-v1</code> on Nov 18. Liquidity: $7 traded, 4¢ spread.</figcaption>
+      </figure>
+    </section>
+
+    <section class="lp-live" aria-labelledby="lpLiveT">
+      <div class="lp-wrap lp-live-head">
+        <h2 id="lpLiveT" class="lp-live-t">On Gemini Exchange right now</h2>
+        <p class="tick-status" id="lpLiveStatus" aria-live="polite">Connecting to Gemini Exchange…</p>
+      </div>
+      <div class="lp-strip" id="lpStrip" aria-label="Live prediction markets"><div class="lp-strip-track" id="lpStripTrack"></div></div>
+      <div class="lp-wrap lp-stats" id="lpStats">
+        <div><span class="lp-s-v" id="lpStatMarkets">—</span><span class="lp-s-l">active prediction markets</span></div>
+        <div><span class="lp-s-v" id="lpStatVol">—</span><span class="lp-s-l">traded on the first 100 listed</span></div>
+        <div><span class="lp-s-v" id="lpStatTop">—</span><span class="lp-s-l" id="lpStatTopL">most traded market</span></div>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-how" aria-labelledby="lpHowT">
+      <div class="lp-sec-head"><h2 id="lpHowT">How Verity reads a market</h2><p>Four steps, in order. The analysis only proposes a purchase. A separate payment service holds the signer and decides.</p></div>
+      <ol class="lp-steps">
+        <li><span class="lp-n">1</span><h3>Read the settlement rules</h3><p>Verity pulls the event and its terms from the public Gemini Exchange endpoint and flattens the rich-text rules. Reading public market data needs no key.</p></li>
+        <li><span class="lp-n">2</span><h3>Score four risks</h3><p>Ambiguity, source, liquidity and correlation, each 1 to 3. Liquidity comes from the bid, the ask and the volume. The rest are code rules, with no LLM.</p></li>
+        <li><span class="lp-n">3</span><h3>Buy only what closes a gap</h3><p>Free and cached answers come first. If a gap stays open, Verity proposes one paid report, priced in testnet USDC and bound to a hash of the request.</p></li>
+        <li><span class="lp-n">4</span><h3>Reconcile payment against delivery</h3><p>Each on-chain payment is matched to the evidence it bought, so the owner can see what was paid for and what arrived.</p></li>
+      </ol>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-markets" aria-labelledby="lpMktT">
+      <div class="lp-sec-head"><h2 id="lpMktT">Two reference markets, Nov 18</h2><p>Both run through the real analysis. Totals of 4 to 6 are low risk, 7 to 8 medium, 9 to 12 high.</p></div>
+      <div class="table-scroll lp-table">
+        <table>
+          <thead><tr><th scope="col">Market</th><th scope="col">Ambiguity</th><th scope="col">Source</th><th scope="col">Liquidity</th><th scope="col">Correlation</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Atlanta vs Oklahoma City, moneyline</th><td class="num">1</td><td class="num">1</td><td class="num">1 <span class="muted">($1,392 traded, 1¢ spread)</span></td><td class="num">3</td><td><span class="tag ok">6, Low</span> nothing to buy</td></tr>
+            <tr><th scope="row">NYC high temperature, 62 to 63°F</th><td class="num">2</td><td class="num">2</td><td class="num">3 <span class="muted">($7 traded, 4¢ spread)</span></td><td class="num">1</td><td><span class="tag warn">8, Medium</span> one 0.05 USDC report proposed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lp-small">In the demo you can score any live Gemini Exchange market the same way, in your browser.</p>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-spend" aria-labelledby="lpSpendT">
+      <div class="lp-sec-head"><h2 id="lpSpendT">Spending rules the agent cannot break</h2><p>A 25 USDC mission budget that counts money already reserved. Passwords, wallet approvals and promo codes are entered by the owner, never by the agent.</p></div>
+      <div class="lp-tiers">
+        <div class="lp-tier"><span class="lp-amt">0.01 to 0.10</span><span class="tag ok">Automatic</span><p>Once the shared checks pass: the merchant is allowlisted, the quote is valid and the purchase is not a duplicate.</p></div>
+        <div class="lp-tier"><span class="lp-amt">0.11 to 0.50</span><span class="tag ok">Automatic, if needed</span><p>Only for an open gap with no free or cached answer.</p></div>
+        <div class="lp-tier"><span class="lp-amt">0.51 to 2.00</span><span class="tag warn">Owner approves</span><p>Verity explains the purchase by voice, and the owner signs with their wallet.</p></div>
+        <div class="lp-tier"><span class="lp-amt">Over 2.00</span><span class="tag no">Rejected</span><p>Never paid, whatever the gap.</p></div>
+      </div>
+      <p class="lp-small">Amounts in testnet USDC on Arc Testnet.</p>
+    </section>
+
+    <section class="lp-sec lp-wrap" aria-labelledby="lpInsideT">
+      <div class="lp-sec-head"><h2 id="lpInsideT">What you can open</h2><p>The demo and an account show the same site. An account only adds a place to keep your work.</p></div>
+      <div class="lp-compare">
+        <div class="lp-plan">
+          <h3>Demo</h3><p class="lp-plan-sub">No account. Opens straight away.</p>
+          <ul>
+            <li>Live board and ticker for every active Gemini Exchange prediction market</li>
+            <li>Market terminal: price history, 5-minute candles and the resolution-risk score</li>
+            <li>Google Gemini review and a combined forecast with Workers AI, labelled as experimental</li>
+            <li>Crypto news from publisher feeds and Exa research search</li>
+            <li>Agent walkthrough and reconciler ledger, labelled as simulations</li>
+          </ul>
+          <button class="btn primary" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo</span><span class="lp-only-in">Open Verity</span></button>
+        </div>
+        <div class="lp-plan">
+          <h3>Account</h3><p class="lp-plan-sub">Sign in with Google. The same button creates your account.</p>
+          <ul>
+            <li>Everything in the demo</li>
+            <li>Saved research runs, kept with your account and visible only to you</li>
+            <li>Verity uses your basic Google profile to sign you in, nothing more</li>
+          </ul>
+          <a class="btn lp-only-out" href="/auth/sign-in">Sign in or create an account</a>
+          <p class="lp-small lp-only-in">You are signed in.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-faq" aria-labelledby="lpFaqT">
+      <div class="lp-sec-head"><h2 id="lpFaqT">Questions</h2></div>
+      <div class="lp-faq">
+        <details><summary>Is this trading advice?</summary><p>No. Verity places no trades. The market price is the crowd’s view, the risk score is about how the contract settles, and the AI forecast is an experimental model estimate.</p></details>
+        <details><summary>Is any real money involved?</summary><p>No. Payments run on testnet USDC. No control on this site can reach a wallet, a signer or a payment endpoint.</p></details>
+        <details><summary>Does “Gemini” mean the Google AI model?</summary><p>On this site, “Gemini” alone means Gemini Exchange, the prediction-market exchange. The AI model is always written “Google Gemini”, and it only gives an optional second opinion. The risk score itself uses no LLM.</p></details>
+        <details><summary>Where does the data come from?</summary><p>Quotes, price history and candles come live from the public Gemini Exchange API, which needs no key. The two Nov 18 markets use the real captured analysis. News comes from publisher feeds, and research from Exa.</p></details>
+        <details><summary>Why would I sign in?</summary><p>Only to save research runs with your account. Everything else works in the demo.</p></details>
+        <details><summary>Does the site hold any API keys?</summary><p>No. AI, news and research calls go through Verity’s Cloudflare Worker, which keeps its keys as server secrets.</p></details>
+      </div>
+    </section>
+
+    <section class="lp-close lp-wrap" aria-labelledby="lpCloseT">
+      <h2 id="lpCloseT">See the price and the rules side by side.</h2>
+      <div class="lp-actions">
+        <button class="btn primary lp-big" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo</span><span class="lp-only-in">Open Verity</span></button>
+        <a class="btn lp-big lp-only-out" href="/auth/sign-in">Sign in</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-foot">
+    <div class="lp-wrap lp-foot-in">
+      <div><span class="wordmark lp-foot-mark">VERITY</span><p>Built at the UBC 2026 hackathon. A research agent for prediction markets.</p></div>
+      <div><h3>Built with</h3><p>Gemini Exchange public API, Cloudflare Workers and Workers AI, Google Gemini, Exa, x402 and EIP-3009, USDC on Arc Testnet, QuickNode Streams, ElevenLabs.</p></div>
+      <div><h3>Please note</h3><p>Independent student project. Not affiliated with or endorsed by Gemini Exchange, Google or any other company named here. Testnet only, and no trades are placed.</p></div>
+    </div>
+  </footer>
+</div>
+<script>
+/* Front page: live strip and stats from the public Gemini Exchange API. Runs only while the front page is showing. */
+document.addEventListener('verity:landing',function(){
+  var GXU='https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100',timer=0;
+  function mid(c){var p=c&&c.prices;if(!p)return null;var b=p.bestBid!=null?+p.bestBid:null,a=p.bestAsk!=null?+p.bestAsk:null;if(b!=null&&a!=null)return (b+a)/2;return p.lastTradePrice!=null?+p.lastTradePrice:(b!=null?b:a);}
+  function money(v){v=+v||0;return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e4?'$'+Math.round(v/1e3)+'k':v>=1e3?'$'+(v/1e3).toFixed(1)+'k':'$'+Math.round(v);}
+  function title(t){return String(t||'').replace(/^Highest temperature in /,'High temp, ').replace(/ on (January|February|March|April|May|June|July|August|September|October|November|December) \d+, \d{4}\??$/,'').replace(/\?$/,'');}
+  function h(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function load(){if(!document.documentElement.classList.contains('landing')){clearInterval(timer);return;}
+    var st=document.getElementById('lpLiveStatus');
+    fetch(GXU,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(j){
+      var ev=(j.data||[]).filter(function(e){return e&&e.title;});var total=(j.pagination&&j.pagination.total)||ev.length;
+      var rows=ev.map(function(e){var cs=(e.contracts||[]).filter(function(c){return c.status==='active'&&mid(c)!=null;});
+        var fav=cs.reduce(function(a,c){return !a||mid(c)>mid(a)?c:a;},null);return {e:e,c:fav,v:+e.volume||0};}).filter(function(r){return r.c;});
+      rows.sort(function(a,b){return b.v-a.v;});
+      var items=rows.slice(0,24).map(function(r){var lab=r.c.label&&r.c.label!==r.e.title?r.c.label:'Yes';
+        return '<span class="lp-chip"><span class="lp-chip-t">'+h(title(r.e.title))+'</span><span class="lp-chip-c">'+h(lab)+'</span><b>'+(mid(r.c)*100).toFixed(0)+'¢</b></span>';}).join('');
+      document.getElementById('lpStripTrack').innerHTML=items+items;
+      document.getElementById('lpStatMarkets').textContent=total;
+      var vol=ev.reduce(function(s,e){return s+(+e.volume||0);},0);document.getElementById('lpStatVol').textContent=money(vol);
+      document.getElementById('lpStatVol').nextElementSibling.textContent='traded on the first '+ev.length+' listed';
+      if(rows[0]){document.getElementById('lpStatTop').textContent=money(rows[0].v);document.getElementById('lpStatTopL').textContent='traded on '+title(rows[0].e.title)+', the busiest of those';}
+      st.className='tick-status live';st.innerHTML='<span class="dot" aria-hidden="true"></span>Live · updated '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+' · <a href="https://api.gemini.com/v1/prediction-markets/events?status=active" target="_blank" rel="noopener noreferrer">source</a>';
+    }).catch(function(e){st.className='tick-status stale';st.textContent='Gemini Exchange is not answering right now ('+e.message+'). The demo will keep retrying.';});}
+  load();timer=setInterval(load,30000);
+},{once:true});
+</script>
+
 <a class="skip" href="#main">Skip to content</a>
 <noscript><div class="noscript">JavaScript is off. The text below still explains Verity, but the charts, the walkthrough and the ledger need JavaScript to run.</div></noscript>
 
@@ -634,6 +947,8 @@ a.tick-item:hover .sym{color:var(--text-primary)}
     <div class="nav-cta">
       <a class="btn ghost sm" href="#spec">Read specification</a>
       <a class="btn primary sm" href="#walkthrough" data-launch>Launch agent terminal</a>
+      <a class="btn ghost sm signin" href="/auth/sign-in">Sign in</a>
+      <button class="btn ghost sm signout" type="button" data-signout>Sign out</button>
     </div>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span></button>
   </div>
@@ -646,6 +961,9 @@ a.tick-item:hover .sym{color:var(--text-primary)}
     <a class="link" href="#ledger">Ledger</a>
     <a class="btn primary" href="#walkthrough" data-launch>Launch agent terminal</a>
     <a class="btn" href="#spec">Read specification</a>
+    <a class="btn signin" href="/auth/sign-in">Sign in to save research</a>
+    <button class="btn signout" type="button" data-signout>Sign out</button>
+    <a class="link" href="/?home">Front page</a>
   </div>
 </header>
 
@@ -727,7 +1045,8 @@ a.tick-item:hover .sym{color:var(--text-primary)}
         </div>
         <div class="chart-wrap" id="probWrap"><canvas id="probChart" role="img" aria-label="Line chart of crowd-implied probability. Use the table below for values."></canvas><div class="tooltip" id="probTip"></div></div>
         <div class="chart-foot"><span id="probFoot">The path ends at the real captured mid. Earlier points are a deterministic demo fixture.</span><span>The price is the market’s view. Run a forecast in the AI panel to add a dashed AI estimate line.</span></div>
-        <details class="table-alt"><summary>Show chart values as a table</summary><div class="table-scroll"><table><thead><tr><th scope="col">Time (UTC)</th><th scope="col">Implied probability</th></tr></thead><tbody id="probTable"></tbody></table></div></details>
+        <div class="chart-meta" id="probMeta" aria-live="polite"></div>
+        <details class="table-alt"><summary>Show chart values as a table</summary><div class="table-scroll"><table><thead><tr><th scope="col">Time (your time zone)</th><th scope="col">Implied probability</th></tr></thead><tbody id="probTable"></tbody></table></div></details>
       </div>
       <div class="term-side">
         <div class="panel">
@@ -1199,13 +1518,35 @@ probC.addEventListener('keydown',e=>{const n=term.series.length;if(e.key==='Arro
 probC.addEventListener('blur',()=>{term.cursor=null;drawProb();});
 probC.setAttribute('aria-describedby','probFoot');
 function probTable(){const m=MARKETS[term.market];$('#probTable').innerHTML=term.series.slice().reverse().map(d=>`<tr><td class="mono">${ptLabel(d,true)}</td><td class="num">${(d.p*100).toFixed(1)}¢${m.live?' (Gemini Exchange close)':d.ago===0?' (captured)':' (fixture)'}</td></tr>`).join('');}
+const TFMS={'1m':6e4,'15m':9e5,'1hr':36e5,'6hr':216e5,'1day':864e5};
+const HIST={state:'demo',fetched:0,newest:0,url:'',err:'',timer:0,vis:false};
+function histUrl(sym,tf){return 'https://api.gemini.com/v2/candles/'+encodeURIComponent(sym.toLowerCase())+'/'+tf;}
+function probMeta(){const el=$('#probMeta');if(!el)return;const m=MARKETS[term.market];
+  if(!m.live){el.innerHTML='<span class="tick-status stale">Demo fixture path</span><span>Earlier points are a labelled fixture. Only the last point is the real Nov 18 capture.</span>';return;}
+  const st={live:['live','<span class="dot" aria-hidden="true"></span>Live history'],stale:['stale','Stale history'],empty:['stale','No history'],loading:['','Loading history…']}[HIST.state]||['','—'];
+  const when=t=>new Date(t).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZoneName:'short'});
+  const bits=[];if(HIST.fetched)bits.push('Fetched '+when(HIST.fetched));if(HIST.newest)bits.push('newest candle '+when(HIST.newest));
+  if(HIST.state==='stale')bits.push(HIST.err?'last refresh failed, showing the previous fetch':'no new candle for several periods');
+  if(HIST.state==='empty')bits.push(HIST.err||'no candles for this timeframe');
+  el.innerHTML=`<span class="tick-status ${st[0]}" role="status">${st[1]}</span><span>${esc(bits.join(' · '))}</span><span>Source: <a href="${esc(HIST.url)}" target="_blank" rel="noopener noreferrer">Gemini Exchange public API, ${esc(m.symbol||'')} candles</a>. Market-implied probability only; the resolution-risk rating beside it is scored separately from the rules.</span>`;}
+function histSchedule(){clearInterval(HIST.timer);HIST.timer=0;const m=MARKETS[term.market];if(HIST.vis&&m&&m.live&&m.symbol)HIST.timer=setInterval(()=>loadHist(true),60000);}
+function loadHist(refresh){const m=MARKETS[term.market];const key=m.symbol+term.tf;const [tf,n]=CTF[term.tf];HIST.url=histUrl(m.symbol,tf);
+  if(refresh)candleCache.delete(m.symbol+'|'+tf);
+  gxCandles(m.symbol,tf,n).then(v=>{const mm=MARKETS[term.market];if(!mm.live||mm.symbol+term.tf!==key)return;
+    HIST.fetched=Date.now();HIST.err='';HIST.newest=v.length?v[v.length-1].t:0;
+    term.series=v.map(d=>({p:d.c,t:d.t,ago:0}));term.msg=v.length<2?'Not enough trading history for this timeframe yet.':'';
+    HIST.state=v.length<2?'empty':(Date.now()-HIST.newest>3*TFMS[tf]?'stale':'live');
+    const traded=v.filter(d=>d.v>0).length;term.foot=v.length?`Closing price of each Gemini Exchange candle. Trades in ${traded} of ${v.length} periods${traded<v.length/2?'; flat stretches mean no trades, so the last price carries forward':''}. The band is the live bid–ask.`:'';if(term.foot)$('#probFoot').textContent=term.foot;drawProb();probTable();probMeta();})
+   .catch(e=>{const mm=MARKETS[term.market];if(!mm.live||mm.symbol+term.tf!==key)return;
+    if(refresh&&term.series.length>1){HIST.state='stale';HIST.err=e.message;probMeta();return;}
+    HIST.state='empty';HIST.err=e.message==='NoDataFound'?'no trades on this contract in this timeframe yet':'history unavailable ('+e.message+')';
+    term.msg=e.message==='NoDataFound'?'No trades on this contract in this timeframe yet, so there are no candles. The quote above is live.':'Candles unavailable right now ('+e.message+'). Retrying every minute.';drawProb();probMeta();});}
 function renderProb(){const m=MARKETS[term.market];term.cursor=null;
-  if(!m.live){term.series=makeSeries(term.market,term.tf);drawProb();probTable();return;}
-  const key=m.symbol+term.tf;term.series=[];term.foot='';term.msg='Loading Gemini Exchange candles…';drawProb();probTable();
-  if(!m.symbol){term.msg='This contract has no instrument symbol, so no candles.';drawProb();return;}
-  const [tf,n]=CTF[term.tf];gxCandles(m.symbol,tf,n).then(v=>{const mm=MARKETS[term.market];if(!mm.live||mm.symbol+term.tf!==key)return;
-    term.series=v.map(d=>({p:d.c,t:d.t,ago:0}));term.msg=v.length<2?'Not enough trading history for this timeframe yet.':'';const traded=v.filter(d=>d.v>0).length;term.foot=v.length?`Closing price of each Gemini Exchange candle. Trades in ${traded} of ${v.length} periods${traded<v.length/2?'; flat stretches mean no trades, so the last price carries forward':''}. The band is the live bid–ask.`:'';if(term.foot)$('#probFoot').textContent=term.foot;drawProb();probTable();})
-   .catch(e=>{term.msg=e.message==='NoDataFound'?'No trades on this contract in this timeframe yet, so there are no candles. The quote above is live.':'Candles unavailable right now ('+e.message+').';drawProb();});}
+  if(!m.live){HIST.state='demo';term.series=makeSeries(term.market,term.tf);drawProb();probTable();probMeta();histSchedule();return;}
+  term.series=[];term.foot='';term.msg='Loading Gemini Exchange candles…';HIST.state='loading';HIST.fetched=0;HIST.newest=0;drawProb();probTable();
+  if(!m.symbol){term.msg='This contract has no instrument symbol, so no candles.';HIST.state='empty';HIST.err='no instrument symbol';HIST.url='https://api.gemini.com/v1/prediction-markets/events';drawProb();probMeta();return;}
+  probMeta();loadHist(false);histSchedule();}
+onVisible(probW,v=>{HIST.vis=v;histSchedule();});
 $$('#tfSeg button').forEach(b=>b.addEventListener('click',()=>{term.tf=b.dataset.tf;$$('#tfSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderProb();}));
 if('ResizeObserver'in window)new ResizeObserver(()=>drawProb()).observe(probW);
 
@@ -1879,7 +2220,7 @@ async function loadNews(){if(document.hidden)return;
   catch(e){if(!NEWS.items.length){$('#newsList').innerHTML='<li class="empty">Headlines are unavailable right now. Retrying in a few minutes.</li>';$('#leadStory').innerHTML='';const s=$('#newsStatus');s.className='tick-status stale';s.textContent='News unavailable · retrying';}}}
 (function newsInit(){$('#newsFilters').innerHTML=NEWS_TOPICS.map(([k,l])=>`<button type="button" data-f="${k}" aria-pressed="${k==='all'}">${l}</button>`).join('');
   $$('#newsFilters button').forEach(b=>b.addEventListener('click',()=>{NEWS.filter=b.dataset.f;renderNews();}));
-  loadNews();NEWS.timer=setInterval(loadNews,10*60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-NEWS.fetched>10*60000)loadNews();});})();
+  (window.VERITY_GATE||Promise.resolve()).then(()=>{loadNews();NEWS.timer=setInterval(loadNews,10*60000);});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-NEWS.fetched>10*60000)loadNews();});})();
 
 /* ---------- More research via Exa (through Verity's Worker) ---------- */
 const RES={q:'',busy:false};
@@ -1898,7 +2239,7 @@ async function runResearch(q){q=(q||'').trim()||'crypto market trends bitcoin et
 (function resInit(){$('#resForm').addEventListener('submit',e=>{e.preventDefault();runResearch($('#resQ').value);});
   $$('#resChips button').forEach(b=>b.addEventListener('click',()=>{$('#resQ').value=b.dataset.q;runResearch(b.dataset.q);}));
   onVisible($('#resList'),v=>{if(v&&!RES.q)runResearch('');});
-  setTimeout(()=>{if(!RES.q)runResearch('');},3000);})(); // don't rely only on the visibility observer
+  (window.VERITY_GATE||Promise.resolve()).then(()=>setTimeout(()=>{if(!RES.q)runResearch('');},3000));})(); // don't rely only on the visibility observer
 
 /* Research for the market selected in the terminal (AI panel) */
 async function runMarketResearch(){const m=MARKETS[term.market];const out=$('#gaiOut');const btn=$('#mresRun');
@@ -1972,10 +2313,16 @@ document.addEventListener('keydown',e=>{const d=$('#drawer');if(!d.classList.con
 
 /* ---------- Init ---------- */
 (async function init(){
+  if(window.VERITY_GATE)await window.VERITY_GATE; // nothing starts until the visitor opens the demo or signs in
   try{await computeHashes();}catch(e){console.warn(e);}
   renderTerm();renderAll();renderTabs();LIVE.start();await loadAll();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{drawProb();drawCandles();});
 })();
+
+/* Sign out: clears the session cookie through the auth service, then returns to the front page */
+$$('[data-signout]').forEach(b=>b.addEventListener('click',async()=>{b.disabled=true;
+  try{const r=await fetch('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',credentials:'same-origin',redirect:'error'});if(!r.ok)throw new Error();try{sessionStorage.removeItem('verity.mode');}catch(e){}location.replace(location.pathname);}
+  catch(e){b.disabled=false;b.textContent='Sign-out failed, try again';}}));
 /* Audit ledger: reads a running Verity payment portal (portal/) with its read token.
    Nothing is fetched until the visitor loads it; the token stays in this tab (sessionStorage). */
 (()=>{
