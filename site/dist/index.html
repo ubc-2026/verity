@@ -784,7 +784,6 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
   <main class="lp-main">
     <div class="lp-art">
       <canvas class="lp-field" id="lpField" aria-hidden="true"></canvas>
-      <div class="lp-field-key" aria-hidden="true"><span class="k-top">100¢</span><span class="k-bot">0¢</span><span class="k-l">closes sooner</span><span class="k-r">closes later</span></div>
       <p class="lp-field-tip" id="lpFieldTip" aria-hidden="true"></p>
     <section class="lp-hero lp-wrap" aria-labelledby="lpTitle">
       <div class="lp-hero-copy">
@@ -816,7 +815,7 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
         <figcaption id="lpCardCap" class="lp-c-cap">Real output of <code>verity-rules-v1</code> on Nov 18. Liquidity: $7 traded, 4¢ spread.</figcaption>
       </figure>
     </section>
-      <p class="lp-field-cap lp-wrap">Behind this text: every outcome in the active Gemini Exchange markets listed right now. Each column is a closing time, earliest on the left; height is the live price to the cent; dot area is volume. Hover a dot to see which one, click it for the details.</p>
+      <p class="lp-field-cap lp-wrap">The V around the card: every outcome in the active Gemini Exchange markets listed right now, one dot each. Left arm: priced 50¢ or more. Right arm: under 50¢. Each arm runs from the latest closing time at the top to the soonest at the point. Dot area is volume. Hover a dot to see which one, click it for the details.</p>
     </div>
 
     <section class="lp-live" aria-labelledby="lpLiveT">
@@ -958,41 +957,61 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
   load();timer=setInterval(load,30000);
   setTimeout(function(){window.__lpField&&window.__lpField.start();},0);
 });
-/* Constellation: real markets as dots on a column grid. Column = order of closing time, row = price to the cent,
-   dot area = volume. No default glow: crisp muted dots, a small halo only on hover, a ring on the dot whose pop-up is open.
-   Dots fade near the headline and the card so the text has room. Positions are data; nothing animates. */
+/* Constellation: every live market outcome as one dot, set on a 10 px lattice in the shape of the Verity V,
+   framing the Gemini Exchange card. Left arm: outcomes priced 50¢ or more. Right arm: under 50¢. Along each arm,
+   the latest closing time is at the top and the soonest is at the point, which is drawn in the logo's accent blue.
+   Dot area is volume. Crisp dots, a small halo only on hover, a ring on the dot whose pop-up is open. Nothing animates. */
 window.__lpField=(function(){
-  var cv=document.getElementById('lpField'),tip=document.getElementById('lpFieldTip'),ctx=cv.getContext('2d'),pts=[],hover=-1,sel=-1,W=0,H=0,dpr=1,cols=48,zones=[],queued=0;
-  var RING=(getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-text')||'#7C9BFF').trim();
+  var cv=document.getElementById('lpField'),tip=document.getElementById('lpFieldTip'),ctx=cv.getContext('2d'),pts=[],cells=[],hover=-1,sel=-1,W=0,H=0,dpr=1,zones=[],card=null,queued=0,mk=[];
+  var RING=(getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-text')||'#7C9BFF').trim(),S=10;
   function mid(c){var p=c&&c.prices;if(!p)return null;var b=p.bestBid!=null?+p.bestBid:null,a=p.bestAsk!=null?+p.bestAsk:null;if(b!=null&&a!=null)return (b+a)/2;return p.lastTradePrice!=null?+p.lastTradePrice:(b!=null?b:a);}
-  function frame(){var px=Math.max(40,W*.04);return {x0:px,x1:W-px,y0:H*.12,y1:H*.9};}
-  function measure(){var cr=cv.getBoundingClientRect();zones=['.lp-hero-copy h1','.lp-hero-copy .lp-lede','.lp-contract'].map(function(q){var e=document.querySelector(q);if(!e)return null;var r=e.getBoundingClientRect();return {l:r.left-cr.left,t:r.top-cr.top,r:r.right-cr.left,b:r.bottom-cr.top};}).filter(Boolean);}
-  function size(){var r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
-    var f=frame();cols=Math.max(24,Math.min(96,Math.floor((f.x1-f.x0)/14)));measure();place();redraw();}
-  function place(){var f=frame();pts.forEach(function(p){var c=Math.round(p.u*(cols-1));p.x=f.x0+(f.x1-f.x0)*c/(cols-1);p.y=f.y0+(f.y1-f.y0)*(1-Math.round(p.p*100)/100);});}
-  function fade(x,y){var k=1,M=56;zones.forEach(function(z){var dx=Math.max(z.l-x,0,x-z.r),dy=Math.max(z.t-y,0,y-z.b),d=Math.sqrt(dx*dx+dy*dy);var f=d>=M?1:.1+.9*(d/M);if(f<k)k=f;});return k;}
+  function rel(q){var e=document.querySelector(q);if(!e)return null;var cr=cv.getBoundingClientRect(),r=e.getBoundingClientRect();return {l:r.left-cr.left,t:r.top-cr.top,r:r.right-cr.left,b:r.bottom-cr.top};}
+  function measure(){card=rel('.lp-contract');zones=['.lp-hero-copy h1','.lp-hero-copy .lp-lede','.lp-hero-copy .lp-actions'].map(rel).filter(Boolean);}
+  function fade(x,y){var k=1,M=48;zones.forEach(function(z){var dx=Math.max(z.l-x,0,x-z.r),dy=Math.max(z.t-y,0,y-z.b),d=Math.sqrt(dx*dx+dy*dy);var f=d>=M?1:.08+.92*(d/M);if(f<k)k=f;});return k;}
+  /* Lattice cells inside the two arms of the V. */
+  function layout(){cells=[];if(!card||!W)return;var cx=(card.l+card.r)/2,cw=card.r-card.l,
+      ay=Math.min(H-16,card.b+Math.max(90,cw*.28)),ty=Math.max(16,card.t-Math.max(180,cw*.5)),
+      half=Math.max(26,Math.min(48,cw*.09)),
+      tl={x:Math.max(18,card.l-cw*.32),y:ty},tr={x:Math.min(W-16,card.r+cw*.32),y:ty},ap={x:cx,y:ay};
+    function arm(T,side){var dx=ap.x-T.x,dy=ap.y-T.y,L=Math.sqrt(dx*dx+dy*dy);return {T:T,ux:dx/L,uy:dy/L,L:L,side:side};}
+    var arms=[arm(tl,0),arm(tr,1)],x0=Math.floor((tl.x-half*2)/S)*S,x1=tr.x+half*2,y0=Math.floor((ty-half)/S)*S,y1=ay+half;
+    for(var y=y0;y<=y1;y+=S)for(var x=x0;x<=x1;x+=S){
+      if(x>card.l-10&&x<card.r+10&&y>card.t-10&&y<card.b+10)continue; // keep the card clear
+      if(fade(x,y)<.6)continue;
+      var best=null;arms.forEach(function(A){var px=x-A.T.x,py=y-A.T.y,t=px*A.ux+py*A.uy,d=Math.abs(px*A.uy-py*A.ux);
+        if(t>=0&&t<=A.L+half&&d<=half&&(!best||d<best.d))best={side:A.side,t:Math.min(1,t/A.L),d:d};});
+      if(best)cells.push({x:x,y:y,side:best.side,t:best.t,accent:y>ay-(ay-ty)*.2});}
+  }
+  function assign(){pts=[];if(!cells.length)return;
+    [0,1].forEach(function(side){var cs=cells.filter(function(c){return c.side===side;}).sort(function(a,b){return a.t-b.t||a.x-b.x;}),
+        ms=mk.filter(function(m){return side===0?m.p>=.5:m.p<.5;});
+      if(ms.length>cs.length){ms=ms.slice().sort(function(a,b){return b.v-a.v;}).slice(0,cs.length);} // keep the most traded if the arm is full
+      ms=ms.slice().sort(function(a,b){return b.h-a.h;}); // latest close first, so the soonest lands at the point
+      var step=cs.length/Math.max(1,ms.length);
+      ms.forEach(function(m,i){var c=cs[Math.min(cs.length-1,Math.floor(i*step+step/2))];c.used=true;pts.push({x:c.x,y:c.y,accent:c.accent,r:m.r,t:m.t,p:m.p,key:m.key,d:m.d});});});
+    pts.sort(function(a,b){return b.r-a.r;});}
+  function relayout(){var selKey=sel>=0&&pts[sel]?pts[sel].key:null;cells.forEach(function(c){c.used=false;});layout();assign();sel=selKey?pts.findIndex(function(p){return p.key===selKey;}):-1;hover=-1;redraw();}
+  function size(){var r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);measure();relayout();}
   function build(ev){var now=Date.now(),out=[];ev.forEach(function(e){var cs=(e.contracts||[]).filter(function(c){return c.status==='active'&&mid(c)!=null;});
       cs.forEach(function(c,i){if(i>5)return;var m=mid(c);if(m==null)return;var ms=Math.max(36e5,Date.parse(e.expiryDate||'')-now||0),pr=c.prices||{};
         out.push({p:Math.max(0,Math.min(1,m)),h:ms,v:+e.volume||0,t:e.title+(c.label&&c.label!==e.title?': '+c.label:''),key:e.ticker+'|'+c.id,
           d:{ticker:e.ticker,contractId:c.id,title:e.title,outcome:c.label&&c.label!==e.title?c.label:'Yes',category:e.category||'',price:m,bid:pr.bestBid!=null?+pr.bestBid:null,ask:pr.bestAsk!=null?+pr.bestAsk:null,volume:+e.volume||0,volume24h:e.volume24h!=null?+e.volume24h:null,expiry:e.expiryDate||'',siblings:Math.max(0,cs.length-1)}});});});
-    var vmax=Math.max.apply(null,out.map(function(o){return o.v;}).concat([1])),hs=out.map(function(o){return o.h;}).sort(function(x,y){return x-y;});
-    out.forEach(function(o){var lo=hs.indexOf(o.h),hi=hs.lastIndexOf(o.h);o.u=hs.length>1?((lo+hi)/2)/(hs.length-1):.5;
-      o.r=Math.sqrt(1+8*(o.v/vmax));}); // radius 1 to 3 px (2 to 6 px across); area grows with volume
-    out.sort(function(a,b){return b.r-a.r;}); // big first, so small dots stay visible on top
-    var selKey=sel>=0&&pts[sel]?pts[sel].key:null;pts=out;sel=selKey?pts.findIndex(function(p){return p.key===selKey;}):-1;hover=-1;place();redraw();}
+    var vmax=Math.max.apply(null,out.map(function(o){return o.v;}).concat([1]));out.forEach(function(o){o.r=Math.sqrt(1.4+7.6*(o.v/vmax));}); // about 2.4 to 6 px across, area grows with volume
+    mk=out;if(!W)size();else{measure();relayout();}}
   function redraw(){if(queued)return;queued=requestAnimationFrame(function(){queued=0;draw();});}
-  function draw(){ctx.clearRect(0,0,W,H);if(!W)return;var f=frame();
-    ctx.fillStyle='rgba(139,155,180,.16)';for(var row=0;row<=10;row++){var y=f.y0+(f.y1-f.y0)*row/10;for(var c=0;c<cols;c+=2){var x=f.x0+(f.x1-f.x0)*c/(cols-1);ctx.globalAlpha=fade(x,y);ctx.fillRect(x-.5,y-.5,1,1);}}
-    ctx.globalAlpha=1;
-    pts.forEach(function(p,i){if(i===hover||i===sel)return;var a=fade(p.x,p.y);ctx.globalAlpha=a;ctx.fillStyle=p.r>2?'rgba(140,166,255,.85)':'rgba(124,155,255,.7)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);ctx.fill();});
+  function draw(){ctx.clearRect(0,0,W,H);if(!W)return;
+    ctx.fillStyle='rgba(139,155,180,.3)';cells.forEach(function(c){if(!c.used)ctx.fillRect(c.x-.5,c.y-.5,1,1);}); // empty lattice keeps the V's outline
+    pts.forEach(function(p,i){if(i===hover||i===sel)return;ctx.globalAlpha=fade(p.x,p.y);
+      ctx.fillStyle=p.accent?'#3D6BFF':(p.r>2?'rgba(150,174,255,.9)':'rgba(124,155,255,.78)');
+      ctx.beginPath();ctx.arc(p.x,p.y,p.accent?p.r+.4:p.r,0,6.2832);ctx.fill();});
     ctx.globalAlpha=1;
     [sel,hover].forEach(function(i,n){if(i<0||!pts[i])return;var p=pts[i];
-      if(n===1||i!==hover){var g=ctx.createRadialGradient(p.x,p.y,p.r,p.x,p.y,p.r+5);g.addColorStop(0,'rgba(124,155,255,.38)');g.addColorStop(1,'rgba(124,155,255,0)');if(n===1){ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r+5,0,6.2832);ctx.fill();}}
+      if(n===1){var g=ctx.createRadialGradient(p.x,p.y,p.r,p.x,p.y,p.r+5);g.addColorStop(0,'rgba(124,155,255,.38)');g.addColorStop(1,'rgba(124,155,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r+5,0,6.2832);ctx.fill();}
       ctx.fillStyle='#F1F5F9';ctx.beginPath();ctx.arc(p.x,p.y,p.r+.5,0,6.2832);ctx.fill();
       if(i===sel){ctx.strokeStyle=RING;ctx.lineWidth=1.25;ctx.beginPath();ctx.arc(p.x,p.y,p.r+4,0,6.2832);ctx.stroke();}});}
-  function onMove(e){var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=-1,bd=144;pts.forEach(function(p,i){var d=(p.x-x)*(p.x-x)+(p.y-y)*(p.y-y);if(d<bd&&fade(p.x,p.y)>.5){bd=d;best=i;}});
+  function onMove(e){var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=-1,bd=64;pts.forEach(function(p,i){var d=(p.x-x)*(p.x-x)+(p.y-y)*(p.y-y);if(d<bd){bd=d;best=i;}});
     if(best!==hover){hover=best;redraw();}cv.parentNode.classList.toggle('on-dot',best>=0);
-    if(best<0){tip.classList.remove('on');}else{var p=pts[best];tip.textContent=p.t+' · '+Math.round(p.p*100)+'¢';tip.style.left=Math.min(W-260,p.x+12)+'px';tip.style.top=Math.max(8,p.y-30)+'px';tip.classList.add('on');}}
+    if(best<0){tip.classList.remove('on');}else{var p=pts[best];tip.textContent=p.t+' · '+Math.round(p.p*100)+'¢';tip.style.left=Math.max(8,Math.min(W-268,p.x+12))+'px';tip.style.top=Math.max(8,p.y-30)+'px';tip.classList.add('on');}}
   var dlg=null;
   function loadDialog(){if(dlg)return dlg;dlg=new Promise(function(ok,no){var l=document.createElement('link');l.rel='stylesheet';l.href='/astryx/astryx.css?v=379a6c17';document.head.appendChild(l);
     var sc=document.createElement('script');sc.src='/astryx/verity-dot.js?v=67fd0374';sc.onload=function(){ok(window.VerityDotDialog);};sc.onerror=function(){dlg=null;no(new Error('load'));};document.head.appendChild(sc);});return dlg;}
@@ -1000,8 +1019,8 @@ window.__lpField=(function(){
     loadDialog().then(function(D){cv.parentNode.style.cursor='';D.open(d,{onClose:function(){sel=-1;redraw();}});})
     .catch(function(){cv.parentNode.style.cursor='';sel=-1;redraw();tip.textContent='Could not load the market details. Try again.';tip.classList.add('on');});}
   function fetchAll(){Promise.all([0,100,200].map(function(o){return fetch('https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100&offset='+o,{cache:'no-store'}).then(function(r){return r.ok?r.json():{data:[]};}).catch(function(){return {data:[]};});}))
-    .then(function(js){var seen={},ev=[];js.forEach(function(j){(j.data||[]).forEach(function(e){if(!seen[e.ticker]){seen[e.ticker]=1;ev.push(e);}});});build(ev);});}
-  return {start:function(){size();addEventListener('resize',size);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){measure();redraw();});
+    .then(function(js){var seen={},ev=[];js.forEach(function(j){(j.data||[]).forEach(function(e){if(!seen[e.ticker]){seen[e.ticker]=1;ev.push(e);}});});if(!ev.length&&(fetchAll.tries=(fetchAll.tries||0)+1)<6){setTimeout(fetchAll,4000);return;}fetchAll.tries=0;build(ev);});}
+  return {state:function(){return {W:W,H:H,markets:mk.length,cells:cells.length,dots:pts.length,card:!!card,queued:!!queued};},start:function(){size();addEventListener('resize',size);if(window.ResizeObserver){var lastW=0,lastH=0;new ResizeObserver(function(){var r=cv.getBoundingClientRect();if(Math.abs(r.width-lastW)>1||Math.abs(r.height-lastH)>1){lastW=r.width;lastH=r.height;size();}}).observe(cv);var c2=document.querySelector('.lp-contract');if(c2)new ResizeObserver(function(){measure();relayout();}).observe(c2);}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){measure();relayout();});
     var art=cv.parentNode;art.addEventListener('pointermove',onMove);art.addEventListener('pointerleave',function(){if(hover>=0){hover=-1;redraw();}tip.classList.remove('on');});
     art.addEventListener('click',function(e){if(hover<0||e.target.closest('a,button,figure,.lp-hero-copy'))return;openDot(hover);});
     fetchAll();setInterval(function(){if(document.documentElement.classList.contains('landing'))fetchAll();},60000);}};
