@@ -612,8 +612,8 @@ a.tick-item:hover .sym{color:var(--text-primary)}
 
 /* ---------- Front page (optional; "Open the demo" skips it) ---------- */
 .lp{display:none}
-html.pre body>*:not(script){visibility:hidden}
-html.landing body>*:not(.lp):not(script){display:none!important}
+html.pre body>*:not(script):not(#verity-astryx-root){visibility:hidden}
+html.landing body>*:not(.lp):not(script):not(#verity-astryx-root){display:none!important}
 html.landing .lp{display:block}
 .signin,.signout{display:none}
 html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
@@ -736,6 +736,8 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 .lp-q-foot{margin:32px 0 0;color:var(--text-muted);max-width:60ch}
 @media (prefers-reduced-motion:reduce){.lp-q-blank{display:inline}.lp-q-opt{animation:none}.lp-q-opt+.lp-q-opt::before{content:" or "}}
 @media (max-width:1024px){.lp-art::before{background:rgba(9,12,16,.86)}.lp-hero{min-height:0}.lp-field-key{display:none}.lp-field-cap{text-align:left}}
+.lp-art.on-dot{cursor:pointer}
+#verity-astryx-root{position:relative;z-index:100}
 </style>
 </head>
 <body>
@@ -814,7 +816,7 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
         <figcaption id="lpCardCap" class="lp-c-cap">Real output of <code>verity-rules-v1</code> on Nov 18. Liquidity: $7 traded, 4¢ spread.</figcaption>
       </figure>
     </section>
-      <p class="lp-field-cap lp-wrap">Behind this text: every outcome in the active Gemini Exchange markets listed right now. Height is the live price, left to right is time to close in order, size is volume. Hover a dot to see which one.</p>
+      <p class="lp-field-cap lp-wrap">Behind this text: every outcome in the active Gemini Exchange markets listed right now. Height is the live price, left to right is time to close in order, size is volume. Hover a dot to see which one, click it for the details.</p>
     </div>
 
     <section class="lp-live" aria-labelledby="lpLiveT">
@@ -964,7 +966,7 @@ window.__lpField=(function(){
   function place(){var px=Math.max(40,W*.04),pt=H*.12,pb=H*.1;pts.forEach(function(p){p.x=px+(W-2*px)*p.u;p.y=pt+(H-pt-pb)*(1-p.p);});}
   function build(ev){var now=Date.now(),out=[];ev.forEach(function(e){var cs=(e.contracts||[]).filter(function(c){return c.status==='active'&&mid(c)!=null;});
       cs.forEach(function(c,i){if(i>5)return;var m=mid(c);if(m==null)return;var ms=Math.max(36e5,Date.parse(e.expiryDate||'')-now||0);
-        out.push({p:Math.max(0,Math.min(1,m)),h:Math.log(ms/36e5),v:+e.volume||0,t:e.title+(c.label&&c.label!==e.title?': '+c.label:''),ph:Math.random()*6.28,lead:i===0});});});
+        var pr=c.prices||{};out.push({p:Math.max(0,Math.min(1,m)),h:Math.log(ms/36e5),v:+e.volume||0,t:e.title+(c.label&&c.label!==e.title?': '+c.label:''),ph:Math.random()*6.28,lead:i===0,d:{ticker:e.ticker,contractId:c.id,title:e.title,outcome:c.label&&c.label!==e.title?c.label:'Yes',category:e.category||'',price:m,bid:pr.bestBid!=null?+pr.bestBid:null,ask:pr.bestAsk!=null?+pr.bestAsk:null,volume:+e.volume||0,volume24h:e.volume24h!=null?+e.volume24h:null,expiry:e.expiryDate||'',siblings:Math.max(0,cs.length-1)}});});});
     var hmax=Math.max.apply(null,out.map(function(o){return o.h;}).concat([1])),vmax=Math.max.apply(null,out.map(function(o){return o.v;}).concat([1]));
     var hs=out.map(function(o){return o.h;}).sort(function(x,y){return x-y;});out.forEach(function(o){var lo=hs.indexOf(o.h),hi=hs.lastIndexOf(o.h);o.u=hs.length>1?((lo+hi)/2)/(hs.length-1):.5;o.u=Math.min(1,Math.max(0,o.u+(Math.random()-.5)*.012));o.r=1+5*Math.sqrt(o.v/vmax);});pts=out;place();}
   function draw(now){ctx.clearRect(0,0,W,H);var k=(now-t0)/1000;
@@ -974,11 +976,16 @@ window.__lpField=(function(){
       ctx.fillStyle=on?'#F1F5F9':'rgba(170,190,255,'+(.45+.45*s)+')';ctx.beginPath();ctx.arc(p.x,p.y,on?p.r+2:p.r,0,6.29);ctx.fill();});
     if(!RM)raf=requestAnimationFrame(draw);}
   function onMove(e){var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=-1,bd=400;pts.forEach(function(p,i){var d=(p.x-x)*(p.x-x)+(p.y-y)*(p.y-y);if(d<bd){bd=d;best=i;}});
-    hover=best;if(best<0){tip.classList.remove('on');}else{var p=pts[best];tip.textContent=p.t+' · '+Math.round(p.p*100)+'¢';tip.style.left=Math.min(W-260,p.x+12)+'px';tip.style.top=Math.max(8,p.y-30)+'px';tip.classList.add('on');}
+    hover=best;cv.parentNode.classList.toggle('on-dot',best>=0);if(best<0){tip.classList.remove('on');}else{var p=pts[best];tip.textContent=p.t+' · '+Math.round(p.p*100)+'¢';tip.style.left=Math.min(W-260,p.x+12)+'px';tip.style.top=Math.max(8,p.y-30)+'px';tip.classList.add('on');}
     if(RM)draw(performance.now());}
+  var dlg=null;
+  function loadDialog(){if(dlg)return dlg;dlg=new Promise(function(ok,no){var l=document.createElement('link');l.rel='stylesheet';l.href='/astryx/astryx.css?v=379a6c17';document.head.appendChild(l);
+    var sc=document.createElement('script');sc.src='/astryx/verity-dot.js?v=d4db524a';sc.onload=function(){ok(window.VerityDotDialog);};sc.onerror=function(){dlg=null;no(new Error('load'));};document.head.appendChild(sc);});return dlg;}
+  function openDot(d){cv.parentNode.style.cursor='progress';loadDialog().then(function(D){cv.parentNode.style.cursor='';D.open(d);}).catch(function(){cv.parentNode.style.cursor='';tip.textContent='Could not load the market details. Try again.';tip.classList.add('on');});}
   function fetchAll(){Promise.all([0,100,200].map(function(o){return fetch('https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100&offset='+o,{cache:'no-store'}).then(function(r){return r.ok?r.json():{data:[]};}).catch(function(){return {data:[]};});}))
     .then(function(js){var seen={},ev=[];js.forEach(function(j){(j.data||[]).forEach(function(e){if(!seen[e.ticker]){seen[e.ticker]=1;ev.push(e);}});});build(ev);if(RM)draw(performance.now());});}
   return {start:function(){size();addEventListener('resize',size);var art=cv.parentNode;art.addEventListener('pointermove',onMove);art.addEventListener('pointerleave',function(){hover=-1;tip.classList.remove('on');});
+    art.addEventListener('click',function(e){if(hover<0||e.target.closest('a,button,figure,.lp-hero-copy'))return;openDot(pts[hover].d);});
     fetchAll();setInterval(function(){if(document.documentElement.classList.contains('landing'))fetchAll();},60000);
     if(!RM)raf=requestAnimationFrame(draw);
     new MutationObserver(function(){if(!document.documentElement.classList.contains('landing')){cancelAnimationFrame(raf);}}).observe(document.documentElement,{attributes:true,attributeFilter:['class']});}};
@@ -2096,6 +2103,13 @@ function renderTabs(){const C=tabContent();$('#tabPanels').innerHTML=Object.entr
   $$('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(C[b.dataset.copy].code,'Code copied')));}
 (function tabs(){const tabs=$$('#tablist [role=tab]');const sel=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$('#'+x.getAttribute('aria-controls')).hidden=!on;});};
   tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{let j=null;if(e.key==='ArrowRight')j=(i+1)%tabs.length;if(e.key==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!=null){e.preventDefault();tabs[j].focus();sel(tabs[j]);}});});})();
+
+/* Front page hand-off: a market picked from the constellation opens in the terminal */
+window.verityPickMarket=async function(){let pick;try{pick=JSON.parse(sessionStorage.getItem('verity.pick')||'null');sessionStorage.removeItem('verity.pick');}catch(e){}
+  if(!pick||!pick.ticker)return;if(window.VERITY_GATE)await window.VERITY_GATE;await new Promise(r=>setTimeout(r,400));
+  try{const j=await LIVE.get('/v1/prediction-markets/events/'+encodeURIComponent(pick.ticker));const ev=j&&j.data&&!Array.isArray(j.data)?j.data:j;
+    const c=ev&&(ev.contracts||[]).find(x=>x.id===pick.contract);if(c)selectLive(ev,c,true);else $('#terminal').scrollIntoView();}
+  catch(e){console.warn('Pick market:',e.message);$('#terminal').scrollIntoView();}};
 /* ---------- Google Gemini (the AI model) — optional second opinion ----------
    Not Gemini Exchange. Requests go to Verity's Cloudflare Worker, which holds the
    Google API key as a Worker secret. No key is ever in this page, in the browser,
