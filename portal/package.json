@@ -1,0 +1,30 @@
+{
+  "name": "verity",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Verity payment portal: database of nanopayment purchases and the QuickNode observations that can prove the direct rail.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubc-2026/verity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ubc-2026/verity/issues"
+  },
+  "homepage": "https://github.com/ubc-2026/verity#readme",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "start": "node src/main.ts",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  }
+}

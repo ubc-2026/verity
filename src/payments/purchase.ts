@@ -9,6 +9,7 @@ import type { AcceptedProposal } from "./proposal.ts";
 import type { VerityQuote } from "./quote.ts";
 import { ResearchRequestError, type ResearchRequestV1 } from "./researchRequest.ts";
 import { PolicyError, type PaymentStore } from "./store.ts";
+import { requestOwnerApproval, type OwnerCaller } from "./voiceApproval.ts";
 
 /** Buyer-generated purchase ID, sent with the quote request. The quote must echo it. */
 export function newPurchaseId(): string {
@@ -49,6 +50,10 @@ export class BuyerService {
   readonly #tokenDomain: { name: string; version: string };
   readonly #missionId: string;
   readonly #saltSource: (() => Hex) | undefined;
+  readonly #ownerCaller: OwnerCaller | undefined;
+  readonly #voiceTimeoutMs: number;
+  readonly #ownerCodeDisplay: ((info: { purchaseId: string; code: string }) => void | Promise<void>) | undefined;
+  readonly #ownerCodeRegister: ((info: { purchaseId: string; code: string }) => void | Promise<void>) | undefined;
   #paused = false;
 
   constructor(options: {
@@ -60,6 +65,14 @@ export class BuyerService {
     missionId: string;
     /** Fixture runs pass a deterministic salt source; production leaves the CSPRNG default. */
     saltSource?: () => Hex;
+    /** Live voice call to the owner for tier 3 purchases. Absent: the owner is only given the explanation text. */
+    ownerCaller?: OwnerCaller;
+    /** Shows the one-time code to the owner (a screen only they see) before the call. Enables the spoken-code check. */
+    ownerCodeDisplay?: (info: { purchaseId: string; code: string }) => void | Promise<void>;
+    /** Registers each code with the voice-verify Worker so the agent can check it live (voiceChallengeFromEnv). */
+    ownerCodeRegister?: (info: { purchaseId: string; code: string }) => void | Promise<void>;
+    /** How long to wait for the owner's spoken answer. Default 2 minutes. */
+    voiceTimeoutMs?: number;
   }) {
     this.#store = options.store;
     this.#catalog = options.catalog;
@@ -68,6 +81,10 @@ export class BuyerService {
     this.#tokenDomain = options.tokenDomain;
     this.#missionId = options.missionId;
     this.#saltSource = options.saltSource;
+    this.#ownerCaller = options.ownerCaller;
+    this.#voiceTimeoutMs = options.voiceTimeoutMs ?? 120_000;
+    this.#ownerCodeDisplay = options.ownerCodeDisplay;
+    this.#ownerCodeRegister = options.ownerCodeRegister;
   }
 
   pause(): void {
@@ -158,8 +175,31 @@ export class BuyerService {
         ? { decision: "needs_approval", tier: "owner" }
         : { decision: "allow", tier: amount > limits.autoApproveMax ? "gap" : "auto" });
 
+    if (record.status === "denied") {
+      const rejected = { decision: "reject", reason: "owner approval was denied or timed out" } as const;
+      return { status: "rejected", reason: rejected.reason, decision: rejected, explanation: explainDecision({ decision: rejected, quote: input.quote }) };
+    }
+
     if (record.status === "awaiting_approval") {
       const waiting = { decision: "needs_approval", tier: "owner" } as const;
+      // Call the owner once per purchase. A spoken yes is logged only; the wallet signature below is what authorizes.
+      if (this.#ownerCaller && this.#store.approvalDecisions(input.purchaseId).length === 0) {
+        const voice = await requestOwnerApproval({
+          store: this.#store,
+          caller: this.#ownerCaller,
+          purchaseId: input.purchaseId,
+          quote: input.quote,
+          timeoutMs: this.#voiceTimeoutMs,
+          now: () => input.now,
+          ...(this.#ownerCodeDisplay
+            ? { codeCheck: { show: this.#ownerCodeDisplay, ...(this.#ownerCodeRegister ? { register: this.#ownerCodeRegister } : {}) } }
+            : {}),
+        });
+        if (voice.outcome !== "awaiting_signature") {
+          const rejected = { decision: "reject", reason: voice.outcome === "denied" ? "owner declined the purchase" : "owner did not approve in time" } as const;
+          return { status: "rejected", reason: rejected.reason, decision: rejected, explanation: explainDecision({ decision: rejected, quote: input.quote }) };
+        }
+      }
       if (!input.ownerSignature) {
         return {
           status: "awaiting_approval",
