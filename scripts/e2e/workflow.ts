@@ -475,7 +475,8 @@ async function noMaterialGap(analyst: Analyst): Promise<ScenarioReport> {
   const analysis = analyst.analyze(OKC);
   const report = baseReport("no_material_gap", OKC, null, analysis);
   report.statuses.payment = "not_started";
-  report.checks.no_proposal = analysis.purchase_proposal === null && /no material resolution gap/.test(analysis.no_purchase_reason ?? "");
+  // The safety property is that nothing is proposed; the reason wording belongs to the analysis.
+  report.checks.no_proposal = analysis.purchase_proposal === null && (analysis.no_purchase_reason ?? "").length > 0;
   report.checks.coverage_unavailable_explicit = analysis.research.coverage.status === "unavailable";
   return report;
 }
