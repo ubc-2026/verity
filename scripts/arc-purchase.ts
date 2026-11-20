@@ -4,13 +4,14 @@
  *
  * Live: Arc Testnet RPC, USDC EIP-3009 settlement through the self-hosted
  * testnet facilitator, durable SQLite records in .verity/payments.sqlite.
- * DEMO FIXTURE: the merchant is an in-process fixture serving the labeled demo
- * artifact (the merchant workstream owns the real HTTP merchant).
+ * The buyer accepts the merchant's DeliveryReceiptV1 into the same database
+ * the QuickNode ledger reads. Set VERITY_NWS_EVIDENCE_FILE to sell the captured
+ * NWS document; otherwise the merchant serves the labeled demo excerpt.
  *
  * Reads VERITY_PAYER_PRIVATE_KEY and VERITY_MERCHANT_PRIVATE_KEY from the
  * environment or .env.arc-testnet. Optional: ARC_RPC_URL, VERITY_DB.
  */
-import { existsSync, mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { createPublicClient, createWalletClient, formatUnits, http, type Hex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -19,11 +20,13 @@ import { ARC_TESTNET } from "../src/payments/arc.ts";
 import { SelfHostedArcFacilitator, SettlementError, USDC_EIP3009_ABI, viemArcChain } from "../src/payments/arcFacilitator.ts";
 import { buildResearchRequest, type CatalogItem } from "../src/payments/buyer.ts";
 import type { MerchantConfig, PaidRequest, SavedQuote } from "../src/payments/merchant.ts";
+import { acceptDelivery, RECEIPT_HEADER } from "../src/payments/deliveryReceipt.ts";
 import { deliverPaidRequest, MerchantDeliveryStore } from "../src/payments/merchantDelivery.ts";
 import { authorizeStoredPurchase, type PaymentSigner } from "../src/payments/paymentService.ts";
 import { parseQuote } from "../src/payments/quote.ts";
 import { hashContent } from "../src/payments/researchRequest.ts";
 import { PaymentStore } from "../src/payments/store.ts";
+import { ReconciliationLedger } from "../src/reconciliation/ledger.ts";
 import { DEMO_RESPONSE_TEXT } from "../test/fixtures/demoVector.ts";
 
 if (existsSync(".env.arc-testnet")) process.loadEnvFile(".env.arc-testnet");
@@ -41,7 +44,7 @@ const USDC_EIP3009_ABI_FULL = [
   { type: "function", name: "DOMAIN_SEPARATOR", stateMutability: "view", inputs: [], outputs: [{ type: "bytes32" }] },
 ] as const;
 
-console.log("== Arc Testnet purchase (merchant is a labeled DEMO FIXTURE; settlement is live) ==");
+console.log("== Arc Testnet purchase (settlement is live) ==");
 console.log(`rpc ${rpcUrl}`);
 
 // 1. Preflight: chain, token domain, keys, funding.
@@ -77,16 +80,28 @@ if (blockers.length > 0) {
   process.exit(2);
 }
 
-// 2. DEMO FIXTURE merchant: catalog, saved quote, artifact.
+// 2. Merchant artifact. VERITY_NWS_EVIDENCE_FILE serves the captured NWS document.
+//    Without it, the script sells the labeled demo resolution excerpt.
 const now = Math.floor(Date.now() / 1000);
 const purchaseId = process.env.VERITY_PURCHASE_ID ?? `purchase-arc-${now}`;
-const artifact = new TextEncoder().encode(DEMO_RESPONSE_TEXT);
+const evidenceFile = process.env.VERITY_NWS_EVIDENCE_FILE;
+const artifact = evidenceFile ? new Uint8Array(readFileSync(evidenceFile)) : new TextEncoder().encode(DEMO_RESPONSE_TEXT);
 const contentHash = hashContent(artifact);
-const parameters = { contractId: "demo-contract-001", evidenceType: "resolution_source" };
+const nws = evidenceFile ? JSON.parse(new TextDecoder().decode(artifact)) as { label?: string; station?: string; date?: string; gap_type?: string } : null;
+if (nws && (nws.label !== "LIVE" || nws.gap_type !== "settlement_source_version" || !nws.station || !nws.date)) {
+  console.log("\nBLOCKED. VERITY_NWS_EVIDENCE_FILE must be a LIVE settlement-version document with station and date.");
+  process.exit(2);
+}
+const contractId = process.env.VERITY_CONTRACT_ID ?? (nws ? "GEMI-WXHIGH-NYC-2611210459-66TO67" : "demo-contract-001");
+const parameters = nws
+  ? { contractId, evidenceType: "settlement_source_version" }
+  : { contractId, evidenceType: "resolution_source" };
+const catalogParameters = nws ? { station: nws.station!, date: nws.date! } : undefined;
+console.log(nws ? `artifact LIVE NWS document ${evidenceFile} station=${nws.station} date=${nws.date}` : "artifact DEMO FIXTURE resolution excerpt");
 const item: CatalogItem = {
-  catalogItemId: "resolution-source-excerpt-v1",
+  catalogItemId: nws ? "cat-nws-cli-settlement-version-v1" : "resolution-source-excerpt-v1",
   merchantId: "verity-demo-merchant",
-  resourceUrl: "https://merchant.example/evidence/resolution-source",
+  resourceUrl: nws ? "https://merchant.example/evidence/nws-cli-settlement" : "https://merchant.example/evidence/resolution-source",
   method: "POST",
   contentType: "application/json",
   chainId: ARC_TESTNET.chainId,
@@ -94,9 +109,9 @@ const item: CatalogItem = {
   payTo: merchant!.address,
   maxAmount: 100_000n,
   price: AMOUNT,
-  evidenceType: "resolution_source",
+  evidenceType: parameters.evidenceType,
   affects: "resolution_risk",
-  requiredParameters: [],
+  requiredParameters: nws ? ["station", "date"] : [],
 };
 const savedQuote: SavedQuote = {
   quoteId: `quote-${purchaseId}`,
@@ -114,6 +129,7 @@ const savedQuote: SavedQuote = {
   amount: AMOUNT.toString(),
   expiresAt: now + 600,
   buyerSessionId: "session-arc-demo",
+  ...(catalogParameters ? { catalogParameters } : {}),
 };
 const merchantConfig: MerchantConfig = {
   origin: "https://merchant.example",
@@ -137,6 +153,7 @@ const request = buildResearchRequest({
   purchaseId,
   payer: payer!.address,
   now,
+  ...(catalogParameters ? { catalogParameters } : {}),
 });
 const first = store.reserveAndRecord({ missionId: "mission-arc-demo", request, now });
 console.log(`\npurchase ${purchaseId}  reserved=${store.reservation(purchaseId)?.status}  nonce=${first.record.nonce}`);
@@ -165,7 +182,7 @@ const facilitator = new SelfHostedArcFacilitator(viemArcChain(publicClient as ne
 });
 const paidRequest: PaidRequest = {
   method: "POST",
-  target: "/evidence/resolution-source",
+  target: nws ? "/evidence/nws-cli-settlement" : "/evidence/resolution-source",
   body: new TextEncoder().encode(JSON.stringify(parameters)),
   bindingHeader: paid.bindingHeader,
   buyerSessionId: savedQuote.buyerSessionId,
@@ -210,7 +227,30 @@ if (result.status !== 200) {
   process.exit(1);
 }
 const receipt = lastReceipt!;
-store.recordSettlement(purchaseId, receipt.txHash, Math.floor(Date.now() / 1000));
+const settledAt = Math.floor(Date.now() / 1000);
+store.recordSettlement(purchaseId, receipt.txHash, settledAt);
+const ledger = new ReconciliationLedger(store);
+const accepted = await acceptDelivery({
+  response: { body: result.body, receiptHeader: result.headers[RECEIPT_HEADER] },
+  trusted: { merchantId: item.merchantId, receiptSigner: merchant!.address },
+  request,
+  expectedTxHash: receipt.txHash,
+  store: ledger,
+  now: settledAt,
+});
+if (!accepted.accepted) {
+  console.log(`\nBUYER REJECTED THE RECEIPT: ${accepted.reason}`);
+  process.exit(1);
+}
+writeFileSync(".verity/last-arc-purchase.json", JSON.stringify({
+  purchaseId,
+  txHash: receipt.txHash,
+  blockNumber: Number(receipt.blockNumber),
+  chainId: ARC_TESTNET.chainId,
+  contractId,
+  evidenceFile: evidenceFile ?? null,
+  receiptOutcome: accepted.outcome.kind,
+}, null, 2) + "\n");
 
 // 5. Resubmitting the same paid request replays the stored receipt and settles nothing.
 const replay = await deliverPaidRequest(paidRequest, deps);
@@ -227,6 +267,7 @@ purchaseId     ${purchaseId}
 txHash         ${receipt.txHash}
 explorer       ${ARC_TESTNET.explorer}/tx/${receipt.txHash}
 receipt        status=${receipt.status} block=${receipt.blockNumber} gasUsed=${receipt.gasUsed} AuthorizationUsed(payer,nonce)=${receipt.authorizationUsedLog} Transfer(payer->merchant,50000)=${receipt.transferLog}
+buyer          ${accepted.outcome.kind}
 store          authorization=${stored.status} reservation=${store.reservation(purchaseId)?.status}
 payer USDC     ${formatUnits(payerBalanceBefore, 6)} -> ${formatUnits(payerBalanceAfter, 6)}
 retry          ${reuseOk ? "reused original authorization (1 signature)" : "FAILED"}

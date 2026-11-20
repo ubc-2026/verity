@@ -35,6 +35,20 @@ def _record(decision_log: Optional[list[str]], msg: str) -> None:
         decision_log.append(msg)
 
 
+def approve_nws_item(catalog: dict[str, Any], contract_id: str, rail: str) -> dict[str, Any]:
+    """Bind the existing NWS item on this rail to one live contract. No new item or price."""
+    item_id = ("cat-nws-cli-settlement-version-nano-v1" if rail == "circle-gateway-batched"
+               else "cat-nws-cli-settlement-version-v1")
+    approved = None
+    for item in catalog.get("items", []):
+        if item.get("id") == item_id:
+            item["live_contract_id"] = contract_id
+            approved = item
+    if approved is None:
+        raise ValueError(f"catalog has no {item_id}")
+    return approved
+
+
 def _catalog_match(ctx: FixtureContext, ra: RiskAnalysisV1, gap_type: str) -> Optional[dict[str, Any]]:
     """First allowlisted item that answers the gap on the requested payment rail."""
     allow = set(ctx.catalog["merchant_allowlist"])

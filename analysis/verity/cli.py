@@ -18,16 +18,39 @@ from pathlib import Path
 from typing import Any
 
 from .analysis import get_risk_analysis
-from .fixtures import FixedClock, FixtureContext, fmt_utc
+from .fixtures import FIXTURE_DIR, FixedClock, FixtureContext, fmt_utc
 from .live import analyze_live
-from .proposals import generate_purchase_request
+from .proposals import approve_nws_item, generate_purchase_request
 from .reassess import reassess
+from .research import NWS_CLINYC_URL, NWS_CLISFO_URL, _fetch_page, live_settlement_document
 from .schemas import RiskAnalysisV1
 from .trends import research_market
 
 
 def _emit(value: Any) -> None:
     sys.stdout.buffer.write(json.dumps(value, indent=2, ensure_ascii=False).encode("utf-8") + b"\n")
+
+
+def capture_evidence(event: str, outcome: str, out: Path) -> dict[str, Any]:
+    """Fetch the public NWS page and write a LIVE document quoted from it."""
+    from .proposals import _weather_market_params
+
+    ra, ctx = analyze_live(event, outcome)
+    record = ctx.markets[ra.contract_id]
+    params = _weather_market_params(record.get("event_ticker"))
+    if not params:
+        raise SystemExit("this event is not an NYC or SFO daily-high market, so there is no NWS report to capture")
+    url = NWS_CLINYC_URL if "NYC" in params["station"] else NWS_CLISFO_URL
+    text, problem = _fetch_page(url)
+    if problem or not text:
+        raise SystemExit(f"NWS report not read: {problem or 'empty'}")
+    try:
+        doc = live_settlement_document(text, station=params["station"], date=params["date"], source_url=url)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(doc, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    return {"wrote": str(out), "contract_id": record["contract_id"], "station": doc["station"], "date": doc["date"], "settling_issuance": doc["settling_issuance"]}
 
 
 def analyze(contract_id: str, scenario: str | None, rail: str = "arc-eip3009") -> dict[str, Any]:
@@ -78,6 +101,11 @@ def main(argv: list[str] | None = None) -> int:
     live.add_argument("--outcome", required=True)
     live.add_argument("--rail", default="circle-gateway-batched", choices=["arc-eip3009", "circle-gateway-batched"])
     live.add_argument("--evidence-catalog", type=Path, help="Trusted operator catalog with evidence approved for exact live contract IDs")
+    live.add_argument("--approve-nws", action="store_true", help="Bind the existing NWS catalog item to this exact contract")
+    capture = sub.add_parser("capture-evidence")
+    capture.add_argument("--event", required=True)
+    capture.add_argument("--outcome", required=True)
+    capture.add_argument("--out", type=Path, required=True)
     reassess_command = sub.add_parser("reassess")
     reassess_command.add_argument("--evidence-catalog", type=Path, help="Trusted operator catalog used for the live proposal")
     args = parser.parse_args(argv)
@@ -88,7 +116,12 @@ def main(argv: list[str] | None = None) -> int:
         ctx.payment_rail = args.rail
         if args.evidence_catalog:
             ctx.catalog = json.loads(args.evidence_catalog.read_text(encoding="utf-8"))
+        elif args.approve_nws:
+            ctx.catalog = json.loads((FIXTURE_DIR / "catalog_v1.json").read_text(encoding="utf-8"))
+            approve_nws_item(ctx.catalog, ra.contract_id, args.rail)
         _emit(_analysis_result(ra, ctx))
+    elif args.command == "capture-evidence":
+        _emit(capture_evidence(args.event, args.outcome, args.out))
     else:
         catalog = json.loads(args.evidence_catalog.read_text(encoding="utf-8")) if args.evidence_catalog else None
         _emit(reassess_from(json.loads(sys.stdin.buffer.read().decode("utf-8")), catalog))

@@ -1,6 +1,7 @@
 """Free research uses injected document text. No network and no model."""
 from verity import FixtureContext, generate_purchase_request, get_risk_analysis
-from verity.research import NWS_CLINYC_URL, named_issuance, research_free_check
+from verity.proposals import approve_nws_item
+from verity.research import NWS_CLINYC_URL, live_settlement_document, named_issuance, research_free_check
 from verity.schemas import EvidenceGap, PurchaseProposalV1
 
 NYC = "fx-nyc-high-20261118"
@@ -196,3 +197,42 @@ def test_fixture_scenario_wins_over_the_model():
     proposal = generate_purchase_request(get_risk_analysis(NYC, ctx), ctx, [])
     assert called == []
     assert proposal is not None and proposal.catalog_item_id == "cat-nws-cli-settlement-version-v1"
+
+
+def test_live_document_quotes_the_report_and_does_not_invent_an_issuance():
+    report = "CLINYC THE CENTRAL PARK NY CLIMATE SUMMARY FOR NOVEMBER 20 2026. MAXIMUM 61."
+    doc = live_settlement_document(report, station="Central Park, NY (CLINYC)", date="2026-11-20", source_url=NWS_CLINYC_URL)
+    assert doc["label"] == "LIVE"
+    assert doc["summary"] in " ".join(report.split())
+    assert doc["settling_issuance"] == "unknown"
+    assert doc["corrections_count"] is True
+
+
+def test_live_document_copies_a_named_issuance():
+    report = "CLIMATE SUMMARY FOR NOVEMBER 20 2026. Settlement uses the final issuance of the daily report. Later corrections do not count."
+    doc = live_settlement_document(report, station="Central Park, NY (CLINYC)", date="2026-11-20", source_url=NWS_CLINYC_URL)
+    assert doc["settling_issuance"] == "final issuance"
+    assert doc["summary"] in " ".join(report.split())
+    assert doc["corrections_count"] is False
+
+
+def test_live_document_refuses_a_different_date():
+    report = "CLIMATE SUMMARY FOR NOVEMBER 18 2026."
+    try:
+        live_settlement_document(report, station="Central Park, NY (CLINYC)", date="2026-11-20", source_url=NWS_CLINYC_URL)
+    except ValueError as error:
+        assert "2026-11-20" in str(error)
+    else:
+        raise AssertionError("a report for another date was accepted")
+
+
+def test_approve_nws_binds_only_the_existing_item():
+    catalog = {"items": [
+        {"id": "cat-nws-cli-settlement-version-v1", "price_base_units": "50000"},
+        {"id": "cat-nws-cli-settlement-version-nano-v1", "price_base_units": "1000"},
+    ]}
+    item = approve_nws_item(catalog, "GEMI-WXHIGH-NYC-1", "arc-eip3009")
+    assert item["id"] == "cat-nws-cli-settlement-version-v1"
+    assert item["live_contract_id"] == "GEMI-WXHIGH-NYC-1"
+    assert item["price_base_units"] == "50000"
+    assert "live_contract_id" not in catalog["items"][1]

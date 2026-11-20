@@ -128,6 +128,7 @@ section{border-top:1px solid var(--border-hairline)}
 .mobile-menu a.link{display:block;padding:12px 0;border-bottom:1px solid var(--border-hairline);color:var(--text-primary);text-decoration:none}
 .mobile-menu .btn{width:100%;margin-top:12px}
 @media (max-width:1180px){.nav-cta .btn.ghost{display:none}}
+@media (max-width:1100px){.nav-inner{gap:12px}.nav-links{gap:0}.nav-links a{padding:8px 6px}}
 @media (max-width:1024px){.nav-links,.nav-cta{display:none}.menu-btn{display:inline-flex}.mobile-menu.open{display:block}}
 
 /* Hero */
@@ -1048,6 +1049,8 @@ window.__lpField=(function(){
       <a href="#terminal">Terminal</a>
       <a href="#stack">4-layer stack</a>
       <a href="#walkthrough">Live walkthrough</a>
+      <a href="#arc-receipt">Arc receipt</a>
+      <a href="#voice-approval">Voice</a>
       <a href="#modules">Modules</a>
       <a href="#reconciler">Reconciler</a>
       <a href="#ledger">Ledger</a>
@@ -1062,6 +1065,8 @@ window.__lpField=(function(){
     <a class="link" href="#terminal">Terminal</a>
     <a class="link" href="#stack">4-layer stack</a>
     <a class="link" href="#walkthrough">Live walkthrough</a>
+    <a class="link" href="#arc-receipt">Arc receipt</a>
+    <a class="link" href="#voice-approval">Voice</a>
     <a class="link" href="#modules">Modules</a>
     <a class="link" href="#reconciler">Reconciler</a>
     <a class="link" href="#ledger">Ledger</a>
@@ -1216,6 +1221,41 @@ window.__lpField=(function(){
         <div class="arch-tip" id="archTip" aria-live="polite">Hover or tab to a node to see what it does.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Recorded Arc purchase and the owner-call tier. Separate from the simulation above. -->
+<section class="section" id="arc-receipt" aria-labelledby="arcTitle">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">Recorded on Arc</span><h2 id="arcTitle">One testnet purchase, already settled</h2><p>Paid on 20 Nov 2026 for the Central Park climate file. The walkthrough above cannot send this payment.</p></div>
+    <div class="panel">
+      <div class="panel-head"><h3>purchase-arc-1795164394</h3><span class="real">ARC TESTNET · RECONCILED</span></div>
+      <div class="stage-body">
+        <dl class="kv">
+          <dt>Contract</dt><dd>GEMI-WXHIGH-NYC-2611210459-66TO67 · NYC high, 66°F to 67°F</dd>
+          <dt>Evidence</dt><dd>NWS CLINYC climate report, Central Park, date 2026-11-20. Catalog item cat-nws-cli-settlement-version-v1.</dd>
+          <dt>Amount</dt><dd>0.05 USDC (50000 base units)</dd>
+          <dt>Chain</dt><dd>Arc Testnet, chain id 5042002, block 73161697</dd>
+          <dt>Transaction</dt><dd><a href="https://explorer.testnet.arc.io/tx/0x65d6a61ac9a7d07365827488a1100204bc868b306a4a56d426ad97660213c46f">0x65d6a61ac9a7d07365827488a1100204bc868b306a4a56d426ad97660213c46f</a></dd>
+          <dt>Payer</dt><dd>0xB168D8716aD707A3a3d816F713931Cc8C7Cec8A8</dd>
+          <dt>Merchant</dt><dd>0xD88E833EA64B98772c60510FE64299Cb929C8F2a</dd>
+          <dt>QuickNode</dt><dd>Stream ad1cc78e-d7c4-473f-a5f8-64ef43b869b4 delivered block 73161697 to the webhook (HTTP 200). Ledger outcome reconciled.</dd>
+          <dt>Score</dt><dd>Unchanged. The report does not name which issuance settles the market.</dd>
+        </dl>
+        <a class="btn primary sm" href="https://explorer.testnet.arc.io/tx/0x65d6a61ac9a7d07365827488a1100204bc868b306a4a56d426ad97660213c46f">View on the Arc explorer</a>
+      </div>
+    </div>
+    <section class="panel" id="voice-approval" aria-labelledby="voiceTitle" style="margin-top:24px">
+      <div class="panel-head"><h3 id="voiceTitle">Owner call, 0.51 to 2.00 USDC</h3><span class="real">ELEVENLABS · VOICE DOES NOT PAY</span></div>
+      <div class="stage-body">
+        <p>The 0.05 USDC receipt above did not call anyone. That amount is automatic. From 0.51 to 2.00 USDC, Verity phones the owner through the ElevenLabs agent. The agent asks for a 4-digit code shown only on the owner’s screen, then asks yes or no.</p>
+        <dl class="kv">
+          <dt>Where it runs</dt><dd>BuyerService, when a purchase is awaiting approval and the ElevenLabs settings are set. The walkthrough buttons above stay simulated and cannot place this call.</dd>
+          <dt>What a yes means</dt><dd>Logged as verbal_yes. The purchase still waits for the owner’s wallet signature. A no, a wrong code, or no answer denies it.</dd>
+          <dt>Try the call</dt><dd>On a machine with the agent configured, <span class="mono">npm run voice:test -- --live</span> places one test call about a fake 0.80 USDC purchase. It does not pay.</dd>
+        </dl>
+      </div>
+    </section>
   </div>
 </section>
 
