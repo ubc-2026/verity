@@ -33,6 +33,8 @@ market fixture (Gemini event, instrument, terms, snapshot time)
   -> overdue events + read-only feed   checked against a contract model of the Grok Bot routine
 ```
 
+**Circle Gateway rail (opt-in):** `npm run e2e:nano` runs the same contract through a 0.001 USDC nanopayment with Gateway mocked. See [Circle Gateway nanopayments](payments/circle-gateway.md).
+
 The transport is Verity's own (`X-Verity-Binding`, `X-Verity-Payment`, `X-Verity-Receipt`, a JSON `402` quote). It is not standard x402, and x402 interoperability has not been built or tested.
 
 ## Scenarios

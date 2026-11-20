@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Verity: an AI agent that buys evidence to clarify how prediction markets resolve.",
   "scripts": {
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --test test/*.test.ts test/*.test.mjs",
+    "test:worker": "node --test test/workers/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "fixture": "node scripts/fixture.ts",
     "arc:keygen": "node scripts/arc-keygen.ts",
@@ -13,7 +14,11 @@
     "quicknode:token": "node scripts/quicknode-token.ts",
     "webhook:serve": "node scripts/webhook-server.ts",
     "delivery:demo": "node scripts/delivery-demo.ts",
-    "e2e": "node scripts/e2e.ts"
+    "e2e": "node scripts/e2e.ts",
+    "e2e:nano": "node scripts/e2e-nano.ts",
+    "arc:gateway": "node scripts/arc-gateway.ts",
+    "app": "node scripts/app-server.ts",
+    "voice:test": "node scripts/voice-test.ts"
   },
   "repository": {
     "type": "git",
@@ -26,13 +31,20 @@
   },
   "homepage": "https://github.com/ubc-2026/verity#readme",
   "dependencies": {
+    "@circle-fin/x402-batching": "4.0.0",
     "@humanwhocodes/momoa": "^3.3.13",
+    "@x402/core": "2.31.0",
+    "@x402/evm": "2.31.0",
     "canonicalize": "^5.1.0",
+    "postgres": "4.1.1",
     "viem": "^2.57.13",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.17",
     "@types/node": "^26.6.6",
+    "esbuild": "^0.25.12",
+    "miniflare": "^4.20260730.0",
     "typescript": "^7.0.2"
   },
   "private": true,

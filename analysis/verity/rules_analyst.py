@@ -105,14 +105,17 @@ def _gaps(source: dict[str, Any], ambiguity: dict[str, Any], hay: str) -> list[d
 
 
 # Free checks research.py can run for a live gap, by event-ticker prefix and gap type.
-_LIVE_FREE_CHECKS = {("WXHIGH-NYC", "settlement_source_version"): "nyc-settlement-version"}
+_LIVE_FREE_CHECKS = {
+    ("WXHIGH-NYC", "settlement_source_version"): "nyc-settlement-version",
+    ("WXHIGH-SFO", "settlement_source_version"): "sfo-settlement-version",
+}
 
 
 def _attach_free_checks(record: dict[str, Any], gaps: list[dict[str, Any]]) -> None:
     ticker = record.get("event_ticker") or ""
     for g in gaps:
         for (prefix, gap_type), check in _LIVE_FREE_CHECKS.items():
-            if ticker.startswith(prefix) and g["gap_type"] == gap_type:
+            if re.fullmatch(rf"{prefix}-\d{{10}}", ticker) and g["gap_type"] == gap_type:
                 g["free_checks"] = [check]
 
 

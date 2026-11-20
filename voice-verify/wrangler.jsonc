@@ -1,0 +1,10 @@
+{
+  "name": "verity-voice-verify",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-01-01",
+  "workers_dev": true,
+  "keep_vars": true,
+  // Create the namespace with:  npx wrangler kv namespace create VOICE_CHALLENGES   then paste the id here.
+  "kv_namespaces": [{ "binding": "VOICE_CHALLENGES", "id": "1defd362736344ba94f5725f84087f29" }]
+  // Secrets (never in this file):  npx wrangler secret put VOICE_ADMIN_SECRET  and  VOICE_TOOL_SECRET
+}

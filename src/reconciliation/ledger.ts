@@ -1,6 +1,7 @@
 import type { DatabaseSync } from "node:sqlite";
 import { hexToBigInt, type Hex } from "viem";
 import { ARC_TESTNET } from "../payments/arc.ts";
+import { ARC_TESTNET_GATEWAY_WALLET } from "../payments/circleGateway.ts";
 import type { DeliveryAcceptanceStore, DeliveryRecordOutcome, SignedDeliveryReceiptV1 } from "../payments/deliveryReceipt.ts";
 import type { PaymentStore } from "../payments/store.ts";
 
@@ -17,11 +18,41 @@ export interface StreamMatch {
   logs: Array<{ address: Hex; topics: Hex[]; data: Hex; logIndex: Hex }>;
 }
 
+/**
+ * One Circle Gateway batch transaction receipt, as emitted by the same filter.
+ * QuickNode can confirm that the batch transaction succeeded and is final. It cannot
+ * attribute one Gateway transfer inside the batch: that link comes from Circle's transfer record.
+ */
+export interface GatewayBatchMatch {
+  blockNumber: Hex;
+  blockHash: Hex;
+  blockTimestamp: Hex;
+  transactionHash: Hex;
+  to: Hex;
+  status: Hex;
+  logCount: number;
+}
+
 export type ReconcileOutcome =
   | { kind: "settlement_recorded"; purchaseId: string; nonce: Hex }
   | { kind: "settlement_already_recorded"; purchaseId: string; nonce: Hex }
   | { kind: "not_final"; purchaseId: string; nonce: Hex }
-  | { kind: "unmatched_payment" | "mismatch" | "failed_receipt"; nonce: Hex | null; detail: string };
+  | { kind: "unmatched_payment" | "mismatch" | "failed_receipt"; nonce: Hex | null; detail: string }
+  | { kind: "gateway_batch_confirmed" | "gateway_batch_already_confirmed" | "gateway_batch_not_final" | "gateway_batch_refused"; txHash: Hex; detail: string };
+
+export interface GatewayBatchConfirmation {
+  chainId: number;
+  txHash: string;
+  blockNumber: number;
+  blockHash: string;
+  blockTimestamp: number;
+  gatewayWallet: string;
+  logCount: number;
+  status: "success_final";
+  source: string;
+  firstEventId: string;
+  recordedAt: number;
+}
 
 export interface IngestResult {
   eventId: string;
@@ -100,6 +131,19 @@ CREATE TABLE IF NOT EXISTS reconciliation_findings (
   found_at   INTEGER NOT NULL,
   PRIMARY KEY (tx_hash, log_index, kind)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS gateway_batch_confirmations (
+  chain_id        INTEGER NOT NULL,
+  tx_hash         TEXT NOT NULL,
+  block_number    INTEGER NOT NULL,
+  block_hash      TEXT NOT NULL,
+  block_timestamp INTEGER NOT NULL,
+  gateway_wallet  TEXT NOT NULL,
+  log_count       INTEGER NOT NULL,
+  source          TEXT NOT NULL,
+  first_event_id  TEXT NOT NULL REFERENCES webhook_events(event_id),
+  recorded_at     INTEGER NOT NULL,
+  PRIMARY KEY (chain_id, tx_hash)
+) STRICT;
 `;
 
 const topicAddress = (topic: Hex | undefined) => (topic ? (`0x${topic.slice(-40)}`.toLowerCase() as Hex) : null);
@@ -114,12 +158,54 @@ export class ReconciliationLedger implements DeliveryAcceptanceStore {
   readonly #db: DatabaseSync;
   readonly #chainId: number;
   readonly #token: Hex;
+  readonly #gatewayWallet: Hex;
 
-  constructor(store: PaymentStore, chain: { chainId: number; token: Hex } = { chainId: ARC_TESTNET.chainId, token: ARC_TESTNET.usdc }) {
+  constructor(
+    store: PaymentStore,
+    chain: { chainId: number; token: Hex; gatewayWallet?: Hex } = { chainId: ARC_TESTNET.chainId, token: ARC_TESTNET.usdc },
+  ) {
     this.#db = store.database;
     this.#db.exec(SCHEMA);
     this.#chainId = chain.chainId;
     this.#token = chain.token.toLowerCase() as Hex;
+    this.#gatewayWallet = (chain.gatewayWallet ?? ARC_TESTNET_GATEWAY_WALLET).toLowerCase() as Hex;
+  }
+
+  /** QuickNode's confirmation that a Gateway batch transaction succeeded and is final. Batch-level only. */
+  gatewayBatch(txHash: string): GatewayBatchConfirmation | undefined {
+    const row = this.#db.prepare(`SELECT * FROM gateway_batch_confirmations WHERE chain_id = ? AND tx_hash = ?`).get(this.#chainId, txHash.toLowerCase()) as
+      | Record<string, string | number>
+      | undefined;
+    if (!row) return undefined;
+    return {
+      chainId: row.chain_id as number,
+      txHash: row.tx_hash as string,
+      blockNumber: row.block_number as number,
+      blockHash: row.block_hash as string,
+      blockTimestamp: row.block_timestamp as number,
+      gatewayWallet: row.gateway_wallet as string,
+      logCount: row.log_count as number,
+      status: "success_final",
+      source: row.source as string,
+      firstEventId: row.first_event_id as string,
+      recordedAt: row.recorded_at as number,
+    };
+  }
+
+  #confirmGatewayBatch(match: GatewayBatchMatch, eventId: string, finalizedBlock: bigint, now: number, source: string): ReconcileOutcome {
+    const txHash = match.transactionHash.toLowerCase() as Hex;
+    if (String(match.to).toLowerCase() !== this.#gatewayWallet) return { kind: "gateway_batch_refused", txHash, detail: "receipt is not addressed to the GatewayWallet contract" };
+    if (match.status !== "0x1") return { kind: "gateway_batch_refused", txHash, detail: "batch transaction reverted" };
+    if (hexToBigInt(match.blockNumber) > finalizedBlock) return { kind: "gateway_batch_not_final", txHash, detail: `block ${num(match.blockNumber)} is above the finalized height ${finalizedBlock}` };
+    const inserted = this.#db
+      .prepare(
+        `INSERT OR IGNORE INTO gateway_batch_confirmations (chain_id, tx_hash, block_number, block_hash, block_timestamp, gateway_wallet, log_count, source, first_event_id, recorded_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      )
+      .run(this.#chainId, txHash, num(match.blockNumber), match.blockHash.toLowerCase(), num(match.blockTimestamp), this.#gatewayWallet, match.logCount, source, eventId, now);
+    return Number(inserted.changes) === 0
+      ? { kind: "gateway_batch_already_confirmed", txHash, detail: "batch confirmation already recorded" }
+      : { kind: "gateway_batch_confirmed", txHash, detail: `batch transaction succeeded in finalized block ${num(match.blockNumber)}` };
   }
 
   settlement(purchaseId: string): SettlementRecord | undefined {
@@ -238,6 +324,8 @@ export class ReconciliationLedger implements DeliveryAcceptanceStore {
     batchEnd: number | null;
     payload: string;
     matches: StreamMatch[];
+    /** Gateway batch receipts (batch-level confirmation only). */
+    gatewayBatches?: GatewayBatchMatch[];
     finalizedBlock: bigint;
     now: number;
     /** Where the event came from; "quicknode-streams" only for real QuickNode deliveries. */
@@ -250,7 +338,11 @@ export class ReconciliationLedger implements DeliveryAcceptanceStore {
         .prepare(`INSERT OR IGNORE INTO webhook_events (event_id, stream_id, batch_start, batch_end, payload, received_at) VALUES (?, ?, ?, ?, ?, ?)`)
         .run(event.eventId, event.streamId, event.batchStart, event.batchEnd, event.payload, event.now);
       const duplicateEvent = Number(inserted.changes) === 0;
-      const outcomes = event.matches.flatMap((match) => this.#reconcile(match, event.eventId, event.finalizedBlock, event.now, event.source ?? "quicknode-streams"));
+      const source = event.source ?? "quicknode-streams";
+      const outcomes = [
+        ...event.matches.flatMap((match) => this.#reconcile(match, event.eventId, event.finalizedBlock, event.now, source)),
+        ...(event.gatewayBatches ?? []).map((batch) => this.#confirmGatewayBatch(batch, event.eventId, event.finalizedBlock, event.now, source)),
+      ];
       db.exec("COMMIT");
       return { eventId: event.eventId, duplicateEvent, outcomes };
     } catch (error) {

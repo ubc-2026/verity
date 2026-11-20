@@ -66,14 +66,14 @@ export function findPython(analysisDir: string): string {
   throw new Error("No Python 3.11+ with pydantic found. Set VERITY_PYTHON or create analysis/.venv (see analysis/README.md).");
 }
 
-interface AnalyzeOutput {
+export interface AnalyzeOutput {
   research: Record<string, unknown> & { coverage: { status: string }; price_trend: { status: string } };
   risk_analysis: RiskAnalysis;
   purchase_proposal: (Record<string, unknown> & { contract_id: string; evidence_gap_id: string; catalog_item_id: string; evidence_type: string; max_amount_base_units: string; proposal_id: string }) | null;
   no_purchase_reason: string | null;
   decision_log: string[];
 }
-interface RiskAnalysis {
+export interface RiskAnalysis {
   contract_id: string;
   rating: { final_rating: string | null; raw_total: number | null };
   research_action: string;
@@ -81,7 +81,7 @@ interface RiskAnalysis {
   evidence_gaps: { id: string; material: boolean; affects: string }[];
   citations: { id: string }[];
 }
-interface Reassessment {
+export interface Reassessment {
   status: "revised" | "unchanged" | "evidence_rejected";
   reason: string;
   revised: RiskAnalysis;
@@ -89,7 +89,7 @@ interface Reassessment {
   evidence_citation: { id: string; source: string; quote: string } | null;
 }
 
-class Analyst {
+export class Analyst {
   readonly python: string;
   readonly dir: string;
   constructor(python: string, dir: string) {
@@ -106,10 +106,17 @@ class Analyst {
     });
     return JSON.parse(out);
   }
-  analyze(contract: string, scenario?: string): AnalyzeOutput {
-    return this.#run(["analyze", "--contract", contract, ...(scenario ? ["--free-check-scenario", scenario] : [])]) as AnalyzeOutput;
+  analyze(contract: string, scenario?: string, rail?: "arc-eip3009" | "circle-gateway-batched"): AnalyzeOutput {
+    return this.#run([
+      "analyze", "--contract", contract,
+      ...(scenario ? ["--free-check-scenario", scenario] : []),
+      ...(rail ? ["--rail", rail] : []),
+    ]) as AnalyzeOutput;
   }
+  /** Times evidence was handed to the analyst. Scenarios read it to prove rejected evidence never arrives. */
+  reassessCalls = 0;
   reassess(riskAnalysis: RiskAnalysis, body: Uint8Array, provenance: Record<string, string>): Reassessment {
+    this.reassessCalls += 1;
     const input = JSON.stringify({ risk_analysis: riskAnalysis, body_b64: Buffer.from(body).toString("base64"), provenance });
     return this.#run(["reassess"], input) as Reassessment;
   }
@@ -322,6 +329,20 @@ async function verifyAndRecord(world: World, purchaseId: string, attempt: PaidAt
   });
 }
 
+/**
+ * The only route from a delivery to the analyst: evidence that failed buyer verification
+ * returns null and is never passed to reassess. The paid and tampered scenarios share it.
+ */
+function reassessIfVerified(
+  analyst: Analyst,
+  analysis: AnalyzeOutput,
+  proposal: NonNullable<AnalyzeOutput["purchase_proposal"]>,
+  verdict: Awaited<ReturnType<typeof verifyAndRecord>>,
+): Reassessment | null {
+  if (!verdict.accepted) return null;
+  return analyst.reassess(analysis.risk_analysis, verdict.body, provenance(proposal, verdict.receipt, verdict.body));
+}
+
 function provenance(proposal: NonNullable<AnalyzeOutput["purchase_proposal"]>, receipt: SignedDeliveryReceiptV1, body: Uint8Array) {
   const { signature: _sig, ...unsigned } = receipt;
   return {
@@ -341,7 +362,7 @@ function provenance(proposal: NonNullable<AnalyzeOutput["purchase_proposal"]>, r
   };
 }
 
-const summaryOf = (ra: RiskAnalysis) => ({
+export const summaryOf = (ra: RiskAnalysis) => ({
   final_rating: ra.rating.final_rating,
   raw_total: ra.rating.raw_total,
   research_action: ra.research_action,
@@ -428,7 +449,7 @@ async function positive(analyst: Analyst): Promise<ScenarioReport> {
       settlementWebhookStatus: chain.status,
       settleCalls: world.settlement.settleCalls,
     };
-    const reassessed = analyst.reassess(analysis.risk_analysis, accepted.body, provenance(proposal, accepted.receipt, accepted.body));
+    const reassessed = reassessIfVerified(analyst, analysis, proposal, accepted)!;
     report.reassessment = { status: reassessed.status, reason: reassessed.reason, revised: summaryOf(reassessed.revised), changes: reassessed.changes, evidenceCitation: reassessed.evidence_citation };
     report.statuses.analysis = reassessed.status;
     report.checks.assessment_revised = reassessed.status === "revised" && reassessed.changes.some((c) => c.finding === "scores.source" && c.changed);
@@ -454,7 +475,8 @@ async function noMaterialGap(analyst: Analyst): Promise<ScenarioReport> {
   const analysis = analyst.analyze(OKC);
   const report = baseReport("no_material_gap", OKC, null, analysis);
   report.statuses.payment = "not_started";
-  report.checks.no_proposal = analysis.purchase_proposal === null && /no material resolution gap/.test(analysis.no_purchase_reason ?? "");
+  // The safety property is that nothing is proposed; the reason wording belongs to the analysis.
+  report.checks.no_proposal = analysis.purchase_proposal === null && (analysis.no_purchase_reason ?? "").length > 0;
   report.checks.coverage_unavailable_explicit = analysis.research.coverage.status === "unavailable";
   return report;
 }
@@ -497,6 +519,8 @@ async function tamperedDelivery(analyst: Analyst): Promise<ScenarioReport> {
     if (result.status !== "authorized") throw new Error(`unexpected ${result.status}`);
     const attempt = await sendPaid(world, result);
     const verdict = await verifyAndRecord(world, purchaseId, attempt);
+    const callsBefore = analyst.reassessCalls;
+    const reassessed = reassessIfVerified(analyst, analysis, proposal, verdict);
     await world.observeOnChain();
     const record = purchaseRecord(world.store.database, purchaseId, world.feedOptions);
     report.statuses = {
@@ -508,7 +532,7 @@ async function tamperedDelivery(analyst: Analyst): Promise<ScenarioReport> {
     report.delivery = { httpStatus: attempt.status, accepted: verdict.accepted, reason: verdict.accepted ? null : verdict.reason, settleCalls: world.settlement.settleCalls };
     report.checks.tamper_rejected = !verdict.accepted && verdict.code === "content_mismatch";
     report.checks.ledger_shows_paid_delivery_missing = record?.ledgerStatus === "Paid, delivery missing";
-    report.checks.analyst_not_called = true; // the reassess call below is skipped when verification fails
+    report.checks.analyst_not_called = reassessed === null && analyst.reassessCalls === callsBefore;
   } finally {
     await world.close();
   }

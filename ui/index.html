@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Verity run console</title>
+<meta name="description" content="Pick a Gemini Exchange market, run Verity's analysis, step through an evidence purchase, and audit the run, purchase, receipt, Circle transfer and Arc batch.">
+<meta name="theme-color" content="#090C10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Tokens and components follow the website's design system (site/DESIGN.md on the website branch). */
+:root{
+  --bg-void:#090C10;--bg-surface:#10151E;--bg-elevated:#161D29;
+  --border-hairline:#1E2738;--border-strong:#2A3550;
+  --accent-blue:#2E5CFF;--accent-blue-text:#7C9BFF;
+  --signal-yes:#00C853;--signal-no:#FF3B30;--signal-no-text:#FF6B62;--signal-warn:#F59E0B;
+  --text-primary:#F1F5F9;--text-muted:#8B9BB4;
+  --font-sans:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --radius-inner:4px;--radius-element:8px;--ease-standard:cubic-bezier(0.24,1,0.4,1);
+  --margin:32px;--gutter:24px;--max:1440px;
+}
+@media (max-width:1024px){:root{--margin:24px;--gutter:20px}}
+@media (max-width:640px){:root{--margin:16px;--gutter:12px}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg-void);color:var(--text-primary);font-family:var(--font-sans);font-size:1rem;line-height:1.55;overflow-x:hidden}
+a{color:var(--accent-blue-text);text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent-blue-text);outline-offset:3px;border-radius:2px}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(1.6rem,2.8vw,2.4rem);line-height:1.1;letter-spacing:-.02em;font-weight:600}
+h2{font-size:1.25rem;letter-spacing:-.01em;font-weight:600}
+h3{font-size:1.05rem;line-height:1.3;letter-spacing:-.01em;font-weight:600}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--margin)}
+.mono,.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--text-muted)}
+.small{font-size:.875rem}
+.label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;color:var(--text-muted);font-weight:500;text-transform:uppercase}
+header.top{border-bottom:1px solid var(--border-hairline);padding:20px 0}
+header.top .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--radius-element);border:1px solid var(--border-strong);background:var(--bg-elevated);color:var(--text-primary);font-weight:500;font-size:.9rem;cursor:pointer;transition:background-color 150ms var(--ease-standard),border-color 150ms var(--ease-standard);white-space:nowrap}
+.btn:hover{border-color:var(--accent-blue-text);background:#1b2433}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.primary{background:var(--accent-blue);border-color:var(--accent-blue);color:#fff}
+.btn.sm{min-height:32px;padding:0 10px;font-size:.8rem}
+.btn[aria-pressed="true"]{border-color:var(--accent-blue);background:rgba(46,92,255,.16)}
+.btn[aria-busy="true"]{cursor:progress;opacity:.7}
+input[type=text],input[type=password],select{background:var(--bg-elevated);border:1px solid var(--border-strong);border-radius:var(--radius-inner);min-height:40px;padding:0 10px;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:.7rem;font-weight:500;padding:1px 7px;border-radius:var(--radius-inner);border:1px solid currentColor;line-height:1.5;white-space:nowrap}
+.tag.ok{color:var(--signal-yes)}.tag.no{color:var(--signal-no-text)}.tag.warn{color:var(--signal-warn)}.tag.info{color:var(--accent-blue-text)}.tag.neutral{color:var(--text-muted)}
+.panel{background:var(--bg-surface);border:1px solid var(--border-hairline);border-radius:var(--radius-element);min-width:0}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border-hairline)}
+.panel-body{padding:16px;display:grid;gap:12px}
+.grid{display:grid;gap:var(--gutter);grid-template-columns:repeat(12,minmax(0,1fr));padding:24px 0}
+.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media (max-width:1024px){.grid>*{grid-column:span 12!important}}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.list{display:grid;gap:6px;max-height:420px;overflow:auto}
+.item{display:grid;gap:2px;text-align:left;padding:10px 12px;border:1px solid var(--border-hairline);border-radius:var(--radius-inner);background:transparent;cursor:pointer;width:100%}
+.item:hover{background:var(--bg-elevated)}
+.item[aria-pressed="true"]{border-color:var(--accent-blue);background:rgba(46,92,255,.10)}
+.contracts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+dl.kv{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:6px 14px;margin:0}
+dl.kv dt{color:var(--text-muted);font-size:.85rem}
+dl.kv dd{margin:0;min-width:0;overflow-wrap:anywhere;font-size:.9rem}
+.price{display:grid;gap:6px;padding:12px;border:1px solid var(--border-hairline);border-radius:var(--radius-inner)}
+.price .v{font-family:var(--font-mono);font-size:1.6rem;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--border-hairline);vertical-align:top}
+th{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);font-weight:500;letter-spacing:.04em}
+.scroll{overflow-x:auto}
+.cite{border-left:2px solid var(--border-strong);padding:4px 10px}
+.cite q{display:block;color:var(--text-primary);font-size:.88rem;quotes:none;white-space:pre-wrap}
+.steps{display:grid;gap:10px}
+.steps .group{display:grid;gap:6px}
+.toast{position:fixed;right:16px;bottom:16px;max-width:min(520px,calc(100vw - 32px));padding:12px 14px;border-radius:var(--radius-element);background:var(--bg-elevated);border:1px solid var(--signal-no-text);color:var(--text-primary);display:none;z-index:10}
+.toast.show{display:block}
+.empty{color:var(--text-muted);font-size:.9rem;padding:8px 0}
+.timeline li{margin:0 0 6px}
+.timeline{margin:0;padding-left:18px;font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="label">Verity · Issue #8 integration</div>
+      <h1>Run console</h1>
+    </div>
+    <div class="row">
+      <span class="tag info" title="Market reads and live analysis use public sources only">◉ LIVE READ-ONLY markets</span>
+      <span class="tag warn" title="Every payment step here uses fixture keys, a fixture merchant and a fixture Circle Gateway">! FIXTURE payments</span>
+      <span id="role" class="tag neutral">visitor</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <!-- Market selection -->
+    <section class="panel c5" aria-labelledby="pick-h">
+      <div class="panel-head"><h2 id="pick-h">1 · Pick a market</h2>
+        <div class="tabs" role="tablist">
+          <button class="btn sm" role="tab" id="tab-fixture" aria-pressed="true">Fixture</button>
+          <button class="btn sm" role="tab" id="tab-live" aria-pressed="false">Live Gemini Exchange</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <p id="market-note" class="muted small"></p>
+        <div id="markets" class="list" aria-live="polite"></div>
+        <div class="row">
+          <label class="small">Rail <select id="rail"></select></label>
+          <label class="small">Scenario <select id="scenario"></select></label>
+        </div>
+        <p id="selection" class="small muted">No market selected.</p>
+        <div class="row"><button id="start" class="btn primary" disabled>Run analysis</button></div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="panel c7" aria-labelledby="res-h">
+      <div class="panel-head"><h2 id="res-h">2 · Results</h2><span id="run-label" class="tag neutral">no run</span></div>
+      <div class="panel-body" id="results"><p class="empty">Start a run to see the analysis, risk, citations, prices and sources.</p></div>
+    </section>
+
+    <!-- Operator steps -->
+    <section class="panel c4" aria-labelledby="ops-h">
+      <div class="panel-head"><h2 id="ops-h">3 · Evidence purchase</h2></div>
+      <div class="panel-body">
+        <div class="row">
+          <input id="token" type="password" autocomplete="off" placeholder="Operator token (kept in this tab only)" aria-label="Operator token" style="flex:1">
+          <button id="signin" class="btn sm">Use token</button>
+        </div>
+        <p class="muted small">Steps call the app server's operator API. Payments use fixture keys and a fixture Circle Gateway; nothing reaches a real wallet or chain.</p>
+        <div id="steps" class="steps"><p class="empty">Start a run first.</p></div>
+      </div>
+    </section>
+
+    <!-- Audit -->
+    <section class="panel c8" aria-labelledby="aud-h">
+      <div class="panel-head"><h2 id="aud-h">4 · Audit</h2><span class="tag warn">! FIXTURE payment evidence</span></div>
+      <div class="panel-body" id="audit"><p class="empty">The audit links the run, purchase, signed receipt, Circle transfer, Arc batch and QuickNode confirmation once a quote exists.</p></div>
+    </section>
+
+    <section class="panel c12" aria-labelledby="ledger-h">
+      <div class="panel-head"><h2 id="ledger-h">Audit ledger</h2><button id="reload-audit" class="btn sm">Refresh</button></div>
+      <div class="panel-body scroll" id="ledger"><p class="empty">No purchases yet.</p></div>
+    </section>
+
+    <section class="panel c12" aria-labelledby="tl-h">
+      <div class="panel-head"><h2 id="tl-h">Timeline</h2></div>
+      <div class="panel-body" id="timeline"><p class="empty">No run yet.</p></div>
+    </section>
+  </div>
+</main>
+<div id="toast" class="toast" role="alert"></div>
+
+<script>
+"use strict";
+const state = { token: null, config: null, tab: "fixture", fixture: [], live: null, pick: null, run: null };
+const $ = (id) => document.getElementById(id);
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const short = (h) => (typeof h === "string" && h.length > 22 ? `${h.slice(0, 10)}…${h.slice(-6)}` : h);
+const hash = (h, fixture = true) => (h ? `<span class="mono" title="${esc(h)}">${esc(short(h))}</span>${fixture ? ' <span class="tag warn">FIXTURE</span>' : ""}` : unavailable("not yet"));
+const unavailable = (why) => `<span class="tag neutral">— unavailable</span> <span class="muted small">${esc(why)}</span>`;
+const GLYPH = { ok: "✓", no: "✕", warn: "!", info: "◉", neutral: "…" };
+const tag = (kind, text) => `<span class="tag ${kind}">${GLYPH[kind]} ${esc(text)}</span>`;
+const stateKind = (s) => (/^(verified|confirmed|completed|batch_settled|reconciled|accepted|fresh|approved|allowed|issued|spent|abstain|unchanged|changed|revised)/.test(s) ? "ok" : /(reject|refus|fail|expired|mismatch|tamper)/.test(s) ? "no" : /(pending|wait|request|needs|unconfirmed|unknown|submitted|received|batched|ready)/.test(s) ? "warn" : "neutral");
+
+function toast(message) {
+  const t = $("toast");
+  t.textContent = message;
+  t.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => t.classList.remove("show"), 6000);
+}
+
+async function api(path, options = {}) {
+  const headers = { "content-type": "application/json" };
+  if (state.token) headers.authorization = `Bearer ${state.token}`;
+  const response = await fetch(path, { ...options, headers: { ...headers, ...(options.headers || {}) } });
+  let body = null;
+  try { body = await response.json(); } catch { body = null; }
+  if (!response.ok) throw new Error((body && body.error) || `HTTP ${response.status}`);
+  return body;
+}
+
+// ---------------------------------------------------------------- markets
+async function loadConfig() {
+  state.config = await api("/api/config");
+  $("role").textContent = state.config.role;
+  $("role").className = `tag ${state.config.role === "operator" ? "info" : "neutral"}`;
+  $("rail").innerHTML = state.config.rails.map((r) => `<option value="${esc(r.id)}" title="${esc(r.detail)}">${esc(r.label)}</option>`).join("");
+  fillScenarios();
+}
+function fillScenarios() {
+  const rail = $("rail").value;
+  const live = state.tab === "live";
+  const options = state.config.scenarios.filter((s) => s.rails.includes(rail) && (!live || s.id === "standard"));
+  $("scenario").innerHTML = options.map((s) => `<option value="${esc(s.id)}" title="${esc(s.detail)}">${esc(s.label)}</option>`).join("");
+}
+async function loadMarkets() {
+  const fixture = await api("/api/markets");
+  state.fixture = fixture.markets;
+  renderMarkets();
+}
+async function loadLive() {
+  $("markets").innerHTML = '<p class="empty">Reading the public Gemini Exchange events endpoint…</p>';
+  try {
+    state.live = await api("/api/markets/live?limit=30");
+  } catch (error) {
+    state.live = { state: "unavailable", note: error.message, events: [] };
+  }
+  renderMarkets();
+}
+function quoteLine(q) {
+  if (!q) return unavailable("no quote");
+  const implied = q.impliedProbability ? `<span class="num">${esc(q.impliedProbability)}</span> market-implied` : `<span class="muted">no market-implied price</span>`;
+  return `${tag(q.state === "two_sided" ? "info" : "warn", q.state.replace(/_/g, " "))} ${implied} <span class="muted small">bid ${esc(q.bestBid ?? "—")} · ask ${esc(q.bestAsk ?? "—")}</span>`;
+}
+function renderMarkets() {
+  const box = $("markets");
+  if (state.tab === "fixture") {
+    $("market-note").textContent = "Five Gemini Exchange markets captured 2026-11-17 (FIXTURE). Runs can step through a fixture purchase.";
+    box.innerHTML = state.fixture.map((m) => `
+      <button class="item" data-fixture="${esc(m.contractId)}" aria-pressed="${state.pick && state.pick.marketId === m.contractId}">
+        <span>${esc(m.question)} <span class="muted">· ${esc(m.outcomeLabel)}</span></span>
+        <span class="small">${quoteLine(m.quote)} <span class="tag warn">FIXTURE ${esc(m.source.snapshotDate)}</span></span>
+      </button>`).join("") || '<p class="empty">No fixture markets.</p>';
+  } else {
+    const live = state.live;
+    if (!live) return;
+    $("market-note").innerHTML = `${tag(live.state === "ok" ? "info" : "warn", `LIVE ${live.state}`)} <span class="muted">${esc(live.note || "")} ${live.fetchedAtUtc ? `Read ${esc(live.fetchedAtUtc)}.` : ""}</span> <span class="muted">A live run reads public sources only and never proposes a purchase.</span>`;
+    box.innerHTML = live.events.map((e) => `
+      <div class="item" role="group" aria-label="${esc(e.title)}">
+        <span>${esc(e.title)} <span class="muted small">· ${esc(e.category || "")} · ${esc(e.ticker)}</span></span>
+        <div class="contracts">${e.contracts.slice(0, 12).map((c) => `
+          <button class="btn sm" data-event="${esc(e.ticker)}" data-outcome="${esc(c.label)}" aria-pressed="${state.pick && state.pick.live && state.pick.live.event === e.ticker && state.pick.live.outcome === c.label}">
+            ${esc(c.label)} <span class="num muted">${esc(c.quote.impliedProbability ?? "—")}</span>
+          </button>`).join("")}</div>
+      </div>`).join("") || `<p class="empty">No live events. ${esc(live.note || "")}</p>`;
+  }
+}
+$("markets").addEventListener("click", (event) => {
+  const target = event.target.closest("[data-fixture],[data-event]");
+  if (!target) return;
+  if (target.dataset.fixture) {
+    const m = state.fixture.find((x) => x.contractId === target.dataset.fixture);
+    state.pick = { marketId: m.contractId, label: `${m.question} · ${m.outcomeLabel} (FIXTURE)` };
+  } else {
+    state.pick = { live: { event: target.dataset.event, outcome: target.dataset.outcome }, label: `${target.dataset.event} · ${target.dataset.outcome} (LIVE)` };
+  }
+  $("selection").textContent = `Selected: ${state.pick.label}`;
+  $("start").disabled = false;
+  renderMarkets();
+});
+for (const tab of ["fixture", "live"]) {
+  $(`tab-${tab}`).addEventListener("click", async () => {
+    state.tab = tab;
+    state.pick = null;
+    $("start").disabled = true;
+    $("selection").textContent = "No market selected.";
+    $("tab-fixture").setAttribute("aria-pressed", String(tab === "fixture"));
+    $("tab-live").setAttribute("aria-pressed", String(tab === "live"));
+    fillScenarios();
+    if (tab === "live" && !state.live) await loadLive();
+    else renderMarkets();
+  });
+}
+$("rail").addEventListener("change", fillScenarios);
+
+// ---------------------------------------------------------------- runs
+$("start").addEventListener("click", async () => {
+  if (!state.pick) return;
+  const button = $("start");
+  button.setAttribute("aria-busy", "true");
+  button.disabled = true;
+  try {
+    const body = { rail: $("rail").value, scenario: $("scenario").value, ...(state.pick.live ? { live: state.pick.live } : { marketId: state.pick.marketId }) };
+    state.run = await api("/api/runs", { method: "POST", body: JSON.stringify(body) });
+    renderRun();
+    loadAudit();
+  } catch (error) {
+    toast(`Run failed: ${error.message}`);
+  } finally {
+    button.removeAttribute("aria-busy");
+    button.disabled = false;
+  }
+});
+
+async function step(action, body = {}) {
+  if (!state.run) return;
+  try {
+    state.run = await api(`/api/operator/runs/${state.run.id}/${action}`, { method: "POST", body: JSON.stringify(body) });
+  } catch (error) {
+    toast(`${action}: ${error.message}`);
+    try { state.run = await api(`/api/runs/${state.run.id}`); } catch {}
+  }
+  renderRun();
+  loadAudit();
+}
+
+function renderRun() {
+  const run = state.run;
+  if (!run) return;
+  $("run-label").className = `tag ${/^LIVE/.test(run.label) ? "info" : "warn"}`;
+  $("run-label").textContent = `${run.label.startsWith("LIVE") ? "◉ LIVE analysis" : "! FIXTURE"} · ${run.id}`;
+  renderResults(run);
+  renderSteps(run);
+  renderAudit(run.audit);
+  $("timeline").innerHTML = `<ol class="timeline">${run.timeline.map((t) => `<li><span class="mono muted">${esc(t.atUtc)}</span> <span class="tag neutral">${esc(t.actor)}</span> <b>${esc(t.step)}</b> ${esc(t.detail)}</li>`).join("")}</ol>`;
+}
+
+function renderResults(run) {
+  const m = run.market;
+  const p = run.pricing;
+  const q = m.quote;
+  const freshness = q.ageSeconds !== null && q.ageSeconds !== undefined ? `${q.ageSeconds} s old` : q.observedDate ? `date only (${q.observedDate})` : "no read time";
+  $("results").innerHTML = `
+    <div>
+      <div class="label">${esc(m.label)} market · ${esc(run.rail.label)}</div>
+      <h3>${esc(m.question)} <span class="muted">· ${esc(m.outcomeLabel)}</span></h3>
+      <p class="small muted">Source: <a href="${esc(m.source.url)}" rel="noopener noreferrer" target="_blank">${esc(m.source.label)}</a> · observed ${esc(m.source.snapshotTimeUtc || m.source.snapshotDate || "unknown")} · expiry ${esc(m.expiryUtc || "unknown")}</p>
+    </div>
+    <div class="grid" style="padding:0;gap:12px">
+      <div class="price c6">
+        <div class="label">Market-implied price</div>
+        <div class="v">${p.marketImplied.value ? esc(p.marketImplied.value) : "—"}</div>
+        <div class="small">${p.marketImplied.value ? "" : unavailable(p.marketImplied.note)} ${p.marketImplied.value ? esc(p.marketImplied.note) : ""}</div>
+        <div class="small muted">Quote ${esc(q.state.replace(/_/g, " "))} · ${esc(freshness)} · ${esc(p.marketImplied.label)}</div>
+      </div>
+      <div class="price c6">
+        <div class="label">Model estimate</div>
+        <div class="v">${p.modelEstimate.value ?? "—"}</div>
+        <div class="small">${p.modelEstimate.value === null ? unavailable(p.modelEstimate.note) : ""}</div>
+        <div class="small muted">Kept separate from the market-implied price.</div>
+      </div>
+    </div>
+    <div>
+      <div class="row"><span class="label">Settlement-risk rating</span> ${tag(run.rating.final === "High" ? "no" : run.rating.final === "Medium" ? "warn" : "ok", `${run.rating.final ?? "incomplete"} · ${run.rating.total ?? "?"}/12`)} <span class="muted small">${esc(run.rating.note)}</span></div>
+      <p class="small">${esc(run.rating.summary)}</p>
+      <div class="scroll"><table><thead><tr><th>FACTOR</th><th>SCORE</th><th>RATIONALE</th><th>CITES</th></tr></thead><tbody>
+        ${run.rating.scores.map((s) => `<tr><td>${esc(s.name)}</td><td class="num">${s.score ?? "—"}</td><td>${esc(s.rationale)}${s.nullReason ? ` <span class="muted">(${esc(s.nullReason)})</span>` : ""}</td><td class="mono small">${esc(s.citationIds.join(", "))}</td></tr>`).join("")}
+      </tbody></table></div>
+    </div>
+    <div>
+      <div class="label">Evidence gaps</div>
+      ${run.gaps.length ? run.gaps.map((g) => `<p class="small">${tag(g.open ? "warn" : "neutral", g.open ? "open" : g.material ? "material" : "minor")} <b>${esc(g.id)}</b> ${esc(g.question)} <span class="muted">${esc(g.why)}</span></p>`).join("") : '<p class="empty">No evidence gaps.</p>'}
+    </div>
+    <div>
+      <div class="label">Decision</div>
+      <p>${tag(run.decision.action === "buy" ? "info" : "ok", run.decision.action)} ${esc(run.decision.reason)}</p>
+      ${run.decision.proposal ? `<p class="small muted">Proposal for ${esc(run.decision.proposal.gapId)}: up to <span class="num">${esc(run.decision.proposal.maxUsdc)}</span> USDC (${esc(run.decision.proposal.catalogItemId)})</p>` : ""}
+      <details><summary class="small">Free-source checks and decision log (${run.decision.freeChecks.length})</summary><ul class="small">${run.decision.freeChecks.map((l) => `<li>${esc(l)}</li>`).join("")}</ul></details>
+    </div>
+    <div>
+      <div class="label">Rule and citations</div>
+      <p class="small">Settlement source: ${run.rule.settlementSource ? esc(run.rule.settlementSource) : unavailable("not extracted as a field; see the rule citations")} · Terms: ${run.rule.termsUrl ? `<a href="${esc(run.rule.termsUrl)}" target="_blank" rel="noopener noreferrer">PDF</a>` : unavailable(run.rule.termsNote || "no terms URL")}</p>
+      ${run.citations.map((c) => `<div class="cite"><span class="mono small">${esc(c.id)} · ${esc(c.field_or_rule)}</span><q>${esc(c.quote)}</q><a class="small" href="${esc(c.source)}" target="_blank" rel="noopener noreferrer">${esc(c.source)}</a></div>`).join("")}
+      ${run.market.unavailable && run.market.unavailable.length ? `<p class="small muted">Unavailable in this analysis: ${esc(run.market.unavailable.join("; "))}</p>` : ""}
+    </div>`;
+}
+
+const STEPS = {
+  common: [["quote", "Request quote"], ["decide", "Policy decision"]],
+  approval: [["approve", "Approve (FIXTURE owner key)", { method: "fixture-owner" }], ["reject", "Reject", { reason: "declined in the console" }], ["advance", "Advance clock 10 min", { seconds: 600 }]],
+  pay: [["pay", "Pay"], ["retry", "Retry (same authorization)"], ["verify", "Verify receipt and bytes"]],
+  gateway: [["circle", "Ask Circle for the transfer"], ["batch", "FIXTURE Circle: advance batch"], ["circle-stale", "Replay an older Circle response"]],
+  chain: [["webhook", "QuickNode event"], ["webhook-replay", "Replay event"], ["webhook-forged", "Forged signature"], ["webhook-stale", "Stale timestamp"]],
+  end: [["reassess", "Reassess with verified evidence"], ["overdue", "Overdue check"]],
+};
+function renderSteps(run) {
+  const box = $("steps");
+  if (!state.config || state.config.role !== "operator") {
+    box.innerHTML = '<p class="empty">Enter the operator token printed by <span class="mono">npm run app</span> to step through the purchase.</p>';
+    return;
+  }
+  const groups = [["Quote and policy", STEPS.common], ["Owner approval", STEPS.approval], ["Payment and delivery", STEPS.pay]];
+  if (run.rail.id === "circle-gateway-batched") groups.push(["Circle Gateway (individual transfer)", STEPS.gateway]);
+  groups.push([run.rail.id === "circle-gateway-batched" ? "QuickNode (batch transaction)" : "QuickNode (purchase transaction)", STEPS.chain], ["Reassessment", STEPS.end]);
+  box.innerHTML = groups.map(([title, steps]) => `<div class="group"><div class="label">${esc(title)}</div><div class="row">${steps.map(([action, label, body]) => `<button class="btn sm" data-step="${esc(action)}" data-body='${esc(JSON.stringify(body || {}))}'>${esc(label)}</button>`).join("")}</div></div>`).join("")
+    + `<dl class="kv small"><dt>Policy</dt><dd>${tag(stateKind(run.states.policy.state), run.states.policy.state)}</dd><dt>Approval</dt><dd>${tag(stateKind(run.states.approval.state), run.states.approval.state)}</dd><dt>Authorization</dt><dd>${tag(stateKind(run.states.authorization.state), run.states.authorization.state)}</dd><dt>Delivery</dt><dd>${tag(stateKind(run.states.delivery.state), run.states.delivery.state)}</dd><dt>Settlement</dt><dd>${tag(stateKind(run.states.settlement.state), run.states.settlement.state)}</dd><dt>Reassessment</dt><dd>${tag(stateKind(run.states.reassessment.state), run.states.reassessment.state)}</dd></dl>`;
+}
+$("steps").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-step]");
+  if (!button) return;
+  let body = {};
+  try { body = JSON.parse(button.dataset.body || "{}"); } catch {}
+  step(button.dataset.step, body);
+});
+
+function renderAudit(a) {
+  if (!a || !a.purchaseId) {
+    $("audit").innerHTML = `<p class="empty">No purchase in this run yet${a && a.runId ? ` (run ${esc(a.runId)})` : ""}. The audit starts with the quote.</p>`;
+    return;
+  }
+  const r = a.receipt;
+  const pay = a.payment;
+  const gateway = a.rail === "circle-gateway-batched";
+  $("audit").innerHTML = `
+    <dl class="kv">
+      <dt>Run</dt><dd class="mono">${esc(a.runId)}</dd>
+      <dt>Purchase</dt><dd class="mono">${esc(a.purchaseId)}</dd>
+      <dt>Rail</dt><dd>${esc(a.rail)}</dd>
+      <dt>Quote</dt><dd>${a.quote ? `<span class="mono">${esc(a.quote.quoteId)}</span> · <span class="num">${esc(a.quote.amountUsdc)}</span> USDC · ${tag(a.quote.freshness === "fresh" ? "ok" : "no", a.quote.freshness)} <span class="muted small">expires ${esc(a.quote.expiresAtUtc)} (${esc(a.quote.secondsLeft)} s left at ${esc(a.quote.asOfUtc)}, FIXTURE clock)</span>` : unavailable("no quote")}</dd>
+      <dt>Owner approval</dt><dd>${tag(stateKind(a.approval), a.approval.replace(/_/g, " "))}</dd>
+      <dt>Authorization</dt><dd>${a.authorization ? `${tag(stateKind(a.authorization.status), a.authorization.status)} nonce ${hash(a.authorization.nonce)} · request ${hash(a.authorization.requestHash, false)}` : unavailable("not signed")}</dd>
+      <dt>Signed receipt</dt><dd>${r.state === "verified" ? `${tag("ok", "verified")} ${esc(r.version)} · digest ${hash(r.digest)} · signer <span class="mono">${esc(short(r.signer))}</span> · content ${hash(r.contentHash, false)}` : r.state === "rejected" ? `${tag("no", "rejected")} ${esc(r.code)}: ${esc(r.reason)}` : tag("warn", r.state.replace(/_/g, " "))}</dd>
+      ${gateway ? `
+      <dt>Circle transfer</dt><dd>${pay.circleTransfer.id ? `<span class="mono">${esc(pay.circleTransfer.id)}</span> ${tag(stateKind(pay.circleTransfer.status), pay.circleTransfer.status)} ${pay.circleTransfer.receiptNamesSameTransfer === true ? tag("ok", "receipt names this transfer") : pay.circleTransfer.receiptNamesSameTransfer === false ? tag("no", "receipt names another transfer") : ""}` : unavailable("Circle has not reported a transfer yet")}<div class="small muted">${esc(pay.circleTransfer.source)}. ${esc(pay.circleTransfer.role)}</div></dd>
+      <dt>Arc batch tx</dt><dd>${pay.arcBatch.txHash ? `${hash(pay.arcBatch.txHash)} ${tag(stateKind(pay.arcBatch.settlement), pay.arcBatch.settlement)} <span class="muted small">${esc(pay.arcBatch.source)}</span>` : unavailable("no batch transaction yet")}</dd>
+      <dt>QuickNode</dt><dd>${pay.quicknode.batch.state === "confirmed" ? `${tag("ok", "batch confirmed")} block <span class="num">${esc(pay.quicknode.batch.blockNumber)}</span>, final · ${esc(pay.quicknode.batch.source)}` : tag("warn", pay.quicknode.batch.state.replace(/_/g, " "))}<div class="small muted">Per transfer: ${esc(pay.quicknode.perTransfer.status)}. ${esc(pay.quicknode.perTransfer.reason)}</div></dd>` : `
+      <dt>Arc transaction</dt><dd>${pay.transaction.txHash ? `${hash(pay.transaction.txHash)} <span class="muted small">${esc(pay.transaction.source)}</span>` : unavailable("not settled yet")}</dd>
+      <dt>QuickNode</dt><dd>${pay.quicknode.state === "confirmed" ? `${tag("ok", "confirmed")} block <span class="num">${esc(pay.quicknode.blockNumber)}</span> · ${esc(pay.quicknode.ledgerOutcome)} · ${esc(pay.quicknode.source)}` : tag("warn", pay.quicknode.state)}</dd>`}
+      <dt>Reassessment</dt><dd>${tag(stateKind(a.reassessment.state), a.reassessment.state.replace(/_/g, " "))} <span class="muted small">${esc(a.reassessment.gate)}</span></dd>
+    </dl>`;
+}
+
+async function loadAudit() {
+  try {
+    const { records } = await api("/api/audit");
+    $("ledger").innerHTML = records.length ? `<table><thead><tr><th>RUN</th><th>PURCHASE</th><th>RAIL</th><th>RECEIPT</th><th>CIRCLE TRANSFER / TX</th><th>BATCH</th><th>QUICKNODE</th><th>REASSESSED</th></tr></thead><tbody>${records.map((a) => {
+      const gw = a.rail === "circle-gateway-batched";
+      return `<tr><td class="mono">${esc(a.runId)}</td><td class="mono">${esc(a.purchaseId)}</td><td>${gw ? "Gateway" : "Arc direct"}</td><td>${tag(stateKind(a.receipt.state), a.receipt.state.replace(/_/g, " "))}</td><td class="mono">${esc(short(gw ? a.payment.circleTransfer.id : a.payment.transaction.txHash) || "—")}</td><td class="mono">${gw ? esc(short(a.payment.arcBatch.txHash) || "—") : "n/a"}</td><td>${tag(stateKind(gw ? a.payment.quicknode.batch.state : a.payment.quicknode.state), gw ? `batch ${a.payment.quicknode.batch.state}` : a.payment.quicknode.state)}</td><td>${esc(a.reassessment.state.replace(/_/g, " "))}</td></tr>`;
+    }).join("")}</tbody></table><p class="small muted">All payment evidence in this table is FIXTURE.</p>` : '<p class="empty">No purchases yet.</p>';
+  } catch (error) {
+    $("ledger").innerHTML = `<p class="empty">Audit unavailable: ${esc(error.message)}</p>`;
+  }
+}
+$("reload-audit").addEventListener("click", loadAudit);
+
+$("signin").addEventListener("click", async () => {
+  const value = $("token").value.trim();
+  state.token = value || null;
+  $("token").value = "";
+  try {
+    await loadConfig();
+    if (state.config.role !== "operator" && value) toast("That token was not accepted.");
+    if (state.run) { state.run = await api(`/api/runs/${state.run.id}`); renderRun(); }
+  } catch (error) {
+    toast(error.message);
+  }
+});
+
+(async () => {
+  try {
+    await loadConfig();
+    await loadMarkets();
+    await loadAudit();
+  } catch (error) {
+    $("markets").innerHTML = `<p class="empty">The app server is not reachable (${esc(error.message)}). Start it with <span class="mono">npm run app</span>.</p>`;
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+{
+  "label": "LIVE public sources (api.gemini.com, assets.gemini.com, forecast.weather.gov); no model, no payment",
+  "command": "python -m verity.cli analyze-live --event WXHIGH-NYC-2611210459 --outcome \"66°F to 67°F\"",
+  "risk_analysis": {
+    "version": "verity-risk-analysis-v1",
+    "contract_id": "GEMI-WXHIGH-NYC-2611210459-66TO67",
+    "event_ticker": "WXHIGH-NYC-2611210459",
+    "instrument_symbol": "GEMI-WXHIGH-NYC-2611210459-66TO67",
+    "question": "Highest temperature in NYC on November 20, 2026?",
+    "expiry_utc": "2026-11-21T04:59:59.000Z",
+    "analyzed_at_utc": "2026-11-19T21:29:38Z",
+    "snapshot": {
+      "source_mode": "live",
+      "source_label": "Gemini Exchange events API",
+      "snapshot_date": "2026-11-19",
+      "snapshot_time_utc": "2026-11-19T21:29:38Z",
+      "snapshot_hash": "sha256:cb8635cb84f3af674f474f5f9f1449e6837b2096011dca9c286fb5964b37d74d",
+      "hash_alg": "sha256"
+    },
+    "quoted_price": {
+      "outcome_label": "66°F to 67°F",
+      "best_bid": "0.47",
+      "best_ask": "0.51",
+      "mid": "0.49",
+      "implied_probability": "0.49",
+      "volume_usd": "0",
+      "volume_basis": "total",
+      "observed_date": "2026-11-19",
+      "observed_time_utc": "2026-11-19T21:29:38Z"
+    },
+    "scores": {
+      "ambiguity": {
+        "score": 3,
+        "rationale": "Outcome depends on a setting, ranking or judgment named in the rules.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "source": {
+        "score": 2,
+        "rationale": "Settlement source looks like official but revisable or preliminary data (matched 'National Weather Service').",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      },
+      "liquidity": {
+        "score": 3,
+        "rationale": "event-total volume $0 is under $100 (4c spread).",
+        "null_reason": null,
+        "citation_ids": [
+          "C-PRICES"
+        ]
+      },
+      "correlation": {
+        "score": 1,
+        "rationale": "No sibling events and no scheduled data named; treated as stand-alone.",
+        "null_reason": null,
+        "citation_ids": [
+          "C-EVENT",
+          "C-CONTRACT",
+          "C-TERMS"
+        ]
+      }
+    },
+    "rating": {
+      "complete": true,
+      "known_total": 9,
+      "raw_total": 9,
+      "raw_rating": "High",
+      "rating_floor": "Medium",
+      "final_rating": "High",
+      "possible_range": null,
+      "overrides": [
+        {
+          "rule": "Any High (3) in Ambiguity or Source -> at least Medium",
+          "triggered_by": "ambiguity",
+          "effect": "rating floor Medium; always seek evidence on the settlement rule"
+        },
+        {
+          "rule": "High (3) in Liquidity -> never trade more than top-of-book",
+          "triggered_by": "liquidity",
+          "effect": "research translation: treat the quoted price as an unreliable signal; rating unchanged"
+        }
+      ]
+    },
+    "research_action": "flag_for_human_review",
+    "summary": "High resolution risk (total 9). Research action: flag_for_human_review. 1 open question(s).",
+    "citations": [
+      {
+        "id": "C-EVENT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-NYC-2611210459",
+        "field_or_rule": "event.description",
+        "quote": "Highest temperature in NYC on November 20, 2026?"
+      },
+      {
+        "id": "C-CONTRACT",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-NYC-2611210459",
+        "field_or_rule": "contract.description",
+        "quote": "This market will resolve based on the highest temperature recorded at Central Park NY, NY on November 20, 2026. The resolution source for this market will be the National Weather Service (\"NWS\") Climatological Report (Daily) for Central Park NY, NY.\n\nSpecifically, this contract will resolve to Yes if the highest temperature recorded at Central Park NY on November 20, 2026, as reported in the first published version of the applicable NWS Climatological Report (Daily), satisfies the temperature range specified in this contract. Otherwise, this contract will resolve to No. The Expiration Value shall be the maximum temperature for November 20, 2026 as documented by the NWS. If the Expiration Value cannot be determined by the latest Expiration Date, the contract will resolve to No. Each temperature range listed for this event is mutually exclusive, and only one contract will resolve to Yes. View the [full rules](https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf)."
+      },
+      {
+        "id": "C-TERMS",
+        "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "field_or_rule": "termsAndConditionsUrl (PDF text, truncated)",
+        "quote": "Attachment A Rule Text for “Will {weather indicator} for {location} during {period} be {above/below/at least/between} {value}?” Rule 13.111 (a) General (1) These Contract Rules govern the trading of “ Will {weather indicator} for {location} during {period} be {above/below/at least/between} {value}? ” (“ WEATHER1 ” or the “ Contract ”) on the Exchange and the clearing of the Contract through the Clearing House. (2) Capitalized Terms used, but not defined herein, have the meanings ascribed to them in the Exchange Rulebook. (b) Underlying (1) The Underlying for each WEATHER1 is the extent of occurrence of {weather indicator} in {location} during {period} as reported by the National Weather Service, for a {location} within the United States, or analogous weather service for a {location} elsewhere. (2) Cash-settled WEATHER1 Contracts are available for any {weather indicator} listed by the Exchange (collectively, the “Contracts”). (3) The Source Agencies for any {location} in the United States are, in hierarchical order, unless otherwise specified by the Exchange at the time of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publication, for the relevant {location}; (ii) Secondary Sources: Weather Underground ( wunderground.com ) or The Weather Company ( weather.com ); and (iii) Tertiary Sources: NOAA Climate Data Online (“CDO”) or the Iowa Environmental Mesonet (“IEM”) ASOS/AWOS station data portal. The Source Agency for any {location} outside the United States is is one or more official governmental, quasi-governmental, national, or regional meteorological authorities with reporting jurisdiction over the applicable {location}. (4) The Expiration Value is the value of the Underlying as documented by the Source Agency on the Expiration Date at the Expiration Time. (c) Issuance (1) After the initial Contract, Contract iterations will be listed on an as-needed basis at the discretion of the Exchange and corresponding to the risk management needs of Members. (i) {weather indicator} refers to an empirical measurement of a particular meteorological phenomenon (e.g., total rainfall, number of observed tornadoes, or maximum/minimum/mean temperature) identified by the Exchange; (ii) {location} refers to a specific place, region, or set of places and/or regions (e.g., the State of Vermont, or the set of U.S. state-capital cities), specified by the Exchange; (iii) {period} refers to a period of time specified by the Exchange. In descriptions of {period}, “between” is inclusive of both endpoints, while “before” and “after” exclude the specified date unless stated otherwise. (iv) {value} refers to a measurement germane to the {weather indicator} underlying the Contract and recorded by the Source Agency (e.g., inches of mercury for atmospheric pressure). (d) Contract Size (1) Each WEATHER1 has a notional size of one dollar ($1.00). (e) Settlement and Expiration (1) The Payout Criterion for the Contract encompasses the Expiration Values that {value} is {above/below/at least/between} the specified value for {period}. (2) The Settlement Date of the Contract shall be no later than the day after the Expiration Date, unless the Market Outcome is under review pursuant to Rule 7.1 of the Rulebook. (3) The Expiration Date of the Contract shall be the sooner of (i) the first 11:00PM Eastern Time after data are available for {value} or (ii) one week after the last day within {period}. (4) The Expiration Time of the Contract shall be 11:00 PM Eastern Time. (f) Listing and Trading Hours (1) Contracts are listed by the Exchange based on the official schedule published by the Source Agency for the given {award}. (2) As outlined in Rule 5.16 of the Rulebook, trading shall be available at all times outside of any maintenance windows, which will be announced in advance by the Exchange. (3) The Last Trading Date of the Contract will be the same as the Expiration Date. The Last Trading Time will be the same as the Expiration Time. (g) Price Limits and Minimum Quote Increment (1) The Minimum Quote Increment for each Contract is $0.01 per Contract. (2) There shall be no Orders for transactions in WEATHER1 at a price less than one cent ($0.01) or more than ninety-nine cents ($0.99). (h) Position Accountability and Position Limits (1) The position accountability level shall be $25,000 of notional exposure. (2) No position limits apply. WEATHER1 are not considered economically equivalent swaps under 17 C.F.R. §150.1. (i) Additional Settlement Contingencies (1) Before Settlement, the Exchange may, at its sole discretion, initiate the Market Outcome Review Process pursuant to Rule 7.1 of the Rulebook. If an Expiration Value cannot be determined on the Expiration Date (including because an award is cancelled or nominee has forfeited, withdrawn or been disqualified), the Exchange has the right to determine payouts pursuant to Rule 7.1 in the Rulebook. (2) If the Source Agency issues preliminary, revised, or corrected reports, only the first published version that includes confirmation of the will be used for Contract resolution. (3) Multiple weather events occurring in the same during shall each be treated as discrete events if separately reported by the Source Agency. (4) A recording of “T” for Trace is considered above 0.00, and multiple recordings of “T” for Trace are considered above 0.00, but not necessarily above a specific positive number. If data are unavailable at the latest Expiration Date, all strikes will resolve to No."
+      },
+      {
+        "id": "C-PRICES",
+        "source": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-NYC-2611210459",
+        "field_or_rule": "contract.prices",
+        "quote": "bestBid 0.47, bestAsk 0.51; event volume 0"
+      }
+    ],
+    "evidence_gaps": [
+      {
+        "id": "GAP-1",
+        "question": "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?",
+        "gap_type": "settlement_source_version",
+        "affects": "resolution_risk",
+        "material": true,
+        "why": "The source can be revised after first publication, and the version used can decide the outcome.",
+        "free_checks": [
+          "nyc-settlement-version"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which issuance of the settlement data (preliminary, final, or a later correction) does Gemini use to settle?"
+    ],
+    "data_quality_flags": [
+      "event_terms_url_empty",
+      "analyst=verity-rules-v1 (code rules, no LLM)"
+    ],
+    "workbook_conflicts": [
+      "Scale: the README specifies 1-5 per category; the workbook uses 1-3. This prototype uses the workbook's 1-3 scale and 4-12 totals.",
+      "Markets!B formula =IF(I>=9,\"High\",IF(I>=7,\"Medium\",\"Low\")) ignores the Framework overrides, and SUM() treats a blank score as 0, so an incomplete row shows as Low. The code reports incomplete ratings instead.",
+      "Volume column mixes bases: rows 2-4 are event totals from the Gemini API, rows 5-6 are 24h figures from CoinRithm, while Agent rule 4 is written for 24h volume.",
+      "Override 'any 3 in Ambiguity or Source -> at least Medium' only changes the result at a raw total of 6 (for example 3+1+1+1); at 7 or more the total is already Medium.",
+      "Override 'High (3) in Liquidity -> never trade more than top-of-book' is a trading rule. Verity places no trades, so it becomes a note that the price is an unreliable signal.",
+      "Agent action column uses trading verbs (Proceed, Proceed small size). They are mapped to research actions: Low -> no_further_research, Medium -> investigate, High -> flag_for_human_review."
+    ]
+  },
+  "purchase_proposal": null,
+  "no_purchase_reason": "[GEMI-WXHIGH-NYC-2611210459-66TO67] skip GAP-1: no allowlisted catalog item answers gap type 'settlement_source_version' for this live contract. [GEMI-WXHIGH-NYC-2611210459-66TO67] no purchase: every material gap was answered, cached, or had no catalog match.",
+  "decision_log": [
+    "[GEMI-WXHIGH-NYC-2611210459-66TO67] GAP-1: free research unresolved. The terms cite the NWS daily climate report and do not name the preliminary, final, or corrected issuance. Sources: https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, https://forecast.weather.gov/product.php?site=OKX&product=CLI&issuedby=NYC&format=txt&version=1&glossary=0. Excerpt: of listing: (i) Primary Source: the applicable National Weather Service (“NWS”) Climatological Report, including the Local Climatological Data (“LC”) publicatio",
+    "[GEMI-WXHIGH-NYC-2611210459-66TO67] skip GAP-1: no allowlisted catalog item answers gap type 'settlement_source_version' for this live contract.",
+    "[GEMI-WXHIGH-NYC-2611210459-66TO67] no purchase: every material gap was answered, cached, or had no catalog match."
+  ]
+}

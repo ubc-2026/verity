@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { gunzipSync } from "node:zlib";
-import type { IngestResult, ReconciliationLedger, StreamMatch } from "./ledger.ts";
+import type { GatewayBatchMatch, IngestResult, ReconciliationLedger, StreamMatch } from "./ledger.ts";
 import { verifyQuickNodeSignature } from "./quicknodeSignature.ts";
 
 export const QUICKNODE_WEBHOOK_PATH = "/webhooks/quicknode";
@@ -15,6 +15,8 @@ export interface WebhookDeps {
   now(): number;
   /** Ledger source label. Defaults to "quicknode-streams". */
   source?: string;
+  /** Refuse signed deliveries whose X-QN-Timestamp is further than this from now(). Live ingestion sets it. */
+  maxTimestampSkewSeconds?: number;
 }
 
 const header = (req: IncomingMessage, name: string) => {
@@ -39,11 +41,16 @@ async function readBody(req: IncomingMessage): Promise<Buffer> {
 }
 
 /** Accepts the filter output directly, or wrapped as { data, metadata }. */
-export function extractMatches(body: unknown): { matches: StreamMatch[]; metadata: Record<string, unknown> | null } {
+export function extractMatches(body: unknown): { matches: StreamMatch[]; gatewayBatches: GatewayBatchMatch[]; metadata: Record<string, unknown> | null } {
   const root = body as Record<string, any> | null;
-  const filtered = root?.matches ? root : root?.data?.matches ? root.data : null;
-  if (!filtered || !Array.isArray(filtered.matches)) return { matches: [], metadata: root?.metadata ?? null };
-  return { matches: filtered.matches as StreamMatch[], metadata: filtered.metadata ?? root?.metadata ?? null };
+  const has = (value: any) => Array.isArray(value?.matches) || Array.isArray(value?.gatewayBatches);
+  const filtered = has(root) ? root : has(root?.data) ? root!.data : null;
+  if (!filtered) return { matches: [], gatewayBatches: [], metadata: root?.metadata ?? null };
+  return {
+    matches: Array.isArray(filtered.matches) ? (filtered.matches as StreamMatch[]) : [],
+    gatewayBatches: Array.isArray(filtered.gatewayBatches) ? (filtered.gatewayBatches as GatewayBatchMatch[]) : [],
+    metadata: filtered.metadata ?? root?.metadata ?? null,
+  };
 }
 
 /**
@@ -68,7 +75,7 @@ export function createQuickNodeWebhookHandler(deps: WebhookDeps) {
       timestamp: header(req, "x-qn-timestamp"),
       signature: header(req, "x-qn-signature"),
       payload,
-    });
+    }, deps.maxTimestampSkewSeconds === undefined ? undefined : { now: deps.now(), maxSkewSeconds: deps.maxTimestampSkewSeconds });
     if (!authentic) return void send(res, 401, { error: "invalid QuickNode signature" });
 
     let body: unknown;
@@ -78,7 +85,7 @@ export function createQuickNodeWebhookHandler(deps: WebhookDeps) {
       return void send(res, 400, { error: "invalid JSON" });
     }
 
-    const { matches, metadata } = extractMatches(body);
+    const { matches, gatewayBatches, metadata } = extractMatches(body);
     const streamId = String(header(req, "stream-id") ?? metadata?.stream_id ?? "unknown");
     const batchStart = header(req, "batch-start-range") ?? metadata?.batch_start_range;
     const batchEnd = header(req, "batch-end-range") ?? metadata?.batch_end_range;
@@ -92,6 +99,7 @@ export function createQuickNodeWebhookHandler(deps: WebhookDeps) {
       batchEnd: batchEnd === undefined || batchEnd === null ? null : Number(batchEnd),
       payload,
       matches,
+      gatewayBatches,
       finalizedBlock: await deps.finalizedBlock(),
       now: deps.now(),
       source: deps.source,

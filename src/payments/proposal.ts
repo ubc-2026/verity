@@ -50,6 +50,8 @@ function sameKeys(left: readonly string[], right: readonly string[]): boolean {
 export function acceptPurchaseProposal(
   input: unknown,
   catalog: ReadonlyMap<string, CatalogItem>,
+  /** The contract the person selected. A proposal for any other contract is refused. */
+  options: { expectedContractId?: string } = {},
 ): AcceptedProposal {
   const parsed = purchaseProposalSchema.safeParse(input);
   if (!parsed.success) {
@@ -58,6 +60,11 @@ export function acceptPurchaseProposal(
     );
   }
   const proposal = parsed.data;
+  if (options.expectedContractId !== undefined && proposal.contract_id !== options.expectedContractId) {
+    throw new ResearchRequestError(
+      `proposal is for contract ${proposal.contract_id}, not the selected contract ${options.expectedContractId}`,
+    );
+  }
   const item = catalog.get(proposal.catalog_item_id);
   if (!item) throw new ResearchRequestError(`catalog item not allowlisted: ${proposal.catalog_item_id}`);
   if (item.affects !== "resolution_risk") {

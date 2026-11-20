@@ -1,6 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 import type { Hex } from "viem";
-import { APPROVAL_MAX, AUTO_MAX, AUTO_MIN, GAP_MAX, MISSION_BUDGET, verifyOwnerApproval } from "./policy.ts";
+import type { PaymentRail } from "./circleGateway.ts";
+import { APPROVAL_MAX, AUTO_MAX, AUTO_MIN, GAP_MAX, MISSION_BUDGET, NANOPAYMENT_POLICY, verifyOwnerApproval } from "./policy.ts";
 import {
   commitResearchRequest,
   computeRequestHash,
@@ -35,12 +36,18 @@ export type SpendingPolicy = { [K in keyof typeof DEMO_POLICY]: bigint };
 
 export type AuthorizationStatus =
   | "awaiting_approval"
+  /** Owner denied, or the approval timed out. Terminal: the reservation is released and nothing can sign it. */
+  | "denied"
   | "prepared"
   | "signed"
   | "submitted"
   | "pending"
   | "settled"
-  | "failed";
+  | "failed"
+  /** The owner declined the approval request. The reservation is released. */
+  | "rejected"
+  /** The authorization window closed before it was approved or signed. The reservation is released. */
+  | "expired";
 
 export interface StoredAuthorization {
   purchaseId: string;
@@ -52,6 +59,61 @@ export interface StoredAuthorization {
   signature: Hex | null;
   status: AuthorizationStatus;
   txHash: Hex | null;
+  /** Rail recorded with the reservation; it fixes the signing domain for every retry. */
+  rail: PaymentRail;
+}
+
+/**
+ * Every owner-approval decision, in order. `verbal_yes` is only a record of what the owner said on the call:
+ * it authorizes nothing. `approved` is written only when a valid wallet signature is stored.
+ */
+export type ApprovalOutcome = "verbal_yes" | "approved" | "denied" | "timed_out";
+export type ApprovalChannel = "voice_call" | "wallet_signature" | "timeout";
+
+export interface ApprovalDecision {
+  purchaseId: string;
+  outcome: ApprovalOutcome;
+  channel: ApprovalChannel;
+  /** Provider conversation ID for a voice call, otherwise null. */
+  conversationId: string | null;
+  detail: string | null;
+  decidedAt: number;
+}
+
+/**
+ * Voice approval (main) and the market-run controls use different names for a
+ * purchase that must never be signed. Both names are kept. The map is the only
+ * place that says which authorization status each name writes and blocks on:
+ *   denied, timed_out -> denied   (the decision row still records which one)
+ *   rejected          -> rejected
+ *   expired           -> expired
+ */
+export const BLOCKED_STATE_STATUS = {
+  denied: "denied",
+  timed_out: "denied",
+  rejected: "rejected",
+  expired: "expired",
+} as const satisfies Record<string, AuthorizationStatus>;
+
+export type BlockedSigningState = keyof typeof BLOCKED_STATE_STATUS;
+
+const BLOCKED_DECISIONS = new Set<ApprovalOutcome>(["denied", "timed_out"]);
+
+/**
+ * The blocked state for a stored purchase, or null when it may still be signed.
+ * `timed_out` and `denied` share an authorization status; the decision row tells
+ * them apart. `rejected` and `expired` are recognized from their own statuses.
+ */
+export function signingBlockFor(
+  status: AuthorizationStatus,
+  decisions: readonly Pick<ApprovalDecision, "outcome">[] = [],
+): BlockedSigningState | null {
+  if (status === BLOCKED_STATE_STATUS.rejected) return "rejected";
+  if (status === BLOCKED_STATE_STATUS.expired) return "expired";
+  const named = [...decisions].reverse().find((decision) => BLOCKED_DECISIONS.has(decision.outcome));
+  if (status === BLOCKED_STATE_STATUS.denied) return named?.outcome === "timed_out" ? "timed_out" : "denied";
+  if (named?.outcome === "denied" || named?.outcome === "timed_out") return named.outcome;
+  return null;
 }
 
 export class PolicyError extends Error {
@@ -81,12 +143,36 @@ CREATE TABLE IF NOT EXISTS reservations (
   status      TEXT NOT NULL CHECK (status IN ('held', 'spent', 'released')),
   updated_at  INTEGER NOT NULL
 ) STRICT;
+CREATE TABLE IF NOT EXISTS purchase_rails (
+  purchase_id TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
+  rail        TEXT NOT NULL CHECK (rail IN ('arc-eip3009', 'circle-gateway-batched'))
+) STRICT;
 CREATE TABLE IF NOT EXISTS owner_approvals (
   purchase_id  TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
   owner        TEXT NOT NULL,
   request_hash TEXT NOT NULL,
   signature    TEXT NOT NULL,
   approved_at  INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS payment_controls (
+  id         INTEGER PRIMARY KEY CHECK (id = 1),
+  paused     INTEGER NOT NULL CHECK (paused IN (0, 1)),
+  reason     TEXT,
+  updated_at INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS owner_rejections (
+  purchase_id TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
+  reason      TEXT NOT NULL,
+  rejected_at INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS approval_decisions (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  purchase_id     TEXT NOT NULL REFERENCES purchases(purchase_id),
+  outcome         TEXT NOT NULL CHECK (outcome IN ('verbal_yes', 'approved', 'denied', 'timed_out')),
+  channel         TEXT NOT NULL CHECK (channel IN ('voice_call', 'wallet_signature', 'timeout')),
+  conversation_id TEXT,
+  detail          TEXT,
+  decided_at      INTEGER NOT NULL
 ) STRICT;
 CREATE TABLE IF NOT EXISTS authorizations (
   purchase_id  TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
@@ -147,7 +233,9 @@ export class PaymentStore {
   get(purchaseId: string): StoredAuthorization | undefined {
     const row = this.#db
       .prepare(
-        `SELECT a.*, p.mission_id FROM authorizations a JOIN purchases p USING (purchase_id) WHERE purchase_id = ?`,
+        `SELECT a.*, p.mission_id, COALESCE(r.rail, 'arc-eip3009') AS rail
+         FROM authorizations a JOIN purchases p USING (purchase_id) LEFT JOIN purchase_rails r USING (purchase_id)
+         WHERE purchase_id = ?`,
       )
       .get(purchaseId) as Row | undefined;
     return row ? toStored(row) : undefined;
@@ -158,6 +246,31 @@ export class PaymentStore {
       | Row
       | undefined;
     return row ? { amount: BigInt(row.amount as string), status: row.status as string } : undefined;
+  }
+
+  /** Durable pause switch. While paused nothing is reserved, approved, or signed. */
+  isPaused(): boolean {
+    const row = this.#db.prepare(`SELECT paused FROM payment_controls WHERE id = 1`).get() as Row | undefined;
+    return row?.paused === 1;
+  }
+
+  setPaused(paused: boolean, now: number, reason: string | null = null): void {
+    this.#db
+      .prepare(
+        `INSERT INTO payment_controls (id, paused, reason, updated_at) VALUES (1, ?, ?, ?)
+         ON CONFLICT (id) DO UPDATE SET paused = excluded.paused, reason = excluded.reason, updated_at = excluded.updated_at`,
+      )
+      .run(paused ? 1 : 0, reason, now);
+  }
+
+  /** Mission budget split into held (reserved, not yet settled) and spent amounts. */
+  budget(missionId: string): { budget: bigint; held: bigint; spent: bigint; released: bigint; available: bigint } {
+    const rows = this.#db.prepare(`SELECT amount, status FROM reservations WHERE mission_id = ?`).all(missionId) as Row[];
+    const sum = (status: string) =>
+      rows.filter((row) => row.status === status).reduce((total, row) => total + BigInt(row.amount as string), 0n);
+    const held = sum("held");
+    const spent = sum("spent");
+    return { budget: this.#policy.missionBudget, held, spent, released: sum("released"), available: this.#policy.missionBudget - held - spent };
   }
 
   /** Confirmed spend plus outstanding reservations for a mission. */
@@ -179,12 +292,15 @@ export class PaymentStore {
     now: number;
     /** True only when the analyst left a material resolution gap with no free or cached evidence. */
     materialUnresolvedGap?: boolean;
+    /** Defaults to the direct EIP-3009 rail. The Gateway rail uses the explicit nanopayment policy. */
+    rail?: PaymentRail;
     saltSource?: () => Hex;
   }): { record: StoredAuthorization; reused: boolean } {
     const { missionId, request, now } = input;
     const requestHash = computeRequestHash(request);
 
     return this.#transaction(() => {
+      if (this.isPaused()) throw new PolicyError("payments are paused");
       const existing = this.get(request.purchaseId);
       if (existing) {
         if (existing.requestHash !== requestHash || existing.missionId !== missionId) {
@@ -197,9 +313,17 @@ export class PaymentStore {
 
       const amount = BigInt(request.amount);
       const policy = this.#policy;
-      if (amount < policy.minAmount) throw new PolicyError("amount below policy minimum");
+      const rail: PaymentRail = input.rail ?? "arc-eip3009";
+      if (rail === "circle-gateway-batched") {
+        if (amount < NANOPAYMENT_POLICY.minAmount || amount > NANOPAYMENT_POLICY.maxAmount) {
+          throw new PolicyError("nanopayments are limited to 0.001 USDC per purchase");
+        }
+        if (input.materialUnresolvedGap !== true) {
+          throw new PolicyError("nanopayments require a material unresolved gap with no free or cached evidence");
+        }
+      } else if (amount < policy.minAmount) throw new PolicyError("amount below policy minimum");
       if (amount > policy.purchaseCap) throw new PolicyError("amount above purchase cap");
-      if (amount > policy.autoApproveMax && amount <= policy.gapMax && input.materialUnresolvedGap !== true) {
+      if (rail === "arc-eip3009" && amount > policy.autoApproveMax && amount <= policy.gapMax && input.materialUnresolvedGap !== true) {
         throw new PolicyError("this tier requires a material unresolved gap with no free or cached evidence");
       }
       if (this.committedSpend(missionId) + amount > policy.missionBudget) {
@@ -251,6 +375,7 @@ export class PaymentStore {
           initialStatus,
           now,
         );
+      this.#db.prepare(`INSERT INTO purchase_rails (purchase_id, rail) VALUES (?, ?)`).run(request.purchaseId, rail);
       return { record: this.get(request.purchaseId)!, reused: false };
     });
   }
@@ -264,6 +389,11 @@ export class PaymentStore {
     const record = this.get(args.purchaseId);
     if (!record) throw new PolicyError(`no purchase ${args.purchaseId} to approve`);
     if (record.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+    if (this.isPaused()) throw new PolicyError("payments are paused");
+    if (args.now >= record.request.validBefore) {
+      this.expire(args.purchaseId, args.now);
+      throw new PolicyError("owner approval expired");
+    }
     const verdict = await verifyOwnerApproval({
       request: record.request,
       requestHash: record.requestHash,
@@ -279,12 +409,174 @@ export class PaymentStore {
       this.#db
         .prepare(`UPDATE authorizations SET status = 'prepared', updated_at = ? WHERE purchase_id = ? AND status = 'awaiting_approval'`)
         .run(args.now, args.purchaseId);
+      this.#logDecision({ purchaseId: args.purchaseId, outcome: "approved", channel: "wallet_signature", conversationId: null, detail: null, decidedAt: args.now });
     });
     return this.get(args.purchaseId)!;
   }
 
+  /**
+   * The owner declined a tier 3 purchase. Only a purchase still awaiting approval
+   * can be declined; its reservation is released so the budget is free again.
+   */
+  recordOwnerRejection(args: { purchaseId: string; reason: string; now: number }): StoredAuthorization {
+    const record = this.get(args.purchaseId);
+    if (!record) throw new PolicyError(`no purchase ${args.purchaseId} to reject`);
+    if (record.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+    this.#transaction(() => {
+      this.#db
+        .prepare(`INSERT INTO owner_rejections (purchase_id, reason, rejected_at) VALUES (?, ?, ?)`)
+        .run(args.purchaseId, args.reason.slice(0, 500), args.now);
+      this.#db
+        .prepare(`UPDATE authorizations SET status = ?, updated_at = ? WHERE purchase_id = ? AND status = 'awaiting_approval'`)
+        .run(BLOCKED_STATE_STATUS.rejected, args.now, args.purchaseId);
+      this.#db
+        .prepare(`UPDATE reservations SET status = 'released', updated_at = ? WHERE purchase_id = ? AND status = 'held'`)
+        .run(args.now, args.purchaseId);
+    });
+    return this.get(args.purchaseId)!;
+  }
+
+  /**
+   * Closes one purchase whose authorization window passed before it was signed.
+   * A signed or submitted authorization is never expired here: its outcome is
+   * decided on chain and reconciled by nonce.
+   */
+  expire(purchaseId: string, now: number): boolean {
+    return this.#transaction(() => {
+      const changed = this.#db
+        .prepare(
+          `UPDATE authorizations SET status = ?, updated_at = ?
+           WHERE purchase_id = ? AND signature IS NULL AND status IN ('awaiting_approval', 'prepared')`,
+        )
+        .run(BLOCKED_STATE_STATUS.expired, now, purchaseId);
+      if (Number(changed.changes) === 0) return false;
+      this.#db
+        .prepare(`UPDATE reservations SET status = 'released', updated_at = ? WHERE purchase_id = ? AND status = 'held'`)
+        .run(now, purchaseId);
+      return true;
+    });
+  }
+
+  /** Expires every unsigned purchase whose window has closed. Returns their IDs. */
+  expireStale(now: number): string[] {
+    const rows = this.#db
+      .prepare(`SELECT purchase_id, request_json FROM authorizations WHERE signature IS NULL AND status IN ('awaiting_approval', 'prepared')`)
+      .all() as Row[];
+    return rows
+      .filter((row) => (JSON.parse(row.request_json as string) as { validBefore: number }).validBefore <= now)
+      .map((row) => row.purchase_id as string)
+      .filter((purchaseId) => this.expire(purchaseId, now));
+  }
+
+  /** Pause and every blocked name, from either vocabulary, refuse a signature write. */
+  #refuseBlockedSignature(purchaseId: string): void {
+    if (this.isPaused()) throw new PolicyError("payments are paused");
+    const record = this.get(purchaseId);
+    if (!record) return;
+    const block = signingBlockFor(record.status, this.approvalDecisions(purchaseId));
+    if (block === "denied" || block === "timed_out") {
+      throw new Error(`purchase ${purchaseId} was denied or timed out and can never be signed`);
+    }
+    if (block === "rejected" || block === "expired") {
+      throw new PolicyError(`purchase ${purchaseId} is ${record.status} and cannot be signed`);
+    }
+  }
+
+  #logDecision(d: ApprovalDecision) {
+    this.#db
+      .prepare(
+        `INSERT INTO approval_decisions (purchase_id, outcome, channel, conversation_id, detail, decided_at) VALUES (?, ?, ?, ?, ?, ?)`,
+      )
+      .run(d.purchaseId, d.outcome, d.channel, d.conversationId, d.detail, d.decidedAt);
+  }
+
+  /** Decisions for a purchase, oldest first. */
+  approvalDecisions(purchaseId: string): ApprovalDecision[] {
+    const rows = this.#db
+      .prepare(`SELECT * FROM approval_decisions WHERE purchase_id = ? ORDER BY id`)
+      .all(purchaseId) as Row[];
+    return rows.map((row) => ({
+      purchaseId: row.purchase_id as string,
+      outcome: row.outcome as ApprovalOutcome,
+      channel: row.channel as ApprovalChannel,
+      conversationId: (row.conversation_id as string | null) ?? null,
+      detail: (row.detail as string | null) ?? null,
+      decidedAt: row.decided_at as number,
+    }));
+  }
+
+  /**
+   * The owner said yes on the call. This is logged and nothing else changes: the purchase stays
+   * `awaiting_approval` until `recordOwnerApproval` verifies a wallet signature.
+   */
+  recordVerbalConsent(args: { purchaseId: string; conversationId: string | null; now: number }): void {
+    const record = this.get(args.purchaseId);
+    if (record?.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+    this.#logDecision({
+      purchaseId: args.purchaseId,
+      outcome: "verbal_yes",
+      channel: "voice_call",
+      conversationId: args.conversationId,
+      detail: "spoken consent only; a wallet signature is still required",
+      decidedAt: args.now,
+    });
+  }
+
+  /**
+   * Owner said no, or nobody answered in time. Terminal: the reservation is released and the
+   * purchase can never be signed. Timeout is deny.
+   */
+  denyAwaitingApproval(args: {
+    purchaseId: string;
+    outcome: "denied" | "timed_out";
+    channel: ApprovalChannel;
+    conversationId?: string | null;
+    detail?: string | null;
+    now: number;
+  }): void {
+    this.#transaction(() => {
+      const record = this.get(args.purchaseId);
+      if (record?.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+      this.#db
+        .prepare(`UPDATE authorizations SET status = ?, updated_at = ? WHERE purchase_id = ? AND status = 'awaiting_approval'`)
+        .run(BLOCKED_STATE_STATUS[args.outcome], args.now, args.purchaseId);
+      this.#db
+        .prepare(`UPDATE reservations SET status = 'released', updated_at = ? WHERE purchase_id = ? AND status = 'held'`)
+        .run(args.now, args.purchaseId);
+      this.#logDecision({
+        purchaseId: args.purchaseId,
+        outcome: args.outcome,
+        channel: args.channel,
+        conversationId: args.conversationId ?? null,
+        detail: args.detail ?? null,
+        decidedAt: args.now,
+      });
+    });
+  }
+
+  /** Default on timeout is deny: any purchase still awaiting approval after its request expired is denied. */
+  denyExpiredApprovals(now: number): string[] {
+    const rows = this.#db.prepare(`SELECT purchase_id FROM authorizations WHERE status = 'awaiting_approval'`).all() as Row[];
+    const denied: string[] = [];
+    for (const row of rows) {
+      const record = this.get(row.purchase_id as string);
+      if (record && now >= record.request.validBefore) {
+        this.denyAwaitingApproval({
+          purchaseId: record.purchaseId,
+          outcome: "timed_out",
+          channel: "timeout",
+          detail: "no valid owner signature before the request expired",
+          now,
+        });
+        denied.push(record.purchaseId);
+      }
+    }
+    return denied;
+  }
+
   /** Stores the signature once. Returns whichever signature is stored. */
   recordSignature(purchaseId: string, signature: Hex, now: number): StoredAuthorization {
+    this.#refuseBlockedSignature(purchaseId);
     this.#db
       .prepare(
         `UPDATE authorizations SET signature = ?, status = 'signed', updated_at = ?
@@ -331,5 +623,6 @@ function toStored(row: Row): StoredAuthorization {
     signature: (row.signature as Hex | null) ?? null,
     status: row.status as AuthorizationStatus,
     txHash: (row.tx_hash as Hex | null) ?? null,
+    rail: row.rail as PaymentRail,
   };
 }

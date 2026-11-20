@@ -1,8 +1,9 @@
 import type { Hex } from "viem";
 import { TRANSFER_WITH_AUTHORIZATION_TYPES } from "./arc.ts";
 import { encodeBindingHeader } from "./binding.ts";
+import { gatewayAuthorizationDomain } from "./circleGateway.ts";
 import type { Eip3009Authorization } from "./merchant.ts";
-import { ApprovalRequiredError, type PaymentStore, type StoredAuthorization } from "./store.ts";
+import { ApprovalRequiredError, PolicyError, signingBlockFor, type PaymentStore, type StoredAuthorization } from "./store.ts";
 
 /** The signer stays behind the payment service. Only typed-data signing is needed. */
 export interface PaymentSigner {
@@ -42,18 +43,35 @@ export async function authorizeStoredPurchase(args: {
   tokenDomain: { name: string; version: string };
   now: number;
 }): Promise<AuthorizedPayment> {
+  // The signing domain follows the purchase's stored rail, so a retry signs (or reuses) under the same domain.
   const { store, purchaseId, signer } = args;
   let record = store.get(purchaseId);
   if (!record) throw new Error(`purchase ${purchaseId} has no recorded reservation; reserve before signing`);
   if (record.status === "awaiting_approval") {
     throw new ApprovalRequiredError(`purchase ${purchaseId} needs owner approval before signing`);
   }
+  // Pause, and every blocked name from both branches, is refused before the signer is called.
+  const block = signingBlockFor(record.status, store.approvalDecisions(purchaseId));
+  if (store.isPaused()) throw new PolicyError("payments are paused");
+  if (block === "denied" || block === "timed_out") {
+    throw new Error(`purchase ${purchaseId} was denied or timed out and can never be signed`);
+  }
+  if (block === "rejected" || block === "expired") {
+    throw new PolicyError(`purchase ${purchaseId} is ${record.status} and cannot be signed`);
+  }
   const reused = record.signature !== null;
+  if (!reused && args.now >= record.request.validBefore) {
+    store.expire(purchaseId, args.now);
+    throw new PolicyError(`purchase ${purchaseId} expired before signing`);
+  }
   if (!reused) {
     const { request } = record;
     if (signer.address.toLowerCase() !== request.payer) throw new Error("signer is not the recorded payer");
     const signature = await signer.signTypedData({
-      domain: { ...args.tokenDomain, chainId: request.chainId, verifyingContract: request.token },
+      domain:
+        record.rail === "circle-gateway-batched"
+          ? { ...gatewayAuthorizationDomain(), chainId: request.chainId }
+          : { ...args.tokenDomain, chainId: request.chainId, verifyingContract: request.token },
       types: TRANSFER_WITH_AUTHORIZATION_TYPES,
       primaryType: "TransferWithAuthorization",
       message: {
