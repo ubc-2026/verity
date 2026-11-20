@@ -20,7 +20,8 @@
   "vars": {
     "VERITY_AUTH_EDGE_URL": "https://ijjjygqgdgqhquugxdfp.supabase.co/functions/v1/consumer-auth",
     "VERITY_AUTH_SITE_ORIGIN": "https://verityresearch.us",
-    "VERITY_PUBLIC_SIGNUP": "true"
+    "VERITY_PUBLIC_SIGNUP": "true",
+    "VERITY_AUTH_GITHUB_SIGNUP": "true"
   },
   "ratelimits": [
     {

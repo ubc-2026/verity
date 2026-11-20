@@ -41,3 +41,27 @@ export function googleRegistration(clientId: string, dbUrl: string): ConsumerAut
     },
   };
 }
+
+// See supabase/consumer-auth-github-signup.sql. A proof stays for 10 minutes, longer than the 2-minute ticket,
+// so a ticket that was already used is still on record and cannot be used again.
+export function githubRegistration(dbUrl: string): ConsumerAuthConfig["githubSignup"] {
+  if (!dbUrl) return;
+  const sql = postgres(dbUrl, { ssl: "verify-full", max: 1, prepare: false, fetch_types: false, connect_timeout: 4, idle_timeout: 10 });
+
+  return {
+    async allowSignup(ticketId, clientIp) {
+      return await sql.begin(async (tx) => {
+        await tx`DELETE FROM app_private.github_signup_proofs WHERE expires_at <= statement_timestamp()`;
+        const rows = await tx`
+          INSERT INTO app_private.github_signup_proofs (ticket_hash, ip_hash, expires_at)
+          SELECT sha256(convert_to(${ticketId}, 'UTF8')), hash, statement_timestamp() + interval '10 minutes'
+          FROM (SELECT app_private.signup_address_hash(${clientIp}) AS hash) AS address
+          WHERE hash IS NOT NULL
+          ON CONFLICT (ticket_hash) DO NOTHING
+          RETURNING 1
+        `;
+        return rows.length === 1;
+      });
+    },
+  };
+}

@@ -7,6 +7,10 @@ const REGISTRATION_TTL = 300;
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const TOKEN = /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/;
 const START_BODY_LIMIT = 4096;
+const GITHUB_TICKET = "verity-github-ticket";
+const GITHUB_TICKET_TTL = 120;
+const TICKET = /^[0-9a-f]{32}~[A-Za-z0-9_-]{43}$/;
+const PROVIDERS = new Set(["google", "github"]);
 const encoder = new TextEncoder();
 const endpoint = "/functions/v1/consumer-auth";
 
@@ -22,6 +26,22 @@ export interface ConsumerAuthConfig {
     verifyIdentity(credential: string, nonce: string): Promise<string | undefined>;
     allowSignup(subject: string): Promise<void>;
   };
+  /**
+   * GitHub has no ID token to check before the account exists, so a GitHub signup is allowed by a proof that
+   * the Before-User-Created hook matches on the client address Supabase Auth sees. Records that proof and
+   * returns false when the ticket was already used.
+   */
+  githubSignup?: {
+    allowSignup(ticketId: string, clientIp: string): Promise<boolean>;
+  };
+}
+
+/** The visitor's address as the Supabase gateway reports it: the first X-Forwarded-For entry. */
+export function clientAddress(req: Request): string | undefined {
+  const first = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "";
+  if (/^(?:\d{1,3}\.){3}\d{1,3}$/.test(first) && first.split(".").every((part) => Number(part) <= 255)) return first;
+  if (first.length <= 45 && /^[0-9a-f:.]+$/i.test(first) && first.includes(":")) return first.toLowerCase();
+  return undefined;
 }
 
 function fields(value: unknown): Record<string, unknown> {
@@ -109,7 +129,10 @@ export function createConsumerAuth(config: ConsumerAuthConfig, send: typeof fetc
   }
 
   async function openCookie(req: Request, name: string, pattern: RegExp): Promise<string | undefined> {
-    const raw = readCookie(req, name);
+    return openSealed(name, readCookie(req, name), pattern);
+  }
+
+  async function openSealed(name: string, raw: string | null | undefined, pattern: RegExp): Promise<string | undefined> {
     if (!raw || raw.length > 3100) return;
     const parts = raw.split(".");
     const digest = parts.pop();
@@ -166,7 +189,42 @@ export function createConsumerAuth(config: ConsumerAuthConfig, send: typeof fetc
     return sealCookie(SESSION, token, lifetime).then((sealed) => cookie(response, SESSION, sealed, lifetime));
   }
 
+  // The browser opens this route on the Supabase origin, so Supabase Auth later sees the same client address.
+  // It needs no edge key: the sealed ticket proves that /start passed the Turnstile check in the last two minutes.
+  async function continueToGitHub(req: Request): Promise<Response> {
+    const fail = () => {
+      const response = reply(303);
+      response.headers.set("location", new URL("/?signin=failed", site).href);
+      return response;
+    };
+    if (!config.githubSignup) return fail();
+    const url = new URL(req.url);
+    if ([...url.searchParams.keys()].join() !== "ticket") return fail();
+    const ticket = await openSealed(GITHUB_TICKET, url.searchParams.get("ticket"), TICKET);
+    const ip = clientAddress(req);
+    if (!ticket || !ip) return fail();
+    const [ticketId, pkceChallenge] = ticket.split("~") as [string, string];
+    if (!(await config.githubSignup.allowSignup(ticketId, ip))) return fail();
+    const authorize = new URL("/auth/v1/authorize", project);
+    authorize.search = new URLSearchParams({
+      provider: "github", redirect_to: callback.href, code_challenge: pkceChallenge, code_challenge_method: "s256",
+    }).toString();
+    const response = reply(303);
+    response.headers.set("location", authorize.href);
+    return response;
+  }
+
   return async (req: Request): Promise<Response> => {
+    const direct = new URL(req.url).pathname.replace(/^\/functions\/v1(?=\/)/, "");
+    if (req.method === "GET" && direct === "/consumer-auth/github") {
+      try {
+        return await continueToGitHub(req);
+      } catch {
+        const response = reply(303);
+        response.headers.set("location", new URL("/?signin=failed", site).href);
+        return response;
+      }
+    }
     const ingress = req.headers.get("x-verity-edge-key");
     if (!ingress || !/^[0-9a-f]{64}$/.test(ingress) || !timingSafeEqual(encoder.encode(ingress), ingressKey)) {
       return reply(404, { error: "not_found" });
@@ -218,17 +276,31 @@ export function createConsumerAuth(config: ConsumerAuthConfig, send: typeof fetc
       if (operation === "POST /start") {
         const input = await readJson(req, START_BODY_LIMIT);
         const challenge = challengeFrom(input);
-        if (!input || Object.keys(input).length !== 1 || !challenge) return reply(400, { error: "invalid_challenge" });
+        const provider = input?.provider ?? "google";
+        const keys = input ? Object.keys(input) : [];
+        if (!input || !challenge || !keys.every((key) => key === "challenge" || key === "provider") ||
+            typeof provider !== "string" || !PROVIDERS.has(provider) || (provider === "github" && !config.githubSignup)) {
+          return reply(400, { error: "invalid_challenge" });
+        }
         const status = await verifyHuman(challenge);
         if (status !== 200) return reply(status, { error: status === 403 ? "challenge_denied" : "signin_unavailable" });
         const verifier = hex(crypto.getRandomValues(new Uint8Array(32)));
         const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(verifier)));
         const pkceChallenge = btoa(String.fromCharCode(...digest)).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
-        const authorize = new URL("/auth/v1/authorize", project);
-        authorize.search = new URLSearchParams({
-          provider: "google", redirect_to: callback.href, code_challenge: pkceChallenge, code_challenge_method: "s256",
-        }).toString();
-        const response = reply(200, { url: authorize.href });
+        let next: URL;
+        if (provider === "github") {
+          const ticketId = hex(crypto.getRandomValues(new Uint8Array(16)));
+          next = new URL(endpoint + "/github", project);
+          next.search = new URLSearchParams({
+            ticket: await sealCookie(GITHUB_TICKET, `${ticketId}~${pkceChallenge}`, GITHUB_TICKET_TTL),
+          }).toString();
+        } else {
+          next = new URL("/auth/v1/authorize", project);
+          next.search = new URLSearchParams({
+            provider: "google", redirect_to: callback.href, code_challenge: pkceChallenge, code_challenge_method: "s256",
+          }).toString();
+        }
+        const response = reply(200, { url: next.href });
         cookie(response, PKCE, await sealCookie(PKCE, verifier, 600), 600);
         return response;
       }

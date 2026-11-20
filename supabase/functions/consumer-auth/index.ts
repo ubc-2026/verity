@@ -1,5 +1,5 @@
 import { createConsumerAuth } from "./handler.ts";
-import { googleRegistration } from "./registration.ts";
+import { githubRegistration, googleRegistration } from "./registration.ts";
 
 Deno.serve(createConsumerAuth({
   siteOrigin: Deno.env.get("VERITY_AUTH_SITE_ORIGIN") ?? "",
@@ -12,4 +12,7 @@ Deno.serve(createConsumerAuth({
     Deno.env.get("VERITY_AUTH_GOOGLE_CLIENT_ID") ?? "",
     Deno.env.get("SUPABASE_DB_URL") ?? "",
   ),
+  githubSignup: Deno.env.get("VERITY_AUTH_GITHUB_SIGNUP") === "true"
+    ? githubRegistration(Deno.env.get("SUPABASE_DB_URL") ?? "")
+    : undefined,
 }));
