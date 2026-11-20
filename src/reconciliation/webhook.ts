@@ -15,6 +15,8 @@ export interface WebhookDeps {
   now(): number;
   /** Ledger source label. Defaults to "quicknode-streams". */
   source?: string;
+  /** Refuse signed deliveries whose X-QN-Timestamp is further than this from now(). Live ingestion sets it. */
+  maxTimestampSkewSeconds?: number;
 }
 
 const header = (req: IncomingMessage, name: string) => {
@@ -68,7 +70,7 @@ export function createQuickNodeWebhookHandler(deps: WebhookDeps) {
       timestamp: header(req, "x-qn-timestamp"),
       signature: header(req, "x-qn-signature"),
       payload,
-    });
+    }, deps.maxTimestampSkewSeconds === undefined ? undefined : { now: deps.now(), maxSkewSeconds: deps.maxTimestampSkewSeconds });
     if (!authentic) return void send(res, 401, { error: "invalid QuickNode signature" });
 
     let body: unknown;

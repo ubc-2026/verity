@@ -41,7 +41,11 @@ export type AuthorizationStatus =
   | "submitted"
   | "pending"
   | "settled"
-  | "failed";
+  | "failed"
+  /** The owner declined the approval request. The reservation is released. */
+  | "rejected"
+  /** The authorization window closed before it was approved or signed. The reservation is released. */
+  | "expired";
 
 export interface StoredAuthorization {
   purchaseId: string;
@@ -94,6 +98,17 @@ CREATE TABLE IF NOT EXISTS owner_approvals (
   request_hash TEXT NOT NULL,
   signature    TEXT NOT NULL,
   approved_at  INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS payment_controls (
+  id         INTEGER PRIMARY KEY CHECK (id = 1),
+  paused     INTEGER NOT NULL CHECK (paused IN (0, 1)),
+  reason     TEXT,
+  updated_at INTEGER NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS owner_rejections (
+  purchase_id TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
+  reason      TEXT NOT NULL,
+  rejected_at INTEGER NOT NULL
 ) STRICT;
 CREATE TABLE IF NOT EXISTS authorizations (
   purchase_id  TEXT PRIMARY KEY REFERENCES purchases(purchase_id),
@@ -169,6 +184,31 @@ export class PaymentStore {
     return row ? { amount: BigInt(row.amount as string), status: row.status as string } : undefined;
   }
 
+  /** Durable pause switch. While paused nothing is reserved, approved, or signed. */
+  isPaused(): boolean {
+    const row = this.#db.prepare(`SELECT paused FROM payment_controls WHERE id = 1`).get() as Row | undefined;
+    return row?.paused === 1;
+  }
+
+  setPaused(paused: boolean, now: number, reason: string | null = null): void {
+    this.#db
+      .prepare(
+        `INSERT INTO payment_controls (id, paused, reason, updated_at) VALUES (1, ?, ?, ?)
+         ON CONFLICT (id) DO UPDATE SET paused = excluded.paused, reason = excluded.reason, updated_at = excluded.updated_at`,
+      )
+      .run(paused ? 1 : 0, reason, now);
+  }
+
+  /** Mission budget split into held (reserved, not yet settled) and spent amounts. */
+  budget(missionId: string): { budget: bigint; held: bigint; spent: bigint; released: bigint; available: bigint } {
+    const rows = this.#db.prepare(`SELECT amount, status FROM reservations WHERE mission_id = ?`).all(missionId) as Row[];
+    const sum = (status: string) =>
+      rows.filter((row) => row.status === status).reduce((total, row) => total + BigInt(row.amount as string), 0n);
+    const held = sum("held");
+    const spent = sum("spent");
+    return { budget: this.#policy.missionBudget, held, spent, released: sum("released"), available: this.#policy.missionBudget - held - spent };
+  }
+
   /** Confirmed spend plus outstanding reservations for a mission. */
   committedSpend(missionId: string): bigint {
     const rows = this.#db
@@ -196,6 +236,7 @@ export class PaymentStore {
     const requestHash = computeRequestHash(request);
 
     return this.#transaction(() => {
+      if (this.isPaused()) throw new PolicyError("payments are paused");
       const existing = this.get(request.purchaseId);
       if (existing) {
         if (existing.requestHash !== requestHash || existing.missionId !== missionId) {
@@ -284,6 +325,11 @@ export class PaymentStore {
     const record = this.get(args.purchaseId);
     if (!record) throw new PolicyError(`no purchase ${args.purchaseId} to approve`);
     if (record.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+    if (this.isPaused()) throw new PolicyError("payments are paused");
+    if (args.now >= record.request.validBefore) {
+      this.expire(args.purchaseId, args.now);
+      throw new PolicyError("owner approval expired");
+    }
     const verdict = await verifyOwnerApproval({
       request: record.request,
       requestHash: record.requestHash,
@@ -301,6 +347,60 @@ export class PaymentStore {
         .run(args.now, args.purchaseId);
     });
     return this.get(args.purchaseId)!;
+  }
+
+  /**
+   * The owner declined a tier 3 purchase. Only a purchase still awaiting approval
+   * can be declined; its reservation is released so the budget is free again.
+   */
+  recordOwnerRejection(args: { purchaseId: string; reason: string; now: number }): StoredAuthorization {
+    const record = this.get(args.purchaseId);
+    if (!record) throw new PolicyError(`no purchase ${args.purchaseId} to reject`);
+    if (record.status !== "awaiting_approval") throw new PolicyError(`purchase ${args.purchaseId} is not awaiting owner approval`);
+    this.#transaction(() => {
+      this.#db
+        .prepare(`INSERT INTO owner_rejections (purchase_id, reason, rejected_at) VALUES (?, ?, ?)`)
+        .run(args.purchaseId, args.reason.slice(0, 500), args.now);
+      this.#db
+        .prepare(`UPDATE authorizations SET status = 'rejected', updated_at = ? WHERE purchase_id = ? AND status = 'awaiting_approval'`)
+        .run(args.now, args.purchaseId);
+      this.#db
+        .prepare(`UPDATE reservations SET status = 'released', updated_at = ? WHERE purchase_id = ? AND status = 'held'`)
+        .run(args.now, args.purchaseId);
+    });
+    return this.get(args.purchaseId)!;
+  }
+
+  /**
+   * Closes one purchase whose authorization window passed before it was signed.
+   * A signed or submitted authorization is never expired here: its outcome is
+   * decided on chain and reconciled by nonce.
+   */
+  expire(purchaseId: string, now: number): boolean {
+    return this.#transaction(() => {
+      const changed = this.#db
+        .prepare(
+          `UPDATE authorizations SET status = 'expired', updated_at = ?
+           WHERE purchase_id = ? AND signature IS NULL AND status IN ('awaiting_approval', 'prepared')`,
+        )
+        .run(now, purchaseId);
+      if (Number(changed.changes) === 0) return false;
+      this.#db
+        .prepare(`UPDATE reservations SET status = 'released', updated_at = ? WHERE purchase_id = ? AND status = 'held'`)
+        .run(now, purchaseId);
+      return true;
+    });
+  }
+
+  /** Expires every unsigned purchase whose window has closed. Returns their IDs. */
+  expireStale(now: number): string[] {
+    const rows = this.#db
+      .prepare(`SELECT purchase_id, request_json FROM authorizations WHERE signature IS NULL AND status IN ('awaiting_approval', 'prepared')`)
+      .all() as Row[];
+    return rows
+      .filter((row) => (JSON.parse(row.request_json as string) as { validBefore: number }).validBefore <= now)
+      .map((row) => row.purchase_id as string)
+      .filter((purchaseId) => this.expire(purchaseId, now));
   }
 
   /** Stores the signature once. Returns whichever signature is stored. */
