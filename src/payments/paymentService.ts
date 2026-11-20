@@ -50,6 +50,7 @@ export async function authorizeStoredPurchase(args: {
   if (record.status === "awaiting_approval") {
     throw new ApprovalRequiredError(`purchase ${purchaseId} needs owner approval before signing`);
   }
+  if (record.status === "denied") throw new Error(`purchase ${purchaseId} was denied or timed out and can never be signed`);
   const reused = record.signature !== null;
   if (!reused) {
     const { request } = record;
