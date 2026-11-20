@@ -50,7 +50,9 @@ export function explainDecision(args: { decision: PolicyDecision; quote: VerityQ
       text =
         decision.tier === "auto"
           ? `Verity bought ${what} automatically: it is within the 0.10 USDC auto-approve tier.`
-          : `Verity bought ${what} under the evidence-gap tier: a material settlement question remained after free sources.`;
+          : decision.tier === "nanopayment"
+            ? `Verity bought ${what} as a Circle Gateway nanopayment: an allowlisted item, at most 0.001 USDC, for an open settlement question.`
+            : `Verity bought ${what} under the evidence-gap tier: a material settlement question remained after free sources.`;
       break;
   }
   return { provider: "elevenlabs", text, voice: { mode: "not_requested", audio: null } };

@@ -26,8 +26,8 @@ def _emit(value: Any) -> None:
     sys.stdout.buffer.write(json.dumps(value, indent=2, ensure_ascii=False).encode("utf-8") + b"\n")
 
 
-def analyze(contract_id: str, scenario: str | None) -> dict[str, Any]:
-    ctx = FixtureContext.default(free_check_scenario=scenario)
+def analyze(contract_id: str, scenario: str | None, rail: str = "arc-eip3009") -> dict[str, Any]:
+    ctx = FixtureContext.default(free_check_scenario=scenario, payment_rail=rail)
     if contract_id not in ctx.markets:
         raise SystemExit(f"unknown contract {contract_id!r}; known: {', '.join(sorted(ctx.markets))}")
     research = research_market(ctx.markets[contract_id], ctx.clock.now())
@@ -60,10 +60,11 @@ def main(argv: list[str] | None = None) -> int:
     a = sub.add_parser("analyze")
     a.add_argument("--contract", required=True)
     a.add_argument("--free-check-scenario", default=None)
+    a.add_argument("--rail", default="arc-eip3009", choices=["arc-eip3009", "circle-gateway-batched"])
     sub.add_parser("reassess")
     args = parser.parse_args(argv)
     if args.command == "analyze":
-        _emit(analyze(args.contract, args.free_check_scenario))
+        _emit(analyze(args.contract, args.free_check_scenario, args.rail))
     else:
         _emit(reassess_from(json.loads(sys.stdin.buffer.read().decode("utf-8"))))
     return 0

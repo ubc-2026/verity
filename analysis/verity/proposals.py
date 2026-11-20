@@ -35,10 +35,11 @@ def _record(decision_log: Optional[list[str]], msg: str) -> None:
 
 
 def _catalog_match(ctx: FixtureContext, gap_type: str) -> Optional[dict[str, Any]]:
+    """First allowlisted item that answers the gap on the requested payment rail."""
     allow = set(ctx.catalog["merchant_allowlist"])
     for item in ctx.catalog["items"]:
         if (gap_type in item["answers_gap_types"] and item["affects"] == "resolution_risk"
-                and item["merchant_id"] in allow):
+                and item["merchant_id"] in allow and item.get("rail", "arc-eip3009") == ctx.payment_rail):
             return item
     return None
 

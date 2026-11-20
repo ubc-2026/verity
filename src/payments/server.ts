@@ -109,7 +109,8 @@ export async function handleMerchantHttp(
       if (result.status === 200) {
         return { status: 200, headers: { ...result.headers, "content-type": "application/json" }, body: result.body };
       }
-      return json(result.status, { outcome: result.status === 202 ? "pending" : "rejected", reason: result.reason, txHash: result.txHash ?? null });
+      const reference = "paymentRef" in result ? { paymentRef: result.paymentRef } : { txHash: ("txHash" in result ? result.txHash : null) ?? null };
+      return json(result.status, { outcome: result.status === 202 ? "pending" : "rejected", reason: result.reason, ...reference });
     }
     return json(404, { outcome: "rejected", reason: "unknown route" });
   } catch (error) {

@@ -14,6 +14,18 @@
       "description": "Reports which issuance of the NWS CLI product (preliminary, final, correction) carries the official max temperature for a station and date, with issuance times, and quotes the exchange rule that names the version."
     },
     {
+      "id": "cat-nws-cli-settlement-version-nano-v1",
+      "evidence_type": "settlement_source_version",
+      "merchant_id": "verity-demo-merchant",
+      "title": "NWS daily climate report: settlement-version check (Circle Gateway nanopayment)",
+      "answers_gap_types": ["settlement_source_version"],
+      "affects": "resolution_risk",
+      "price_base_units": "1000",
+      "parameters": ["station", "date"],
+      "rail": "circle-gateway-batched",
+      "description": "Same document as cat-nws-cli-settlement-version-v1, sold for 0.001 USDC over Circle Gateway nanopayments on Arc Testnet."
+    },
+    {
       "id": "cat-point-forecast-v1",
       "evidence_type": "outcome_forecast",
       "merchant_id": "verity-demo-merchant",

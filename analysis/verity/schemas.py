@@ -257,9 +257,19 @@ class EvidenceProvenance(Strict):
     content_sha256: str
     receipt_digest: str
     receipt_signer: str
-    tx_hash: str
-    verified_by: Literal["verifyDelivery"]
+    tx_hash: Optional[str] = None      # direct rail: the settlement tx the receipt signs
+    verified_by: Literal["verifyDelivery", "verifyGatewayDelivery"]
     data_label: DataLabel
+    payment_rail: Literal["arc-eip3009", "circle-gateway-batched"] = "arc-eip3009"
+    payment_ref: Optional[str] = None  # Gateway rail: Circle transfer ID the V2 receipt signs
+
+    @model_validator(mode="after")
+    def _rail_reference(self) -> "EvidenceProvenance":
+        if self.payment_rail == "arc-eip3009" and (not self.tx_hash or self.verified_by != "verifyDelivery"):
+            raise ValueError("direct-rail evidence needs tx_hash and verifyDelivery")
+        if self.payment_rail == "circle-gateway-batched" and (not self.payment_ref or self.verified_by != "verifyGatewayDelivery"):
+            raise ValueError("Gateway evidence needs payment_ref and verifyGatewayDelivery")
+        return self
 
 
 class FindingChange(Strict):

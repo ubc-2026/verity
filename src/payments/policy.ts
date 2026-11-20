@@ -12,6 +12,18 @@ export const AUTO_MAX = 100_000n;
 export const GAP_MAX = 500_000n;
 export const APPROVAL_MAX = 2_000_000n;
 
+/**
+ * Explicit nanopayment policy (Circle Gateway rail only). Amounts under the 0.01 USDC
+ * minimum are allowed only here: allowlisted items, at most 0.001 USDC each, and only
+ * for a material unresolved gap. Mission budget and duplicate checks still apply.
+ */
+export const NANOPAYMENT_POLICY = {
+  rail: "circle-gateway-batched",
+  minAmount: 1n,
+  maxAmount: 1_000n, // 0.001 USDC
+  allowlistedItems: ["cat-nws-cli-settlement-version-nano-v1"] as readonly string[],
+} as const;
+
 export const ownerApprovalTypes = {
   OwnerApproval: [
     { name: "purchaseId", type: "string" },
@@ -35,7 +47,7 @@ export function ownerApprovalDomain(chainId: number) {
 }
 
 export type PolicyDecision =
-  | { decision: "allow"; tier: "auto" | "gap" }
+  | { decision: "allow"; tier: "auto" | "gap" | "nanopayment" }
   | { decision: "needs_approval"; tier: "owner" }
   | { decision: "reject"; reason: string };
 
@@ -55,6 +67,8 @@ export interface PolicyAssessmentInput {
   spentKeys: readonly string[];
   committedBaseUnits: bigint;
   budget: bigint;
+  /** Payment rail of the catalog item. Defaults to the direct EIP-3009 rail. */
+  rail?: "arc-eip3009" | "circle-gateway-batched";
 }
 
 /**
@@ -75,6 +89,19 @@ export function assessPolicy(input: PolicyAssessmentInput): PolicyDecision {
   }
 
   const { amount } = input;
+  if (input.rail === NANOPAYMENT_POLICY.rail) {
+    if (!NANOPAYMENT_POLICY.allowlistedItems.includes(input.catalogItemId)) {
+      return { decision: "reject", reason: "catalog item is not allowlisted for nanopayments" };
+    }
+    if (amount < NANOPAYMENT_POLICY.minAmount || amount > NANOPAYMENT_POLICY.maxAmount) {
+      return { decision: "reject", reason: "nanopayments are limited to 0.001 USDC per purchase" };
+    }
+    if (!input.materialUnresolvedGap) {
+      return { decision: "reject", reason: "nanopayments require a material unresolved gap with no free or cached evidence" };
+    }
+    if (input.committedBaseUnits + amount > input.budget) return { decision: "reject", reason: "mission budget exceeded" };
+    return { decision: "allow", tier: "nanopayment" };
+  }
   if (amount < AUTO_MIN) return { decision: "reject", reason: "below the 0.01 USDC minimum" };
   if (amount > APPROVAL_MAX) return { decision: "reject", reason: "above the 2.00 USDC owner-approval maximum" };
   if (input.committedBaseUnits + amount > input.budget) {
