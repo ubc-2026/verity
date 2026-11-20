@@ -1897,7 +1897,8 @@ async function runResearch(q){q=(q||'').trim()||'crypto market trends bitcoin et
   finally{RES.busy=false;btn.removeAttribute('aria-busy');}}
 (function resInit(){$('#resForm').addEventListener('submit',e=>{e.preventDefault();runResearch($('#resQ').value);});
   $$('#resChips button').forEach(b=>b.addEventListener('click',()=>{$('#resQ').value=b.dataset.q;runResearch(b.dataset.q);}));
-  onVisible($('#resList'),v=>{if(v&&!RES.q)runResearch('');});})();
+  onVisible($('#resList'),v=>{if(v&&!RES.q)runResearch('');});
+  setTimeout(()=>{if(!RES.q)runResearch('');},3000);})(); // don't rely only on the visibility observer
 
 /* Research for the market selected in the terminal (AI panel) */
 async function runMarketResearch(){const m=MARKETS[term.market];const out=$('#gaiOut');const btn=$('#mresRun');
