@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { describe, it, mock } from "node:test";
 import type { Hex } from "viem";
 import { buildResearchRequest } from "../src/payments/buyer.ts";
 import { catalogById } from "../src/payments/catalog.ts";
@@ -8,11 +8,12 @@ import { deliverGatewayPaidRequest, GatewayDeliveryStore, type GatewayDeliveryDe
 import { GatewayLedger } from "../src/payments/gatewayLedger.ts";
 import { verifyGatewayDelivery } from "../src/payments/gatewayReceipt.ts";
 import type { PaidRequest } from "../src/payments/merchant.ts";
-import { authorizeStoredPurchase } from "../src/payments/paymentService.ts";
+import { authorizeStoredPurchase, type PaymentSigner } from "../src/payments/paymentService.ts";
 import { assessPolicy, MISSION_BUDGET } from "../src/payments/policy.ts";
 import { parseQuote } from "../src/payments/quote.ts";
 import { hashContent } from "../src/payments/researchRequest.ts";
-import { PaymentStore, PolicyError } from "../src/payments/store.ts";
+import { BuyerService } from "../src/payments/purchase.ts";
+import { DEMO_POLICY, PaymentStore, PolicyError } from "../src/payments/store.ts";
 import { MockGatewayProvider } from "../scripts/e2e/mockGateway.ts";
 import { DEMO_MERCHANT_CONFIG, DEMO_MERCHANT_SIGNER, DEMO_NOW, DEMO_PAYER } from "./fixtures/scenario.ts";
 import { RESEARCH_RESOURCES } from "../src/payments/catalog.ts";
@@ -401,5 +402,54 @@ describe("Gateway buyer verification and ledger", () => {
     assert.equal((await verifyGatewayDelivery({ ...base, body: altered, authorizationNonce: t.paid.record.nonce })).ok, false);
     const otherNonce = await verifyGatewayDelivery({ ...base, body: res.body, authorizationNonce: `0x${"ab".repeat(32)}` });
     assert.equal(!otherNonce.ok && otherNonce.code, "nonce_mismatch");
+  });
+});
+
+describe("expired or declined quotes never submit payment", () => {
+  it("merchant: an expired quote is refused before Gateway verify or settle, though the 7-day authorization is still valid", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const expiresAt = nanoQuote().expiresAt;
+    assert.ok(Number(t.input.authorization.validBefore) > expiresAt, "the Gateway authorization outlives the quote");
+    const late = await deliverGatewayPaidRequest(t.input, { ...t.deps, now: () => expiresAt });
+    assert.equal(late.status, 410, JSON.stringify(late));
+    assert.equal(gateway.verifyCalls, 0);
+    assert.equal(gateway.settleCalls, 0);
+    assert.equal(t.deliveries.get(t.request.purchaseId), undefined);
+  });
+
+  it("buyer: an expired quote or a policy decline signs nothing and stores no authorization", async () => {
+    const signTypedData = mock.fn<PaymentSigner["signTypedData"]>(async () => {
+      throw new Error("A rejected purchase must never reach the signer");
+    });
+    const signer = { address: DEMO_PAYER.address, signTypedData };
+    const buyer = (store: PaymentStore) =>
+      new BuyerService({ store, catalog, owner: DEMO_PAYER.address, signer, tokenDomain: { name: "USDC", version: "2" }, missionId: "m-safeguard" });
+    const accepted = {
+      selection: { catalogItemId: NANO, parameters, maxAmount: 1000n },
+      groupKey: "fx-nyc-high-20261118:GAP-NYC-SETTLE",
+      catalogParameters,
+      materialUnresolvedGap: true as const,
+    };
+    const { buyerSessionId: _s, ...wire } = nanoQuote("purchase-expired");
+    const expiredStore = new PaymentStore();
+    const expired = await buyer(expiredStore).purchase({ accepted, purchaseId: "purchase-expired", quote: parseQuote(wire), now: wire.expiresAt });
+    assert.equal(expired.status, "rejected");
+    assert.match(expired.status === "rejected" ? expired.reason : "", /quote expired/);
+    assert.equal(expiredStore.get("purchase-expired"), undefined);
+    assert.equal(signTypedData.mock.callCount(), 0);
+
+    const { buyerSessionId: _s2, ...wire2 } = nanoQuote("purchase-over-budget");
+    const declinedStore = new PaymentStore(":memory:", { ...DEMO_POLICY, missionBudget: 999n });
+    const declined = await buyer(declinedStore).purchase({
+      accepted,
+      purchaseId: "purchase-over-budget",
+      quote: parseQuote(wire2),
+      now: DEMO_NOW,
+    });
+    assert.equal(declined.status, "rejected");
+    assert.match(declined.status === "rejected" ? declined.reason : "", /mission budget exceeded/);
+    assert.equal(declinedStore.get("purchase-over-budget"), undefined);
+    assert.equal(signTypedData.mock.callCount(), 0);
   });
 });

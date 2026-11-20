@@ -78,6 +78,13 @@ def _settlement_version(original: RiskAnalysisV1, gap: EvidenceGap, doc: Any, pr
     item = next((i for i in ctx.catalog.get("items", []) if i["id"] == prov.catalog_item_id), None)
     if item is None:
         return _result("evidence_rejected", f"catalog item {prov.catalog_item_id} is not in the allowlisted catalog", original, prov=prov)
+    if original.snapshot.source_mode == "live":
+        if (item.get("live_contract_id") != original.contract_id or item.get("merchant_id") != prov.merchant_id
+                or prov.merchant_id not in ctx.catalog["merchant_allowlist"]
+                or item.get("rail", "arc-eip3009") != prov.payment_rail):
+            return _result("evidence_rejected", "catalog item is not approved for this live contract, merchant, and rail", original, prov=prov)
+        if doc.get("label") != "LIVE" or prov.data_label != "LIVE":
+            return _result("evidence_rejected", "a live assessment requires live evidence and provenance", original, prov=prov)
     expected = _catalog_params(original, item)
     got = {"station": ev.station, "date": ev.date}
     if any(not v for v in expected.values()) or {k: got.get(k) for k in expected} != expected:

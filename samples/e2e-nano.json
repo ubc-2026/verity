@@ -260,7 +260,8 @@
       "checks": {
         "tamper_rejected": true,
         "wrong_signer_rejected": true,
-        "nothing_recorded_as_delivered": true
+        "nothing_recorded_as_delivered": true,
+        "analyst_not_called": true
       }
     }
   ],
