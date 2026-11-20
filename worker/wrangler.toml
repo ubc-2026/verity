@@ -6,7 +6,7 @@ preview_urls = false
 
 [vars]
 SITE_ORIGIN = "https://verityresearch.us"
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
 [ai]

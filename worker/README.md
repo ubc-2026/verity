@@ -16,7 +16,7 @@ All of them accept requests only from `https://verityresearch.us` (the `Origin` 
 ## Files
 
 - `worker.mjs`: the Worker code.
-- `wrangler.toml`: its config, with the vars `SITE_ORIGIN`, `GEMINI_MODEL` (preferred model; retired names are replaced automatically) and `BACKUP_MODEL`, plus the `[ai]` binding and the rate limiter.
+- `wrangler.toml`: its config, with the vars `SITE_ORIGIN`, `GEMINI_MODEL` (preferred model, currently `gemini-3.5-flash-lite`; if Google retires it, the Worker picks the next-best Flash model automatically) and `BACKUP_MODEL`, plus the `[ai]` binding and the rate limiter.
 - `deploy.ps1`: a Windows one-step deploy. It writes these two files to a temp folder, runs `wrangler deploy`, and offers to set the Exa key.
 
 ## Secrets
@@ -39,8 +39,13 @@ npx wrangler@4 deploy
 
 On Windows you can use `powershell -ExecutionPolicy Bypass -File deploy.ps1` instead.
 
+## Version
+
+v8 (Nov 20, 2026), deployed as version `7d310d8d`. `GET /status` shows the model in use; its `version` field still reads `v7`, because v8 changed only the default model and the model-list caching.
+
 ## Notes
 
 - Workers' `fetch` supports only `redirect: 'follow'` or `'manual'`. `'error'` throws, which broke the first version.
 - Gemini thinking is turned down (`thinkingBudget: 0` for 2.5, `thinkingLevel: 'low'` for 3.x) so answers return before the 14-second timeout. A model that rejects the setting is retried without it.
+- `deploy.ps1` writes the Worker files as UTF-8 (a teammate's fix), so characters such as … survive.
 - Workers AI's JSON mode can fail with "JSON Mode couldn't be met", so the Worker retries with `json_object`.
