@@ -50,6 +50,8 @@ class FixtureContext:
     free_checks: dict[str, Any] = field(default_factory=dict)
     cached_evidence: dict[tuple[str, str], str] = field(default_factory=dict)
     free_check_scenario: Optional[str] = None   # which labeled fixture outcome to use
+    # Payment rail the catalog item must use: "arc-eip3009" (direct) or "circle-gateway-batched".
+    payment_rail: str = "arc-eip3009"
     # When set, and no fixture scenario is selected, read the public documents.
     live_research: bool = False
     fetch_text: Optional[Callable[[str], tuple[Optional[str], Optional[str]]]] = None

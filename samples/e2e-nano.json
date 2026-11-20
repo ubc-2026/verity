@@ -1,0 +1,270 @@
+{
+  "workflow": "verity-circle-gateway-fixture-loop-v1",
+  "dataLabels": {
+    "market": "FIXTURE NYC high-temperature contract (terms excerpts read from the real terms PDF on 2026-11-18)",
+    "freeCheck": "OBSERVED reading (observed-2026-11-18); FIXTURE assumption (free-check-answers)",
+    "gateway": "MOCKED Circle Gateway: verify/settle, transfer IDs, and batch tx hashes are generated locally; no Circle API call, no deposit, no testnet payment",
+    "merchantEvidence": "FIXTURE document served by the demo merchant",
+    "quicknode": "Not claimed for Gateway purchases (batch settlement; no provable per-payment match)"
+  },
+  "scenarios": [
+    {
+      "name": "free_evidence_resolves_gap",
+      "statuses": {
+        "analysis": "no_proposal",
+        "payment": "not_started",
+        "delivery": "not_requested",
+        "batchSettlement": "-",
+        "quicknode": "-"
+      },
+      "details": {
+        "finding": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "reason": "[fx-nyc-high-20261118] skip GAP-NYC-SETTLE: answered by the free check; nothing to buy. [fx-nyc-high-20261118] no purchase: every material gap was answered, cached, or had no catalog match."
+      },
+      "checks": {
+        "no_purchase": true
+      }
+    },
+    {
+      "name": "paid_nanopayment_changes_assessment",
+      "statuses": {
+        "analysis": "revised",
+        "payment": "accepted_by_gateway; batch_settled",
+        "delivery": "verified",
+        "batchSettlement": "completed (batch tx 0xde4138183512ba772a7a75ce77266ac642c7bb794fefc44d4e275d90eb7331af)",
+        "quicknode": "not_claimed: Gateway settles many payments in one batch transaction and Circle does not document a per-payment link inside it, so no QuickNode match is claimed for this purchase"
+      },
+      "details": {
+        "originalFinding": {
+          "rule": {
+            "id": "C-NYC-4",
+            "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18",
+            "quote": "only the first published version that includes confirmation of the will be used"
+          },
+          "gap": {
+            "id": "GAP-NYC-SETTLE",
+            "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+            "gap_type": "settlement_source_version",
+            "affects": "resolution_risk",
+            "material": true,
+            "why": "If a correction moves the max across a 2°F band edge, the version used decides the outcome.",
+            "free_checks": [
+              "nyc-settlement-version"
+            ]
+          },
+          "assessment": {
+            "final_rating": "Medium",
+            "raw_total": 8,
+            "research_action": "investigate",
+            "scores": {
+              "ambiguity": 2,
+              "source": 2,
+              "liquidity": 3,
+              "correlation": 1
+            },
+            "open_material_gaps": [
+              "GAP-NYC-SETTLE"
+            ]
+          },
+          "freeCheck": "[fx-nyc-high-20261118] GAP-NYC-SETTLE: free official-source check (Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, NWS Climatological Report (Daily) for Central Park, product CLINYC) -> inconclusive. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later revisions and corrections do not count. But the rule text is missing a word after 'confirmation of the', and NWS publishes a same-day CLINYC before the full-day one (Nov 17: issued 4:38 PM EST, valid as of 4:00 PM, max 57F at 3:55 PM). The terms do not say whether that partial-day report counts as the first published version, so the gap stays open."
+        },
+        "proposal": {
+          "version": "verity-purchase-proposal-v1",
+          "proposal_id": "prop-06680e4a9de9",
+          "contract_id": "fx-nyc-high-20261118",
+          "evidence_gap_id": "GAP-NYC-SETTLE",
+          "catalog_item_id": "cat-nws-cli-settlement-version-nano-v1",
+          "evidence_type": "settlement_source_version",
+          "catalog_parameters": {
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18"
+          },
+          "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check (Circle Gateway nanopayment)' answers exactly this gap type.",
+          "max_amount_base_units": "1000",
+          "asset": "USDC",
+          "network_label": "arc-testnet",
+          "fixture_label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z",
+          "signed": false,
+          "created_at_utc": "2026-11-18T01:00:00Z"
+        },
+        "purchase": {
+          "purchaseId": "purchase-7b12cc73918c31d4f2f2a10d",
+          "decision": {
+            "decision": "allow",
+            "tier": "nanopayment"
+          },
+          "amountBaseUnits": "1000",
+          "explanation": "Verity bought cat-nws-cli-settlement-version-nano-v1 from verity-demo-merchant for 0.001 USDC (testnet) as a Circle Gateway nanopayment: an allowlisted item, at most 0.001 USDC, for an open settlement question."
+        },
+        "evidencePurchased": {
+          "body": {
+            "label": "FIXTURE",
+            "source": "nws-cli",
+            "gap_type": "settlement_source_version",
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18",
+            "settling_issuance": "first_full_day_cli",
+            "excludes": [
+              "same-day partial CLINYC valid to 4 PM",
+              "later corrections"
+            ],
+            "corrections_count": false,
+            "summary": "FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count."
+          },
+          "receipt": {
+            "version": "verity-delivery-receipt-v2",
+            "paymentRail": "circle-gateway-batched",
+            "paymentRef": "e7340a41-9950-4976-860e-6b9c9cba63d0",
+            "authorizationNonce": "0x8b68f9391484b0ba2e6f1c53959f1b38ba3a0e60396c0fc9df3ff57ef907ddcc",
+            "contentHash": "0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca"
+          },
+          "gatewaySettleCalls": 1,
+          "batchHistory": [
+            {
+              "status": "unknown",
+              "txHash": null
+            },
+            {
+              "status": "batched",
+              "txHash": "0xde4138183512ba772a7a75ce77266ac642c7bb794fefc44d4e275d90eb7331af"
+            },
+            {
+              "status": "completed",
+              "txHash": "0xde4138183512ba772a7a75ce77266ac642c7bb794fefc44d4e275d90eb7331af"
+            }
+          ]
+        },
+        "whatChanged": [
+          {
+            "finding": "evidence_gaps.GAP-NYC-SETTLE",
+            "before": "open",
+            "after": "closed",
+            "changed": true,
+            "reason": "the receipt-verified document names the settling issuance: first_full_day_cli"
+          },
+          {
+            "finding": "scores.source",
+            "before": "2",
+            "after": "1",
+            "changed": true,
+            "reason": "revision risk resolved: settling issuance named and corrections excluded"
+          },
+          {
+            "finding": "rating.raw_total",
+            "before": "8",
+            "after": "7",
+            "changed": true,
+            "reason": "sum of the four category scores"
+          },
+          {
+            "finding": "rating.final_rating",
+            "before": "Medium",
+            "after": "Medium",
+            "changed": false,
+            "reason": "total 7 is still in the Medium band; ambiguity 2, liquidity 3, correlation 1 are unchanged by this evidence"
+          },
+          {
+            "finding": "research_action",
+            "before": "investigate",
+            "after": "investigate",
+            "changed": false,
+            "reason": "follows the final rating"
+          }
+        ],
+        "revisedAssessment": {
+          "final_rating": "Medium",
+          "raw_total": 7,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 1,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": []
+        }
+      },
+      "checks": {
+        "rule_quoted": true,
+        "proposal_for_gap": true,
+        "nanopayment_policy": true,
+        "receipt_and_bytes_verified": true,
+        "acceptance_recorded_before_batch": true,
+        "batch_settlement_recorded_separately": true,
+        "provider_id_tied_to_purchase_and_receipt": true,
+        "quicknode_not_claimed": true,
+        "reservation_spent_after_confirmation": true,
+        "assessment_revised": true
+      }
+    },
+    {
+      "name": "replay_without_second_charge",
+      "statuses": {
+        "analysis": "proposal",
+        "payment": "accepted_by_gateway (once)",
+        "delivery": "verified (replayed receipt)",
+        "batchSettlement": "received",
+        "quicknode": "not_claimed"
+      },
+      "details": {
+        "sameTickCopies": [
+          200,
+          202
+        ],
+        "retryStatus": 200,
+        "authorizationReused": true,
+        "gatewaySettleCallsThroughVerity": 1,
+        "directGatewayReplay": {
+          "success": false,
+          "errorReason": "nonce_already_used",
+          "transaction": ""
+        },
+        "secondPurchaseForSameGap": "duplicate purchase: purchase-360f98516a61f956c13cf494 already covers fx-nyc-high-20261118 / settlement_source_version"
+      },
+      "checks": {
+        "same_tick_one_submission": true,
+        "retry_replays_receipt": true,
+        "authorization_reused": true,
+        "gateway_settled_once": true,
+        "gateway_refuses_reused_nonce": true,
+        "duplicate_purchase_refused": true
+      }
+    },
+    {
+      "name": "invalid_delivery_rejected",
+      "statuses": {
+        "analysis": "not_reassessed (evidence rejected before the analyst)",
+        "payment": "accepted_by_gateway",
+        "delivery": "rejected:content_mismatch",
+        "batchSettlement": "received",
+        "quicknode": "not_claimed"
+      },
+      "details": {
+        "tampered": "response bytes hash to 0xbd2c269a0e3e53dca757b1764d9c95113189c07db570f22f28ef11a26aa7831e, receipt says 0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+        "wrongPinnedKey": "wrong_signer"
+      },
+      "checks": {
+        "tamper_rejected": true,
+        "wrong_signer_rejected": true,
+        "nothing_recorded_as_delivered": true,
+        "analyst_not_called": true
+      }
+    }
+  ],
+  "ok": true,
+  "failedChecks": []
+}

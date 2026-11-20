@@ -1,0 +1,1341 @@
+{
+  "workflow": "verity-connected-fixture-workflow-v1",
+  "dataLabels": {
+    "market": "FIXTURE (workbook snapshot 2026-11-17; NYC terms excerpts read 2026-11-18)",
+    "freeCheck": "OBSERVED reading for observed-2026-11-18; FIXTURE assumption for free-check-answers",
+    "coverage": "CAPTURED Exa results (2026-11-18) for NYC; none for OKC",
+    "settlement": "FIXTURE stub: no chain, tx hashes are derived, not real",
+    "quicknode": "FIXTURE delivery signed locally with a fixture token, through the real webhook handler and stream filter",
+    "merchantEvidence": "FIXTURE document served by the demo merchant",
+    "grokRoutine": "FIXTURE contract model; the real Grok Bot routine was not called",
+    "voice": "ElevenLabs explanation text only; no audio requested"
+  },
+  "scenarios": [
+    {
+      "name": "positive_purchase_changes_assessment",
+      "market": "fx-nyc-high-20261118",
+      "freeCheckScenario": "observed-2026-11-18",
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-nyc-high-20261118",
+          "event_ticker": "WXHIGH-NYC-2611190459",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "62°F to 63°F",
+          "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+          "expiry_utc": "2026-11-19T04:59:00Z",
+          "resolution": {
+            "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+            "rule_excerpt_ids": [
+              "C-NYC-1",
+              "C-NYC-2",
+              "C-NYC-4",
+              "C-NYC-5",
+              "C-NYC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.54",
+            "best_ask": "0.58",
+            "volume_usd": "7",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded",
+            "event terms link: empty on the event; terms_url comes from the contract rules"
+          ]
+        },
+        "coverage": {
+          "status": "available",
+          "reason": null,
+          "data_label": "CAPTURED",
+          "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+          "captured_utc": "2026-11-18T04:02:50Z",
+          "recent": {
+            "start_utc": "2026-11-11T01:00:00Z",
+            "end_utc": "2026-11-18T01:00:00Z",
+            "count": 5,
+            "samples": [
+              {
+                "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+                "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+                "published_utc": "2026-11-15T21:18:27Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+                "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+                "published_utc": "2026-11-13T18:01:28Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+                "title": "New York City wind and rain make way for a cool and cloudy weekend",
+                "published_utc": "2026-11-13T13:05:00Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "prior": {
+            "start_utc": "2026-11-04T01:00:00Z",
+            "end_utc": "2026-11-11T01:00:00Z",
+            "count": 1,
+            "samples": [
+              {
+                "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+                "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+                "published_utc": "2026-11-10T14:11:56Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "undated_excluded": 2,
+          "direction": "more_recent",
+          "caveat": "Counts come from one ranked search of 8 results, not total coverage, and search ranking favors recent pages. This is a coverage trend, not a price trend."
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": [
+          {
+            "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+            "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+            "published_utc": "2026-11-15T21:18:27Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+            "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+            "published_utc": "2026-11-13T18:01:28Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+            "title": "New York City wind and rain make way for a cool and cloudy weekend",
+            "published_utc": "2026-11-13T13:05:00Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+            "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+            "published_utc": "2026-11-10T14:11:56Z",
+            "provider": "exa"
+          }
+        ]
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "proposal": {
+          "version": "verity-purchase-proposal-v1",
+          "proposal_id": "prop-f14ba059791a",
+          "contract_id": "fx-nyc-high-20261118",
+          "evidence_gap_id": "GAP-NYC-SETTLE",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+          "evidence_type": "settlement_source_version",
+          "catalog_parameters": {
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18"
+          },
+          "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+          "max_amount_base_units": "50000",
+          "asset": "USDC",
+          "network_label": "arc-testnet",
+          "fixture_label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z",
+          "signed": false,
+          "created_at_utc": "2026-11-18T01:00:00Z"
+        },
+        "noPurchaseReason": null
+      },
+      "statuses": {
+        "payment": "settled_confirmed_by_quicknode",
+        "delivery": "verified",
+        "analysis": "revised",
+        "ledger": "Reconciled"
+      },
+      "purchase": {
+        "purchaseId": "purchase-efaefa6b73d2ad99018eba76",
+        "decision": {
+          "decision": "allow",
+          "tier": "auto"
+        },
+        "amountBaseUnits": "50000",
+        "payTo": "0x2222222222222222222222222222222222222222",
+        "resourceUrl": "https://merchant.example/evidence/nws-cli-settlement",
+        "explanation": {
+          "provider": "elevenlabs",
+          "text": "Verity bought cat-nws-cli-settlement-version-v1 from verity-demo-merchant for 0.05 USDC (testnet) automatically: it is within the 0.10 USDC auto-approve tier.",
+          "voice": {
+            "mode": "not_requested",
+            "audio": null
+          }
+        },
+        "transport": "Verity custom paid transport (X-Verity-Binding, X-Verity-Payment, X-Verity-Receipt); not standard x402"
+      },
+      "delivery": {
+        "httpStatus": 200,
+        "receipt": {
+          "merchant": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+          "txHash": "0x152ae79ffb8d1987085e7074cd16f68a8faf541ab373c9ae4241d23378f07aa4",
+          "contentHash": "0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+          "requestHash": "0xd7c5b4c1da124736837735238b45121aa3b0a70d293062a6bb717f5297422656"
+        },
+        "body": {
+          "label": "FIXTURE",
+          "source": "nws-cli",
+          "gap_type": "settlement_source_version",
+          "station": "Central Park, NY (CLINYC)",
+          "date": "2026-11-18",
+          "settling_issuance": "first_full_day_cli",
+          "excludes": [
+            "same-day partial CLINYC valid to 4 PM",
+            "later corrections"
+          ],
+          "corrections_count": false,
+          "summary": "FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count."
+        },
+        "settlementWebhookStatus": 200,
+        "settleCalls": 1
+      },
+      "reassessment": {
+        "status": "revised",
+        "reason": "evidence applied",
+        "revised": {
+          "final_rating": "Medium",
+          "raw_total": 7,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 1,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": []
+        },
+        "changes": [
+          {
+            "finding": "evidence_gaps.GAP-NYC-SETTLE",
+            "before": "open",
+            "after": "closed",
+            "changed": true,
+            "reason": "the receipt-verified document names the settling issuance: first_full_day_cli"
+          },
+          {
+            "finding": "scores.source",
+            "before": "2",
+            "after": "1",
+            "changed": true,
+            "reason": "revision risk resolved: settling issuance named and corrections excluded"
+          },
+          {
+            "finding": "rating.raw_total",
+            "before": "8",
+            "after": "7",
+            "changed": true,
+            "reason": "sum of the four category scores"
+          },
+          {
+            "finding": "rating.final_rating",
+            "before": "Medium",
+            "after": "Medium",
+            "changed": false,
+            "reason": "total 7 is still in the Medium band; ambiguity 2, liquidity 3, correlation 1 are unchanged by this evidence"
+          },
+          {
+            "finding": "research_action",
+            "before": "investigate",
+            "after": "investigate",
+            "changed": false,
+            "reason": "follows the final rating"
+          }
+        ],
+        "evidenceCitation": {
+          "id": "GAP-NYC-SETTLE-EV1",
+          "source": "merchant verity-demo-merchant, purchase purchase-efaefa6b73d2ad99018eba76, receipt 0xa0bc9c80f38f2f02532411461b7d63f0f89e47e309f94988af87e143828e777e",
+          "field_or_rule": "FIXTURE evidence from catalog item cat-nws-cli-settlement-version-v1 (DeliveryReceiptV1 verified, tx 0x152ae79ffb8d1987085e7074cd16f68a8faf541ab373c9ae4241d23378f07aa4)",
+          "quote": "FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count."
+        }
+      },
+      "alerts": {
+        "overdueEvents": 0,
+        "forgedEventOutcome": "skipped_delivery_verified",
+        "cards": 0
+      },
+      "checks": {
+        "proposal_emitted": true,
+        "policy_auto_approved": true,
+        "receipt_verified": true,
+        "quicknode_join_reconciled": true,
+        "assessment_revised": true,
+        "reconciled_zero_alerts": true
+      }
+    },
+    {
+      "name": "no_material_gap",
+      "market": "fx-okc-moneyline-20261118",
+      "freeCheckScenario": null,
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-okc-moneyline-20261118",
+          "event_ticker": "NBA-2611190100-ATL-OKC-M",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "Oklahoma City",
+          "question": "Atlanta vs Oklahoma City, NBA moneyline (game Nov 18, 2026, 8:00 PM ET): will Oklahoma City win?",
+          "expiry_utc": "2026-11-20T13:00:00Z",
+          "resolution": {
+            "settlement_source": "League governing body, then ESPN, Fox Sports, and the broadcast partner",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+            "terms_url_note": null,
+            "rule_excerpt_ids": [
+              "C-OKC-1",
+              "C-OKC-2",
+              "C-OKC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.69",
+            "best_ask": "0.70",
+            "volume_usd": "1071",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded"
+          ]
+        },
+        "coverage": {
+          "status": "unavailable",
+          "reason": "no coverage sample for this contract (none recorded, and live Exa search is not configured)",
+          "data_label": null,
+          "query": null,
+          "captured_utc": null,
+          "recent": null,
+          "prior": null,
+          "undated_excluded": 0,
+          "direction": null,
+          "caveat": null
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": []
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Low",
+          "raw_total": 4,
+          "research_action": "no_further_research",
+          "scores": {
+            "ambiguity": 1,
+            "source": 1,
+            "liquidity": 1,
+            "correlation": 1
+          },
+          "open_material_gaps": []
+        },
+        "proposal": null,
+        "noPurchaseReason": "[fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research)."
+      },
+      "statuses": {
+        "payment": "not_started",
+        "delivery": "not_requested",
+        "analysis": "no_proposal",
+        "ledger": null
+      },
+      "purchase": null,
+      "delivery": null,
+      "reassessment": null,
+      "alerts": null,
+      "checks": {
+        "no_proposal": true,
+        "coverage_unavailable_explicit": true
+      }
+    },
+    {
+      "name": "evidence_available_free",
+      "market": "fx-nyc-high-20261118",
+      "freeCheckScenario": "free-check-answers",
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-nyc-high-20261118",
+          "event_ticker": "WXHIGH-NYC-2611190459",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "62°F to 63°F",
+          "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+          "expiry_utc": "2026-11-19T04:59:00Z",
+          "resolution": {
+            "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+            "rule_excerpt_ids": [
+              "C-NYC-1",
+              "C-NYC-2",
+              "C-NYC-4",
+              "C-NYC-5",
+              "C-NYC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.54",
+            "best_ask": "0.58",
+            "volume_usd": "7",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded",
+            "event terms link: empty on the event; terms_url comes from the contract rules"
+          ]
+        },
+        "coverage": {
+          "status": "available",
+          "reason": null,
+          "data_label": "CAPTURED",
+          "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+          "captured_utc": "2026-11-18T04:02:50Z",
+          "recent": {
+            "start_utc": "2026-11-11T01:00:00Z",
+            "end_utc": "2026-11-18T01:00:00Z",
+            "count": 5,
+            "samples": [
+              {
+                "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+                "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+                "published_utc": "2026-11-15T21:18:27Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+                "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+                "published_utc": "2026-11-13T18:01:28Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+                "title": "New York City wind and rain make way for a cool and cloudy weekend",
+                "published_utc": "2026-11-13T13:05:00Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "prior": {
+            "start_utc": "2026-11-04T01:00:00Z",
+            "end_utc": "2026-11-11T01:00:00Z",
+            "count": 1,
+            "samples": [
+              {
+                "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+                "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+                "published_utc": "2026-11-10T14:11:56Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "undated_excluded": 2,
+          "direction": "more_recent",
+          "caveat": "Counts come from one ranked search of 8 results, not total coverage, and search ranking favors recent pages. This is a coverage trend, not a price trend."
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": [
+          {
+            "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+            "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+            "published_utc": "2026-11-15T21:18:27Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+            "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+            "published_utc": "2026-11-13T18:01:28Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+            "title": "New York City wind and rain make way for a cool and cloudy weekend",
+            "published_utc": "2026-11-13T13:05:00Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+            "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+            "published_utc": "2026-11-10T14:11:56Z",
+            "provider": "exa"
+          }
+        ]
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "proposal": null,
+        "noPurchaseReason": "[fx-nyc-high-20261118] skip GAP-NYC-SETTLE: answered by the free check; nothing to buy. [fx-nyc-high-20261118] no purchase: every material gap was answered, cached, or had no catalog match."
+      },
+      "statuses": {
+        "payment": "not_started",
+        "delivery": "not_requested",
+        "analysis": "no_proposal",
+        "ledger": null
+      },
+      "purchase": null,
+      "delivery": null,
+      "reassessment": null,
+      "alerts": null,
+      "checks": {
+        "no_proposal": true,
+        "free_check_logged": true
+      }
+    },
+    {
+      "name": "budget_denial",
+      "market": "fx-nyc-high-20261118",
+      "freeCheckScenario": "observed-2026-11-18",
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-nyc-high-20261118",
+          "event_ticker": "WXHIGH-NYC-2611190459",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "62°F to 63°F",
+          "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+          "expiry_utc": "2026-11-19T04:59:00Z",
+          "resolution": {
+            "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+            "rule_excerpt_ids": [
+              "C-NYC-1",
+              "C-NYC-2",
+              "C-NYC-4",
+              "C-NYC-5",
+              "C-NYC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.54",
+            "best_ask": "0.58",
+            "volume_usd": "7",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded",
+            "event terms link: empty on the event; terms_url comes from the contract rules"
+          ]
+        },
+        "coverage": {
+          "status": "available",
+          "reason": null,
+          "data_label": "CAPTURED",
+          "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+          "captured_utc": "2026-11-18T04:02:50Z",
+          "recent": {
+            "start_utc": "2026-11-11T01:00:00Z",
+            "end_utc": "2026-11-18T01:00:00Z",
+            "count": 5,
+            "samples": [
+              {
+                "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+                "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+                "published_utc": "2026-11-15T21:18:27Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+                "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+                "published_utc": "2026-11-13T18:01:28Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+                "title": "New York City wind and rain make way for a cool and cloudy weekend",
+                "published_utc": "2026-11-13T13:05:00Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "prior": {
+            "start_utc": "2026-11-04T01:00:00Z",
+            "end_utc": "2026-11-11T01:00:00Z",
+            "count": 1,
+            "samples": [
+              {
+                "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+                "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+                "published_utc": "2026-11-10T14:11:56Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "undated_excluded": 2,
+          "direction": "more_recent",
+          "caveat": "Counts come from one ranked search of 8 results, not total coverage, and search ranking favors recent pages. This is a coverage trend, not a price trend."
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": [
+          {
+            "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+            "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+            "published_utc": "2026-11-15T21:18:27Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+            "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+            "published_utc": "2026-11-13T18:01:28Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+            "title": "New York City wind and rain make way for a cool and cloudy weekend",
+            "published_utc": "2026-11-13T13:05:00Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+            "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+            "published_utc": "2026-11-10T14:11:56Z",
+            "provider": "exa"
+          }
+        ]
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "proposal": {
+          "version": "verity-purchase-proposal-v1",
+          "proposal_id": "prop-f14ba059791a",
+          "contract_id": "fx-nyc-high-20261118",
+          "evidence_gap_id": "GAP-NYC-SETTLE",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+          "evidence_type": "settlement_source_version",
+          "catalog_parameters": {
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18"
+          },
+          "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+          "max_amount_base_units": "50000",
+          "asset": "USDC",
+          "network_label": "arc-testnet",
+          "fixture_label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z",
+          "signed": false,
+          "created_at_utc": "2026-11-18T01:00:00Z"
+        },
+        "noPurchaseReason": null
+      },
+      "statuses": {
+        "payment": "denied_by_policy",
+        "delivery": "not_requested",
+        "analysis": "proposal",
+        "ledger": null
+      },
+      "purchase": {
+        "purchaseId": "purchase-eac15bf5016f718207be8774",
+        "missionBudgetBaseUnits": "40000",
+        "quoteBaseUnits": "50000",
+        "status": "rejected",
+        "reason": "mission budget exceeded",
+        "explanation": {
+          "provider": "elevenlabs",
+          "text": "Verity did not buy cat-nws-cli-settlement-version-v1 from verity-demo-merchant for 0.05 USDC (testnet). Reason: mission budget exceeded. No payment was authorized.",
+          "voice": {
+            "mode": "not_requested",
+            "audio": null
+          }
+        }
+      },
+      "delivery": null,
+      "reassessment": null,
+      "alerts": null,
+      "checks": {
+        "denied": true,
+        "nothing_signed_or_settled": true
+      }
+    },
+    {
+      "name": "tampered_delivery",
+      "market": "fx-nyc-high-20261118",
+      "freeCheckScenario": "observed-2026-11-18",
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-nyc-high-20261118",
+          "event_ticker": "WXHIGH-NYC-2611190459",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "62°F to 63°F",
+          "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+          "expiry_utc": "2026-11-19T04:59:00Z",
+          "resolution": {
+            "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+            "rule_excerpt_ids": [
+              "C-NYC-1",
+              "C-NYC-2",
+              "C-NYC-4",
+              "C-NYC-5",
+              "C-NYC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.54",
+            "best_ask": "0.58",
+            "volume_usd": "7",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded",
+            "event terms link: empty on the event; terms_url comes from the contract rules"
+          ]
+        },
+        "coverage": {
+          "status": "available",
+          "reason": null,
+          "data_label": "CAPTURED",
+          "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+          "captured_utc": "2026-11-18T04:02:50Z",
+          "recent": {
+            "start_utc": "2026-11-11T01:00:00Z",
+            "end_utc": "2026-11-18T01:00:00Z",
+            "count": 5,
+            "samples": [
+              {
+                "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+                "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+                "published_utc": "2026-11-15T21:18:27Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+                "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+                "published_utc": "2026-11-13T18:01:28Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+                "title": "New York City wind and rain make way for a cool and cloudy weekend",
+                "published_utc": "2026-11-13T13:05:00Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "prior": {
+            "start_utc": "2026-11-04T01:00:00Z",
+            "end_utc": "2026-11-11T01:00:00Z",
+            "count": 1,
+            "samples": [
+              {
+                "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+                "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+                "published_utc": "2026-11-10T14:11:56Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "undated_excluded": 2,
+          "direction": "more_recent",
+          "caveat": "Counts come from one ranked search of 8 results, not total coverage, and search ranking favors recent pages. This is a coverage trend, not a price trend."
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": [
+          {
+            "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+            "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+            "published_utc": "2026-11-15T21:18:27Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+            "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+            "published_utc": "2026-11-13T18:01:28Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+            "title": "New York City wind and rain make way for a cool and cloudy weekend",
+            "published_utc": "2026-11-13T13:05:00Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+            "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+            "published_utc": "2026-11-10T14:11:56Z",
+            "provider": "exa"
+          }
+        ]
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "proposal": {
+          "version": "verity-purchase-proposal-v1",
+          "proposal_id": "prop-f14ba059791a",
+          "contract_id": "fx-nyc-high-20261118",
+          "evidence_gap_id": "GAP-NYC-SETTLE",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+          "evidence_type": "settlement_source_version",
+          "catalog_parameters": {
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18"
+          },
+          "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+          "max_amount_base_units": "50000",
+          "asset": "USDC",
+          "network_label": "arc-testnet",
+          "fixture_label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z",
+          "signed": false,
+          "created_at_utc": "2026-11-18T01:00:00Z"
+        },
+        "noPurchaseReason": null
+      },
+      "statuses": {
+        "payment": "settled_confirmed_by_quicknode",
+        "delivery": "rejected:content_mismatch",
+        "analysis": "not_reassessed (evidence rejected before the analyst)",
+        "ledger": "Paid, delivery missing"
+      },
+      "purchase": null,
+      "delivery": {
+        "httpStatus": 200,
+        "accepted": false,
+        "reason": "response bytes hash to 0xbd2c269a0e3e53dca757b1764d9c95113189c07db570f22f28ef11a26aa7831e, receipt says 0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+        "settleCalls": 1
+      },
+      "reassessment": null,
+      "alerts": null,
+      "checks": {
+        "tamper_rejected": true,
+        "ledger_shows_paid_delivery_missing": true,
+        "analyst_not_called": true
+      }
+    },
+    {
+      "name": "retry_without_second_settlement",
+      "market": "fx-nyc-high-20261118",
+      "freeCheckScenario": "observed-2026-11-18",
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-nyc-high-20261118",
+          "event_ticker": "WXHIGH-NYC-2611190459",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "62°F to 63°F",
+          "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+          "expiry_utc": "2026-11-19T04:59:00Z",
+          "resolution": {
+            "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+            "rule_excerpt_ids": [
+              "C-NYC-1",
+              "C-NYC-2",
+              "C-NYC-4",
+              "C-NYC-5",
+              "C-NYC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.54",
+            "best_ask": "0.58",
+            "volume_usd": "7",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded",
+            "event terms link: empty on the event; terms_url comes from the contract rules"
+          ]
+        },
+        "coverage": {
+          "status": "available",
+          "reason": null,
+          "data_label": "CAPTURED",
+          "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+          "captured_utc": "2026-11-18T04:02:50Z",
+          "recent": {
+            "start_utc": "2026-11-11T01:00:00Z",
+            "end_utc": "2026-11-18T01:00:00Z",
+            "count": 5,
+            "samples": [
+              {
+                "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+                "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+                "published_utc": "2026-11-15T21:18:27Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+                "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+                "published_utc": "2026-11-13T18:01:28Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+                "title": "New York City wind and rain make way for a cool and cloudy weekend",
+                "published_utc": "2026-11-13T13:05:00Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "prior": {
+            "start_utc": "2026-11-04T01:00:00Z",
+            "end_utc": "2026-11-11T01:00:00Z",
+            "count": 1,
+            "samples": [
+              {
+                "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+                "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+                "published_utc": "2026-11-10T14:11:56Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "undated_excluded": 2,
+          "direction": "more_recent",
+          "caveat": "Counts come from one ranked search of 8 results, not total coverage, and search ranking favors recent pages. This is a coverage trend, not a price trend."
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": [
+          {
+            "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+            "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+            "published_utc": "2026-11-15T21:18:27Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+            "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+            "published_utc": "2026-11-13T18:01:28Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+            "title": "New York City wind and rain make way for a cool and cloudy weekend",
+            "published_utc": "2026-11-13T13:05:00Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+            "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+            "published_utc": "2026-11-10T14:11:56Z",
+            "provider": "exa"
+          }
+        ]
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "proposal": {
+          "version": "verity-purchase-proposal-v1",
+          "proposal_id": "prop-f14ba059791a",
+          "contract_id": "fx-nyc-high-20261118",
+          "evidence_gap_id": "GAP-NYC-SETTLE",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+          "evidence_type": "settlement_source_version",
+          "catalog_parameters": {
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18"
+          },
+          "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+          "max_amount_base_units": "50000",
+          "asset": "USDC",
+          "network_label": "arc-testnet",
+          "fixture_label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z",
+          "signed": false,
+          "created_at_utc": "2026-11-18T01:00:00Z"
+        },
+        "noPurchaseReason": null
+      },
+      "statuses": {
+        "payment": "settled_confirmed_by_quicknode",
+        "delivery": "verified",
+        "analysis": "proposal",
+        "ledger": "Reconciled"
+      },
+      "purchase": null,
+      "delivery": {
+        "racingFirstCopies": [
+          {
+            "httpStatus": 202,
+            "reason": "settlement outcome pending: FIXTURE: receipt wait timed out after broadcast"
+          },
+          {
+            "httpStatus": 202,
+            "reason": "settlement in progress for this purchase"
+          }
+        ],
+        "retryAfterSubmission": {
+          "httpStatus": 200
+        },
+        "copiesAfterDelivery": [
+          200,
+          200
+        ],
+        "settleCalls": 1,
+        "resumeCalls": 1,
+        "authorizationReused": true
+      },
+      "reassessment": null,
+      "alerts": null,
+      "checks": {
+        "racing_copies_pending_not_settled_twice": true,
+        "resumed_by_tx_hash": true,
+        "settled_once": true,
+        "authorization_reused": true,
+        "retry_delivery_verified": true
+      }
+    },
+    {
+      "name": "overdue_delivery_alert",
+      "market": "fx-nyc-high-20261118",
+      "freeCheckScenario": "observed-2026-11-18",
+      "research": {
+        "normalizedMarket": {
+          "exchange": "gemini",
+          "contract_id": "fx-nyc-high-20261118",
+          "event_ticker": "WXHIGH-NYC-2611190459",
+          "ticker_status": "confirmed",
+          "instrument_symbol": null,
+          "outcome_label": "62°F to 63°F",
+          "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+          "expiry_utc": "2026-11-19T04:59:00Z",
+          "resolution": {
+            "settlement_source": "NWS Climatological Report (Daily), Central Park station",
+            "terms_url": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "terms_url_note": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+            "rule_excerpt_ids": [
+              "C-NYC-1",
+              "C-NYC-2",
+              "C-NYC-4",
+              "C-NYC-5",
+              "C-NYC-3"
+            ]
+          },
+          "observed_date": "2026-11-17",
+          "observed_utc": null,
+          "quote": {
+            "best_bid": "0.54",
+            "best_ask": "0.58",
+            "volume_usd": "7",
+            "volume_basis": "total"
+          },
+          "source_mode": "fixture",
+          "source_label": "Gemini Exchange public events list, captured via the workbook",
+          "source_url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "unavailable": [
+            "instrument_symbol: the snapshot did not record which instrument was priced",
+            "observed_utc: only the date 2026-11-17 was recorded",
+            "event terms link: empty on the event; terms_url comes from the contract rules"
+          ]
+        },
+        "coverage": {
+          "status": "available",
+          "reason": null,
+          "data_label": "CAPTURED",
+          "query": "news article about New York City Central Park temperatures and weather forecast in mid November 2026",
+          "captured_utc": "2026-11-18T04:02:50Z",
+          "recent": {
+            "start_utc": "2026-11-11T01:00:00Z",
+            "end_utc": "2026-11-18T01:00:00Z",
+            "count": 5,
+            "samples": [
+              {
+                "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+                "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+                "published_utc": "2026-11-15T21:18:27Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+                "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+                "published_utc": "2026-11-13T18:01:28Z",
+                "provider": "exa"
+              },
+              {
+                "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+                "title": "New York City wind and rain make way for a cool and cloudy weekend",
+                "published_utc": "2026-11-13T13:05:00Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "prior": {
+            "start_utc": "2026-11-04T01:00:00Z",
+            "end_utc": "2026-11-11T01:00:00Z",
+            "count": 1,
+            "samples": [
+              {
+                "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+                "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+                "published_utc": "2026-11-10T14:11:56Z",
+                "provider": "exa"
+              }
+            ]
+          },
+          "undated_excluded": 2,
+          "direction": "more_recent",
+          "caveat": "Counts come from one ranked search of 8 results, not total coverage, and search ranking favors recent pages. This is a coverage trend, not a price trend."
+        },
+        "priceTrend": {
+          "status": "unavailable",
+          "reason": "instrument symbol not recorded, so prices cannot be tied to one instrument",
+          "instrument_symbol": null,
+          "points": [],
+          "change": null
+        },
+        "citations": [
+          {
+            "url": "https://hoodline.com/2026/11/storms-fuhgeddaboudit-sunny-mild-week-ahead-for-nyc/",
+            "title": "NYC Weather Forecast Sunny Sunday And Warmer Dry Week Ahead",
+            "published_utc": "2026-11-15T21:18:27Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.cbsnews.com/newyork/news/rain-weather-nyc-nj-forecast-cold-temperatures/",
+            "title": "Cold, rainy weather in NYC continues before drying out for the weekend",
+            "published_utc": "2026-11-13T18:01:28Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://gothamist.com/news/new-york-city-wind-and-rain-make-way-for-a-cool-and-cloudy-weekend",
+            "title": "New York City wind and rain make way for a cool and cloudy weekend",
+            "published_utc": "2026-11-13T13:05:00Z",
+            "provider": "exa"
+          },
+          {
+            "url": "https://www.nyandnj.com/en/article/nyc-weather-thursday-rain-2026-11",
+            "title": "Sunny and Mild Through Veterans Day on Wednesday; Rain Arrives Thursday Morning, With Friday Highs Dropping to 48",
+            "published_utc": "2026-11-10T14:11:56Z",
+            "provider": "exa"
+          }
+        ]
+      },
+      "analysis": {
+        "original": {
+          "final_rating": "Medium",
+          "raw_total": 8,
+          "research_action": "investigate",
+          "scores": {
+            "ambiguity": 2,
+            "source": 2,
+            "liquidity": 3,
+            "correlation": 1
+          },
+          "open_material_gaps": [
+            "GAP-NYC-SETTLE"
+          ]
+        },
+        "proposal": {
+          "version": "verity-purchase-proposal-v1",
+          "proposal_id": "prop-f14ba059791a",
+          "contract_id": "fx-nyc-high-20261118",
+          "evidence_gap_id": "GAP-NYC-SETTLE",
+          "catalog_item_id": "cat-nws-cli-settlement-version-v1",
+          "evidence_type": "settlement_source_version",
+          "catalog_parameters": {
+            "station": "Central Park, NY (CLINYC)",
+            "date": "2026-11-18"
+          },
+          "rationale": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+          "max_amount_base_units": "50000",
+          "asset": "USDC",
+          "network_label": "arc-testnet",
+          "fixture_label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z",
+          "signed": false,
+          "created_at_utc": "2026-11-18T01:00:00Z"
+        },
+        "noPurchaseReason": null
+      },
+      "statuses": {
+        "payment": "settled_confirmed_by_quicknode",
+        "delivery": "not_delivered (merchant 503: paid artifact unavailable; retry to receive the receipt)",
+        "analysis": "not_reassessed",
+        "ledger": "Paid, delivery missing"
+      },
+      "purchase": null,
+      "delivery": null,
+      "reassessment": null,
+      "alerts": {
+        "eventsBeforeDeadline": 0,
+        "eventsAfterDeadline": 1,
+        "event": {
+          "schema": "verity.overdue_delivery.v1",
+          "eventId": "evt-9603cf2e020dee1f07793018",
+          "environment": "fixture",
+          "purchaseId": "purchase-b4d6c5f6e35a95384ad3358e",
+          "exceptionType": "paid_delivery_missing",
+          "ledgerStatus": "Paid, delivery missing",
+          "settlementConfirmed": true,
+          "txHash": "0x2ce1d678ebebae90e78f897ec85bfc265446c8fd3e98daf856846a54ce6c66c4",
+          "amountBaseUnits": "50000",
+          "merchantLabel": "verity-demo-merchant (fixture)",
+          "deliveryDeadlineUtc": "2026-11-18T01:07:00Z",
+          "emittedAtUtc": "2026-11-18T01:07:01Z"
+        },
+        "first": "created",
+        "exactReplay": "duplicate",
+        "wrongRoutineKey": 401,
+        "feedWithoutToken": 401,
+        "cardCount": 1,
+        "card": {
+          "incidentKey": "fixture:purchase-b4d6c5f6e35a95384ad3358e:paid_delivery_missing",
+          "environment": "fixture",
+          "purchaseId": "purchase-b4d6c5f6e35a95384ad3358e",
+          "amount": "0.05 testnet USDC",
+          "amountBaseUnits": "50000",
+          "merchantLabel": "verity-demo-merchant (fixture)",
+          "txHash": "0x2ce1d678ebebae90e78f897ec85bfc265446c8fd3e98daf856846a54ce6c66c4",
+          "txUrl": "https://explorer.testnet.arc.io/tx/0x2ce1d678ebebae90e78f897ec85bfc265446c8fd3e98daf856846a54ce6c66c4",
+          "deliveryDeadlineUtc": "2026-11-18T01:07:00Z",
+          "status": "Missing verified delivery",
+          "label": "FIXTURE",
+          "replayCount": 1,
+          "createdAtUtc": "2026-11-18T01:07:01Z",
+          "lastSeenUtc": "2026-11-18T01:07:01Z",
+          "source": "webhook"
+        }
+      },
+      "checks": {
+        "no_event_before_deadline": true,
+        "one_event_after_deadline": true,
+        "one_card_after_exact_replay": true,
+        "wrong_key_rejected": true,
+        "feed_requires_token": true
+      }
+    }
+  ],
+  "ok": true,
+  "failedChecks": []
+}

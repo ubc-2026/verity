@@ -4,6 +4,7 @@
   "items": [
     {
       "id": "cat-nws-cli-settlement-version-v1",
+      "evidence_type": "settlement_source_version",
       "merchant_id": "verity-demo-merchant",
       "title": "NWS daily climate report: settlement-version check",
       "answers_gap_types": ["settlement_source_version"],
@@ -14,6 +15,7 @@
     },
     {
       "id": "cat-midway-vs-title-station-pack-v1",
+      "evidence_type": "settlement_source_version",
       "merchant_id": "verity-demo-merchant",
       "title": "Chicago Midway station pack (title vs settlement)",
       "answers_gap_types": ["settlement_source_version", "station_title_mismatch"],
@@ -24,6 +26,7 @@
     },
     {
       "id": "cat-sports-settlement-version-v1",
+      "evidence_type": "settlement_source_version",
       "merchant_id": "verity-demo-merchant",
       "title": "Sports settlement-version pack",
       "answers_gap_types": ["settlement_source_version"],
@@ -34,6 +37,7 @@
     },
     {
       "id": "cat-commodity-settlement-version-v1",
+      "evidence_type": "settlement_source_version",
       "merchant_id": "verity-demo-merchant",
       "title": "Commodity index settlement-version pack",
       "answers_gap_types": ["settlement_source_version"],
@@ -44,6 +48,7 @@
     },
     {
       "id": "cat-crypto-settlement-version-v1",
+      "evidence_type": "settlement_source_version",
       "merchant_id": "verity-demo-merchant",
       "title": "Crypto reference-rate settlement-version pack",
       "answers_gap_types": ["settlement_source_version"],
@@ -53,7 +58,20 @@
       "description": "Reports which Lukka (or named) reference-rate print and correction policy settles a crypto contract, with issuance timing and the exchange rule that picks the version."
     },
     {
+      "id": "cat-nws-cli-settlement-version-nano-v1",
+      "evidence_type": "settlement_source_version",
+      "merchant_id": "verity-demo-merchant",
+      "title": "NWS daily climate report: settlement-version check (Circle Gateway nanopayment)",
+      "answers_gap_types": ["settlement_source_version"],
+      "affects": "resolution_risk",
+      "price_base_units": "1000",
+      "parameters": ["station", "date"],
+      "rail": "circle-gateway-batched",
+      "description": "Same document as cat-nws-cli-settlement-version-v1, sold for 0.001 USDC over Circle Gateway nanopayments on Arc Testnet."
+    },
+    {
       "id": "cat-point-forecast-v1",
+      "evidence_type": "outcome_forecast",
       "merchant_id": "verity-demo-merchant",
       "title": "Point temperature forecast",
       "answers_gap_types": ["outcome_forecast"],
@@ -64,6 +82,7 @@
     },
     {
       "id": "cat-lm-arena-snapshot-v1",
+      "evidence_type": "leaderboard_snapshot",
       "merchant_id": "verity-demo-merchant",
       "title": "LM Arena leaderboard snapshot (style control off)",
       "answers_gap_types": ["leaderboard_snapshot"],

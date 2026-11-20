@@ -193,6 +193,7 @@ def _gaps(source: dict[str, Any], resolution: dict[str, Any], hay: str) -> list[
 
 _WEATHER_FREE_CHECKS = {
     "WXHIGH-NYC": "nyc-settlement-version",
+    "WXHIGH-SFO": "sfo-settlement-version",
     "WXHIGH-CHI": "chi-midway-settlement-version",
     "WXHIGH-ATL": "atl-settlement-version",
     "WXHIGH-BOS": "bos-settlement-version",

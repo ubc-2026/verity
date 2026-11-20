@@ -1,0 +1,14 @@
+# Named Cloudflare Tunnel for the Verity QuickNode receiver (persistent hostname).
+# Copy to ~/.cloudflared/config.yml after:
+#   cloudflared tunnel login                      # browser; pick the Cloudflare zone
+#   cloudflared tunnel create verity-quicknode     # prints the tunnel UUID and credentials file
+#   cloudflared tunnel route dns verity-quicknode <host>.<your-zone>
+# Run: cloudflared tunnel run verity-quicknode
+tunnel: <TUNNEL-UUID>
+credentials-file: C:\Users\<you>\.cloudflared\<TUNNEL-UUID>.json
+ingress:
+  # Only the webhook and health paths are exposed.
+  - hostname: <host>.<your-zone>
+    path: ^/(webhooks/quicknode|healthz)$
+    service: http://127.0.0.1:8787
+  - service: http_status:404

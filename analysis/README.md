@@ -1,4 +1,4 @@
-# Verity analysis: risk scoring and evidence proposals
+﻿# Verity analysis: risk scoring and evidence proposals
 
 Market fixture → `get_risk_analysis()` → `generate_purchase_request()` → an unsigned proposal, or `null` with a logged reason.
 Fixture mode (the default) uses no network, no API key and no wallet. Live mode is optional and is described below. Neither mode uses an LLM.
@@ -29,10 +29,11 @@ python demo.py --live NBA-2611190100-ATL-OKC-M --outcome "Oklahoma City"
 - Liquidity is computed in code from the bid, the ask, and the volume.
 - `analyze_live()` returns the analysis and its context. Pass both to `generate_purchase_request()`.
 - The output is written to `samples/live_last_run.json`, which git ignores.
-- **Evidence gaps on live markets** come from the rules analyst. A live NYC weather gap is wired to the `nyc-settlement-version` free check in `research.py`; other live gaps have no free check yet, so they are logged and skipped, and no purchase is proposed. The New York fixture gap can be checked against the public terms PDF and the NWS Central Park report with `python demo.py --research`. A document that cannot be read does not become a purchase. The labeled fixture scenarios are unchanged.
-- **A model can answer any gap** when `FixtureContext.complete_json` is set. That function is `complete_json(system, user, schema) -> dict`. The model may quote only text that was gathered. A quote or URL it was not given makes the result `failed`, and a failure does not propose a purchase. No model provider or API key is wired in. A fixture scenario still takes priority.
+- **Evidence gaps on live markets** come from the rules analyst. `research.py` checks official NWS reports for NYC and San Francisco Airport weather markets. For San Francisco, the date in the CLISFO climate summary must match the market date. A missing or mismatched report blocks purchase proposals. Conditional or conflicting report rules stay unresolved until evidence establishes which rule applies. The New York fixture gap can be checked against the public terms PDF and the NWS Central Park report with `python demo.py --research`.
+- **An optional model can answer remaining gaps** when `FixtureContext.complete_json` is set. That function is `complete_json(system, user, schema) -> dict`. For live San Francisco weather gaps, the official check runs first. The model may quote only text that was gathered. An unsupported quote or URL makes the result `failed` and blocks the proposal. A fixture scenario still takes priority.
+- **Reads are allowlisted.** Terms links and URLs quoted in exchange text or a terms PDF come from the exchange, not from Verity. The analysis path reads only `https://api.gemini.com`, `https://assets.gemini.com`, and `https://forecast.weather.gov` (`READ_HOSTS` in `live.py`). Any other host, scheme, or port is refused before a request is sent, every redirect hop is checked against the same list, and a response body over 5 MB is refused. A refused URL is recorded as unread, so it cannot lead to a purchase.
 
-The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. The repo-level README still describes a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
+The fixtures were checked against `Prediction market risk analysis.xlsx`, which has the same five rows, the same rubric and overrides, and the same 11 agent rules. An earlier repo-level README described a 1–5 scale. This slice uses the workbook's 1–3 scale, as agreed for the prototype.
 
 ## Layout
 
@@ -44,12 +45,16 @@ verity/
   proposals.py   generate_purchase_request(risk_analysis, ctx=None, decision_log=None)
   research.py    NYC document check, and one injected model call per gap
   fixtures.py    loader, FixedClock (2026-11-18T01:00:00Z = Nov 17, 8pm ET), snapshot hash
-  live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live()
+  live.py        Gemini Exchange read + terms PDF -> fixture-shaped record; analyze_live(); read allowlist
+  rules_analyst.py  code-only Framework rules for live ambiguity, source, and correlation scores
+  trends.py      normalized market, Exa coverage (recent vs prior window), price movement or why it is unavailable
+  reassess.py    applies receipt-verified evidence to a RiskAnalysisV1 and lists every changed or unchanged finding
+  cli.py         JSON commands used by `npm run e2e`: `analyze` and `reassess`
 fixtures/
   markets_2026-11-17.json   the 5 workbook rows, with source, snapshot date, ticker status
   catalog_v1.json           allowlisted evidence items (NWS settlement-version item at 50000 base units)
   free_checks.json          free official-source checks; NYC outcomes are labeled assumptions
-tests/test_slice.py, test_live.py, test_exchange.py (all external APIs faked)
+tests/test_slice.py, test_live.py, test_research.py, test_safety.py, test_integration.py (all external APIs faked)
 demo.py
 samples/                    generated outputs (OKC, NYC gap-remains)
 ```
@@ -73,27 +78,38 @@ samples/                    generated outputs (OKC, NYC gap-remains)
 | Category | 3 | 2 | 1 | null |
 |---|---|---|---|---|
 | Ambiguity | rules mention a setting, ranking or judgment ("style control", "top-ranked", "at its discretion") | terms PDF not read, event terms link empty (Agent rule 3), or numeric band edges decide it | terms read, objective outcome | no rule text |
-| Source | leaderboard, LM Arena, Mecone/nowcast | NWS / climate report, BLS, CPI, GDP, Kaiko/Hyperliquid commodity perps (proxy) | league, NCAA, Federal Reserve, Lukka, official result | no source, or one the rules don't recognize |
+| Source | leaderboard, LM Arena, social metrics | NWS / climate report, BLS, CPI, GDP, anything preliminary or revisable | league, NCAA, Federal Reserve, official result | no source, or one the rules don't recognize |
 | Correlation | sibling events on the same underlying (Agent rule 7) | scheduled data or news (CPI, jobs, FOMC, injuries, earnings) | neither | — |
 
-Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; on `WXHIGH-CHI` it uses `chi-midway-settlement-version` (Midway CLI). Live WXHIGH events often omit `termsLink`; `analyze_live` falls back to the shared weather terms PDF so free research can run. `analyze_live` sets `live_research=True` so inconclusive free reads can emit an unsigned catalog proposal (Midway prefers `cat-midway-vs-title-station-pack-v1`).
+Evidence gaps: a Source 2 adds a material `settlement_source_version` gap; a Source 3 (or Ambiguity 3 on a leaderboard) adds a `leaderboard_snapshot` gap. On a `WXHIGH-NYC` market the settlement-version gap uses the `nyc-settlement-version` free check; the others have none yet.
 
-On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): raw total 6 (Low), floor High from Correlation 3, final High, `flag_for_human_review`. The workbook scored Correlation 1.
+On the real OKC moneyline response (2026-11-18) with the terms read, the rules give Ambiguity 1, Source 1, Liquidity 1, Correlation 3 (5 sibling events): total 6, Low, `no_further_research`. The workbook scored Correlation 1.
+
+## Research, trends, and reassessment
+
+- `python -m verity.cli analyze --contract <id> [--free-check-scenario <name>]` prints the research record, the risk analysis, and either one unsigned proposal or the specific reason there is none.
+- **Coverage** comes from `fixtures/exa_coverage.json`. The NYC entry is a real Exa search captured on 2026-11-18 (labeled `CAPTURED`); other markets have none and say so. Results are counted in the 7 days before the snapshot and the 7 days before that; undated results are excluded. This is a coverage trend, not a price trend. `exa_coverage_sample()` is the live client: the key and the HTTP call are injected, and it has only been tested with a fake transport.
+- **Price movement** is reported only from two or more timestamped prices for the same instrument symbol. The fixtures record no instrument symbol and one price, so it is `unavailable` with that reason.
+- **Reassessment** (`python -m verity.cli reassess`, JSON on stdin) accepts only bytes whose SHA-256 matches the provenance from the buyer's receipt check, for an open gap on the same contract, with the station and date derived from the contract. For the settlement-version gap, a document that names the settling issuance closes the gap, and if it also says later corrections do not count, Source drops from 2 to 1. The rating is recomputed with the same rubric, and each change (or unchanged finding) carries its reason.
+- **Order placement was removed.** The guarded trading client (`exchange.py`) is not part of the integration; Verity is research-only.
 
 ## Proposal gates
 
 1. The ticker must be confirmed.
 2. The market must be at least 1 hour from expiry on the fixture clock.
-3. For each material gap that affects **resolution** risk:
+3. The Excel action must be Investigate (Medium).
+4. For each material gap that affects **resolution** risk:
    - skip it if cached evidence exists;
    - otherwise run the free official-source check;
-   - if the gap is still open, look for an allowlisted catalog item that answers that gap type.
+   - if the gap is still open, look for an allowlisted catalog item that answers that gap type;
+   - fill every catalog parameter from the market. For the NWS item the date is the New York climate day read from the `WXHIGH-NYC` ticker, which ends with the trading close in UTC. If any parameter cannot be filled, no proposal is made, and `PurchaseProposalV1` itself refuses an empty value.
+   - the proposal carries the catalog item's `evidence_type`; the payment service refuses a proposal whose type or parameter names differ from the allowlisted item, and the merchant refuses a quote for parameters it has no document for.
 
 Forecast gaps (outcome probability) are logged and skipped. When the free check has no result for the chosen scenario, there is no purchase, because the gap can't be validated.
 
 ## Conflicts found in the workbook
 
-1. The README uses a 1–5 scale; the workbook uses 1–3. Resolved in favor of 1–3.
+1. An earlier repo-level README used a 1–5 scale; the workbook uses 1–3. Resolved in favor of 1–3.
 2. The `Markets!B` rating formula ignores the overrides, and `SUM` counts a blank as 0, so incomplete rows silently show Low.
 3. The Volume column mixes event totals (rows 2–4, from the Gemini API) with 24-hour figures (rows 5–6, from CoinRithm). Agent rule 4 assumes 24-hour volume.
 4. The Ambiguity/Source floor only changes anything at a raw total of 6. The same override also says "Always buy evidence on the settlement rule before acting", which a research-only agent can't do unconditionally. Here it is a floor plus a note, and any purchase still has to pass the proposal gates.
@@ -106,7 +122,7 @@ All five rows reproduce the workbook's totals.
 
 ## What still needs live data
 
-- **Live OKC result (2026-11-18, terms not read):** Ambiguity 2, Source 1, Liquidity 1 ($1,392 volume, 1¢ spread), Correlation 3, raw total 7 (Medium), floor High, final High, `flag_for_human_review`, no purchase (no material gap). The live event has 5 sibling events (spread, totals, 3 player props), so Correlation is 3, not the workbook's 1. With the terms PDF read (`pypdf`), Ambiguity drops to 1 and the raw total to 6; Correlation 3 still floors final to High.
+- **Live OKC result (2026-11-18, terms not read):** Ambiguity 2, Source 1, Liquidity 1 ($1,392 volume, 1¢ spread), Correlation 3, total 7, Medium, `investigate`, no purchase. The live event has 5 sibling events (spread, totals, 3 player props), so Correlation is 3, not the workbook's 1. With the terms PDF read (`pypdf`), Ambiguity should drop to 1 and the total to 6, Low.
 - **NYC free check:** done on 2026-11-18 as scenario `observed-2026-11-18` in `free_checks.json`, which the demo now uses. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later corrections don't count. The rule text is missing a word, though, and NWS publishes a same-day partial CLINYC (valid to 4 PM) before the full-day report, so whether that partial report counts is still unstated. The result is `inconclusive` and the 0.05 USDC proposal still stands, now labeled `OBSERVED`. The two `free-check-*` scenarios remain as labeled fixture assumptions. The terms PDF URL was inferred but resolves.
 - **NYC expiry:** the terms set expiry at the first 11:00 PM ET after the data are available. That is later than the fixture's `2026-11-19T04:59:00Z` from the API, which is probably the trading close. Confirm against a live response.
 - **Snapshot time:** the workbook stores only the date (2026-11-17). Live reads should store the UTC time.
@@ -116,4 +132,6 @@ All five rows reproduce the workbook's totals.
 - **Rules text** is a paraphrase of the API descriptions, except NYC, which now cites the real terms (`C-NYC-4`, `C-NYC-5`). Fetch the OKC and MSU terms PDFs the same way.
 - **Expiry:** every fixture market expires between Nov 19 and Jan 1. After that, keep the fixture clock or take a new snapshot.
 - **Reading scores:** on live markets they come from `rules_analyst.py`. Check its scores against the workbook on a few more real markets. Fixture files still carry the workbook scores.
-- **Free checks in live mode:** to let a live gap lead to a purchase, add a free-check source for each type of gap (for example, read the terms PDF for the settlement rule).
+- **Free checks in live mode:** NYC and San Francisco Airport weather markets can read the official terms and the station's NWS daily report before proposing any purchase. San Francisco records whether the contract explicitly chooses a full-day issuance. An inaccessible source stops the proposal.
+- **Live purchase handoff:** `python -m verity.cli analyze-live --event WXHIGH-SFO-2611200459 --outcome "58°F to 59°F"` prints the risk assessment and the free-check decision. An optional `--evidence-catalog` points to an operator-approved catalog in the existing `catalog_v1.json` format. A live entry must name the exact instrument in `live_contract_id` and use the selected `--rail` (Gateway by default). Its `price_base_units` becomes the unsigned proposal cap. The bundled fixture catalog supplies no live artifacts. The buyer still uses its trusted merchant catalog and owns signing.
+- **Live reassessment:** pass the same trusted catalog to `python -m verity.cli reassess --evidence-catalog <path>` with the existing JSON envelope on stdin. Live reassessment requires receipt-verified `LIVE` evidence for the approved contract, merchant, rail, station and date.

@@ -1,10 +1,15 @@
 """Live path with the exchange API faked: no network, no key."""
+import hashlib
+import json
+from copy import deepcopy
 from datetime import datetime, timezone
 
 import pytest
 
 from verity import generate_purchase_request
 from verity.live import analyze_live, build_live_record
+from verity.reassess import reassess
+from verity.research import NWS_CLISFO_URL
 
 NOW = datetime(2026, 11, 18, 1, 0, tzinfo=timezone.utc)
 
@@ -43,6 +48,7 @@ GAME = {
 class FakeResp:
     def __init__(self, payload=None, content=b"", status=200):
         self._p, self.content, self.status_code = payload, content, status
+        self.text = content.decode("utf-8")
 
     def json(self):
         return self._p
@@ -85,6 +91,144 @@ def test_document_description_becomes_plain_text():
 def test_unknown_outcome_lists_labels():
     with pytest.raises(KeyError, match="labels"):
         build_live_record(EVENT, "Nope", now=NOW)
+
+
+def _sfo_research(monkeypatch, *, selection="The first published version of the applicable report is used.",
+                  report_status=200, climate_date="NOVEMBER 19 2026", terms_text="Gemini's official weather terms."):
+    event = deepcopy(EVENT)
+    event["ticker"] = "WXHIGH-SFO-2611200459"
+    event["title"] = "Highest temperature in San Francisco on November 19, 2026?"
+    event["expiryDate"] = "2026-11-20T04:59:59Z"
+    event["sourceDetails"] = {"agency": "NWS", "index": "CLISFO"}
+    contract = event["contracts"][0]
+    contract["instrumentSymbol"] = "GEMI-WXHIGH-SFO-2611200459-58TO59"
+    contract["termsAndConditionsUrl"] = ""
+    url = "https://assets.gemini.com/predictions/terms_and_conditions/weather.pdf"
+    contract["description"] = f"San Francisco Airport uses the NWS daily climate report. {selection} [Full rules]({url})."
+    calls = []
+
+    def get(target, timeout=None):
+        calls.append(target)
+        if target.endswith("/events/" + event["ticker"]):
+            return FakeResp(event)
+        assert target == NWS_CLISFO_URL
+        summary = "THE SAN FRANCISCO AIRPORT CLIMATE SUMMARY"
+        if climate_date:
+            summary += f" FOR {climate_date}..."
+        report = f"CLISFO\n138 AM PST FRI NOV 20 2026\n{summary}\nVALID TODAY AS OF 0400 PM LOCAL TIME."
+        return FakeResp(content=report.encode(), status=report_status)
+
+    def terms(target, _get):
+        assert target == url
+        calls.append(target)
+        return terms_text, None
+
+    monkeypatch.setattr("verity.live.fetch_terms_text", terms)
+    risk, ctx = analyze_live(event["ticker"], contract["label"], http_get=get, now=NOW)
+    assert ctx.markets[risk.contract_id]["terms_url"] == url
+    assert risk.evidence_gaps[0].free_checks == ["sfo-settlement-version"]
+    return risk, ctx, calls
+
+
+def test_sfo_live_free_sources_precede_exact_live_catalog(monkeypatch):
+    risk, ctx, calls = _sfo_research(monkeypatch)
+    log = []
+    assert generate_purchase_request(risk, ctx, log) is None
+    assert calls[-1] == NWS_CLISFO_URL
+    assert len(calls) == 3  # market, linked PDF, station report
+    assert any("free research unresolved" in line for line in log)
+    assert any("for this live contract" in line for line in log)
+
+    # Simulated operator-approved catalog entry. The repository ships no such live artifact.
+    original = ctx.catalog["items"][0]
+    ctx.payment_rail = "circle-gateway-batched"
+    item = {**original, "id": "sfo-live-test-evidence", "live_contract_id": risk.contract_id,
+            "rail": ctx.payment_rail, "price_base_units": "1000"}
+    ctx.catalog["items"] = [{**item, "id": "unrelated-live-test-evidence", "live_contract_id": "different-contract"}, item]
+    log = []
+    proposal = generate_purchase_request(risk, ctx, log)
+    assert proposal is not None and proposal.catalog_item_id == item["id"]
+    assert proposal.catalog_parameters == {"station": "San Francisco Airport, CA (CLISFO)", "date": "2026-11-19"}
+    assert proposal.max_amount_base_units == "1000" and proposal.signed is False
+    assert any("0.001 USDC" in line for line in log)
+
+    # The receipt verifier supplies this provenance in a real run.
+    doc = {"source": "test merchant", "gap_type": proposal.evidence_type, **proposal.catalog_parameters,
+           "settling_issuance": "first full-day report", "excludes": [], "corrections_count": False,
+           "summary": "The first full-day report controls."}
+    provenance = {"purchase_id": "purchase-test", "contract_id": risk.contract_id,
+                  "evidence_gap_id": proposal.evidence_gap_id, "catalog_item_id": proposal.catalog_item_id,
+                  "merchant_id": item["merchant_id"], "request_hash": "request", "content_hash_keccak256": "content",
+                  "receipt_digest": "digest", "receipt_signer": "signer", "verified_by": "verifyGatewayDelivery",
+                  "payment_rail": ctx.payment_rail, "payment_ref": "test-transfer"}
+    for label, status in [("FIXTURE", "evidence_rejected"), ("LIVE", "revised")]:
+        body = json.dumps({**doc, "label": label}).encode()
+        result = reassess(risk, body, {**provenance, "data_label": label,
+                                      "content_sha256": "0x" + hashlib.sha256(body).hexdigest()}, ctx)
+        assert result.status == status, result.reason
+    assert result.revised.scores.source.score == 1
+
+
+@pytest.mark.parametrize("selection,report_status,status", [
+    ("Settlement shall use the first full-day NWS daily report.", 200, "resolved"),
+    ("Settlement must use the first full-day NWS daily report.", 200, "resolved"),
+    ("Settlement shall use the first full-day NWS daily report. If the maximum temperature is 58°F, Yes pays out.",
+     200, "resolved"),
+    ("The first published version of the applicable report is used.", 404, "failed"),
+])
+def test_sfo_recognizes_resolved_or_failed_official_checks(monkeypatch, selection, report_status, status):
+    risk, ctx, _calls = _sfo_research(monkeypatch, selection=selection, report_status=report_status)
+    ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+    log = []
+    assert generate_purchase_request(risk, ctx, log) is None
+    assert any(f"free research {status}" in line for line in log)
+
+
+@pytest.mark.parametrize("terms_text", [
+    "If the full-day report is unavailable, the intraday report controls.",
+    "The intraday report controls.",
+    "Settlement will use the final full-day NWS daily report.",
+])
+def test_sfo_keeps_conditional_or_conflicting_issuances_unresolved(monkeypatch, terms_text):
+    first = "Settlement shall use the first full-day NWS daily report."
+    for selection, terms in [(f"{first} {terms_text}", "Unrelated terms."), (first, terms_text)]:
+        risk, ctx, _calls = _sfo_research(monkeypatch, selection=selection, terms_text=terms)
+        ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+
+        log = []
+        assert generate_purchase_request(risk, ctx, log) is not None
+        assert any("free research unresolved" in line for line in log)
+
+        ctx.complete_json = lambda *_args: pytest.fail("An unresolved issuance condition needs supporting evidence")
+        assert generate_purchase_request(risk, ctx) is not None
+
+
+@pytest.mark.parametrize("climate_date", ["NOVEMBER 18 2026", "NOVEMBER 20 2026", "NOVEMBER 31 2026", None])
+@pytest.mark.parametrize("use_model", [False, True])
+def test_sfo_requires_report_for_exact_climate_date(monkeypatch, climate_date, use_model):
+    risk, ctx, _calls = _sfo_research(monkeypatch, climate_date=climate_date)
+    ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+    if use_model:
+        ctx.complete_json = lambda *_args: pytest.fail("The model must not run before the SFO report date is verified")
+
+    log = []
+    assert generate_purchase_request(risk, ctx, log) is None
+    assert any("free research failed" in line and "2026-11-19" in line for line in log)
+
+
+def test_sfo_can_use_model_after_matching_official_check(monkeypatch):
+    risk, ctx, calls = _sfo_research(monkeypatch)
+    ctx.catalog["items"][0]["live_contract_id"] = risk.contract_id
+    model_calls = []
+
+    def complete(*_args):
+        assert calls[-1] == NWS_CLISFO_URL
+        model_calls.append(1)
+        return {"resolved": False, "conclusion": "Issuance is unclear.", "reasoning": "No explicit selection."}
+
+    ctx.complete_json = complete
+    assert generate_purchase_request(risk, ctx) is not None
+    assert model_calls == [1]
 
 
 def test_analyze_live_end_to_end_with_fakes():
