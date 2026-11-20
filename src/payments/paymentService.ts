@@ -50,6 +50,7 @@ export async function authorizeStoredPurchase(args: {
   if (record.status === "awaiting_approval") {
     throw new ApprovalRequiredError(`purchase ${purchaseId} needs owner approval before signing`);
   }
+  if (record.status === "denied") throw new Error(`purchase ${purchaseId} was denied or timed out and can never be signed`);
   if (store.isPaused()) throw new PolicyError("payments are paused");
   if (record.status === "rejected" || record.status === "expired") {
     throw new PolicyError(`purchase ${purchaseId} is ${record.status} and cannot be signed`);

@@ -12,7 +12,7 @@
  * VERITY_QN_SECURITY_TOKEN, VERITY_WEBHOOK_URL, QUICKNODE_ARC_TESTNET_SLUG.
  */
 import { createHash, randomBytes } from "node:crypto";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { createPublicClient, http, toHex } from "viem";
@@ -26,9 +26,14 @@ import { createQuickNodeWebhookHandler, QUICKNODE_WEBHOOK_PATH } from "../src/re
 
 if (existsSync(".env.quicknode")) process.loadEnvFile(".env.quicknode");
 
-const BLOCK = 72781628;
-const TX = "0xe3a6642f57e846526ac9a349f13c16cb11880e982f07ebcaeb9be90957abb4b0";
-const PURCHASE_ID = "purchase-arc-1794970282";
+const lastPurchasePath = ".verity/last-arc-purchase.json";
+const lastPurchase = existsSync(lastPurchasePath)
+  ? JSON.parse(readFileSync(lastPurchasePath, "utf8")) as { purchaseId: string; txHash: string; blockNumber: number }
+  : null;
+const BLOCK = lastPurchase?.blockNumber ?? 72781628;
+const TX = lastPurchase?.txHash ?? "0xe3a6642f57e846526ac9a349f13c16cb11880e982f07ebcaeb9be90957abb4b0";
+const PURCHASE_ID = lastPurchase?.purchaseId ?? "purchase-arc-1794970282";
+if (lastPurchase) console.log(`using on-chain purchase ${PURCHASE_ID} tx ${TX} block ${BLOCK}`);
 const slug = process.env.QUICKNODE_ARC_TESTNET_SLUG ?? "arc-testnet";
 const providedToken = process.env.VERITY_QN_SECURITY_TOKEN;
 const securityToken = providedToken ?? randomBytes(32).toString("hex");
@@ -180,10 +185,18 @@ const after = ledger.counts();
 console.log(`\n== Ledger record ==\n${JSON.stringify(settlement, null, 2)}`);
 console.log(`authorization=${store.get(PURCHASE_ID)?.status} reservation=${store.reservation(PURCHASE_ID)?.status}`);
 const settlementsForPurchase = settlement ? 1 : 0;
+const deliveryPending = settlement?.deliveryStatus === "pending" && settlement.ledgerOutcome === "settlement_confirmed_delivery_pending";
+const deliveryJoined = settlement?.deliveryStatus === "verified" && settlement.ledgerOutcome === "reconciled";
 const ok =
   s1 === 200 && s2 === 200 && s3 === 200 && s5 === 401 && forged.status === 401 &&
   settlementsForPurchase === 1 && after.settlements - before.settlements <= 1 &&
-  store.reservation(PURCHASE_ID)?.status === "spent" && settlement?.settlementStatus === "confirmed" && settlement.deliveryStatus === "pending";
-console.log(ok ? "\nRECONCILED SETTLEMENT: one record, reservation spent, delivery pending" : "\nRECONCILIATION CHECK FAILED");
+  store.reservation(PURCHASE_ID)?.status === "spent" && settlement?.settlementStatus === "confirmed" && (deliveryPending || deliveryJoined);
+console.log(
+  deliveryJoined
+    ? "\nRECONCILED: QuickNode settlement joined the accepted delivery receipt"
+    : ok
+      ? "\nRECONCILED SETTLEMENT: one record, reservation spent, delivery pending"
+      : "\nRECONCILIATION CHECK FAILED",
+);
 store.close();
 process.exitCode = ok ? 0 : 1;

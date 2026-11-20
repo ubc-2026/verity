@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import type { Hex } from "viem";
 import type { CatalogItem } from "./buyer.ts";
 import { hashContent } from "./researchRequest.ts";
@@ -67,6 +68,30 @@ const nwsSettlementDocument = text(
   `{"label":"FIXTURE","source":"nws-cli","gap_type":"settlement_source_version","station":"Central Park, NY (CLINYC)","date":"2026-11-18","settling_issuance":"first_full_day_cli","excludes":["same-day partial CLINYC valid to 4 PM","later corrections"],"corrections_count":false,"summary":"FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count."}`,
 );
 
+/** VERITY_NWS_EVIDENCE_FILE replaces the fixture body. The file must be a LIVE document from capture-evidence. */
+function liveNwsFile(): { bytes: Uint8Array; station: string; date: string } | null {
+  const file = process.env.VERITY_NWS_EVIDENCE_FILE;
+  if (!file) return null;
+  const bytes = new Uint8Array(readFileSync(file));
+  const doc = JSON.parse(new TextDecoder().decode(bytes)) as Record<string, unknown>;
+  if (doc.label !== "LIVE" || doc.gap_type !== "settlement_source_version") {
+    throw new Error("VERITY_NWS_EVIDENCE_FILE must be a LIVE settlement-version document");
+  }
+  if (typeof doc.station !== "string" || typeof doc.date !== "string" || typeof doc.summary !== "string" || !doc.summary.trim()) {
+    throw new Error("VERITY_NWS_EVIDENCE_FILE is missing station, date, or summary");
+  }
+  if (doc.settling_issuance !== "unknown" && typeof doc.settling_issuance !== "string") {
+    throw new Error("VERITY_NWS_EVIDENCE_FILE has no settling issuance");
+  }
+  return { bytes, station: doc.station, date: doc.date };
+}
+
+const liveNws = liveNwsFile();
+const nwsBody = liveNws?.bytes ?? nwsSettlementDocument;
+const nwsParameters = liveNws
+  ? { station: liveNws.station, date: liveNws.date }
+  : { station: "Central Park, NY (CLINYC)", date: "2026-11-18" };
+
 /** Allowlisted documents the mock merchant can sell. */
 export const RESEARCH_RESOURCES: readonly ResearchResource[] = [
   item(
@@ -92,9 +117,9 @@ export const RESEARCH_RESOURCES: readonly ResearchResource[] = [
       price: 50_000n,
       maxAmount: 100_000n,
       requiredParameters: ["date", "station"],
-      sampleParameters: { station: "Central Park, NY (CLINYC)", date: "2026-11-18" },
+      sampleParameters: nwsParameters,
     },
-    nwsSettlementDocument,
+    nwsBody,
 
   ),
   item(
@@ -107,10 +132,10 @@ export const RESEARCH_RESOURCES: readonly ResearchResource[] = [
       price: 1_000n, // 0.001 USDC
       maxAmount: 1_000n,
       requiredParameters: ["date", "station"],
-      sampleParameters: { station: "Central Park, NY (CLINYC)", date: "2026-11-18" },
+      sampleParameters: nwsParameters,
       rail: "circle-gateway-batched",
     },
-    nwsSettlementDocument,
+    nwsBody,
   ),
   item(
     {

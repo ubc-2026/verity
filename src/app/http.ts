@@ -40,7 +40,7 @@ export function capabilities(deps: Pick<AppDeps, "gatewayEnabled" | "engine">) {
       id: "live-analysis",
       name: "Live analysis run",
       state: "live read-only",
-      detail: "analyze-live reads api.gemini.com, assets.gemini.com and forecast.weather.gov only. No model, no payment, and no evidence catalog, so a live run never proposes a purchase.",
+      detail: "analyze-live reads api.gemini.com, assets.gemini.com and forecast.weather.gov only. Set VERITY_LIVE_EVIDENCE=1 to propose the existing NWS item when the free check leaves the gap open, and VERITY_NWS_EVIDENCE_FILE to the LIVE document captured from that NWS page. Without those, a live run does not propose a purchase.",
     },
     {
       id: "arc-direct",
@@ -61,7 +61,7 @@ export function capabilities(deps: Pick<AppDeps, "gatewayEnabled" | "engine">) {
       detail: "Runs use a FIXTURE Circle Gateway (no network, no funds): verify, settle once, per-transfer status, batch. Set VERITY_GATEWAY_RAIL=1 to also show the archived live 0.001 USDC purchase. No live Gateway payment is made from this server.",
     },
     { id: "grok", name: "Grok overdue alert", state: "fixture", detail: "Overdue events come from the ledger status. A contract model of the Grok routine opens one card per purchase and counts replays. The real routine is not called." },
-    { id: "voice", name: "ElevenLabs voice", state: "blocked", detail: "Approval explanations are text. No authorized ElevenLabs integration is wired or captured." },
+    { id: "voice", name: "ElevenLabs voice", state: "wired, not called from this server", detail: "BuyerService calls the owner for a purchase above 0.50 USDC when ELEVENLABS_API_KEY, ELEVENLABS_AGENT_ID, ELEVENLABS_PHONE_NUMBER_ID and OWNER_PHONE_NUMBER are set. A spoken yes is logged only. This server's fixture runs do not place a call." },
     { id: "x402", name: "Standard x402", state: "blocked", detail: "The transport uses Verity headers (X-Verity-Binding, X-Verity-Payment, X-Verity-Receipt). x402 interoperability has not been checked." },
     {
       id: "owner",
