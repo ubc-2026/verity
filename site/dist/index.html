@@ -618,7 +618,7 @@ html.landing .lp{display:block}
 .signin,.signout{display:none}
 html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 .mobile-menu .signin,.mobile-menu .signout{width:100%}
-@media (max-width:1440px){html.demo-mode .nav-cta a[href="#spec"],html.signed-in .nav-cta a[href="#spec"]{display:none}}
+@media (max-width:1440px){.nav-cta a[href="#spec"]{display:none}} /* room for the account button the edge adds */
 .lp-only-in{display:none}html.signed-in .lp-only-in{display:inline}html.signed-in p.lp-only-in{display:block}html.signed-in .lp-only-out{display:none!important}
 .lp-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--margin)}
 .lp-bar{position:sticky;top:0;z-index:20;background:rgba(9,12,16,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border-hairline)}
@@ -947,8 +947,6 @@ document.addEventListener('verity:landing',function(){
     <div class="nav-cta">
       <a class="btn ghost sm" href="#spec">Read specification</a>
       <a class="btn primary sm" href="#walkthrough" data-launch>Launch agent terminal</a>
-      <a class="btn ghost sm signin" href="/auth/sign-in">Sign in</a>
-      <button class="btn ghost sm signout" type="button" data-signout>Sign out</button>
     </div>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span></button>
   </div>
@@ -961,8 +959,6 @@ document.addEventListener('verity:landing',function(){
     <a class="link" href="#ledger">Ledger</a>
     <a class="btn primary" href="#walkthrough" data-launch>Launch agent terminal</a>
     <a class="btn" href="#spec">Read specification</a>
-    <a class="btn signin" href="/auth/sign-in">Sign in to save research</a>
-    <button class="btn signout" type="button" data-signout>Sign out</button>
     <a class="link" href="/?home">Front page</a>
   </div>
 </header>
@@ -2319,10 +2315,6 @@ document.addEventListener('keydown',e=>{const d=$('#drawer');if(!d.classList.con
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{drawProb();drawCandles();});
 })();
 
-/* Sign out: clears the session cookie through the auth service, then returns to the front page */
-$$('[data-signout]').forEach(b=>b.addEventListener('click',async()=>{b.disabled=true;
-  try{const r=await fetch('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',credentials:'same-origin',redirect:'error'});if(!r.ok)throw new Error();try{sessionStorage.removeItem('verity.mode');}catch(e){}location.replace(location.pathname);}
-  catch(e){b.disabled=false;b.textContent='Sign-out failed, try again';}}));
 /* Audit ledger: reads a running Verity payment portal (portal/) with its read token.
    Nothing is fetched until the visitor loads it; the token stays in this tab (sessionStorage). */
 (()=>{
