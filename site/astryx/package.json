@@ -1,0 +1,13 @@
+{
+  "name": "verity-astryx-dot",
+  "private": true,
+  "description": "Front-page market pop-up for verityresearch.us, built with Meta's Astryx design system",
+  "scripts": { "build": "sh build.sh" },
+  "dependencies": {
+    "@astryxdesign/core": "0.7.16",
+    "@stylexjs/stylex": "^0.19.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": { "esbuild": "^0.28.0" }
+}
