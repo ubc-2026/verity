@@ -32,7 +32,7 @@ echo '<body>'
 cat src/body.html
 echo '<script>'
 cat keccak.js
-cat src/app1.js src/app2.js src/app3.js
+cat src/app1.js src/live.js src/ticker.js src/app2.js src/gemini.js src/news.js src/app3.js
 echo '</script>'
 echo '</body>'
 echo '</html>'
