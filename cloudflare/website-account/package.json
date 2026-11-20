@@ -1,0 +1,9 @@
+{
+  "name": "verity-website-account",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker for verityresearch.us/auth/* and /api/account/runs",
+  "dependencies": {
+    "postgres": "4.1.1"
+  }
+}

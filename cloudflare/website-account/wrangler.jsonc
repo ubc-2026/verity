@@ -1,0 +1,41 @@
+{
+  "name": "verity-website-account",
+  "main": "src/website-account.mjs",
+  "workers_dev": false,
+  "preview_urls": false,
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "routes": [
+    {
+      "pattern": "verityresearch.us/api/account/runs",
+      "zone_name": "verityresearch.us"
+    },
+    {
+      "pattern": "verityresearch.us/auth/*",
+      "zone_name": "verityresearch.us"
+    }
+  ],
+  "vars": {
+    "VERITY_AUTH_EDGE_URL": "https://ijjjygqgdgqhquugxdfp.supabase.co/functions/v1/consumer-auth",
+    "VERITY_AUTH_SITE_ORIGIN": "https://verityresearch.us",
+    "VERITY_PUBLIC_SIGNUP": "true"
+  },
+  "ratelimits": [
+    {
+      "name": "VERITY_AUTH_RATE_LIMIT",
+      "namespace_id": "1021",
+      "simple": {
+        "limit": 12,
+        "period": 60
+      }
+    }
+  ],
+  "hyperdrive": [
+    {
+      "binding": "VERITY_PRIVATE_RUNS_DB",
+      "id": "943279230ce442eb94c14fde7025e92f"
+    }
+  ]
+}
