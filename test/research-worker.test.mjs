@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { createResearchWorker } from "../research-worker.mjs";
+import { createResearchWorker, termsUrlOf } from "../research-worker.mjs";
 
 const host = "https://api.verityresearch.us";
 const symbol = "GEMI-WXHIGH-SFO-2611200459-56TO57";
@@ -142,4 +142,13 @@ it("rejects invalid input and returns a safe error when the history connection i
   assert.equal(response.status, 503);
   assert.deepEqual(await response.json(), { error: "Stored quote history is temporarily unavailable" });
   assert.equal(calls, 1);
+});
+
+it("falls back to the terms PDF in a weather contract description", () => {
+  const pdf = "https://assets.gemini.com/predictions/terms_and_conditions/Weather.pdf";
+  assert.equal(termsUrlOf({ description: `Rules: ${pdf}` }, {}), pdf);
+  assert.equal(termsUrlOf({ termsAndConditionsUrl: "https://a/c.pdf", description: pdf }, { termsLink: "https://a/e.pdf" }), "https://a/c.pdf");
+  assert.equal(termsUrlOf({ description: pdf }, { termsLink: "https://a/e.pdf" }), "https://a/e.pdf");
+  assert.equal(termsUrlOf({ description: `${pdf} https://assets.gemini.com/predictions/terms_and_conditions/B.pdf` }, {}), null);
+  assert.equal(termsUrlOf({}, {}), null);
 });

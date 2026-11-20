@@ -251,6 +251,23 @@ describe("code registration for the live check", () => {
     assert.match(store.approvalDecisions(PURCHASE)[0]?.detail ?? "", /could not register/);
   });
 
+  it("fails closed: no call is placed if the code cannot be shown", async () => {
+    let called = false;
+    const caller: OwnerCaller = { async call() { called = true; return { verbal: "yes", conversationId: "c", spokenCode: "0000" }; } };
+    const { store, input } = setup(caller);
+    const buyer = new BuyerService({
+      store, catalog, owner: DEMO_OWNER.address, signer: DEMO_PAYER, tokenDomain: { name: "USDC", version: "2" }, missionId: "mission-voice",
+      ownerCaller: caller,
+      ownerCodeDisplay: () => { throw new Error("screen gone"); },
+    });
+    const result = await buyer.purchase(input);
+    assert.equal(result.status, "rejected");
+    assert.equal(called, false);
+    assert.equal(store.get(PURCHASE)?.status, "denied");
+    assert.equal(store.committedSpend("mission-voice"), 0n);
+    assert.match(store.approvalDecisions(PURCHASE)[0]?.detail ?? "", /could not show/);
+  });
+
   it("the client sends only an HMAC of the code", async () => {
     const { VoiceChallengeClient, codeMac } = await import("../src/payments/voiceChallenge.ts");
     let sent: { url: string; headers: Record<string, string>; body: string } | undefined;
@@ -312,6 +329,30 @@ describe("ElevenLabs owner caller", () => {
     assert.equal((await run([done("maybe")]).result).verbal, "no_answer");
     assert.equal((await run([done(undefined)]).result).verbal, "no_answer");
     assert.equal((await run([{ status: "failed" }]).result).verbal, "no_answer");
+  });
+
+  it("keeps waiting when one poll throws or returns a bad body", async () => {
+    let polled = 0;
+    const fetch = async (url: string) => {
+      if (url.endsWith("/outbound-call")) return { ok: true, status: 200, json: async () => ({ success: true, conversation_id: "conv-x" }) };
+      polled += 1;
+      if (polled === 1) throw new Error("socket reset");
+      if (polled === 2) return { ok: true, status: 200, json: async () => { throw new SyntaxError("bad json"); } };
+      return { ok: true, status: 200, json: async () => done("yes") };
+    };
+    let now = 0;
+    const caller = new ElevenLabsOwnerCaller({ config, fetch, sleep: async (ms) => void (now += ms), clock: () => now, pollMs: 1000 });
+    assert.equal((await caller.call({ purchaseId: PURCHASE, summary: "buy X", timeoutMs: 60_000 })).verbal, "yes");
+    assert.equal(polled, 3);
+  });
+
+  it("does not sleep past the deadline", async () => {
+    const sleeps: number[] = [];
+    const { fetch } = fakeFetch([{ status: "in-progress" }]);
+    let now = 0;
+    const caller = new ElevenLabsOwnerCaller({ config, fetch, sleep: async (ms) => void (sleeps.push(ms), (now += ms)), clock: () => now, pollMs: 4000 });
+    await caller.call({ purchaseId: PURCHASE, summary: "buy X", timeoutMs: 10_000 });
+    assert.equal(sleeps.reduce((a, b) => a + b, 0), 10_000);
   });
 
   it("gives up at the timeout when the call never finishes", async () => {

@@ -106,7 +106,20 @@ export async function requestOwnerApproval(args: {
         return { outcome: "timed_out", conversationId: null };
       }
     }
-    await args.codeCheck.show({ purchaseId: args.purchaseId, code });
+    try {
+      await args.codeCheck.show({ purchaseId: args.purchaseId, code });
+    } catch (error) {
+      // Fail closed: the owner never saw the code, so they cannot pass the check. Record it instead of throwing,
+      // which would leave the purchase awaiting approval with a registered challenge and no decision.
+      args.store.denyAwaitingApproval({
+        purchaseId: args.purchaseId,
+        outcome: "timed_out",
+        channel: "voice_call",
+        detail: `could not show the one-time code: ${error instanceof Error ? error.message : "failed"}`,
+        now: args.now(),
+      });
+      return { outcome: "timed_out", conversationId: null };
+    }
   }
 
   let result: OwnerCallResult;
@@ -245,13 +258,19 @@ export class ElevenLabsOwnerCaller implements OwnerCaller {
 
     const field = this.#config.decisionField ?? "owner_decision";
     while (this.#clock() < deadline) {
-      await this.#sleep(this.#pollMs);
-      const response = await this.#fetch(`${base}/v1/convai/conversations/${encodeURIComponent(conversationId)}`, { headers });
-      if (!response.ok) continue;
-      const body = (await response.json()) as {
+      await this.#sleep(Math.min(this.#pollMs, Math.max(0, deadline - this.#clock())));
+      // A network error or bad body on one poll must not end the wait: the call is still live.
+      let body: {
         status?: unknown;
         analysis?: { data_collection_results?: Record<string, { value?: unknown } | undefined> };
       };
+      try {
+        const response = await this.#fetch(`${base}/v1/convai/conversations/${encodeURIComponent(conversationId)}`, { headers });
+        if (!response.ok) continue;
+        body = (await response.json()) as typeof body;
+      } catch {
+        continue;
+      }
       if (body.status === "failed") return { verbal: "no_answer", conversationId };
       if (body.status !== "done") continue;
       const value = body.analysis?.data_collection_results?.[field]?.value;

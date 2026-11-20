@@ -185,6 +185,17 @@ function upstreamFailure(source, fetchedAt) {
   return json({ error: "Market source unavailable", mode: "unavailable", live: false, source, fetchedAt }, 502);
 }
 
+const TERMS_PDF = /https:\/\/assets\.gemini\.com\/predictions\/terms_and_conditions\/[^\s"'()<>\\]+?\.pdf/gi;
+
+// Gemini weather events leave termsLink and termsAndConditionsUrl empty and link the terms PDF only in the
+// contract description. Use that link when exactly one terms PDF appears, as analysis/verity/live.py does.
+export function termsUrlOf(contract, event) {
+  const direct = contract?.termsAndConditionsUrl || event?.termsLink;
+  if (direct) return direct;
+  const found = new Set(JSON.stringify(contract?.description ?? "").match(TERMS_PDF) ?? []);
+  return found.size === 1 ? [...found][0] : null;
+}
+
 function researchBrief(event, source, fetchedAt) {
   const contracts = Array.isArray(event.contracts) ? event.contracts : [];
   const contract = contracts.find((item) => item?.status === "active") || contracts[0] || {};
@@ -196,7 +207,7 @@ function researchBrief(event, source, fetchedAt) {
     researchDate: fetchedAt.slice(0, 10),
     instrumentSymbol: contract.instrumentSymbol || null,
     resolutionCriteria: criteria.slice(0, 2000),
-    terms: contract.termsAndConditionsUrl || event.termsLink || null,
+    terms: termsUrlOf(contract, event),
     source,
     quotes: contracts.slice(0, 20).map((item) => ({
       instrumentSymbol: item?.instrumentSymbol || null,
