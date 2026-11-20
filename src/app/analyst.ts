@@ -187,18 +187,21 @@ export class Analyst {
   /**
    * LIVE read-only analysis of one Gemini Exchange outcome (python -m verity.cli analyze-live): public
    * reads from api.gemini.com, assets.gemini.com and forecast.weather.gov only, no model, no payment.
-   * No evidence catalog is passed, so a live run never proposes a purchase. The CLI output has no
+   * VERITY_LIVE_EVIDENCE=1 binds the existing NWS catalog item to this contract (`--approve-nws`).
+   * The merchant serves VERITY_NWS_EVIDENCE_FILE instead of the fixture document. With the flag
+   * unset, no catalog is passed and a live run does not propose a purchase. The CLI output has no
    * `research` block; one is built from the risk analysis, and anything it does not carry is listed
    * as unavailable. Results are reused for 60 s per event, outcome and rail.
    */
   analyzeLive(event: string, outcome: string, rail: "arc-eip3009" | "circle-gateway-batched" = "circle-gateway-batched"): Promise<AnalyzeOutput> {
-    const key = `live|${event}|${outcome}|${rail}`;
+    const approve = process.env.VERITY_LIVE_EVIDENCE === "1";
+    const key = `live|${event}|${outcome}|${rail}|${approve ? "nws" : ""}`;
     const cached = this.#liveCache.get(key);
     if (cached && cached.expires > Date.now()) return cached.pending;
     // Each uncached live run starts a Python child that reads public sources; cap how many run at once.
     if (this.#liveInFlight >= MAX_LIVE_IN_FLIGHT) return Promise.reject(new LiveAnalysisBusyError());
     this.#liveInFlight += 1;
-    const pending = (this.#run(["analyze-live", "--event", event, "--outcome", outcome, "--rail", rail]) as Promise<LiveAnalyzeOutput>)
+    const pending = (this.#run(["analyze-live", "--event", event, "--outcome", outcome, "--rail", rail, ...(approve ? ["--approve-nws"] : [])]) as Promise<LiveAnalyzeOutput>)
       .then(withResearch)
       .finally(() => { this.#liveInFlight -= 1; });
     pending.catch(() => this.#liveCache.delete(key));

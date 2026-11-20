@@ -137,6 +137,46 @@ def named_issuance(text: str) -> Optional[str]:
     return None
 
 
+def _report_has_date(report: str, iso_date: str) -> bool:
+    try:
+        day = datetime.strptime(iso_date, "%Y-%m-%d")
+    except ValueError:
+        return False
+    flat = _flat(report).upper()
+    return f"{day.strftime('%B').upper()} {day.day} {day.year}" in flat or iso_date in report
+
+
+def live_settlement_document(report_text: str, *, station: str, date: str, source_url: str) -> dict[str, Any]:
+    """A settlement-version document whose summary is copied from the NWS page.
+
+    The issuance is "unknown" unless the page itself names a preliminary, final,
+    or corrected issuance. Corrections are treated as still able to count unless
+    the page says they do not. A page for a different date is refused.
+    """
+    flat = _flat(report_text)
+    if not flat:
+        raise ValueError("the NWS report was empty")
+    if not _report_has_date(flat, date):
+        raise ValueError(f"the NWS report does not contain the market date {date}")
+    excerpt = named_issuance(flat)
+    phrase = next((item for item in _ISSUANCE_PHRASES if item in flat.lower()), None)
+    summary = excerpt if excerpt and excerpt in flat else flat[:240]
+    if summary not in flat:
+        raise ValueError("the evidence summary is not a quote from the NWS report")
+    corrections_do_not_count = "corrections do not count" in flat.lower() or "later corrections do not count" in flat.lower()
+    return {
+        "label": "LIVE",
+        "source": source_url,
+        "gap_type": "settlement_source_version",
+        "station": station,
+        "date": date,
+        "settling_issuance": phrase or "unknown",
+        "excludes": [],
+        "corrections_count": not corrections_do_not_count,
+        "summary": summary,
+    }
+
+
 def _fetch_page(url: str, *, http_get: Optional[HttpGet] = None) -> tuple[Optional[str], Optional[str]]:
     """Read a public text page. PDF bytes are handled by the terms reader."""
     if url.lower().split("?", 1)[0].endswith(".pdf"):
