@@ -93,6 +93,41 @@ export interface GatewaySettleResult {
   /** Facilitator's settlement reference. Circle does not document it as an onchain tx hash. */
   transaction: string;
 }
+
+/**
+ * Settle `errorReason` values Circle documents on HTTP 200 as a definite rejection
+ * (Settle an x402 payment). `nonce_already_used` is omitted: that nonce may already
+ * belong to an accepted transfer, so the caller reconciles instead of releasing.
+ * HTTP 500 is `unexpected_error`, which is not in this set. `BatchFacilitatorClient.callSettle`
+ * returns any JSON body that contains `success` (including that 500) rather than throwing.
+ */
+const DETERMINISTIC_GATEWAY_SETTLE_REJECTIONS = new Set([
+  "unsupported_scheme",
+  "unsupported_network",
+  "unsupported_asset",
+  "invalid_payload",
+  "address_mismatch",
+  "amount_mismatch",
+  "invalid_signature",
+  "authorization_not_yet_valid",
+  "authorization_expired",
+  "authorization_validity_too_short",
+  "self_transfer",
+  "insufficient_balance",
+  "unsupported_domain",
+  "wallet_not_found",
+]);
+
+export function isDeterministicGatewayRejection(errorReason: string | undefined): boolean {
+  return errorReason !== undefined && DETERMINISTIC_GATEWAY_SETTLE_REJECTIONS.has(errorReason);
+}
+
+/** Filters for Circle `searchTransfers`: one authorization, narrowed by its payer and recipient. */
+export interface GatewayNonceLookup {
+  nonce: Hex;
+  from: Hex;
+  to: Hex;
+}
 export type GatewayTransferStatus = "received" | "batched" | "confirmed" | "completed" | "failed";
 /** Circle's per-payment record (`getTransferById`). `txHash` is the batch transaction once known. */
 export interface GatewayTransfer {
@@ -110,8 +145,11 @@ export interface GatewayProvider {
   readonly mode: "fixture" | "live";
   verify(payload: GatewayPaymentPayload, requirements: GatewayRequirements): Promise<GatewayVerifyResult>;
   settle(payload: GatewayPaymentPayload, requirements: GatewayRequirements): Promise<GatewaySettleResult>;
-  /** Per-payment record by the authorization nonce (Circle: searchTransfers({ nonce })). */
-  transferByNonce(nonce: Hex): Promise<GatewayTransfer | undefined>;
+  /**
+   * Per-payment record for one authorization.
+   * Circle: searchTransfers({ nonce, from, to }). The caller still checks the nonce and a non-failed status.
+   */
+  transferByNonce(lookup: GatewayNonceLookup): Promise<GatewayTransfer | undefined>;
   transferById(id: string): Promise<GatewayTransfer>;
 }
 
@@ -141,10 +179,17 @@ export async function createLiveGatewayProvider(args: { sellerPrivateKey: Hex; r
     mode: "live",
     verify: (payload, requirements) => facilitator.verify(payload as never, requirements as never) as Promise<GatewayVerifyResult>,
     settle: (payload, requirements) => facilitator.settle(payload as never, requirements as never) as Promise<GatewaySettleResult>,
-    async transferByNonce(nonce) {
-      const { transfers } = await seller.searchTransfers({ nonce, pageSize: 1 });
-      const first = transfers[0];
-      return first ? toTransfer(first as Record<string, unknown>) : undefined;
+    async transferByNonce(lookup) {
+      const { transfers } = await seller.searchTransfers({
+        nonce: lookup.nonce,
+        from: lookup.from,
+        to: lookup.to,
+        pageSize: 10,
+      });
+      const match = ((transfers ?? []) as Record<string, unknown>[]).find(
+        (row) => typeof row.nonce === "string" && row.nonce.toLowerCase() === lookup.nonce.toLowerCase(),
+      );
+      return match ? toTransfer(match) : undefined;
     },
     async transferById(id) {
       return toTransfer((await seller.getTransferById(id)) as Record<string, unknown>);

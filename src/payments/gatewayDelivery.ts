@@ -2,7 +2,13 @@ import { DatabaseSync } from "node:sqlite";
 import type { Hex } from "viem";
 import { parseBindingHeader } from "./binding.ts";
 import { RECEIPT_HEADER } from "./deliveryReceipt.ts";
-import { gatewayPaymentPayload, gatewayRequirements, type GatewayProvider } from "./circleGateway.ts";
+import {
+  gatewayPaymentPayload,
+  gatewayRequirements,
+  isDeterministicGatewayRejection,
+  type GatewayProvider,
+  type GatewayTransfer,
+} from "./circleGateway.ts";
 import {
   encodeGatewayReceiptHeader,
   signGatewayReceipt,
@@ -16,8 +22,9 @@ import { hashContent } from "./researchRequest.ts";
 type Verified = Extract<VerifyResult, { ok: true }>;
 
 /**
- * claimed    verified and claimed; Gateway not yet known to have accepted it
- * accepted   Gateway settle() returned success; the per-payment transfer may not be visible yet
+ * claimed    verified and claimed; Gateway not yet known to have accepted it.
+ *            A retry reconciles by the original EIP-3009 nonce and does not settle again.
+ * accepted   Gateway accepted the payment; the per-payment transfer may not be visible yet
  * delivered  receipt signed with the Gateway transfer ID and stored; retries replay it
  *
  * Batch settlement is tracked separately (batch_status / batch_tx_hash): Gateway
@@ -134,6 +141,7 @@ export interface GatewayDeliveryDeps extends MerchantDeps {
  * Merchant path for the Gateway rail. Same guarantees as deliverPaidRequest:
  * binding verified first, one durable claim per purchase and nonce, Gateway
  * settle() called at most once, and a retry replays the stored receipt.
+ * A lost or indeterminate settle stays claimed and is reconciled by nonce.
  */
 export async function deliverGatewayPaidRequest(input: PaidRequest, deps: GatewayDeliveryDeps): Promise<GatewayDeliveryResponse> {
   const { deliveries } = deps;
@@ -160,7 +168,7 @@ export async function deliverGatewayPaidRequest(input: PaidRequest, deps: Gatewa
     case "accepted":
       return issueReceipt(verified, deps);
     case "claimed":
-      return { status: 202, reason: "Gateway submission in progress for this purchase", paymentRef: null };
+      return reconcileInterruptedClaim(verified, deps);
   }
 }
 
@@ -172,30 +180,108 @@ async function submitToGateway(verified: Verified, input: PaidRequest, deps: Gat
   try {
     const check = await deps.gateway.verify(payload, requirements);
     if (!check.isValid) {
+      // Verify does not accept a payment, except a nonce Circle (or the fixture) already recorded.
+      if (check.invalidReason === "nonce_already_used") return reconcileInterruptedClaim(verified, deps);
       deps.deliveries.release(purchaseId);
       return { status: 402, reason: `Gateway rejected the authorization: ${check.invalidReason ?? "invalid"}` };
     }
     const settled = await deps.gateway.settle(payload, requirements);
     if (!settled.success) {
-      deps.deliveries.release(purchaseId);
-      return { status: 402, reason: `Gateway did not accept the payment: ${settled.errorReason ?? "settle failed"}` };
+      if (isDeterministicGatewayRejection(settled.errorReason)) {
+        deps.deliveries.release(purchaseId);
+        return { status: 402, reason: `Gateway did not accept the payment: ${settled.errorReason ?? "settle failed"}` };
+      }
+      // unexpected_error (HTTP 500 body), nonce_already_used, or any other undocumented reason.
+      // The payment may already exist. Keep the claim and reconcile; do not settle again.
+      return reconcileInterruptedClaim(verified, deps);
     }
     deps.deliveries.accept(purchaseId, settled.transaction || "(empty)", deps.now());
   } catch (error) {
-    // Unknown outcome: keep the claim so a retry can never submit a second time. Resolve by nonce lookup.
+    // Lost response or a thrown client error. Keep the claim. The retry reconciles by nonce
+    // and must not call settle() again.
     return { status: 502, reason: `Gateway call failed; outcome unknown, resolve by nonce: ${(error as Error).message}` };
   }
   return issueReceipt(verified, deps);
 }
 
-async function issueReceipt(verified: Verified, deps: GatewayDeliveryDeps): Promise<GatewayDeliveryResponse> {
+const FULFILLABLE_TRANSFER = new Set<GatewayTransfer["status"]>(["received", "batched", "confirmed", "completed"]);
+
+/** A transfer can resume this purchase only when it is the same authorization and was not failed. */
+function transferRejection(transfer: GatewayTransfer, verified: Verified): string | null {
+  const { request } = verified;
+  if (transfer.nonce?.toLowerCase() !== verified.nonce.toLowerCase()) {
+    return "Gateway transfer does not carry this authorization nonce";
+  }
+  if (transfer.status === "failed") return "Gateway transfer for this nonce failed; the payment was not charged";
+  if (!FULFILLABLE_TRANSFER.has(transfer.status)) {
+    return `Gateway transfer for this nonce has an unrecognized status (${transfer.status})`;
+  }
+  if (
+    transfer.amount !== request.amount ||
+    transfer.toAddress.toLowerCase() !== request.payTo.toLowerCase() ||
+    transfer.fromAddress.toLowerCase() !== request.payer.toLowerCase()
+  ) {
+    return "Gateway transfer for this nonce does not match the request (amount, payer, or recipient)";
+  }
+  return null;
+}
+
+type TransferLookup =
+  | { outcome: "transfer"; transfer: GatewayTransfer }
+  | { outcome: "missing" }
+  | { outcome: "rejected"; reason: string }
+  | { outcome: "error"; reason: string };
+
+async function lookupTransfer(verified: Verified, deps: GatewayDeliveryDeps): Promise<TransferLookup> {
+  try {
+    const transfer = await deps.gateway.transferByNonce({
+      nonce: verified.nonce,
+      from: verified.request.payer,
+      to: verified.request.payTo,
+    });
+    if (!transfer) return { outcome: "missing" };
+    const reason = transferRejection(transfer, verified);
+    return reason ? { outcome: "rejected", reason } : { outcome: "transfer", transfer };
+  } catch (error) {
+    return { outcome: "error", reason: `Gateway nonce lookup failed; outcome unknown: ${(error as Error).message}` };
+  }
+}
+
+/**
+ * An interrupted claim (lost settle response, or an indeterminate settle body) is resolved
+ * from Circle's transfer for the original EIP-3009 nonce. Nothing here calls settle().
+ */
+async function reconcileInterruptedClaim(verified: Verified, deps: GatewayDeliveryDeps): Promise<GatewayDeliveryResponse> {
+  const found = await lookupTransfer(verified, deps);
+  if (found.outcome === "error" || found.outcome === "rejected") return { status: 502, reason: found.reason };
+  if (found.outcome === "missing") {
+    return { status: 202, reason: "Gateway submission in progress for this purchase", paymentRef: null };
+  }
+  const purchaseId = verified.request.purchaseId;
+  deps.deliveries.accept(purchaseId, found.transfer.id, deps.now());
+  const saved = deps.deliveries.get(purchaseId);
+  if (saved?.status === "delivered" && saved.receipt) return respond(saved.receipt, deps, true);
+  if (saved?.status !== "accepted") {
+    return { status: 202, reason: "Gateway submission in progress for this purchase", paymentRef: saved?.paymentRef ?? null };
+  }
+  return issueReceipt(verified, deps, found.transfer);
+}
+
+async function issueReceipt(verified: Verified, deps: GatewayDeliveryDeps, resolved?: GatewayTransfer): Promise<GatewayDeliveryResponse> {
   const { request } = verified;
   let record = deps.deliveries.get(request.purchaseId)!;
   if (!record.paymentRef) {
-    const transfer = await deps.gateway.transferByNonce(verified.nonce);
-    if (!transfer) return { status: 202, reason: "accepted by Gateway; per-payment transfer not visible yet, retry", paymentRef: null };
-    if (transfer.amount !== request.amount || transfer.toAddress.toLowerCase() !== request.payTo || transfer.fromAddress.toLowerCase() !== request.payer) {
-      return { status: 502, reason: "Gateway transfer for this nonce does not match the request (amount, payer, or recipient)" };
+    let transfer = resolved;
+    if (!transfer) {
+      const found = await lookupTransfer(verified, deps);
+      if (found.outcome === "error" || found.outcome === "rejected") return { status: 502, reason: found.reason };
+      if (found.outcome === "missing") {
+        return { status: 202, reason: "accepted by Gateway; per-payment transfer not visible yet, retry", paymentRef: null };
+      }
+      transfer = found.transfer;
+    } else {
+      const reason = transferRejection(transfer, verified);
+      if (reason) return { status: 502, reason };
     }
     deps.deliveries.linkPaymentRef(request.purchaseId, transfer.id, deps.now());
     deps.deliveries.recordBatch(request.purchaseId, transfer.status, transfer.txHash, deps.now());

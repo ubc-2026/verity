@@ -8,8 +8,10 @@ import type { PaymentStore } from "./store.ts";
  * Buyer-side record of Gateway purchases. Three facts are kept apart:
  *   accepted   Circle Gateway accepted the payment and the merchant's V2 receipt
  *              (bound to Circle's transfer ID and Verity's purchase ID) was verified
- *   batch      Circle's per-payment status (received, batched, confirmed, completed,
- *              failed) and the batch transaction hash once Circle reports one
+ *   batch      Circle's per-payment status moves only forward
+ *              (received -> batched -> confirmed -> completed). `failed` is terminal
+ *              and is recorded only before the transfer is confirmed. The batch row
+ *              and the reservation spend commit in one transaction.
  *   quicknode  never claimed per payment: a Gateway batch settles many payments in one
  *              transaction, and Circle does not document how to attribute a transfer
  *              inside it, so a QuickNode log cannot prove this purchase's match
@@ -81,17 +83,40 @@ export class GatewayLedger {
     return { kind: "accepted", purchaseId: receipt.purchaseId, paymentRef: receipt.paymentRef };
   }
 
-  /** Applies Circle's per-payment record. It must be the transfer the receipt named. */
+  /**
+   * Applies Circle's per-payment record. It must be the transfer the receipt named.
+   * Status only moves forward, and the batch row and the reservation spend commit together,
+   * so a delayed pending response cannot overwrite a completed batch while the reservation stays spent.
+   */
   recordBatch(purchaseId: string, transfer: GatewayTransfer, now: number): GatewayPaymentStatus | { error: string } {
-    const row = this.#db.prepare(`SELECT payment_ref FROM gateway_payments WHERE purchase_id = ?`).get(purchaseId) as { payment_ref: string } | undefined;
-    if (!row) return { error: "no accepted Gateway payment for this purchase" };
-    if (row.payment_ref !== transfer.id) return { error: `transfer ${transfer.id} is not the one on the receipt (${row.payment_ref})` };
-    this.#db
-      .prepare(`UPDATE gateway_payments SET batch_status = ?, batch_tx_hash = COALESCE(?, batch_tx_hash), batch_updated_at = ? WHERE purchase_id = ?`)
-      .run(transfer.status, transfer.txHash, now, purchaseId);
-    if (transfer.status === "confirmed" || transfer.status === "completed") {
-      // Circle: wait for `confirmed` before crediting; only then does the reservation become spend.
-      this.#db.prepare(`UPDATE reservations SET status = 'spent', updated_at = ? WHERE purchase_id = ? AND status = 'held'`).run(now, purchaseId);
+    this.#db.exec("BEGIN IMMEDIATE");
+    try {
+      const row = this.#db.prepare(`SELECT payment_ref, batch_status FROM gateway_payments WHERE purchase_id = ?`).get(purchaseId) as
+        | { payment_ref: string; batch_status: string | null }
+        | undefined;
+      if (!row) {
+        this.#db.exec("ROLLBACK");
+        return { error: "no accepted Gateway payment for this purchase" };
+      }
+      if (row.payment_ref !== transfer.id) {
+        this.#db.exec("ROLLBACK");
+        return { error: `transfer ${transfer.id} is not the one on the receipt (${row.payment_ref})` };
+      }
+      if (allowsBatchTransition(row.batch_status, transfer.status)) {
+        this.#db
+          .prepare(`UPDATE gateway_payments SET batch_status = ?, batch_tx_hash = COALESCE(?, batch_tx_hash), batch_updated_at = ? WHERE purchase_id = ?`)
+          .run(transfer.status, transfer.txHash, now, purchaseId);
+        if (transfer.status === "confirmed" || transfer.status === "completed") {
+          // Circle: wait for `confirmed` before crediting; only then does the reservation become spend.
+          this.#db.prepare(`UPDATE reservations SET status = 'spent', updated_at = ? WHERE purchase_id = ? AND status = 'held'`).run(now, purchaseId);
+        }
+        this.#db.exec("COMMIT");
+      } else {
+        this.#db.exec("ROLLBACK");
+      }
+    } catch (error) {
+      this.#db.exec("ROLLBACK");
+      throw error;
     }
     return this.status(purchaseId)!;
   }
@@ -111,4 +136,19 @@ export class GatewayLedger {
       quicknode: { status: "not_claimed", reason: QUICKNODE_REASON },
     };
   }
+}
+
+/**
+ * Circle transfer order is received -> batched -> confirmed -> completed.
+ * `failed` can replace an unconfirmed transfer and is then terminal.
+ * A later response at the same or an earlier rank is ignored.
+ */
+function allowsBatchTransition(current: string | null, next: GatewayTransfer["status"]): boolean {
+  if (current === null) return true;
+  if (current === "completed" || current === "failed") return false;
+  if (next === "failed") return current === "received" || current === "batched";
+  const rank: Record<string, number> = { received: 1, batched: 2, confirmed: 3, completed: 4 };
+  const from = rank[current];
+  const to = rank[next];
+  return from !== undefined && to !== undefined && to > from;
 }

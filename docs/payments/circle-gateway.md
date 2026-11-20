@@ -23,9 +23,10 @@ POST /evidence/nws-cli-settlement-nano  (bearer session, X-Verity-Binding, X-Ver
   MerchantService.deliver -> deliverGatewayPaidRequest
     verifyPaidRequest (trusted quote, request binding, Gateway-domain signature)
     durable claim (purchase + nonce)        -> Gateway verify() + settle() at most once
+    lost or indeterminate settle stays claimed -> searchTransfers({ nonce, from, to })
     accepted -> Circle transfer by nonce    -> DeliveryReceiptV2 (purchaseId, transfer ID, nonce, content hash)
 buyer: verifyGatewayDelivery (pinned key, binding, keccak256 of bytes, own nonce) -> GatewayLedger: accepted
-later: Circle transfer status received -> batched -> confirmed/completed + batch tx -> GatewayLedger: batch_settled
+later: Circle status moves only forward (received -> batched -> confirmed/completed); the batch row and the reservation spend commit together -> GatewayLedger: batch_settled
 analyst: reassess with the verified bytes and provenance (payment_rail, payment_ref)
 ```
 
@@ -44,7 +45,8 @@ QuickNode reconciliation is **not claimed** for Gateway purchases. Gateway settl
 
 - **Explicit policy:** `NANOPAYMENT_POLICY` in `src/payments/policy.ts`, enforced again by `PaymentStore`. Only `cat-nws-cli-settlement-version-nano-v1`, 1 to 1000 base units, material gap required, mission budget applies. 0.001 USDC on the direct rail is still refused (0.01 USDC minimum).
 - **Trusted quote, request binding, stable purchase ID, duplicate protection:** unchanged code paths (`buildResearchRequest`, the nonce commitment, `verifyPaidRequest`, one purchase per mission + contract + evidence type).
-- **Duplicate charge:** the merchant's durable claim lets only one request call Gateway `settle()`; a retry replays the stored V2 receipt; Gateway itself refuses a reused nonce (`nonce_already_used`). If `settle()` fails with an unknown outcome, the claim is kept and never resubmitted.
+- **Duplicate charge:** the merchant's durable claim lets only one request call Gateway `settle()`; a retry replays the stored V2 receipt. A deterministic settle rejection (Circle's documented HTTP 200 `errorReason` values other than `nonce_already_used`) releases the claim. A lost response, HTTP 500 `unexpected_error`, or `nonce_already_used` keeps the claim. The retry reconciles that claim by the original EIP-3009 nonce (`searchTransfers({ nonce, from, to })`), checks that the transfer carries that nonce, the payer, the recipient, the amount, and a non-failed status, then resumes receipt issuance. The claim is never submitted a second time.
+- **Forward-only batch status:** buyer `recordBatch` ignores a pending or failed response once the transfer is `confirmed` or `completed`. The batch row and the reservation spend (`confirmed` / `completed`) commit in one SQLite transaction.
 - **One deliberate relaxation:** Circle requires Gateway authorizations to be valid for at least 7 days (`GATEWAY_MIN_AUTH_VALIDITY_SECONDS` in the SDK). On this rail only, `validBefore` may run past quote expiry (`authorizationMayOutliveQuote`); the merchant still refuses a paid request after the quote expires, and the window is capped at 7 days + 160 s.
 
 ## What the mock checks, and what the live run showed

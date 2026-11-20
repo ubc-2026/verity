@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { keccak256, recoverTypedDataAddress, toBytes, type Hex } from "viem";
 import {
   gatewayAuthorizationDomain,
+  type GatewayNonceLookup,
   type GatewayPaymentPayload,
   type GatewayProvider,
   type GatewayRequirements,
@@ -100,9 +101,14 @@ export class MockGatewayProvider implements GatewayProvider {
     return { success: true, payer: auth.from, transaction: id };
   }
 
-  async transferByNonce(nonce: Hex) {
-    const id = this.#byNonce.get(nonce.toLowerCase());
-    return id ? { ...this.#transfers.get(id)! } : undefined;
+  async transferByNonce(lookup: GatewayNonceLookup) {
+    const id = this.#byNonce.get(lookup.nonce.toLowerCase());
+    const transfer = id ? this.#transfers.get(id) : undefined;
+    if (!transfer) return undefined;
+    if (transfer.nonce?.toLowerCase() !== lookup.nonce.toLowerCase()) return undefined;
+    if (transfer.fromAddress.toLowerCase() !== lookup.from.toLowerCase()) return undefined;
+    if (transfer.toAddress.toLowerCase() !== lookup.to.toLowerCase()) return undefined;
+    return { ...transfer };
   }
 
   async transferById(id: string) {
