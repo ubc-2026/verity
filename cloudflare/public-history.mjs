@@ -28,7 +28,7 @@ export async function readHistory(sql, instrument) {
 
 function outcomeLabel(label, symbol) {
   const text = typeof label === "string" && label.trim() ? label.trim() : symbol;
-  return text.slice(0, 180);
+  return Array.from(text.toWellFormed().replaceAll("\u0000", "")).slice(0, 180).join("") || symbol;
 }
 
 function allowedTimeBasis(value) {
@@ -66,43 +66,30 @@ export async function recordObservations(sql, observations) {
     });
   }
   if (rows.length === 0) return 0;
-  // One statement. Conflict targets are the unique keys already on the live
-  // tables: instruments (venue, external_instrument_id) and
-  // quote_snapshots (instrument_id, source_mode, observed_at).
+  // Two statements. A quote INSERT in the same statement as the instrument
+  // INSERT cannot see that instrument under row-level security.
+  const batch = JSON.stringify(rows);
+  await sql`
+    INSERT INTO research.instruments (venue, external_instrument_id, outcome_label)
+    SELECT DISTINCT ON (instrument) 'gemini-exchange', instrument, outcome_label
+    FROM jsonb_to_recordset(${batch}::jsonb) AS t(instrument text, outcome_label text)
+    ORDER BY instrument
+    ON CONFLICT (venue, external_instrument_id) DO NOTHING
+  `;
   await sql`
     WITH incoming AS (
-      SELECT * FROM jsonb_to_recordset(${JSON.stringify(rows)}::jsonb) AS t(
-        instrument text,
-        outcome_label text,
-        observed_at timestamptz,
-        time_basis text,
-        best_bid numeric,
-        best_ask numeric,
-        market_state text
+      SELECT * FROM jsonb_to_recordset(${batch}::jsonb) AS t(
+        instrument text, observed_at timestamptz, time_basis text,
+        best_bid numeric, best_ask numeric, market_state text
       )
-    ),
-    upserted AS (
-      INSERT INTO research.instruments (venue, external_instrument_id, outcome_label)
-      SELECT DISTINCT ON (instrument) 'gemini-exchange', instrument, outcome_label FROM incoming
-      ORDER BY instrument
-      ON CONFLICT (venue, external_instrument_id) DO NOTHING
-      RETURNING id, venue, external_instrument_id
-    ),
-    known AS (
-      SELECT id, venue, external_instrument_id FROM upserted
-      UNION
-      SELECT i.id, i.venue, i.external_instrument_id
-      FROM research.instruments i
-      JOIN (SELECT DISTINCT instrument FROM incoming) n
-        ON i.venue = 'gemini-exchange' AND i.external_instrument_id = n.instrument
     )
     INSERT INTO research.quote_snapshots
       (instrument_id, observed_at, observed_at_basis, source_mode, best_bid, best_ask, market_state)
-    SELECT DISTINCT ON (k.id, n.observed_at)
-      k.id, n.observed_at, n.time_basis, 'live', n.best_bid, n.best_ask, n.market_state
+    SELECT DISTINCT ON (i.id, n.observed_at)
+      i.id, n.observed_at, n.time_basis, 'live', n.best_bid, n.best_ask, n.market_state
     FROM incoming n
-    JOIN known k ON k.external_instrument_id = n.instrument
-    ORDER BY k.id, n.observed_at
+    JOIN research.instruments i ON i.venue = 'gemini-exchange' AND i.external_instrument_id = n.instrument
+    ORDER BY i.id, n.observed_at
     ON CONFLICT (instrument_id, source_mode, observed_at) DO NOTHING
   `;
   return rows.length;

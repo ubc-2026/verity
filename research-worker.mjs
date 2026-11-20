@@ -69,22 +69,13 @@ function plainText(value, depth = 0) {
 }
 
 function quotePrice(value) {
-  if (typeof value === "number" && Number.isFinite(value)) value = String(value);
-  if (typeof value !== "string" || !value.trim()) return null;
-  const text = value.trim();
-  const number = Number(text);
-  if (!Number.isFinite(number) || number < 0 || number > 1) return null;
-  return text;
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  if (typeof value === "string" && value.trim()) return value.trim();
+  return null;
 }
 
 function marketStateOf(contract, event) {
-  const state = String(contract?.marketState || event?.status || "unknown");
-  return state === "open" || state === "closed" || state === "unknown" ? state : "unknown";
-}
-
-function outcomeLabel(contract, symbol) {
-  const label = typeof contract?.label === "string" ? contract.label.trim() : "";
-  return (label || symbol).slice(0, 180);
+  return String(contract?.marketState || event?.status || "unknown").slice(0, 32);
 }
 
 function observationsFrom(payload, fetchedAt) {
@@ -94,9 +85,9 @@ function observationsFrom(payload, fetchedAt) {
       if (!validInstrument(contract?.instrumentSymbol)) continue;
       observations.push({
         instrument: contract.instrumentSymbol,
-        outcomeLabel: outcomeLabel(contract, contract.instrumentSymbol),
+        outcomeLabel: typeof contract?.label === "string" ? contract.label : undefined,
         observedAtUtc: fetchedAt,
-        timeBasis: "collector",
+        timeBasis: "worker-fetch",
         bestBid: quotePrice(contract.prices?.bestBid),
         bestAsk: quotePrice(contract.prices?.bestAsk),
         marketState: marketStateOf(contract, event),

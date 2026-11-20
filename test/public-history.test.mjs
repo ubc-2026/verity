@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { it } from "node:test";
 import { PGlite } from "@electric-sql/pglite";
 import { readHistory, recordObservations } from "../cloudflare/public-history.mjs";
@@ -92,9 +93,9 @@ it("records a live quote and reads it back in time order", async () => {
     ];
     const recorded = await recordObservations(sql, batch);
     assert.equal(recorded, 2);
-    assert.equal(queries, 1);
-    assert.equal(await recordObservations(sql, batch), 2);
     assert.equal(queries, 2);
+    assert.equal(await recordObservations(sql, batch), 2);
+    assert.equal(queries, 4);
     assert.deepEqual(await readHistory(sql, symbol), [
       { observedAtUtc: "2026-11-20T05:25:56.000Z", timeBasis: "collector", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
       { observedAtUtc: "2026-11-20T05:26:56.000Z", timeBasis: "collector", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },
@@ -134,7 +135,11 @@ it("stores labels, collector time, and known market states, and drops prices out
     };
     const labeled = "GEMI-EDGE-LABELED";
     const fallback = "GEMI-EDGE-FALLBACK";
+    const boundarySymbol = "GEMI-EDGE-BOUNDARY";
+    const nulSymbol = "GEMI-EDGE-NUL";
     const longLabel = `Boston ${"x".repeat(200)}`;
+    const boundaryLabel = `${"a".repeat(179)}\u{1F600}z`;
+    const nulLabel = "Bo\u0000ston";
     await recordObservations(sql, [
       {
         instrument: labeled,
@@ -152,6 +157,24 @@ it("stores labels, collector time, and known market states, and drops prices out
         bestBid: "0",
         bestAsk: "1",
         marketState: "closed",
+      },
+      {
+        instrument: boundarySymbol,
+        outcomeLabel: boundaryLabel,
+        observedAtUtc: "2026-11-20T06:00:00Z",
+        timeBasis: "collector",
+        bestBid: "0.20",
+        bestAsk: "0.30",
+        marketState: "open",
+      },
+      {
+        instrument: nulSymbol,
+        outcomeLabel: nulLabel,
+        observedAtUtc: "2026-11-20T06:00:00Z",
+        timeBasis: "collector",
+        bestBid: "0.20",
+        bestAsk: "0.30",
+        marketState: "open",
       },
     ]);
     await recordObservations(sql, [
@@ -171,9 +194,14 @@ it("stores labels, collector time, and known market states, and drops prices out
       FROM research.instruments
       ORDER BY external_instrument_id
     `;
+    const boundaryStored = `${"a".repeat(179)}\u{1F600}`;
+    assert.equal(boundaryStored.includes("\uD83D\uDE00"), true);
+    assert.equal(boundaryStored.includes("\uFFFD"), false);
     assert.deepEqual(instruments, [
+      { external_instrument_id: boundarySymbol, outcome_label: boundaryStored, label_length: 180 },
       { external_instrument_id: fallback, outcome_label: fallback, label_length: fallback.length },
       { external_instrument_id: labeled, outcome_label: longLabel.slice(0, 180), label_length: 180 },
+      { external_instrument_id: nulSymbol, outcome_label: "Boston", label_length: 6 },
     ]);
     assert.deepEqual(await readHistory(sql, labeled), [{
       observedAtUtc: "2026-11-20T06:00:00.000Z",
@@ -189,6 +217,82 @@ it("stores labels, collector time, and known market states, and drops prices out
       bestAsk: "1",
       marketState: "closed",
     }]);
+  } finally {
+    await database.close();
+  }
+});
+
+it("inserts new and existing instruments under the writer role with row-level security", async () => {
+  const database = await PGlite.create();
+  try {
+    await database.exec(`
+      CREATE SCHEMA research;
+      CREATE TABLE research.instruments (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        venue text NOT NULL,
+        external_instrument_id text NOT NULL,
+        outcome_label text NOT NULL,
+        UNIQUE (venue, external_instrument_id)
+      );
+      CREATE TABLE research.quote_snapshots (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        instrument_id bigint NOT NULL REFERENCES research.instruments(id),
+        observed_at timestamptz NOT NULL,
+        observed_at_basis text NOT NULL CHECK (observed_at_basis IN ('exchange', 'collector')),
+        source_mode text NOT NULL,
+        best_bid numeric CHECK (best_bid IS NULL OR (best_bid >= 0 AND best_bid <= 1)),
+        best_ask numeric CHECK (best_ask IS NULL OR (best_ask >= 0 AND best_ask <= 1)),
+        market_state text NOT NULL CHECK (market_state IN ('open', 'closed', 'unknown')),
+        UNIQUE (instrument_id, source_mode, observed_at)
+      );
+      CREATE ROLE verity_history_worker LOGIN PASSWORD 'test-only'
+        NOSUPERUSER NOCREATEDB NOCREATEROLE NOBYPASSRLS INHERIT;
+    `);
+    await database.exec(readFileSync(new URL("../supabase/worker-history-record.sql", import.meta.url), "utf8"));
+    await database.exec(`
+      ALTER TABLE research.instruments ENABLE ROW LEVEL SECURITY;
+      ALTER TABLE research.instruments FORCE ROW LEVEL SECURITY;
+      ALTER TABLE research.quote_snapshots ENABLE ROW LEVEL SECURITY;
+      ALTER TABLE research.quote_snapshots FORCE ROW LEVEL SECURITY;
+      SET ROLE verity_history_worker;
+    `);
+    const sql = async (strings, ...values) => {
+      const query = strings.reduce((text, part, index) => index === 0 ? part : `${text}$${index}${part}`, "");
+      return (await database.query(query, values)).rows;
+    };
+    const counts = async () => {
+      const rows = await sql`
+        SELECT
+          (SELECT count(*) FROM research.instruments)::int AS instruments,
+          (SELECT count(*) FROM research.quote_snapshots)::int AS quotes
+      `;
+      return rows[0];
+    };
+    const fresh = "GEMI-RLS-NEW";
+    const added = "GEMI-RLS-ADDED";
+    const quote = (instrument, observedAtUtc) => ({
+      instrument,
+      outcomeLabel: instrument,
+      observedAtUtc,
+      timeBasis: "worker-fetch",
+      bestBid: "0.40",
+      bestAsk: "0.50",
+      marketState: "open",
+    });
+    await recordObservations(sql, [quote(fresh, "2026-11-20T07:00:00Z")]);
+    assert.deepEqual(await counts(), { instruments: 1, quotes: 1 });
+    await recordObservations(sql, [
+      quote(fresh, "2026-11-20T07:01:00Z"),
+      quote(added, "2026-11-20T07:01:00Z"),
+    ]);
+    assert.deepEqual(await counts(), { instruments: 2, quotes: 3 });
+    await recordObservations(sql, [
+      quote(fresh, "2026-11-20T07:01:00Z"),
+      quote(added, "2026-11-20T07:01:00Z"),
+    ]);
+    assert.deepEqual(await counts(), { instruments: 2, quotes: 3 });
+    assert.equal((await readHistory(sql, fresh)).length, 2);
+    assert.equal((await readHistory(sql, added)).length, 1);
   } finally {
     await database.close();
   }

@@ -222,7 +222,7 @@ it("records a live observation when a market is fetched and declares history mod
   assert.equal(history.body.observations[0].bestBid, "0.25");
   assert.equal(history.body.observations[0].bestAsk, "0.30");
   assert.equal(history.body.observations[0].marketState, "open");
-  assert.equal(history.body.observations[0].timeBasis, "collector");
+  assert.equal(history.body.observations[0].timeBasis, "worker-fetch");
   assert.match(history.body.observations[0].observedAtUtc, isoTime);
 });
 
