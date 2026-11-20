@@ -255,3 +255,10 @@ function renderTabs(){const C=tabContent();$('#tabPanels').innerHTML=Object.entr
   $$('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(C[b.dataset.copy].code,'Code copied')));}
 (function tabs(){const tabs=$$('#tablist [role=tab]');const sel=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$('#'+x.getAttribute('aria-controls')).hidden=!on;});};
   tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{let j=null;if(e.key==='ArrowRight')j=(i+1)%tabs.length;if(e.key==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!=null){e.preventDefault();tabs[j].focus();sel(tabs[j]);}});});})();
+
+/* Front page hand-off: a market picked from the constellation opens in the terminal */
+window.verityPickMarket=async function(){let pick;try{pick=JSON.parse(sessionStorage.getItem('verity.pick')||'null');sessionStorage.removeItem('verity.pick');}catch(e){}
+  if(!pick||!pick.ticker)return;if(window.VERITY_GATE)await window.VERITY_GATE;await new Promise(r=>setTimeout(r,400));
+  try{const j=await LIVE.get('/v1/prediction-markets/events/'+encodeURIComponent(pick.ticker));const ev=j&&j.data&&!Array.isArray(j.data)?j.data:j;
+    const c=ev&&(ev.contracts||[]).find(x=>x.id===pick.contract);if(c)selectLive(ev,c,true);else $('#terminal').scrollIntoView();}
+  catch(e){console.warn('Pick market:',e.message);$('#terminal').scrollIntoView();}};

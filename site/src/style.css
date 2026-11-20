@@ -593,8 +593,8 @@ a.tick-item:hover .sym{color:var(--text-primary)}
 
 /* ---------- Front page (optional; "Open the demo" skips it) ---------- */
 .lp{display:none}
-html.pre body>*:not(script){visibility:hidden}
-html.landing body>*:not(.lp):not(script){display:none!important}
+html.pre body>*:not(script):not(#verity-astryx-root){visibility:hidden}
+html.landing body>*:not(.lp):not(script):not(#verity-astryx-root){display:none!important}
 html.landing .lp{display:block}
 .signin,.signout{display:none}
 html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
@@ -717,3 +717,5 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 .lp-q-foot{margin:32px 0 0;color:var(--text-muted);max-width:60ch}
 @media (prefers-reduced-motion:reduce){.lp-q-blank{display:inline}.lp-q-opt{animation:none}.lp-q-opt+.lp-q-opt::before{content:" or "}}
 @media (max-width:1024px){.lp-art::before{background:rgba(9,12,16,.86)}.lp-hero{min-height:0}.lp-field-key{display:none}.lp-field-cap{text-align:left}}
+.lp-art.on-dot{cursor:pointer}
+#verity-astryx-root{position:relative;z-index:100}
