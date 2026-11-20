@@ -6,12 +6,36 @@ const host = "https://api.verityresearch.us";
 const symbol = "GEMI-WXHIGH-SFO-2611200459-56TO57";
 const request = (path, options) => new Request(host + path, options);
 const fakeBinding = { VERITY_HISTORY_DB: { connectionString: "test-only" } };
+const isoTime = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/;
 
-it("keeps the research brief and the GET-only contract", async () => {
-  const worker = createResearchWorker();
-  const brief = await worker.fetch(request("/v1/research"));
-  assert.equal(brief.status, 200);
-  assert.ok((await brief.json()).data[0].resolutionCriteria);
+function liveResearchResponse() {
+  return new Response(JSON.stringify({
+    data: [{
+      ticker: "WXHIGH-BOS-2611210459",
+      title: "Highest temperature in Boston on November 20, 2026?",
+      status: "active",
+      contracts: [{
+        status: "active",
+        instrumentSymbol: "GEMI-WXHIGH-BOS-2611210459-66TO67",
+        description: "The Expiration Value shall be the maximum temperature for November 20, 2026 as documented by the NWS.",
+        prices: { bestBid: "0.43", bestAsk: "0.50" },
+        marketState: "open",
+      }],
+    }],
+  }), { status: 200, headers: { "content-type": "application/json" } });
+}
+
+it("serves a live research brief and the GET-only contract", async () => {
+  const worker = createResearchWorker(undefined, { fetchImpl: async () => liveResearchResponse() });
+  const response = await worker.fetch(request("/v1/research"));
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.mode, "live");
+  assert.equal(body.live, true);
+  assert.match(body.source, /^https:\/\/api\.gemini\.com\/v1\/prediction-markets\/events\?/);
+  assert.match(body.fetchedAt, isoTime);
+  assert.match(body.data[0].resolutionCriteria, /maximum temperature/);
+  assert.equal(JSON.stringify(body).includes("NBA-2611200100-LAC-SAS-T"), false);
   assert.equal((await worker.fetch(request("/v1/research", { method: "POST" }))).status, 405);
 });
 
@@ -24,7 +48,58 @@ it("reads history for the full instrument symbol through the private binding", a
   });
   const response = await worker.fetch(request(`/v1/market-history?instrument=${symbol}`), fakeBinding);
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { venue: "gemini-exchange", instrument: symbol, observations });
+  const body = await response.json();
+  assert.equal(body.mode, "live");
+  assert.equal(body.live, true);
+  assert.equal(body.source, "gemini-exchange");
+  assert.equal(body.venue, "gemini-exchange");
+  assert.equal(body.instrument, symbol);
+  assert.match(body.fetchedAt, isoTime);
+  assert.deepEqual(body.observations, observations);
+});
+
+it("labels an empty stored history as stored rather than live", async () => {
+  const worker = createResearchWorker(async () => []);
+  const response = await worker.fetch(request(`/v1/market-history?instrument=${symbol}`), fakeBinding);
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.mode, "stored");
+  assert.equal(body.live, false);
+  assert.equal(body.source, "gemini-exchange");
+  assert.match(body.fetchedAt, isoTime);
+  assert.deepEqual(body.observations, []);
+});
+
+it("logs an upstream failure without secrets and does not serve a cached brief", async () => {
+  const lines = [];
+  const original = console.error;
+  console.error = (line) => lines.push(String(line));
+  try {
+    const worker = createResearchWorker(undefined, {
+      fetchImpl: async (url, init) => {
+        assert.equal(init.redirect, "manual");
+        assert.equal(init.headers.Accept, "application/json");
+        assert.ok(init.signal);
+        throw new TypeError("Invalid redirect value, must be one of \"follow\" or \"manual\"");
+      },
+    });
+    const response = await worker.fetch(request("/v1/markets/NOPE-0000000000-XX"));
+    assert.equal(response.status, 502);
+    const body = await response.json();
+    assert.equal(body.error, "Market source unavailable");
+    assert.equal(body.mode, "unavailable");
+    assert.equal(body.live, false);
+    assert.equal(JSON.stringify(body).includes("NBA-2611200100-LAC-SAS-T"), false);
+    const logged = JSON.parse(lines[0]);
+    assert.equal(logged.event, "gemini_upstream_error");
+    assert.equal(logged.name, "TypeError");
+    assert.match(logged.message, /manual/);
+    assert.equal(logged.source, "https://api.gemini.com/v1/prediction-markets/events/NOPE-0000000000-XX");
+    assert.equal(logged.status, null);
+    assert.equal(JSON.stringify(logged).includes("postgres://"), false);
+  } finally {
+    console.error = original;
+  }
 });
 
 it("rejects invalid input and returns a safe error when the history connection is unavailable", async () => {

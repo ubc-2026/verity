@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Verity: an AI agent that buys evidence to clarify how prediction markets resolve.",
   "scripts": {
-    "test": "node --test \"test/**/*.test.ts\" \"test/**/*.test.mjs\"",
+    "test": "node --test test/*.test.ts test/*.test.mjs",
+    "test:worker": "node --test test/workers/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "fixture": "node scripts/fixture.ts",
     "arc:keygen": "node scripts/arc-keygen.ts",
@@ -40,6 +41,8 @@
   "devDependencies": {
     "@electric-sql/pglite": "0.5.17",
     "@types/node": "^26.6.6",
+    "esbuild": "^0.25.12",
+    "miniflare": "^4.20260730.0",
     "typescript": "^7.0.2"
   },
   "private": true,
