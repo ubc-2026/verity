@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Verity: an AI agent that buys evidence to clarify how prediction markets resolve.",
   "scripts": {
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --test \"test/**/*.test.ts\" \"test/**/*.test.mjs\"",
     "typecheck": "tsc --noEmit",
     "fixture": "node scripts/fixture.ts",
     "arc:keygen": "node scripts/arc-keygen.ts",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@humanwhocodes/momoa": "^3.3.13",
     "canonicalize": "^5.1.0",
+    "postgres": "4.1.1",
     "viem": "^2.57.13",
     "zod": "^4.6.7"
   },

@@ -1,3 +1,5 @@
+import { readHyperdriveHistory, validInstrument } from "./cloudflare/public-history.mjs";
+
 const events = "https://api.gemini.com/v1/prediction-markets/events";
 
 const brief = {
@@ -19,13 +21,27 @@ function json(data, status = 200, extra = {}) {
   } });
 }
 
-export default {
-  async fetch(request) {
+export function createResearchWorker(readHistory = readHyperdriveHistory) {
+  async function handleRequest(request, env = {}) {
     if (request.method !== "GET") return json({ error: "Use GET" }, 405, { Allow: "GET" });
     const { pathname, searchParams } = new URL(request.url);
     if (pathname === "/") return json({ name: "Verity Research API", version: 1,
-      endpoints: ["/v1/markets", "/v1/markets/{eventTicker}", "/v1/research"], source: "Gemini Exchange" });
+      endpoints: ["/v1/markets", "/v1/markets/{eventTicker}", "/v1/market-history", "/v1/research"], source: "Gemini Exchange" });
     if (pathname === "/v1/research") return json({ data: [brief] });
+    if (pathname === "/v1/market-history") {
+      const instrument = searchParams.get("instrument");
+      if (searchParams.getAll("instrument").length !== 1 || !validInstrument(instrument)) {
+        return json({ error: "Use one valid full instrument symbol" }, 400);
+      }
+      const connectionString = env.VERITY_HISTORY_DB?.connectionString;
+      if (!connectionString) return json({ error: "Stored quote history is not configured" }, 503);
+      try {
+        const observations = await readHistory(connectionString, instrument);
+        return json({ venue: "gemini-exchange", instrument, observations });
+      } catch {
+        return json({ error: "Stored quote history is temporarily unavailable" }, 503);
+      }
+    }
     const match = /^\/v1\/markets(?:\/([A-Za-z0-9_-]{1,128}))?\/?$/.exec(pathname);
     if (!match) return json({ error: "Endpoint not found" }, 404);
     const source = new URL(match[1] ? events + "/" + match[1] : events);
@@ -48,4 +64,7 @@ export default {
       return unavailable();
     }
   }
-};
+  return { fetch: handleRequest };
+}
+
+export default createResearchWorker();
