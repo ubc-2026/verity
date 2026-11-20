@@ -68,17 +68,19 @@ export async function recordObservations(sql, observations) {
   if (rows.length === 0) return 0;
   // Two statements. A quote INSERT in the same statement as the instrument
   // INSERT cannot see that instrument under row-level security.
+  // The batch is sent as text and cast in SQL. A parameter the server types as jsonb is
+  // JSON-encoded again by postgres.js, which turns the array into a JSON string.
   const batch = JSON.stringify(rows);
   await sql`
     INSERT INTO research.instruments (venue, external_instrument_id, outcome_label)
     SELECT DISTINCT ON (instrument) 'gemini-exchange', instrument, outcome_label
-    FROM jsonb_to_recordset(${batch}::jsonb) AS t(instrument text, outcome_label text)
+    FROM jsonb_to_recordset(${batch}::text::jsonb) AS t(instrument text, outcome_label text)
     ORDER BY instrument
     ON CONFLICT (venue, external_instrument_id) DO NOTHING
   `;
   await sql`
     WITH incoming AS (
-      SELECT * FROM jsonb_to_recordset(${batch}::jsonb) AS t(
+      SELECT * FROM jsonb_to_recordset(${batch}::text::jsonb) AS t(
         instrument text, observed_at timestamptz, time_basis text,
         best_bid numeric, best_ask numeric, market_state text
       )
