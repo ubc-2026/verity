@@ -29,23 +29,78 @@ const PURCH={
     {t:'Full NWS issuance archive',id:'(none in catalog)',p:'—',state:['warn','! Unsupported by catalog'],meta:'The merchant catalog has no item for this, so Verity cannot buy it.'}],
   okc:[{t:'Nothing to buy',id:'—',p:'0.00',state:['ok','✓ No material gap'],meta:'Total 6, Low. generate_purchase_request returned None.'}]
 };
-function renderTerm(){
+function liveJSON(m){const r=m.r,sc=k=>({score:r.scores[k][0],rationale:r.scores[k][1]});
+  return {version:'verity-risk-analysis-v1',analyst:'verity-rules-v1 (browser port, code rules, no LLM)',event_ticker:m.e.ticker,instrument_symbol:m.symbol||null,
+    snapshot:{source_mode:'live',source_label:'Gemini Exchange events API',observed_at_utc:new Date(LIVE.lastOk||Date.now()).toISOString()},
+    quoted_price:{outcome_label:m.c.label,best_bid:m.c.prices.bestBid??null,best_ask:m.c.prices.bestAsk??null,mid:m.mid!=null?m.mid.toFixed(3):null,last_trade:m.c.prices.lastTradePrice??null,volume_usd:m.e.volume,volume_24h_usd:m.e.volume24h},
+    scores:{ambiguity:sc('ambiguity'),source:sc('source'),liquidity:sc('liquidity'),correlation:sc('correlation')},
+    rating:{known_total:r.total,complete:r.known===4,final_rating:r.rating},evidence_gaps:r.gaps,
+    sibling_events:r.sib.map(x=>x.ticker),data_quality_flags:['terms_not_read: the browser does not fetch the terms PDF',...(r.unq?['some_strikes_unquoted']:[])]};}
+function liveFlags(m){const r=m.r,f=[];const ex=r.text?r.text.slice(0,260)+(r.text.length>260?'…':''):null;
+  const sev=v=>v==null?'info':v===3?'no':v===2?'warn':'ok';
+  [['ambiguity','Ambiguity'],['source','Settlement source'],['liquidity','Liquidity'],['correlation','Correlation']].forEach(([k,t])=>{const [v,why]=r.scores[k];f.push({sev:sev(v),title:`${t}: ${v==null?'needs a person':v+' of 3'}`,prov:'verity-rules-v1 · live read',body:why,ex:k==='ambiguity'||k==='source'?ex:null});});
+  r.gaps.forEach(g=>f.unshift({sev:'warn',title:'Gap: '+g.gap_type.replace(/_/g,' '),prov:g.id+' · affects resolution risk',body:g.question,ex:null}));
+  if(m.e.termsLink)f.push({sev:'neutral',title:'Terms PDF linked, not read here',prov:'event.termsLink',body:`The full rules are at <a href="${esc(m.e.termsLink)}" target="_blank" rel="noopener">the terms PDF</a>. The Python analyst reads it; the browser port does not, so ambiguity stays at least 2.`,ex:null});
+  return f;}
+function livePurch(m){const r=m.r;if(!r.gaps.length)return [{t:'Nothing to buy',id:'—',p:'0.00',state:['ok','✓ No material gap'],meta:'The rules found no open settlement gap for this market.'}];
+  return r.gaps.map(g=>{if(g.gap_type==='settlement_source_version'&&/\bnws\b|national weather|climatolog/i.test(r.text))return {t:'NWS daily climate report: settlement-version check',id:'cat-nws-cli-settlement-version-v1',p:'0.05',state:['ok','✓ Allowed · tier 1, automatic'],meta:'Would be proposed for '+g.id+'. A proposal is not a payment; nothing is bought here.'};
+    if(g.gap_type==='leaderboard_snapshot')return {t:'LM Arena leaderboard snapshot',id:'cat-lm-arena-snapshot-v1',p:'0.05',state:['ok','✓ Allowed · tier 1, automatic'],meta:'Would be proposed for '+g.id+'.'};
+    return {t:'Evidence for '+g.gap_type.replace(/_/g,' '),id:'(none in catalog)',p:'—',state:['warn','! Unsupported by catalog'],meta:'catalog v1 has no item for this source, so Verity cannot buy it.'};});}
+function renderTerm(light){
   const m=MARKETS[term.market];
   $('#qMid').textContent=(m.mid*100).toFixed(1)+'¢';$('#qBA').textContent=Math.round(m.bid*100)+'¢ / '+Math.round(m.ask*100)+'¢';$('#qVol').textContent=m.volLabel;
-  $('#riskTotal').textContent=m.total+' / 12';const cls=m.rating==='Low'?'ok':m.rating==='Medium'?'warn':'no';
-  const tg=$('#riskTag');tg.className='tag '+cls;tg.textContent=(cls==='ok'?'✓ ':cls==='warn'?'! ':'✕ ')+m.rating;
+  $('#riskTotal').textContent=m.rating==='Incomplete'?m.total+' + ?':m.total+' / 12';const cls=m.rating==='Low'?'ok':m.rating==='Medium'?'warn':m.rating==='Incomplete'?'neutral':'no';
+  const tg=$('#riskTag');tg.className='tag '+cls;tg.textContent=({ok:'✓ ',warn:'! ',neutral:'– ',no:'✕ '})[cls]+m.rating;
   const segs=$$('#gaugeTrack span');segs.forEach((s,i)=>{s.classList.toggle('on',i===(m.total<=6?0:m.total<=8?1:2));s.style.color=['#00C853','#F59E0B','#FF3B30'][i];});
-  $('#gaugeMarker').style.left='calc('+((m.total-4)/8*100)+'% - 1px)';
-  $('#scoreGrid').innerHTML=Object.entries(m.scores).map(([k,[v,why]])=>`<div title="${esc(why)}"><div class="label">${k[0].toUpperCase()+k.slice(1)}</div><div class="v">${v}</div><div class="pips" aria-label="${v} of 3">${[1,2,3].map(i=>`<i class="${i<=v?'on':''}"></i>`).join('')}</div></div>`).join('');
-  $('#riskWhy').textContent=m.key==='nyc'?'Medium because the rule names a report version with a word missing, and the market is thin. Risk is not a probability.':'Low: a clear source and a deep book. Risk is how the contract settles, not how likely OKC is to win.';
-  const J=m.key==='nyc'?NYC_JSON:OKC_JSON;$('#riskJson').innerHTML=hl(JSON.stringify(J,null,2));$('#inspSrc').textContent=m.file;
-  $('#flagList').innerHTML=FLAGS[m.key].map((f,i)=>`<div class="flag"><button aria-expanded="false" aria-controls="fb${i}"><span class="tag ${f.sev}">${{warn:'!',no:'✕',info:'i',ok:'✓',neutral:'–'}[f.sev]}</span><span><span style="display:block;font-size:.9rem">${f.title}</span><span class="label">${f.prov}</span></span><span class="chev" aria-hidden="true">›</span></button><div class="flag-body" id="fb${i}">${f.body}${f.ex?`<div class="excerpt"><span class="label" style="display:block;margin-bottom:4px">Contract excerpt · ${f.prov.split('·')[0]}</span>${f.ex}</div>`:''}</div></div>`).join('');
-  $$('#flagList .flag>button').forEach(b=>b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);$('#'+b.getAttribute('aria-controls')).classList.toggle('open',o);}));
-  $('#purchaseList').innerHTML=PURCH[m.key].map(p=>`<div class="purchase"><span>${p.t}</span><span class="num">${p.p} USDC</span><span class="meta"><span class="tag ${p.state[0]}">${p.state[1]}</span> <code class="mono" style="font-size:.7rem">${p.id}</code><br>${p.meta}</span></div>`).join('');
+  $('#gaugeMarker').style.left='calc('+(Math.max(0,Math.min(8,m.total-4))/8*100)+'% - 1px)';
+  $('#scoreGrid').innerHTML=Object.entries(m.scores).map(([k,[v,why]])=>`<div title="${esc(why)}"><div class="label">${k[0].toUpperCase()+k.slice(1)}</div><div class="v">${v==null?'—':v}</div><div class="pips" aria-label="${v==null?'not scored':v+' of 3'}">${[1,2,3].map(i=>`<i class="${i<=v?'on':''}"></i>`).join('')}</div></div>`).join('');
+  $('#riskWhy').textContent=m.live?(m.r.gaps.length?'Open settlement question: '+m.r.gaps[0].question:'Scored live by the rules port. Risk is how the contract settles, not how likely the outcome is.'):m.key==='nyc'?'Medium because the rule names a report version with a word missing, and the market is thin. Risk is not a probability.':'Low: a clear source and a deep book. Risk is how the contract settles, not how likely OKC is to win.';
+  const J=m.live?liveJSON(m):m.key==='nyc'?NYC_JSON:OKC_JSON;term.json=J;$('#riskJson').innerHTML=hl(JSON.stringify(J,null,2));$('#inspSrc').textContent=m.file;
+  const openF=new Set($$('#flagList .flag>button[aria-expanded="true"]').map(b=>b.textContent));$('#flagList').innerHTML=(m.live?liveFlags(m):FLAGS[m.key]).map((f,i)=>`<div class="flag"><button aria-expanded="false" aria-controls="fb${i}"><span class="tag ${f.sev}">${{warn:'!',no:'✕',info:'i',ok:'✓',neutral:'–'}[f.sev]}</span><span><span style="display:block;font-size:.9rem">${f.title}</span><span class="label">${f.prov}</span></span><span class="chev" aria-hidden="true">›</span></button><div class="flag-body" id="fb${i}">${f.body}${f.ex?`<div class="excerpt"><span class="label" style="display:block;margin-bottom:4px">Contract excerpt · ${f.prov.split('·')[0]}</span>${f.ex}</div>`:''}</div></div>`).join('');
+  $$('#flagList .flag>button').forEach(b=>{if(light&&openF.has(b.textContent)){b.setAttribute('aria-expanded','true');$('#'+b.getAttribute('aria-controls')).classList.add('open');}});$$('#flagList .flag>button').forEach(b=>b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);$('#'+b.getAttribute('aria-controls')).classList.toggle('open',o);}));
+  $('#purchaseList').innerHTML=(m.live?livePurch(m):PURCH[m.key]).map(p=>`<div class="purchase"><span>${p.t}</span><span class="num">${p.p} USDC</span><span class="meta"><span class="tag ${p.state[0]}">${p.state[1]}</span> <code class="mono" style="font-size:.7rem">${p.id}</code><br>${p.meta}</span></div>`).join('');
+  const pb=$('#probBadge'),cb=$('#candleBadge');pb.className=cb.className=m.live?'real':'demo';pb.textContent=m.live?'GEMINI EXCHANGE CANDLES':'DEMO FIXTURE PATH';cb.textContent=m.live?'GEMINI EXCHANGE':'DEMO FIXTURE';
+  if(!light||!m.live)$('#probFoot').textContent=m.live?(term.foot||'Closing price of each Gemini Exchange candle for the contract shown. The band is the live bid–ask.'):'The path ends at the real captured mid. Earlier points are a deterministic demo fixture.';
+  $('#candleFoot').textContent=m.live?'Real 5-minute candles and live top of book. Order-book depth is not public.':'Top of book is real; candles and depth beyond it are fixtures.';
+  $('#mktQ').textContent=m.question;if(typeof gaiSyncMarket==='function')gaiSyncMarket();
+  renderMarketPanel(m);
+  if(light){drawProb();drawCandles();return;}
   renderProb();seedCandles();drawCandles();
 }
-$$('[data-market]').forEach(b=>b.addEventListener('click',()=>{term.market=b.dataset.market;$$('[data-market]').forEach(x=>x.setAttribute('aria-pressed',x===b));renderTerm();}));
-$('#copyJson').addEventListener('click',()=>copy(JSON.stringify(term.market==='nyc'?NYC_JSON:OKC_JSON,null,2),'Risk JSON copied'));
+function renderMarketPanel(m){const dl=$('#mktDetails'),tb=$('#mktOutcomes');if(!dl)return;
+  const row=(k,v)=>v==null||v===''?'':`<dt>${k}</dt><dd>${v}</dd>`;const when=iso=>iso?new Date(iso).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+' ('+closesIn(iso)+')':null;
+  if(m.live){const e=m.e,c=m.c,p=c.prices||{};const b=lnum(p.bestBid),a=lnum(p.bestAsk);
+    $('#mktSrc').textContent='live · Gemini Exchange · '+new Date(LIVE.lastOk||Date.now()).toLocaleTimeString();
+    dl.innerHTML=row('Event',esc(e.title))+row('Category',esc([e.category,typeof e.subcategory==='string'?e.subcategory:(e.subcategory&&(e.subcategory.name||e.subcategory.label||e.subcategory.title))].filter(Boolean).join(' · ')))+row('Ticker','<span class="mono">'+esc(e.ticker)+'</span>')
+      +row('Selected outcome',esc(c.label))+row('Bid / ask',b!=null||a!=null?`<span class="num">${b!=null?(b*100).toFixed(0)+'¢':'—'} / ${a!=null?(a*100).toFixed(0)+'¢':'—'}${b!=null&&a!=null?' · spread '+Math.round((a-b)*100)+'¢':''}</span>`:'No live quote')
+      +row('Last trade',p.lastTradePrice!=null?'<span class="num">'+(+p.lastTradePrice*100).toFixed(1)+'¢</span>':'No trades yet')
+      +row('Volume','<span class="num">'+lusd(e.volume)+' total · '+lusd(e.volume24h)+' in 24h</span>')
+      +row('Closes',when(c.expiryDate||e.expiryDate))+row('Starts',e.startTime?(Date.parse(e.startTime)<=Date.now()?new Date(e.startTime).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+' (started)':when(e.startTime)):null)
+      +row('Settlement source',e.sourceDetails?esc(Object.values(e.sourceDetails).join(' · ')):null)
+      +row('Rules',e.termsLink||c.termsAndConditionsUrl?`<a href="${esc(e.termsLink||c.termsAndConditionsUrl)}" target="_blank" rel="noopener">Terms PDF</a>`:'No terms link')
+      +row('Outcomes',String((e.contracts||[]).length));
+    const cs=(e.contracts||[]).slice().sort((x,y)=>(lmid(y.prices)??-1)-(lmid(x.prices)??-1));
+    tb.innerHTML=cs.map(x=>{const q=x.prices||{},mm=lmid(q),sel=x.id===c.id;const f=v=>v==null?'—':(+v*100).toFixed(0)+'¢';
+      return `<tr class="${sel?'sel':''}"><td style="white-space:normal">${esc(x.label)}${x.status!=='active'?' <span class="label">'+esc(x.status)+'</span>':''}</td><td class="num">${f(q.bestBid)}</td><td class="num">${f(q.bestAsk)}</td><td class="num">${f(q.lastTradePrice)}</td><td class="num">${mm==null?'—':(mm*100).toFixed(1)+'¢'}</td><td>${sel?'<span class="tag info">Shown</span>':`<button class="btn sm" data-pick="${esc(x.id)}" ${mm==null?'disabled title="No price yet"':''}>Show</button>`}</td></tr>`;}).join('');
+    $$('#mktOutcomes [data-pick]').forEach(btn=>btn.addEventListener('click',()=>{const x=e.contracts.find(k=>k.id===btn.dataset.pick);if(x)selectLive(e,x,false);}));}
+  else{const J=m.key==='nyc'?NYC_JSON:OKC_JSON,q=J.quoted_price;$('#mktSrc').textContent='Nov 18, 2026 capture';
+    dl.innerHTML=row('Market',esc(m.question))+row('Ticker','<span class="mono">'+esc(J.event_ticker)+'</span>')+row('Outcome',esc(q.outcome_label))+row('Bid / ask','<span class="num">'+(q.best_bid*100).toFixed(0)+'¢ / '+(q.best_ask*100).toFixed(0)+'¢</span>')+row('Volume','<span class="num">$'+(+q.volume_usd).toLocaleString()+'</span>')+row('Source',esc(m.source));
+    tb.innerHTML=`<tr><td colspan="6" class="muted" style="white-space:normal">Only the analysed outcome was captured on Nov 18. Pick a live market to see every outcome with live prices.</td></tr>`;}}
+function selectLive(e,c,scroll){MARKETS.live=liveMarket(e,c);term.market='live';term.userPicked=true;
+  $$('[data-market]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.market==='live'));$('#liveBtn').disabled=false;$('#liveBtn').textContent='Live: '+ltitle(e.title).slice(0,34);
+  const sel=$('#liveSel');if(sel)sel.value=c.id;renderTerm();if(scroll)$('#terminal').scrollIntoView({behavior:RM.matches?'auto':'smooth'});}
+function fillLiveSel(){const sel=$('#liveSel');const rows=LIVE.events.map(e=>({e,c:favourite(e)})).filter(x=>x.c).sort((a,b)=>(+b.e.volume24h||0)-(+a.e.volume24h||0)).slice(0,40);
+  const cur=MARKETS.live&&MARKETS.live.c.id;const ids=rows.map(r=>r.c.id).join();if(sel.dataset.ids===ids&&(!cur||sel.value===cur))return;sel.dataset.ids=ids;
+  sel.innerHTML='<option value="">Pick a live market…</option>'+rows.map(r=>`<option value="${esc(r.c.id)}" data-ev="${esc(r.e.ticker)}">${esc(r.e.category)} · ${esc(ltitle(r.e.title).slice(0,46))} · ${(lmid(r.c.prices)*100).toFixed(0)}¢</option>`).join('');
+  if(cur&&rows.some(r=>r.c.id===cur))sel.value=cur;}
+$('#liveSel').addEventListener('change',e=>{const o=e.target.selectedOptions[0];if(!o||!o.value)return;const ev=LIVE.events.find(x=>x.ticker===o.dataset.ev);const c=ev&&ev.contracts.find(x=>x.id===o.value);if(c)selectLive(ev,c,false);});
+LIVE.on(()=>{if(!LIVE.events.length)return;fillLiveSel();
+  if(!term.userPicked&&!MARKETS.live){const top=LIVE.events.map(e=>({e,c:favourite(e)})).filter(x=>x.c&&x.c.instrumentSymbol).sort((a,b)=>(+b.e.volume24h||0)-(+a.e.volume24h||0))[0];
+    if(top){selectLive(top.e,top.c,false);term.userPicked=false;}}
+  else if(MARKETS.live){const e=LIVE.events.find(x=>x.ticker===MARKETS.live.e.ticker);const c=e&&e.contracts.find(x=>x.id===MARKETS.live.c.id);
+    if(c&&lmid(c.prices)!=null){MARKETS.live=liveMarket(e,c);if(term.market==='live')renderTerm(true);}}});
+$$('[data-market]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.market==='live'&&!MARKETS.live)return;term.market=b.dataset.market;term.userPicked=true;$$('[data-market]').forEach(x=>x.setAttribute('aria-pressed',x===b));renderTerm();}));
+$('#copyJson').addEventListener('click',()=>copy(JSON.stringify(term.json,null,2),'Risk JSON copied'));
 $$('[data-inspect]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>{const b=$('#flagList .flag>button');if(b&&b.getAttribute('aria-expanded')!=='true')b.click();},400)));
 
 /* ---------- Walkthrough ---------- */

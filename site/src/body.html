@@ -2,10 +2,10 @@
 <noscript><div class="noscript">JavaScript is off. The text below still explains Verity, but the charts, the walkthrough and the ledger need JavaScript to run.</div></noscript>
 
 <!-- 01 Ticker -->
-<div class="ticker" id="ticker" role="region" aria-label="Market ticker, Gemini Exchange fixture snapshots">
-  <div class="ticker-label"><span class="real" title="Prices are the captured snapshots, not a live feed">Snapshot 2026-11-17/18</span></div>
+<div class="ticker" id="ticker" role="region" aria-label="Live prediction-market prices from Gemini Exchange">
+  <div class="ticker-label"><span class="tick-status" id="tickerLabel" aria-live="polite">Connecting to Gemini Exchange…</span></div>
   <div class="ticker-viewport"><div class="ticker-track" id="tickerTrack"></div></div>
-  <button class="ticker-pause" id="tickerPause" aria-pressed="false" aria-label="Pause ticker">Pause</button>
+  <button class="ticker-pause" id="tickerPause" aria-pressed="false" aria-label="Pause ticker scroll">Pause</button>
 </div>
 
 <header class="nav" id="nav">
@@ -44,21 +44,45 @@
 <section class="hero" id="top" aria-labelledby="heroTitle">
   <div class="wrap">
     <div class="hero-grid">
-      <div>
-        <p class="eyebrow"><span>Gemini Exchange market data</span><span>x402 + USDC</span><span>EIP-3009</span><span>QuickNode Streams</span></p>
-        <h1 id="heroTitle"><span class="q">Separate “will it happen?”</span><span class="q q2">from “how does it resolve?”</span></h1>
-        <p class="sub">Verity reads a prediction market’s settlement rules, scores the resolution risk, buys research only to close a real gap through request-bound USDC payments, and checks that what arrived matches what was paid for.</p>
-        <p class="support">The price says how likely the crowd thinks an event is. It says nothing about which report settles it, or whether a missing word in the rules decides the payout. Verity scores that second question with code rules, proposes the smallest purchase that answers it, and keeps every purchase inside the owner’s spending tiers. A wallet signature, not a voice, authorizes the larger ones. It places no trades.</p>
+      <div class="board" aria-labelledby="heroTitle">
+        <div class="board-top">
+          <h1 id="heroTitle" class="board-title">Live prediction markets, read for how they settle</h1>
+          <span class="tick-status" id="boardStatus" aria-live="polite">Connecting to Gemini Exchange…</span>
+        </div>
+        <p class="board-sub">Real prices from the Gemini Exchange API, refreshed every 15 seconds. Pick any market to see its price history, its settlement rules and Verity’s resolution-risk score.</p>
+        <dl class="board-stats" id="boardStats"></dl>
+        <div class="topic-tabs" role="tablist" aria-label="Market topics" id="topicTabs"></div>
+        <div class="topic-panel" role="tabpanel" id="topicPanel" tabindex="0"><p class="empty">Loading live markets…</p></div>
         <div class="hero-ctas">
-          <a class="btn primary" href="#terminal" data-inspect>Inspect contract demo</a>
-          <a class="btn" href="#stack">Explore architecture</a>
+          <a class="btn primary" href="#terminal" data-inspect>Inspect the terminal</a>
+          <a class="btn" href="#walkthrough">See a paid research run</a>
         </div>
       </div>
+      <div class="hero-side">
+        <div class="side-top">
+          <div class="coin-wrap">
       <div class="coin-stage" id="coinStage">
-        <div class="coin-fallback" aria-hidden="true">
-          <svg viewBox="0 0 200 200"><defs><radialGradient id="cg" cx="40%" cy="35%"><stop offset="0" stop-color="#f6dc8a"/><stop offset=".6" stop-color="#c39a3a"/><stop offset="1" stop-color="#6d531c"/></radialGradient></defs><circle cx="100" cy="100" r="92" fill="#3a2d10"/><circle cx="100" cy="100" r="86" fill="url(#cg)"/><circle cx="100" cy="100" r="70" fill="none" stroke="#7a5d20" stroke-width="1.5"/><circle cx="100" cy="100" r="64" fill="none" stroke="#7a5d20" stroke-width=".8"/><text x="100" y="128" text-anchor="middle" font-size="84" font-family="Space Grotesk,sans-serif" font-weight="700" fill="#5b4413">₿</text></svg>
+              <div class="coin-fallback" aria-hidden="true">
+                <svg viewBox="0 0 200 200"><defs><radialGradient id="cg" cx="40%" cy="35%"><stop offset="0" stop-color="#f6dc8a"/><stop offset=".6" stop-color="#c39a3a"/><stop offset="1" stop-color="#6d531c"/></radialGradient></defs><circle cx="100" cy="100" r="92" fill="#3a2d10"/><circle cx="100" cy="100" r="86" fill="url(#cg)"/><circle cx="100" cy="100" r="70" fill="none" stroke="#7a5d20" stroke-width="1.5"/><circle cx="100" cy="100" r="64" fill="none" stroke="#7a5d20" stroke-width=".8"/><text x="100" y="128" text-anchor="middle" font-size="84" font-family="Space Grotesk,sans-serif" font-weight="700" fill="#5b4413">₿</text></svg>
+              </div>
+              <div class="coin-caption"><span>Editorial visual. Verity pays in USDC on Arc Testnet, not bitcoin.</span><span class="hint" id="coinHint">Drag to tilt · click to spin</span></div>
+            </div>
+            <p class="coin-note">Editorial visual. Verity pays in USDC on Arc Testnet, not bitcoin.</p>
+          </div>
+          <article class="lead-story" id="leadStory" aria-label="Top crypto story"></article>
         </div>
-        <div class="coin-caption"><span>Editorial visual. Verity pays in USDC on Arc Testnet, not bitcoin.</span><span class="hint" id="coinHint">Drag to tilt · click to spin</span></div>
+        <section class="news-panel" aria-labelledby="newsTitle">
+          <div class="news-head"><h2 id="newsTitle">Crypto news</h2><span class="tick-status" id="newsStatus" aria-live="polite">Loading headlines…</span></div>
+          <div class="seg news-filters" id="newsFilters" role="group" aria-label="Filter news by topic"></div>
+          <ol class="news-list" id="newsList"><li class="empty">Loading headlines…</li></ol>
+          <p class="label news-foot">Headlines and summaries link to the publishers. Refreshed every 10 minutes.</p>
+          <div class="res-block" aria-labelledby="resTitle">
+            <div class="news-head"><h3 id="resTitle">More research from across the web</h3><span class="tick-status" id="resStatus" aria-live="polite">Exa search</span></div>
+            <form class="res-form" id="resForm" role="search"><label class="sr-only" for="resQ">Search crypto research</label><input id="resQ" class="gai-input" type="search" maxlength="200" placeholder="Search recent crypto coverage, e.g. bitcoin ETF flows"><button class="btn sm primary" id="resGo" type="submit">Search</button></form>
+            <div class="res-chips" id="resChips"><button type="button" class="btn sm" data-q="bitcoin price outlook ETF flows">Bitcoin outlook</button><button type="button" class="btn sm" data-q="ethereum network upgrades staking">Ethereum</button><button type="button" class="btn sm" data-q="crypto regulation SEC CFTC stablecoin bill">Regulation</button><button type="button" class="btn sm" data-q="prediction markets Kalshi Polymarket Gemini">Prediction markets</button></div>
+            <ol class="news-list" id="resList"></ol>
+          </div>
+        </section>
       </div>
     </div>
     <dl class="telemetry" aria-label="Configured values">
@@ -73,15 +97,18 @@
 <!-- 03 Terminal -->
 <section class="section" id="terminal" aria-labelledby="termTitle">
   <div class="wrap">
-    <div class="sec-head"><span class="idx">03 / Market terminal</span><h2 id="termTitle">The price and the rules are two different readings</h2><p>Quotes and scores below come from the captured Gemini Exchange markets and the Nov 18 analysis. The price paths and candles are demo fixtures, because only snapshots were recorded.</p></div>
+    <div class="sec-head"><span class="idx">03 / Market terminal</span><h2 id="termTitle">The price and the rules are two different readings</h2><p>Live markets use real Gemini Exchange quotes and candles, scored in your browser by a port of the rules analyst. The two Nov 18 markets show the full Python analysis, with demo price paths.</p></div>
     <div class="market-switch" role="group" aria-label="Choose a market">
       <span class="label">Market</span>
+      <button class="btn sm" data-market="live" aria-pressed="false" id="liveBtn" disabled>Live market</button>
+      <select class="sel" id="liveSel" aria-label="Choose a live market"><option value="">Loading live markets…</option></select>
+      <span class="label" style="margin-left:8px">Nov 18 analysis</span>
       <button class="btn sm" data-market="nyc" aria-pressed="true">NYC high, 62 to 63°F</button>
       <button class="btn sm" data-market="okc" aria-pressed="false">Atlanta vs Oklahoma City</button>
     </div>
     <div class="term-grid">
       <div class="panel term-a">
-        <div class="panel-head"><h3 id="chartTitle">Crowd-implied probability</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="demo">DEMO FIXTURE PATH</span><div class="seg" role="group" aria-label="Timeframe" id="tfSeg"><button data-tf="1H" aria-pressed="false">1H</button><button data-tf="24H" aria-pressed="true">24H</button><button data-tf="7D" aria-pressed="false">7D</button><button data-tf="30D" aria-pressed="false">30D</button><button data-tf="ALL" aria-pressed="false">ALL</button></div></div></div>
+        <div class="panel-head"><div><h3 id="chartTitle">Crowd-implied probability</h3><p class="label" id="mktQ" style="margin-top:2px"></p></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="demo" id="probBadge">DEMO FIXTURE PATH</span><div class="seg" role="group" aria-label="Timeframe" id="tfSeg"><button data-tf="1H" aria-pressed="false">1H</button><button data-tf="24H" aria-pressed="true">24H</button><button data-tf="7D" aria-pressed="false">7D</button><button data-tf="30D" aria-pressed="false">30D</button><button data-tf="ALL" aria-pressed="false">ALL</button></div></div></div>
         <div class="quote-row" aria-live="polite">
           <div><div class="label">Mid (implied)</div><div class="v" id="qMid">56.0¢</div></div>
           <div><div class="label">Bid / ask</div><div class="v sm" id="qBA">54¢ / 58¢</div></div>
@@ -89,7 +116,7 @@
           <div><div class="label">Cursor</div><div class="v sm" id="qCur">—</div></div>
         </div>
         <div class="chart-wrap" id="probWrap"><canvas id="probChart" role="img" aria-label="Line chart of crowd-implied probability. Use the table below for values."></canvas><div class="tooltip" id="probTip"></div></div>
-        <div class="chart-foot"><span id="probFoot">The path ends at the real captured mid. Earlier points are a deterministic demo fixture.</span><span>No fair-value line: Verity does not forecast outcomes.</span></div>
+        <div class="chart-foot"><span id="probFoot">The path ends at the real captured mid. Earlier points are a deterministic demo fixture.</span><span>The price is the market’s view. Run a forecast in the AI panel to add a dashed AI estimate line.</span></div>
         <details class="table-alt"><summary>Show chart values as a table</summary><div class="table-scroll"><table><thead><tr><th scope="col">Time (UTC)</th><th scope="col">Implied probability</th></tr></thead><tbody id="probTable"></tbody></table></div></details>
       </div>
       <div class="term-side">
@@ -104,13 +131,20 @@
           <div class="score-grid" id="scoreGrid"></div>
         </div>
         <div class="panel">
-          <div class="panel-head"><h3>Microstructure</h3><div style="display:flex;gap:6px;align-items:center"><span class="demo">DEMO FIXTURE</span><button class="btn sm" id="candlePause" aria-pressed="false">Pause</button></div></div>
+          <div class="panel-head"><h3>Microstructure</h3><div style="display:flex;gap:6px;align-items:center"><span class="demo" id="candleBadge">DEMO FIXTURE</span><button class="btn sm" id="candlePause" aria-pressed="false">Pause</button></div></div>
           <div class="chart-wrap short" id="candleWrap"><canvas id="candleChart" role="img" aria-label="Candlestick, volume and order-book depth for the selected contract, demo fixture"></canvas><div class="tooltip" id="candleTip"></div></div>
-          <div class="chart-foot"><span>Top of book is real; candles and depth beyond it are fixtures.</span><span class="num" id="candleStamp">—</span></div>
+          <div class="chart-foot"><span id="candleFoot">Top of book is real; candles and depth beyond it are fixtures.</span><span class="num" id="candleStamp">—</span></div>
+        </div>
+      </div>
+      <div class="panel term-c" id="mktPanel">
+        <div class="panel-head"><h3>Market details and outcomes</h3><span class="real" id="mktSrc">—</span></div>
+        <div class="mkt-grid">
+          <dl class="kv mkt-kv" id="mktDetails"></dl>
+          <div class="mkt-out"><div class="table-scroll" style="max-height:340px"><table><thead><tr><th scope="col">Outcome</th><th scope="col" class="num">Bid</th><th scope="col" class="num">Ask</th><th scope="col" class="num">Last</th><th scope="col" class="num">Mid</th><th scope="col"><span class="sr-only">Select</span></th></tr></thead><tbody id="mktOutcomes"></tbody></table></div></div>
         </div>
       </div>
       <div class="panel term-c">
-        <div class="panel-head"><h3>Risk inspector</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="real" id="inspSrc">samples/nyc_high_gap_remains.json</span><button class="btn sm" id="copyJson">Copy JSON</button></div></div>
+        <div class="panel-head"><h3>Risk inspector</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="real" id="inspSrc">samples/nyc_high_gap_remains.json</span><button class="btn sm" id="copyJson">Copy JSON</button><button class="btn sm primary" data-ai-open type="button">Ask AI about this market</button></div></div>
         <div class="inspector">
           <pre class="code" id="riskJson" tabindex="0" aria-label="Risk analysis JSON"></pre>
           <div class="insp-side">
@@ -158,7 +192,7 @@
     <div class="sec-head"><span class="idx">05 / Architecture</span><h2 id="stackTitle">Four layers, each with one job</h2><p>The analysis only proposes. A separate payment service holds the signer and decides. That split is the whole safety argument.</p></div>
     <div class="matrix" role="table" aria-label="Four-layer architecture">
       <div class="row head" role="row"><div role="columnheader">Layer</div><div role="columnheader">Name</div><div role="columnheader">Responsibility</div><div role="columnheader">Technology</div></div>
-      <div class="row" role="row"><div role="cell" class="num muted">L1</div><div role="cell" class="layer">Brain</div><div role="cell">Reads the contract, scores resolution risk, finds gaps, proposes purchases</div><div role="cell" class="tech">Gemini Exchange public API · verity-rules-v1 (code rules, no LLM)</div></div>
+      <div class="row" role="row"><div role="cell" class="num muted">L1</div><div role="cell" class="layer">Brain</div><div role="cell">Reads the contract, scores resolution risk, finds gaps, proposes purchases</div><div role="cell" class="tech">Gemini Exchange public API · verity-rules-v1 (code rules, score of record) · optional Google Gemini second opinion with Cloudflare Workers AI as backup (via Verity’s Worker, advisory)</div></div>
       <div class="row" role="row"><div role="cell" class="num muted">L2</div><div role="cell" class="layer">Wallet</div><div role="cell">Pays for exactly the requested resource, once</div><div role="cell" class="tech">x402 · EIP-3009 · USDC on Arc Testnet</div></div>
       <div class="row" role="row"><div role="cell" class="num muted">L3</div><div role="cell" class="layer">Safeguard</div><div role="cell">Enforces tiers, the 25 USDC budget and human approval</div><div role="cell" class="tech">Policy engine · ElevenLabs voice · wallet signature</div></div>
       <div class="row" role="row"><div role="cell" class="num muted">L4</div><div role="cell" class="layer">Auditor</div><div role="cell">Matches each payment to a verified delivery</div><div role="cell" class="tech">QuickNode Streams · reconciler</div></div>
@@ -219,6 +253,31 @@
   </div>
 </section>
 </main>
+
+
+<!-- AI second opinion: side dock that follows the page -->
+<button class="ai-tab" id="aiTab" type="button" aria-expanded="false" aria-controls="aiDock"><span class="ai-tab-dot" aria-hidden="true"></span><span class="ai-tab-label">AI second opinion</span></button>
+<aside class="ai-dock" id="aiDock" aria-label="AI second opinion" aria-hidden="true">
+  <div class="ai-resize" id="aiResize" role="separator" aria-orientation="vertical" aria-label="Resize AI panel. Drag, or use the arrow keys: left and right for width, up and down for height when floating." aria-valuemin="320" aria-valuemax="900" aria-valuenow="440" tabindex="0" title="Drag to resize · double-click to reset"></div>
+  <div class="panel" id="gaiPanel">
+    <div class="ai-dock-head">
+      <div><h2 class="ai-dock-title">AI second opinion</h2><p class="label" style="margin-top:2px">Google Gemini · Workers AI backup · advisory only</p></div>
+      <div class="ai-head-btns"><button class="btn sm ghost ai-move" id="aiMove" type="button" title="Drag the header to move. Arrow keys move it when this button is focused." aria-label="Move AI panel (drag the header, or use the arrow keys here)">Move</button><button class="btn sm" id="aiDockBtn" type="button" hidden>Dock</button><button class="btn sm" id="aiClose" type="button" aria-label="Close AI panel">Close</button></div>
+    </div>
+    <div class="ai-dock-body">
+      <div class="ai-market"><span class="label">Market</span><p id="gaiMarket">—</p><a href="#terminal" class="ai-change" data-ai-change>Change market in the terminal</a></div>
+      <p class="gai-help">Google Gemini (the AI model, separate from Gemini Exchange) reads this market’s settlement rules, scores ambiguity, source and correlation, and compares them with Verity’s code rules. If Google Gemini is unavailable, Cloudflare Workers AI answers and the answer is labelled. It never changes Verity’s score, and nothing is bought from here.</p>
+      <button class="btn primary ai-full" id="gaiReview" data-gai type="button">Review this market’s settlement rules</button>
+      <div class="fc-box"><span class="label">Forecast</span><p class="gai-help" style="margin:4px 0 8px">Google Gemini and Workers AI each estimate the outcome from this market’s real price history, recent changes, volume, rules and recent news found by Exa. The page combines the two and compares them with the market price.</p><button class="btn ai-full" id="fcRun" data-gai type="button">Forecast this market with both models</button><button class="btn sm ghost ai-full" id="mresRun" type="button" style="margin-top:8px">Research this market with Exa</button></div>
+      <label class="label" for="gaiQ" style="margin-top:16px;display:block">Or ask a question</label>
+      <textarea id="gaiQ" class="gai-input gai-q" rows="3" maxlength="1500" placeholder="e.g. Which report version settles this, and what could change the payout?"></textarea>
+      <div class="gai-actions"><button class="btn" id="gaiAsk" data-gai type="button">Ask</button><button class="btn sm ghost" id="gaiCopy" type="button">Copy answer</button></div>
+      <p class="gai-status" id="gaiStatus" role="status" aria-live="polite">Ready · up to 6 requests per minute</p>
+      <div class="gai-out" id="gaiOut" aria-live="polite"><p class="muted">Run a review or ask a question to see the model’s answer here.</p></div>
+    </div>
+  </div>
+  <span class="ai-grip" data-k="e" aria-hidden="true"></span><span class="ai-grip" data-k="s" aria-hidden="true"></span><span class="ai-grip" data-k="n" aria-hidden="true"></span><span class="ai-grip" data-k="se" aria-hidden="true"></span><span class="ai-grip" data-k="sw" aria-hidden="true"></span><span class="ai-grip" data-k="ne" aria-hidden="true"></span>
+</aside>
 
 <div class="drawer-backdrop" id="drawerBg"></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true" tabindex="-1">

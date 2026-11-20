@@ -63,6 +63,6 @@ document.addEventListener('keydown',e=>{const d=$('#drawer');if(!d.classList.con
 /* ---------- Init ---------- */
 (async function init(){
   try{await computeHashes();}catch(e){console.warn(e);}
-  renderTerm();renderAll();renderTabs();await loadAll();
+  renderTerm();renderAll();renderTabs();LIVE.start();await loadAll();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{drawProb();drawCandles();});
 })();
