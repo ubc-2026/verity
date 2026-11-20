@@ -41,3 +41,5 @@ jobs:
         working-directory: portal
       - run: npm run typecheck
         working-directory: portal
+      # The published page is site/dist/index.html; it must be the build of site/src.
+      - run: sh site/build.sh && git diff --ignore-cr-at-eol --exit-code site/dist

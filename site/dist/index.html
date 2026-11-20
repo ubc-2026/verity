@@ -875,7 +875,7 @@ a.tick-item:hover .sym{color:var(--text-primary)}
           <input id="ldgToken" type="password">
           <button class="btn primary sm" type="submit">Load ledger</button>
         </form>
-        <p class="label" id="ldgMsg" aria-live="polite">Start the portal with <code class="mono">cd portal &amp;&amp; npm start</code>. To read it from this page, set <code class="mono">PORTAL_ALLOWED_ORIGINS</code> to this page’s origin.</p>
+        <p class="label" id="ldgMsg" aria-live="polite">Start the portal with <code class="mono">cd portal &amp;&amp; npm start</code>. To read it from this page, set <code class="mono">PORTAL_ALLOWED_ORIGINS</code> to this page’s origin. From https, use <code class="mono">127.0.0.1</code> or <code class="mono">localhost</code> and allow local network access if Chrome asks.</p>
       </div>
       <div class="panel ldg-card">
         <span class="label">Run console · market to results to audit</span>
@@ -1478,7 +1478,7 @@ function liveFlags(m){const r=m.r,f=[];const ex=r.text?r.text.slice(0,260)+(r.te
   const sev=v=>v==null?'info':v===3?'no':v===2?'warn':'ok';
   [['ambiguity','Ambiguity'],['source','Settlement source'],['liquidity','Liquidity'],['correlation','Correlation']].forEach(([k,t])=>{const [v,why]=r.scores[k];f.push({sev:sev(v),title:`${t}: ${v==null?'needs a person':v+' of 3'}`,prov:'verity-rules-v1 · live read',body:why,ex:k==='ambiguity'||k==='source'?ex:null});});
   r.gaps.forEach(g=>f.unshift({sev:'warn',title:'Gap: '+g.gap_type.replace(/_/g,' '),prov:g.id+' · affects resolution risk',body:g.question,ex:null}));
-  if(m.e.termsLink)f.push({sev:'neutral',title:'Terms PDF linked, not read here',prov:'event.termsLink',body:`The full rules are at <a href="${esc(m.e.termsLink)}" target="_blank" rel="noopener">the terms PDF</a>. The Python analyst reads it; the browser port does not, so ambiguity stays at least 2.`,ex:null});
+  if(m.e.termsLink)f.push({sev:'neutral',title:'Terms PDF linked, not read here',prov:'event.termsLink',body:`The full rules are at <a href="${esc(safeHref(m.e.termsLink))}" target="_blank" rel="noopener">the terms PDF</a>. The Python analyst reads it; the browser port does not, so ambiguity stays at least 2.`,ex:null});
   return f;}
 function livePurch(m){const r=m.r;if(!r.gaps.length)return [{t:'Nothing to buy',id:'—',p:'0.00',state:['ok','✓ No material gap'],meta:'The rules found no open settlement gap for this market.'}];
   return r.gaps.map(g=>{if(g.gap_type==='settlement_source_version'&&/\bnws\b|national weather|climatolog/i.test(r.text))return {t:'NWS daily climate report: settlement-version check',id:'cat-nws-cli-settlement-version-v1',p:'0.05',state:['ok','✓ Allowed · tier 1, automatic'],meta:'Would be proposed for '+g.id+'. A proposal is not a payment; nothing is bought here.'};
@@ -1515,7 +1515,7 @@ function renderMarketPanel(m){const dl=$('#mktDetails'),tb=$('#mktOutcomes');if(
       +row('Volume','<span class="num">'+lusd(e.volume)+' total · '+lusd(e.volume24h)+' in 24h</span>')
       +row('Closes',when(c.expiryDate||e.expiryDate))+row('Starts',e.startTime?(Date.parse(e.startTime)<=Date.now()?new Date(e.startTime).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+' (started)':when(e.startTime)):null)
       +row('Settlement source',e.sourceDetails?esc(Object.values(e.sourceDetails).join(' · ')):null)
-      +row('Rules',e.termsLink||c.termsAndConditionsUrl?`<a href="${esc(e.termsLink||c.termsAndConditionsUrl)}" target="_blank" rel="noopener">Terms PDF</a>`:'No terms link')
+      +row('Rules',e.termsLink||c.termsAndConditionsUrl?`<a href="${esc(safeHref(e.termsLink||c.termsAndConditionsUrl))}" target="_blank" rel="noopener">Terms PDF</a>`:'No terms link')
       +row('Outcomes',String((e.contracts||[]).length));
     const cs=(e.contracts||[]).slice().sort((x,y)=>(lmid(y.prices)??-1)-(lmid(x.prices)??-1));
     tb.innerHTML=cs.map(x=>{const q=x.prices||{},mm=lmid(q),sel=x.id===c.id;const f=v=>v==null?'—':(+v*100).toFixed(0)+'¢';
@@ -1739,7 +1739,7 @@ async function gaiRun(mode){if(GAI.busy)return;const q=$('#gaiQ').value.trim();
   finally{GAI.busy=false;btn.removeAttribute('aria-busy');$$('#gaiPanel [data-gai]').forEach(x=>x.disabled=false);}}
 function mdLite(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/^\s*[-*] (.+)$/gm,'<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g,s=>'<ul>'+s.replace(/\n/g,'')+'</ul>').replace(/\n{2,}/g,'</p><p>').replace(/\n/g,'<br>').replace(/^/,'<p>')+'</p>';}
 function reviewHTML(r,ctx,meta,pv){pv=pv||{name:'Google Gemini',tag:'<span class="tag info">Google Gemini · advisory</span>',note:''};const ru=ctx.verity_rules_v1||{};const rs=k=>{const v=ru[k]||(ru.scores&&ru.scores[k]);return v?(Array.isArray(v)?v[0]:v.score):null;};
-  const s=r.scores||{};const row=(k,l)=>`<tr><td>${l}</td><td class="num">${rs(k)??'—'}</td><td class="num">${s[k]??'—'}</td><td>${rs(k)!=null&&s[k]!=null&&rs(k)!==s[k]?'<span class="tag warn">! differs</span>':'<span class="tag neutral">– same</span>'}</td></tr>`;
+  const s=r.scores||{};const row=(k,l)=>`<tr><td>${l}</td><td class="num">${esc(rs(k)??'—')}</td><td class="num">${esc(s[k]??'—')}</td><td>${rs(k)!=null&&s[k]!=null&&rs(k)!==s[k]?'<span class="tag warn">! differs</span>':'<span class="tag neutral">– same</span>'}</td></tr>`;
   return `<div class="gai-meta">${pv.tag}<span class="label">${meta}</span></div>${pv.note}
    <p class="gai-sum">${esc(r.summary||'')}</p>
    <dl class="kv"><dt>Settlement source</dt><dd>${esc(r.settlement_source||'unknown')}</dd><dt>Model confidence</dt><dd>${esc(r.confidence||'—')}</dd><dt>Agrees with rules</dt><dd>${r.agrees_with_rules_analyst?'<span class="tag ok">✓ yes</span>':'<span class="tag warn">! no</span>'} ${esc(r.disagreement||'')}</dd></dl>

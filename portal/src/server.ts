@@ -122,10 +122,8 @@ export class PortalServer {
         response.writeHead(204);
         return void response.end();
       }
-      if (allowedOrigin && request.method === "GET") {
-        response.setHeader("access-control-allow-origin", origin!);
-        response.setHeader("vary", "Origin");
-      }
+      if (this.#allowedOrigins.size > 0) response.setHeader("vary", "Origin");
+      if (allowedOrigin && request.method === "GET") response.setHeader("access-control-allow-origin", origin!);
       if (request.method === "GET" && parts.length === 0) return this.#send(response, 200, portalHtml(), "text/html; charset=utf-8");
       if (request.method === "GET" && parts.length === 1 && parts[0] === "healthz") return this.#send(response, 200, { ok: true });
       if (request.method === "GET" && parts.length === 1 && parts[0] === "activity") {

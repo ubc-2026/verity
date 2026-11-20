@@ -21,6 +21,7 @@ test("a listed origin may read with the read token; others get no CORS headers",
     assert.equal(listed.headers.get("access-control-allow-origin"), site);
     const other = await fetch(`${url}/purchases`, { headers: { origin: "https://evil.example", authorization: `Bearer ${readToken}` } });
     assert.equal(other.headers.get("access-control-allow-origin"), null);
+    assert.equal(other.headers.get("vary"), "Origin", "responses vary by origin once an allowlist exists");
     const noToken = await fetch(`${url}/activity`, { headers: { origin: site } });
     assert.equal(noToken.status, 401, "CORS does not replace the read token");
   } finally {

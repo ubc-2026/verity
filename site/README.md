@@ -15,9 +15,10 @@ The public site at https://verityresearch.us. It is one self-contained HTML file
 | `src/gemini.js` | AI panel: Google Gemini review and questions, combined forecast, Exa market research, movable and resizable window |
 | `src/news.js` | Crypto news (publisher RSS via the Worker, Hacker News fallback) and Exa research search |
 | `src/app3.js` | Reconciler ledger, verification drawer, start-up |
+| `src/ledger.js` | Section 07: reads a running payment portal (`portal/`) with its read token, and links the run console |
 | `keccak.js` | keccak-256 for request hashes |
 | `build.sh` | Joins everything into `dist/index.html` (order matters; see the script) |
-| `dist/index.html` | The built site, identical to what verityresearch.us serves |
+| `dist/index.html` | The built site to publish. CI fails if it differs from `sh build.sh` |
 
 The AI, news and research features call the Cloudflare Worker in `../worker/`. The page never holds an API key.
 

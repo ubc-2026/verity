@@ -42,7 +42,7 @@ namespace_id = "1001"
 [ratelimits.simple]
 limit = 6
 period = 60
-'@ | Set-Content -LiteralPath $config -Encoding ASCII
+'@ | Set-Content -LiteralPath $config -Encoding utf8
 
     @'
 const string = { type: 'STRING' };
@@ -374,7 +374,7 @@ export default {
       primary.reason === 'quota' ? 'Google Gemini quota reached and the backup model is unavailable.' : 'Both Google Gemini and the backup model are unavailable.');
   },
 };
-'@ | Set-Content -LiteralPath $worker -Encoding ASCII
+'@ | Set-Content -LiteralPath $worker -Encoding utf8
 
     Push-Location -LiteralPath $folder
     try {

@@ -38,7 +38,7 @@ Its core promise: AI agents that can buy what they need, spend only what they ar
 5. **Never invent metrics, quotes, logos, transactions or hashes.**
    - Real data comes either from the live Gemini Exchange API or from the Nov 17–18, 2026 captures and analysis.
    - Anything simulated must be labelled on the page (`DEMO FIXTURE`, `SIMULATED`).
-6. **No demo control may reach a wallet, signer or payment endpoint.** The walkthrough and the ledger are simulations.
+6. **No demo control may reach a wallet, signer or payment endpoint.** The walkthrough and the reconciler (section 6) are simulations. The ledger (section 7) only reads a portal the visitor runs, with its read token; it never writes.
 7. **The owner retains authority** over publishing, production deploys, paid services, real transactions, credential changes, contract interactions, repo merges, payment-security changes and external service configuration. Ask before doing any of these.
 8. **Text is sentence case with proper capitals** (NYC, NWS, USDC, Gemini Exchange). Every animation respects `prefers-reduced-motion`.
 
@@ -51,8 +51,8 @@ Its core promise: AI agents that can buy what they need, spend only what they ar
 | **Live site** | https://verityresearch.us | GitHub Pages, HTTPS enforced |
 | **Live site repo** (public) | `ryanmarklin-arch/verityresearch-live`, branch `main` | Holds the built `index.html` (the whole site), plus `CNAME` (`verityresearch.us`), `.nojekyll`, `robots.txt`, `DESIGN.md` and `README.md`. Pushing to `main` publishes. |
 | **Analysis code** (private) | `ubc-2026/verity`, branch `analysis-fixture-slice` | Python, `analysis/` folder. The head when notes were written was `3594cb5a3ba8ab889d63744370de37231c658331`. Morgan's branch `morgan-lin-analysis` was merged in (merge commit `e940e94` on her branch). |
-| **Team copy of site source** | `ubc-2026/verity`, branch `website`, folder `site/` | Current as of Nov 20, 1:35 AM ET. `site/dist/index.html` matches the live site. |
-| **AI and news Worker** | `ubc-2026/verity`, branch `website`, folder `worker/` | Cloudflare Worker `verity-gemini` (https://verity-gemini.safe-572.workers.dev). Secrets `GEMINI_API_KEY` and `EXA_API_KEY` live on Cloudflare only. See `worker/README.md`. |
+| **Team copy of site source** | `ubc-2026/verity`, branch `main`, folder `site/` | `site/dist/index.html` is the build to publish. CI checks that it matches `sh site/build.sh`. |
+| **AI and news Worker** | `ubc-2026/verity`, branch `main`, folder `worker/` | Cloudflare Worker `verity-gemini` (https://verity-gemini.safe-572.workers.dev). Secrets `GEMINI_API_KEY` and `EXA_API_KEY` live on Cloudflare only. See `worker/README.md`. |
 | **Old Lovable version** | Lovable project "Verity: Market Clarity" (`2d886bed-95e0-40a5-8a43-568a85f73396`) → https://verity-research.lovable.app; source on `main` of private `ryanmarklin-arch/verityresearch-site` | Superseded. Lovable free credits are used up. |
 | **Old certificate design** | `certificate-design` branch of `ryanmarklin-arch/verityresearch-site` | History only |
 | **Domain** | `verityresearch.us` at Porkbun (account RyanLion) | Four A records 185.199.108.153 to .111.153, plus `www` CNAME → `ryanmarklin-arch.github.io`. A leftover `*` CNAME → `pixie.porkbun.com` is harmless. |
@@ -188,7 +188,7 @@ Before it is built, the page is these parts, concatenated in order by `build.sh`
 ```
 <head> + <style>  src/style.css
 <body>            src/body.html
-<script>          keccak.js → src/app1.js → src/live.js → src/ticker.js → src/app2.js → src/app3.js
+<script>          keccak.js → src/app1.js → src/live.js → src/ticker.js → src/app2.js → src/gemini.js → src/news.js → src/app3.js → src/ledger.js
 ```
 
 All scripts share one scope. Top-level `const`s are in the temporal dead zone until their file runs, so **anything that calls across files must run at runtime, not at load.** That is why `LIVE.start()` is called from `init()` in `app3.js`.
@@ -217,7 +217,8 @@ If you only have `index.html`, you can edit it directly: it is the concatenation
 | 4 | **Walkthrough** (`#walkthrough`): six steps from contract to audit, with keccak request hash computed in the browser, tamper demo (KNYC→KLGA, merchant rejects), policy tester with simulated voice approval and wallet signature, settlement vs delivery chain, audit report | **Simulated**, labelled. No payment service exists to read from. |
 | 5 | **Architecture** (`#stack`, `#modules`, `#spec`): four-layer matrix (Brain = Gemini Exchange API plus verity-rules-v1, not an LLM), four modules, code tabs | Spec and pseudocode, labelled |
 | 6 | **Reconciler** (`#reconciler`) | **Demo fixture** ledger; hashes computed from fixtures; transaction refs are `demo-tx-…`, never fake hex |
-| 7 | Footer | Real links only (GitHub, Gemini API, NYC terms PDF); unavailable items say so |
+| 7 | **Ledger** (`#ledger`) | **Live from the visitor's own portal** (`portal/`, read token, nothing fetched until loaded) plus a link to the run console (`npm run app`, 127.0.0.1:8790). The portal must list this page's origin in `PORTAL_ALLOWED_ORIGINS`. |
+| 8 | Footer | Real links only (GitHub, Gemini API, NYC terms PDF); unavailable items say so |
 
 ### AI second opinion (Google Gemini): `src/gemini.js`, panel `#gaiPanel` in the terminal
 

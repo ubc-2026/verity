@@ -44,7 +44,7 @@ async function gaiRun(mode){if(GAI.busy)return;const q=$('#gaiQ').value.trim();
   finally{GAI.busy=false;btn.removeAttribute('aria-busy');$$('#gaiPanel [data-gai]').forEach(x=>x.disabled=false);}}
 function mdLite(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/^\s*[-*] (.+)$/gm,'<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g,s=>'<ul>'+s.replace(/\n/g,'')+'</ul>').replace(/\n{2,}/g,'</p><p>').replace(/\n/g,'<br>').replace(/^/,'<p>')+'</p>';}
 function reviewHTML(r,ctx,meta,pv){pv=pv||{name:'Google Gemini',tag:'<span class="tag info">Google Gemini · advisory</span>',note:''};const ru=ctx.verity_rules_v1||{};const rs=k=>{const v=ru[k]||(ru.scores&&ru.scores[k]);return v?(Array.isArray(v)?v[0]:v.score):null;};
-  const s=r.scores||{};const row=(k,l)=>`<tr><td>${l}</td><td class="num">${rs(k)??'—'}</td><td class="num">${s[k]??'—'}</td><td>${rs(k)!=null&&s[k]!=null&&rs(k)!==s[k]?'<span class="tag warn">! differs</span>':'<span class="tag neutral">– same</span>'}</td></tr>`;
+  const s=r.scores||{};const row=(k,l)=>`<tr><td>${l}</td><td class="num">${esc(rs(k)??'—')}</td><td class="num">${esc(s[k]??'—')}</td><td>${rs(k)!=null&&s[k]!=null&&rs(k)!==s[k]?'<span class="tag warn">! differs</span>':'<span class="tag neutral">– same</span>'}</td></tr>`;
   return `<div class="gai-meta">${pv.tag}<span class="label">${meta}</span></div>${pv.note}
    <p class="gai-sum">${esc(r.summary||'')}</p>
    <dl class="kv"><dt>Settlement source</dt><dd>${esc(r.settlement_source||'unknown')}</dd><dt>Model confidence</dt><dd>${esc(r.confidence||'—')}</dd><dt>Agrees with rules</dt><dd>${r.agrees_with_rules_analyst?'<span class="tag ok">✓ yes</span>':'<span class="tag warn">! no</span>'} ${esc(r.disagreement||'')}</dd></dl>

@@ -40,7 +40,7 @@ function liveFlags(m){const r=m.r,f=[];const ex=r.text?r.text.slice(0,260)+(r.te
   const sev=v=>v==null?'info':v===3?'no':v===2?'warn':'ok';
   [['ambiguity','Ambiguity'],['source','Settlement source'],['liquidity','Liquidity'],['correlation','Correlation']].forEach(([k,t])=>{const [v,why]=r.scores[k];f.push({sev:sev(v),title:`${t}: ${v==null?'needs a person':v+' of 3'}`,prov:'verity-rules-v1 · live read',body:why,ex:k==='ambiguity'||k==='source'?ex:null});});
   r.gaps.forEach(g=>f.unshift({sev:'warn',title:'Gap: '+g.gap_type.replace(/_/g,' '),prov:g.id+' · affects resolution risk',body:g.question,ex:null}));
-  if(m.e.termsLink)f.push({sev:'neutral',title:'Terms PDF linked, not read here',prov:'event.termsLink',body:`The full rules are at <a href="${esc(m.e.termsLink)}" target="_blank" rel="noopener">the terms PDF</a>. The Python analyst reads it; the browser port does not, so ambiguity stays at least 2.`,ex:null});
+  if(m.e.termsLink)f.push({sev:'neutral',title:'Terms PDF linked, not read here',prov:'event.termsLink',body:`The full rules are at <a href="${esc(safeHref(m.e.termsLink))}" target="_blank" rel="noopener">the terms PDF</a>. The Python analyst reads it; the browser port does not, so ambiguity stays at least 2.`,ex:null});
   return f;}
 function livePurch(m){const r=m.r;if(!r.gaps.length)return [{t:'Nothing to buy',id:'—',p:'0.00',state:['ok','✓ No material gap'],meta:'The rules found no open settlement gap for this market.'}];
   return r.gaps.map(g=>{if(g.gap_type==='settlement_source_version'&&/\bnws\b|national weather|climatolog/i.test(r.text))return {t:'NWS daily climate report: settlement-version check',id:'cat-nws-cli-settlement-version-v1',p:'0.05',state:['ok','✓ Allowed · tier 1, automatic'],meta:'Would be proposed for '+g.id+'. A proposal is not a payment; nothing is bought here.'};
@@ -77,7 +77,7 @@ function renderMarketPanel(m){const dl=$('#mktDetails'),tb=$('#mktOutcomes');if(
       +row('Volume','<span class="num">'+lusd(e.volume)+' total · '+lusd(e.volume24h)+' in 24h</span>')
       +row('Closes',when(c.expiryDate||e.expiryDate))+row('Starts',e.startTime?(Date.parse(e.startTime)<=Date.now()?new Date(e.startTime).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+' (started)':when(e.startTime)):null)
       +row('Settlement source',e.sourceDetails?esc(Object.values(e.sourceDetails).join(' · ')):null)
-      +row('Rules',e.termsLink||c.termsAndConditionsUrl?`<a href="${esc(e.termsLink||c.termsAndConditionsUrl)}" target="_blank" rel="noopener">Terms PDF</a>`:'No terms link')
+      +row('Rules',e.termsLink||c.termsAndConditionsUrl?`<a href="${esc(safeHref(e.termsLink||c.termsAndConditionsUrl))}" target="_blank" rel="noopener">Terms PDF</a>`:'No terms link')
       +row('Outcomes',String((e.contracts||[]).length));
     const cs=(e.contracts||[]).slice().sort((x,y)=>(lmid(y.prices)??-1)-(lmid(x.prices)??-1));
     tb.innerHTML=cs.map(x=>{const q=x.prices||{},mm=lmid(q),sel=x.id===c.id;const f=v=>v==null?'—':(+v*100).toFixed(0)+'¢';
