@@ -49,8 +49,9 @@ it("reads history for the full instrument symbol through the private binding", a
   const response = await worker.fetch(request(`/v1/market-history?instrument=${symbol}`), fakeBinding);
   assert.equal(response.status, 200);
   const body = await response.json();
-  assert.equal(body.mode, "live");
-  assert.equal(body.live, true);
+  assert.equal(body.mode, "stored");
+  assert.equal(body.live, false);
+  assert.equal(body.newestObservedAtUtc, observations[0].observedAtUtc);
   assert.equal(body.source, "gemini-exchange");
   assert.equal(body.venue, "gemini-exchange");
   assert.equal(body.instrument, symbol);
@@ -65,9 +66,33 @@ it("labels an empty stored history as stored rather than live", async () => {
   const body = await response.json();
   assert.equal(body.mode, "stored");
   assert.equal(body.live, false);
+  assert.equal(body.newestObservedAtUtc, null);
   assert.equal(body.source, "gemini-exchange");
   assert.match(body.fetchedAt, isoTime);
   assert.deepEqual(body.observations, []);
+});
+
+it("keeps public reads from writing and collects once per instrument window", async () => {
+  const writes = [];
+  const worker = createResearchWorker(async () => [], {
+    fetchImpl: async () => liveResearchResponse(),
+    recordObservations: async (connection, observations) => {
+      writes.push({ connection, count: observations.length });
+      return observations.length;
+    },
+  });
+  const env = { VERITY_HISTORY_DB: { connectionString: "postgres://verity:secret@127.0.0.1:1/verity" } };
+  for (let n = 0; n < 5; n += 1) {
+    assert.equal((await worker.fetch(request("/v1/markets?limit=20"), env)).status, 200);
+    assert.equal((await worker.fetch(request("/v1/research"), env)).status, 200);
+  }
+  assert.equal(writes.length, 0);
+  await worker.scheduled({ cron: "*/2 * * * *" }, env, {});
+  assert.equal(writes.length, 1);
+  assert.equal(writes[0].count, 1);
+  assert.equal(writes[0].connection.includes("secret"), true);
+  await worker.scheduled({ cron: "*/2 * * * *" }, env, {});
+  assert.equal(writes.length, 1);
 });
 
 it("logs an upstream failure without secrets and does not serve a cached brief", async () => {

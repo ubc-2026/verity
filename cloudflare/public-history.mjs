@@ -26,44 +26,73 @@ export async function readHistory(sql, instrument) {
   }));
 }
 
+function outcomeLabel(label, symbol) {
+  const text = typeof label === "string" && label.trim() ? label.trim() : symbol;
+  return Array.from(text.toWellFormed().replaceAll("\u0000", "")).slice(0, 180).join("") || symbol;
+}
+
+function allowedTimeBasis(value) {
+  return value === "exchange" || value === "collector" ? value : "collector";
+}
+
+function allowedMarketState(value) {
+  return value === "open" || value === "closed" || value === "unknown" ? value : "unknown";
+}
+
+function priceInRange(value) {
+  if (value == null || value === "") return null;
+  const text = String(value).trim();
+  const number = Number(text);
+  if (!Number.isFinite(number) || number < 0 || number > 1) return null;
+  return text;
+}
+
 export async function recordObservations(sql, observations) {
-  let recorded = 0;
+  const seen = new Set();
+  const rows = [];
   for (const observation of observations) {
     if (!validInstrument(observation.instrument)) continue;
-    const inserted = await sql`
-      INSERT INTO research.instruments (venue, external_instrument_id)
-      SELECT 'gemini-exchange', ${observation.instrument}
-      WHERE NOT EXISTS (
-        SELECT 1 FROM research.instruments
-        WHERE venue = 'gemini-exchange' AND external_instrument_id = ${observation.instrument}
-      )
-      RETURNING id
-    `;
-    let instrumentId = inserted[0]?.id;
-    if (instrumentId == null) {
-      const existing = await sql`
-        SELECT id FROM research.instruments
-        WHERE venue = 'gemini-exchange' AND external_instrument_id = ${observation.instrument}
-      `;
-      instrumentId = existing[0]?.id;
-    }
-    if (instrumentId == null) continue;
-    await sql`
-      INSERT INTO research.quote_snapshots
-        (instrument_id, observed_at, observed_at_basis, source_mode, best_bid, best_ask, market_state)
-      VALUES (
-        ${instrumentId},
-        ${observation.observedAtUtc},
-        ${observation.timeBasis},
-        'live',
-        ${observation.bestBid},
-        ${observation.bestAsk},
-        ${observation.marketState}
-      )
-    `;
-    recorded += 1;
+    const key = `${observation.instrument}\0${observation.observedAtUtc}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    rows.push({
+      instrument: observation.instrument,
+      outcome_label: outcomeLabel(observation.outcomeLabel, observation.instrument),
+      observed_at: observation.observedAtUtc,
+      time_basis: allowedTimeBasis(observation.timeBasis),
+      best_bid: priceInRange(observation.bestBid),
+      best_ask: priceInRange(observation.bestAsk),
+      market_state: allowedMarketState(observation.marketState),
+    });
   }
-  return recorded;
+  if (rows.length === 0) return 0;
+  // Two statements. A quote INSERT in the same statement as the instrument
+  // INSERT cannot see that instrument under row-level security.
+  const batch = JSON.stringify(rows);
+  await sql`
+    INSERT INTO research.instruments (venue, external_instrument_id, outcome_label)
+    SELECT DISTINCT ON (instrument) 'gemini-exchange', instrument, outcome_label
+    FROM jsonb_to_recordset(${batch}::jsonb) AS t(instrument text, outcome_label text)
+    ORDER BY instrument
+    ON CONFLICT (venue, external_instrument_id) DO NOTHING
+  `;
+  await sql`
+    WITH incoming AS (
+      SELECT * FROM jsonb_to_recordset(${batch}::jsonb) AS t(
+        instrument text, observed_at timestamptz, time_basis text,
+        best_bid numeric, best_ask numeric, market_state text
+      )
+    )
+    INSERT INTO research.quote_snapshots
+      (instrument_id, observed_at, observed_at_basis, source_mode, best_bid, best_ask, market_state)
+    SELECT DISTINCT ON (i.id, n.observed_at)
+      i.id, n.observed_at, n.time_basis, 'live', n.best_bid, n.best_ask, n.market_state
+    FROM incoming n
+    JOIN research.instruments i ON i.venue = 'gemini-exchange' AND i.external_instrument_id = n.instrument
+    ORDER BY i.id, n.observed_at
+    ON CONFLICT (instrument_id, source_mode, observed_at) DO NOTHING
+  `;
+  return rows.length;
 }
 
 export async function recordHyperdriveObservations(connectionString, observations) {

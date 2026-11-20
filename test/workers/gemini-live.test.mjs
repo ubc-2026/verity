@@ -213,6 +213,7 @@ it("records a live observation when a market is fetched and declares history mod
   assert.equal(history.calls.length, 0);
   assert.equal(history.body.mode, "live");
   assert.equal(history.body.live, true);
+  assert.equal(history.body.newestObservedAtUtc, history.body.observations[0].observedAtUtc);
   assert.equal(history.body.source, "gemini-exchange");
   assert.equal(history.body.venue, "gemini-exchange");
   assert.equal(history.body.instrument, instrument);
@@ -223,4 +224,147 @@ it("records a live observation when a market is fetched and declares history mod
   assert.equal(history.body.observations[0].marketState, "open");
   assert.equal(history.body.observations[0].timeBasis, "worker-fetch");
   assert.match(history.body.observations[0].observedAtUtc, isoTime);
+});
+
+async function bundleWorker(entry, filename) {
+  const built = await esbuild.build({
+    absWorkingDir: root,
+    entryPoints: [path.join(root, entry)],
+    bundle: true,
+    format: "esm",
+    platform: "neutral",
+    conditions: ["workerd", "worker", "browser"],
+    target: "esnext",
+    write: false,
+    external: [
+      "cloudflare:*", "node:*", "assert", "async_hooks", "buffer", "crypto",
+      "diagnostics_channel", "dns", "events", "fs", "http", "https", "net",
+      "os", "path", "perf_hooks", "stream", "string_decoder", "tls", "util", "zlib",
+    ],
+  });
+  await mkdir(bundleDir, { recursive: true });
+  const file = path.join(bundleDir, filename);
+  await writeFile(file, built.outputFiles[0].text);
+  return file;
+}
+
+it("does not write on public reads and collects one batch from the schedule", async () => {
+  await bundleWorker("research-worker.mjs", "collector.mjs");
+  const seen = [];
+  const collector = new Miniflare({
+    rootPath: bundleDir,
+    modulesRoot: bundleDir,
+    modules: true,
+    scriptPath: "collector.mjs",
+    compatibilityDate: "2026-01-01",
+    compatibilityFlags: ["nodejs_compat"],
+    unsafeTriggerHandlers: true,
+    hyperdrives: {
+      VERITY_HISTORY_DB: "postgres://verity:secret@127.0.0.1:1/verity?sslmode=disable",
+    },
+    outboundService() {
+      seen.push("gemini");
+      return jsonResponse({
+        data: [{
+          ticker: "COLLECT-1",
+          status: "active",
+          contracts: [
+            { status: "active", instrumentSymbol: "GEMI-COLLECT-A", marketState: "open", prices: { bestBid: "0.11", bestAsk: "0.12" } },
+            { status: "active", instrumentSymbol: "GEMI-COLLECT-B", marketState: "open", prices: { bestBid: "0.21", bestAsk: "0.22" } },
+          ],
+        }],
+        pagination: { total: 1 },
+      });
+    },
+  });
+  try {
+    logs.length = 0;
+    for (let n = 0; n < 8; n += 1) {
+      const response = await collector.dispatchFetch(`${host}/v1/markets?limit=20`);
+      assert.equal(response.status, 200);
+      await response.arrayBuffer();
+      const detail = await collector.dispatchFetch(`${host}/v1/markets/COLLECT-1`);
+      assert.equal(detail.status, 200);
+      await detail.arrayBuffer();
+      const research = await collector.dispatchFetch(`${host}/v1/research`);
+      assert.equal(research.status, 200);
+      await research.arrayBuffer();
+    }
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    const duringReads = logs.filter((line) => line.includes("market_history_collect") || line.includes("market_history_record_error"));
+    assert.deepEqual(duringReads, []);
+    assert.equal(seen.length, 24);
+
+    logs.length = 0;
+    const first = await collector.dispatchFetch("https://api.verityresearch.us/cdn-cgi/handler/scheduled", { method: "POST" });
+    assert.equal(first.status, 200);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    const collects = logs.filter((line) => line.includes("market_history_collect"));
+    assert.equal(collects.length, 1);
+    const recorded = JSON.parse(collects[0].slice(collects[0].indexOf("{")));
+    assert.equal(recorded.batched, true);
+    assert.equal(recorded.instruments, 2);
+    assert.equal(collects[0].includes("secret"), false);
+
+    logs.length = 0;
+    const second = await collector.dispatchFetch("https://api.verityresearch.us/cdn-cgi/handler/scheduled", { method: "POST" });
+    assert.equal(second.status, 200);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    assert.equal(logs.some((line) => line.includes("market_history_collect")), false);
+  } finally {
+    await collector.dispose();
+  }
+});
+
+it("labels database history as stored and keeps only fresh isolate observations live", async () => {
+  await bundleWorker("test/workers/history-label-harness.mjs", "history-label.mjs");
+  const labeler = new Miniflare({
+    rootPath: bundleDir,
+    modulesRoot: bundleDir,
+    modules: true,
+    scriptPath: "history-label.mjs",
+    compatibilityDate: "2026-01-01",
+    compatibilityFlags: ["nodejs_compat"],
+    outboundService: () => jsonResponse({}),
+  });
+  try {
+    const response = await labeler.dispatchFetch(`${host}/v1/market-history?instrument=GEMI-WXHIGH-SFO-2611200459-56TO57`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.mode, "stored");
+    assert.equal(body.live, false);
+    assert.equal(body.newestObservedAtUtc, "2026-11-20T02:15:46.000Z");
+    assert.equal(body.observations.length, 1);
+    assert.equal(body.observations[0].bestBid, "0.83");
+  } finally {
+    await labeler.dispose();
+  }
+});
+
+it("evicts the oldest in-memory instrument after 2000", async () => {
+  for (let n = 0; n < 2001; n += 1) {
+    const ticker = `CAP${String(n).padStart(4, "0")}`;
+    upstream = () => jsonResponse({
+      ticker,
+      status: "active",
+      contracts: [{
+        status: "active",
+        instrumentSymbol: `GEMI-${ticker}`,
+        marketState: "open",
+        prices: { bestBid: "0.10", bestAsk: "0.20" },
+      }],
+    });
+    const response = await worker.dispatchFetch(`${host}/v1/markets/${ticker}`);
+    assert.equal(response.status, 200);
+    await response.arrayBuffer();
+  }
+  const oldest = await worker.dispatchFetch(`${host}/v1/market-history?instrument=GEMI-CAP0000`);
+  assert.equal(oldest.status, 503);
+  await oldest.arrayBuffer();
+  const newest = await worker.dispatchFetch(`${host}/v1/market-history?instrument=GEMI-CAP2000`);
+  assert.equal(newest.status, 200);
+  const body = await newest.json();
+  assert.equal(body.mode, "live");
+  assert.equal(body.live, true);
+  assert.equal(body.instrument, "GEMI-CAP2000");
 });
