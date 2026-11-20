@@ -155,6 +155,8 @@ async function paidNanopayment(analyst: Analyst): Promise<NanoScenarioReport> {
     r.checks.receipt_and_bytes_verified = verdict.ok;
     if (!verdict.ok) return r;
     const accepted = world.ledger.recordVerifiedDelivery({ receipt: verdict.receipt, digest: verdict.digest, now: world.now() });
+    // Verified-delivery gate, as on the direct rail: a receipt the ledger refuses never reaches reassessment.
+    if (accepted.kind === "mismatch") return r;
     const atAcceptance = world.ledger.status(purchaseId)!;
     // At acceptance the buyer knows only that Gateway accepted the payment; Circle's batch status is not reported yet.
     r.checks.acceptance_recorded_before_batch = accepted.kind === "accepted" && atAcceptance.settlement === "pending_batch" && atAcceptance.batch.status === "unknown";

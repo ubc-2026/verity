@@ -18,6 +18,7 @@ npm run build    # checks that it builds; writes dist/index.html
 | Colours, fonts, spacing | `src/tokens.css` |
 | The 3D coin | `src/Coin3D.tsx` |
 | The ledger page | `src/Portal.tsx`, opened at `#ledger` |
+| The run page (one market, end to end) | `src/Run.tsx`, opened at `#run`. It needs `npm run app` in the repo root, or shows the recorded fixture preview |
 
 Make changes on a branch and open a pull request, like the rest of this repo.
 

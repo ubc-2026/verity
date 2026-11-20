@@ -6,6 +6,7 @@ import {useGSAP} from '@gsap/react';
 import Magnet from './bits/Magnet';
 import Coin3D from './Coin3D';
 import Portal from './Portal';
+import Run from './Run';
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
@@ -205,10 +206,12 @@ function Spending() {
 
 export default function App() {
   const root = useRef<HTMLDivElement>(null);
-  const [ledger, setLedger] = useState(() => window.location.hash === '#ledger');
+  const [route, setRoute] = useState(() => window.location.hash);
+  const ledger = route === '#ledger';
+  const run = route === '#run';
 
   useEffect(() => {
-    const sync = () => setLedger(window.location.hash === '#ledger');
+    const sync = () => setRoute(window.location.hash);
     window.addEventListener('hashchange', sync);
     return () => window.removeEventListener('hashchange', sync);
   }, []);
@@ -276,12 +279,13 @@ export default function App() {
             <a href="#how">How it works</a>
             <a href="#markets">Markets</a>
             <a href="#spending">Spending</a>
+            <a href="#run" aria-current={run ? 'page' : undefined}>Run</a>
             <a href="#ledger" aria-current={ledger ? 'page' : undefined}>Ledger</a>
           </nav>
         </div>
       </header>
 
-      {ledger ? <Portal /> : <main id="top">
+      {ledger ? <Portal /> : run ? <Run /> : <main id="top">
         <section className="hero">
           <Guilloche className="hero-rosette" bands={6} />
           <div className="container hero-in">
