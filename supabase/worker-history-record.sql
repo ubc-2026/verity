@@ -1,19 +1,16 @@
--- Owner-applied migration for scheduled quote collection.
+-- Owner-applied grants for scheduled quote collection.
 -- Do not run this from CI, from the Worker, or against a database until the
--- owner has reviewed it. Applying it creates the unique indexes the Worker's
--- ON CONFLICT clauses require and grants INSERT to a separate writer role.
+-- owner has reviewed it. It does not create indexes. Production already has a
+-- unique key on research.instruments (venue, external_instrument_id) and on
+-- research.quote_snapshots (instrument_id, source_mode, observed_at). The
+-- Worker's ON CONFLICT clauses use those keys.
 -- The read-only verity_history_reader role is unchanged.
 --
 -- The Worker login keeps working as a reader if this file is not applied.
 -- Collection then fails, is logged once, and does not change market responses.
+-- Both id columns are identity columns, so this role gets no sequence grants.
 
 BEGIN;
-
-CREATE UNIQUE INDEX IF NOT EXISTS instruments_venue_external_id
-  ON research.instruments (venue, external_instrument_id);
-
-CREATE UNIQUE INDEX IF NOT EXISTS quote_snapshots_instrument_observed_at
-  ON research.quote_snapshots (instrument_id, observed_at);
 
 DO $$
 BEGIN
@@ -25,23 +22,6 @@ $$;
 
 GRANT USAGE ON SCHEMA research TO verity_history_writer;
 GRANT SELECT, INSERT ON research.instruments, research.quote_snapshots TO verity_history_writer;
-
--- Identity and serial columns read these sequences on INSERT.
-DO $$
-DECLARE
-  seq text;
-BEGIN
-  FOREACH seq IN ARRAY ARRAY[
-    pg_get_serial_sequence('research.instruments', 'id'),
-    pg_get_serial_sequence('research.quote_snapshots', 'id')
-  ]
-  LOOP
-    IF seq IS NOT NULL THEN
-      EXECUTE format('GRANT USAGE, SELECT ON SEQUENCE %s TO verity_history_writer', seq);
-    END IF;
-  END LOOP;
-END
-$$;
 
 -- Policies apply only when row-level security is enabled on the table.
 DO $$
@@ -77,7 +57,12 @@ BEGIN
     WHERE schemaname = 'research' AND tablename = 'quote_snapshots' AND policyname = 'worker_write_quotes_insert'
   ) THEN
     CREATE POLICY worker_write_quotes_insert ON research.quote_snapshots
-      FOR INSERT TO verity_history_writer WITH CHECK (source_mode = 'live');
+      FOR INSERT TO verity_history_writer WITH CHECK (
+        source_mode = 'live' AND EXISTS (
+          SELECT 1 FROM research.instruments i
+          WHERE i.id = quote_snapshots.instrument_id AND i.venue = 'gemini-exchange'
+        )
+      );
   END IF;
 END
 $$;

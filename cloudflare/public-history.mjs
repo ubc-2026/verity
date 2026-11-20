@@ -26,6 +26,27 @@ export async function readHistory(sql, instrument) {
   }));
 }
 
+function outcomeLabel(label, symbol) {
+  const text = typeof label === "string" && label.trim() ? label.trim() : symbol;
+  return text.slice(0, 180);
+}
+
+function allowedTimeBasis(value) {
+  return value === "exchange" || value === "collector" ? value : "collector";
+}
+
+function allowedMarketState(value) {
+  return value === "open" || value === "closed" || value === "unknown" ? value : "unknown";
+}
+
+function priceInRange(value) {
+  if (value == null || value === "") return null;
+  const text = String(value).trim();
+  const number = Number(text);
+  if (!Number.isFinite(number) || number < 0 || number > 1) return null;
+  return text;
+}
+
 export async function recordObservations(sql, observations) {
   const seen = new Set();
   const rows = [];
@@ -36,20 +57,23 @@ export async function recordObservations(sql, observations) {
     seen.add(key);
     rows.push({
       instrument: observation.instrument,
+      outcome_label: outcomeLabel(observation.outcomeLabel, observation.instrument),
       observed_at: observation.observedAtUtc,
-      time_basis: observation.timeBasis,
-      best_bid: observation.bestBid,
-      best_ask: observation.bestAsk,
-      market_state: observation.marketState,
+      time_basis: allowedTimeBasis(observation.timeBasis),
+      best_bid: priceInRange(observation.bestBid),
+      best_ask: priceInRange(observation.bestAsk),
+      market_state: allowedMarketState(observation.marketState),
     });
   }
   if (rows.length === 0) return 0;
-  // One statement: insert any missing instruments, then insert quotes.
-  // Both ON CONFLICT clauses need the unique indexes in supabase/worker-history-record.sql.
+  // One statement. Conflict targets are the unique keys already on the live
+  // tables: instruments (venue, external_instrument_id) and
+  // quote_snapshots (instrument_id, source_mode, observed_at).
   await sql`
     WITH incoming AS (
       SELECT * FROM jsonb_to_recordset(${JSON.stringify(rows)}::jsonb) AS t(
         instrument text,
+        outcome_label text,
         observed_at timestamptz,
         time_basis text,
         best_bid numeric,
@@ -58,8 +82,9 @@ export async function recordObservations(sql, observations) {
       )
     ),
     upserted AS (
-      INSERT INTO research.instruments (venue, external_instrument_id)
-      SELECT DISTINCT 'gemini-exchange', instrument FROM incoming
+      INSERT INTO research.instruments (venue, external_instrument_id, outcome_label)
+      SELECT DISTINCT ON (instrument) 'gemini-exchange', instrument, outcome_label FROM incoming
+      ORDER BY instrument
       ON CONFLICT (venue, external_instrument_id) DO NOTHING
       RETURNING id, venue, external_instrument_id
     ),
@@ -78,7 +103,7 @@ export async function recordObservations(sql, observations) {
     FROM incoming n
     JOIN known k ON k.external_instrument_id = n.instrument
     ORDER BY k.id, n.observed_at
-    ON CONFLICT (instrument_id, observed_at) DO NOTHING
+    ON CONFLICT (instrument_id, source_mode, observed_at) DO NOTHING
   `;
   return rows.length;
 }

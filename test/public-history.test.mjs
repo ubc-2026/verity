@@ -63,18 +63,19 @@ it("records a live quote and reads it back in time order", async () => {
         id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         venue text NOT NULL,
         external_instrument_id text NOT NULL,
+        outcome_label text NOT NULL,
         UNIQUE (venue, external_instrument_id)
       );
       CREATE TABLE research.quote_snapshots (
         id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         instrument_id bigint NOT NULL REFERENCES research.instruments(id),
         observed_at timestamptz NOT NULL,
-        observed_at_basis text NOT NULL,
+        observed_at_basis text NOT NULL CHECK (observed_at_basis IN ('exchange', 'collector')),
         source_mode text NOT NULL,
-        best_bid numeric,
-        best_ask numeric,
-        market_state text NOT NULL,
-        UNIQUE (instrument_id, observed_at)
+        best_bid numeric CHECK (best_bid IS NULL OR (best_bid >= 0 AND best_bid <= 1)),
+        best_ask numeric CHECK (best_ask IS NULL OR (best_ask >= 0 AND best_ask <= 1)),
+        market_state text NOT NULL CHECK (market_state IN ('open', 'closed', 'unknown')),
+        UNIQUE (instrument_id, source_mode, observed_at)
       );
     `);
     let queries = 0;
@@ -95,9 +96,99 @@ it("records a live quote and reads it back in time order", async () => {
     assert.equal(await recordObservations(sql, batch), 2);
     assert.equal(queries, 2);
     assert.deepEqual(await readHistory(sql, symbol), [
-      { observedAtUtc: "2026-11-20T05:25:56.000Z", timeBasis: "worker-fetch", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
-      { observedAtUtc: "2026-11-20T05:26:56.000Z", timeBasis: "worker-fetch", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },
+      { observedAtUtc: "2026-11-20T05:25:56.000Z", timeBasis: "collector", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
+      { observedAtUtc: "2026-11-20T05:26:56.000Z", timeBasis: "collector", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },
     ]);
+  } finally {
+    await database.close();
+  }
+});
+
+it("stores labels, collector time, and known market states, and drops prices outside 0 to 1", async () => {
+  const database = await PGlite.create();
+  try {
+    await database.exec(`
+      CREATE SCHEMA research;
+      CREATE TABLE research.instruments (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        venue text NOT NULL,
+        external_instrument_id text NOT NULL,
+        outcome_label text NOT NULL,
+        UNIQUE (venue, external_instrument_id)
+      );
+      CREATE TABLE research.quote_snapshots (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        instrument_id bigint NOT NULL REFERENCES research.instruments(id),
+        observed_at timestamptz NOT NULL,
+        observed_at_basis text NOT NULL CHECK (observed_at_basis IN ('exchange', 'collector')),
+        source_mode text NOT NULL,
+        best_bid numeric CHECK (best_bid IS NULL OR (best_bid >= 0 AND best_bid <= 1)),
+        best_ask numeric CHECK (best_ask IS NULL OR (best_ask >= 0 AND best_ask <= 1)),
+        market_state text NOT NULL CHECK (market_state IN ('open', 'closed', 'unknown')),
+        UNIQUE (instrument_id, source_mode, observed_at)
+      );
+    `);
+    const sql = async (strings, ...values) => {
+      const query = strings.reduce((text, part, index) => index === 0 ? part : `${text}$${index}${part}`, "");
+      return (await database.query(query, values)).rows;
+    };
+    const labeled = "GEMI-EDGE-LABELED";
+    const fallback = "GEMI-EDGE-FALLBACK";
+    const longLabel = `Boston ${"x".repeat(200)}`;
+    await recordObservations(sql, [
+      {
+        instrument: labeled,
+        outcomeLabel: longLabel,
+        observedAtUtc: "2026-11-20T06:00:00Z",
+        timeBasis: "worker-fetch",
+        bestBid: "1.5",
+        bestAsk: "-0.01",
+        marketState: "post_only",
+      },
+      {
+        instrument: fallback,
+        observedAtUtc: "2026-11-20T06:00:00Z",
+        timeBasis: "exchange",
+        bestBid: "0",
+        bestAsk: "1",
+        marketState: "closed",
+      },
+    ]);
+    await recordObservations(sql, [
+      {
+        instrument: labeled,
+        outcomeLabel: longLabel,
+        observedAtUtc: "2026-11-20T06:00:00Z",
+        timeBasis: "worker-fetch",
+        bestBid: "0.40",
+        bestAsk: "0.50",
+        marketState: "open",
+      },
+    ]);
+
+    const instruments = await sql`
+      SELECT external_instrument_id, outcome_label, char_length(outcome_label)::int AS label_length
+      FROM research.instruments
+      ORDER BY external_instrument_id
+    `;
+    assert.deepEqual(instruments, [
+      { external_instrument_id: fallback, outcome_label: fallback, label_length: fallback.length },
+      { external_instrument_id: labeled, outcome_label: longLabel.slice(0, 180), label_length: 180 },
+    ]);
+    assert.deepEqual(await readHistory(sql, labeled), [{
+      observedAtUtc: "2026-11-20T06:00:00.000Z",
+      timeBasis: "collector",
+      bestBid: null,
+      bestAsk: null,
+      marketState: "unknown",
+    }]);
+    assert.deepEqual(await readHistory(sql, fallback), [{
+      observedAtUtc: "2026-11-20T06:00:00.000Z",
+      timeBasis: "exchange",
+      bestBid: "0",
+      bestAsk: "1",
+      marketState: "closed",
+    }]);
   } finally {
     await database.close();
   }
