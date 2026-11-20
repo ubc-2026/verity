@@ -297,3 +297,48 @@ it("inserts new and existing instruments under the writer role with row-level se
     await database.close();
   }
 });
+
+it("records a batch when the driver JSON-encodes jsonb parameters, as postgres.js does with prepared statements", async () => {
+  const database = await PGlite.create();
+  try {
+    await database.exec(`
+      CREATE SCHEMA research;
+      CREATE TABLE research.instruments (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        venue text NOT NULL,
+        external_instrument_id text NOT NULL,
+        outcome_label text NOT NULL,
+        UNIQUE (venue, external_instrument_id)
+      );
+      CREATE TABLE research.quote_snapshots (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        instrument_id bigint NOT NULL REFERENCES research.instruments(id),
+        observed_at timestamptz NOT NULL,
+        observed_at_basis text NOT NULL,
+        source_mode text NOT NULL,
+        best_bid numeric,
+        best_ask numeric,
+        market_state text NOT NULL,
+        UNIQUE (instrument_id, source_mode, observed_at)
+      );
+    `);
+    // postgres.js learns each parameter's type from the server and runs JSON.stringify
+    // on any parameter the server types as json or jsonb, even when it is already a string.
+    // Production collection failed with "cannot call jsonb_to_recordset on a non-array" this way.
+    const sql = async (strings, ...values) => {
+      const encoded = values.map((value, index) => /^::jsonb\b/.test(strings[index + 1]) ? JSON.stringify(value) : value);
+      const query = strings.reduce((text, part, index) => index === 0 ? part : `${text}$${index}${part}`, "");
+      return (await database.query(query, encoded)).rows;
+    };
+    const symbol = "GEMI-WXHIGH-BOS-2611210459-66TO67";
+    const recorded = await recordObservations(sql, [
+      { instrument: symbol, observedAtUtc: "2026-11-20T05:25:56Z", timeBasis: "worker-fetch", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
+    ]);
+    assert.equal(recorded, 1);
+    assert.deepEqual(await readHistory(sql, symbol), [
+      { observedAtUtc: "2026-11-20T05:25:56.000Z", timeBasis: "collector", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
+    ]);
+  } finally {
+    await database.close();
+  }
+});
