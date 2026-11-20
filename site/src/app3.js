@@ -62,7 +62,13 @@ document.addEventListener('keydown',e=>{const d=$('#drawer');if(!d.classList.con
 
 /* ---------- Init ---------- */
 (async function init(){
+  if(window.VERITY_GATE)await window.VERITY_GATE; // nothing starts until the visitor opens the demo or signs in
   try{await computeHashes();}catch(e){console.warn(e);}
   renderTerm();renderAll();renderTabs();LIVE.start();await loadAll();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{drawProb();drawCandles();});
 })();
+
+/* Sign out: clears the session cookie through the auth service, then returns to the front page */
+$$('[data-signout]').forEach(b=>b.addEventListener('click',async()=>{b.disabled=true;
+  try{const r=await fetch('/auth/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',credentials:'same-origin',redirect:'error'});if(!r.ok)throw new Error();try{sessionStorage.removeItem('verity.mode');}catch(e){}location.replace(location.pathname);}
+  catch(e){b.disabled=false;b.textContent='Sign-out failed, try again';}}));

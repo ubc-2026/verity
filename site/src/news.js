@@ -27,7 +27,7 @@ async function loadNews(){if(document.hidden)return;
   catch(e){if(!NEWS.items.length){$('#newsList').innerHTML='<li class="empty">Headlines are unavailable right now. Retrying in a few minutes.</li>';$('#leadStory').innerHTML='';const s=$('#newsStatus');s.className='tick-status stale';s.textContent='News unavailable · retrying';}}}
 (function newsInit(){$('#newsFilters').innerHTML=NEWS_TOPICS.map(([k,l])=>`<button type="button" data-f="${k}" aria-pressed="${k==='all'}">${l}</button>`).join('');
   $$('#newsFilters button').forEach(b=>b.addEventListener('click',()=>{NEWS.filter=b.dataset.f;renderNews();}));
-  loadNews();NEWS.timer=setInterval(loadNews,10*60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-NEWS.fetched>10*60000)loadNews();});})();
+  (window.VERITY_GATE||Promise.resolve()).then(()=>{loadNews();NEWS.timer=setInterval(loadNews,10*60000);});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-NEWS.fetched>10*60000)loadNews();});})();
 
 /* ---------- More research via Exa (through Verity's Worker) ---------- */
 const RES={q:'',busy:false};
@@ -46,7 +46,7 @@ async function runResearch(q){q=(q||'').trim()||'crypto market trends bitcoin et
 (function resInit(){$('#resForm').addEventListener('submit',e=>{e.preventDefault();runResearch($('#resQ').value);});
   $$('#resChips button').forEach(b=>b.addEventListener('click',()=>{$('#resQ').value=b.dataset.q;runResearch(b.dataset.q);}));
   onVisible($('#resList'),v=>{if(v&&!RES.q)runResearch('');});
-  setTimeout(()=>{if(!RES.q)runResearch('');},3000);})(); // don't rely only on the visibility observer
+  (window.VERITY_GATE||Promise.resolve()).then(()=>setTimeout(()=>{if(!RES.q)runResearch('');},3000));})(); // don't rely only on the visibility observer
 
 /* Research for the market selected in the terminal (AI panel) */
 async function runMarketResearch(){const m=MARKETS[term.market];const out=$('#gaiOut');const btn=$('#mresRun');

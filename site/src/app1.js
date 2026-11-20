@@ -222,13 +222,35 @@ probC.addEventListener('keydown',e=>{const n=term.series.length;if(e.key==='Arro
 probC.addEventListener('blur',()=>{term.cursor=null;drawProb();});
 probC.setAttribute('aria-describedby','probFoot');
 function probTable(){const m=MARKETS[term.market];$('#probTable').innerHTML=term.series.slice().reverse().map(d=>`<tr><td class="mono">${ptLabel(d,true)}</td><td class="num">${(d.p*100).toFixed(1)}¢${m.live?' (Gemini Exchange close)':d.ago===0?' (captured)':' (fixture)'}</td></tr>`).join('');}
+const TFMS={'1m':6e4,'15m':9e5,'1hr':36e5,'6hr':216e5,'1day':864e5};
+const HIST={state:'demo',fetched:0,newest:0,url:'',err:'',timer:0,vis:false};
+function histUrl(sym,tf){return 'https://api.gemini.com/v2/candles/'+encodeURIComponent(sym.toLowerCase())+'/'+tf;}
+function probMeta(){const el=$('#probMeta');if(!el)return;const m=MARKETS[term.market];
+  if(!m.live){el.innerHTML='<span class="tick-status stale">Demo fixture path</span><span>Earlier points are a labelled fixture. Only the last point is the real Nov 18 capture.</span>';return;}
+  const st={live:['live','<span class="dot" aria-hidden="true"></span>Live history'],stale:['stale','Stale history'],empty:['stale','No history'],loading:['','Loading history…']}[HIST.state]||['','—'];
+  const when=t=>new Date(t).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZoneName:'short'});
+  const bits=[];if(HIST.fetched)bits.push('Fetched '+when(HIST.fetched));if(HIST.newest)bits.push('newest candle '+when(HIST.newest));
+  if(HIST.state==='stale')bits.push(HIST.err?'last refresh failed, showing the previous fetch':'no new candle for several periods');
+  if(HIST.state==='empty')bits.push(HIST.err||'no candles for this timeframe');
+  el.innerHTML=`<span class="tick-status ${st[0]}" role="status">${st[1]}</span><span>${esc(bits.join(' · '))}</span><span>Source: <a href="${esc(HIST.url)}" target="_blank" rel="noopener noreferrer">Gemini Exchange public API, ${esc(m.symbol||'')} candles</a>. Market-implied probability only; the resolution-risk rating beside it is scored separately from the rules.</span>`;}
+function histSchedule(){clearInterval(HIST.timer);HIST.timer=0;const m=MARKETS[term.market];if(HIST.vis&&m&&m.live&&m.symbol)HIST.timer=setInterval(()=>loadHist(true),60000);}
+function loadHist(refresh){const m=MARKETS[term.market];const key=m.symbol+term.tf;const [tf,n]=CTF[term.tf];HIST.url=histUrl(m.symbol,tf);
+  if(refresh)candleCache.delete(m.symbol+'|'+tf);
+  gxCandles(m.symbol,tf,n).then(v=>{const mm=MARKETS[term.market];if(!mm.live||mm.symbol+term.tf!==key)return;
+    HIST.fetched=Date.now();HIST.err='';HIST.newest=v.length?v[v.length-1].t:0;
+    term.series=v.map(d=>({p:d.c,t:d.t,ago:0}));term.msg=v.length<2?'Not enough trading history for this timeframe yet.':'';
+    HIST.state=v.length<2?'empty':(Date.now()-HIST.newest>3*TFMS[tf]?'stale':'live');
+    const traded=v.filter(d=>d.v>0).length;term.foot=v.length?`Closing price of each Gemini Exchange candle. Trades in ${traded} of ${v.length} periods${traded<v.length/2?'; flat stretches mean no trades, so the last price carries forward':''}. The band is the live bid–ask.`:'';if(term.foot)$('#probFoot').textContent=term.foot;drawProb();probTable();probMeta();})
+   .catch(e=>{const mm=MARKETS[term.market];if(!mm.live||mm.symbol+term.tf!==key)return;
+    if(refresh&&term.series.length>1){HIST.state='stale';HIST.err=e.message;probMeta();return;}
+    HIST.state='empty';HIST.err=e.message==='NoDataFound'?'no trades on this contract in this timeframe yet':'history unavailable ('+e.message+')';
+    term.msg=e.message==='NoDataFound'?'No trades on this contract in this timeframe yet, so there are no candles. The quote above is live.':'Candles unavailable right now ('+e.message+'). Retrying every minute.';drawProb();probMeta();});}
 function renderProb(){const m=MARKETS[term.market];term.cursor=null;
-  if(!m.live){term.series=makeSeries(term.market,term.tf);drawProb();probTable();return;}
-  const key=m.symbol+term.tf;term.series=[];term.foot='';term.msg='Loading Gemini Exchange candles…';drawProb();probTable();
-  if(!m.symbol){term.msg='This contract has no instrument symbol, so no candles.';drawProb();return;}
-  const [tf,n]=CTF[term.tf];gxCandles(m.symbol,tf,n).then(v=>{const mm=MARKETS[term.market];if(!mm.live||mm.symbol+term.tf!==key)return;
-    term.series=v.map(d=>({p:d.c,t:d.t,ago:0}));term.msg=v.length<2?'Not enough trading history for this timeframe yet.':'';const traded=v.filter(d=>d.v>0).length;term.foot=v.length?`Closing price of each Gemini Exchange candle. Trades in ${traded} of ${v.length} periods${traded<v.length/2?'; flat stretches mean no trades, so the last price carries forward':''}. The band is the live bid–ask.`:'';if(term.foot)$('#probFoot').textContent=term.foot;drawProb();probTable();})
-   .catch(e=>{term.msg=e.message==='NoDataFound'?'No trades on this contract in this timeframe yet, so there are no candles. The quote above is live.':'Candles unavailable right now ('+e.message+').';drawProb();});}
+  if(!m.live){HIST.state='demo';term.series=makeSeries(term.market,term.tf);drawProb();probTable();probMeta();histSchedule();return;}
+  term.series=[];term.foot='';term.msg='Loading Gemini Exchange candles…';HIST.state='loading';HIST.fetched=0;HIST.newest=0;drawProb();probTable();
+  if(!m.symbol){term.msg='This contract has no instrument symbol, so no candles.';HIST.state='empty';HIST.err='no instrument symbol';HIST.url='https://api.gemini.com/v1/prediction-markets/events';drawProb();probMeta();return;}
+  probMeta();loadHist(false);histSchedule();}
+onVisible(probW,v=>{HIST.vis=v;histSchedule();});
 $$('#tfSeg button').forEach(b=>b.addEventListener('click',()=>{term.tf=b.dataset.tf;$$('#tfSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderProb();}));
 if('ResizeObserver'in window)new ResizeObserver(()=>drawProb()).observe(probW);
 

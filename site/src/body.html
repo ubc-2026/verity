@@ -1,3 +1,207 @@
+<!-- 00 Front page. Optional: "Open the demo" needs no account. Signing in only adds saved research.
+     The session lives in an HttpOnly cookie set by /auth/*; this page only asks whether it exists. -->
+<script>
+(function(){
+  var root=document.documentElement,q=new URLSearchParams(location.search),local=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)||location.protocol==='file:';
+  var mode='';try{mode=sessionStorage.getItem('verity.mode')||'';}catch(e){}
+  var direct=!q.has('home')&&(q.has('demo')||mode==='demo'||(location.hash&&location.hash!=='#top'&&location.hash!=='#'));
+  var done;window.VERITY_GATE=new Promise(function(r){done=r;});
+  window.VERITY_ACCOUNT={signedIn:false};
+  function enter(how){root.classList.remove('pre','landing');root.classList.add(how==='account'?'signed-in':'demo-mode');
+    if(how==='demo'){try{sessionStorage.setItem('verity.mode','demo');}catch(e){}}done(how);}
+  window.verityOpenDemo=function(){if(q.has('home'))history.replaceState(null,'',location.pathname);enter(root.classList.contains('signed-in')?'account':'demo');if(!location.hash)window.scrollTo({top:0,behavior:'instant'});};
+  function showLanding(){if(!root.classList.contains('pre'))return;root.classList.remove('pre');root.classList.add('landing');document.dispatchEvent(new Event('verity:landing'));}
+  if(local){enter('demo');return;}
+  if(!direct)root.classList.add('pre');
+  var t=setTimeout(function(){direct?enter('demo'):showLanding();},1500);
+  fetch('/auth/session',{cache:'no-store',credentials:'same-origin',redirect:'error'}).then(function(r){
+    clearTimeout(t);
+    if(r.ok){window.VERITY_ACCOUNT.signedIn=true;if(q.has('home')){root.classList.add('signed-in');showLanding();}else enter('account');return;}
+    direct?enter('demo'):showLanding();
+  }).catch(function(){clearTimeout(t);direct?enter('demo'):showLanding();});
+})();
+</script>
+<div class="lp" id="lp">
+  <header class="lp-bar">
+    <div class="lp-wrap lp-bar-in">
+      <a class="wordmark" href="/?home" aria-label="Verity front page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h4.2L12 15.6 16.8 4H21l-7.4 16h-3.2z" fill="#F1F5F9"/><path d="M10.4 20h3.2l1.3-2.9H9.1z" fill="#2E5CFF"/></svg>
+        VERITY
+      </a>
+      <nav class="lp-links" aria-label="Front page">
+        <a href="#lp-how">How it works</a><a href="#lp-markets">Reference markets</a><a href="#lp-spend">Spending rules</a><a href="#lp-faq">Questions</a>
+      </nav>
+      <div class="lp-cta">
+        <a class="btn ghost sm lp-only-out" href="/auth/sign-in">Sign in</a>
+        <button class="btn primary sm" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo</span><span class="lp-only-in">Open Verity</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="lp-main">
+    <section class="lp-hero lp-wrap" aria-labelledby="lpTitle">
+      <div class="lp-hero-copy">
+        <p class="lp-kicker"><span class="lp-dot" aria-hidden="true"></span>UBC 2026 prototype · research agent for prediction markets</p>
+        <h1 id="lpTitle">A price tells you what the crowd expects. The rules decide who gets paid.</h1>
+        <p class="lp-lede">Verity reads how a prediction market settles, scores the resolution risk on its own 4 to 12 scale, and buys only the evidence that closes a gap. Every purchase stays inside the owner’s spending rules. It places no trades, and payments run on testnet USDC.</p>
+        <div class="lp-actions">
+          <button class="btn primary lp-big" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo, no account needed</span><span class="lp-only-in">Open Verity</span></button>
+          <a class="btn lp-big lp-only-out" href="/auth/sign-in">Sign in or create an account</a>
+        </div>
+        <p class="lp-small lp-only-out">The demo has every feature. An account adds saved research, kept with your Google sign-in.</p>
+        <p class="lp-small lp-only-in">You are signed in. Your saved research is kept with your account.</p>
+      </div>
+
+      <figure class="lp-contract" aria-labelledby="lpCardCap">
+        <div class="lp-c-head">
+          <div><span class="lp-c-k">Gemini Exchange · captured Nov 18, 2026</span><span class="lp-c-t">NYC high temperature, 62 to 63°F</span></div>
+          <div class="lp-c-price"><span class="lp-c-k">Mid price</span><b>56¢</b></div>
+        </div>
+        <blockquote class="lp-rule">“…only the first published version that includes confirmation of the <mark aria-label="missing word">&nbsp;___&nbsp;</mark> will be used.”</blockquote>
+        <p class="lp-c-note">A word is missing, so it is unclear which NWS report counts: the partial 4 PM report or the full-day one.</p>
+        <dl class="lp-scores">
+          <div><dt>Ambiguity</dt><dd><b>2</b><i class="p2" aria-hidden="true"></i></dd></div>
+          <div><dt>Source</dt><dd><b>2</b><i class="p2" aria-hidden="true"></i></dd></div>
+          <div><dt>Liquidity</dt><dd><b>3</b><i class="p3" aria-hidden="true"></i></dd></div>
+          <div><dt>Correlation</dt><dd><b>1</b><i class="p1" aria-hidden="true"></i></dd></div>
+        </dl>
+        <div class="lp-c-foot"><span class="lp-total">8 / 12</span><span class="tag warn">! Medium</span><span class="lp-c-buy">One 0.05 USDC report proposed</span></div>
+        <figcaption id="lpCardCap" class="lp-c-cap">Real output of <code>verity-rules-v1</code> on Nov 18. Liquidity: $7 traded, 4¢ spread.</figcaption>
+      </figure>
+    </section>
+
+    <section class="lp-live" aria-labelledby="lpLiveT">
+      <div class="lp-wrap lp-live-head">
+        <h2 id="lpLiveT" class="lp-live-t">On Gemini Exchange right now</h2>
+        <p class="tick-status" id="lpLiveStatus" aria-live="polite">Connecting to Gemini Exchange…</p>
+      </div>
+      <div class="lp-strip" id="lpStrip" aria-label="Live prediction markets"><div class="lp-strip-track" id="lpStripTrack"></div></div>
+      <div class="lp-wrap lp-stats" id="lpStats">
+        <div><span class="lp-s-v" id="lpStatMarkets">—</span><span class="lp-s-l">active prediction markets</span></div>
+        <div><span class="lp-s-v" id="lpStatVol">—</span><span class="lp-s-l">traded on the first 100 listed</span></div>
+        <div><span class="lp-s-v" id="lpStatTop">—</span><span class="lp-s-l" id="lpStatTopL">most traded market</span></div>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-how" aria-labelledby="lpHowT">
+      <div class="lp-sec-head"><h2 id="lpHowT">How Verity reads a market</h2><p>Four steps, in order. The analysis only proposes a purchase. A separate payment service holds the signer and decides.</p></div>
+      <ol class="lp-steps">
+        <li><span class="lp-n">1</span><h3>Read the settlement rules</h3><p>Verity pulls the event and its terms from the public Gemini Exchange endpoint and flattens the rich-text rules. Reading public market data needs no key.</p></li>
+        <li><span class="lp-n">2</span><h3>Score four risks</h3><p>Ambiguity, source, liquidity and correlation, each 1 to 3. Liquidity comes from the bid, the ask and the volume. The rest are code rules, with no LLM.</p></li>
+        <li><span class="lp-n">3</span><h3>Buy only what closes a gap</h3><p>Free and cached answers come first. If a gap stays open, Verity proposes one paid report, priced in testnet USDC and bound to a hash of the request.</p></li>
+        <li><span class="lp-n">4</span><h3>Reconcile payment against delivery</h3><p>Each on-chain payment is matched to the evidence it bought, so the owner can see what was paid for and what arrived.</p></li>
+      </ol>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-markets" aria-labelledby="lpMktT">
+      <div class="lp-sec-head"><h2 id="lpMktT">Two reference markets, Nov 18</h2><p>Both run through the real analysis. Totals of 4 to 6 are low risk, 7 to 8 medium, 9 to 12 high.</p></div>
+      <div class="table-scroll lp-table">
+        <table>
+          <thead><tr><th scope="col">Market</th><th scope="col">Ambiguity</th><th scope="col">Source</th><th scope="col">Liquidity</th><th scope="col">Correlation</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Atlanta vs Oklahoma City, moneyline</th><td class="num">1</td><td class="num">1</td><td class="num">1 <span class="muted">($1,392 traded, 1¢ spread)</span></td><td class="num">3</td><td><span class="tag ok">6, Low</span> nothing to buy</td></tr>
+            <tr><th scope="row">NYC high temperature, 62 to 63°F</th><td class="num">2</td><td class="num">2</td><td class="num">3 <span class="muted">($7 traded, 4¢ spread)</span></td><td class="num">1</td><td><span class="tag warn">8, Medium</span> one 0.05 USDC report proposed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lp-small">In the demo you can score any live Gemini Exchange market the same way, in your browser.</p>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-spend" aria-labelledby="lpSpendT">
+      <div class="lp-sec-head"><h2 id="lpSpendT">Spending rules the agent cannot break</h2><p>A 25 USDC mission budget that counts money already reserved. Passwords, wallet approvals and promo codes are entered by the owner, never by the agent.</p></div>
+      <div class="lp-tiers">
+        <div class="lp-tier"><span class="lp-amt">0.01 to 0.10</span><span class="tag ok">Automatic</span><p>Once the shared checks pass: the merchant is allowlisted, the quote is valid and the purchase is not a duplicate.</p></div>
+        <div class="lp-tier"><span class="lp-amt">0.11 to 0.50</span><span class="tag ok">Automatic, if needed</span><p>Only for an open gap with no free or cached answer.</p></div>
+        <div class="lp-tier"><span class="lp-amt">0.51 to 2.00</span><span class="tag warn">Owner approves</span><p>Verity explains the purchase by voice, and the owner signs with their wallet.</p></div>
+        <div class="lp-tier"><span class="lp-amt">Over 2.00</span><span class="tag no">Rejected</span><p>Never paid, whatever the gap.</p></div>
+      </div>
+      <p class="lp-small">Amounts in testnet USDC on Arc Testnet.</p>
+    </section>
+
+    <section class="lp-sec lp-wrap" aria-labelledby="lpInsideT">
+      <div class="lp-sec-head"><h2 id="lpInsideT">What you can open</h2><p>The demo and an account show the same site. An account only adds a place to keep your work.</p></div>
+      <div class="lp-compare">
+        <div class="lp-plan">
+          <h3>Demo</h3><p class="lp-plan-sub">No account. Opens straight away.</p>
+          <ul>
+            <li>Live board and ticker for every active Gemini Exchange prediction market</li>
+            <li>Market terminal: price history, 5-minute candles and the resolution-risk score</li>
+            <li>Google Gemini review and a combined forecast with Workers AI, labelled as experimental</li>
+            <li>Crypto news from publisher feeds and Exa research search</li>
+            <li>Agent walkthrough and reconciler ledger, labelled as simulations</li>
+          </ul>
+          <button class="btn primary" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo</span><span class="lp-only-in">Open Verity</span></button>
+        </div>
+        <div class="lp-plan">
+          <h3>Account</h3><p class="lp-plan-sub">Sign in with Google. The same button creates your account.</p>
+          <ul>
+            <li>Everything in the demo</li>
+            <li>Saved research runs, kept with your account and visible only to you</li>
+            <li>Verity uses your basic Google profile to sign you in, nothing more</li>
+          </ul>
+          <a class="btn lp-only-out" href="/auth/sign-in">Sign in or create an account</a>
+          <p class="lp-small lp-only-in">You are signed in.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-wrap" id="lp-faq" aria-labelledby="lpFaqT">
+      <div class="lp-sec-head"><h2 id="lpFaqT">Questions</h2></div>
+      <div class="lp-faq">
+        <details><summary>Is this trading advice?</summary><p>No. Verity places no trades. The market price is the crowd’s view, the risk score is about how the contract settles, and the AI forecast is an experimental model estimate.</p></details>
+        <details><summary>Is any real money involved?</summary><p>No. Payments run on testnet USDC. No control on this site can reach a wallet, a signer or a payment endpoint.</p></details>
+        <details><summary>Does “Gemini” mean the Google AI model?</summary><p>On this site, “Gemini” alone means Gemini Exchange, the prediction-market exchange. The AI model is always written “Google Gemini”, and it only gives an optional second opinion. The risk score itself uses no LLM.</p></details>
+        <details><summary>Where does the data come from?</summary><p>Quotes, price history and candles come live from the public Gemini Exchange API, which needs no key. The two Nov 18 markets use the real captured analysis. News comes from publisher feeds, and research from Exa.</p></details>
+        <details><summary>Why would I sign in?</summary><p>Only to save research runs with your account. Everything else works in the demo.</p></details>
+        <details><summary>Does the site hold any API keys?</summary><p>No. AI, news and research calls go through Verity’s Cloudflare Worker, which keeps its keys as server secrets.</p></details>
+      </div>
+    </section>
+
+    <section class="lp-close lp-wrap" aria-labelledby="lpCloseT">
+      <h2 id="lpCloseT">See the price and the rules side by side.</h2>
+      <div class="lp-actions">
+        <button class="btn primary lp-big" type="button" onclick="verityOpenDemo()"><span class="lp-only-out">Open the demo</span><span class="lp-only-in">Open Verity</span></button>
+        <a class="btn lp-big lp-only-out" href="/auth/sign-in">Sign in</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-foot">
+    <div class="lp-wrap lp-foot-in">
+      <div><span class="wordmark lp-foot-mark">VERITY</span><p>Built at the UBC 2026 hackathon. A research agent for prediction markets.</p></div>
+      <div><h3>Built with</h3><p>Gemini Exchange public API, Cloudflare Workers and Workers AI, Google Gemini, Exa, x402 and EIP-3009, USDC on Arc Testnet, QuickNode Streams, ElevenLabs.</p></div>
+      <div><h3>Please note</h3><p>Independent student project. Not affiliated with or endorsed by Gemini Exchange, Google or any other company named here. Testnet only, and no trades are placed.</p></div>
+    </div>
+  </footer>
+</div>
+<script>
+/* Front page: live strip and stats from the public Gemini Exchange API. Runs only while the front page is showing. */
+document.addEventListener('verity:landing',function(){
+  var GXU='https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100',timer=0;
+  function mid(c){var p=c&&c.prices;if(!p)return null;var b=p.bestBid!=null?+p.bestBid:null,a=p.bestAsk!=null?+p.bestAsk:null;if(b!=null&&a!=null)return (b+a)/2;return p.lastTradePrice!=null?+p.lastTradePrice:(b!=null?b:a);}
+  function money(v){v=+v||0;return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e4?'$'+Math.round(v/1e3)+'k':v>=1e3?'$'+(v/1e3).toFixed(1)+'k':'$'+Math.round(v);}
+  function title(t){return String(t||'').replace(/^Highest temperature in /,'High temp, ').replace(/ on (January|February|March|April|May|June|July|August|September|October|November|December) \d+, \d{4}\??$/,'').replace(/\?$/,'');}
+  function h(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function load(){if(!document.documentElement.classList.contains('landing')){clearInterval(timer);return;}
+    var st=document.getElementById('lpLiveStatus');
+    fetch(GXU,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(j){
+      var ev=(j.data||[]).filter(function(e){return e&&e.title;});var total=(j.pagination&&j.pagination.total)||ev.length;
+      var rows=ev.map(function(e){var cs=(e.contracts||[]).filter(function(c){return c.status==='active'&&mid(c)!=null;});
+        var fav=cs.reduce(function(a,c){return !a||mid(c)>mid(a)?c:a;},null);return {e:e,c:fav,v:+e.volume||0};}).filter(function(r){return r.c;});
+      rows.sort(function(a,b){return b.v-a.v;});
+      var items=rows.slice(0,24).map(function(r){var lab=r.c.label&&r.c.label!==r.e.title?r.c.label:'Yes';
+        return '<span class="lp-chip"><span class="lp-chip-t">'+h(title(r.e.title))+'</span><span class="lp-chip-c">'+h(lab)+'</span><b>'+(mid(r.c)*100).toFixed(0)+'¢</b></span>';}).join('');
+      document.getElementById('lpStripTrack').innerHTML=items+items;
+      document.getElementById('lpStatMarkets').textContent=total;
+      var vol=ev.reduce(function(s,e){return s+(+e.volume||0);},0);document.getElementById('lpStatVol').textContent=money(vol);
+      document.getElementById('lpStatVol').nextElementSibling.textContent='traded on the first '+ev.length+' listed';
+      if(rows[0]){document.getElementById('lpStatTop').textContent=money(rows[0].v);document.getElementById('lpStatTopL').textContent='traded on '+title(rows[0].e.title)+', the busiest of those';}
+      st.className='tick-status live';st.innerHTML='<span class="dot" aria-hidden="true"></span>Live · updated '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+' · <a href="https://api.gemini.com/v1/prediction-markets/events?status=active" target="_blank" rel="noopener noreferrer">source</a>';
+    }).catch(function(e){st.className='tick-status stale';st.textContent='Gemini Exchange is not answering right now ('+e.message+'). The demo will keep retrying.';});}
+  load();timer=setInterval(load,30000);
+},{once:true});
+</script>
+
 <a class="skip" href="#main">Skip to content</a>
 <noscript><div class="noscript">JavaScript is off. The text below still explains Verity, but the charts, the walkthrough and the ledger need JavaScript to run.</div></noscript>
 
@@ -26,6 +230,8 @@
     <div class="nav-cta">
       <a class="btn ghost sm" href="#spec">Read specification</a>
       <a class="btn primary sm" href="#walkthrough" data-launch>Launch agent terminal</a>
+      <a class="btn ghost sm signin" href="/auth/sign-in">Sign in</a>
+      <button class="btn ghost sm signout" type="button" data-signout>Sign out</button>
     </div>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span></button>
   </div>
@@ -38,6 +244,9 @@
     <a class="link" href="#ledger">Ledger</a>
     <a class="btn primary" href="#walkthrough" data-launch>Launch agent terminal</a>
     <a class="btn" href="#spec">Read specification</a>
+    <a class="btn signin" href="/auth/sign-in">Sign in to save research</a>
+    <button class="btn signout" type="button" data-signout>Sign out</button>
+    <a class="link" href="/?home">Front page</a>
   </div>
 </header>
 
@@ -119,7 +328,8 @@
         </div>
         <div class="chart-wrap" id="probWrap"><canvas id="probChart" role="img" aria-label="Line chart of crowd-implied probability. Use the table below for values."></canvas><div class="tooltip" id="probTip"></div></div>
         <div class="chart-foot"><span id="probFoot">The path ends at the real captured mid. Earlier points are a deterministic demo fixture.</span><span>The price is the market’s view. Run a forecast in the AI panel to add a dashed AI estimate line.</span></div>
-        <details class="table-alt"><summary>Show chart values as a table</summary><div class="table-scroll"><table><thead><tr><th scope="col">Time (UTC)</th><th scope="col">Implied probability</th></tr></thead><tbody id="probTable"></tbody></table></div></details>
+        <div class="chart-meta" id="probMeta" aria-live="polite"></div>
+        <details class="table-alt"><summary>Show chart values as a table</summary><div class="table-scroll"><table><thead><tr><th scope="col">Time (your time zone)</th><th scope="col">Implied probability</th></tr></thead><tbody id="probTable"></tbody></table></div></details>
       </div>
       <div class="term-side">
         <div class="panel">
