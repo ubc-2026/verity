@@ -3,7 +3,7 @@ import { describe, it } from "node:test";
 import type { Hex } from "viem";
 import { buildResearchRequest } from "../src/payments/buyer.ts";
 import { catalogById } from "../src/payments/catalog.ts";
-import { GATEWAY_AUTH_VALIDITY_SECONDS, gatewayAuthorizationDomain, type GatewayProvider } from "../src/payments/circleGateway.ts";
+import { GATEWAY_AUTH_VALIDITY_SECONDS, gatewayAuthorizationDomain, type GatewayProvider, type GatewayTransfer } from "../src/payments/circleGateway.ts";
 import { deliverGatewayPaidRequest, GatewayDeliveryStore, type GatewayDeliveryDeps } from "../src/payments/gatewayDelivery.ts";
 import { GatewayLedger } from "../src/payments/gatewayLedger.ts";
 import { verifyGatewayDelivery } from "../src/payments/gatewayReceipt.ts";
@@ -123,7 +123,7 @@ describe("Gateway merchant path", () => {
     const first = await deliverGatewayPaidRequest(t.input, t.deps);
     assert.equal(first.status, 200, JSON.stringify(first));
     if (first.status !== 200) return;
-    const transfer = await gateway.transferByNonce(t.paid.record.nonce);
+    const transfer = await gateway.transferByNonce({ nonce: t.paid.record.nonce, from: t.request.payer, to: t.request.payTo });
     assert.equal(first.receipt.paymentRef, transfer?.id);
     assert.equal(first.receipt.authorizationNonce, t.paid.record.nonce);
     const replay = await deliverGatewayPaidRequest(t.input, t.deps);
@@ -131,25 +131,144 @@ describe("Gateway merchant path", () => {
     assert.equal(gateway.settleCalls, 1);
   });
 
-  it("releases the claim when Gateway rejects, keeps it when the outcome is unknown", async () => {
+  it("releases the claim when Gateway deterministically rejects the payment", async () => {
     const poor = await setup(new MockGatewayProvider({ now: () => DEMO_NOW, balances: {} }));
     const rejected = await deliverGatewayPaidRequest(poor.input, poor.deps);
     assert.equal(rejected.status, 402);
     assert.match((rejected as { reason: string }).reason, /insufficient_balance/);
     assert.equal(poor.deliveries.get(poor.request.purchaseId), undefined);
 
-    let settles = 0;
-    const flaky: GatewayProvider = {
+    const settleRejected: GatewayProvider = {
       mode: "fixture",
       verify: async () => ({ isValid: true }),
-      settle: async () => { settles += 1; throw new Error("socket hang up"); },
+      settle: async () => ({ success: false, errorReason: "insufficient_balance", transaction: "" }),
       transferByNonce: async () => undefined,
       transferById: async () => { throw new Error("none"); },
     };
-    const t = await setup(flaky);
-    assert.equal((await deliverGatewayPaidRequest(t.input, t.deps)).status, 502);
-    assert.equal((await deliverGatewayPaidRequest(t.input, t.deps)).status, 202);
+    const t = await setup(settleRejected);
+    const again = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(again.status, 402);
+    assert.match((again as { reason: string }).reason, /insufficient_balance/);
+    assert.equal(t.deliveries.get(t.request.purchaseId), undefined);
+  });
+
+  it("reconciles a lost settlement by the original nonce and delivers on retry with one settle call", async () => {
+    const inner = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const lookups: { nonce: string; from: string; to: string }[] = [];
+    const gateway: GatewayProvider = {
+      mode: "fixture",
+      verify: (payload, requirements) => inner.verify(payload, requirements),
+      settle: async (payload, requirements) => {
+        await inner.settle(payload, requirements);
+        throw new Error("socket hang up");
+      },
+      transferByNonce: async (lookup) => {
+        lookups.push(lookup);
+        return inner.transferByNonce(lookup);
+      },
+      transferById: (id) => inner.transferById(id),
+    };
+    const t = await setup(gateway);
+    const lost = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(lost.status, 502);
+    assert.match((lost as { reason: string }).reason, /outcome unknown/);
+    assert.equal(t.deliveries.get(t.request.purchaseId)?.status, "claimed");
+    assert.equal(t.deliveries.get(t.request.purchaseId)?.paymentRef, null);
+    assert.equal(inner.settleCalls, 1);
+
+    const retry = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(retry.status, 200, JSON.stringify(retry));
+    if (retry.status !== 200) return;
+    assert.equal(retry.replayed, false);
+    assert.deepEqual(retry.body, body);
+    assert.equal(inner.settleCalls, 1);
+    const transfer = await inner.transferByNonce({ nonce: t.paid.record.nonce, from: t.request.payer, to: t.request.payTo });
+    assert.equal(retry.receipt.paymentRef, transfer?.id);
+    assert.equal(retry.receipt.authorizationNonce, t.paid.record.nonce);
+    assert.ok(lookups.some((q) => q.nonce === t.paid.record.nonce && q.from === t.request.payer && q.to === t.request.payTo));
+
+    const replay = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(replay.status === 200 && replay.replayed, true);
+    assert.equal(inner.settleCalls, 1);
+  });
+
+  it("reconciles unexpected_error and nonce_already_used without a second settle, and does not release the claim when no transfer exists yet", async () => {
+    const acceptedThen = async (errorReason: string) => {
+      const inner = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+      const gateway: GatewayProvider = {
+        mode: "fixture",
+        verify: (payload, requirements) => inner.verify(payload, requirements),
+        settle: async (payload, requirements) => {
+          await inner.settle(payload, requirements);
+          return { success: false, errorReason, transaction: "" };
+        },
+        transferByNonce: (lookup) => inner.transferByNonce(lookup),
+        transferById: (id) => inner.transferById(id),
+      };
+      const t = await setup(gateway);
+      const first = await deliverGatewayPaidRequest(t.input, t.deps);
+      assert.equal(first.status, 200, JSON.stringify(first));
+      if (first.status !== 200) return;
+      assert.deepEqual(first.body, body);
+      assert.equal(inner.settleCalls, 1);
+      assert.equal(t.deliveries.get(t.request.purchaseId)?.status, "delivered");
+      const replay = await deliverGatewayPaidRequest(t.input, t.deps);
+      assert.equal(replay.status === 200 && replay.replayed, true);
+      assert.equal(inner.settleCalls, 1);
+    };
+    await acceptedThen("unexpected_error");
+    await acceptedThen("nonce_already_used");
+
+    let settles = 0;
+    const unknown: GatewayProvider = {
+      mode: "fixture",
+      verify: async () => ({ isValid: true }),
+      settle: async () => {
+        settles += 1;
+        return { success: false, errorReason: "unexpected_error", transaction: "" };
+      },
+      transferByNonce: async () => undefined,
+      transferById: async () => { throw new Error("none"); },
+    };
+    const t = await setup(unknown);
+    const first = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(first.status, 202);
+    assert.equal(t.deliveries.get(t.request.purchaseId)?.status, "claimed");
+    const retry = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(retry.status, 202);
     assert.equal(settles, 1);
+    assert.equal(t.deliveries.get(t.request.purchaseId)?.status, "claimed");
+  });
+
+  it("does not deliver a failed transfer or one with a different nonce, and does not settle again", async () => {
+    const cases: { name: string; alter: (transfer: GatewayTransfer) => GatewayTransfer }[] = [
+      { name: "failed", alter: (transfer) => ({ ...transfer, status: "failed" }) },
+      { name: "other nonce", alter: (transfer) => ({ ...transfer, nonce: `0x${"ab".repeat(32)}` }) },
+    ];
+    for (const scenario of cases) {
+      const inner = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+      const gateway: GatewayProvider = {
+        mode: "fixture",
+        verify: (payload, requirements) => inner.verify(payload, requirements),
+        settle: async (payload, requirements) => {
+          await inner.settle(payload, requirements);
+          throw new Error("socket hang up");
+        },
+        transferByNonce: async (lookup) => {
+          const transfer = await inner.transferByNonce(lookup);
+          return transfer ? scenario.alter(transfer) : undefined;
+        },
+        transferById: (id) => inner.transferById(id),
+      };
+      const t = await setup(gateway);
+      assert.equal((await deliverGatewayPaidRequest(t.input, t.deps)).status, 502);
+      const retry = await deliverGatewayPaidRequest(t.input, t.deps);
+      assert.equal(retry.status, 502, scenario.name);
+      assert.equal(t.deliveries.get(t.request.purchaseId)?.status, "claimed");
+      assert.equal(inner.settleCalls, 1);
+      assert.equal((await deliverGatewayPaidRequest(t.input, t.deps)).status, 502);
+      assert.equal(inner.settleCalls, 1);
+    }
   });
 
   it("refuses a token-domain signature and an authorization window shorter than Circle's 7 days", async () => {
@@ -212,6 +331,59 @@ describe("Gateway buyer verification and ledger", () => {
     if ("error" in settled) return;
     assert.equal(settled.settlement, "batch_settled");
     assert.equal(settled.quicknode.status, "not_claimed");
+    assert.equal(t.store.reservation(t.request.purchaseId)?.status, "spent");
+  });
+
+  it("keeps the purchase settled when a delayed pending response follows a completed one", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const res = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(res.status, 200);
+    if (res.status !== 200) return;
+    const verdict = await verifyGatewayDelivery({
+      receiptHeader: res.headers["X-Verity-Receipt"], body: res.body,
+      trusted: { merchantId: DEMO_MERCHANT_CONFIG.merchantId, receiptSigner: DEMO_MERCHANT_SIGNER.address },
+      request: t.request, authorizationNonce: t.paid.record.nonce,
+    });
+    assert.equal(verdict.ok, true);
+    if (!verdict.ok) return;
+    const ledger = new GatewayLedger(t.store);
+    assert.equal(ledger.recordVerifiedDelivery({ receipt: verdict.receipt, digest: verdict.digest, now: DEMO_NOW }).kind, "accepted");
+
+    const received = await gateway.transferById(res.receipt.paymentRef);
+    assert.equal(received.status, "received");
+    const pending = ledger.recordBatch(t.request.purchaseId, received, DEMO_NOW);
+    assert.ok(!("error" in pending));
+    if ("error" in pending) return;
+    assert.equal(pending.settlement, "pending_batch");
+    assert.equal(t.store.reservation(t.request.purchaseId)?.status, "held");
+
+    gateway.advanceBatch();
+    gateway.advanceBatch();
+    const completed = await gateway.transferById(res.receipt.paymentRef);
+    assert.equal(completed.status, "completed");
+    assert.ok(completed.txHash);
+    const settled = ledger.recordBatch(t.request.purchaseId, completed, DEMO_NOW + 1);
+    assert.ok(!("error" in settled));
+    if ("error" in settled) return;
+    assert.equal(settled.settlement, "batch_settled");
+    assert.equal(settled.batch.status, "completed");
+    assert.equal(settled.batch.txHash, completed.txHash);
+    assert.equal(t.store.reservation(t.request.purchaseId)?.status, "spent");
+
+    const stale = ledger.recordBatch(t.request.purchaseId, received, DEMO_NOW + 2);
+    assert.ok(!("error" in stale));
+    if ("error" in stale) return;
+    assert.equal(stale.settlement, "batch_settled");
+    assert.equal(stale.batch.status, "completed");
+    assert.equal(stale.batch.txHash, completed.txHash);
+    assert.equal(t.store.reservation(t.request.purchaseId)?.status, "spent");
+
+    const failed = ledger.recordBatch(t.request.purchaseId, { ...completed, status: "failed" }, DEMO_NOW + 3);
+    assert.ok(!("error" in failed));
+    if ("error" in failed) return;
+    assert.equal(failed.settlement, "batch_settled");
+    assert.equal(failed.batch.status, "completed");
     assert.equal(t.store.reservation(t.request.purchaseId)?.status, "spent");
   });
 

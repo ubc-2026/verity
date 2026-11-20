@@ -32,6 +32,7 @@ import { catalogById } from "../src/payments/catalog.ts";
 import {
   ARC_TESTNET_GATEWAY_WALLET,
   createLiveGatewayProvider,
+  type GatewayNonceLookup,
   type GatewayPaymentPayload,
   type GatewayProvider,
   type GatewayRequirements,
@@ -113,8 +114,8 @@ class RecordingGateway implements GatewayProvider {
     this.calls.settle.push(result);
     return result;
   }
-  async transferByNonce(nonce: Hex) {
-    const found = await this.inner.transferByNonce(nonce);
+  async transferByNonce(lookup: GatewayNonceLookup) {
+    const found = await this.inner.transferByNonce(lookup);
     this.calls.transferByNonce.push({ at: nowSeconds(), found: found ?? null });
     return found;
   }
