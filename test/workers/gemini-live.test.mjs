@@ -4,7 +4,7 @@ import path from "node:path";
 import { after, before, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
-import { Miniflare } from "miniflare";
+import { Miniflare, convertV4MiniflareOptions } from "miniflare";
 
 // Node's fetch accepts redirect:"error", so these tests run the Worker inside
 // workerd. On that runtime the old option throws before any request is sent.
@@ -66,7 +66,7 @@ before(async () => {
   await mkdir(bundleDir, { recursive: true });
   await writeFile(path.join(bundleDir, "worker.mjs"), built.outputFiles[0].text);
   console.error = (...args) => logs.push(args.map(strip).join(" "));
-  worker = new Miniflare({
+  worker = new Miniflare(convertV4MiniflareOptions({
     rootPath: bundleDir,
     modulesRoot: bundleDir,
     modules: true,
@@ -77,7 +77,7 @@ before(async () => {
       calls.push(request.url);
       return upstream(request);
     },
-  });
+  }));
 });
 
 after(async () => {
@@ -251,14 +251,13 @@ async function bundleWorker(entry, filename) {
 it("does not write on public reads and collects one batch from the schedule", async () => {
   await bundleWorker("research-worker.mjs", "collector.mjs");
   const seen = [];
-  const collector = new Miniflare({
+  const collector = new Miniflare(convertV4MiniflareOptions({
     rootPath: bundleDir,
     modulesRoot: bundleDir,
     modules: true,
     scriptPath: "collector.mjs",
     compatibilityDate: "2026-01-01",
     compatibilityFlags: ["nodejs_compat"],
-    unsafeTriggerHandlers: true,
     hyperdrives: {
       VERITY_HISTORY_DB: "postgres://verity:secret@127.0.0.1:1/verity?sslmode=disable",
     },
@@ -276,7 +275,7 @@ it("does not write on public reads and collects one batch from the schedule", as
         pagination: { total: 1 },
       });
     },
-  });
+  }));
   try {
     logs.length = 0;
     for (let n = 0; n < 8; n += 1) {
@@ -296,8 +295,9 @@ it("does not write on public reads and collects one batch from the schedule", as
     assert.equal(seen.length, 24);
 
     logs.length = 0;
-    const first = await collector.dispatchFetch("https://api.verityresearch.us/cdn-cgi/handler/scheduled", { method: "POST" });
-    assert.equal(first.status, 200);
+    const scheduledWorker = await collector.getWorker();
+    const first = await scheduledWorker.scheduled({});
+    assert.equal(first.outcome, "ok");
     await new Promise((resolve) => setTimeout(resolve, 50));
     const collects = logs.filter((line) => line.includes("market_history_collect"));
     assert.equal(collects.length, 1);
@@ -307,8 +307,8 @@ it("does not write on public reads and collects one batch from the schedule", as
     assert.equal(collects[0].includes("secret"), false);
 
     logs.length = 0;
-    const second = await collector.dispatchFetch("https://api.verityresearch.us/cdn-cgi/handler/scheduled", { method: "POST" });
-    assert.equal(second.status, 200);
+    const second = await scheduledWorker.scheduled({});
+    assert.equal(second.outcome, "ok");
     await new Promise((resolve) => setTimeout(resolve, 50));
     assert.equal(logs.some((line) => line.includes("market_history_collect")), false);
   } finally {
@@ -318,7 +318,7 @@ it("does not write on public reads and collects one batch from the schedule", as
 
 it("labels database history as stored and keeps only fresh isolate observations live", async () => {
   await bundleWorker("test/workers/history-label-harness.mjs", "history-label.mjs");
-  const labeler = new Miniflare({
+  const labeler = new Miniflare(convertV4MiniflareOptions({
     rootPath: bundleDir,
     modulesRoot: bundleDir,
     modules: true,
@@ -326,7 +326,7 @@ it("labels database history as stored and keeps only fresh isolate observations 
     compatibilityDate: "2026-01-01",
     compatibilityFlags: ["nodejs_compat"],
     outboundService: () => jsonResponse({}),
-  });
+  }));
   try {
     const response = await labeler.dispatchFetch(`${host}/v1/market-history?instrument=GEMI-WXHIGH-SFO-2611200459-56TO57`);
     assert.equal(response.status, 200);

@@ -45,16 +45,12 @@
     "@electric-sql/pglite": "0.5.17",
     "@types/node": "^26.6.6",
     "esbuild": "^0.25.12",
-    "miniflare": "^4.20260730.0",
+    "miniflare": "5.20261119.0-beta",
     "typescript": "^7.0.2"
   },
   "private": true,
   "engines": {
     "node": ">=22.18"
-  },
-  "overrides": {
-    "undici": ">=7.30.2 <8",
-    "sharp": ">=0.35.5 <0.36"
   },
   "allowScripts": {
     "esbuild": true,
