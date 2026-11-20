@@ -7,6 +7,8 @@ preview_urls = false
 [vars]
 SITE_ORIGIN = "https://verityresearch.us"
 GEMINI_MODEL = "gemini-3.5-flash-lite"
+# Global spend cap in units per UTC day: review/ask 1, forecast 3, Exa research miss 1.
+AI_DAILY_CAP = "300"
 BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
 [ai]
@@ -19,3 +21,12 @@ namespace_id = "1001"
 [ratelimits.simple]
 limit = 6
 period = 60
+
+# Daily AI budget counter. Create it once, then paste the id:
+#   npx wrangler kv namespace create AI_BUDGET
+# Secrets (set by an operator, never committed):
+#   npx wrangler secret put TURNSTILE_SECRET   # same widget secret as the sign-in page (VERITY_AUTH_TURNSTILE_SECRET)
+#   npx wrangler secret put STATUS_KEY         # optional; without it /status answers 404
+[[kv_namespaces]]
+binding = "AI_BUDGET"
+id = "REPLACE_WITH_AI_BUDGET_KV_ID"
