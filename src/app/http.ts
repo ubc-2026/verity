@@ -10,6 +10,8 @@ import { existsSync, readFileSync } from "node:fs";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { ARC_TESTNET } from "../payments/arc.ts";
 import { ARC_TESTNET_GATEWAY_WALLET } from "../payments/circleGateway.ts";
+import { researchRoute } from "../research/http.ts";
+import type { ResearchStore } from "../research/store.ts";
 import { AppError, RAILS, RunEngine, SCENARIOS, toJson } from "./engine.ts";
 import type { LiveMarkets } from "./markets.ts";
 
@@ -26,6 +28,8 @@ export interface AppDeps {
   repoRoot: string;
   /** Built single-file site to serve at "/", when present. */
   siteIndex?: string;
+  /** Research history (read-only API). Null when the store could not be opened. */
+  research?: ResearchStore | null;
 }
 
 export function capabilities(deps: Pick<AppDeps, "gatewayEnabled" | "engine">) {
@@ -151,6 +155,9 @@ export function createAppHandler(deps: AppDeps) {
       }
       if (!path.startsWith("/api/")) return send(res, 404, { error: "not found" });
       const operator = isOperator(req);
+      // Research history is read-only for everyone, operator or not.
+      const research = await researchRoute(deps.research ?? null, method, path);
+      if (research) return send(res, research.status, research.body);
 
       if (method === "GET" && path === "/api/health") return send(res, 200, { ok: true });
       if (method === "GET" && path === "/api/config") {

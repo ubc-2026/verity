@@ -15,6 +15,14 @@
  *   VERITY_GATEWAY_RAIL=1  also show the archived live Circle Gateway purchase.
  *   VERITY_PYTHON          Python 3.11+ with pydantic (else analysis/.venv).
  *   PORT                   default 8790. The server binds 127.0.0.1 only.
+ *
+ * Research history (read-only /api/research):
+ *   VERITY_RESEARCH_PGLITE_DIR  embedded Postgres directory (default
+ *                          .verity/research-pg, or "memory"). Migrated and seeded
+ *                          with the FIXTURE slice on start. No credentials.
+ *   VERITY_RESEARCH_READ_URL    a real Postgres server instead, read through
+ *                          the reader role. Never migrated by this server.
+ *   VERITY_RESEARCH_INGEST_URL  optional ingest-role connection for that server.
  */
 import { randomBytes } from "node:crypto";
 import { createServer } from "node:http";
@@ -25,6 +33,7 @@ import { Analyst, findPython } from "../src/app/analyst.ts";
 import { RunEngine } from "../src/app/engine.ts";
 import { createAppHandler } from "../src/app/http.ts";
 import { LiveMarkets, loadFixtureMarkets } from "../src/app/markets.ts";
+import { openResearchFromEnv, type OpenedResearch } from "../src/research/runtime.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const analysisDir = join(root, "analysis");
@@ -48,6 +57,13 @@ const engine = new RunEngine({
   markets: loadFixtureMarkets(analysisDir),
   ...(ownerEnv ? { owner: getAddress(ownerEnv) as Hex } : {}),
 });
+// The run console works without the research store; a failure to open it is logged, not fatal.
+let research: OpenedResearch | null = null;
+try {
+  research = await openResearchFromEnv(process.env, root);
+} catch (error) {
+  console.error(`Research store unavailable: ${(error as Error).message}`);
+}
 const handler = createAppHandler({
   engine,
   live: new LiveMarkets(),
@@ -55,14 +71,20 @@ const handler = createAppHandler({
   gatewayEnabled: process.env.VERITY_GATEWAY_RAIL === "1",
   repoRoot: root,
   siteIndex: join(root, "ui", "index.html"),
+  research: research?.store ?? null,
 });
 
 const server = createServer((req, res) => void handler(req, res));
 const port = Number(process.env.PORT ?? 8790);
 server.listen(port, "127.0.0.1", () => {
   console.log(`Verity run console on http://127.0.0.1:${port}/ (API under /api)`);
+  if (research) {
+    const s = research.seeded;
+    const added = s ? s.quotes.inserted + s.sources.inserted + s.assessments.inserted : 0;
+    console.log(`Research store: ${research.mode} (${research.where})${s ? `, FIXTURE slice: ${added} new record(s)` : ""}`);
+  }
   if (generated) console.log(`Operator token for this session (not stored): ${operatorToken}`);
 });
 for (const signal of ["SIGINT", "SIGTERM"] as const) {
-  process.on(signal, () => server.close(() => void engine.close().then(() => process.exit(0))));
+  process.on(signal, () => server.close(() => void Promise.all([engine.close(), research?.close()]).then(() => process.exit(0))));
 }

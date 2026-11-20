@@ -1,0 +1,111 @@
+{
+  "label": "CAPTURED",
+  "provider": "gemini-exchange-public-api",
+  "url": "https://api.gemini.com/v1/prediction-markets/events/WXHIGH-NYC-2611190459",
+  "fetchedAtUtc": "2026-11-20T02:01:02.370Z",
+  "httpStatus": 200,
+  "responseSha256": "0x2efb2d130d2e48437fdb2de648462ac451572c161230dc123a00508effa58227",
+  "unavailableReason": null,
+  "event": {
+    "ticker": "WXHIGH-NYC-2611190459",
+    "title": "Highest temperature in NYC on November 18, 2026?",
+    "category": "Weather",
+    "status": "settled",
+    "expiryUtc": "2026-11-19T04:59:59.000Z",
+    "resolvedAtUtc": "2026-11-19T11:02:04.297Z",
+    "termsUrl": null,
+    "description": "Highest temperature in NYC on November 18, 2026?",
+    "contracts": [
+      {
+        "id": "473677-1189150",
+        "label": "57°F or below",
+        "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-LO57",
+        "status": "settled",
+        "marketState": "closed",
+        "prices": {
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTradePrice": null
+        },
+        "resolutionSide": "no",
+        "termsUrl": null,
+        "expiryUtc": "2026-11-19T04:59:59.000Z"
+      },
+      {
+        "id": "473677-1189151",
+        "label": "58°F to 59°F",
+        "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-58TO59",
+        "status": "settled",
+        "marketState": "closed",
+        "prices": {
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTradePrice": null
+        },
+        "resolutionSide": "no",
+        "termsUrl": null,
+        "expiryUtc": "2026-11-19T04:59:59.000Z"
+      },
+      {
+        "id": "473677-1189152",
+        "label": "60°F to 61°F",
+        "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-60TO61",
+        "status": "settled",
+        "marketState": "closed",
+        "prices": {
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTradePrice": null
+        },
+        "resolutionSide": "no",
+        "termsUrl": null,
+        "expiryUtc": "2026-11-19T04:59:59.000Z"
+      },
+      {
+        "id": "473677-1189153",
+        "label": "62°F to 63°F",
+        "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-62TO63",
+        "status": "settled",
+        "marketState": "closed",
+        "prices": {
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTradePrice": null
+        },
+        "resolutionSide": "no",
+        "termsUrl": null,
+        "expiryUtc": "2026-11-19T04:59:59.000Z"
+      },
+      {
+        "id": "473677-1189154",
+        "label": "64°F to 65°F",
+        "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-64TO65",
+        "status": "settled",
+        "marketState": "closed",
+        "prices": {
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTradePrice": null
+        },
+        "resolutionSide": "yes",
+        "termsUrl": null,
+        "expiryUtc": "2026-11-19T04:59:59.000Z"
+      },
+      {
+        "id": "473677-1189155",
+        "label": "66°F or above",
+        "instrumentSymbol": "GEMI-WXHIGH-NYC-2611190459-HI66",
+        "status": "settled",
+        "marketState": "closed",
+        "prices": {
+          "bestBid": null,
+          "bestAsk": null,
+          "lastTradePrice": null
+        },
+        "resolutionSide": "no",
+        "termsUrl": null,
+        "expiryUtc": "2026-11-19T04:59:59.000Z"
+      }
+    ]
+  }
+}

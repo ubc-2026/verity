@@ -5,7 +5,7 @@
 
 Verity reads the rules of a prediction-market contract, identifies evidence that could clarify how it resolves, and proposes buying that evidence. The payment service enforces the owner’s spending rules. An audit trail links each purchase to both the onchain transfer and the resource the merchant delivered.
 
-> **Project status** · UBC 2026 hackathon design. The demo targets testnet USDC and a controlled merchant. This brief describes the planned workflow. Install commands and a demo URL are pending.
+> **Project status** · UBC 2026 hackathon design. The demo targets testnet USDC and a controlled merchant. This brief describes the planned workflow. To run it locally, see [Run it from the browser](#run-it-from-the-browser-fixture-first). A public demo URL is pending.
 
 ## How it works
 
@@ -63,6 +63,93 @@ Status: the routine is fixture-tested in the Grok Bot runtime, which is outside 
 `npm run e2e` runs one market from research through risk analysis, an evidence purchase, and the updated assessment. Settlement is stubbed and nothing leaves the machine. Commands, scenarios, and what is fixture versus live: [Connected fixture workflow](docs/integration.md).
 
 `npm run app` serves the run console: pick a fixture or live Gemini Exchange market, run the analysis, step through a fixture purchase on Arc direct or Circle Gateway, and audit the run, purchase, receipt, Circle transfer, Arc batch and QuickNode confirmation: [Run console](docs/run-console.md).
+
+## Run it from the browser (fixture first)
+
+The run page (`site/src/Run.tsx`, opened at `#run`) runs one market end to end against the app API (`npm run app`). No key, wallet, or chain is needed.
+
+```bash
+npm ci
+python -m venv analysis/.venv
+analysis/.venv/bin/pip install -r analysis/requirements.txt   # Windows: analysis\.venv\Scripts\pip
+(cd site && npm ci && npm run build)                         # writes site/dist/index.html
+npm run app                                                  # http://127.0.0.1:8790/#run
+```
+
+- `npm run app` prints a one-time operator token on its own console. Set `VERITY_OPERATOR_TOKEN` (24+ characters) to choose it. The token is checked on the server and never sent to visitors.
+- For live editing, run `cd site && npm run dev`. Vite proxies `/api` to the app server.
+- With no app server (for example a static deploy), the page shows a read-only FIXTURE preview recorded by `npm run app:snapshot` (`site/src/fixture-preview.json`).
+- Optional settings: `VERITY_OWNER_ADDRESS` enrolls a real owner wallet, `VERITY_GATEWAY_RAIL=1` shows the archived Gateway purchase, and `VERITY_PYTHON` selects the Python interpreter.
+
+### The agent's decision loop
+
+1. **Read.** The person picks a Gemini Exchange market. The page shows the snapshot time, the bid and ask, and the market-implied price (the mid of a two-sided book). A missing, one-sided, stale, crossed, or closed quote is labeled and gets no implied price.
+2. **Score.** The rules analyst scores ambiguity, source, liquidity, and correlation from 1 to 3 each. Each score cites the rule text. The settlement-risk rating is shown apart from the price.
+3. **Find the gap and check free sources.** Open material gaps are listed. Free official sources and cached evidence are checked first, and the decision log records each check.
+4. **Buy or abstain.** Verity proposes one allowlisted catalog item for one gap, with a price ceiling, or it states why it buys nothing.
+5. **Pay under policy (operator).** The operator requests the quote. Policy then decides allow, owner approval, or refuse. The owner can sign the exact request in a wallet, reject it, or let it expire.
+6. **Verify, then reconcile.** The buyer checks the receipt signature, the request binding, and the hash of the delivered bytes. Delivery, settlement, and reconciliation are shown as three separate states.
+7. **Reassess.** The analysis reads the evidence only after the receipt and the bytes are verified.
+
+### Spending safeguards
+
+| Safeguard | Where it is enforced |
+| --- | --- |
+| Merchant and catalog allowlists, evidence type, parameters, price ceilings | `assessPolicy`, `acceptPurchaseProposal`, `buildResearchRequest` |
+| The selected contract only | `acceptPurchaseProposal(..., { expectedContractId })` |
+| Amount, quote expiry, authorization window | `buildResearchRequest`, `PaymentStore`, `authorizeStoredPurchase`, merchant `verifyPaidRequest` |
+| Request-hash and nonce binding | `ResearchRequestV1` commitment; the merchant checks `X-Verity-Binding` before settling |
+| Budget, held funds included | `PaymentStore` counts `held` and `spent` reservations. Rejection and expiry release the hold |
+| Pause switch | Durable in `PaymentStore`. Checked on reserve, approval, signing, and resumed purchases |
+| Owner approval bound to the exact request | EIP-712 `OwnerApproval` over purchase ID, request hash, amount, recipient, and expiry. It is verified against the enrolled owner |
+| One settlement and one verified delivery | Durable merchant claim per purchase. Retries return the stored authorization. Ledger keys are unique per nonce, tx, and purchase |
+| Webhook authenticity, replay, finality | QuickNode HMAC, a 300 s timestamp window, event IDs from the body bytes, and matching only at or below the finalized block |
+| Operator-only steps | `/api/operator/*` needs the operator bearer token. Visitors can read data and run fixture analysis only |
+| Server-only credentials | The payer, merchant, webhook, and feed credentials stay in the server process. Responses never include them |
+
+`test/app.test.ts` and the browser run covered these paths: happy path in both event orders, replay and retry, no purchase, approval rejected, approval expired, wrong approval signer, budget denial, expired quote, receipt rejection with one overdue incident across replays, pause, and forged or stale webhooks.
+
+### Arc Testnet contracts used
+
+| Contract | Address |
+| --- | --- |
+| Chain | Arc Testnet, chain ID `5042002` (`eip155:5042002`) |
+| USDC (EIP-3009, domain `USDC` v`2`) | `0x3600000000000000000000000000000000000000` |
+| Circle Gateway Wallet (opt-in rail) | `0x0077777d7eba4688bdef3e311b846f25870a19b9` |
+
+The fixture run sends nothing on chain. Its tx hashes are derived from the nonce. The archived Gateway purchase (`samples/arc-gateway-live-*.json`) records Circle transfer ID `018a216c-72ff-454b-94b1-9bfbdf637f2d` and Arc batch transaction `0x3b31471543ae1a1bd08cdff377c57b9586c1c8ae7bd759703b5a1c3ebcaebd82`.
+
+### What is fixture, live, or blocked
+
+| Capability | State | Missing step |
+| --- | --- | --- |
+| Analysis, quote, policy, approval, payment, delivery, QuickNode join, reassessment | FIXTURE | None for the fixture run |
+| Market snapshot from Gemini Exchange | LIVE read-only | Live markets are shown but not analyzed or bought from |
+| Arc Testnet direct settlement | Blocked | Not wired into the app server. `scripts/arc-purchase.ts` has not been run live in this version. A live spend needs the owner's approval |
+| QuickNode live ingestion | Blocked | `npm run webhook:serve` has the checks. No live delivery has been received, and the last key returned 403 |
+| Circle Gateway rail | Opt-in. Archived LIVE purchase; the analysis and evidence bytes in it were FIXTURE | PR #10 review found no blocker. Open items are in its review notes |
+| Grok overdue alert | FIXTURE | The real routine has not been called |
+| ElevenLabs voice | Blocked | Explanations are text only. No authorized integration has been captured |
+| Standard x402 | Blocked | The transport uses `X-Verity-*` headers. Interoperability has not been checked |
+| Research history store (instruments, quotes, sources, assessment versions) | FIXTURE and CAPTURED data on embedded Postgres; the same suite passed on Postgres 17 in local Docker | The Supabase project is not connected. The remaining steps are in [db/research/README.md](db/research/README.md) |
+| Research evaluation set (19 weather and sports cases) | FIXTURE and CAPTURED, plus 2 LIVE checks | 0 of 19 cases have been reviewed by a person. See [eval/research/v1/report.md](eval/research/v1/report.md) |
+
+## Research history (fixture first)
+
+The app server keeps market history in a private Postgres schema (`db/research/0001_research.up.sql`) and serves it read-only at `/api/research`. The run page shows it in section V, "Recorded history". Without credentials it uses embedded Postgres in `.verity/research-pg`, migrated and seeded on start. The payment stores stay in SQLite.
+
+- **Instruments** are keyed by exchange, event ticker and the outcome's instrument symbol. Quote snapshots keep the venue and capture times, provider, bid, ask, market state and provenance. A replayed input adds nothing.
+- **The market-implied probability** is the mid of a two-sided, uncrossed, open book only, and it is reported apart from the settlement-risk rating. Missing, one-sided, crossed, closed, stale and unavailable quotes are labeled.
+- **Assessments** are append-only versions. A reassessment points at its parent and records the rubric version, the quote snapshot, the source versions, the cited claims, the gap and the decision. The database refuses a changed finding unless the evidence was verified.
+- **Roles.** Only the ingest role can write. The reader role sees display views only. `anon`, `authenticated` and `service_role` get nothing. The research code imports nothing from the payment code.
+
+```bash
+npm run app                                   # migrates and seeds .verity/research-pg, then serves /api/research
+npm run research:eval                         # scores eval/research/v1 (needs VERITY_PYTHON); add --live for 2 live checks
+npm run research:migrate -- plan              # against VERITY_RESEARCH_MIGRATE_URL in .env.research; apply needs the reviewed checksum
+```
+
+The vertical slice is the NYC high-temperature market, outcome 62°F to 63°F (`GEMI-WXHIGH-NYC-2611190459-62TO63`). It has three quotes: the workbook snapshot from 2026-11-17 (FIXTURE, date only, 56¢ implied) and two reads of the settled event from the public API (CAPTURED 2026-11-20, closed, no implied price). Receipt-verified FIXTURE evidence moved the rating from 8 Medium to 7 Medium. Schema, roles, migration and rollback steps are in [db/research/README.md](db/research/README.md).
 
 ## Demo plan
 

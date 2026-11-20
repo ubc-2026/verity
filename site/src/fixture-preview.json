@@ -1,0 +1,1032 @@
+{
+  "label": "FIXTURE preview",
+  "note": "Recorded from the fixture engine (npm run app:snapshot). Read-only: start npm run app for live steps.",
+  "scenarios": [
+    {
+      "id": "standard",
+      "label": "Standard",
+      "detail": "Free official sources are checked first (observed reading of 2026-11-18). Demo policy."
+    },
+    {
+      "id": "free_answers",
+      "label": "Free source answers",
+      "detail": "FIXTURE assumption: the free check answers the gap, so nothing is bought."
+    },
+    {
+      "id": "approval",
+      "label": "Owner approval",
+      "detail": "FIXTURE policy: the automatic tiers end at 0.01 USDC, so the 0.05 USDC item needs the owner's wallet signature."
+    },
+    {
+      "id": "budget",
+      "label": "Budget denial",
+      "detail": "FIXTURE policy: the mission budget is 0.04 USDC, below the 0.05 USDC item."
+    },
+    {
+      "id": "tampered",
+      "label": "Receipt rejection",
+      "detail": "FIXTURE fault: one response byte is altered in transit, so the buyer must reject the delivery."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "fixture",
+      "name": "Fixture run",
+      "state": "fixture",
+      "detail": "Analysis, quote, policy, approval, payment, delivery, QuickNode join and reassessment, all local. No keys."
+    },
+    {
+      "id": "live-markets",
+      "name": "Live market snapshot",
+      "state": "live read-only",
+      "detail": "Public Gemini Exchange events endpoint, no key, no orders. Quotes show missing, one-sided, stale, crossed and closed states."
+    },
+    {
+      "id": "arc-direct",
+      "name": "Arc Testnet direct settlement",
+      "state": "blocked",
+      "detail": "Not wired into this server. scripts/arc-purchase.ts settles through deliverPaidRequest but has not been run live in this version (docs/integration.md). Missing: the owner's approval for a live spend and a configured VERITY_ENV_FILE."
+    },
+    {
+      "id": "quicknode",
+      "name": "QuickNode reconciliation",
+      "state": "fixture",
+      "detail": "The real stream filter, HMAC check, replay window and finality rule run on locally signed deliveries. Live ingestion runs only in scripts/webhook-server.ts; no live delivery was received in this build (the last key returned 403)."
+    },
+    {
+      "id": "gateway",
+      "name": "Circle Gateway rail",
+      "state": "off (opt-in)",
+      "detail": "PR #10 reviewed: opt-in, no blocker. Set VERITY_GATEWAY_RAIL=1 to show the archived purchase. The rail is not run from this server."
+    },
+    {
+      "id": "grok",
+      "name": "Grok overdue alert",
+      "state": "fixture",
+      "detail": "Overdue events come from the ledger status. A contract model of the Grok routine opens one card per purchase and counts replays. The real routine is not called."
+    },
+    {
+      "id": "voice",
+      "name": "ElevenLabs voice",
+      "state": "blocked",
+      "detail": "Approval explanations are text. No authorized ElevenLabs integration is wired or captured."
+    },
+    {
+      "id": "x402",
+      "name": "Standard x402",
+      "state": "blocked",
+      "detail": "The transport uses Verity headers (X-Verity-Binding, X-Verity-Payment, X-Verity-Receipt). x402 interoperability has not been checked."
+    },
+    {
+      "id": "owner",
+      "name": "Owner wallet approval",
+      "state": "fixture",
+      "detail": "Enrolled owner is the public Anvil test key #3. Set VERITY_OWNER_ADDRESS to enroll a real wallet; then only its EIP-712 signature is accepted."
+    }
+  ],
+  "markets": [
+    {
+      "contractId": "fx-okc-moneyline-20261118",
+      "question": "Atlanta vs Oklahoma City, NBA moneyline (game Nov 18, 2026, 8:00 PM ET): will Oklahoma City win?",
+      "outcomeLabel": "Oklahoma City",
+      "eventTicker": "NBA-2611190100-ATL-OKC-M",
+      "expiryUtc": "2026-11-20T13:00:00Z",
+      "settlementSource": "League governing body, then ESPN, Fox Sports, and the broadcast partner",
+      "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+      "source": {
+        "mode": "fixture",
+        "label": "Gemini Exchange public events list, captured via the workbook",
+        "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "snapshotDate": "2026-11-17",
+        "snapshotTimeUtc": null
+      },
+      "volumeUsd": "1071",
+      "volumeBasis": "total",
+      "quote": {
+        "bestBid": "0.69",
+        "bestAsk": "0.7",
+        "lastTradePrice": null,
+        "observedAtUtc": null,
+        "observedDate": "2026-11-17",
+        "ageSeconds": null,
+        "impliedProbability": "0.695",
+        "spread": "0.01",
+        "state": "two_sided",
+        "note": "Mid of the best bid and best ask."
+      },
+      "label": "FIXTURE"
+    },
+    {
+      "contractId": "fx-nyc-high-20261118",
+      "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+      "outcomeLabel": "62°F to 63°F",
+      "eventTicker": "WXHIGH-NYC-2611190459",
+      "expiryUtc": "2026-11-19T04:59:00Z",
+      "settlementSource": "NWS Climatological Report (Daily), Central Park station",
+      "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+      "source": {
+        "mode": "fixture",
+        "label": "Gemini Exchange public events list, captured via the workbook",
+        "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "snapshotDate": "2026-11-17",
+        "snapshotTimeUtc": null
+      },
+      "volumeUsd": "7",
+      "volumeBasis": "total",
+      "quote": {
+        "bestBid": "0.54",
+        "bestAsk": "0.58",
+        "lastTradePrice": null,
+        "observedAtUtc": null,
+        "observedDate": "2026-11-17",
+        "ageSeconds": null,
+        "impliedProbability": "0.56",
+        "spread": "0.04",
+        "state": "two_sided",
+        "note": "Mid of the best bid and best ask."
+      },
+      "label": "FIXTURE"
+    },
+    {
+      "contractId": "fx-msu-spread-20261117",
+      "question": "Michigan State vs Tennessee point spread: MSU wins by more than 1.5?",
+      "outcomeLabel": "MSU wins by >1.5",
+      "eventTicker": "NCAAM-2611180200-MSU-TENN-S",
+      "expiryUtc": "2026-11-20T02:00:00Z",
+      "settlementSource": "NCAA, then ESPN, Fox Sports, and the broadcast partner",
+      "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NCAA_MB_Margin_Classdocx_0e17934c-24ae-4b91-99e3-4c46d7d5d741.pdf",
+      "source": {
+        "mode": "fixture",
+        "label": "Gemini Exchange public events list, captured via the workbook",
+        "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+        "snapshotDate": "2026-11-17",
+        "snapshotTimeUtc": null
+      },
+      "volumeUsd": "857.53",
+      "volumeBasis": "total",
+      "quote": {
+        "bestBid": "0.51",
+        "bestAsk": "0.54",
+        "lastTradePrice": null,
+        "observedAtUtc": null,
+        "observedDate": "2026-11-17",
+        "ageSeconds": null,
+        "impliedProbability": "0.525",
+        "spread": "0.03",
+        "state": "two_sided",
+        "note": "Mid of the best bid and best ask."
+      },
+      "label": "FIXTURE"
+    },
+    {
+      "contractId": "fx-fed-dec-hike25-2026",
+      "question": "Fed decision in December? Hike 25bps",
+      "outcomeLabel": "Hike 25bps",
+      "eventTicker": null,
+      "expiryUtc": "2026-12-11T05:00:00Z",
+      "settlementSource": "Federal Reserve FOMC decision",
+      "termsUrl": null,
+      "source": {
+        "mode": "fixture",
+        "label": "CoinRithm aggregator quoting Gemini",
+        "url": "https://www.coinrithm.com/en/prediction-markets/gemini/fed-decision-in-december",
+        "snapshotDate": "2026-11-15",
+        "snapshotTimeUtc": null
+      },
+      "volumeUsd": "20",
+      "volumeBasis": "24h",
+      "quote": {
+        "bestBid": null,
+        "bestAsk": null,
+        "lastTradePrice": null,
+        "observedAtUtc": null,
+        "observedDate": "2026-11-15",
+        "ageSeconds": null,
+        "impliedProbability": null,
+        "spread": null,
+        "state": "missing",
+        "note": "No bid and no ask. A last trade is not a current price."
+      },
+      "label": "FIXTURE"
+    },
+    {
+      "contractId": "fx-best-ai-2026-gemini",
+      "question": "Best AI at the end of 2026? Gemini (Google)",
+      "outcomeLabel": "Gemini (Google)",
+      "eventTicker": null,
+      "expiryUtc": "2027-01-01T04:59:00Z",
+      "settlementSource": "LM Arena text leaderboard (Remove Style Controls)",
+      "termsUrl": null,
+      "source": {
+        "mode": "fixture",
+        "label": "CoinRithm aggregator quoting Gemini (reported stale)",
+        "url": "https://www.coinrithm.com/en/prediction-markets/gemini/best-ai-at-the-end-of-2026",
+        "snapshotDate": "2026-11-16",
+        "snapshotTimeUtc": null
+      },
+      "volumeUsd": "252",
+      "volumeBasis": "24h",
+      "quote": {
+        "bestBid": null,
+        "bestAsk": null,
+        "lastTradePrice": null,
+        "observedAtUtc": null,
+        "observedDate": "2026-11-16",
+        "ageSeconds": null,
+        "impliedProbability": null,
+        "spread": null,
+        "state": "missing",
+        "note": "No bid and no ask. A last trade is not a current price."
+      },
+      "label": "FIXTURE"
+    }
+  ],
+  "runs": [
+    {
+      "id": "run-31aa00f9f7007426",
+      "label": "FIXTURE",
+      "createdAtUtc": "2026-11-20T01:00:53Z",
+      "scenario": {
+        "id": "standard",
+        "label": "Standard",
+        "detail": "Free official sources are checked first (observed reading of 2026-11-18). Demo policy.",
+        "freeCheck": "observed-2026-11-18"
+      },
+      "market": {
+        "contractId": "fx-nyc-high-20261118",
+        "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+        "outcomeLabel": "62°F to 63°F",
+        "eventTicker": "WXHIGH-NYC-2611190459",
+        "expiryUtc": "2026-11-19T04:59:00Z",
+        "settlementSource": "NWS Climatological Report (Daily), Central Park station",
+        "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "source": {
+          "mode": "fixture",
+          "label": "Gemini Exchange public events list, captured via the workbook",
+          "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "snapshotDate": "2026-11-17",
+          "snapshotTimeUtc": null
+        },
+        "volumeUsd": "7",
+        "volumeBasis": "total",
+        "quote": {
+          "bestBid": "0.54",
+          "bestAsk": "0.58",
+          "lastTradePrice": null,
+          "observedAtUtc": null,
+          "observedDate": "2026-11-17",
+          "ageSeconds": null,
+          "impliedProbability": "0.56",
+          "spread": "0.04",
+          "state": "two_sided",
+          "note": "Mid of the best bid and best ask."
+        },
+        "label": "FIXTURE",
+        "snapshotHash": "sha256:24d17b986b3e4bc8954ae70dbc9b4b76766ab0273120ad0679b2bcbb6a31029c",
+        "unavailable": [
+          "instrument_symbol: the snapshot did not record which instrument was priced",
+          "observed_utc: only the date 2026-11-17 was recorded",
+          "event terms link: empty on the event; terms_url comes from the contract rules"
+        ]
+      },
+      "rating": {
+        "final": "Medium",
+        "total": 8,
+        "complete": true,
+        "researchAction": "investigate",
+        "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+        "scores": [
+          {
+            "name": "ambiguity",
+            "score": 2,
+            "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-1",
+              "C-NYC-2"
+            ]
+          },
+          {
+            "name": "source",
+            "score": 2,
+            "rationale": "Official NWS source, but the daily climate report can be issued preliminarily and corrected later (Agent rule 9).",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-1"
+            ]
+          },
+          {
+            "name": "liquidity",
+            "score": 3,
+            "rationale": "event-total volume $7 is under $100 (4c spread).",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-3"
+            ]
+          },
+          {
+            "name": "correlation",
+            "score": 1,
+            "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.",
+            "nullReason": null,
+            "citationIds": []
+          }
+        ],
+        "note": "Settlement-risk rating: how the contract resolves, separate from the market-implied price."
+      },
+      "rule": {
+        "settlementSource": "NWS Climatological Report (Daily), Central Park station",
+        "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "termsNote": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+        "citations": [
+          {
+            "id": "C-NYC-1",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "event.description (paraphrased)",
+            "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."
+          },
+          {
+            "id": "C-NYC-2",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "event.termsAndConditionsUrl",
+            "quote": "(empty)"
+          },
+          {
+            "id": "C-NYC-4",
+            "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18",
+            "quote": "only the first published version that includes confirmation of the will be used"
+          },
+          {
+            "id": "C-NYC-5",
+            "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)",
+            "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."
+          },
+          {
+            "id": "C-NYC-3",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "contracts[62-63F].prices",
+            "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "id": "C-NYC-1",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "event.description (paraphrased)",
+          "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."
+        },
+        {
+          "id": "C-NYC-2",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "event.termsAndConditionsUrl",
+          "quote": "(empty)"
+        },
+        {
+          "id": "C-NYC-4",
+          "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+          "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18",
+          "quote": "only the first published version that includes confirmation of the will be used"
+        },
+        {
+          "id": "C-NYC-5",
+          "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+          "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)",
+          "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."
+        },
+        {
+          "id": "C-NYC-3",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "contracts[62-63F].prices",
+          "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"
+        }
+      ],
+      "gaps": [
+        {
+          "id": "GAP-NYC-SETTLE",
+          "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+          "why": "If a correction moves the max across a 2°F band edge, the version used decides the outcome.",
+          "affects": "resolution_risk",
+          "material": true,
+          "open": true
+        },
+        {
+          "id": "GAP-NYC-FORECAST",
+          "question": "What maximum temperature is likely at Central Park on Nov 18?",
+          "why": "A forecast changes the estimated chance of the event, not the risk of how the contract settles. Verity is research-only and places no trades.",
+          "affects": "outcome_probability",
+          "material": false,
+          "open": false
+        }
+      ],
+      "decision": {
+        "action": "buy",
+        "reason": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+        "freeChecks": [
+          "[fx-nyc-high-20261118] skip GAP-NYC-FORECAST: outcome forecast changes event probability, not settlement risk; research-only, no trades.",
+          "[fx-nyc-high-20261118] GAP-NYC-SETTLE: free official-source check (Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, NWS Climatological Report (Daily) for Central Park, product CLINYC) -> inconclusive. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later revisions and corrections do not count. But the rule text is missing a word after 'confirmation of the', and NWS publishes a same-day CLINYC before the full-day one (Nov 17: issued 4:38 PM EST, valid as of 4:00 PM, max 57F at 3:55 PM). The terms do not say whether that partial-day report counts as the first published version, so the gap stays open.",
+          "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-NYC-SETTLE: max 50000 base units (= 0.05 USDC), unsigned."
+        ],
+        "proposal": {
+          "gapId": "GAP-NYC-SETTLE",
+          "catalogItemId": "cat-nws-cli-settlement-version-v1",
+          "maxUsdc": "0.05",
+          "label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z"
+        }
+      },
+      "states": {
+        "quote": {
+          "state": "issued",
+          "amountUsdc": "0.05",
+          "expiresAtUtc": "2026-11-18T01:12:00Z"
+        },
+        "policy": {
+          "state": "allowed",
+          "tier": "auto"
+        },
+        "approval": {
+          "state": "not_needed",
+          "by": null,
+          "reason": null
+        },
+        "authorization": {
+          "state": "settled",
+          "amountUsdc": "0.05"
+        },
+        "delivery": {
+          "state": "verified",
+          "contentHash": "0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+          "receiptTx": "0xfd9aa7ccdeaf2e735a5b54b21b8f5e40ecb81bb5fb2371aa91b86cc3a7ba0dc0",
+          "atUtc": "2026-11-18T01:02:00Z"
+        },
+        "settlement": {
+          "state": "confirmed",
+          "txHash": "0xfd9aa7ccdeaf2e735a5b54b21b8f5e40ecb81bb5fb2371aa91b86cc3a7ba0dc0",
+          "blockNumber": 72781628,
+          "source": "fixture-signed-locally",
+          "label": "FIXTURE: derived tx hash, not on Arc Testnet"
+        },
+        "reconciliation": {
+          "state": "Reconciled",
+          "deadlineUtc": "2026-11-18T01:07:00Z",
+          "settlementConfirmed": true
+        },
+        "reassessment": {
+          "state": "revised",
+          "reason": "evidence applied",
+          "before": {
+            "final": "Medium",
+            "total": 8
+          },
+          "after": {
+            "final": "Medium",
+            "total": 7
+          },
+          "changes": [
+            {
+              "finding": "evidence_gaps.GAP-NYC-SETTLE",
+              "before": "open",
+              "after": "closed",
+              "changed": true,
+              "reason": "the receipt-verified document names the settling issuance: first_full_day_cli"
+            },
+            {
+              "finding": "scores.source",
+              "before": "2",
+              "after": "1",
+              "changed": true,
+              "reason": "revision risk resolved: settling issuance named and corrections excluded"
+            },
+            {
+              "finding": "rating.raw_total",
+              "before": "8",
+              "after": "7",
+              "changed": true,
+              "reason": "sum of the four category scores"
+            }
+          ],
+          "evidenceCitation": {
+            "id": "GAP-NYC-SETTLE-EV1",
+            "source": "merchant verity-demo-merchant, purchase purchase-76527f0f9b4fc3198e227116, receipt 0x0299e720bd991f9df24149e36a79665df5ad41742f9021d4a5571813311f5f45",
+            "field_or_rule": "FIXTURE evidence from catalog item cat-nws-cli-settlement-version-v1 (DeliveryReceiptV1 verified, tx 0xfd9aa7ccdeaf2e735a5b54b21b8f5e40ecb81bb5fb2371aa91b86cc3a7ba0dc0)",
+            "quote": "FIXTURE: the first full-day CLINYC report for 2026-11-18 settles the contract. The same-day partial report and later corrections do not count."
+          }
+        }
+      },
+      "timeline": [
+        {
+          "atUtc": "2026-11-18T01:00:00Z",
+          "actor": "operator",
+          "step": "analyze",
+          "detail": "Proposal for GAP-NYC-SETTLE: up to 0.05 USDC."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "operator",
+          "step": "quote",
+          "detail": "Quote quote-db44d60d66e20bda0d4f1506: 0.05 USDC to 0x2222222222222222222222222222222222222222, expires 2026-11-18T01:12:00Z."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "policy",
+          "detail": "Verity bought cat-nws-cli-settlement-version-v1 from verity-demo-merchant for 0.05 USDC (testnet) automatically: it is within the 0.10 USDC auto-approve tier."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "operator",
+          "step": "pay",
+          "detail": "Merchant answered 200. Settle calls so far: 1. Authorization reused."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "verify",
+          "detail": "Receipt and bytes verified (delivered_payment_unconfirmed)."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "webhook:observe",
+          "detail": "QuickNode handler answered 200. Settlements recorded: 1."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "webhook:replay",
+          "detail": "QuickNode handler answered 200 (duplicate event). Settlements recorded: 1."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "operator",
+          "step": "retry",
+          "detail": "Merchant answered 200. Settle calls so far: 1. Authorization reused."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "reassess",
+          "detail": "revised: evidence applied"
+        }
+      ]
+    },
+    {
+      "id": "run-2e84fd94ee41e17a",
+      "label": "FIXTURE",
+      "createdAtUtc": "2026-11-20T01:00:53Z",
+      "scenario": {
+        "id": "standard",
+        "label": "Standard",
+        "detail": "Free official sources are checked first (observed reading of 2026-11-18). Demo policy.",
+        "freeCheck": "observed-2026-11-18"
+      },
+      "market": {
+        "contractId": "fx-okc-moneyline-20261118",
+        "question": "Atlanta vs Oklahoma City, NBA moneyline (game Nov 18, 2026, 8:00 PM ET): will Oklahoma City win?",
+        "outcomeLabel": "Oklahoma City",
+        "eventTicker": "NBA-2611190100-ATL-OKC-M",
+        "expiryUtc": "2026-11-20T13:00:00Z",
+        "settlementSource": "League governing body, then ESPN, Fox Sports, and the broadcast partner",
+        "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+        "source": {
+          "mode": "fixture",
+          "label": "Gemini Exchange public events list, captured via the workbook",
+          "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "snapshotDate": "2026-11-17",
+          "snapshotTimeUtc": null
+        },
+        "volumeUsd": "1071",
+        "volumeBasis": "total",
+        "quote": {
+          "bestBid": "0.69",
+          "bestAsk": "0.7",
+          "lastTradePrice": null,
+          "observedAtUtc": null,
+          "observedDate": "2026-11-17",
+          "ageSeconds": null,
+          "impliedProbability": "0.695",
+          "spread": "0.01",
+          "state": "two_sided",
+          "note": "Mid of the best bid and best ask."
+        },
+        "label": "FIXTURE",
+        "snapshotHash": "sha256:c4e0d7cfd3e30c3f2c80c98497aca46560ad0107d36e549c419dddd029418c2b",
+        "unavailable": [
+          "instrument_symbol: the snapshot did not record which instrument was priced",
+          "observed_utc: only the date 2026-11-17 was recorded"
+        ]
+      },
+      "rating": {
+        "final": "Low",
+        "total": 4,
+        "complete": true,
+        "researchAction": "no_further_research",
+        "summary": "Low resolution risk (total 4). Research action: no_further_research. No open resolution questions.",
+        "scores": [
+          {
+            "name": "ambiguity",
+            "score": 1,
+            "rationale": "Binary win/lose outcome tied to a scheduled game.",
+            "nullReason": null,
+            "citationIds": [
+              "C-OKC-1"
+            ]
+          },
+          {
+            "name": "source",
+            "score": 1,
+            "rationale": "Official league result with named fallbacks.",
+            "nullReason": null,
+            "citationIds": [
+              "C-OKC-2"
+            ]
+          },
+          {
+            "name": "liquidity",
+            "score": 1,
+            "rationale": "event-total volume $1071 with a 1c spread.",
+            "nullReason": null,
+            "citationIds": [
+              "C-OKC-3"
+            ]
+          },
+          {
+            "name": "correlation",
+            "score": 1,
+            "rationale": "No sibling markets captured; injury news moves the odds but not how the contract settles.",
+            "nullReason": null,
+            "citationIds": []
+          }
+        ],
+        "note": "Settlement-risk rating: how the contract resolves, separate from the market-implied price."
+      },
+      "rule": {
+        "settlementSource": "League governing body, then ESPN, Fox Sports, and the broadcast partner",
+        "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Terms_and_Conditions_NBA_Win_Lose_Class_925aa13e-b255-4ef8-85e0-534a6f0a9012.pdf",
+        "termsNote": null,
+        "citations": [
+          {
+            "id": "C-OKC-1",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "event.description (paraphrased)",
+            "quote": "Moneyline for the game scheduled Nov 18, 2026 at 8:00 PM ET; pays Yes if the named team wins."
+          },
+          {
+            "id": "C-OKC-2",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "sourceDetails / contract rules (paraphrased)",
+            "quote": "Sources in order: the league governing body, ESPN, Fox Sports, and the broadcast partner."
+          },
+          {
+            "id": "C-OKC-3",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "contracts[OKC].prices",
+            "quote": "bestBid 0.69, bestAsk 0.70; event volume 1071"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "id": "C-OKC-1",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "event.description (paraphrased)",
+          "quote": "Moneyline for the game scheduled Nov 18, 2026 at 8:00 PM ET; pays Yes if the named team wins."
+        },
+        {
+          "id": "C-OKC-2",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "sourceDetails / contract rules (paraphrased)",
+          "quote": "Sources in order: the league governing body, ESPN, Fox Sports, and the broadcast partner."
+        },
+        {
+          "id": "C-OKC-3",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "contracts[OKC].prices",
+          "quote": "bestBid 0.69, bestAsk 0.70; event volume 1071"
+        }
+      ],
+      "gaps": [],
+      "decision": {
+        "action": "abstain",
+        "reason": "[fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research).",
+        "freeChecks": [
+          "[fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research)."
+        ],
+        "proposal": null
+      },
+      "states": {
+        "quote": {
+          "state": "not_needed"
+        },
+        "policy": {
+          "state": "not_decided"
+        },
+        "approval": {
+          "state": "not_needed",
+          "by": null,
+          "reason": null
+        },
+        "authorization": {
+          "state": "none"
+        },
+        "delivery": {
+          "state": "not_received"
+        },
+        "settlement": {
+          "state": "none"
+        },
+        "reconciliation": {
+          "state": "none"
+        },
+        "reassessment": {
+          "state": "waits_for_verified_delivery"
+        }
+      },
+      "timeline": [
+        {
+          "atUtc": "2026-11-18T01:00:00Z",
+          "actor": "operator",
+          "step": "analyze",
+          "detail": "No purchase: [fx-okc-moneyline-20261118] no purchase: no material resolution gap (research action: no_further_research)."
+        }
+      ]
+    },
+    {
+      "id": "run-01f8044b6943e1b2",
+      "label": "FIXTURE",
+      "createdAtUtc": "2026-11-20T01:00:53Z",
+      "scenario": {
+        "id": "tampered",
+        "label": "Receipt rejection",
+        "detail": "FIXTURE fault: one response byte is altered in transit, so the buyer must reject the delivery.",
+        "freeCheck": "observed-2026-11-18",
+        "tamper": true
+      },
+      "market": {
+        "contractId": "fx-nyc-high-20261118",
+        "question": "Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?",
+        "outcomeLabel": "62°F to 63°F",
+        "eventTicker": "WXHIGH-NYC-2611190459",
+        "expiryUtc": "2026-11-19T04:59:00Z",
+        "settlementSource": "NWS Climatological Report (Daily), Central Park station",
+        "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "source": {
+          "mode": "fixture",
+          "label": "Gemini Exchange public events list, captured via the workbook",
+          "url": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "snapshotDate": "2026-11-17",
+          "snapshotTimeUtc": null
+        },
+        "volumeUsd": "7",
+        "volumeBasis": "total",
+        "quote": {
+          "bestBid": "0.54",
+          "bestAsk": "0.58",
+          "lastTradePrice": null,
+          "observedAtUtc": null,
+          "observedDate": "2026-11-17",
+          "ageSeconds": null,
+          "impliedProbability": "0.56",
+          "spread": "0.04",
+          "state": "two_sided",
+          "note": "Mid of the best bid and best ask."
+        },
+        "label": "FIXTURE",
+        "snapshotHash": "sha256:24d17b986b3e4bc8954ae70dbc9b4b76766ab0273120ad0679b2bcbb6a31029c",
+        "unavailable": [
+          "instrument_symbol: the snapshot did not record which instrument was priced",
+          "observed_utc: only the date 2026-11-17 was recorded",
+          "event terms link: empty on the event; terms_url comes from the contract rules"
+        ]
+      },
+      "rating": {
+        "final": "Medium",
+        "total": 8,
+        "complete": true,
+        "researchAction": "investigate",
+        "summary": "Medium resolution risk (total 8). Research action: investigate. 1 open question(s).",
+        "scores": [
+          {
+            "name": "ambiguity",
+            "score": 2,
+            "rationale": "Outcome is numeric, but the event-level terms link is empty (Agent rule 3 raises Ambiguity to at least 2) and 2°F bands make edge readings decisive.",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-1",
+              "C-NYC-2"
+            ]
+          },
+          {
+            "name": "source",
+            "score": 2,
+            "rationale": "Official NWS source, but the daily climate report can be issued preliminarily and corrected later (Agent rule 9).",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-1"
+            ]
+          },
+          {
+            "name": "liquidity",
+            "score": 3,
+            "rationale": "event-total volume $7 is under $100 (4c spread).",
+            "nullReason": null,
+            "citationIds": [
+              "C-NYC-3"
+            ]
+          },
+          {
+            "name": "correlation",
+            "score": 1,
+            "rationale": "Stand-alone bucket; the other bands are the same event's mutually exclusive outcomes, not separate events.",
+            "nullReason": null,
+            "citationIds": []
+          }
+        ],
+        "note": "Settlement-risk rating: how the contract resolves, separate from the market-implied price."
+      },
+      "rule": {
+        "settlementSource": "NWS Climatological Report (Daily), Central Park station",
+        "termsUrl": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+        "termsNote": "Event-level termsAndConditionsUrl was empty; this file name appeared only in the contract rules. The URL was inferred from Gemini's asset path pattern and confirmed to resolve on 2026-11-18 (Rule 13.111, Attachment A).",
+        "citations": [
+          {
+            "id": "C-NYC-1",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "event.description (paraphrased)",
+            "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."
+          },
+          {
+            "id": "C-NYC-2",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "event.termsAndConditionsUrl",
+            "quote": "(empty)"
+          },
+          {
+            "id": "C-NYC-4",
+            "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18",
+            "quote": "only the first published version that includes confirmation of the will be used"
+          },
+          {
+            "id": "C-NYC-5",
+            "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+            "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)",
+            "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."
+          },
+          {
+            "id": "C-NYC-3",
+            "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+            "field_or_rule": "contracts[62-63F].prices",
+            "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "id": "C-NYC-1",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "event.description (paraphrased)",
+          "quote": "Resolves on the NWS Climatological Report (Daily) maximum temperature at Central Park, NY on Nov 18, 2026. Ranges are mutually exclusive."
+        },
+        {
+          "id": "C-NYC-2",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "event.termsAndConditionsUrl",
+          "quote": "(empty)"
+        },
+        {
+          "id": "C-NYC-4",
+          "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+          "field_or_rule": "Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18",
+          "quote": "only the first published version that includes confirmation of the will be used"
+        },
+        {
+          "id": "C-NYC-5",
+          "source": "https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf",
+          "field_or_rule": "Weather terms PDF, Rule 13.111(b)(3) and (e)(3) (paraphrased)",
+          "quote": "Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet. The contract expires at the first 11:00 PM ET after the data are available, or one week after the period ends."
+        },
+        {
+          "id": "C-NYC-3",
+          "source": "https://api.gemini.com/v1/prediction-markets/events?status=active&limit=100",
+          "field_or_rule": "contracts[62-63F].prices",
+          "quote": "bestBid 0.54, bestAsk 0.58; event volume 7"
+        }
+      ],
+      "gaps": [
+        {
+          "id": "GAP-NYC-SETTLE",
+          "question": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle?",
+          "why": "If a correction moves the max across a 2°F band edge, the version used decides the outcome.",
+          "affects": "resolution_risk",
+          "material": true,
+          "open": true
+        },
+        {
+          "id": "GAP-NYC-FORECAST",
+          "question": "What maximum temperature is likely at Central Park on Nov 18?",
+          "why": "A forecast changes the estimated chance of the event, not the risk of how the contract settles. Verity is research-only and places no trades.",
+          "affects": "outcome_probability",
+          "material": false,
+          "open": false
+        }
+      ],
+      "decision": {
+        "action": "buy",
+        "reason": "Which issuance of the NWS Central Park daily climate report (preliminary, final, or a later correction) does Gemini use to settle? If a correction moves the max across a 2°F band edge, the version used decides the outcome. No cached or free official source answered it, and catalog item 'NWS daily climate report: settlement-version check' answers exactly this gap type.",
+        "freeChecks": [
+          "[fx-nyc-high-20261118] skip GAP-NYC-FORECAST: outcome forecast changes event probability, not settlement risk; research-only, no trades.",
+          "[fx-nyc-high-20261118] GAP-NYC-SETTLE: free official-source check (Contract terms PDF: Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf, NWS Climatological Report (Daily) for Central Park, product CLINYC) -> inconclusive. Rule 13.111(i)(2) settles on the first published version that confirms the value, so later revisions and corrections do not count. But the rule text is missing a word after 'confirmation of the', and NWS publishes a same-day CLINYC before the full-day one (Nov 17: issued 4:38 PM EST, valid as of 4:00 PM, max 57F at 3:55 PM). The terms do not say whether that partial-day report counts as the first published version, so the gap stays open.",
+          "[fx-nyc-high-20261118] PROPOSE cat-nws-cli-settlement-version-v1 for GAP-NYC-SETTLE: max 50000 base units (= 0.05 USDC), unsigned."
+        ],
+        "proposal": {
+          "gapId": "GAP-NYC-SETTLE",
+          "catalogItemId": "cat-nws-cli-settlement-version-v1",
+          "maxUsdc": "0.05",
+          "label": "OBSERVED: free-check scenario 'observed-2026-11-18' read from the official sources at 2026-11-18T05:50:00Z"
+        }
+      },
+      "states": {
+        "quote": {
+          "state": "issued",
+          "amountUsdc": "0.05",
+          "expiresAtUtc": "2026-11-18T01:12:00Z"
+        },
+        "policy": {
+          "state": "allowed",
+          "tier": "auto"
+        },
+        "approval": {
+          "state": "not_needed",
+          "by": null,
+          "reason": null
+        },
+        "authorization": {
+          "state": "settled",
+          "amountUsdc": "0.05"
+        },
+        "delivery": {
+          "state": "rejected",
+          "code": "content_mismatch",
+          "reason": "response bytes hash to 0xbd2c269a0e3e53dca757b1764d9c95113189c07db570f22f28ef11a26aa7831e, receipt says 0x6d23d9b65eb865628e66959c4e3d55e221e6eab300c89e90c834e5f4e9d964ca",
+          "atUtc": "2026-11-18T01:02:00Z"
+        },
+        "settlement": {
+          "state": "confirmed",
+          "txHash": "0xbce4946d91ff473a2d044e110b8cfd8bd67ddf94bc7bc635e7de09c258b446c6",
+          "blockNumber": 72781628,
+          "source": "fixture-signed-locally",
+          "label": "FIXTURE: derived tx hash, not on Arc Testnet"
+        },
+        "reconciliation": {
+          "state": "Paid, delivery missing",
+          "deadlineUtc": "2026-11-18T01:07:00Z",
+          "settlementConfirmed": true
+        },
+        "reassessment": {
+          "state": "waits_for_verified_delivery"
+        }
+      },
+      "timeline": [
+        {
+          "atUtc": "2026-11-18T01:00:00Z",
+          "actor": "operator",
+          "step": "analyze",
+          "detail": "Proposal for GAP-NYC-SETTLE: up to 0.05 USDC."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "operator",
+          "step": "quote",
+          "detail": "Quote quote-7d92592177ce0f6454c19e16: 0.05 USDC to 0x2222222222222222222222222222222222222222, expires 2026-11-18T01:12:00Z."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "policy",
+          "detail": "Verity bought cat-nws-cli-settlement-version-v1 from verity-demo-merchant for 0.05 USDC (testnet) automatically: it is within the 0.10 USDC auto-approve tier."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "operator",
+          "step": "pay",
+          "detail": "Merchant answered 200. Settle calls so far: 1. Authorization reused."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "verify",
+          "detail": "Delivery rejected: content_mismatch. The analyst never sees these bytes."
+        },
+        {
+          "atUtc": "2026-11-18T01:02:00Z",
+          "actor": "system",
+          "step": "webhook:observe",
+          "detail": "QuickNode handler answered 200. Settlements recorded: 1."
+        }
+      ]
+    }
+  ]
+}
