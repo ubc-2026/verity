@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { PGlite } from "@electric-sql/pglite";
-import { readHistory } from "../cloudflare/public-history.mjs";
+import { readHistory, recordObservations } from "../cloudflare/public-history.mjs";
 
 it("returns the latest 120 observations in order when timestamps tie at the cutoff", async () => {
   const database = await PGlite.create();
@@ -49,6 +49,47 @@ it("returns the latest 120 observations in order when timestamps tie at the cuto
     }));
 
     assert.deepEqual(await readHistory(sql, "GEMI-CUTOFF"), expected);
+  } finally {
+    await database.close();
+  }
+});
+
+it("records a live quote and reads it back in time order", async () => {
+  const database = await PGlite.create();
+  try {
+    await database.exec(`
+      CREATE SCHEMA research;
+      CREATE TABLE research.instruments (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        venue text NOT NULL,
+        external_instrument_id text NOT NULL
+      );
+      CREATE TABLE research.quote_snapshots (
+        id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        instrument_id bigint NOT NULL REFERENCES research.instruments(id),
+        observed_at timestamptz NOT NULL,
+        observed_at_basis text NOT NULL,
+        source_mode text NOT NULL,
+        best_bid numeric,
+        best_ask numeric,
+        market_state text NOT NULL
+      );
+    `);
+    const sql = async (strings, ...values) => {
+      const query = strings.reduce((text, part, index) => index === 0 ? part : `${text}$${index}${part}`, "");
+      return (await database.query(query, values)).rows;
+    };
+    const symbol = "GEMI-WXHIGH-BOS-2611210459-66TO67";
+    const recorded = await recordObservations(sql, [
+      { instrument: symbol, observedAtUtc: "2026-11-20T05:25:56Z", timeBasis: "worker-fetch", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
+      { instrument: symbol, observedAtUtc: "2026-11-20T05:26:56Z", timeBasis: "worker-fetch", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },
+      { instrument: "not a symbol", observedAtUtc: "2026-11-20T05:26:56Z", timeBasis: "worker-fetch", bestBid: "0.10", bestAsk: "0.20", marketState: "open" },
+    ]);
+    assert.equal(recorded, 2);
+    assert.deepEqual(await readHistory(sql, symbol), [
+      { observedAtUtc: "2026-11-20T05:25:56.000Z", timeBasis: "worker-fetch", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
+      { observedAtUtc: "2026-11-20T05:26:56.000Z", timeBasis: "worker-fetch", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },
+    ]);
   } finally {
     await database.close();
   }
