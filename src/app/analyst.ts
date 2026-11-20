@@ -8,6 +8,7 @@ import { join } from "node:path";
 
 export interface RiskAnalysis {
   contract_id: string;
+  event_ticker?: string | null;
   question: string;
   expiry_utc: string | null;
   analyzed_at_utc: string;
@@ -91,6 +92,7 @@ export class Analyst {
   readonly python: string;
   readonly dir: string;
   readonly #cache = new Map<string, Promise<AnalyzeOutput>>();
+  readonly #liveCache = new Map<string, { pending: Promise<AnalyzeOutput>; expires: number }>();
 
   constructor(python: string, dir: string) {
     this.python = python;
@@ -123,15 +125,32 @@ export class Analyst {
     });
   }
 
-  /** Fixture analysis is deterministic, so results are cached per contract and free-check scenario. */
-  analyze(contract: string, scenario: string | null): Promise<AnalyzeOutput> {
-    const key = `${contract}|${scenario ?? ""}`;
+  /** Fixture analysis is deterministic, so results are cached per contract, free-check scenario, and payment rail. */
+  analyze(contract: string, scenario: string | null, rail: "arc-eip3009" | "circle-gateway-batched" = "arc-eip3009"): Promise<AnalyzeOutput> {
+    const key = `${contract}|${scenario ?? ""}|${rail}`;
     let pending = this.#cache.get(key);
     if (!pending) {
-      pending = this.#run(["analyze", "--contract", contract, ...(scenario ? ["--free-check-scenario", scenario] : [])]) as Promise<AnalyzeOutput>;
+      pending = this.#run(["analyze", "--contract", contract, ...(scenario ? ["--free-check-scenario", scenario] : []), "--rail", rail]) as Promise<AnalyzeOutput>;
       pending.catch(() => this.#cache.delete(key));
       this.#cache.set(key, pending);
     }
+    return pending;
+  }
+
+  /**
+   * LIVE read-only analysis of one Gemini Exchange outcome (python -m verity.cli analyze-live): public
+   * reads from api.gemini.com, assets.gemini.com and forecast.weather.gov only, no model, no payment.
+   * No evidence catalog is passed, so a live run never proposes a purchase. The CLI output has no
+   * `research` block; one is built from the risk analysis, and anything it does not carry is listed
+   * as unavailable. Results are reused for 60 s per event, outcome and rail.
+   */
+  analyzeLive(event: string, outcome: string, rail: "arc-eip3009" | "circle-gateway-batched" = "circle-gateway-batched"): Promise<AnalyzeOutput> {
+    const key = `live|${event}|${outcome}|${rail}`;
+    const cached = this.#liveCache.get(key);
+    if (cached && cached.expires > Date.now()) return cached.pending;
+    const pending = (this.#run(["analyze-live", "--event", event, "--outcome", outcome, "--rail", rail]) as Promise<LiveAnalyzeOutput>).then(withResearch);
+    pending.catch(() => this.#liveCache.delete(key));
+    this.#liveCache.set(key, { pending, expires: Date.now() + 60_000 });
     return pending;
   }
 
@@ -139,4 +158,38 @@ export class Analyst {
     const input = JSON.stringify({ risk_analysis: riskAnalysis, body_b64: Buffer.from(body).toString("base64"), provenance });
     return this.#run(["reassess"], input) as Promise<Reassessment>;
   }
+}
+
+/** analyze-live output: the same analysis and proposal fields, without the fixture research block. */
+export type LiveAnalyzeOutput = Omit<AnalyzeOutput, "research"> & { label?: string; command?: string };
+
+/** Builds the research block the run views expect from a live risk analysis. Unknown fields stay null and are listed. */
+export function withResearch(live: LiveAnalyzeOutput): AnalyzeOutput {
+  const ra = live.risk_analysis;
+  const byId = new Map(ra.citations.map((c) => [c.id, c]));
+  const terms = ra.citations.find((c) => /terms|.pdf/i.test(c.source) && c.source.startsWith("https://assets.gemini.com/"));
+  const ruleIds = ra.citations.filter((c) => c.id !== "C-EVENT" && (/^contract./.test(c.field_or_rule) || /terms|rule/i.test(c.field_or_rule) || c.id === "C-TERMS")).map((c) => c.id);
+  const q = ra.quoted_price;
+  return {
+    ...live,
+    research: {
+      market: {
+        contract_id: ra.contract_id,
+        event_ticker: ra.event_ticker ?? null,
+        outcome_label: q?.outcome_label ?? ra.contract_id,
+        question: ra.question,
+        expiry_utc: ra.expiry_utc,
+        resolution: { settlement_source: null, terms_url: terms?.source ?? null, terms_url_note: terms ? null : "No terms PDF was cited by the live analysis.", rule_excerpt_ids: ruleIds },
+        quote: { best_bid: q?.best_bid ?? null, best_ask: q?.best_ask ?? null, volume_usd: q?.volume_usd ?? null, volume_basis: q?.volume_basis ?? null },
+        source_mode: ra.snapshot.source_mode,
+        source_label: ra.snapshot.source_label,
+        source_url: byId.get("C-EVENT")?.source ?? "https://api.gemini.com/v1/prediction-markets/events",
+        observed_date: q?.observed_date ?? ra.snapshot.snapshot_date,
+        observed_utc: q?.observed_time_utc ?? ra.snapshot.snapshot_time_utc,
+        unavailable: ["settlement_source (not extracted as a field by the live analysis; see the rule citations)", "price_trend (live runs read one snapshot)"],
+      },
+      coverage: { status: "not_run", reason: "Live runs read public sources only; no paid search." },
+      price_trend: { status: "not_run", reason: "One live snapshot." },
+    },
+  };
 }

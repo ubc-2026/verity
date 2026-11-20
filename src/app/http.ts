@@ -10,7 +10,7 @@ import { existsSync, readFileSync } from "node:fs";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { ARC_TESTNET } from "../payments/arc.ts";
 import { ARC_TESTNET_GATEWAY_WALLET } from "../payments/circleGateway.ts";
-import { AppError, RunEngine, SCENARIOS, toJson } from "./engine.ts";
+import { AppError, RAILS, RunEngine, SCENARIOS, toJson } from "./engine.ts";
 import type { LiveMarkets } from "./markets.ts";
 
 const MAX_BODY = 16 * 1024;
@@ -33,6 +33,12 @@ export function capabilities(deps: Pick<AppDeps, "gatewayEnabled" | "engine">) {
     { id: "fixture", name: "Fixture run", state: "fixture", detail: "Analysis, quote, policy, approval, payment, delivery, QuickNode join and reassessment, all local. No keys." },
     { id: "live-markets", name: "Live market snapshot", state: "live read-only", detail: "Public Gemini Exchange events endpoint, no key, no orders. Quotes show missing, one-sided, stale, crossed and closed states." },
     {
+      id: "live-analysis",
+      name: "Live analysis run",
+      state: "live read-only",
+      detail: "analyze-live reads api.gemini.com, assets.gemini.com and forecast.weather.gov only. No model, no payment, and no evidence catalog, so a live run never proposes a purchase.",
+    },
+    {
       id: "arc-direct",
       name: "Arc Testnet direct settlement",
       state: "blocked",
@@ -42,13 +48,13 @@ export function capabilities(deps: Pick<AppDeps, "gatewayEnabled" | "engine">) {
       id: "quicknode",
       name: "QuickNode reconciliation",
       state: "fixture",
-      detail: "The real stream filter, HMAC check, replay window and finality rule run on locally signed deliveries. Live ingestion runs only in scripts/webhook-server.ts; no live delivery was received in this build (the last key returned 403).",
+      detail: "The real stream filter, HMAC check, replay window and finality rule run on locally signed deliveries: the purchase's own transaction on Arc direct, and the batch transaction on Gateway (batch-level confirmation only). Live ingestion runs only in scripts/webhook-server.ts; no live delivery was received in this build (the last key returned 403).",
     },
     {
       id: "gateway",
       name: "Circle Gateway rail",
-      state: deps.gatewayEnabled ? "opt-in, archived live evidence" : "off (opt-in)",
-      detail: "PR #10 reviewed: opt-in, no blocker. Set VERITY_GATEWAY_RAIL=1 to show the archived purchase. The rail is not run from this server.",
+      state: deps.gatewayEnabled ? "fixture runs; archived live evidence shown" : "fixture runs",
+      detail: "Runs use a FIXTURE Circle Gateway (no network, no funds): verify, settle once, per-transfer status, batch. Set VERITY_GATEWAY_RAIL=1 to also show the archived live 0.001 USDC purchase. No live Gateway payment is made from this server.",
     },
     { id: "grok", name: "Grok overdue alert", state: "fixture", detail: "Overdue events come from the ledger status. A contract model of the Grok routine opens one card per purchase and counts replays. The real routine is not called." },
     { id: "voice", name: "ElevenLabs voice", state: "blocked", detail: "Approval explanations are text. No authorized ElevenLabs integration is wired or captured." },
@@ -152,7 +158,8 @@ export function createAppHandler(deps: AppDeps) {
           mode: "fixture",
           role: operator ? "operator" : "visitor",
           paused: deps.engine.paused,
-          scenarios: Object.entries(SCENARIOS).map(([id, s]) => ({ id, label: s.label, detail: s.detail })),
+          scenarios: Object.entries(SCENARIOS).map(([id, s]) => ({ id, label: s.label, detail: s.detail, rails: s.rails ?? Object.keys(RAILS) })),
+          rails: Object.entries(RAILS).map(([id, r]) => ({ id, ...r })),
           capabilities: capabilities(deps),
           arc: { chainId: ARC_TESTNET.chainId, usdc: ARC_TESTNET.usdc, gatewayWallet: ARC_TESTNET_GATEWAY_WALLET, explorer: ARC_TESTNET.explorer },
           gateway: deps.gatewayEnabled ? gatewayPanel(deps.repoRoot) : null,
@@ -169,9 +176,10 @@ export function createAppHandler(deps: AppDeps) {
       if (method === "POST" && path === "/api/runs") {
         if (!operator && !allowPublicRun()) return send(res, 429, { error: "too many runs; try again in a minute" });
         const body = await readJson(req);
-        const run = await deps.engine.createRun({ marketId: body.marketId, scenario: body.scenario }, operator ? "operator" : "visitor");
+        const run = await deps.engine.createRun({ marketId: body.marketId, scenario: body.scenario, rail: body.rail, live: body.live }, operator ? "operator" : "visitor");
         return send(res, 201, operator ? deps.engine.operatorView(run) : deps.engine.publicView(run));
       }
+      if (method === "GET" && path === "/api/audit") return send(res, 200, { label: "FIXTURE payments", records: deps.engine.auditLog() });
       const runMatch = path.match(/^\/api\/runs\/(run-[0-9a-f]{16})$/);
       if (method === "GET" && runMatch) {
         const run = deps.engine.get(runMatch[1]!);

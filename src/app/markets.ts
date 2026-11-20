@@ -93,7 +93,7 @@ export interface FixtureMarket {
   volumeUsd: string | null;
   volumeBasis: string | null;
   quote: QuoteView;
-  label: "FIXTURE";
+  label: "FIXTURE" | "LIVE";
 }
 
 interface RawFixtureMarket {
