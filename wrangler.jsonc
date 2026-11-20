@@ -8,6 +8,8 @@
   "preview_urls": true,
   "keep_vars": true,
   "routes": [{ "pattern": "api.verityresearch.us", "custom_domain": true }],
+  // Collection cron. It is not running until the next deploy of this Worker.
+  "triggers": { "crons": ["*/2 * * * *"] },
   "hyperdrive": [
     { "binding": "VERITY_HISTORY_DB", "id": "4b4dfdd1a1534e60a19ed52a05039971" }
   ]
