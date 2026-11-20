@@ -6,6 +6,7 @@
 import { createHash } from "node:crypto";
 import { keccak256, pad, toBytes, toHex, type Hex } from "viem";
 import { ARC_TESTNET } from "../payments/arc.ts";
+import { ARC_TESTNET_GATEWAY_WALLET } from "../payments/circleGateway.ts";
 import type { DeliverySettlementAdapter } from "../payments/merchantDelivery.ts";
 import { AUTHORIZATION_USED_TOPIC, TRANSFER_TOPIC } from "../reconciliation/ledger.ts";
 import { signQuickNodePayload } from "../reconciliation/quicknodeSignature.ts";
@@ -87,6 +88,51 @@ export function signedFixtureDelivery(args: {
     runStreamFilter({ data: [blockEntry(args.settled, args.blockTimestamp, args.txFrom)], metadata: { stream_id: args.streamId } }, [args.settled.txHash]),
   );
   const nonce = createHash("sha256").update(`${args.streamId}|${args.settled.txHash}|${args.timestamp}`).digest("hex").slice(0, 16);
+  const timestamp = String(args.timestamp);
+  return {
+    payload,
+    headers: {
+      "x-qn-nonce": nonce,
+      "x-qn-timestamp": timestamp,
+      "x-qn-signature": signQuickNodePayload(args.securityToken, nonce, timestamp, payload),
+      "stream-id": args.streamId,
+    },
+  };
+}
+
+/** FIXTURE Gateway batch block, also below the fixture finalized height. */
+export const FIXTURE_GATEWAY_BLOCK = 72781650;
+
+/**
+ * The QuickNode delivery for one Gateway batch transaction: a successful receipt sent to the
+ * GatewayWallet with a single GatewayWallet log that names neither payer nor seller (as observed
+ * for the archived live batch), passed through the real stream filter and HMAC-signed with a
+ * fixture token. It confirms the batch transaction only.
+ */
+export function signedGatewayBatchDelivery(args: {
+  batchTxHash: Hex;
+  blockNumber?: number;
+  blockTimestamp: number;
+  securityToken: string;
+  timestamp: number;
+  streamId: string;
+}): SignedDelivery {
+  const blockNumber = args.blockNumber ?? FIXTURE_GATEWAY_BLOCK;
+  const entry = {
+    block: { number: toHex(blockNumber), hash: keccak256(toBytes(`block|${args.batchTxHash}`)), timestamp: toHex(args.blockTimestamp) },
+    receipts: [
+      {
+        transactionHash: args.batchTxHash,
+        transactionIndex: "0x0",
+        from: "0x000000000000000000000000000000000000c1c1",
+        to: ARC_TESTNET_GATEWAY_WALLET,
+        status: "0x1",
+        logs: [{ address: ARC_TESTNET_GATEWAY_WALLET, topics: [keccak256(toBytes("fixture-gateway-batch-event"))], data: "0x", logIndex: "0x0" }],
+      },
+    ],
+  };
+  const payload = JSON.stringify(runStreamFilter({ data: [entry], metadata: { stream_id: args.streamId } }, [args.batchTxHash]));
+  const nonce = createHash("sha256").update(`${args.streamId}|${args.batchTxHash}|${args.timestamp}`).digest("hex").slice(0, 16);
   const timestamp = String(args.timestamp);
   return {
     payload,

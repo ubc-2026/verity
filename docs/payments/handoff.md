@@ -20,7 +20,8 @@ FIXTURE values: the contract `fx-nyc-high-20261118`, gap `GAP-NYC-SETTLE`, propo
 
 - **Circle identifies the individual transfer.** The transfer record names payer, payee, amount (1000 base units), and the authorization nonce. `settle()` returned the same UUID, and the buyer stores it as `paymentRef` next to the receipt digest.
 - **QuickNode confirms the Arc batch receipt.** It can show that the batch transaction succeeded and is final. It cannot show which transfer inside the batch is ours: the batch transaction has one log, emitted by GatewayWallet, and that log names neither the payer nor the seller. That is why the ledger keeps QuickNode at `not_claimed` for Gateway purchases.
-- **QuickNode confirmation is not done yet.** It uses account credits and needs the owner's approval, and the QuickNode key returned 403 earlier. In the meantime, Arc's public RPC (`https://rpc.testnet.arc.io`, not QuickNode) shows the batch transaction `success` in block 72968478 at 05:27:02 UTC, 323 s after settle.
+- **The code path exists and is fixture-tested.** The stream filter now also keeps successful receipts sent to the GatewayWallet (`gatewayBatches`), and the ledger records one confirmation per batch transaction once it is final (`ReconciliationLedger.gatewayBatch`). The run console's audit view joins it to the purchase through Circle's transfer record (`docs/run-console.md`). The live QuickNode Stream still runs the earlier filter until it is updated.
+- **QuickNode confirmation of the archived batch is not done yet.** It uses account credits and needs the owner's approval, and the QuickNode key returned 403 earlier. In the meantime, Arc's public RPC (`https://rpc.testnet.arc.io`, not QuickNode) shows the batch transaction `success` in block 72968478 at 05:27:02 UTC, 323 s after settle.
 
 ### Portal calls
 
