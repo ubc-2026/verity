@@ -280,6 +280,15 @@ export function createResearchWorker(readHistory = readHyperdriveHistory, option
   async function handleRequest(request, env = {}, ctx) {
     if (request.method !== "GET") return json({ error: "Use GET" }, 405, { Allow: "GET" });
     const { pathname, searchParams } = new URL(request.url);
+    // Per-IP limits. Cloudflare does not cache Worker responses on its own, so without these every request
+    // reaches the upstream API and (for history) the database. Missing bindings fail open: the data is public.
+    const history = pathname === "/v1/market-history";
+    const limiter = history ? env.API_HISTORY_LIMIT : env.API_LIMIT;
+    if (limiter) {
+      const ip = request.headers.get("cf-connecting-ip") || "unknown";
+      const { success } = await limiter.limit({ key: (history ? "history:" : "api:") + ip });
+      if (!success) return json({ error: "Too many requests" }, 429, { "Retry-After": "60" });
+    }
     if (pathname === "/") return json({ name: "Verity Research API", version: 1,
       endpoints: ["/v1/markets", "/v1/markets/{eventTicker}", "/v1/market-history", "/v1/research"], source: "Gemini Exchange" });
     if (pathname === "/v1/research") {

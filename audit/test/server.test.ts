@@ -212,3 +212,38 @@ test("a verified delivery and a later sweep emit one overdue event", async () =>
     await server.close();
   }
 });
+
+test("a replayed signed delivery is acknowledged but not processed twice", async () => {
+  const now = new Date("2026-11-18T12:00:00Z");
+  const server = await start({ now: () => now });
+  try {
+    const body = JSON.stringify(payload([block(10, word(10), word(9)), block(11, word(11), word(10))]));
+    const timestamp = String(Math.floor(now.getTime() / 1000));
+    const send = () => fetch(`http://127.0.0.1:${server.address().port}/webhooks/quicknode`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-qn-nonce": "n-replay", "x-qn-timestamp": timestamp,
+        "x-qn-signature": signWebhook(secret, "n-replay", timestamp, body) },
+      body,
+    });
+    const first = await (await send()).json();
+    assert.equal(first.ok, true);
+    assert.equal(first.duplicate, undefined);
+    const again = await send();
+    assert.equal(again.status, 200);
+    assert.equal((await again.json()).duplicate, true);
+  } finally {
+    await server.close();
+  }
+});
+
+test("a malformed escape in a purchase path is a 400, not a server error", async () => {
+  const server = await start();
+  try {
+    const response = await fetch(`http://127.0.0.1:${server.address().port}/purchases/%E0%A4%A`, {
+      headers: { authorization: `Bearer ${readToken}` },
+    });
+    assert.equal(response.status, 400);
+  } finally {
+    await server.close();
+  }
+});

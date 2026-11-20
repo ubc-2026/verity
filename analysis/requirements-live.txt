@@ -1,3 +1,3 @@
 -r requirements.txt
-requests>=2.31
-pypdf>=4
+requests>=2.33.0  # 2.31-2.32.x: CVE-2024-35195, CVE-2024-47081, CVE-2026-25645
+pypdf>=6.21.4  # older releases have 100+ OSV advisories (mostly crafted-PDF DoS)

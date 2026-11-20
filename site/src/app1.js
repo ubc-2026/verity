@@ -2,7 +2,7 @@
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
 const enc=s=>new TextEncoder().encode(s);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const short=h=>h&&h.length>18?h.slice(0,10)+'…'+h.slice(-6):h;
 async function sha256(s){
   if(!(window.crypto&&crypto.subtle))return null;

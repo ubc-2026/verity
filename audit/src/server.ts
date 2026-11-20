@@ -58,6 +58,8 @@ export class AuditServer {
   readonly #sweepOnWebhook: boolean;
   readonly #report?: (body: unknown) => Promise<void>;
   readonly http: Server;
+  /** Nonces of signed deliveries already processed, with the time they can be forgotten (ms). */
+  readonly #seenNonces = new Map<string, number>();
 
   constructor(options: AuditServerOptions) {
     this.ledger = options.ledger;
@@ -122,7 +124,7 @@ export class AuditServer {
       }
       if (request.method === "GET" && parts.length === 2 && parts[0] === "purchases") {
         if (!this.#bearer(request, this.#readToken)) return this.#send(response, 401, { error: "unauthorized" });
-        const view = this.ledger.view(decodeURIComponent(parts[1]!));
+        const view = this.ledger.view(pathId(parts[1]!));
         if (!view) return this.#send(response, 404, { error: "unknown purchase" });
         return this.#send(response, 200, publicPurchase(view));
       }
@@ -142,13 +144,13 @@ export class AuditServer {
         const parsed = deliverySchema.safeParse(await this.#json(request));
         if (!parsed.success) return this.#send(response, 400, { error: "invalid delivery" });
         this.ledger.noteDelivery({
-          purchaseId: decodeURIComponent(parts[1]!),
+          purchaseId: pathId(parts[1]!),
           ok: parsed.data.ok,
           detail: parsed.data.detail ?? (parsed.data.ok ? "delivery verified" : "delivery rejected"),
           contentHash: parsed.data.contentHash ?? null,
           recordedAtUtc: this.#now().toISOString(),
         });
-        return this.#send(response, 200, publicPurchase(this.ledger.view(decodeURIComponent(parts[1]!))!));
+        return this.#send(response, 200, publicPurchase(this.ledger.view(pathId(parts[1]!))!));
       }
       if (request.method === "POST" && parts.length === 2 && parts[0] === "internal" && parts[1] === "sweep") {
         if (!this.#bearer(request, this.#writeToken)) return this.#send(response, 401, { error: "unauthorized" });
@@ -186,6 +188,11 @@ export class AuditServer {
       maxSkewSeconds: this.#maxSkewSeconds,
     });
     if (!valid) return this.#send(response, 401, { error: "invalid signature" });
+    // A signed body stays valid for the whole skew window, so a captured delivery could be sent again.
+    // A nonce is remembered only after it is processed, so a delivery that failed can still be retried.
+    const nowMs = this.#now().getTime();
+    for (const [seen, until] of this.#seenNonces) if (until <= nowMs) this.#seenNonces.delete(seen);
+    if (this.#seenNonces.has(nonce)) return this.#send(response, 200, { ok: true, duplicate: true });
     let body: unknown;
     try {
       body = JSON.parse(payload);
@@ -193,6 +200,7 @@ export class AuditServer {
       return this.#send(response, 400, { error: "invalid payload" });
     }
     const result = this.ledger.ingest(body);
+    this.#seenNonces.set(nonce, nowMs + 2 * this.#maxSkewSeconds * 1000);
     this.#send(response, 200, { ok: true, ...result });
     if (this.#sweepOnWebhook) {
       void this.sweep().catch((error: unknown) => {
@@ -248,6 +256,15 @@ export class AuditServer {
     const payload = typeof body === "string" ? body : JSON.stringify(body);
     response.writeHead(status, { "content-type": contentType, "content-length": Buffer.byteLength(payload) });
     response.end(payload);
+  }
+}
+
+/** Decodes one path segment; a malformed escape is the client's error (400), not a crash (500). */
+function pathId(segment: string): string {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    throw new HttpError(400, "invalid path");
   }
 }
 
