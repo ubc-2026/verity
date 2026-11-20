@@ -6,6 +6,15 @@ import { spawn, spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 
+/** At most this many uncached live analyses run at once; more get a 429. */
+export const MAX_LIVE_IN_FLIGHT = 2;
+
+export class LiveAnalysisBusyError extends Error {
+  constructor() {
+    super("live analyses are busy; try again shortly");
+  }
+}
+
 export interface RiskAnalysis {
   contract_id: string;
   event_ticker?: string | null;
@@ -124,6 +133,8 @@ export class Analyst {
   readonly dir: string;
   readonly #cache = new Map<string, Promise<AnalyzeOutput>>();
   readonly #liveCache = new Map<string, { pending: Promise<AnalyzeOutput>; expires: number }>();
+  /** Live analyses that started a Python child and have not finished. */
+  #liveInFlight = 0;
 
   constructor(python: string, dir: string) {
     this.python = python;
@@ -179,7 +190,12 @@ export class Analyst {
     const key = `live|${event}|${outcome}|${rail}`;
     const cached = this.#liveCache.get(key);
     if (cached && cached.expires > Date.now()) return cached.pending;
-    const pending = (this.#run(["analyze-live", "--event", event, "--outcome", outcome, "--rail", rail]) as Promise<LiveAnalyzeOutput>).then(withResearch);
+    // Each uncached live run starts a Python child that reads public sources; cap how many run at once.
+    if (this.#liveInFlight >= MAX_LIVE_IN_FLIGHT) return Promise.reject(new LiveAnalysisBusyError());
+    this.#liveInFlight += 1;
+    const pending = (this.#run(["analyze-live", "--event", event, "--outcome", outcome, "--rail", rail]) as Promise<LiveAnalyzeOutput>)
+      .then(withResearch)
+      .finally(() => { this.#liveInFlight -= 1; });
     pending.catch(() => this.#liveCache.delete(key));
     this.#liveCache.set(key, { pending, expires: Date.now() + 60_000 });
     return pending;

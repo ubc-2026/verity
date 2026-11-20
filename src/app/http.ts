@@ -173,6 +173,8 @@ export function createAppHandler(deps: AppDeps) {
       if (method === "GET" && path === "/api/config") {
         return send(res, 200, {
           mode: "fixture",
+          // Each run has its own in-memory payment store. Durability across restarts is proven on file-backed stores in test/acceptance.test.ts.
+          ledger: "FIXTURE: in memory, one store per run; not kept across a restart",
           role: operator ? "operator" : "visitor",
           paused: deps.engine.paused,
           scenarios: Object.entries(SCENARIOS).map(([id, s]) => ({ id, label: s.label, detail: s.detail, rails: s.rails ?? Object.keys(RAILS) })),

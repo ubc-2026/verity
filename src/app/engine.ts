@@ -34,7 +34,7 @@ import { MerchantService } from "../payments/service.ts";
 import { DEMO_POLICY, PaymentStore, type SpendingPolicy } from "../payments/store.ts";
 import { ReconciliationLedger, type IngestResult } from "../reconciliation/ledger.ts";
 import { createQuickNodeWebhookHandler, QUICKNODE_WEBHOOK_PATH } from "../reconciliation/webhook.ts";
-import type { Analyst, AnalyzeOutput, Reassessment } from "./analyst.ts";
+import { LiveAnalysisBusyError, type Analyst, type AnalyzeOutput, type Reassessment } from "./analyst.ts";
 import { FIXTURE_FINALIZED_BLOCK, signedFixtureDelivery, signedGatewayBatchDelivery, StubSettlement, type SignedDelivery } from "./fixtureChain.ts";
 import { classifyQuote, type FixtureMarket } from "./markets.ts";
 
@@ -315,16 +315,21 @@ export class RunEngine {
     if (!live && (typeof input.marketId !== "string" || !this.#markets.has(input.marketId))) throw new AppError(400, "unknown market");
     const scenario = (typeof input.scenario === "string" ? input.scenario : "standard") as ScenarioId;
     if (live && scenario !== "standard") throw new AppError(400, "live runs use the standard scenario only");
-    if (!(scenario in SCENARIOS)) throw new AppError(400, "unknown scenario");
+    if (!Object.hasOwn(SCENARIOS, scenario)) throw new AppError(400, "unknown scenario");
     const rail = (input.rail === undefined || input.rail === null ? "arc-eip3009" : input.rail) as PaymentRail;
-    if (!(typeof rail === "string" && rail in RAILS)) throw new AppError(400, "unknown payment rail");
+    if (!(typeof rail === "string" && Object.hasOwn(RAILS, rail))) throw new AppError(400, "unknown payment rail");
     const allowed = SCENARIOS[scenario].rails;
     if (allowed && !allowed.includes(rail)) throw new AppError(400, `scenario ${scenario} does not apply to the ${rail} rail`);
     let analysis: AnalyzeOutput;
     let market: FixtureMarket;
     if (live) {
       try {
-        analysis = await this.#analyst.analyzeLive(live.event, live.outcome, rail);
+        try {
+          analysis = await this.#analyst.analyzeLive(live.event, live.outcome, rail);
+        } catch (error) {
+          if (error instanceof LiveAnalysisBusyError) throw new AppError(429, error.message);
+          throw error;
+        }
       } catch (error) {
         throw new AppError(502, `live analysis failed: ${(error as Error).message.slice(0, 300)}`);
       }

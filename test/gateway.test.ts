@@ -429,6 +429,24 @@ describe("Gateway buyer verification and ledger", () => {
     assert.equal(ledger.receipt(id), undefined);
   });
 
+  it("a failed Circle transfer releases the hold, and a later status cannot revive it", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const res = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(res.status, 200);
+    if (res.status !== 200) return;
+    const ledger = new GatewayLedger(t.store);
+    const id = t.request.purchaseId;
+    const real = await gateway.transferById(res.receipt.paymentRef);
+    assert.equal(t.store.reservation(id)?.status, "held");
+    const failed = ledger.recordBatch(id, { ...real, status: "failed" }, DEMO_NOW + 1);
+    assert.ok(!("error" in failed));
+    assert.equal(t.store.reservation(id)?.status, "released", "no USDC moved, so the budget is free again");
+    ledger.recordBatch(id, { ...real, status: "completed" }, DEMO_NOW + 2);
+    assert.equal(ledger.status(id)?.batch.status, "failed");
+    assert.equal(t.store.reservation(id)?.status, "released");
+  });
+
   it("refuses a Circle transfer that arrives before the receipt when it has no nonce", async () => {
     const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
     const t = await setup(gateway);

@@ -65,3 +65,5 @@ Scenarios: standard, free source answers, owner approval (Arc direct), budget de
 - Circle status only moves forward (received, batched, confirmed, completed; `failed` only before confirmation). A stale response never regresses a settled purchase, and the reservation is spent once.
 - A lost settle response is recovered by nonce on the retry, with no second settlement and no second signature.
 - Buyer and merchant state is SQLite, so a restart resumes from disk. `test/acceptance.test.ts` proves these rules with file-backed stores.
+- The run console itself keeps each run in memory, with one in-memory payment store per run, so its runs and the operator pause switch are gone after a restart. `/api/config` says so in `ledger`. The durable path is the same `PaymentStore` and `MerchantService` opened on a file, as the acceptance tests do.
+- At most 2 uncached live analyses run at once; a third gets 429. Visitors may start 30 runs a minute in total.

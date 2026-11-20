@@ -102,9 +102,17 @@ describe("app server (fixture)", { skip }, () => {
     assert.equal(created.json.label, "FIXTURE");
   });
 
+  it("refuses inherited object keys as a scenario or rail", async () => {
+    for (const key of ["toString", "constructor", "__proto__", "hasOwnProperty"]) {
+      assert.equal((await call("POST", "/api/runs", { marketId: NYC, scenario: key }, null)).status, 400, `scenario ${key}`);
+      assert.equal((await call("POST", "/api/runs", { marketId: NYC, rail: key }, null)).status, 400, `rail ${key}`);
+    }
+  });
+
   it("gives visitors a fixture run and refuses every operator step", async () => {
     const config = (await call("GET", "/api/config", undefined, null)).json;
     assert.equal(config.role, "visitor");
+    assert.match(config.ledger, /in memory/);
     assert.equal(config.gateway.circleTransferId, "018a216c-72ff-454b-94b1-9bfbdf637f2d");
     assert.equal(config.gateway.arcBatchTx, "0x3b31471543ae1a1bd08cdff377c57b9586c1c8ae7bd759703b5a1c3ebcaebd82");
     const markets = (await call("GET", "/api/markets", undefined, null)).json.markets as Json[];

@@ -167,6 +167,10 @@ export class GatewayLedger {
         // Circle: wait for `confirmed` before crediting; only then does the reservation become spend.
         this.#db.prepare(`UPDATE reservations SET status = 'spent', updated_at = ? WHERE purchase_id = ? AND status = 'held'`).run(now, purchaseId);
       }
+      if (transfer.status === "failed") {
+        // `failed` is accepted only before confirmation and is terminal: no USDC moved, so the hold is released.
+        this.#db.prepare(`UPDATE reservations SET status = 'released', updated_at = ? WHERE purchase_id = ? AND status = 'held'`).run(now, purchaseId);
+      }
       return null;
     });
     return refused ?? this.status(purchaseId)!;
