@@ -1,10 +1,10 @@
 /**
- * Verity app server: the API behind the website's run page.
- *   npm run app            -> http://127.0.0.1:8790 (API under /api)
- *   cd site && npm run dev -> proxies /api to this server
+ * Verity app server: the run console (ui/index.html) and the API behind it.
+ *   npm run app            -> http://127.0.0.1:8790 (console at /, API under /api)
  *
  * Fixture-first: no key, wallet or network is needed except the optional live
- * read-only market snapshot (public Gemini Exchange endpoint).
+ * read-only market snapshot and live analysis runs (public Gemini Exchange,
+ * Gemini terms PDFs and NWS pages only; no model, no payment).
  *
  * Env:
  *   VERITY_OPERATOR_TOKEN  bearer token for operator steps (24+ chars). When
@@ -12,7 +12,7 @@
  *                          on the server console only.
  *   VERITY_OWNER_ADDRESS   enrolled owner wallet for approvals (default: the
  *                          public Anvil test key #3 address, FIXTURE).
- *   VERITY_GATEWAY_RAIL=1  show the archived opt-in Circle Gateway purchase.
+ *   VERITY_GATEWAY_RAIL=1  also show the archived live Circle Gateway purchase.
  *   VERITY_PYTHON          Python 3.11+ with pydantic (else analysis/.venv).
  *   PORT                   default 8790. The server binds 127.0.0.1 only.
  */
@@ -54,13 +54,13 @@ const handler = createAppHandler({
   operatorToken,
   gatewayEnabled: process.env.VERITY_GATEWAY_RAIL === "1",
   repoRoot: root,
-  siteIndex: join(root, "site", "dist", "index.html"),
+  siteIndex: join(root, "ui", "index.html"),
 });
 
 const server = createServer((req, res) => void handler(req, res));
 const port = Number(process.env.PORT ?? 8790);
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Verity app API on http://127.0.0.1:${port}/api (site: http://127.0.0.1:${port}/#run when site/dist is built)`);
+  console.log(`Verity run console on http://127.0.0.1:${port}/ (API under /api)`);
   if (generated) console.log(`Operator token for this session (not stored): ${operatorToken}`);
 });
 for (const signal of ["SIGINT", "SIGTERM"] as const) {

@@ -62,6 +62,8 @@ Status: the routine is fixture-tested in the Grok Bot runtime, which is outside 
 
 `npm run e2e` runs one market from research through risk analysis, an evidence purchase, and the updated assessment. Settlement is stubbed and nothing leaves the machine. Commands, scenarios, and what is fixture versus live: [Connected fixture workflow](docs/integration.md).
 
+`npm run app` serves the run console: pick a fixture or live Gemini Exchange market, run the analysis, step through a fixture purchase on Arc direct or Circle Gateway, and audit the run, purchase, receipt, Circle transfer, Arc batch and QuickNode confirmation: [Run console](docs/run-console.md).
+
 ## Demo plan
 
 1. Open a prediction-market contract and highlight a specific ambiguity in its resolution rules.
