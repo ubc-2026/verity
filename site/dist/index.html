@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verity: prediction-market resolution risk and verifiable agent payments</title>
+<meta name="description" content="Verity reads how a prediction market settles, scores the resolution risk, buys only the evidence that closes a gap through request-bound USDC payments, and reconciles payment against delivery. UBC 2026 prototype, testnet only.">
+<meta name="theme-color" content="#090C10">
+<meta property="og:title" content="Verity">
+<meta property="og:description" content="Separate “will it happen?” from “how does it resolve?”">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://verityresearch.us/">
+<link rel="canonical" href="https://verityresearch.us/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23090C10'/%3E%3Cpath d='M3 4h4.2L12 15.6 16.8 4H21l-7.4 16h-3.2z' fill='%23F1F5F9'/%3E%3Cpath d='M10.4 20h3.2l1.3-2.9H9.1z' fill='%232E5CFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-void:#090C10;--bg-surface:#10151E;--bg-elevated:#161D29;
+  --border-hairline:#1E2738;--border-strong:#2A3550;
+  --accent-blue:#2E5CFF;--accent-blue-text:#7C9BFF;
+  --signal-yes:#00C853;--signal-no:#FF3B30;--signal-no-text:#FF6B62;--signal-warn:#F59E0B;
+  --text-primary:#F1F5F9;--text-muted:#8B9BB4;
+  --font-sans:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --radius-inner:4px;--radius-element:8px;
+  --duration-fast:175ms;--duration-medium:410ms;--duration-slow:975ms;
+  --ease-standard:cubic-bezier(0.24,1,0.4,1);--ease-exit:cubic-bezier(0.3,0,0.6,0.6);
+  --margin:32px;--gutter:24px;--max:1440px;
+}
+@media (max-width:1024px){:root{--margin:24px;--gutter:20px}}
+@media (max-width:640px){:root{--margin:16px;--gutter:12px}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:104px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg-void);color:var(--text-primary);font-family:var(--font-sans);font-size:1rem;line-height:1.55;overflow-x:hidden}
+img,svg,canvas{display:block;max-width:100%}
+a{color:var(--accent-blue-text);text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent-blue-text);outline-offset:3px;border-radius:2px}
+.mono{font-family:var(--font-mono)}
+.num,[data-num]{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--text-muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:8px;top:-60px;z-index:100;background:var(--accent-blue);color:#fff;padding:8px 12px;border-radius:var(--radius-inner)}
+.skip:focus{top:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--margin)}
+.label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;color:var(--text-muted);font-weight:500}
+h1,h2,h3{margin:0;font-weight:600}
+h2{font-size:clamp(1.6rem,2.8vw,2.4rem);line-height:1.1;letter-spacing:-.02em}
+h3{font-size:1.05rem;line-height:1.3;letter-spacing:-.01em}
+p{margin:0}
+section{border-top:1px solid var(--border-hairline)}
+.section{padding:72px 0}
+@media (max-width:640px){.section{padding:48px 0}}
+.sec-head{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter);margin-bottom:32px;align-items:end}
+.sec-head .idx{grid-column:span 2;font-family:var(--font-mono);font-size:.8rem;color:var(--text-muted)}
+.sec-head h2{grid-column:span 6}
+.sec-head p{grid-column:span 4;color:var(--text-muted);font-size:.95rem}
+@media (max-width:1024px){.sec-head{grid-template-columns:1fr}.sec-head>*{grid-column:auto!important}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--radius-element);border:1px solid var(--border-strong);background:var(--bg-elevated);color:var(--text-primary);font-weight:500;font-size:.94rem;text-decoration:none;cursor:pointer;transition:background-color 150ms var(--ease-standard),border-color 150ms var(--ease-standard),color 150ms;white-space:nowrap}
+.btn:hover{border-color:var(--accent-blue-text);background:#1b2433}
+.btn:active{transform:translateY(1px)}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.btn.primary{background:var(--accent-blue);border-color:var(--accent-blue);color:#fff}
+.btn.primary:hover{background:#4770ff;border-color:#4770ff}
+.btn.sm{min-height:34px;padding:0 12px;font-size:.82rem}
+.btn.ghost{background:transparent}
+.btn[aria-pressed="true"],.btn[aria-selected="true"]{border-color:var(--accent-blue);background:rgba(46,92,255,.16);color:var(--text-primary)}
+.btn[aria-busy="true"]{cursor:progress}
+.btn[aria-busy="true"]::after{content:"";width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 700ms linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.seg{display:inline-flex;border:1px solid var(--border-strong);border-radius:var(--radius-element);overflow:hidden}
+.seg button{border:0;border-right:1px solid var(--border-strong);background:transparent;min-height:32px;padding:0 10px;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);cursor:pointer;transition:background-color 150ms,color 150ms}
+.seg button:last-child{border-right:0}
+.seg button:hover{color:var(--text-primary);background:var(--bg-elevated)}
+.seg button[aria-pressed="true"]{background:var(--accent-blue);color:#fff}
+
+/* Tags */
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:.7rem;font-weight:500;padding:2px 8px;border-radius:var(--radius-inner);border:1px solid currentColor;line-height:1.5;white-space:nowrap}
+.tag.ok{color:var(--signal-yes)}.tag.no{color:var(--signal-no-text)}.tag.warn{color:var(--signal-warn)}.tag.info{color:var(--accent-blue-text)}.tag.neutral{color:var(--text-muted)}
+.demo{display:inline-flex;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.05em;padding:1px 6px;border:1px dashed var(--signal-warn);color:var(--signal-warn);border-radius:var(--radius-inner);white-space:nowrap}
+.real{display:inline-flex;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.05em;padding:1px 6px;border:1px solid var(--border-strong);color:var(--text-muted);border-radius:var(--radius-inner);white-space:nowrap}
+
+/* Panels */
+.panel{background:var(--bg-surface);border:1px solid var(--border-hairline);border-radius:var(--radius-element);min-width:0}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--border-hairline)}
+.panel-body{padding:16px}
+
+/* Ticker */
+.ticker{border-bottom:1px solid var(--border-hairline);background:var(--bg-void);height:36px;overflow:hidden;position:relative;display:flex;align-items:center}
+.ticker-label{flex:none;height:100%;display:flex;align-items:center;padding:0 12px;border-right:1px solid var(--border-hairline);background:var(--bg-surface);z-index:2}
+.ticker-viewport{overflow:hidden;flex:1;height:100%;mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.ticker-track{display:flex;width:max-content;height:100%;animation:tick 70s linear infinite}
+.ticker:hover .ticker-track,.ticker.paused .ticker-track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.tick-item{display:flex;align-items:center;gap:10px;padding:0 18px;border-right:1px solid var(--border-hairline);font-family:var(--font-mono);font-size:.76rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tick-item .sym{color:var(--text-muted)}
+.tick-item .px{min-width:7ch;text-align:right;padding:1px 3px;border-radius:2px;transition:background-color 600ms}
+.tick-item .px.flash{background:rgba(46,92,255,.28);transition:none}
+.spread-bar{width:44px;height:8px;border:1px solid var(--border-strong);position:relative;border-radius:1px}
+.spread-bar i{position:absolute;top:0;bottom:0;background:var(--accent-blue)}
+.ticker-pause{flex:none;height:100%;border:0;border-left:1px solid var(--border-hairline);background:var(--bg-surface);padding:0 12px;cursor:pointer;color:var(--text-muted);font-family:var(--font-mono);font-size:.72rem}
+.ticker-pause:hover{color:var(--text-primary)}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(9,12,16,.94);border-bottom:1px solid var(--border-hairline);backdrop-filter:saturate(1.2) blur(6px)}
+.nav-inner{display:flex;align-items:center;gap:24px;height:64px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.14em;font-size:1rem;color:var(--text-primary);text-decoration:none}
+.wordmark svg{width:22px;height:22px}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.7rem;color:var(--signal-warn);border:1px solid var(--border-strong);padding:3px 8px;border-radius:var(--radius-inner)}
+.status::before{content:"";width:6px;height:6px;border:1.5px solid currentColor;border-radius:50%}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.88rem;padding:8px 10px;border-radius:var(--radius-inner);transition:color 150ms,background-color 150ms}
+.nav-links a:hover,.nav-links a[aria-current="true"]{color:var(--text-primary);background:var(--bg-elevated)}
+.nav-cta{display:flex;gap:8px}
+.menu-btn{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--border-strong);background:var(--bg-elevated);border-radius:var(--radius-element);cursor:pointer;align-items:center;justify-content:center}
+.menu-btn span{display:block;width:18px;height:1.5px;background:var(--text-primary);position:relative}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--text-primary);transition:transform 150ms}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;border-top:1px solid var(--border-hairline);padding:12px var(--margin) 20px}
+.mobile-menu a.link{display:block;padding:12px 0;border-bottom:1px solid var(--border-hairline);color:var(--text-primary);text-decoration:none}
+.mobile-menu .btn{width:100%;margin-top:12px}
+@media (max-width:1180px){.nav-cta .btn.ghost{display:none}}
+@media (max-width:1024px){.nav-links,.nav-cta{display:none}.menu-btn{display:inline-flex}.mobile-menu.open{display:block}}
+
+/* Hero */
+.hero{border-top:0;padding:56px 0 0}
+.hero-grid{display:grid;grid-template-columns:3fr 2fr;gap:var(--gutter);align-items:center}
+.eyebrow{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);margin-bottom:24px}
+.eyebrow span+span::before{content:"/";margin-right:14px;color:var(--border-strong)}
+.hero h1{font-size:clamp(2.25rem,5.2vw,4.5rem);line-height:1.02;letter-spacing:-.03em;max-width:15ch}
+.hero h1 .q{display:block}
+.hero h1 .q2{color:var(--accent-blue-text)}
+.hero .sub{font-size:1.12rem;color:var(--text-primary);max-width:60ch;margin-top:24px}
+.hero .support{color:var(--text-muted);max-width:62ch;margin-top:14px;font-size:.95rem}
+.hero-ctas{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.coin-stage{position:relative;aspect-ratio:1/1;width:100%;max-width:560px;justify-self:end;border:1px solid var(--border-hairline);border-radius:var(--radius-element);background:radial-gradient(circle at 50% 45%,#111a2a 0,var(--bg-void) 70%);overflow:hidden}
+.coin-stage canvas{width:100%!important;height:100%!important;cursor:grab}
+.coin-stage .coin-fallback{position:absolute;inset:12%;display:none}
+.coin-stage.fallback .coin-fallback{display:block}
+.coin-caption{position:absolute;left:12px;right:12px;bottom:10px;display:flex;justify-content:space-between;gap:8px;font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);pointer-events:none}
+.coin-caption .hint{text-align:right}
+.telemetry{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline)}
+.telemetry>div{padding:18px 16px;border-right:1px solid var(--border-hairline);min-width:0}
+.telemetry>div:first-child{padding-left:0}
+.telemetry>div:last-child{border-right:0}
+.telemetry .v{font-family:var(--font-mono);font-size:1rem;margin-top:6px;font-variant-numeric:tabular-nums}
+.telemetry .n{font-size:.78rem;color:var(--text-muted);margin-top:4px}
+@media (max-width:1024px){.hero-grid{grid-template-columns:1fr}.coin-stage{justify-self:stretch;max-width:none;aspect-ratio:16/11}.telemetry{grid-template-columns:repeat(2,1fr)}.telemetry>div:nth-child(2){border-right:0}.telemetry>div:nth-child(3){padding-left:0}.telemetry>div:nth-child(-n+2){border-bottom:1px solid var(--border-hairline)}}
+@media (max-width:640px){.hero{padding-top:36px}.coin-stage{aspect-ratio:1/1}.telemetry{grid-template-columns:1fr}.telemetry>div{padding-left:0!important;border-right:0;border-bottom:1px solid var(--border-hairline)}.telemetry>div:last-child{border-bottom:0}}
+
+/* Terminal */
+.market-switch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.term-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter)}
+.term-a{grid-column:span 8}
+.term-side{grid-column:span 4;display:grid;gap:var(--gutter);align-content:start}
+.term-c{grid-column:span 12}
+@media (max-width:1024px){.term-a,.term-side,.term-c{grid-column:span 12}.term-side{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.term-side{grid-template-columns:1fr}}
+.quote-row{display:grid;grid-template-columns:repeat(4,auto);gap:4px 28px;justify-content:start;padding:14px 16px;border-bottom:1px solid var(--border-hairline)}
+.quote-row .v{font-family:var(--font-mono);font-size:1.35rem;font-variant-numeric:tabular-nums}
+.quote-row .v.sm{font-size:1rem}
+@media (max-width:640px){.quote-row{grid-template-columns:repeat(2,1fr)}}
+.chart-wrap{position:relative;height:320px;touch-action:pan-y}
+.chart-wrap.short{height:220px}
+.chart-wrap canvas{width:100%;height:100%}
+.tooltip{position:absolute;pointer-events:none;background:var(--bg-elevated);border:1px solid var(--border-strong);border-radius:var(--radius-inner);padding:6px 8px;font-family:var(--font-mono);font-size:.72rem;font-variant-numeric:tabular-nums;white-space:nowrap;opacity:0;transition:opacity 120ms}
+.tooltip.on{opacity:1}
+.chart-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--border-hairline);font-size:.78rem;color:var(--text-muted)}
+details.table-alt{border-top:1px solid var(--border-hairline)}
+details.table-alt summary{cursor:pointer;padding:10px 16px;font-size:.82rem;color:var(--text-muted)}
+details.table-alt summary:hover{color:var(--text-primary)}
+.table-scroll{overflow-x:auto;max-height:240px}
+table{border-collapse:collapse;width:100%;font-size:.8rem}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--border-hairline);white-space:nowrap}
+th{font-family:var(--font-mono);font-weight:500;font-size:.7rem;color:var(--text-muted);background:var(--bg-surface);position:sticky;top:0}
+td.num,td .num{text-align:right}
+.gauge{padding:16px}
+.gauge-track{position:relative;height:10px;display:grid;grid-template-columns:3fr 2fr 4fr;gap:2px;margin:18px 0 8px}
+.gauge-track span{background:var(--bg-elevated);border:1px solid var(--border-hairline)}
+.gauge-track span.on{border-color:currentColor}
+.gauge-marker{position:absolute;top:-6px;width:2px;height:22px;background:var(--text-primary);transition:left var(--duration-medium) var(--ease-standard)}
+.gauge-scale{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted)}
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border-hairline)}
+.score-grid>div{padding:12px;border-right:1px solid var(--border-hairline)}
+.score-grid>div:last-child{border-right:0}
+.score-grid .v{font-family:var(--font-mono);font-size:1.2rem}
+.pips{display:flex;gap:3px;margin-top:6px}.pips i{width:12px;height:4px;background:var(--bg-elevated);border:1px solid var(--border-strong)}.pips i.on{background:var(--text-primary);border-color:var(--text-primary)}
+.inspector{display:grid;grid-template-columns:7fr 5fr}
+@media (max-width:1024px){.inspector{grid-template-columns:1fr}}
+.code{margin:0;padding:16px;font-family:var(--font-mono);font-size:.76rem;line-height:1.65;overflow:auto;max-height:440px;background:var(--bg-void);color:#c8d3e6;tab-size:2}
+.code .k{color:var(--accent-blue-text)}.code .s{color:#9fd8b4}.code .n{color:#f2c879}.code .c{color:var(--text-muted)}.code .b{color:#ff9b94}
+.insp-side{border-left:1px solid var(--border-hairline);min-width:0}
+@media (max-width:1024px){.insp-side{border-left:0;border-top:1px solid var(--border-hairline)}}
+.flag{border-bottom:1px solid var(--border-hairline)}
+.flag>button{width:100%;display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:transparent;border:0;text-align:left;cursor:pointer;transition:background-color 150ms}
+.flag>button:hover{background:var(--bg-elevated)}
+.flag>button .chev{margin-left:auto;font-family:var(--font-mono);color:var(--text-muted);transition:transform 150ms}
+.flag>button[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.flag .flag-body{padding:0 16px 14px;font-size:.86rem;color:var(--text-muted);display:none}
+.flag .flag-body.open{display:block}
+.excerpt{margin-top:10px;border-left:2px solid var(--accent-blue);padding:8px 12px;background:var(--bg-void);font-family:var(--font-mono);font-size:.76rem;color:var(--text-primary)}
+.excerpt mark{background:rgba(245,158,11,.22);color:var(--text-primary);outline:1px dashed var(--signal-warn);padding:0 3px}
+.purchase{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 16px;border-bottom:1px solid var(--border-hairline);font-size:.86rem}
+.purchase .meta{grid-column:1/-1;font-size:.78rem;color:var(--text-muted)}
+
+/* Walkthrough */
+.wt-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.wt-controls .sep{width:1px;height:28px;background:var(--border-hairline);margin:0 4px}
+.timeline{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--border-hairline);border-radius:var(--radius-element);overflow:hidden;margin-bottom:var(--gutter);list-style:none;padding:0}
+.timeline li{border-right:1px solid var(--border-hairline);min-width:0}
+.timeline li:last-child{border-right:0}
+.timeline button{width:100%;height:100%;text-align:left;padding:12px 14px;background:var(--bg-surface);border:0;cursor:pointer;position:relative;transition:background-color 150ms}
+.timeline button:hover{background:var(--bg-elevated)}
+.timeline button .n{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted)}
+.timeline button .t{display:block;font-size:.86rem;font-weight:500;margin-top:2px}
+.timeline button .st{display:block;font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);margin-top:4px}
+.timeline button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:transparent}
+.timeline button[aria-current="step"]{background:var(--bg-elevated)}
+.timeline button[aria-current="step"]::after{background:var(--accent-blue)}
+.timeline button.done .st{color:var(--signal-yes)}
+.timeline button.fail .st{color:var(--signal-no-text)}
+.timeline button.wait .st{color:var(--signal-warn)}
+@media (max-width:1024px){.timeline{grid-template-columns:repeat(3,1fr)}.timeline li:nth-child(3){border-right:0}.timeline li:nth-child(-n+3){border-bottom:1px solid var(--border-hairline)}}
+@media (max-width:560px){.timeline{grid-template-columns:repeat(2,1fr)}.timeline li{border-bottom:1px solid var(--border-hairline)}.timeline li:nth-child(3){border-right:1px solid var(--border-hairline)}.timeline li:nth-child(2n){border-right:0}.timeline li:nth-last-child(-n+2){border-bottom:0}}
+.wt-grid{display:grid;grid-template-columns:7fr 5fr;gap:var(--gutter)}
+@media (max-width:1024px){.wt-grid{grid-template-columns:1fr}}
+.stage{min-height:560px}
+.stage-body{padding:20px;animation:stageIn var(--duration-medium) var(--ease-standard)}
+@keyframes stageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kv{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:6px 16px;font-size:.86rem;margin:12px 0}
+.kv dt{color:var(--text-muted);font-family:var(--font-mono);font-size:.74rem;padding-top:2px}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:480px){.kv{grid-template-columns:1fr;gap:2px}.kv dd{margin-bottom:8px}}
+.box{border:1px solid var(--border-hairline);border-radius:var(--radius-element);background:var(--bg-void);padding:14px;margin-top:14px}
+.box.warn{border-color:rgba(245,158,11,.5)}.box.no{border-color:rgba(255,59,48,.55)}.box.ok{border-color:rgba(0,200,83,.5)}
+.tiers{width:100%;margin-top:12px}
+.tiers td,.tiers th{white-space:normal}
+.tiers tr.active td{background:rgba(46,92,255,.12)}
+.tiers tr.active td:first-child{box-shadow:inset 2px 0 0 var(--accent-blue)}
+.range{width:100%;accent-color:var(--accent-blue);min-height:32px}
+.budget{height:10px;border:1px solid var(--border-strong);border-radius:2px;position:relative;overflow:hidden;margin-top:8px}
+.budget i{position:absolute;top:0;bottom:0;left:0}
+.budget .spent{background:var(--accent-blue)}
+.budget .res{background:repeating-linear-gradient(45deg,var(--signal-warn) 0 3px,transparent 3px 6px)}
+.voice{border:1px solid var(--border-strong);border-radius:var(--radius-element);margin-top:14px;overflow:hidden}
+.voice-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--border-hairline);background:var(--bg-elevated)}
+.wave{height:56px;display:flex;align-items:center;gap:3px;padding:0 14px}
+.wave i{flex:1;max-width:5px;background:var(--accent-blue-text);border-radius:1px;height:6px;transition:height 120ms}
+.voice-body{padding:12px 14px}
+.voice-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}
+.hashline{font-family:var(--font-mono);font-size:.74rem;overflow-wrap:anywhere;padding:8px 10px;border:1px solid var(--border-hairline);border-radius:var(--radius-inner);background:var(--bg-surface);margin-top:6px}
+.hashline.bad{border-color:var(--signal-no);color:var(--signal-no-text)}
+.hashline.good{border-color:rgba(0,200,83,.55)}
+.diff{background:rgba(255,59,48,.2);outline:1px solid var(--signal-no);padding:0 2px}
+.chain{list-style:none;margin:14px 0 0;padding:0;border-left:1px solid var(--border-strong)}
+.chain li{position:relative;padding:0 0 14px 18px}
+.chain li::before{content:"";position:absolute;left:-5px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--bg-void);border:1.5px solid var(--text-muted)}
+.chain li.ok::before{border-color:var(--signal-yes);background:var(--signal-yes)}
+.chain li.warn::before{border-color:var(--signal-warn)}
+.chain li.no::before{border-color:var(--signal-no);background:var(--signal-no)}
+.chain li .t{font-weight:500;font-size:.9rem}
+.chain li .d{font-size:.8rem;color:var(--text-muted)}
+.arch{padding:12px}
+.arch svg{width:100%;height:auto}
+.arch .node rect{fill:var(--bg-elevated);stroke:var(--border-strong);transition:stroke 150ms,fill 150ms}
+.arch .node text{fill:var(--text-muted);font-family:var(--font-mono);font-size:11px}
+.arch .node .tt{fill:var(--text-primary);font-family:var(--font-sans);font-size:13px;font-weight:600}
+.arch .node:hover rect,.arch .node:focus rect{stroke:var(--accent-blue-text)}
+.arch .node:focus{outline:none}
+.arch .node.on rect{stroke:var(--accent-blue);fill:#17244a}
+.arch .node.err rect{stroke:var(--signal-no);fill:#2a1416}
+.arch .node.ok rect{stroke:var(--signal-yes)}
+.arch .edge{stroke:var(--border-strong);stroke-width:1.5;fill:none}
+.arch .edge.on{stroke:var(--accent-blue);stroke-dasharray:6 6;animation:flow 900ms linear infinite}
+.arch .edge.err{stroke:var(--signal-no);stroke-dasharray:3 4}
+.arch .edge.resp{stroke-dasharray:2 4}
+@keyframes flow{to{stroke-dashoffset:-12}}
+.arch-tip{min-height:64px;padding:10px 14px;border-top:1px solid var(--border-hairline);font-size:.82rem;color:var(--text-muted)}
+
+/* Stack */
+.matrix{border:1px solid var(--border-hairline);border-radius:var(--radius-element);overflow:hidden}
+.matrix .row{display:grid;grid-template-columns:64px 160px 1fr 1.2fr;border-bottom:1px solid var(--border-hairline);align-items:stretch}
+.matrix .row:last-child{border-bottom:0}
+.matrix .row>div{padding:14px 16px;border-right:1px solid var(--border-hairline);min-width:0}
+.matrix .row>div:last-child{border-right:0}
+.matrix .row.head>div{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);padding:10px 16px;background:var(--bg-surface)}
+.matrix .layer{font-weight:600}
+.matrix .tech{font-family:var(--font-mono);font-size:.78rem;color:var(--text-primary)}
+@media (max-width:760px){.matrix .row{grid-template-columns:48px 1fr}.matrix .row>div:nth-child(3),.matrix .row>div:nth-child(4){grid-column:2;border-right:0;padding-top:0}.matrix .row>div:nth-child(2){border-right:0}.matrix .row>div:first-child{grid-row:span 3}.matrix .row.head{display:none}}
+.modules{display:grid;grid-template-columns:repeat(12,1fr);gap:0;margin-top:40px;border-top:1px solid var(--border-hairline)}
+.module{grid-column:span 3;padding:22px 20px 22px 0;border-right:1px solid var(--border-hairline)}
+.module+.module{padding-left:20px}
+.module:last-child{border-right:0}
+.module ol{margin:12px 0 0;padding:0;list-style:none;counter-reset:m}
+.module li{counter-increment:m;display:flex;gap:10px;font-size:.88rem;padding:6px 0;border-bottom:1px dashed var(--border-hairline)}
+.module li::before{content:counter(m,decimal-leading-zero);font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);padding-top:3px}
+.module .where{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:12px;overflow-wrap:anywhere}
+@media (max-width:1024px){.module{grid-column:span 6;padding:20px!important;border-bottom:1px solid var(--border-hairline)}.module:nth-child(2n){border-right:0}}
+@media (max-width:640px){.module{grid-column:span 12;border-right:0;padding:20px 0!important}}
+.tabs{margin-top:40px}
+.tablist{display:flex;overflow-x:auto;border-bottom:1px solid var(--border-hairline)}
+.tablist button{flex:none;background:transparent;border:0;border-bottom:2px solid transparent;padding:12px 16px;color:var(--text-muted);font-family:var(--font-mono);font-size:.78rem;cursor:pointer;transition:color 150ms,border-color 150ms;min-height:44px}
+.tablist button:hover{color:var(--text-primary)}
+.tablist button[aria-selected="true"]{color:var(--text-primary);border-bottom-color:var(--accent-blue)}
+.tabpanel{display:grid;grid-template-columns:8fr 4fr}
+.tabpanel[hidden]{display:none}
+.tabpanel .explain{padding:16px;border-left:1px solid var(--border-hairline);font-size:.88rem;color:var(--text-muted)}
+.tabpanel .explain p+p{margin-top:10px}
+@media (max-width:1024px){.tabpanel{grid-template-columns:1fr}.tabpanel .explain{border-left:0;border-top:1px solid var(--border-hairline)}}
+.copy-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--border-hairline);background:var(--bg-surface)}
+
+/* Ledger */
+.ledger-tools{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.counts{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--font-mono);font-size:.76rem;color:var(--text-muted)}
+.counts b{color:var(--text-primary);font-weight:500}
+.ledger{overflow-x:auto;border:1px solid var(--border-hairline);border-radius:var(--radius-element)}
+.ledger table{min-width:1080px}
+.ledger th button{background:transparent;border:0;color:inherit;font:inherit;cursor:pointer;padding:0;display:inline-flex;gap:4px}
+.ledger th button:hover{color:var(--text-primary)}
+.ledger tbody tr{cursor:pointer;transition:background-color 150ms}
+.ledger tbody tr:hover,.ledger tbody tr:focus-visible{background:var(--bg-elevated)}
+.ledger tbody tr[aria-selected="true"]{background:rgba(46,92,255,.12)}
+.ledger tbody tr.new{animation:rowin 1.4s var(--ease-standard)}
+@keyframes rowin{from{background:rgba(46,92,255,.35)}to{background:transparent}}
+.trunc{display:inline-flex;align-items:center;gap:6px}
+.trunc code{font-family:var(--font-mono);font-size:.74rem}
+.icon-btn{border:1px solid var(--border-strong);background:transparent;border-radius:var(--radius-inner);width:26px;height:26px;cursor:pointer;color:var(--text-muted);font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
+.icon-btn:hover{color:var(--text-primary);border-color:var(--accent-blue-text)}
+.empty{padding:40px 16px;text-align:center;color:var(--text-muted)}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(5,7,10,.7);z-index:80;opacity:0;pointer-events:none;transition:opacity var(--duration-fast)}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--bg-surface);border-left:1px solid var(--border-strong);z-index:90;transform:translateX(100%);transition:transform var(--duration-medium) var(--ease-standard);display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border-hairline)}
+.drawer-body{overflow:auto;padding:4px 20px 24px}
+.drawer-body h3{margin-top:20px;font-size:.92rem}
+.drawer-body .hashline{font-size:.72rem}
+
+/* Footer */
+.guarantees{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline)}
+.guarantees>div{padding:24px 20px 24px 0;border-right:1px solid var(--border-hairline)}
+.guarantees>div+div{padding-left:20px}
+.guarantees>div:last-child{border-right:0}
+.guarantees h3{font-size:.98rem}
+.guarantees p{font-size:.86rem;color:var(--text-muted);margin-top:6px}
+@media (max-width:1024px){.guarantees{grid-template-columns:1fr 1fr}.guarantees>div{padding:20px!important}.guarantees>div:nth-child(2n){border-right:0}.guarantees>div:nth-child(-n+2){border-bottom:1px solid var(--border-hairline)}}
+@media (max-width:560px){.guarantees{grid-template-columns:1fr}.guarantees>div{border-right:0;padding:18px 0!important;border-bottom:1px solid var(--border-hairline)}.guarantees>div:last-child{border-bottom:0}}
+.foot-links{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:var(--gutter);padding:32px 0}
+.foot-links h4{margin:0 0 10px;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);font-weight:500}
+.foot-links ul{list-style:none;margin:0;padding:0;font-size:.88rem}
+.foot-links li{padding:4px 0}
+.foot-links .na{color:var(--text-muted)}
+@media (max-width:760px){.foot-links{grid-template-columns:1fr 1fr}.foot-links>div:first-child{grid-column:1/-1}}
+.copyright{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 0 32px;border-top:1px solid var(--border-hairline);font-size:.78rem;color:var(--text-muted)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);background:var(--bg-elevated);border:1px solid var(--border-strong);padding:10px 14px;border-radius:var(--radius-element);font-size:.85rem;z-index:120;opacity:0;pointer-events:none;transition:opacity 150ms,transform 150ms}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.noscript{padding:12px var(--margin);background:var(--bg-elevated);border-bottom:1px solid var(--signal-warn);font-size:.9rem}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .ticker-track{animation:none!important;transform:none}
+  .ticker-viewport{overflow-x:auto;mask-image:none}
+}
+.copy-row .demo,.copy-row .real{white-space:normal;line-height:1.4;padding:3px 6px}
+@media (max-width:480px){.score-grid{grid-template-columns:1fr 1fr}.score-grid>div:nth-child(2){border-right:0}.score-grid>div:nth-child(-n+2){border-bottom:1px solid var(--border-hairline)}}
+.term-a{display:flex;flex-direction:column}.term-a .chart-wrap{flex:1;min-height:320px}
+@media (min-width:1025px){.inspector{position:relative}.inspector>.code{position:absolute;left:0;top:0;bottom:0;width:58.333%;max-height:none}.insp-side{grid-column:2;min-height:440px}}
+.status{white-space:nowrap}
+@media (max-width:400px){.status{font-size:.62rem;padding:3px 6px}.wordmark{letter-spacing:.08em}.nav-inner{gap:12px}}
+@media (max-width:640px){.arch{overflow-x:auto}.arch svg{min-width:500px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<noscript><div class="noscript">JavaScript is off. The text below still explains Verity, but the charts, the walkthrough and the ledger need JavaScript to run.</div></noscript>
+
+<!-- 01 Ticker -->
+<div class="ticker" id="ticker" role="region" aria-label="Market ticker, Gemini Exchange fixture snapshots">
+  <div class="ticker-label"><span class="real" title="Prices are the captured snapshots, not a live feed">Snapshot 2026-11-17/18</span></div>
+  <div class="ticker-viewport"><div class="ticker-track" id="tickerTrack"></div></div>
+  <button class="ticker-pause" id="tickerPause" aria-pressed="false" aria-label="Pause ticker">Pause</button>
+</div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="wordmark" href="#top" aria-label="Verity, back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h4.2L12 15.6 16.8 4H21l-7.4 16h-3.2z" fill="#F1F5F9"/><path d="M10.4 20h3.2l1.3-2.9H9.1z" fill="#2E5CFF"/></svg>
+      VERITY
+    </a>
+    <span class="status" title="No live payment, settlement or stream service is connected to this page">Testnet · demo mode</span>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#terminal">Terminal</a>
+      <a href="#stack">4-layer stack</a>
+      <a href="#walkthrough">Live walkthrough</a>
+      <a href="#modules">Modules</a>
+      <a href="#reconciler">Reconciler</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn ghost sm" href="#spec">Read specification</a>
+      <a class="btn primary sm" href="#walkthrough" data-launch>Launch agent terminal</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="link" href="#terminal">Terminal</a>
+    <a class="link" href="#stack">4-layer stack</a>
+    <a class="link" href="#walkthrough">Live walkthrough</a>
+    <a class="link" href="#modules">Modules</a>
+    <a class="link" href="#reconciler">Reconciler</a>
+    <a class="btn primary" href="#walkthrough" data-launch>Launch agent terminal</a>
+    <a class="btn" href="#spec">Read specification</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- 02 Hero -->
+<section class="hero" id="top" aria-labelledby="heroTitle">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span>Gemini Exchange market data</span><span>x402 + USDC</span><span>EIP-3009</span><span>QuickNode Streams</span></p>
+        <h1 id="heroTitle"><span class="q">Separate “will it happen?”</span><span class="q q2">from “how does it resolve?”</span></h1>
+        <p class="sub">Verity reads a prediction market’s settlement rules, scores the resolution risk, buys research only to close a real gap through request-bound USDC payments, and checks that what arrived matches what was paid for.</p>
+        <p class="support">The price says how likely the crowd thinks an event is. It says nothing about which report settles it, or whether a missing word in the rules decides the payout. Verity scores that second question with code rules, proposes the smallest purchase that answers it, and keeps every purchase inside the owner’s spending tiers. A wallet signature, not a voice, authorizes the larger ones. It places no trades.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#terminal" data-inspect>Inspect contract demo</a>
+          <a class="btn" href="#stack">Explore architecture</a>
+        </div>
+      </div>
+      <div class="coin-stage" id="coinStage">
+        <div class="coin-fallback" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><defs><radialGradient id="cg" cx="40%" cy="35%"><stop offset="0" stop-color="#f6dc8a"/><stop offset=".6" stop-color="#c39a3a"/><stop offset="1" stop-color="#6d531c"/></radialGradient></defs><circle cx="100" cy="100" r="92" fill="#3a2d10"/><circle cx="100" cy="100" r="86" fill="url(#cg)"/><circle cx="100" cy="100" r="70" fill="none" stroke="#7a5d20" stroke-width="1.5"/><circle cx="100" cy="100" r="64" fill="none" stroke="#7a5d20" stroke-width=".8"/><text x="100" y="128" text-anchor="middle" font-size="84" font-family="Space Grotesk,sans-serif" font-weight="700" fill="#5b4413">₿</text></svg>
+        </div>
+        <div class="coin-caption"><span>Editorial visual. Verity pays in USDC on Arc Testnet, not bitcoin.</span><span class="hint" id="coinHint">Drag to tilt · click to spin</span></div>
+      </div>
+    </div>
+    <dl class="telemetry" aria-label="Configured values">
+      <div><dt class="label">Research purchase price</dt><dd class="v" style="margin:6px 0 0">0.05 USDC</dd><dd class="n" style="margin:4px 0 0">NWS settlement-version check, catalog v1</dd></div>
+      <div><dt class="label">Replay protection</dt><dd class="v" style="margin:6px 0 0">EIP-3009 nonce</dd><dd class="n" style="margin:4px 0 0">One-time authorization, bound to the request hash</dd></div>
+      <div><dt class="label">Human approval</dt><dd class="v" style="margin:6px 0 0">0.51–2.00 USDC</dd><dd class="n" style="margin:4px 0 0">Voice explains, the wallet signs. Over 2.00 is rejected.</dd></div>
+      <div><dt class="label">Audit state</dt><dd class="v" style="margin:6px 0 0">Demo reconciliation</dd><dd class="n" style="margin:4px 0 0">No live QuickNode stream is connected</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 03 Terminal -->
+<section class="section" id="terminal" aria-labelledby="termTitle">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">03 / Market terminal</span><h2 id="termTitle">The price and the rules are two different readings</h2><p>Quotes and scores below come from the captured Gemini Exchange markets and the Nov 18 analysis. The price paths and candles are demo fixtures, because only snapshots were recorded.</p></div>
+    <div class="market-switch" role="group" aria-label="Choose a market">
+      <span class="label">Market</span>
+      <button class="btn sm" data-market="nyc" aria-pressed="true">NYC high, 62 to 63°F</button>
+      <button class="btn sm" data-market="okc" aria-pressed="false">Atlanta vs Oklahoma City</button>
+    </div>
+    <div class="term-grid">
+      <div class="panel term-a">
+        <div class="panel-head"><h3 id="chartTitle">Crowd-implied probability</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="demo">DEMO FIXTURE PATH</span><div class="seg" role="group" aria-label="Timeframe" id="tfSeg"><button data-tf="1H" aria-pressed="false">1H</button><button data-tf="24H" aria-pressed="true">24H</button><button data-tf="7D" aria-pressed="false">7D</button><button data-tf="30D" aria-pressed="false">30D</button><button data-tf="ALL" aria-pressed="false">ALL</button></div></div></div>
+        <div class="quote-row" aria-live="polite">
+          <div><div class="label">Mid (implied)</div><div class="v" id="qMid">56.0¢</div></div>
+          <div><div class="label">Bid / ask</div><div class="v sm" id="qBA">54¢ / 58¢</div></div>
+          <div><div class="label">Traded</div><div class="v sm" id="qVol">$7</div></div>
+          <div><div class="label">Cursor</div><div class="v sm" id="qCur">—</div></div>
+        </div>
+        <div class="chart-wrap" id="probWrap"><canvas id="probChart" role="img" aria-label="Line chart of crowd-implied probability. Use the table below for values."></canvas><div class="tooltip" id="probTip"></div></div>
+        <div class="chart-foot"><span id="probFoot">The path ends at the real captured mid. Earlier points are a deterministic demo fixture.</span><span>No fair-value line: Verity does not forecast outcomes.</span></div>
+        <details class="table-alt"><summary>Show chart values as a table</summary><div class="table-scroll"><table><thead><tr><th scope="col">Time (UTC)</th><th scope="col">Implied probability</th></tr></thead><tbody id="probTable"></tbody></table></div></details>
+      </div>
+      <div class="term-side">
+        <div class="panel">
+          <div class="panel-head"><h3>Resolution risk</h3><span class="real">verity-rules-v1</span></div>
+          <div class="gauge">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><div class="num" style="font-size:2rem" id="riskTotal">8 / 12</div><span class="tag warn" id="riskTag">! Medium</span></div>
+            <div class="gauge-track" id="gaugeTrack" aria-hidden="true"><span></span><span></span><span></span><i class="gauge-marker" id="gaugeMarker"></i></div>
+            <div class="gauge-scale" aria-hidden="true"><span>4 Low</span><span>7 Medium</span><span>9 High 12</span></div>
+            <p class="muted" style="font-size:.82rem;margin-top:12px" id="riskWhy">Risk is how the contract settles, on its own 4–12 scale. It is not a probability.</p>
+          </div>
+          <div class="score-grid" id="scoreGrid"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Microstructure</h3><div style="display:flex;gap:6px;align-items:center"><span class="demo">DEMO FIXTURE</span><button class="btn sm" id="candlePause" aria-pressed="false">Pause</button></div></div>
+          <div class="chart-wrap short" id="candleWrap"><canvas id="candleChart" role="img" aria-label="Candlestick, volume and order-book depth for the selected contract, demo fixture"></canvas><div class="tooltip" id="candleTip"></div></div>
+          <div class="chart-foot"><span>Top of book is real; candles and depth beyond it are fixtures.</span><span class="num" id="candleStamp">—</span></div>
+        </div>
+      </div>
+      <div class="panel term-c">
+        <div class="panel-head"><h3>Risk inspector</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="real" id="inspSrc">samples/nyc_high_gap_remains.json</span><button class="btn sm" id="copyJson">Copy JSON</button></div></div>
+        <div class="inspector">
+          <pre class="code" id="riskJson" tabindex="0" aria-label="Risk analysis JSON"></pre>
+          <div class="insp-side">
+            <div class="panel-head" style="border-top:0"><span class="label">Flags and gaps</span><span class="label">click to open</span></div>
+            <div id="flagList"></div>
+            <div class="panel-head"><span class="label">Proposed purchases</span><span class="label">catalog v1</span></div>
+            <div id="purchaseList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Walkthrough -->
+<section class="section" id="walkthrough" aria-labelledby="wtTitle">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">04 / Live walkthrough</span><h2 id="wtTitle">One research run, from contract to audit</h2><p>A deterministic simulation of the NYC run. Hashes are computed in your browser. Nothing here can sign or send a payment.</p></div>
+    <div class="wt-controls" role="toolbar" aria-label="Simulation controls">
+      <button class="btn primary" id="wtRun">Simulate agent run</button>
+      <button class="btn" id="wtPause" disabled>Pause</button>
+      <button class="btn" id="wtReset">Reset</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="btn" id="wtPrev" aria-label="Previous step">Previous step</button>
+      <button class="btn" id="wtNext" aria-label="Next step">Next step</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="btn" id="wtEvidence">Inspect evidence</button>
+      <span class="demo" style="margin-left:auto">SIMULATED</span>
+    </div>
+    <ol class="timeline" id="timeline" aria-label="Run steps"></ol>
+    <div class="wt-grid">
+      <div class="panel stage" id="stage" aria-live="polite"></div>
+      <div class="panel">
+        <div class="panel-head"><h3>System path</h3><span class="label" id="archStep">Step 1 of 6</span></div>
+        <div class="arch" id="arch"></div>
+        <div class="arch-tip" id="archTip" aria-live="polite">Hover or tab to a node to see what it does.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Stack and modules -->
+<section class="section" id="stack" aria-labelledby="stackTitle">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">05 / Architecture</span><h2 id="stackTitle">Four layers, each with one job</h2><p>The analysis only proposes. A separate payment service holds the signer and decides. That split is the whole safety argument.</p></div>
+    <div class="matrix" role="table" aria-label="Four-layer architecture">
+      <div class="row head" role="row"><div role="columnheader">Layer</div><div role="columnheader">Name</div><div role="columnheader">Responsibility</div><div role="columnheader">Technology</div></div>
+      <div class="row" role="row"><div role="cell" class="num muted">L1</div><div role="cell" class="layer">Brain</div><div role="cell">Reads the contract, scores resolution risk, finds gaps, proposes purchases</div><div role="cell" class="tech">Gemini Exchange public API · verity-rules-v1 (code rules, no LLM)</div></div>
+      <div class="row" role="row"><div role="cell" class="num muted">L2</div><div role="cell" class="layer">Wallet</div><div role="cell">Pays for exactly the requested resource, once</div><div role="cell" class="tech">x402 · EIP-3009 · USDC on Arc Testnet</div></div>
+      <div class="row" role="row"><div role="cell" class="num muted">L3</div><div role="cell" class="layer">Safeguard</div><div role="cell">Enforces tiers, the 25 USDC budget and human approval</div><div role="cell" class="tech">Policy engine · ElevenLabs voice · wallet signature</div></div>
+      <div class="row" role="row"><div role="cell" class="num muted">L4</div><div role="cell" class="layer">Auditor</div><div role="cell">Matches each payment to a verified delivery</div><div role="cell" class="tech">QuickNode Streams · reconciler</div></div>
+    </div>
+
+    <div class="modules" id="modules">
+      <article class="module"><span class="label">Module 1</span><h3 style="margin-top:6px">Hardened payments</h3><ol><li>Canonicalize the request</li><li>Hash it with keccak-256</li><li>Sign an EIP-3009 authorization</li><li>Merchant recomputes and compares</li><li>Nonce blocks a replay</li></ol><p class="where">payment service (separate from analysis/)</p></article>
+      <article class="module"><span class="label">Module 2</span><h3 style="margin-top:6px">Market risk analysis</h3><ol><li>Read the event and terms link</li><li>Inspect the settlement source</li><li>Read bid, ask and volume</li><li>Score four categories, 1 to 3</li><li>List gaps and free checks</li></ol><p class="where">analysis/verity/rules_analyst.py, live.py</p></article>
+      <article class="module"><span class="label">Module 3</span><h3 style="margin-top:6px">Voice spending approval</h3><ol><li>Match the amount to a tier</li><li>Check budget and allowlist</li><li>Escalate 0.51–2.00 to the owner</li><li>Owner signs with the wallet</li><li>Deny or time out cleanly</li></ol><p class="where">policy engine · ElevenLabs</p></article>
+      <article class="module"><span class="label">Module 4</span><h3 style="margin-top:6px">Reconciliation</h3><ol><li>Ingest settlement events</li><li>Accept the merchant delivery</li><li>Verify the content hash</li><li>Deduplicate by event and nonce</li><li>Flag every discrepancy</li></ol><p class="where">QuickNode Streams · reconciler</p></article>
+    </div>
+
+    <div class="tabs panel" id="spec">
+      <div class="tablist" role="tablist" aria-label="Technical previews" id="tablist">
+        <button role="tab" id="tab-402" aria-controls="panel-402" aria-selected="true" tabindex="0">HTTP 402 challenge</button>
+        <button role="tab" id="tab-3009" aria-controls="panel-3009" aria-selected="false" tabindex="-1">EIP-3009 authorization</button>
+        <button role="tab" id="tab-risk" aria-controls="panel-risk" aria-selected="false" tabindex="-1">Rules analyst risk JSON</button>
+        <button role="tab" id="tab-qn" aria-controls="panel-qn" aria-selected="false" tabindex="-1">QuickNode stream event</button>
+      </div>
+      <div id="tabPanels"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 Reconciler -->
+<section class="section" id="reconciler" aria-labelledby="recTitle">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">06 / Reconciler</span><h2 id="recTitle">Every payment, matched to what was delivered</h2><p>Demo fixture ledger. Request and content hashes are computed here from the fixture records; transaction references are demo identifiers, not chain hashes.</p></div>
+    <div class="ledger-tools">
+      <div class="seg" role="group" aria-label="Filter records" id="recFilter">
+        <button data-f="all" aria-pressed="true">All records</button>
+        <button data-f="ok" aria-pressed="false">Verified match</button>
+        <button data-f="flag" aria-pressed="false">Flagged exceptions</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="demo">DEMO FIXTURE STREAM</span>
+        <button class="btn sm" id="recReplay">Replay fixture stream</button>
+        <button class="btn sm ghost" id="recClear">Clear</button>
+      </div>
+    </div>
+    <div class="counts" aria-live="polite" id="recCounts"></div>
+    <div class="ledger" style="margin-top:12px">
+      <table aria-label="Payment and delivery ledger">
+        <thead><tr>
+          <th scope="col"><button data-sort="id">Purchase ID</button></th>
+          <th scope="col">Payment rail</th>
+          <th scope="col">Merchant</th>
+          <th scope="col"><button data-sort="amount">Amount</button></th>
+          <th scope="col">Request hash</th>
+          <th scope="col">Transaction ref</th>
+          <th scope="col">Delivery evidence</th>
+          <th scope="col"><button data-sort="status">Status</button></th>
+          <th scope="col"><button data-sort="ts">Timestamp (UTC)</button></th>
+        </tr></thead>
+        <tbody id="recBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="drawer-backdrop" id="drawerBg"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true" tabindex="-1">
+  <div class="drawer-head"><div><span class="label">Verification</span><h2 id="drawerTitle" style="font-size:1.1rem;margin-top:2px">—</h2></div><button class="btn sm" id="drawerClose">Close</button></div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<!-- 07 Footer -->
+<footer class="section" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="guarantees">
+      <div><h3>Exact resource binding</h3><p>A payment is valid only for the request whose hash it was signed over.</p></div>
+      <div><h3>Bounded spending</h3><p>Every purchase sits inside a tier, the mission budget and, above 0.50 USDC, a signed approval.</p></div>
+      <div><h3>Verified delivery</h3><p>A merchant receipt is not proof. The content hash has to match.</p></div>
+      <div><h3>Independent audit trail</h3><p>Settlement events and deliveries are reconciled, and gaps are flagged.</p></div>
+    </div>
+    <div class="foot-links">
+      <div><a class="wordmark" href="#top" aria-label="Verity, back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h4.2L12 15.6 16.8 4H21l-7.4 16h-3.2z" fill="#F1F5F9"/><path d="M10.4 20h3.2l1.3-2.9H9.1z" fill="#2E5CFF"/></svg>VERITY</a><p class="muted" style="font-size:.86rem;margin-top:12px;max-width:40ch">A research agent for prediction markets. UBC 2026 hackathon prototype, Agentic payments and AI track. Payments run on testnet USDC; it places no trades.</p></div>
+      <div><h4>Project</h4><ul><li><a href="https://github.com/ubc-2026/verity">GitHub, ubc-2026/verity</a> <span class="muted">(private)</span></li><li><a href="#spec">Architecture specification</a></li><li class="na">Documentation: not published yet</li></ul></div>
+      <div><h4>Data</h4><ul><li><a href="https://api.gemini.com/v1/prediction-markets/events?status=active&amp;limit=100">Gemini Exchange events API</a></li><li><a href="https://assets.gemini.com/predictions/terms_and_conditions/Weather_Terms_and_Conditions_67323dd4-5775-48d5-bea0-c33d672d1f74.pdf">NYC weather terms (PDF)</a></li></ul></div>
+      <div><h4>Status</h4><ul><li class="na">System status: demo mode, no live services</li><li class="na">Arc Testnet explorer: no transactions to link yet</li></ul></div>
+    </div>
+    <div class="copyright"><span>© 2026 Verity team, University Blockchain Conference 2026</span><span class="mono">Fixture data captured 2026-11-17 and 2026-11-18</span></div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+// Compact keccak-256 (Ethereum variant, 0x01 padding). 32-bit lane halves.
+function keccak256(bytes){
+  const RC=[1,0,32898,0,32906,2147483648,2147516416,2147483648,32907,0,2147483649,0,2147516545,2147483648,32777,2147483648,138,0,136,0,2147516425,0,2147483658,0,2147516555,0,139,2147483648,32905,2147483648,32771,2147483648,32770,2147483648,128,2147483648,32778,0,2147483658,2147483648,2147516545,2147483648,32896,2147483648,2147483649,0,2147516424,2147483648];
+  const ROT=[0,1,62,28,27,36,44,6,55,20,3,10,43,25,39,41,45,15,21,8,18,2,61,56,14];
+  const PI=[0,10,20,5,15,16,1,11,21,6,7,17,2,12,22,23,8,18,3,13,14,24,9,19,4];
+  const s=new Uint32Array(50), rate=136;
+  const msg=new Uint8Array(Math.ceil((bytes.length+1)/rate)*rate);
+  msg.set(bytes); msg[bytes.length]^=0x01; msg[msg.length-1]^=0x80;
+  const B=new Uint32Array(50), C=new Uint32Array(10);
+  function f(){
+    for(let r=0;r<24;r++){
+      for(let x=0;x<5;x++){C[2*x]=s[2*x]^s[2*x+10]^s[2*x+20]^s[2*x+30]^s[2*x+40];C[2*x+1]=s[2*x+1]^s[2*x+11]^s[2*x+21]^s[2*x+31]^s[2*x+41];}
+      for(let x=0;x<5;x++){const a=(x+4)%5,b=(x+1)%5;const lo=C[2*a]^((C[2*b]<<1)|(C[2*b+1]>>>31));const hi=C[2*a+1]^((C[2*b+1]<<1)|(C[2*b]>>>31));for(let y=0;y<25;y+=5){s[2*(x+y)]^=lo;s[2*(x+y)+1]^=hi;}}
+      for(let i=0;i<25;i++){const lo=s[2*i],hi=s[2*i+1],n=ROT[i];let rl,rh;
+        if(n===0){rl=lo;rh=hi;}else if(n<32){rl=(lo<<n)|(hi>>>(32-n));rh=(hi<<n)|(lo>>>(32-n));}else if(n===32){rl=hi;rh=lo;}else{const m=n-32;rl=(hi<<m)|(lo>>>(32-m));rh=(lo<<m)|(hi>>>(32-m));}
+        B[2*PI[i]]=rl;B[2*PI[i]+1]=rh;}
+      for(let y=0;y<25;y+=5)for(let x=0;x<5;x++){const i=y+x,j=y+(x+1)%5,k=y+(x+2)%5;s[2*i]=B[2*i]^(~B[2*j]&B[2*k]);s[2*i+1]=B[2*i+1]^(~B[2*j+1]&B[2*k+1]);}
+      s[0]^=RC[2*r];s[1]^=RC[2*r+1];
+    }
+  }
+  for(let o=0;o<msg.length;o+=rate){for(let i=0;i<rate/4;i++){const p=o+4*i;s[i]^=msg[p]|(msg[p+1]<<8)|(msg[p+2]<<16)|(msg[p+3]<<24);}f();}
+  let h='';for(let i=0;i<8;i++){const w=s[i];for(let k=0;k<4;k++)h+=((w>>>(8*k))&255).toString(16).padStart(2,'0');}
+  return '0x'+h;
+}
+if(typeof module!=='undefined')module.exports=keccak256;
+/* Verity terminal. Vanilla JS, no framework. Demo controls never touch a wallet, signer or payment endpoint. */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+const enc=s=>new TextEncoder().encode(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const short=h=>h&&h.length>18?h.slice(0,10)+'…'+h.slice(-6):h;
+async function sha256(s){
+  if(!(window.crypto&&crypto.subtle))return null;
+  const b=await crypto.subtle.digest('SHA-256',enc(s));
+  return 'sha256:'+[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+const kec=s=>keccak256(enc(s));
+function canon(o){ // sorted-key JSON, no whitespace (demo canonicalization)
+  if(Array.isArray(o))return '['+o.map(canon).join(',')+']';
+  if(o&&typeof o==='object')return '{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+canon(o[k])).join(',')+'}';
+  return JSON.stringify(o);
+}
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2200);}
+async function copy(text,what='Copied'){
+  try{
+    if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}
+    else{const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();if(!ok)throw 0;}
+    toast(what+' to clipboard');
+  }catch(e){toast('Clipboard is blocked here. Select the text and copy it manually.');}
+}
+function hl(json){ // JSON syntax highlight
+  return esc(json).replace(/(&quot;(?:[^&]|&(?!quot;))*?&quot;)(\s*:)?|\b(true|false|null)\b|(-?\d+(?:\.\d+)?)/g,(m,str,colon,b,n)=>{
+    if(str)return colon?'<span class="k">'+str+'</span>'+colon:'<span class="s">'+str+'</span>';
+    if(b)return '<span class="b">'+b+'</span>';
+    return '<span class="n">'+n+'</span>';
+  });
+}
+function rng(seed){let a=0;for(const c of seed)a=(a*31+c.charCodeAt(0))>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function onVisible(el,cb){if(!('IntersectionObserver'in window)){cb(true);return;}new IntersectionObserver(es=>es.forEach(e=>cb(e.isIntersecting)),{rootMargin:'100px'}).observe(el);}
+function fitCanvas(c){const r=c.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);const w=Math.max(1,Math.round(r.width*d)),h=Math.max(1,Math.round(r.height*d));if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return{x,w:r.width,h:r.height};}
+const CSSV=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- Real data ---------- */
+const MARKETS={
+  nyc:{key:'nyc',ticker:'WXHIGH-NYC-2611190459',question:'Highest temperature in NYC (Central Park) on Nov 18, 2026: 62°F to 63°F?',short:'NYC high 62–63°F',
+    bid:.54,ask:.58,mid:.56,vol:7,volLabel:'$7',source:'Gemini Exchange, fixture captured 2026-11-17',
+    scores:{ambiguity:[2,'Outcome is numeric, but the event-level terms link is empty and 2°F bands make edge readings decisive.'],source:[2,'Official NWS source, but the daily climate report can be issued preliminarily and corrected later.'],liquidity:[3,'Volume $7 is under $100 (spread 4¢).'],correlation:[1,'Stand-alone bucket; the other bands are the same event’s mutually exclusive outcomes.']},
+    total:8,rating:'Medium',file:'samples/nyc_high_gap_remains.json'},
+  okc:{key:'okc',ticker:'NBA-2611190100-ATL-OKC-M',question:'Atlanta vs Oklahoma City, NBA moneyline (Nov 18, 2026): will Oklahoma City win?',short:'ATL vs OKC, OKC',
+    bid:.69,ask:.70,mid:.695,vol:1392.14,volLabel:'$1,392',source:'Gemini Exchange events API, live read 2026-11-18',
+    scores:{ambiguity:[1,'Clear win/lose outcome; terms PDF read on the live run.'],source:[1,'Official primary source (league), with named fallbacks.'],liquidity:[1,'Volume $1,392.14 with a 1¢ spread.'],correlation:[3,'5 sibling events on the same underlying (Agent rule 7).']},
+    total:6,rating:'Low',file:'live run, NBA-2611190100-ATL-OKC-M, 2026-11-18'}
+};
+const TICKER=[
+  {sym:'OKC win · ATL vs OKC',bid:.69,ask:.70,extra:'vol $1,392'},
+  {sym:'ATL win · ATL vs OKC',bid:.30,ask:.31,extra:'last 29¢'},
+  {sym:'NYC high 62–63°F',bid:.54,ask:.58,extra:'vol $7'},
+  {sym:'MSU −1.5 · MSU vs TENN',bid:.51,ask:.54,extra:'vol $858'},
+  {sym:'Fed Dec · hike 25bps',prob:'82.4%',extra:'reported, 7 pt spread'},
+  {sym:'x402 purchase · NWS version check',text:'0.05 USDC'},
+  {sym:'Resolution risk · NYC',text:'8/12 Medium',cls:'warn'},
+  {sym:'Resolution risk · OKC',text:'6/12 Low',cls:'ok'},
+  {sym:'Mission budget',text:'25 USDC'},
+  {sym:'Settlement',text:'Arc Testnet · demo'}
+];
+
+/* ---------- Ticker ---------- */
+(function ticker(){
+  const item=t=>{
+    let px='';
+    if(t.bid!=null){const l=t.bid*100,w=Math.max(2,(t.ask-t.bid)*100);px=`<span class="px">${Math.round(t.bid*100)}¢ / ${Math.round(t.ask*100)}¢</span><span class="spread-bar" title="Bid–ask on a 0–100¢ scale" aria-hidden="true"><i style="left:${l}%;width:${w}%"></i></span>`;}
+    else if(t.prob)px=`<span class="px">${t.prob}</span>`;
+    else px=`<span class="px" style="color:${t.cls==='warn'?'var(--signal-warn)':t.cls==='ok'?'var(--signal-yes)':'inherit'}">${t.text}</span>`;
+    return `<span class="tick-item"><span class="sym">${t.sym}</span>${px}${t.extra?`<span class="muted">${t.extra}</span>`:''}</span>`;
+  };
+  const html=TICKER.map(item).join('');
+  const tr=$('#tickerTrack');tr.innerHTML=html+'<span aria-hidden="true" style="display:contents">'+html+'</span>';
+  const b=$('#tickerPause'),tk=$('#ticker');
+  b.addEventListener('click',()=>{const p=!tk.classList.contains('paused');tk.classList.toggle('paused',p);b.setAttribute('aria-pressed',p);b.textContent=p?'Play':'Pause';b.setAttribute('aria-label',p?'Play ticker':'Pause ticker');});
+  if(RM.matches){b.hidden=true;}
+})();
+
+/* ---------- Nav ---------- */
+(function nav(){
+  const mb=$('#menuBtn'),mm=$('#mobileMenu');
+  const set=o=>{mb.setAttribute('aria-expanded',o);mm.classList.toggle('open',o);mb.setAttribute('aria-label',o?'Close menu':'Open menu');};
+  mb.addEventListener('click',()=>set(mb.getAttribute('aria-expanded')!=='true'));
+  $$('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>set(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mb.getAttribute('aria-expanded')==='true'){set(false);mb.focus();}});
+  const links=$$('.nav-links a');const secs=links.map(a=>$(a.getAttribute('href')));
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.removeAttribute('aria-current'));const i=secs.indexOf(e.target);if(i>=0)links[i].setAttribute('aria-current','true');}}),{rootMargin:'-45% 0px -50% 0px'});secs.forEach(s=>s&&io.observe(s));}
+})();
+
+/* ---------- Three.js coin ---------- */
+(function coin(){
+  const stage=$('#coinStage');
+  const fail=()=>{stage.classList.add('fallback');$('#coinHint').textContent='Static view (WebGL unavailable)';};
+  const hasGL=(()=>{try{const c=document.createElement('canvas');return !!(c.getContext('webgl')||c.getContext('experimental-webgl'));}catch(e){return false;}})();
+  if(!hasGL){fail();return;}
+  const s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.integrity='sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==';
+  s.crossOrigin='anonymous';s.referrerPolicy='no-referrer';
+  s.onload=()=>{try{build();}catch(e){console.warn(e);fail();}};s.onerror=fail;
+  document.head.appendChild(s);
+  function btc(g,m){ // vector bitcoin mark, independent of font coverage
+    const u=m/512;g.save();g.translate(m,m);g.rotate(0.24);g.scale(u,u);
+    const bar=(x,y,w,h)=>g.fillRect(x,y,w,h);
+    bar(-60,-250,34,80);bar(10,-250,34,80);bar(-60,170,34,80);bar(10,170,34,80);
+    g.beginPath();g.moveTo(-130,-180);g.lineTo(40,-180);g.bezierCurveTo(150,-180,175,-105,145,-55);g.bezierCurveTo(130,-30,110,-18,90,-12);
+    g.bezierCurveTo(130,0,175,35,170,90);g.bezierCurveTo(165,160,110,190,40,190);g.lineTo(-130,190);g.lineTo(-130,150);g.lineTo(-90,150);g.lineTo(-90,-140);g.lineTo(-130,-140);g.closePath();
+    g.moveTo(-25,-128);g.lineTo(30,-128);g.bezierCurveTo(85,-128,85,-38,30,-38);g.lineTo(-25,-38);g.closePath();
+    g.moveTo(-25,18);g.lineTo(40,18);g.bezierCurveTo(105,18,105,138,40,138);g.lineTo(-25,138);g.closePath();
+    g.fill('evenodd');g.restore();}
+  function faceTexture(){
+    const N=1024,c=document.createElement('canvas');c.width=c.height=N;const g=c.getContext('2d'),m=N/2;
+    const gr=g.createRadialGradient(m*.8,m*.7,40,m,m,m);gr.addColorStop(0,'#f7e2a0');gr.addColorStop(.55,'#cda349');gr.addColorStop(1,'#8a6a26');
+    g.fillStyle=gr;g.fillRect(0,0,N,N);
+    // brushed texture
+    const r=rng('brush');g.globalAlpha=.06;for(let i=0;i<2200;i++){g.strokeStyle=r()>.5?'#fff':'#5a4210';g.lineWidth=r()*1.4;g.beginPath();const a=r()*Math.PI*2,rr=r()*m;g.arc(m,m,rr,a,a+.15+r()*.3);g.stroke();}
+    g.globalAlpha=1;
+    // grooves
+    g.strokeStyle='rgba(70,50,12,.55)';[0.97,0.80,0.765,0.30].forEach((k,i)=>{g.lineWidth=i===0?10:2.5;g.beginPath();g.arc(m,m,m*k,0,Math.PI*2);g.stroke();});
+    // micro-engraving
+    g.fillStyle='rgba(60,42,10,.8)';g.font='600 22px "JetBrains Mono",monospace';g.textAlign='center';g.textBaseline='middle';
+    const ring='KECCAK-256 · SHA-256 · EIP-3009 · NONCE · TRANSFERWITHAUTHORIZATION · REQUEST HASH · ';
+    const txt=ring+ring.slice(0,22);const R=m*.885;for(let i=0;i<txt.length;i++){const a=(i/txt.length)*Math.PI*2-Math.PI/2;g.save();g.translate(m+Math.cos(a)*R,m+Math.sin(a)*R);g.rotate(a+Math.PI/2);g.fillText(txt[i],0,0);g.restore();}
+    // hex dots ring
+    for(let i=0;i<96;i++){const a=i/96*Math.PI*2;g.beginPath();g.arc(m+Math.cos(a)*m*.70,m+Math.sin(a)*m*.70,i%8?2:4,0,Math.PI*2);g.fill();}
+    // emblem
+    g.fillStyle='#f3d88a';g.shadowColor='rgba(40,28,6,.85)';g.shadowBlur=26;g.shadowOffsetX=10;g.shadowOffsetY=14;btc(g,m);
+    g.shadowColor='transparent';
+    // bump (grayscale) from same drawing
+    const b=document.createElement('canvas');b.width=b.height=N;const bg=b.getContext('2d');bg.fillStyle='#777';bg.fillRect(0,0,N,N);
+    bg.strokeStyle='#222';[0.97,0.80,0.765,0.30].forEach((k,i)=>{bg.lineWidth=i===0?10:2.5;bg.beginPath();bg.arc(m,m,m*k,0,Math.PI*2);bg.stroke();});
+    bg.fillStyle='#333';bg.font=g.font.replace('520px','22px');for(let i=0;i<96;i++){const a=i/96*Math.PI*2;bg.beginPath();bg.arc(m+Math.cos(a)*m*.70,m+Math.sin(a)*m*.70,i%8?2:4,0,Math.PI*2);bg.fill();}
+    bg.fillStyle='#fff';btc(bg,m);
+    return [c,b];
+  }
+  function edgeTexture(){const c=document.createElement('canvas');c.width=512;c.height=32;const g=c.getContext('2d');for(let i=0;i<512;i+=4){g.fillStyle=(i/4)%2?'#3a3a3a':'#e0e0e0';g.fillRect(i,0,4,32);}return c;}
+  function build(){
+    const T=window.THREE;if(!T)throw new Error('no three');
+    const renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+    stage.prepend(renderer.domElement);renderer.domElement.setAttribute('aria-hidden','true');
+    const scene=new T.Scene(),cam=new T.PerspectiveCamera(32,1,.1,50);cam.position.set(0,0,6.2);
+    // environment for metal reflections
+    const pm=new T.PMREMGenerator(renderer),env=new T.Scene();
+    const room=new T.Mesh(new T.BoxGeometry(10,10,10),new T.MeshBasicMaterial({color:0x0b0f16,side:T.BackSide}));env.add(room);
+    const panel=(col,x,y,z,w,h,i)=>{const m=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color:new T.Color(col).multiplyScalar(i),side:T.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);env.add(m);};
+    panel(0xffe2b0,-3,3,3,4,2,3.2);panel(0x2e5cff,4,-1,-2,2,4,2.4);panel(0xffffff,0,4.5,0,6,1,1.4);panel(0x00c853,-4,-3,1,1.5,1.5,1.1);
+    scene.environment=pm.fromScene(env,.04).texture;
+    const [fc,fb]=faceTexture();const ft=new T.CanvasTexture(fc),fbt=new T.CanvasTexture(fb);ft.encoding=T.sRGBEncoding;ft.anisotropy=4;
+    const et=new T.CanvasTexture(edgeTexture());et.wrapS=T.RepeatWrapping;et.repeat.set(5,1);
+    const faceM=new T.MeshStandardMaterial({map:ft,bumpMap:fbt,bumpScale:.035,metalness:.92,roughness:.34,envMapIntensity:1.15});
+    const edgeM=new T.MeshStandardMaterial({color:0xb8bcc4,bumpMap:et,bumpScale:.02,roughnessMap:et,metalness:1,roughness:.38,envMapIntensity:1.2});
+    const geo=new T.CylinderGeometry(1.5,1.5,.2,96,1,false);
+    const coin=new T.Mesh(geo,[edgeM,faceM,faceM]);coin.rotation.x=Math.PI/2;
+    const rim=new T.Mesh(new T.TorusGeometry(1.5,.03,12,96),edgeM);
+    const grp=new T.Group();grp.add(coin);grp.add(rim);const rim2=rim.clone();rim.position.z=.1;rim2.position.z=-.1;grp.add(rim2);scene.add(grp);
+    const key=new T.DirectionalLight(0xffd9a0,2.2);key.position.set(-3,3,4);scene.add(key);
+    const rimL=new T.DirectionalLight(0x2e5cff,2.6);rimL.position.set(3.5,-.5,-3);scene.add(rimL);
+    const em=new T.PointLight(0x00c853,1.1,9);em.position.set(-2.4,-2.2,2);scene.add(em);
+    scene.add(new T.AmbientLight(0x8b9bb4,.18));
+    // orbital markers
+    const pts=[];for(let i=0;i<36;i++){const a=i/36*Math.PI*2;pts.push(Math.cos(a)*2.15,Math.sin(a)*2.15*.34,Math.sin(a)*.2);}
+    const pg=new T.BufferGeometry();pg.setAttribute('position',new T.Float32BufferAttribute(pts,3));
+    const orbit=new T.Points(pg,new T.PointsMaterial({color:0x7c9bff,size:.035,transparent:true,opacity:.75}));orbit.rotation.x=-.35;scene.add(orbit);
+    let vis=true,raf=0,last=0,spin=0,vel=RM.matches?0:.45,tx=0,ty=0,cx=0,cy=0,base=RM.matches?0:.45;
+    function size(){const r=stage.getBoundingClientRect();renderer.setSize(r.width,r.height,false);cam.aspect=r.width/r.height;cam.updateProjectionMatrix();cam.position.z=r.width/r.height<1.05?7.2:6.2;draw();}
+    function draw(){renderer.render(scene,cam);}
+    function loop(t){raf=0;const dt=Math.min(.05,last?(t-last)/1000:0);last=t;
+      vel+=(base-vel)*Math.min(1,dt*1.6);spin+=vel*dt;
+      cx+=(tx-cx)*Math.min(1,dt*5);cy+=(ty-cy)*Math.min(1,dt*5);
+      grp.rotation.y=spin;grp.rotation.x=cy*.35;grp.rotation.z=-cx*.08;
+      cam.position.x=cx*.35;cam.position.y=-cy*.25;cam.lookAt(0,0,0);orbit.rotation.z+=dt*.12;
+      draw();
+      const moving=Math.abs(vel-base)>.002||Math.abs(tx-cx)>.001||Math.abs(ty-cy)>.001||base>0;
+      if(vis&&moving)raf=requestAnimationFrame(loop);else last=0;}
+    const kick=()=>{if(vis&&!raf)raf=requestAnimationFrame(loop);};
+    stage.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=stage.getBoundingClientRect();tx=(e.clientX-r.left)/r.width*2-1;ty=(e.clientY-r.top)/r.height*2-1;kick();});
+    stage.addEventListener('pointerleave',()=>{tx=ty=0;kick();});
+    stage.addEventListener('click',()=>{vel+=RM.matches?0:9;if(RM.matches){spin+=Math.PI;draw();}kick();});
+    $('#coinHint').textContent=matchMedia('(hover:hover)').matches?'Move to tilt · click to spin':'Tap to spin';
+    onVisible(stage,v=>{vis=v;if(v)kick();});
+    if('ResizeObserver'in window)new ResizeObserver(size).observe(stage);else window.addEventListener('resize',size);
+    RM.addEventListener&&RM.addEventListener('change',()=>{base=RM.matches?0:.45;kick();});
+    size();kick();
+  }
+})();
+
+/* ---------- Terminal: probability chart ---------- */
+const TF={ '1H':{n:60,step:60e3,vol:.004},'24H':{n:96,step:15*60e3,vol:.012},'7D':{n:84,step:2*3600e3,vol:.02},'30D':{n:90,step:8*3600e3,vol:.03},'ALL':{n:120,step:24*3600e3,vol:.035}};
+const term={market:'nyc',tf:'24H',cursor:null,series:[]};
+function makeSeries(mk,tf){
+  const m=MARKETS[mk],cfg=TF[tf],r=rng(mk+tf),n=cfg.n;const v=new Array(n);v[n-1]=m.mid;
+  for(let i=n-2;i>=0;i--){const pull=(0.5-v[i+1])*0.015;v[i]=Math.min(.97,Math.max(.03,v[i+1]-pull+(r()-.5)*cfg.vol*2));}
+  return v.map((p,i)=>({p,ago:(n-1-i)*cfg.step}));
+}
+function fmtAgo(ms){if(ms===0)return 'snapshot';const m=Math.round(ms/60e3);if(m<60)return '−'+m+'m';const h=Math.floor(m/60),mm=m%60;if(h<48)return '−'+h+'h'+(mm?' '+mm+'m':'');return '−'+Math.round(h/24)+'d';}
+const probC=$('#probChart'),probW=$('#probWrap'),tip=$('#probTip');
+function drawProb(){
+  const {x,w,h}=fitCanvas(probC);const pad={l:44,r:56,t:16,b:28};const s=term.series,m=MARKETS[term.market];
+  x.clearRect(0,0,w,h);
+  let lo=Math.min(...s.map(d=>d.p),m.bid),hi=Math.max(...s.map(d=>d.p),m.ask);const span=Math.max(.08,hi-lo);lo=Math.max(0,lo-span*.25);hi=Math.min(1,hi+span*.25);
+  const X=i=>pad.l+(w-pad.l-pad.r)*i/(s.length-1),Y=p=>pad.t+(h-pad.t-pad.b)*(1-(p-lo)/(hi-lo));
+  x.font='11px "JetBrains Mono",monospace';x.textBaseline='middle';
+  const step=span>.3?.1:span>.12?.05:.02;
+  for(let g=Math.ceil(lo/step)*step;g<=hi+1e-9;g+=step){const y=Y(g);x.strokeStyle='#1E2738';x.lineWidth=1;x.beginPath();x.moveTo(pad.l,Math.round(y)+.5);x.lineTo(w-pad.r,Math.round(y)+.5);x.stroke();x.fillStyle='#8B9BB4';x.textAlign='right';x.fillText((g*100).toFixed(0)+'¢',pad.l-8,y);}
+  const ticks=w<480?3:6;x.textAlign='center';x.textBaseline='top';
+  for(let k=0;k<=ticks;k++){const i=Math.round((s.length-1)*k/ticks);x.fillStyle='#8B9BB4';x.fillText(fmtAgo(s[i].ago),Math.min(w-pad.r-16,Math.max(pad.l+16,X(i))),h-pad.b+8);}
+  // bid/ask band at snapshot
+  x.fillStyle='rgba(46,92,255,.12)';x.fillRect(pad.l,Y(m.ask),w-pad.l-pad.r,Y(m.bid)-Y(m.ask));
+  // area + line
+  x.beginPath();x.moveTo(X(0),Y(s[0].p));for(let i=1;i<s.length;i++){const xm=(X(i-1)+X(i))/2,ym=(Y(s[i-1].p)+Y(s[i].p))/2;x.quadraticCurveTo(X(i-1),Y(s[i-1].p),xm,ym);}x.lineTo(X(s.length-1),Y(s[s.length-1].p));
+  const path=new Path2D();// reuse for fill
+  x.strokeStyle='#2E5CFF';x.lineWidth=2;x.stroke();
+  x.lineTo(X(s.length-1),h-pad.b);x.lineTo(X(0),h-pad.b);x.closePath();const gr=x.createLinearGradient(0,pad.t,0,h-pad.b);gr.addColorStop(0,'rgba(46,92,255,.18)');gr.addColorStop(1,'rgba(46,92,255,0)');x.fillStyle=gr;x.fill();
+  // last price marker
+  const ly=Y(m.mid);x.fillStyle='#2E5CFF';x.fillRect(w-pad.r+4,ly-9,pad.r-6,18);x.fillStyle='#fff';x.textAlign='center';x.textBaseline='middle';x.fillText((m.mid*100).toFixed(1),w-pad.r+4+(pad.r-6)/2,ly);
+  x.textAlign='left';x.fillStyle='#8B9BB4';x.fillText('ask '+Math.round(m.ask*100),w-pad.r+6,Y(m.ask)-12<pad.t?Y(m.ask)+12:Y(m.ask)-12);
+  // crosshair
+  if(term.cursor!=null){const i=term.cursor,cx=X(i),cy=Y(s[i].p);x.strokeStyle='#8B9BB4';x.setLineDash([3,3]);x.beginPath();x.moveTo(cx+.5,pad.t);x.lineTo(cx+.5,h-pad.b);x.moveTo(pad.l,cy+.5);x.lineTo(w-pad.r,cy+.5);x.stroke();x.setLineDash([]);x.fillStyle='#F1F5F9';x.beginPath();x.arc(cx,cy,3.5,0,7);x.fill();
+    tip.innerHTML=`${fmtAgo(s[i].ago)} &nbsp; <b>${(s[i].p*100).toFixed(1)}¢</b> <span style="color:#F59E0B">fixture</span>`;tip.classList.add('on');const tw=tip.offsetWidth;tip.style.left=Math.min(w-tw-4,Math.max(4,cx+10))+'px';tip.style.top=Math.max(4,cy-34)+'px';
+    $('#qCur').textContent=(s[i].p*100).toFixed(1)+'¢ '+fmtAgo(s[i].ago);}
+  else{tip.classList.remove('on');$('#qCur').textContent='—';}
+  probC._X={pad,w,n:s.length};
+}
+function idxFromX(clientX){const r=probC.getBoundingClientRect(),g=probC._X;if(!g)return null;const t=(clientX-r.left-g.pad.l)/(g.w-g.pad.l-g.pad.r);return Math.max(0,Math.min(g.n-1,Math.round(t*(g.n-1))));}
+probC.tabIndex=0;
+probC.addEventListener('pointermove',e=>{term.cursor=idxFromX(e.clientX);drawProb();});
+probC.addEventListener('pointerdown',e=>{term.cursor=idxFromX(e.clientX);drawProb();});
+probC.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch'){term.cursor=null;drawProb();}});
+probC.addEventListener('keydown',e=>{const n=term.series.length;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();term.cursor=term.cursor==null?n-1:Math.max(0,Math.min(n-1,term.cursor+(e.key==='ArrowLeft'?-1:1)));drawProb();}else if(e.key==='Escape'){term.cursor=null;drawProb();}});
+probC.addEventListener('blur',()=>{term.cursor=null;drawProb();});
+probC.setAttribute('aria-describedby','probFoot');
+function renderProb(){term.series=makeSeries(term.market,term.tf);term.cursor=null;drawProb();
+  $('#probTable').innerHTML=term.series.slice().reverse().map(d=>`<tr><td class="mono">${fmtAgo(d.ago)}</td><td class="num">${(d.p*100).toFixed(1)}¢${d.ago===0?' (captured)':' (fixture)'}</td></tr>`).join('');}
+$$('#tfSeg button').forEach(b=>b.addEventListener('click',()=>{term.tf=b.dataset.tf;$$('#tfSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderProb();}));
+if('ResizeObserver'in window)new ResizeObserver(()=>drawProb()).observe(probW);
+
+/* ---------- Terminal: candles + depth ---------- */
+const cand={list:[],paused:false,vis:false,timer:0,ticks:0,dirty:true,cursor:null};
+function seedCandles(){const m=MARKETS[term.market],r=rng('c'+term.market);let p=m.mid;const L=[];
+  for(let i=0;i<40;i++){const o=p,c=Math.min(.97,Math.max(.03,o+(r()-.5)*.025));const hi=Math.max(o,c)+r()*.01,lo=Math.min(o,c)-r()*.01;L.push({o,h:hi,l:lo,c,v:Math.round(r()*(m.vol>100?60:3)+1)});p=c;}
+  const k=m.mid-L[39].c;L.forEach(d=>{d.o+=k;d.c+=k;d.h+=k;d.l+=k;});cand.list=L;cand.r=rng('live'+term.market);cand.dirty=true;}
+const cc=$('#candleChart'),ctip=$('#candleTip');
+function drawCandles(){cand.dirty=false;const {x,w,h}=fitCanvas(cc),m=MARKETS[term.market],L=cand.list;x.clearRect(0,0,w,h);
+  const depthW=Math.max(64,w*.26),pw=w-depthW-8,top=10,ph=(h-34)*.74,vh=(h-34)*.22,vy=top+ph+6;
+  let lo=Math.min(...L.map(d=>d.l),m.bid-.03),hi=Math.max(...L.map(d=>d.h),m.ask+.03);const Y=p=>top+ph*(1-(p-lo)/(hi-lo));
+  const bw=pw/L.length;const vmax=Math.max(...L.map(d=>d.v));
+  x.strokeStyle='#1E2738';for(let k=0;k<=3;k++){const y=Math.round(top+ph*k/3)+.5;x.beginPath();x.moveTo(0,y);x.lineTo(pw,y);x.stroke();}
+  L.forEach((d,i)=>{const cx=i*bw+bw/2,up=d.c>=d.o;const col=up?'#00C853':'#FF3B30';x.strokeStyle=col;x.beginPath();x.moveTo(Math.round(cx)+.5,Y(d.h));x.lineTo(Math.round(cx)+.5,Y(d.l));x.stroke();
+    const y1=Y(Math.max(d.o,d.c)),y2=Y(Math.min(d.o,d.c));x.fillStyle=up?col:'#10151E';x.fillRect(cx-bw*.32,y1,bw*.64,Math.max(1,y2-y1));if(!up)x.strokeRect(cx-bw*.32+.5,y1+.5,bw*.64-1,Math.max(1,y2-y1)-1);
+    x.fillStyle=up?'rgba(0,200,83,.35)':'rgba(255,59,48,.35)';const vhh=vh*d.v/vmax;x.fillRect(cx-bw*.32,vy+vh-vhh,bw*.64,vhh);});
+  const last=L[L.length-1].c,ly=Y(last);x.strokeStyle='#2E5CFF';x.setLineDash([4,3]);x.beginPath();x.moveTo(0,ly+.5);x.lineTo(pw,ly+.5);x.stroke();x.setLineDash([]);
+  // depth: top of book real; deeper levels fixture
+  const dx=pw+8;x.fillStyle='#8B9BB4';x.font='10px "JetBrains Mono",monospace';x.textBaseline='middle';x.textAlign='left';
+  const r=rng('d'+term.market);let cumA=0,cumB=0;const lv=[];for(let k=0;k<6;k++){cumA+=Math.round(r()*40+8);cumB+=Math.round(r()*40+8);lv.push([m.ask+k*.01,cumA],[m.bid-k*.01,-cumB]);}
+  const mx=Math.max(cumA,cumB);lv.forEach(([p,q])=>{const y=Y(p);if(y<top||y>top+ph)return;const len=(depthW-34)*Math.abs(q)/mx;x.fillStyle=q>0?'rgba(255,59,48,.35)':'rgba(0,200,83,.35)';x.fillRect(dx,y-3,len,6);});
+  x.fillStyle='#FF6B62';x.fillText('ask '+Math.round(m.ask*100)+'¢',dx,Math.max(top+6,Y(m.ask)-9));x.fillStyle='#00C853';x.fillText('bid '+Math.round(m.bid*100)+'¢',dx,Math.min(top+ph-6,Y(m.bid)+9));
+  x.fillStyle='#8B9BB4';x.fillText('last '+(last*100).toFixed(1),4,h-10);x.textAlign='right';x.fillText('vol',pw-4,h-10);
+  if(cand.cursor!=null&&L[cand.cursor]){const d=L[cand.cursor],cx=cand.cursor*bw+bw/2;x.strokeStyle='#8B9BB4';x.setLineDash([3,3]);x.beginPath();x.moveTo(cx+.5,top);x.lineTo(cx+.5,vy+vh);x.stroke();x.setLineDash([]);
+    ctip.innerHTML=`O ${(d.o*100).toFixed(1)} H ${(d.h*100).toFixed(1)} L ${(d.l*100).toFixed(1)} C ${(d.c*100).toFixed(1)} · v ${d.v}`;ctip.classList.add('on');ctip.style.left=Math.max(4,Math.min(w-ctip.offsetWidth-4,cx-ctip.offsetWidth/2))+'px';ctip.style.top='4px';}else ctip.classList.remove('on');
+  cc._bw=bw;cc._pw=pw;
+}
+function candleTick(){const L=cand.list,d=L[L.length-1],r=cand.r;cand.ticks++;
+  if(cand.ticks%5===0){L.shift();const o=d.c;L.push({o,h:o,l:o,c:o,v:1});}
+  const z=L[L.length-1],m=MARKETS[term.market];z.c=Math.min(m.ask+.03,Math.max(m.bid-.03,z.c+(r()-.5)*.008));z.h=Math.max(z.h,z.c);z.l=Math.min(z.l,z.c);z.v+=Math.round(r()*2);
+  $('#candleStamp').textContent='simulated tick '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  requestAnimationFrame(drawCandles);}
+function candleSchedule(){clearInterval(cand.timer);cand.timer=0;if(cand.vis&&!cand.paused&&!RM.matches)cand.timer=setInterval(candleTick,1200);}
+onVisible($('#candleWrap'),v=>{cand.vis=v;candleSchedule();});
+$('#candlePause').addEventListener('click',e=>{cand.paused=!cand.paused;e.currentTarget.setAttribute('aria-pressed',cand.paused);e.currentTarget.textContent=cand.paused?'Resume':'Pause';candleSchedule();});
+if(RM.matches){$('#candlePause').textContent='Static';$('#candlePause').disabled=true;}
+cc.addEventListener('pointermove',e=>{const r=cc.getBoundingClientRect(),xx=e.clientX-r.left;cand.cursor=xx<cc._pw?Math.floor(xx/cc._bw):null;drawCandles();});
+cc.addEventListener('pointerleave',()=>{cand.cursor=null;drawCandles();});
+if('ResizeObserver'in window)new ResizeObserver(()=>drawCandles()).observe($('#candleWrap'));
+/* ---------- Terminal: scores, gauge, inspector ---------- */
+const NYC_JSON={version:'verity-risk-analysis-v1',contract_id:'fx-nyc-high-20261118',event_ticker:'WXHIGH-NYC-2611190459',analyzed_at_utc:'2026-11-18T01:00:00Z',
+  quoted_price:{outcome_label:'62°F to 63°F',best_bid:'0.54',best_ask:'0.58',mid:'0.56',implied_probability:'0.56',volume_usd:'7'},
+  scores:{ambiguity:{score:2,citation_ids:['C-NYC-1','C-NYC-2']},source:{score:2,citation_ids:['C-NYC-1']},liquidity:{score:3,citation_ids:['C-NYC-3']},correlation:{score:1,citation_ids:[]}},
+  rating:{known_total:8,final_rating:'Medium',overrides:[{rule:'High (3) in Liquidity -> never trade more than top-of-book',effect:'treat the quoted price as an unreliable signal; rating unchanged'}]},
+  research_action:'investigate',
+  evidence_gaps:[{id:'GAP-NYC-SETTLE',gap_type:'settlement_source_version',affects:'resolution_risk',material:true,free_checks:['nyc-settlement-version']},{id:'GAP-NYC-FORECAST',gap_type:'outcome_forecast',affects:'outcome_probability',material:false,free_checks:[]}],
+  data_quality_flags:['source_mode=fixture','snapshot_time_unrecorded','event_terms_url_empty','rules_paraphrased']};
+const OKC_JSON={version:'verity-risk-analysis-v1',event_ticker:'NBA-2611190100-ATL-OKC-M',snapshot:{source_mode:'live',source_label:'Gemini Exchange events API',snapshot_date:'2026-11-18',snapshot_hash:'sha256:5c564d21bafcf0085684fab03d57c949071ced4b2e697d0fb0a3592fac11f8e7'},
+  quoted_price:{outcome_label:'Oklahoma City',best_bid:'0.69',best_ask:'0.7',mid:'0.695',implied_probability:'0.695',volume_usd:'1392.14'},
+  scores:{ambiguity:{score:1},source:{score:1},liquidity:{score:1},correlation:{score:3,rationale:'5 sibling event(s) on the same underlying (Agent rule 7).'}},
+  rating:{known_total:6,final_rating:'Low'},evidence_gaps:[],purchase_request:null,data_quality_flags:['analyst=verity-rules-v1 (code rules, no LLM)']};
+const FLAGS={
+  nyc:[
+    {sev:'warn',title:'Missing word in the settlement rule',prov:'Weather terms PDF, Rule 13.111(i)(2), read 2026-11-18',body:'The rule says which report version counts, but a word is missing, so it is unclear whether the partial 4 PM report or the full-day report settles the market.',ex:'only the first published version that includes confirmation of the <mark>___</mark> will be used'},
+    {sev:'warn',title:'Gap: which NWS issuance settles (material)',prov:'GAP-NYC-SETTLE · affects resolution risk',body:'If a correction moves the max across a 2°F band edge, the version used decides the outcome. The free check nyc-settlement-version ran on 2026-11-18 and was inconclusive.',ex:'Primary source is the applicable NWS Climatological Report, then Weather Underground or weather.com, then the Iowa Environmental Mesonet.'},
+    {sev:'no',title:'Thin market: $7 traded, 4¢ spread',prov:'contracts[62-63F].prices · C-NYC-3',body:'Liquidity scores 3, so the quoted price is treated as an unreliable signal. The rating stays Medium.',ex:'bestBid 0.54, bestAsk 0.58; event volume 7'},
+    {sev:'info',title:'Event-level terms link is empty',prov:'event.termsAndConditionsUrl · C-NYC-2',body:'The terms PDF was found only through the contract rules. Agent rule 3 raises ambiguity to at least 2.',ex:'(empty)'},
+    {sev:'neutral',title:'Not a gap: the temperature forecast',prov:'GAP-NYC-FORECAST · affects outcome probability',body:'A forecast changes the chance of the event, not how the contract settles. Verity is research-only and places no trades, so it is not proposed.',ex:null}],
+  okc:[
+    {sev:'info',title:'Correlated siblings',prov:'Agent rule 7 · live read',body:'Five sibling events share the same game. That raises correlation to 3, but no settlement gap is open.',ex:null},
+    {sev:'ok',title:'Clear settlement source',prov:'sourceDetails · live read',body:'The league result settles it, with ESPN, Fox Sports and the broadcast partner as named fallbacks.',ex:'Sources in order: the league governing body, ESPN, Fox Sports, and the broadcast partner.'}]
+};
+const PURCH={
+  nyc:[
+    {t:'NWS daily climate report: settlement-version check',id:'cat-nws-cli-settlement-version-v1',p:'0.05',state:['ok','✓ Allowed · tier 1, automatic'],meta:'Proposed for GAP-NYC-SETTLE after the free check came back inconclusive. Not purchased here: a proposal is not a payment.'},
+    {t:'Point temperature forecast',id:'cat-point-forecast-v1',p:'0.02',state:['neutral','– Not proposed'],meta:'Affects outcome probability, not resolution risk.'},
+    {t:'LM Arena leaderboard snapshot',id:'cat-lm-arena-snapshot-v1',p:'0.05',state:['neutral','✕ Not applicable'],meta:'Answers a leaderboard gap; no such gap here.'},
+    {t:'Full NWS issuance archive',id:'(none in catalog)',p:'—',state:['warn','! Unsupported by catalog'],meta:'The merchant catalog has no item for this, so Verity cannot buy it.'}],
+  okc:[{t:'Nothing to buy',id:'—',p:'0.00',state:['ok','✓ No material gap'],meta:'Total 6, Low. generate_purchase_request returned None.'}]
+};
+function renderTerm(){
+  const m=MARKETS[term.market];
+  $('#qMid').textContent=(m.mid*100).toFixed(1)+'¢';$('#qBA').textContent=Math.round(m.bid*100)+'¢ / '+Math.round(m.ask*100)+'¢';$('#qVol').textContent=m.volLabel;
+  $('#riskTotal').textContent=m.total+' / 12';const cls=m.rating==='Low'?'ok':m.rating==='Medium'?'warn':'no';
+  const tg=$('#riskTag');tg.className='tag '+cls;tg.textContent=(cls==='ok'?'✓ ':cls==='warn'?'! ':'✕ ')+m.rating;
+  const segs=$$('#gaugeTrack span');segs.forEach((s,i)=>{s.classList.toggle('on',i===(m.total<=6?0:m.total<=8?1:2));s.style.color=['#00C853','#F59E0B','#FF3B30'][i];});
+  $('#gaugeMarker').style.left='calc('+((m.total-4)/8*100)+'% - 1px)';
+  $('#scoreGrid').innerHTML=Object.entries(m.scores).map(([k,[v,why]])=>`<div title="${esc(why)}"><div class="label">${k[0].toUpperCase()+k.slice(1)}</div><div class="v">${v}</div><div class="pips" aria-label="${v} of 3">${[1,2,3].map(i=>`<i class="${i<=v?'on':''}"></i>`).join('')}</div></div>`).join('');
+  $('#riskWhy').textContent=m.key==='nyc'?'Medium because the rule names a report version with a word missing, and the market is thin. Risk is not a probability.':'Low: a clear source and a deep book. Risk is how the contract settles, not how likely OKC is to win.';
+  const J=m.key==='nyc'?NYC_JSON:OKC_JSON;$('#riskJson').innerHTML=hl(JSON.stringify(J,null,2));$('#inspSrc').textContent=m.file;
+  $('#flagList').innerHTML=FLAGS[m.key].map((f,i)=>`<div class="flag"><button aria-expanded="false" aria-controls="fb${i}"><span class="tag ${f.sev}">${{warn:'!',no:'✕',info:'i',ok:'✓',neutral:'–'}[f.sev]}</span><span><span style="display:block;font-size:.9rem">${f.title}</span><span class="label">${f.prov}</span></span><span class="chev" aria-hidden="true">›</span></button><div class="flag-body" id="fb${i}">${f.body}${f.ex?`<div class="excerpt"><span class="label" style="display:block;margin-bottom:4px">Contract excerpt · ${f.prov.split('·')[0]}</span>${f.ex}</div>`:''}</div></div>`).join('');
+  $$('#flagList .flag>button').forEach(b=>b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);$('#'+b.getAttribute('aria-controls')).classList.toggle('open',o);}));
+  $('#purchaseList').innerHTML=PURCH[m.key].map(p=>`<div class="purchase"><span>${p.t}</span><span class="num">${p.p} USDC</span><span class="meta"><span class="tag ${p.state[0]}">${p.state[1]}</span> <code class="mono" style="font-size:.7rem">${p.id}</code><br>${p.meta}</span></div>`).join('');
+  renderProb();seedCandles();drawCandles();
+}
+$$('[data-market]').forEach(b=>b.addEventListener('click',()=>{term.market=b.dataset.market;$$('[data-market]').forEach(x=>x.setAttribute('aria-pressed',x===b));renderTerm();}));
+$('#copyJson').addEventListener('click',()=>copy(JSON.stringify(term.market==='nyc'?NYC_JSON:OKC_JSON,null,2),'Risk JSON copied'));
+$$('[data-inspect]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>{const b=$('#flagList .flag>button');if(b&&b.getAttribute('aria-expanded')!=='true')b.click();},400)));
+
+/* ---------- Walkthrough ---------- */
+const REQ={method:'GET',resource:'/v1/catalog/cat-nws-cli-settlement-version-v1',params:{station:'KNYC',date:'2026-11-18'},amount:'50000',asset:'USDC',chain:'arc-testnet',merchant:'verity-demo-merchant',expires_at:'2026-11-18T01:10:00Z',request_id:'req-nyc-0001'};
+const DELIVERY={item:'cat-nws-cli-settlement-version-v1',station:'KNYC',date:'2026-11-18',fixture:true,note:'Demo fixture body. A real report would list each NWS CLI issuance with times and quote the exchange rule that names the version.'};
+const W={step:0,running:false,timer:0,tampered:false,approval:'idle',testAmt:0.05,approvalTimer:0,deadline:0,hashes:{},done:new Set()};
+const STEPS=[
+  {t:'Contract ingestion',nodes:['gx','ra'],edges:['gx-ra']},
+  {t:'Gap detection',nodes:['ra'],edges:[]},
+  {t:'Policy gate',nodes:['pg','ow'],edges:['ra-pg','pg-ow','ow-pg']},
+  {t:'x402 payment',nodes:['ps','mc'],edges:['pg-ps','ps-mc','mc-ps']},
+  {t:'Settlement and delivery',nodes:['arc','qn','mc'],edges:['ps-arc','arc-qn','mc-rc']},
+  {t:'Audit report',nodes:['rc'],edges:['qn-rc','mc-rc']}];
+function tierOf(a){if(a<=0)return null;if(a<=0.10)return 0;if(a<=0.50)return 1;if(a<=2.00)return 2;return 3;}
+const TIERS=[['0.01–0.10','Automatic once shared checks pass (allowlisted merchant, valid quote, not a duplicate)'],['0.11–0.50','Automatic only for an open gap with no free or cached answer'],['0.51–2.00','Owner approval: Verity explains by voice, the owner signs with the wallet'],['Over 2.00','Rejected']];
+function stepStatus(i){
+  if(i===3&&W.tampered)return['fail','rejected'];
+  if(i===2&&W.approval==='pending')return['wait','awaiting owner'];
+  if(i===4&&W.tampered&&W.done.has(4))return['fail','not settled'];
+  if(W.done.has(i))return['done','complete'];
+  if(i===W.step)return['','in view'];return['','pending'];}
+function renderTimeline(){
+  $('#timeline').innerHTML=STEPS.map((s,i)=>{const [c,st]=stepStatus(i);return `<li><button data-step="${i}" class="${c}" ${i===W.step?'aria-current="step"':''}><span class="n">Step ${i+1}</span><span class="t">${s.t}</span><span class="st">${c==='done'?'✓ ':c==='fail'?'✕ ':c==='wait'?'! ':''}${st}</span></button></li>`;}).join('');
+  $$('#timeline button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.step)));
+}
+async function computeHashes(){
+  const c0=canon(REQ),t=JSON.parse(JSON.stringify(REQ));t.params.station='KLGA';const c1=canon(t);
+  W.hashes={canon:c0,canonT:c1,req:kec(c0),reqT:kec(c1),content:await sha256(canon(DELIVERY)),deliveryCanon:canon(DELIVERY)};
+}
+function stageHTML(i){
+  const H=W.hashes;
+  if(i===0)return `<span class="label">Step 1 · Contract ingestion</span><h3 style="margin-top:6px">${MARKETS.nyc.question}</h3>
+   <dl class="kv"><dt>Event ticker</dt><dd class="mono">WXHIGH-NYC-2611190459</dd><dt>Resolution source</dt><dd>NWS Climatological Report (Daily), Central Park</dd><dt>Expiry (UTC)</dt><dd class="mono">2026-11-19T04:59:00Z</dd><dt>Quote</dt><dd class="num">bid 0.54 · ask 0.58 · mid 0.56 · vol $7</dd><dt>Analyst</dt><dd class="mono">verity-rules-v1 (code rules, no LLM)</dd></dl>
+   <div class="box"><span class="label">Rule 13.111(i)(2), weather terms PDF</span><p class="excerpt" style="margin-top:8px">only the first published version that includes confirmation of the <mark>___</mark> will be used</p><p class="muted" style="font-size:.84rem;margin-top:8px"><span class="tag warn">! ambiguity detected</span> A word is missing, so the rule does not say which report version counts.</p></div>`;
+  if(i===1)return `<span class="label">Step 2 · Information gap detection</span><h3 style="margin-top:6px">One material gap, one non-gap</h3>
+   <table style="margin-top:12px"><thead><tr><th>Gap</th><th>Affects</th><th>Priority</th><th class="num">Cost</th></tr></thead><tbody>
+   <tr><td style="white-space:normal">Which NWS issuance settles<br><span class="label">GAP-NYC-SETTLE</span></td><td>Resolution risk</td><td><span class="tag warn">! Material</span></td><td class="num">0.05 USDC</td></tr>
+   <tr><td style="white-space:normal">Likely max temperature<br><span class="label">GAP-NYC-FORECAST</span></td><td>Outcome probability</td><td><span class="tag neutral">– Not material</span></td><td class="num">not proposed</td></tr></tbody></table>
+   <dl class="kv"><dt>Why it matters</dt><dd>A correction that moves the max across a 2°F band edge flips the outcome.</dd><dt>Free check first</dt><dd><span class="mono">nyc-settlement-version</span>: inconclusive (observed 2026-11-18)</dd><dt>Provider</dt><dd class="mono">verity-demo-merchant · cat-nws-cli-settlement-version-v1</dd><dt>Relevance vs confidence</dt><dd>Relevance is high: it targets the open rule. This says nothing about the outcome, and no confidence score is claimed.</dd></dl>`;
+  if(i===2){const t=tierOf(W.testAmt);const need=t===2;return `<span class="label">Step 3 · Policy gate</span><h3 style="margin-top:6px">0.05 USDC clears tier 1 automatically</h3>
+   <ul class="chain" style="margin-top:12px"><li class="ok"><span class="t">Merchant allowlisted</span><div class="d">verity-demo-merchant is in catalog v1’s allowlist</div></li><li class="ok"><span class="t">Quote valid</span><div class="d">50000 base units, expires 01:10 UTC</div></li><li class="ok"><span class="t">Not a duplicate</span><div class="d">No earlier purchase for req-nyc-0001</div></li><li class="ok"><span class="t">Budget</span><div class="d">0.05 of 25 USDC reserved, including money already reserved</div></li></ul>
+   <div class="box"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><span class="label">Policy tester · does not change this run</span><span class="num" id="amtOut">${W.testAmt.toFixed(2)} USDC</span></div>
+   <input type="range" class="range" id="amt" min="0.01" max="2.5" step="0.01" value="${W.testAmt}" aria-label="Test purchase amount in USDC" aria-valuetext="${W.testAmt.toFixed(2)} USDC">
+   <table class="tiers"><thead><tr><th>Amount (USDC)</th><th>Behaviour</th></tr></thead><tbody>${TIERS.map((r,k)=>`<tr class="${k===t?'active':''}"><td class="num" style="text-align:left">${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody></table>
+   <div class="budget" aria-hidden="true"><i class="spent" style="width:${0.05/25*100}%"></i><i class="res" style="left:${0.05/25*100}%;width:${Math.min(2,W.testAmt)/25*100}%"></i></div><div class="label" style="margin-top:4px">Budget 25 USDC · 0.05 reserved by this run · striped = tested amount</div>
+   ${need?voiceHTML():t===3?`<div class="box no"><span class="tag no">✕ Rejected</span> Over 2.00 USDC is never purchased, with or without approval.</div>`:''}</div>`;}
+  if(i===3){const a=W.tampered;return `<span class="label">Step 4 · Hardened x402 payment</span><h3 style="margin-top:6px">The payment is bound to this exact request</h3>
+   <p class="muted" style="font-size:.86rem;margin-top:6px">Canonical form: sorted-key JSON with no whitespace (demo canonicalization). <code class="mono">requestHash = keccak256(canonicalRequest)</code>, computed in your browser.</p>
+   <pre class="code" style="max-height:none;margin-top:10px;border:1px solid var(--border-hairline);border-radius:4px;white-space:pre-wrap;word-break:break-all">${esc(H.canon)}</pre>
+   <span class="label" style="display:block;margin-top:10px">Signed request hash</span><div class="hashline good">${H.req}</div>
+   ${a?`<span class="label" style="display:block;margin-top:10px">Tampered request (params.station → <span class="diff">KLGA</span>)</span><pre class="code" style="max-height:none;margin-top:6px;border:1px solid var(--signal-no);border-radius:4px;white-space:pre-wrap;word-break:break-all">${esc(H.canonT).replace('KLGA','<span class="diff">KLGA</span>')}</pre><span class="label" style="display:block;margin-top:10px">Recomputed by merchant</span><div class="hashline bad">${H.reqT}</div>
+   <div class="box no"><span class="tag no">✕ Merchant rejects</span><p style="font-size:.86rem;margin-top:8px">The commitments differ (${H.req.slice(0,10)}… ≠ ${H.reqT.slice(0,10)}…). The authorization was signed over the KNYC request, so accepting it for KLGA would pay for a resource the agent never approved. Demo response: <code class="mono">request_hash_mismatch</code>. The real status code follows the payment service’s API contract; it is not a 402, which only means payment is required.</p></div>`:
+   `<div class="box ok"><span class="tag ok">✓ Commitment matches</span><p style="font-size:.86rem;margin-top:8px">The merchant recomputes the hash from the request it received and compares it with the hash in the authorization. EIP-3009 adds a one-time nonce so the same authorization cannot be used twice.</p></div>`}
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn sm" id="tamper" aria-pressed="${a}">${a?'Restore original request':'Tamper request field'}</button><button class="btn sm ghost" id="copyCanon">Copy canonical request</button></div>`;}
+  if(i===4){const a=W.tampered;return `<span class="label">Step 5 · Settlement evidence and delivery</span><h3 style="margin-top:6px">${a?'Nothing settles for a rejected request':'Payment and delivery, recorded separately'}</h3>
+   <ul class="chain">
+   <li class="${a?'no':'ok'}"><span class="t">Payment authorization</span><div class="d">EIP-3009 TransferWithAuthorization over ${short(H.req)} <span class="demo">SIMULATED SIGNATURE</span></div></li>
+   <li class="${a?'no':'ok'}"><span class="t">Payment submission</span><div class="d">${a?'Not submitted: the merchant rejected the request':'<span class="mono">demo-tx-0001</span>, direct Arc Testnet settlement'}</div></li>
+   <li class="${a?'no':'ok'}"><span class="t">Settlement evidence</span><div class="d">${a?'None':'QuickNode-shaped event, AuthorizationUsed + Transfer <span class="demo">SIMULATED</span>'}</div></li>
+   <li class="${a?'no':'ok'}"><span class="t">Merchant delivery</span><div class="d">${a?'None':'Response body received (demo fixture)'}</div></li>
+   <li class="${a?'no':H.content?'ok':'warn'}"><span class="t">Content hash verification</span><div class="d">${a?'—':H.content?`<span class="mono">${short(H.content)}</span> computed from the body matches the merchant’s receipt`:'SHA-256 is unavailable in this browser context'}</div></li>
+   <li class="${a?'no':'ok'}"><span class="t">Reconciliation ingestion</span><div class="d">${a?'Recorded as a rejected request, no charge':'One payment, one delivery, keyed by request hash and nonce'}</div></li></ul>
+   <div class="box"><span class="label">Rails are not interchangeable</span><p style="font-size:.84rem;margin-top:6px">This run uses direct Arc settlement, where one transaction carries one transfer. With Circle Gateway, many transfers settle in one batch transaction; an individual purchase is attributed from Gateway’s own transfer record, never from the batch receipt alone.</p></div>`;}
+  if(i===5){const r=report();return `<span class="label">Step 6 · Final risk and audit report</span><h3 style="margin-top:6px">${r.status}</h3>
+   <dl class="kv"><dt>Original finding</dt><dd>${r.finding}</dd><dt>Purchased evidence</dt><dd>${r.evidence}</dd><dt>Updated risk</dt><dd>${r.risk}</dd><dt>Authorized spend</dt><dd class="num">${r.spend} USDC of 25</dd><dt>Confirmed payments</dt><dd class="num">${r.payments}</dd><dt>Verified deliveries</dt><dd class="num">${r.deliveries}</dd><dt>Policy test</dt><dd>${r.policy}</dd><dt>Remaining uncertainty</dt><dd>${r.left}</dd></dl>
+   <details class="box"><summary style="cursor:pointer">Technical audit trail</summary><dl class="kv"><dt>request_id</dt><dd class="mono">req-nyc-0001</dd><dt>requestHash</dt><dd class="mono">${W.tampered?H.reqT+' (rejected)':H.req}</dd><dt>transaction</dt><dd class="mono">${W.tampered?'none':'demo-tx-0001 (demo identifier)'}</dd><dt>contentHash</dt><dd class="mono">${W.tampered?'none':H.content||'unavailable'}</dd></dl></details>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn sm" id="copyReport">Copy demo summary</button><button class="btn sm" id="dlReport">Download JSON</button></div>`;}
+}
+function report(){const ok=!W.tampered&&!!W.hashes.content;
+  return {status:ok?'Reconciled: payment matches delivery':W.tampered?'Not reconciled: request rejected':'Incomplete: content hash unavailable',
+    finding:'Medium resolution risk (8 of 12). The rule naming the settling report is missing a word.',
+    evidence:ok?'Settlement-version report, 0.05 USDC (demo fixture body)':'None',
+    risk:'8 of 12, Medium, unchanged. The delivered body is a fixture, so no real answer was read; a real report could lower ambiguity and source.',
+    spend:ok?'0.05':'0.00',payments:ok?'1 (demo)':'0',deliveries:ok?'1 verified (demo)':'0',
+    policy:W.approval==='approved'?`${W.testAmt.toFixed(2)} USDC tested: owner approved and signed (simulated)`:W.approval==='denied'?`${W.testAmt.toFixed(2)} USDC tested: denied by owner`:W.approval==='timeout'?`${W.testAmt.toFixed(2)} USDC tested: approval timed out, not purchased`:'No escalation tested',
+    left:'Which NWS issuance settles remains open until a real report is read.',
+    requestHash:W.tampered?W.hashes.reqT:W.hashes.req,contentHash:ok?W.hashes.content:null,demo:true};}
+function voiceHTML(){const s=W.approval;const left=Math.max(0,Math.ceil((W.deadline-Date.now())/1000));
+  return `<div class="voice" aria-live="polite"><div class="voice-head"><span><b style="font-size:.9rem">Verity agent → owner</b> <span class="label">voice approval</span></span><span class="demo">SIMULATED CALL · NO AUDIO</span></div>
+   <div class="wave" id="wave" aria-hidden="true">${Array.from({length:40},()=>'<i></i>').join('')}</div>
+   <div class="voice-body"><dl class="kv" style="margin:0"><dt>Merchant</dt><dd class="mono">verity-demo-merchant</dd><dt>Resource</dt><dd>Hypothetical item priced at ${W.testAmt.toFixed(2)} USDC</dd><dt>Amount</dt><dd class="num">${W.testAmt.toFixed(2)} USDC</dd><dt>Deadline</dt><dd class="num">${s==='pending'?left+' s':'20 s once requested'}</dd><dt>State</dt><dd>${{idle:'<span class="tag neutral">– not requested</span>',pending:'<span class="tag warn">! awaiting owner</span>',heard:'<span class="tag warn">! verbal yes, signature needed</span>',approved:'<span class="tag ok">✓ signed (simulated)</span>',denied:'<span class="tag no">✕ denied</span>',timeout:'<span class="tag no">✕ timed out</span>'}[s]}</dd></dl>
+   <p class="muted" style="font-size:.8rem;margin-top:10px">Voice is the interface. The wallet signature is the authorization. A spoken yes alone never pays.</p></div>
+   <div class="voice-actions">${s==='idle'||s==='denied'||s==='timeout'||s==='approved'?`<button class="btn sm primary" id="vReq">Request approval</button>`:''}${s==='pending'?`<button class="btn sm" id="vYes">Owner says yes</button><button class="btn sm" id="vNo">Deny</button>`:''}${s==='heard'?`<button class="btn sm primary" id="vSign">Authorize with wallet signature</button><button class="btn sm" id="vNo">Deny</button>`:''}</div></div>`;}
+let waveRaf=0;
+function animateWave(){cancelAnimationFrame(waveRaf);const bars=$$('#wave i');if(!bars.length||RM.matches||W.approval!=='pending'&&W.approval!=='heard')return;const t0=performance.now();
+  const f=t=>{const k=(t-t0)/1000;bars.forEach((b,i)=>{b.style.height=(6+Math.abs(Math.sin(k*5+i*.5)*Math.sin(k*1.7+i*.13))*36)+'px';});if(W.step===2&&(W.approval==='pending'||W.approval==='heard'))waveRaf=requestAnimationFrame(f);};waveRaf=requestAnimationFrame(f);}
+function bindStage(){
+  const amt=$('#amt');if(amt)amt.addEventListener('input',()=>{W.testAmt=+amt.value;if(W.approval!=='idle'){W.approval='idle';clearInterval(W.approvalTimer);}const pos=amt.selectionStart;renderStage(true);const n=$('#amt');n&&n.focus();});
+  const tm=$('#tamper');if(tm)tm.addEventListener('click',()=>{W.tampered=!W.tampered;renderAll();$('#tamper')&&$('#tamper').focus();});
+  const cc=$('#copyCanon');if(cc)cc.addEventListener('click',()=>copy(W.tampered?W.hashes.canonT:W.hashes.canon,'Canonical request copied'));
+  const cr=$('#copyReport');if(cr)cr.addEventListener('click',()=>{const r=report();copy(`Verity demo run (SIMULATED)\n${r.status}\nFinding: ${r.finding}\nEvidence: ${r.evidence}\nRisk: ${r.risk}\nSpend: ${r.spend} USDC of 25\nRequest hash: ${r.requestHash}\nContent hash: ${r.contentHash||'none'}\nPolicy test: ${r.policy}`,'Summary copied');});
+  const dl=$('#dlReport');if(dl)dl.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(report(),null,2)],{type:'application/json'}));a.download='verity-demo-run.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);});
+  const vr=$('#vReq');if(vr)vr.addEventListener('click',()=>{W.approval='pending';W.deadline=Date.now()+20000;clearInterval(W.approvalTimer);W.approvalTimer=setInterval(()=>{if(Date.now()>=W.deadline&&(W.approval==='pending'||W.approval==='heard')){W.approval='timeout';clearInterval(W.approvalTimer);renderAll();}else if(W.step===2){const d=$$('.voice .kv dd')[3];if(d)d.textContent=Math.max(0,Math.ceil((W.deadline-Date.now())/1000))+' s';}},500);renderAll();$('#vYes')&&$('#vYes').focus();});
+  const vy=$('#vYes');if(vy)vy.addEventListener('click',()=>{W.approval='heard';renderAll();$('#vSign')&&$('#vSign').focus();});
+  const vn=$('#vNo');if(vn)vn.addEventListener('click',()=>{W.approval='denied';clearInterval(W.approvalTimer);renderAll();$('#vReq')&&$('#vReq').focus();});
+  const vs=$('#vSign');if(vs)vs.addEventListener('click',()=>{vs.setAttribute('aria-busy','true');vs.disabled=true;setTimeout(()=>{W.approval='approved';clearInterval(W.approvalTimer);renderAll();toast('Simulated signature recorded. No wallet was contacted.');},700);});
+  animateWave();
+}
+function renderStage(keep){const st=$('#stage');st.innerHTML=`<div class="stage-body"${keep?' style="animation:none"':''}>${stageHTML(W.step)}</div>`;bindStage();}
+function renderAll(){renderTimeline();renderStage();updateArch();$('#archStep').textContent='Step '+(W.step+1)+' of 6';
+  $('#wtPrev').disabled=W.step===0;$('#wtNext').disabled=W.step===5;}
+function go(i){W.step=Math.max(0,Math.min(5,i));for(let k=0;k<W.step;k++)W.done.add(k);renderAll();}
+function stopRun(){W.running=false;clearInterval(W.timer);$('#wtRun').textContent='Simulate agent run';$('#wtRun').removeAttribute('aria-busy');$('#wtPause').disabled=true;$('#wtPause').textContent='Pause';}
+function startRun(fromStart){if(fromStart){W.done.clear();W.tampered=false;W.step=0;}W.running=true;$('#wtRun').textContent='Running';$('#wtRun').setAttribute('aria-busy','true');$('#wtPause').disabled=false;$('#wtPause').textContent='Pause';renderAll();
+  clearInterval(W.timer);W.timer=setInterval(()=>{if(W.step>=5){W.done.add(5);stopRun();renderAll();toast('Run complete. See the audit report.');return;}W.done.add(W.step);go(W.step+1);},RM.matches?1800:2600);}
+$('#wtRun').addEventListener('click',()=>{if(W.running)return;startRun(W.step===5||W.step===0);});
+$('#wtPause').addEventListener('click',()=>{if(W.running){W.running=false;clearInterval(W.timer);$('#wtPause').textContent='Resume';$('#wtRun').textContent='Paused';$('#wtRun').removeAttribute('aria-busy');}else startRun(false);});
+$('#wtReset').addEventListener('click',()=>{stopRun();W.done.clear();W.tampered=false;W.approval='idle';W.testAmt=.05;clearInterval(W.approvalTimer);W.step=0;renderAll();});
+$('#wtNext').addEventListener('click',()=>{W.done.add(W.step);go(W.step+1);});
+$('#wtPrev').addEventListener('click',()=>go(W.step-1));
+$('#wtEvidence').addEventListener('click',e=>openDrawer(runRecord(),e.currentTarget));
+$$('[data-launch]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>{if(!W.running&&W.step===0)startRun(true);},500)));
+
+/* ---------- Architecture SVG ---------- */
+const NODES={gx:[20,20,'Gemini Exchange API','public market data'],ra:[20,108,'Rules analyst','verity-rules-v1'],pg:[20,196,'Policy gate','tiers · budget'],ow:[290,196,'Owner','voice + wallet'],
+  ps:[20,284,'Payment service','holds the signer'],mc:[290,284,'Merchant (x402)','recomputes hash'],arc:[20,420,'Arc Testnet','USDC settlement'],qn:[290,420,'QuickNode Streams','event delivery'],rc:[155,508,'Reconciler','payment ↔ delivery']};
+const NTIP={gx:'Public event endpoint. Reading market data needs no key.',ra:'Scores ambiguity, source, liquidity and correlation with code rules, then lists gaps.',pg:'Checks the tier, the 25 USDC budget, the allowlist, the quote and duplicates.',ow:'For 0.51–2.00 USDC: Verity explains by voice, the owner signs. Voice alone never authorizes.',ps:'Separate from analysis. Builds the canonical request, hashes it and signs EIP-3009.',mc:'Answers 402 with a quote, recomputes the request hash and rejects mismatches.',arc:'USDC transfer settles on Arc Testnet.',qn:'Streams AuthorizationUsed and Transfer events to the auditor.',rc:'Joins settlement events to verified deliveries and flags exceptions.'};
+const EDGES={'gx-ra':['gx','ra'],'ra-pg':['ra','pg'],'pg-ow':['pg','ow'],'ow-pg':['ow','pg',1],'pg-ps':['pg','ps'],'ps-mc':['ps','mc'],'mc-ps':['mc','ps',1],'ps-arc':['ps','arc'],'arc-qn':['arc','qn'],'qn-rc':['qn','rc'],'mc-rc':['mc','rc']};
+(function buildArch(){const NW=210,NH=56;let s=`<svg viewBox="0 0 520 584" role="group" aria-label="System path diagram"><defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4 0 8z" fill="#2A3550"/></marker><marker id="ahOn" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4 0 8z" fill="#2E5CFF"/></marker></defs>`;
+  s+=`<line x1="0" y1="372" x2="520" y2="372" stroke="#2A3550" stroke-dasharray="4 4"/><text x="262" y="364" fill="#8B9BB4" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">OFFCHAIN</text><text x="262" y="388" fill="#8B9BB4" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">ONCHAIN · ARC TESTNET</text>`;
+  const c=(k,side)=>{const [x,y]=NODES[k];return side==='b'?[x+NW/2,y+NH]:side==='t'?[x+NW/2,y]:side==='r'?[x+NW,y+NH/2]:[x,y+NH/2];};
+  for(const [id,[a,b,resp]] of Object.entries(EDGES)){let p;const A=NODES[a],B=NODES[b];
+    if(A[0]===B[0]){const [x1,y1]=c(a,'b'),[x2,y2]=c(b,'t');p=`M${x1-(resp?24:0)} ${y1}L${x2-(resp?24:0)} ${y2-2}`;}
+    else if(A[1]===B[1]){const r=A[0]<B[0];const [x1,y1]=c(a,r?'r':'l'),[x2,y2]=c(b,r?'l':'r');const o=resp?14:-6;p=`M${x1} ${y1+o}L${x2+(r?-2:2)} ${y2+o}`;}
+    else{const [x1,y1]=c(a,'b'),[x2,y2]=c(b,'t');const my=(y1+y2)/2;p=`M${x1+(a==='mc'?40:0)} ${y1}C${x1+(a==='mc'?40:0)} ${my} ${x2} ${my} ${x2+(a==='mc'?24:-24)} ${y2-2}`;}
+    if(id==='mc-rc')p='M500 312L510 312L510 536L369 536';if(id==='qn-rc')p='M395 476C395 492 300 490 300 506';s+=`<path class="edge${resp?' resp':''}" id="e-${id}" d="${p}" marker-end="url(#ah)"/>`;}
+  for(const [k,[x,y,t,sub]] of Object.entries(NODES))s+=`<g class="node" id="n-${k}" tabindex="0" role="img" aria-label="${t}: ${NTIP[k]}"><rect x="${x}" y="${y}" width="${NW}" height="${NH}" rx="6"/><text class="tt" x="${x+14}" y="${y+24}">${t}</text><text x="${x+14}" y="${y+42}">${sub}</text></g>`;
+  $('#arch').innerHTML=s+'</svg>';
+  $$('#arch .node').forEach(g=>{const k=g.id.slice(2);const show=()=>{$('#archTip').innerHTML=`<b style="color:var(--text-primary)">${NODES[k][2]}</b> · ${NTIP[k]}`;};g.addEventListener('mouseenter',show);g.addEventListener('focus',show);g.addEventListener('click',show);});
+})();
+function updateArch(){const st=STEPS[W.step];$$('#arch .node').forEach(n=>n.classList.remove('on','err','ok'));$$('#arch .edge').forEach(e=>{e.classList.remove('on','err');e.setAttribute('marker-end','url(#ah)');});
+  st.nodes.forEach(k=>$('#n-'+k).classList.add('on'));st.edges.forEach(k=>{const e=$('#e-'+k);if(e){e.classList.add('on');e.setAttribute('marker-end','url(#ahOn)');}});
+  if(W.tampered&&W.step>=3){$('#n-mc').classList.remove('on');$('#n-mc').classList.add('err');$('#e-ps-mc').classList.remove('on');$('#e-ps-mc').classList.add('err');if(W.step===4){['arc','qn'].forEach(k=>$('#n-'+k).classList.remove('on'));['ps-arc','arc-qn'].forEach(k=>{$('#e-'+k).classList.remove('on');$('#e-'+k).setAttribute('marker-end','url(#ah)');});}}
+  if(W.step===5&&!W.tampered)$('#n-rc').classList.add('ok');
+  if(W.step===2&&tierOf(W.testAmt)!==2){$('#n-ow').classList.remove('on');['pg-ow','ow-pg'].forEach(k=>{$('#e-'+k).classList.remove('on');$('#e-'+k).setAttribute('marker-end','url(#ah)');});}
+}
+
+/* ---------- Code tabs ---------- */
+function tabContent(){const H=W.hashes,vb=Math.floor(Date.parse(REQ.expires_at)/1000);
+  return {
+  '402':{lang:'http',label:'Illustrative · field names follow the public x402 spec; Verity’s merchant response is not in this repo',code:`HTTP/1.1 402 Payment Required
+Content-Type: application/json
+
+${JSON.stringify({x402Version:1,accepts:[{scheme:'exact',network:'arc-testnet',maxAmountRequired:'50000',resource:REQ.resource+'?date=2026-11-18&station=KNYC',description:'NWS daily climate report: settlement-version check',payTo:'<merchant address, not in fixtures>',asset:'<USDC on Arc Testnet>',maxTimeoutSeconds:600,extra:{requestHash:H.req}}]},null,2)}`,
+   ex:['The merchant answers an unpaid request with 402 and a quote. 50000 base units is 0.05 USDC (6 decimals), the catalog v1 price.','The request hash travels with the quote, so the agent signs over exactly this resource and these parameters.']},
+  '3009':{lang:'json',label:'Pseudocode · assumes nonce = requestHash; confirm against the payment service',code:JSON.stringify({primaryType:'TransferWithAuthorization',domain:{name:'USDC',version:'2',chainId:'<Arc Testnet chain id>',verifyingContract:'<USDC contract>'},types:{TransferWithAuthorization:[{name:'from',type:'address'},{name:'to',type:'address'},{name:'value',type:'uint256'},{name:'validAfter',type:'uint256'},{name:'validBefore',type:'uint256'},{name:'nonce',type:'bytes32'}]},message:{from:'<agent wallet>',to:'<merchant address>',value:'50000',validAfter:'0',validBefore:String(vb),nonce:H.req}},null,2),
+   ex:['EIP-3009 lets the token contract move USDC with a signed authorization. Each nonce can be used once, which blocks replays.','Putting the request hash in the nonce ties the signature to one canonical request. The merchant still has to recompute the hash and compare.',`validBefore ${vb} is ${REQ.expires_at}, the quote expiry.`]},
+  'risk':{lang:'json',label:'Real output · samples/nyc_high_gap_remains.json (excerpt)',code:JSON.stringify(NYC_JSON,null,2),ex:['This is what the rules analyst writes for the NYC market. No LLM is involved; scoring is code in rules_analyst.py.','Totals: 4–6 Low, 7–8 Medium, 9–12 High. Liquidity is computed from bid, ask and volume.']},
+  'qn':{lang:'json',label:'Simulated · shape of a filtered stream payload; not real QuickNode output',code:JSON.stringify({stream:'demo-arc-usdc',network:'arc-testnet',simulated:true,data:[{transactionHash:'demo-tx-0001',logs:[{event:'AuthorizationUsed',authorizer:'<agent wallet>',nonce:H.req},{event:'Transfer',from:'<agent wallet>',to:'<merchant address>',value:'50000'}]}]},null,2),
+   ex:['The auditor listens for AuthorizationUsed, which EIP-3009 emits per nonce, and the matching Transfer.','A replayed event carries the same nonce, so the ledger deduplicates it instead of counting a second charge.']}};}
+function renderTabs(){const C=tabContent();$('#tabPanels').innerHTML=Object.entries(C).map(([k,v],i)=>`<div class="tabpanel" role="tabpanel" id="panel-${k}" aria-labelledby="tab-${k}" ${i?'hidden':''} tabindex="0"><div style="min-width:0"><div class="copy-row"><span class="${v.label.startsWith('Real')?'real':'demo'}">${esc(v.label)}</span><button class="btn sm" data-copy="${k}">Copy</button></div><pre class="code" style="max-height:420px">${v.lang==='http'?hl(v.code).replace(/^HTTP\/1\.1 402 Payment Required/,'<span class="b">HTTP/1.1 402 Payment Required</span>'):hl(v.code)}</pre></div><div class="explain">${v.ex.map(p=>`<p>${p}</p>`).join('')}</div></div>`).join('');
+  $$('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(C[b.dataset.copy].code,'Code copied')));}
+(function tabs(){const tabs=$$('#tablist [role=tab]');const sel=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$('#'+x.getAttribute('aria-controls')).hidden=!on;});};
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{let j=null;if(e.key==='ArrowRight')j=(i+1)%tabs.length;if(e.key==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!=null){e.preventDefault();tabs[j].focus();sel(tabs[j]);}});});})();
+/* ---------- Reconciler ledger (demo fixtures) ---------- */
+const STATUS={ok:['ok','✓ Matched & verified'],pnd:['no','✕ Paid, not delivered'],dnp:['warn','! Delivered, not paid'],dup:['info','≡ Duplicate, deduplicated'],nonce:['info','≡ Replay blocked, nonce used'],mis:['no','✕ Mismatched request']};
+const FORECAST_REQ={...REQ,resource:'/v1/catalog/cat-point-forecast-v1',amount:'20000',request_id:'req-nyc-0002',expires_at:'2026-11-18T01:12:00Z'};
+const LB_REQ={...REQ,resource:'/v1/catalog/cat-lm-arena-snapshot-v1',params:{board:'text',timestamp:'2026-11-18T00:00:00Z'},request_id:'req-ai-0003',expires_at:'2026-11-18T01:20:00Z'};
+const EVENTS=[ // fixture event stream, in arrival order
+  {ev:'e1',id:'P-0001',rail:'Arc direct',req:REQ,tx:'demo-tx-0001',delivery:DELIVERY,ts:'2026-11-18T01:02:10Z',kind:'ok'},
+  {ev:'e2',id:'P-0002',rail:'Arc direct',req:FORECAST_REQ,tx:'demo-tx-0002',delivery:null,ts:'2026-11-18T01:03:40Z',kind:'pnd',sla:'No delivery 10 min after settlement. SLA alert raised.'},
+  {ev:'e3',id:'P-0001',rail:'Arc direct',req:REQ,tx:'demo-tx-0001',delivery:DELIVERY,ts:'2026-11-18T01:04:05Z',kind:'dup',note:'Same transaction and nonce as event e1. Counted once; no second charge.'},
+  {ev:'e4',id:'P-0003',rail:'Circle Gateway',req:LB_REQ,tx:'demo-batch-07',delivery:{item:'cat-lm-arena-snapshot-v1',fixture:true},ts:'2026-11-18T01:06:30Z',kind:'dnp',note:'Delivery is recorded. Batch demo-batch-07 is confirmed on Arc, but no Gateway transfer record names this purchase, so payment is not established.'},
+  {ev:'e5',id:'P-0004',rail:'Arc direct',req:REQ,tx:'—',delivery:null,ts:'2026-11-18T01:07:15Z',kind:'nonce',note:'A second authorization with the P-0001 nonce was rejected before submission. Nothing settled.'},
+  {ev:'e6',id:'P-0005',rail:'Arc direct',req:{...REQ,params:{station:'KLGA',date:'2026-11-18'},request_id:'req-nyc-0005'},signedReq:REQ,tx:'demo-tx-0005',delivery:{...DELIVERY,station:'KLGA'},ts:'2026-11-18T01:09:00Z',kind:'mis',note:'The settled authorization commits to the KNYC request; the merchant delivered for KLGA. Hashes differ.'}];
+const R={rows:[],filter:'all',sort:{k:'ts',dir:1},replay:0,sel:null};
+async function rowFrom(e){const reqHash=kec(canon(e.req));const signed=e.signedReq?kec(canon(e.signedReq)):reqHash;const content=e.delivery?await sha256(canon(e.delivery)):null;
+  return {...e,amount:(+e.req.amount/1e6),reqHash,signedHash:signed,content,merchant:e.req.merchant,status:e.kind};}
+function statusGroup(k){return k==='ok'?'ok':(k==='dup'||k==='nonce')?'other':'flag';}
+function renderLedger(){
+  const rows=R.rows.filter(r=>R.filter==='all'||(R.filter==='ok'?r.status==='ok':statusGroup(r.status)==='flag'));
+  const {k,dir}=R.sort;rows.sort((a,b)=>{const x=k==='amount'?a.amount-b.amount:String(a[k]).localeCompare(String(b[k]));return x*dir;});
+  const tb=$('#recBody');
+  if(!R.rows.length)tb.innerHTML=`<tr><td colspan="9" class="empty">No records yet. Replay the fixture stream to ingest demo events.</td></tr>`;
+  else if(!rows.length)tb.innerHTML=`<tr><td colspan="9" class="empty">No records match this filter.</td></tr>`;
+  else tb.innerHTML=rows.map(r=>`<tr tabindex="0" data-ev="${r.ev}" class="${r.fresh?'new':''}" aria-selected="${R.sel===r.ev}"><td class="mono">${r.id}${r.status==='dup'?' <span class="label">event 2</span>':''}</td><td>${r.rail}</td><td class="mono" style="font-size:.74rem">${r.merchant}</td><td class="num">${r.status==='nonce'?'0.00':r.amount.toFixed(2)} USDC</td>
+    <td><span class="trunc"><code title="${r.reqHash}">${short(r.reqHash)}</code><button class="icon-btn" data-c="${r.reqHash}" aria-label="Copy request hash">⧉</button></span></td>
+    <td><span class="trunc"><code>${r.tx}</code></span></td>
+    <td>${r.content?`<span class="trunc"><code title="${r.content}">${short(r.content)}</code><button class="icon-btn" data-c="${r.content}" aria-label="Copy content hash">⧉</button></span>`:'<span class="muted">none</span>'}</td>
+    <td><span class="tag ${STATUS[r.status][0]}">${STATUS[r.status][1]}</span></td><td class="mono" style="font-size:.74rem" title="Fixture timestamp">${r.ts.replace('T',' ').replace('Z','')}</td></tr>`).join('');
+  R.rows.forEach(r=>r.fresh=false);
+  $$('#recBody tr[data-ev]').forEach(tr=>{const open=()=>{R.sel=tr.dataset.ev;$$('#recBody tr').forEach(x=>x.setAttribute('aria-selected',x===tr));openDrawer(recordView(R.rows.find(r=>r.ev===tr.dataset.ev)),tr);};tr.addEventListener('click',e=>{if(e.target.closest('[data-c]'))return;open();});tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
+  $$('#recBody [data-c]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();copy(b.dataset.c,'Hash copied');}));
+  const uniq=new Set(R.rows.filter(r=>r.status!=='dup'&&r.status!=='nonce'&&r.rail==='Arc direct').map(r=>r.tx));
+  const settled=R.rows.filter(r=>['ok','pnd','mis'].includes(r.status)).reduce((s,r)=>s+r.amount,0);
+  $('#recCounts').innerHTML=`<span>Records <b>${R.rows.length}</b></span><span>Verified <b>${R.rows.filter(r=>r.status==='ok').length}</b></span><span>Exceptions <b>${R.rows.filter(r=>statusGroup(r.status)==='flag').length}</b></span><span>Duplicates and replays blocked <b>${R.rows.filter(r=>r.status==='dup'||r.status==='nonce').length}</b></span><span>Unique settled <b>${settled.toFixed(2)} USDC</b> across ${uniq.size} tx</span><span class="demo">DEMO FIXTURE</span>`;
+}
+async function loadAll(){R.rows=[];for(const e of EVENTS)R.rows.push(await rowFrom(e));renderLedger();}
+async function replay(){const b=$('#recReplay');clearInterval(R.replay);R.rows=[];renderLedger();b.setAttribute('aria-busy','true');b.disabled=true;let i=0;
+  const next=async()=>{if(i>=EVENTS.length){clearInterval(R.replay);b.removeAttribute('aria-busy');b.disabled=false;toast('Fixture stream replayed: 6 events, 1 duplicate suppressed');return;}const r=await rowFrom(EVENTS[i++]);r.fresh=true;R.rows.push(r);renderLedger();};
+  await next();R.replay=setInterval(next,RM.matches?200:800);}
+$('#recReplay').addEventListener('click',replay);
+$('#recClear').addEventListener('click',()=>{clearInterval(R.replay);$('#recReplay').disabled=false;$('#recReplay').removeAttribute('aria-busy');R.rows=[];renderLedger();});
+$$('#recFilter button').forEach(b=>b.addEventListener('click',()=>{R.filter=b.dataset.f;$$('#recFilter button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderLedger();}));
+$$('[data-sort]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.sort;R.sort={k,dir:R.sort.k===k?-R.sort.dir:1};$$('[data-sort]').forEach(x=>{x.closest('th').removeAttribute('aria-sort');x.textContent=x.textContent.replace(/ [▲▼]$/,'');});b.closest('th').setAttribute('aria-sort',R.sort.dir>0?'ascending':'descending');b.textContent+=R.sort.dir>0?' ▲':' ▼';renderLedger();}));
+
+/* ---------- Drawer ---------- */
+function recordView(r){const decision={ok:'Matched: settlement, request commitment and content hash agree.',pnd:'Exception: payment settled with no qualifying delivery. '+(r.sla||''),dnp:'Exception: '+(r.note||''),dup:'Deduplicated: '+(r.note||''),nonce:'Blocked: '+(r.note||''),mis:'Exception: '+(r.note||'')}[r.status];
+  return {title:r.id+' · '+STATUS[r.status][1].slice(2),sections:[
+    ['Canonical request',`<pre class="code" style="max-height:200px;white-space:pre-wrap;word-break:break-all;border:1px solid var(--border-hairline);border-radius:4px">${esc(canon(r.req))}</pre><div class="hashline">${r.reqHash}</div>`],
+    ['Authorization metadata',`<dl class="kv"><dt>scheme</dt><dd class="mono">EIP-3009 TransferWithAuthorization</dd><dt>nonce</dt><dd class="mono" style="font-size:.72rem">${r.signedHash}</dd><dt>signature</dt><dd><span class="demo">SIMULATED</span> not a real signature</dd></dl>${r.signedHash!==r.reqHash?`<div class="hashline bad">Signed over ${short(r.signedHash)} but delivered request hashes to ${short(r.reqHash)}</div>`:''}`],
+    ['Payment evidence',`<dl class="kv"><dt>rail</dt><dd>${r.rail}</dd><dt>reference</dt><dd class="mono">${r.tx}</dd><dt>amount</dt><dd class="num">${r.status==='nonce'?'0.00 (not submitted)':r.amount.toFixed(2)+' USDC'}</dd></dl>${r.rail==='Circle Gateway'?'<p class="muted" style="font-size:.82rem">Gateway attribution: the batch transaction proves the batch settled. Only Gateway’s individual transfer record can attribute this purchase, and none was found.</p>':''}`],
+    ['Merchant receipt and content hash',r.content?`<p class="muted" style="font-size:.82rem">Response body (demo fixture), SHA-256 computed in your browser:</p><div class="hashline ${r.status==='mis'?'bad':'good'}">${r.content}</div>`:'<p class="muted">No delivery recorded.</p>'],
+    ['Reconciliation decision',`<div class="box ${STATUS[r.status][0]}"><span class="tag ${STATUS[r.status][0]}">${STATUS[r.status][1]}</span><p style="font-size:.86rem;margin-top:8px">${decision}</p></div>`],
+    ['Evidence source and time',`<dl class="kv"><dt>source</dt><dd>Demo fixture stream (not QuickNode)</dd><dt>event</dt><dd class="mono">${r.ev}</dd><dt>timestamp</dt><dd class="mono">${r.ts} (fixture)</dd></dl>`]]};}
+async function runRecordRow(){return rowFrom({ev:'run',id:'Current run',rail:'Arc direct',req:W.tampered?{...REQ,params:{station:'KLGA',date:'2026-11-18'}}:REQ,signedReq:REQ,tx:W.tampered?'—':'demo-tx-0001',delivery:W.tampered?null:DELIVERY,ts:'2026-11-18T01:02:10Z',kind:W.tampered?'mis':'ok',note:'The tampered request was rejected before payment; nothing settled.'});}
+function runRecord(){return {title:'Current run evidence',async:true};}
+let lastFocus=null;
+async function openDrawer(view,from){lastFocus=from||document.activeElement;if(view.async){const r=await runRecordRow();if(W.tampered){r.tx='—';}view=recordView(r);view.title='Current walkthrough run · '+(W.tampered?'request rejected':'matched');}
+  $('#drawerTitle').textContent=view.title;$('#drawerBody').innerHTML=view.sections.map(([h,b])=>`<h3>${h}</h3>${b}`).join('');
+  const d=$('#drawer');d.classList.add('open');d.setAttribute('aria-hidden','false');$('#drawerBg').classList.add('open');document.body.style.overflow='hidden';$('#drawerClose').focus();}
+function closeDrawer(){const d=$('#drawer');d.classList.remove('open');d.setAttribute('aria-hidden','true');$('#drawerBg').classList.remove('open');document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+$('#drawerClose').addEventListener('click',closeDrawer);$('#drawerBg').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{const d=$('#drawer');if(!d.classList.contains('open'))return;if(e.key==='Escape'){closeDrawer();return;}
+  if(e.key==='Tab'){const f=$$('button,[href],[tabindex]:not([tabindex="-1"]),summary',d).filter(x=>!x.disabled&&x.offsetParent!==null);if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}}});
+
+/* ---------- Init ---------- */
+(async function init(){
+  try{await computeHashes();}catch(e){console.warn(e);}
+  renderTerm();renderAll();renderTabs();await loadAll();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{drawProb();drawCandles();});
+})();
+</script>
+</body>
+</html>
