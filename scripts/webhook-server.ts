@@ -4,7 +4,8 @@
  *   npm run webhook:serve
  *
  * Env (or .env.quicknode): VERITY_QN_SECURITY_TOKEN (required), PORT (8787),
- * VERITY_DB (.verity/payments.sqlite), ARC_RPC_URL.
+ * VERITY_DB (.verity/payments.sqlite), ARC_RPC_URL, VERITY_QN_MAX_SKEW_SECONDS (300; 0 turns the
+ * timestamp window off).
  * Each accepted delivery is logged to stdout and .verity/quicknode-deliveries.log.
  */
 import { appendFileSync, existsSync, mkdirSync } from "node:fs";
@@ -26,6 +27,7 @@ mkdirSync(".verity", { recursive: true });
 const logFile = ".verity/quicknode-deliveries.log";
 const store = new PaymentStore(process.env.VERITY_DB ?? ".verity/payments.sqlite");
 const ledger = new ReconciliationLedger(store);
+const maxSkew = Number(process.env.VERITY_QN_MAX_SKEW_SECONDS ?? 300);
 const client = createPublicClient({ chain: arcTestnet, transport: http(process.env.ARC_RPC_URL) });
 const handler = createQuickNodeWebhookHandler({
   securityToken,
@@ -33,6 +35,8 @@ const handler = createQuickNodeWebhookHandler({
   finalizedBlock: async () => BigInt((await client.request({ method: "eth_getBlockByNumber", params: ["finalized", false] }))!.number!),
   now: () => Math.floor(Date.now() / 1000),
   source: "quicknode-streams",
+  // Replay window: a signed delivery is refused when X-QN-Timestamp is further than this from now.
+  ...(maxSkew > 0 ? { maxTimestampSkewSeconds: maxSkew } : {}),
 });
 
 const server = createServer(async (req, res) => {

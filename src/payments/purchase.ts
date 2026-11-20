@@ -49,7 +49,6 @@ export class BuyerService {
   readonly #tokenDomain: { name: string; version: string };
   readonly #missionId: string;
   readonly #saltSource: (() => Hex) | undefined;
-  #paused = false;
 
   constructor(options: {
     store: PaymentStore;
@@ -70,12 +69,32 @@ export class BuyerService {
     this.#saltSource = options.saltSource;
   }
 
-  pause(): void {
-    this.#paused = true;
+  /** The pause switch is durable (PaymentStore), so it holds across restarts and for purchases already reserved. */
+  pause(now: number = Math.floor(Date.now() / 1000), reason: string | null = null): void {
+    this.#store.setPaused(true, now, reason);
   }
 
-  resume(): void {
-    this.#paused = false;
+  resume(now: number = Math.floor(Date.now() / 1000)): void {
+    this.#store.setPaused(false, now);
+  }
+
+  get paused(): boolean {
+    return this.#store.isPaused();
+  }
+
+  /** Budget for this buyer's mission, counting held reservations and settled spend. */
+  budget() {
+    return this.#store.budget(this.#missionId);
+  }
+
+  /**
+   * The owner declines a purchase that is awaiting approval. The reservation is
+   * released; the purchase can never be signed afterwards.
+   */
+  rejectApproval(input: { purchaseId: string; reason: string; now: number; quote: VerityQuote }): PurchaseResult {
+    this.#store.recordOwnerRejection(input);
+    const decision = { decision: "reject", reason: `owner rejected: ${input.reason}` } as const;
+    return { status: "rejected", reason: decision.reason, decision, explanation: explainDecision({ decision, quote: input.quote }) };
   }
 
   async purchase(input: {
@@ -100,7 +119,7 @@ export class BuyerService {
       catalogItemId: quote.catalogItemId,
       groupKey: accepted.groupKey,
       materialUnresolvedGap: accepted.materialUnresolvedGap,
-      paused: this.#paused,
+      paused: this.#store.isPaused(),
       allowlistedMerchants: [...new Set([...this.#catalog.values()].map((item) => item.merchantId))],
       allowlistedItems: [...this.#catalog.keys()],
       // Duplicates are enforced durably by PaymentStore (one purchase per mission, contract, and evidence type).
@@ -148,6 +167,18 @@ export class BuyerService {
     decision?: PolicyDecision,
   ): Promise<PurchaseResult> {
     let record = this.#store.get(input.purchaseId)!;
+    const refuse = (reason: string): PurchaseResult => {
+      const rejected = { decision: "reject", reason } as const;
+      return { status: "rejected", reason, decision: rejected, explanation: explainDecision({ decision: rejected, quote: input.quote }) };
+    };
+    // A resumed purchase passes the same gates as a new one: pause, closed records, and an expired window.
+    if (this.#store.isPaused()) return refuse("payments are paused");
+    if (record.status === "rejected") return refuse("the owner rejected this purchase");
+    if (record.status === "expired") return refuse("the authorization window expired before signing");
+    if (record.signature === null && input.now >= record.request.validBefore) {
+      this.#store.expire(input.purchaseId, input.now);
+      return refuse("the authorization window expired before signing");
+    }
     const amount = BigInt(request.amount);
     const limits = this.#store.policy;
     const effective: PolicyDecision =

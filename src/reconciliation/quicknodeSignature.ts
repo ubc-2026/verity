@@ -19,10 +19,28 @@ export function signQuickNodePayload(securityToken: string, nonce: string, times
   return createHmac("sha256", Buffer.from(securityToken)).update(nonce + timestamp + payload).digest("hex");
 }
 
-export function verifyQuickNodeSignature(securityToken: string, request: QuickNodeSignedRequest): boolean {
+/**
+ * Optional replay window. When set, X-QN-Timestamp must be Unix seconds (or
+ * milliseconds) within `maxSkewSeconds` of `now`. Live ingestion sets it; an
+ * old signed delivery replayed later is then refused before it is parsed.
+ */
+export interface SignatureWindow {
+  now: number;
+  maxSkewSeconds: number;
+}
+
+export function timestampWithinWindow(timestamp: string, window: SignatureWindow): boolean {
+  if (!/^[0-9]{9,13}$/.test(timestamp)) return false;
+  const value = Number(timestamp);
+  const seconds = timestamp.length >= 13 ? Math.floor(value / 1000) : value;
+  return Math.abs(window.now - seconds) <= window.maxSkewSeconds;
+}
+
+export function verifyQuickNodeSignature(securityToken: string, request: QuickNodeSignedRequest, window?: SignatureWindow): boolean {
   const { nonce, timestamp, signature, payload } = request;
   if (!securityToken || !nonce || !timestamp || !signature) return false;
   if (!/^[0-9a-f]{64}$/i.test(signature)) return false;
+  if (window && !timestampWithinWindow(timestamp, window)) return false;
   const expected = Buffer.from(signQuickNodePayload(securityToken, nonce, timestamp, payload), "hex");
   return timingSafeEqual(expected, Buffer.from(signature, "hex"));
 }

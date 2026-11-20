@@ -15,7 +15,8 @@
     "delivery:demo": "node scripts/delivery-demo.ts",
     "e2e": "node scripts/e2e.ts",
     "e2e:nano": "node scripts/e2e-nano.ts",
-    "arc:gateway": "node scripts/arc-gateway.ts"
+    "arc:gateway": "node scripts/arc-gateway.ts",
+    "app": "node scripts/app-server.ts"
   },
   "repository": {
     "type": "git",
