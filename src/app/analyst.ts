@@ -156,7 +156,12 @@ export class Analyst {
       child.on("error", reject);
       child.on("close", (code) => {
         clearTimeout(timer);
-        if (code !== 0) return reject(new Error(`analysis exited ${code}: ${Buffer.concat(err).toString("utf8").trim().split("\n").at(-1) ?? ""}`));
+        if (code !== 0) {
+          const last = Buffer.concat(err).toString("utf8").trim().split("\n").at(-1) ?? "";
+          // findPython only checks for pydantic. Live runs also need requests and pypdf.
+          const hint = /ModuleNotFoundError/.test(last) ? " (install analysis/requirements-live.txt into this Python)" : "";
+          return reject(new Error(`analysis exited ${code}: ${last}${hint}`));
+        }
         try {
           resolve(JSON.parse(Buffer.concat(out).toString("utf8")));
         } catch (error) {

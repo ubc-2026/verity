@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { Analyst, findPython } from "../src/app/analyst.ts";
 import { RunEngine } from "../src/app/engine.ts";
 import { createAppHandler } from "../src/app/http.ts";
-import { classifyQuote, LiveMarkets, loadFixtureMarkets, type Fetcher } from "../src/app/markets.ts";
+import { classifyQuote, LiveMarkets, loadFixtureMarkets, shapeLiveEvent, termsPdfInDescription, type Fetcher } from "../src/app/markets.ts";
 import { catalogById } from "../src/payments/catalog.ts";
 import { acceptPurchaseProposal } from "../src/payments/proposal.ts";
 import { signQuickNodePayload, verifyQuickNodeSignature } from "../src/reconciliation/quicknodeSignature.ts";
@@ -375,6 +375,97 @@ describe("quote states", () => {
     const none = await new LiveMarkets({ fetch: fake, now: () => clock }).snapshot(5);
     assert.equal(none.state, "unavailable");
     assert.deepEqual(none.events, []);
+  });
+});
+
+describe("live Gemini events", () => {
+  const PDF = "https://assets.gemini.com/predictions/terms_and_conditions/Weather.pdf";
+  it("finds the terms PDF in a weather contract description when termsLink is empty", () => {
+    assert.equal(termsPdfInDescription(`Settles per the [rules](${PDF}).`), PDF);
+    assert.equal(termsPdfInDescription({ text: `see ${PDF} and ${PDF}` }), PDF, "one distinct link");
+    assert.equal(termsPdfInDescription(`${PDF} or https://assets.gemini.com/predictions/terms_and_conditions/Other.pdf`), null, "two links are ambiguous");
+    assert.equal(termsPdfInDescription("https://evil.example/terms_and_conditions/x.pdf"), null);
+    assert.equal(termsPdfInDescription(undefined), null);
+    const event = shapeLiveEvent({ ticker: "WXHIGH-SFO", status: "active", contracts: [{ label: "56 to 57", status: "active", description: `Rules: ${PDF}` }] }, 0, 0, 120);
+    assert.equal(event.termsUrl, PDF);
+    assert.equal(event.contracts[0]!.termsUrl, PDF);
+    const direct = shapeLiveEvent({ ticker: "X", termsLink: "https://assets.gemini.com/t.pdf", contracts: [{ label: "a", termsAndConditionsUrl: "https://assets.gemini.com/c.pdf", description: PDF }] }, 0, 0, 120);
+    assert.equal(direct.termsUrl, "https://assets.gemini.com/t.pdf");
+    assert.equal(direct.contracts[0]!.termsUrl, "https://assets.gemini.com/c.pdf");
+  });
+
+  it("drops feed terms links that are not https on assets.gemini.com and prefers the active contract", () => {
+    const other = "https://assets.gemini.com/predictions/terms_and_conditions/Old.pdf";
+    const event = shapeLiveEvent({
+      ticker: "X",
+      termsLink: "javascript:alert(1)",
+      contracts: [null, { label: "old", status: "settled", description: other }, { label: "new", status: "active", termsAndConditionsUrl: "https://evil.example/t.pdf", description: PDF }],
+    }, 0, 0, 120);
+    assert.equal(event.termsUrl, PDF, "event-level link comes from the active contract");
+    assert.equal(event.contracts.length, 2, "a null contract is skipped");
+    assert.equal(event.contracts[1]!.termsUrl, PDF, "an off-site link falls back to the description");
+  });
+
+  it("keeps the larger reading when two reads race", async () => {
+    const events = Array.from({ length: 60 }, (_, i) => ({ ticker: `E${i}`, status: "active", contracts: [] }));
+    const pending: Array<() => void> = [];
+    const fake: Fetcher = (url) => new Promise((resolve) => {
+      const limit = Number(new URL(url).searchParams.get("limit"));
+      pending.push(() => resolve({ ok: true, status: 200, text: async () => JSON.stringify({ data: events.slice(0, limit) }) }));
+    });
+    const live = new LiveMarkets({ fetch: fake, now: () => 1_800_000_000 });
+    const big = live.snapshot(50);
+    const small = live.snapshot(5);
+    pending[0]!();
+    pending[1]!();
+    assert.equal((await big).events.length, 50);
+    assert.equal((await small).events.length, 5);
+    assert.equal((await live.snapshot(50)).events.length, 50, "the smaller read did not replace the larger one");
+  });
+
+  it("does not refetch a failed larger limit on every request and says it is short", async () => {
+    let calls = 0;
+    let clock = 1_800_000_000;
+    const events = Array.from({ length: 60 }, (_, i) => ({ ticker: `E${i}`, status: "active", contracts: [] }));
+    const fake: Fetcher = async (url) => {
+      calls += 1;
+      const limit = Number(new URL(url).searchParams.get("limit"));
+      if (limit > 5) return { ok: false, status: 503, text: async () => "" };
+      return { ok: true, status: 200, text: async () => JSON.stringify({ data: events.slice(0, limit) }) };
+    };
+    const live = new LiveMarkets({ fetch: fake, now: () => clock });
+    await live.snapshot(5);
+    const first = await live.snapshot(50);
+    assert.equal(first.events.length, 5);
+    assert.match(first.note, /read for 50 failed: HTTP 503/);
+    await live.snapshot(50);
+    await live.snapshot(40);
+    assert.equal(calls, 2, "no new read while backing off");
+    clock += 31;
+    await live.snapshot(50);
+    assert.equal(calls, 3, "retries after cacheSeconds");
+  });
+
+  it("honours the requested limit and refetches when a larger one is asked for", async () => {
+    const urls: string[] = [];
+    const events = Array.from({ length: 60 }, (_, i) => ({ ticker: `E${i}`, status: "active", contracts: [] }));
+    const fake: Fetcher = async (url) => {
+      urls.push(url);
+      const limit = Number(new URL(url).searchParams.get("limit"));
+      return { ok: true, status: 200, text: async () => JSON.stringify({ data: events.slice(0, limit) }) };
+    };
+    const live = new LiveMarkets({ fetch: fake, now: () => 1_800_000_000 });
+    const five = await live.snapshot(5);
+    assert.equal(five.events.length, 5);
+    assert.match(five.source, /limit=5$/);
+    const fifty = await live.snapshot(50);
+    assert.equal(fifty.events.length, 50);
+    assert.match(fifty.source, /limit=50$/);
+    const three = await live.snapshot(3);
+    assert.equal(three.events.length, 3, "a smaller limit is served from the cache");
+    assert.equal(urls.length, 2);
+    await live.snapshot(1000);
+    assert.match(urls.at(-1)!, /limit=100$/, "the limit is capped at 100");
   });
 });
 

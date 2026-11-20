@@ -182,19 +182,44 @@ function str(value: unknown): string | null {
   return typeof value === "string" && value.length > 0 ? value : typeof value === "number" ? String(value) : null;
 }
 
+const TERMS_PDF = /https:\/\/assets\.gemini\.com\/predictions\/terms_and_conditions\/[^\s"'()<>\\]+?\.pdf/gi;
+
+/** A terms link from the feed, kept only when it is an https link on assets.gemini.com. */
+export function geminiTermsUrl(value: unknown): string | null {
+  if (typeof value !== "string" || value.length === 0) return null;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === "assets.gemini.com" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Gemini weather events leave termsLink and termsAndConditionsUrl empty and link the terms PDF only in the
+ * contract description. Returns that link when exactly one terms PDF appears. analysis/verity/live.py reads
+ * markdown link targets only; this also accepts a bare link, and both require assets.gemini.com.
+ */
+export function termsPdfInDescription(description: unknown): string | null {
+  const found = new Set(JSON.stringify(description ?? "").match(TERMS_PDF) ?? []);
+  return found.size === 1 ? [...found][0]! : null;
+}
+
 export function shapeLiveEvent(raw: Record<string, any>, fetchedAt: number, now: number, staleAfterSeconds: number): LiveEvent {
   const ticker = String(raw.ticker ?? "");
   const eventOpen = (raw.status ?? "active") === "active";
+  const rawContracts: Record<string, any>[] = Array.isArray(raw.contracts) ? raw.contracts.filter((c: unknown) => c && typeof c === "object") : [];
+  const lead = rawContracts.find((c) => c.status === "active") ?? rawContracts[0];
   return {
     ticker,
     title: String(raw.title ?? ticker),
     category: str(raw.category),
     status: str(raw.status),
     expiryUtc: str(raw.expiryDate),
-    termsUrl: str(raw.termsLink),
+    termsUrl: geminiTermsUrl(raw.termsLink) ?? (lead ? termsPdfInDescription(lead.description) : null),
     volumeUsd: str(raw.volume),
     url: `${GEMINI_EVENTS_URL}/${encodeURIComponent(ticker)}`,
-    contracts: (Array.isArray(raw.contracts) ? raw.contracts : []).map((c: Record<string, any>) => {
+    contracts: rawContracts.map((c) => {
       const prices = (c.prices ?? {}) as Record<string, unknown>;
       const expired = typeof c.expiryDate === "string" && Date.parse(c.expiryDate) / 1000 <= now;
       return {
@@ -203,7 +228,7 @@ export function shapeLiveEvent(raw: Record<string, any>, fetchedAt: number, now:
         instrumentSymbol: str(c.instrumentSymbol),
         status: str(c.status),
         expiryUtc: str(c.expiryDate),
-        termsUrl: str(c.termsAndConditionsUrl),
+        termsUrl: geminiTermsUrl(c.termsAndConditionsUrl) ?? geminiTermsUrl(raw.termsLink) ?? termsPdfInDescription(c.description),
         quote: classifyQuote({
           bestBid: prices.bestBid,
           bestAsk: prices.bestAsk,
@@ -228,8 +253,10 @@ export class LiveMarkets {
   readonly #clock: () => number;
   readonly #cacheSeconds: number;
   readonly #staleAfterSeconds: number;
-  #last: { at: number; raw: Record<string, any>[] } | null = null;
+  #last: { at: number; limit: number; raw: Record<string, any>[] } | null = null;
   #lastError: string | null = null;
+  /** When the last read failed. No new read is tried for cacheSeconds after it, whatever the limit. */
+  #failedAt: number | null = null;
 
   constructor(options: { fetch?: Fetcher; now?: () => number; cacheSeconds?: number; staleAfterSeconds?: number } = {}) {
     this.#fetch = options.fetch ?? (fetch as unknown as Fetcher);
@@ -240,13 +267,21 @@ export class LiveMarkets {
 
   async snapshot(limit = 25): Promise<LiveSnapshot> {
     const now = this.#clock();
-    if (!this.#last || now - this.#last.at >= this.#cacheSeconds) await this.#refresh(limit, now);
-    const source = `${GEMINI_EVENTS_URL}?status=active&limit=${limit}`;
+    const wanted = Math.min(Math.max(Math.floor(limit) || 1, 1), 100);
+    // A cached reading serves any smaller limit; a larger limit needs a new read. After a failed read,
+    // wait cacheSeconds before reading again, so visitors cannot drive repeated calls while Gemini is down.
+    const expired = !this.#last || now - this.#last.at >= this.#cacheSeconds;
+    const tooSmall = this.#last !== null && this.#last.limit < wanted;
+    const backingOff = this.#failedAt !== null && now - this.#failedAt < this.#cacheSeconds;
+    if ((expired || tooSmall) && !backingOff) await this.#refresh(wanted, now);
     if (!this.#last) {
+      const source = `${GEMINI_EVENTS_URL}?status=active&limit=${wanted}`;
       return { label: "LIVE read-only", source, fetchedAtUtc: null, state: "unavailable", note: `Gemini Exchange did not answer: ${this.#lastError ?? "no reading yet"}.`, events: [] };
     }
+    const source = `${GEMINI_EVENTS_URL}?status=active&limit=${this.#last.limit}`;
     const age = now - this.#last.at;
     const stale = age > this.#staleAfterSeconds;
+    const short = this.#last.limit < wanted && this.#last.raw.length >= this.#last.limit;
     return {
       label: "LIVE read-only",
       source,
@@ -254,8 +289,10 @@ export class LiveMarkets {
       state: stale ? "stale" : "ok",
       note: stale
         ? `Last reading is ${age} s old (refresh failed: ${this.#lastError ?? "unknown"}). Prices are not shown as current.`
-        : "Read from the public endpoint. The API does not timestamp quotes, so the time shown is when Verity read them.",
-      events: this.#last.raw.map((raw) => shapeLiveEvent(raw, this.#last!.at, now, this.#staleAfterSeconds)),
+        : short
+          ? `Showing the last reading of ${this.#last.limit} events; the read for ${wanted} failed: ${this.#lastError ?? "unknown"}.`
+          : "Read from the public endpoint. The API does not timestamp quotes, so the time shown is when Verity read them.",
+      events: this.#last.raw.slice(0, wanted).map((raw) => shapeLiveEvent(raw, this.#last!.at, now, this.#staleAfterSeconds)),
     };
   }
 
@@ -263,7 +300,7 @@ export class LiveMarkets {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 10_000);
     try {
-      const response = await this.#fetch(`${GEMINI_EVENTS_URL}?status=active&limit=${Math.min(Math.max(limit, 1), 100)}`, {
+      const response = await this.#fetch(`${GEMINI_EVENTS_URL}?status=active&limit=${limit}`, {
         signal: controller.signal,
         headers: { accept: "application/json", "user-agent": "verity-readonly" },
       });
@@ -272,10 +309,14 @@ export class LiveMarkets {
       if (text.length > MAX_LIVE_BYTES) throw new Error("response too large");
       const body = JSON.parse(text) as { data?: unknown };
       if (!Array.isArray(body.data)) throw new Error("unexpected response shape");
-      this.#last = { at: now, raw: body.data as Record<string, any>[] };
+      // Two reads can race. Keep a larger fresh reading rather than replace it with a smaller one.
+      const keep = this.#last && this.#last.at >= now && this.#last.limit > limit;
+      if (!keep) this.#last = { at: now, limit, raw: body.data as Record<string, any>[] };
       this.#lastError = null;
+      this.#failedAt = null;
     } catch (error) {
       this.#lastError = (error as Error).name === "AbortError" ? "timed out" : (error as Error).message;
+      this.#failedAt = now;
     } finally {
       clearTimeout(timer);
     }
