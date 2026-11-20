@@ -1,6 +1,7 @@
 #!/bin/sh
 # Builds the front-page market pop-up (Astryx) into ../../ (live repo) astryx/ files.
-# Output: out/verity-dot.js and out/astryx.css. Copy both to astryx/ in ryanmarklin-arch/verityresearch-live,
+# Output: out/verity-dot.js and out/astryx.css. Copy them and out/index.html (a redirect, so /astryx/ is not a 404)
+# to astryx/ in ryanmarklin-arch/verityresearch-live,
 # then bump the ?v= keys in site/src/body.html (search for /astryx/) and rebuild the site.
 set -e
 cd "$(dirname "$0")"

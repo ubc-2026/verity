@@ -2,8 +2,23 @@ export interface ConsumerAuthWorkerEnv {
   VERITY_AUTH_SITE_ORIGIN: string;
   VERITY_AUTH_EDGE_URL: string;
   VERITY_AUTH_EDGE_KEY: string;
-  VERITY_AUTH_RATE_LIMIT: { limit(options: { key: string }): Promise<{ success: boolean }> };
+  VERITY_AUTH_RATE_LIMIT: RateLimit;
+  /**
+   * Separate, higher limit for GET /auth/session. Every page load asks for the session, and visitors on one
+   * network (a campus or office) share an address, so the sign-in limit would show them as signed out.
+   * Without this binding the session check falls back to VERITY_AUTH_RATE_LIMIT.
+   */
+  VERITY_AUTH_SESSION_RATE_LIMIT?: RateLimit;
 }
+
+type RateLimit = { limit(options: { key: string }): Promise<{ success: boolean }> };
+
+// Read-only requests that are safe to send twice. /auth/callback is a GET too, but its code works only once.
+const RETRYABLE = new Set(["/auth/session", "/auth/signup-context"]);
+const RETRY_STATUS = new Set([502, 503, 504]);
+const RETRY_DELAY_MS = 250;
+// A retry starts only if this much of the request's deadline is left after the delay.
+const RETRY_MIN_MS = 1000;
 
 const routes = new Map([
   ["/auth/start", "POST"], ["/auth/callback", "GET"], ["/auth/session", "GET"], ["/auth/logout", "POST"],
@@ -20,7 +35,13 @@ function failure(status: number, error: string) {
 }
 
 /** Call from the same-origin website Worker before any static or API fallback. */
-export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorkerEnv, send: typeof fetch = fetch) {
+export async function proxyConsumerAuth(
+  request: Request,
+  env: ConsumerAuthWorkerEnv,
+  send: typeof fetch = fetch,
+  /** Total time for the upstream call, including any retry. Tests pass a short value. */
+  budgetMs?: number,
+) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/auth/")) return null;
   const method = routes.get(url.pathname);
@@ -43,7 +64,10 @@ export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorke
       "raw", encoder.encode(env.VERITY_AUTH_EDGE_KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"],
     );
     const rateKey = await crypto.subtle.sign("HMAC", key, encoder.encode(`verity-auth-rate:${url.pathname}:${ip}`));
-    const result = await env.VERITY_AUTH_RATE_LIMIT.limit({ key: btoa(String.fromCharCode(...new Uint8Array(rateKey))) });
+    const limiter = url.pathname === "/auth/session" && env.VERITY_AUTH_SESSION_RATE_LIMIT
+      ? env.VERITY_AUTH_SESSION_RATE_LIMIT
+      : env.VERITY_AUTH_RATE_LIMIT;
+    const result = await limiter.limit({ key: btoa(String.fromCharCode(...new Uint8Array(rateKey))) });
     if (!result.success) return failure(429, "try_again_later");
 
     target.pathname += url.pathname.slice("/auth".length);
@@ -61,10 +85,34 @@ export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorke
       const contentType = request.headers.get("content-type");
       if (contentType) headers.set("content-type", contentType);
     }
-    const upstream = await send(target, {
+    // One deadline covers the whole upstream exchange, retry included, so a slow Edge Function never makes
+    // a page wait longer than it did before retries existed.
+    const budget = budgetMs ?? (url.pathname === "/auth/signup" ? 22000 : 10000);
+    const deadline = Date.now() + budget;
+    const signal = AbortSignal.timeout(budget);
+    const call = () => send(target, {
       method, headers, body: url.pathname === "/auth/start" || url.pathname === "/auth/signup" ? request.body : undefined,
-      redirect: "manual", signal: AbortSignal.timeout(url.pathname === "/auth/signup" ? 22000 : 10000),
+      redirect: "manual", signal,
     });
+    let upstream: Response;
+    if (RETRYABLE.has(url.pathname)) {
+      // The Edge Function restarts between bursts of traffic. A request that lands during a restart fails fast,
+      // so a read-only check gets one more try instead of telling a signed-in visitor that sign-in is down.
+      // A timeout uses up the deadline, so it is never retried.
+      const first = await call().catch(() => undefined);
+      if (first && !RETRY_STATUS.has(first.status)) {
+        upstream = first;
+      } else {
+        await first?.body?.cancel().catch(() => undefined);
+        if (signal.aborted || deadline - Date.now() < RETRY_DELAY_MS + RETRY_MIN_MS) {
+          return failure(503, "signin_unavailable");
+        }
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+        upstream = await call();
+      }
+    } else {
+      upstream = await call();
+    }
     const safeHeaders = new Headers({
       "cache-control": "no-store",
       "referrer-policy": "no-referrer",
