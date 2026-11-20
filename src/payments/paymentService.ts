@@ -3,7 +3,7 @@ import { TRANSFER_WITH_AUTHORIZATION_TYPES } from "./arc.ts";
 import { encodeBindingHeader } from "./binding.ts";
 import { gatewayAuthorizationDomain } from "./circleGateway.ts";
 import type { Eip3009Authorization } from "./merchant.ts";
-import { ApprovalRequiredError, type PaymentStore, type StoredAuthorization } from "./store.ts";
+import { ApprovalRequiredError, PolicyError, signingBlockFor, type PaymentStore, type StoredAuthorization } from "./store.ts";
 
 /** The signer stays behind the payment service. Only typed-data signing is needed. */
 export interface PaymentSigner {
@@ -50,8 +50,20 @@ export async function authorizeStoredPurchase(args: {
   if (record.status === "awaiting_approval") {
     throw new ApprovalRequiredError(`purchase ${purchaseId} needs owner approval before signing`);
   }
-  if (record.status === "denied") throw new Error(`purchase ${purchaseId} was denied or timed out and can never be signed`);
+  // Pause, and every blocked name from both branches, is refused before the signer is called.
+  const block = signingBlockFor(record.status, store.approvalDecisions(purchaseId));
+  if (store.isPaused()) throw new PolicyError("payments are paused");
+  if (block === "denied" || block === "timed_out") {
+    throw new Error(`purchase ${purchaseId} was denied or timed out and can never be signed`);
+  }
+  if (block === "rejected" || block === "expired") {
+    throw new PolicyError(`purchase ${purchaseId} is ${record.status} and cannot be signed`);
+  }
   const reused = record.signature !== null;
+  if (!reused && args.now >= record.request.validBefore) {
+    store.expire(purchaseId, args.now);
+    throw new PolicyError(`purchase ${purchaseId} expired before signing`);
+  }
   if (!reused) {
     const { request } = record;
     if (signer.address.toLowerCase() !== request.payer) throw new Error("signer is not the recorded payer");

@@ -8,7 +8,7 @@ import { approvalTypedData, assessPolicy, parseQuoteAmount, type PolicyDecision 
 import type { AcceptedProposal } from "./proposal.ts";
 import type { VerityQuote } from "./quote.ts";
 import { ResearchRequestError, type ResearchRequestV1 } from "./researchRequest.ts";
-import { PolicyError, type PaymentStore } from "./store.ts";
+import { PolicyError, signingBlockFor, type PaymentStore } from "./store.ts";
 import { requestOwnerApproval, type OwnerCaller } from "./voiceApproval.ts";
 
 /** Buyer-generated purchase ID, sent with the quote request. The quote must echo it. */
@@ -54,7 +54,6 @@ export class BuyerService {
   readonly #voiceTimeoutMs: number;
   readonly #ownerCodeDisplay: ((info: { purchaseId: string; code: string }) => void | Promise<void>) | undefined;
   readonly #ownerCodeRegister: ((info: { purchaseId: string; code: string }) => void | Promise<void>) | undefined;
-  #paused = false;
 
   constructor(options: {
     store: PaymentStore;
@@ -87,12 +86,32 @@ export class BuyerService {
     this.#ownerCodeRegister = options.ownerCodeRegister;
   }
 
-  pause(): void {
-    this.#paused = true;
+  /** The pause switch is durable (PaymentStore), so it holds across restarts and for purchases already reserved. */
+  pause(now: number = Math.floor(Date.now() / 1000), reason: string | null = null): void {
+    this.#store.setPaused(true, now, reason);
   }
 
-  resume(): void {
-    this.#paused = false;
+  resume(now: number = Math.floor(Date.now() / 1000)): void {
+    this.#store.setPaused(false, now);
+  }
+
+  get paused(): boolean {
+    return this.#store.isPaused();
+  }
+
+  /** Budget for this buyer's mission, counting held reservations and settled spend. */
+  budget() {
+    return this.#store.budget(this.#missionId);
+  }
+
+  /**
+   * The owner declines a purchase that is awaiting approval. The reservation is
+   * released; the purchase can never be signed afterwards.
+   */
+  rejectApproval(input: { purchaseId: string; reason: string; now: number; quote: VerityQuote }): PurchaseResult {
+    this.#store.recordOwnerRejection(input);
+    const decision = { decision: "reject", reason: `owner rejected: ${input.reason}` } as const;
+    return { status: "rejected", reason: decision.reason, decision, explanation: explainDecision({ decision, quote: input.quote }) };
   }
 
   async purchase(input: {
@@ -117,7 +136,7 @@ export class BuyerService {
       catalogItemId: quote.catalogItemId,
       groupKey: accepted.groupKey,
       materialUnresolvedGap: accepted.materialUnresolvedGap,
-      paused: this.#paused,
+      paused: this.#store.isPaused(),
       allowlistedMerchants: [...new Set([...this.#catalog.values()].map((item) => item.merchantId))],
       allowlistedItems: [...this.#catalog.keys()],
       // Duplicates are enforced durably by PaymentStore (one purchase per mission, contract, and evidence type).
@@ -165,6 +184,20 @@ export class BuyerService {
     decision?: PolicyDecision,
   ): Promise<PurchaseResult> {
     let record = this.#store.get(input.purchaseId)!;
+    const refuse = (reason: string): PurchaseResult => {
+      const rejected = { decision: "reject", reason } as const;
+      return { status: "rejected", reason, decision: rejected, explanation: explainDecision({ decision: rejected, quote: input.quote }) };
+    };
+    // A resumed purchase passes the same gates as a new one: pause, closed records, and an expired window.
+    if (this.#store.isPaused()) return refuse("payments are paused");
+    const block = signingBlockFor(record.status, this.#store.approvalDecisions(input.purchaseId));
+    if (block === "rejected") return refuse("the owner rejected this purchase");
+    if (block === "expired") return refuse("the authorization window expired before signing");
+    if (block === "denied" || block === "timed_out") return refuse("owner approval was denied or timed out");
+    if (record.signature === null && input.now >= record.request.validBefore) {
+      this.#store.expire(input.purchaseId, input.now);
+      return refuse("the authorization window expired before signing");
+    }
     const amount = BigInt(request.amount);
     const limits = this.#store.policy;
     const effective: PolicyDecision =
@@ -174,11 +207,6 @@ export class BuyerService {
         : amount > limits.gapMax
         ? { decision: "needs_approval", tier: "owner" }
         : { decision: "allow", tier: amount > limits.autoApproveMax ? "gap" : "auto" });
-
-    if (record.status === "denied") {
-      const rejected = { decision: "reject", reason: "owner approval was denied or timed out" } as const;
-      return { status: "rejected", reason: rejected.reason, decision: rejected, explanation: explainDecision({ decision: rejected, quote: input.quote }) };
-    }
 
     if (record.status === "awaiting_approval") {
       const waiting = { decision: "needs_approval", tier: "owner" } as const;

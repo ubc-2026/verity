@@ -388,6 +388,82 @@ describe("Gateway buyer verification and ledger", () => {
     assert.equal(t.store.reservation(t.request.purchaseId)?.status, "spent");
   });
 
+  it("accepts Circle's transfer before the receipt only if it matches the authorization, and then requires the receipt to name it", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const res = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(res.status, 200);
+    if (res.status !== 200) return;
+    const verdict = await verifyGatewayDelivery({
+      receiptHeader: res.headers["X-Verity-Receipt"], body: res.body,
+      trusted: { merchantId: DEMO_MERCHANT_CONFIG.merchantId, receiptSigner: DEMO_MERCHANT_SIGNER.address },
+      request: t.request, authorizationNonce: t.paid.record.nonce,
+    });
+    assert.equal(verdict.ok, true);
+    if (!verdict.ok) return;
+    const ledger = new GatewayLedger(t.store);
+    const id = t.request.purchaseId;
+    const real = await gateway.transferById(res.receipt.paymentRef);
+    for (const [field, wrong] of [
+      ["nonce", { ...real, nonce: "0x" + "ab".repeat(32) }],
+      ["payer", { ...real, fromAddress: "0x1111111111111111111111111111111111111111" }],
+      ["payee", { ...real, toAddress: "0x3333333333333333333333333333333333333333" }],
+      ["amount", { ...real, amount: "1001" }],
+      ["amount", { ...real, amount: "0.001" }],
+    ] as const) {
+      assert.deepEqual(ledger.recordBatch(id, wrong, DEMO_NOW), { error: `transfer ${real.id} does not match the stored authorization (${field})` });
+    }
+    assert.equal(ledger.status(id), undefined, "a refused transfer records nothing");
+
+    // Circle reports a transfer for this authorization under another ID; the merchant's receipt names the real one.
+    const other = { ...real, id: "00000000-0000-4000-8000-000000000001" };
+    const observed = ledger.recordBatch(id, other, DEMO_NOW);
+    assert.ok(!("error" in observed));
+    if ("error" in observed) return;
+    assert.equal(observed.acceptance, "awaiting_verified_delivery");
+    assert.equal(observed.paymentRef, other.id);
+    assert.deepEqual(ledger.recordBatch(id, real, DEMO_NOW), { error: `transfer ${real.id} differs from the one already observed (${other.id})` });
+    const refused = ledger.recordVerifiedDelivery({ receipt: verdict.receipt, digest: verdict.digest, now: DEMO_NOW });
+    assert.equal(refused.kind, "mismatch");
+    assert.match((refused as { detail: string }).detail, /but Circle reported/);
+    assert.equal(ledger.receipt(id), undefined);
+  });
+
+  it("a failed Circle transfer releases the hold, and a later status cannot revive it", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const res = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(res.status, 200);
+    if (res.status !== 200) return;
+    const ledger = new GatewayLedger(t.store);
+    const id = t.request.purchaseId;
+    const real = await gateway.transferById(res.receipt.paymentRef);
+    assert.equal(t.store.reservation(id)?.status, "held");
+    const failed = ledger.recordBatch(id, { ...real, status: "failed" }, DEMO_NOW + 1);
+    assert.ok(!("error" in failed));
+    assert.equal(t.store.reservation(id)?.status, "released", "no USDC moved, so the budget is free again");
+    ledger.recordBatch(id, { ...real, status: "completed" }, DEMO_NOW + 2);
+    assert.equal(ledger.status(id)?.batch.status, "failed");
+    assert.equal(t.store.reservation(id)?.status, "released");
+  });
+
+  it("refuses a Circle transfer that arrives before the receipt when it has no nonce", async () => {
+    const gateway = new MockGatewayProvider({ now: () => DEMO_NOW, balances: { [DEMO_PAYER.address]: 10_000n } });
+    const t = await setup(gateway);
+    const res = await deliverGatewayPaidRequest(t.input, t.deps);
+    assert.equal(res.status, 200);
+    if (res.status !== 200) return;
+    const ledger = new GatewayLedger(t.store);
+    const real = await gateway.transferById(res.receipt.paymentRef);
+    assert.equal(ledger.receipt(t.request.purchaseId), undefined, "no receipt row yet");
+    assert.deepEqual(ledger.recordBatch(t.request.purchaseId, { ...real, nonce: null }, DEMO_NOW), {
+      error: `transfer ${real.id} does not match the stored authorization (nonce)`,
+    });
+    assert.equal(ledger.status(t.request.purchaseId), undefined, "a nonce-less transfer records nothing");
+    const observed = ledger.recordBatch(t.request.purchaseId, real, DEMO_NOW);
+    assert.ok(!("error" in observed));
+  });
+
   it("rejects a V2 receipt whose nonce is not the buyer's, or whose bytes were altered", async () => {
     const t = await setup();
     const res = await deliverGatewayPaidRequest(t.input, t.deps);
