@@ -2,8 +2,20 @@ export interface ConsumerAuthWorkerEnv {
   VERITY_AUTH_SITE_ORIGIN: string;
   VERITY_AUTH_EDGE_URL: string;
   VERITY_AUTH_EDGE_KEY: string;
-  VERITY_AUTH_RATE_LIMIT: { limit(options: { key: string }): Promise<{ success: boolean }> };
+  VERITY_AUTH_RATE_LIMIT: RateLimit;
+  /**
+   * Separate, higher limit for GET /auth/session. Every page load asks for the session, and visitors on one
+   * network (a campus or office) share an address, so the sign-in limit would show them as signed out.
+   * Without this binding the session check falls back to VERITY_AUTH_RATE_LIMIT.
+   */
+  VERITY_AUTH_SESSION_RATE_LIMIT?: RateLimit;
 }
+
+type RateLimit = { limit(options: { key: string }): Promise<{ success: boolean }> };
+
+// Read-only requests that are safe to send twice. /auth/callback is a GET too, but its code works only once.
+const RETRYABLE = new Set(["/auth/session", "/auth/signup-context"]);
+const RETRY_STATUS = new Set([502, 503, 504]);
 
 const routes = new Map([
   ["/auth/start", "POST"], ["/auth/callback", "GET"], ["/auth/session", "GET"], ["/auth/logout", "POST"],
@@ -43,7 +55,10 @@ export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorke
       "raw", encoder.encode(env.VERITY_AUTH_EDGE_KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"],
     );
     const rateKey = await crypto.subtle.sign("HMAC", key, encoder.encode(`verity-auth-rate:${url.pathname}:${ip}`));
-    const result = await env.VERITY_AUTH_RATE_LIMIT.limit({ key: btoa(String.fromCharCode(...new Uint8Array(rateKey))) });
+    const limiter = url.pathname === "/auth/session" && env.VERITY_AUTH_SESSION_RATE_LIMIT
+      ? env.VERITY_AUTH_SESSION_RATE_LIMIT
+      : env.VERITY_AUTH_RATE_LIMIT;
+    const result = await limiter.limit({ key: btoa(String.fromCharCode(...new Uint8Array(rateKey))) });
     if (!result.success) return failure(429, "try_again_later");
 
     target.pathname += url.pathname.slice("/auth".length);
@@ -61,10 +76,25 @@ export async function proxyConsumerAuth(request: Request, env: ConsumerAuthWorke
       const contentType = request.headers.get("content-type");
       if (contentType) headers.set("content-type", contentType);
     }
-    const upstream = await send(target, {
+    const call = () => send(target, {
       method, headers, body: url.pathname === "/auth/start" || url.pathname === "/auth/signup" ? request.body : undefined,
       redirect: "manual", signal: AbortSignal.timeout(url.pathname === "/auth/signup" ? 22000 : 10000),
     });
+    let upstream: Response;
+    if (RETRYABLE.has(url.pathname)) {
+      // The Edge Function restarts between bursts of traffic. A request that lands during a restart fails once,
+      // so a read-only check gets one more try instead of telling a signed-in visitor that sign-in is down.
+      const first = await call().catch(() => undefined);
+      if (first && !RETRY_STATUS.has(first.status)) {
+        upstream = first;
+      } else {
+        await first?.body?.cancel();
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        upstream = await call();
+      }
+    } else {
+      upstream = await call();
+    }
     const safeHeaders = new Headers({
       "cache-control": "no-store",
       "referrer-policy": "no-referrer",

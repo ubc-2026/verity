@@ -31,6 +31,14 @@
         "limit": 12,
         "period": 60
       }
+    },
+    {
+      "name": "VERITY_AUTH_SESSION_RATE_LIMIT",
+      "namespace_id": "1022",
+      "simple": {
+        "limit": 120,
+        "period": 60
+      }
     }
   ],
   "hyperdrive": [
