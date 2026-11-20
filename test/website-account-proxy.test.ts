@@ -36,7 +36,13 @@ function upstream(outcomes: Array<number | "throw" | "hang">) {
     if (next === "throw") throw new TypeError("connection reset");
     if (next === "hang") {
       return await new Promise<Response>((_, reject) => {
-        init?.signal?.addEventListener("abort", () => reject(init.signal?.reason), { once: true });
+        // Node unrefs the AbortSignal.timeout timer, so with nothing else pending the test runner would exit
+        // before the abort fires (Node 22 does). This ref'd timer keeps the event loop alive until then.
+        const keepAlive = setTimeout(() => reject(new Error("signal never aborted")), 30_000);
+        init?.signal?.addEventListener("abort", () => {
+          clearTimeout(keepAlive);
+          reject(init.signal?.reason);
+        }, { once: true });
       });
     }
     return new Response(JSON.stringify(next === 200 ? { accountId: "acct" } : { error: "x" }), { status: next });
