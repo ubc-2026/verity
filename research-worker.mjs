@@ -2,7 +2,13 @@ import { readHyperdriveHistory, recordHyperdriveObservations, validInstrument } 
 
 const events = "https://api.gemini.com/v1/prediction-markets/events";
 const UPSTREAM_TIMEOUT_MS = 10_000;
+const MAX_INSTRUMENTS = 2_000;
+const QUOTES_PER_INSTRUMENT = 120;
+const FRESH_MS = 60_000;
+const RECORD_INTERVAL_MS = 60_000;
+const COLLECT_LIMIT = 20;
 const recentObservations = new Map();
+const lastWrittenAt = new Map();
 const loggedHistoryErrors = new Set();
 
 function json(data, status = 200, extra = {}) {
@@ -94,6 +100,7 @@ function observationsFrom(payload, fetchedAt) {
 function remember(observations) {
   for (const observation of observations) {
     const kept = recentObservations.get(observation.instrument) ?? [];
+    if (!recentObservations.has(observation.instrument)) recentObservations.set(observation.instrument, kept);
     kept.push({
       observedAtUtc: observation.observedAtUtc,
       timeBasis: observation.timeBasis,
@@ -101,7 +108,32 @@ function remember(observations) {
       bestAsk: observation.bestAsk,
       marketState: observation.marketState,
     });
-    recentObservations.set(observation.instrument, kept.slice(-120));
+    if (kept.length > QUOTES_PER_INSTRUMENT) kept.splice(0, kept.length - QUOTES_PER_INSTRUMENT);
+  }
+  while (recentObservations.size > MAX_INSTRUMENTS) {
+    const oldest = recentObservations.keys().next().value;
+    recentObservations.delete(oldest);
+  }
+}
+
+function observationsDue(observations, now = Date.now()) {
+  const due = [];
+  const seen = new Set();
+  for (const observation of observations) {
+    if (seen.has(observation.instrument)) continue;
+    seen.add(observation.instrument);
+    const previous = lastWrittenAt.get(observation.instrument);
+    if (previous != null && now - previous < RECORD_INTERVAL_MS) continue;
+    due.push(observation);
+  }
+  return due;
+}
+
+function markWritten(observations, now = Date.now()) {
+  for (const observation of observations) lastWrittenAt.set(observation.instrument, now);
+  while (lastWrittenAt.size > MAX_INSTRUMENTS) {
+    const oldest = lastWrittenAt.keys().next().value;
+    lastWrittenAt.delete(oldest);
   }
 }
 
@@ -122,13 +154,9 @@ function mergeObservations(stored, fresh) {
   return merged.slice(-120);
 }
 
-async function persistObservations(env, observations, ctx) {
-  remember(observations);
-  const connectionString = env?.VERITY_HISTORY_DB?.connectionString;
-  if (!connectionString || observations.length === 0) return;
-  const pending = recordHyperdriveObservations(connectionString, observations).catch((error) => logRecordError(error));
+function track(ctx, pending) {
   if (typeof ctx?.waitUntil === "function") ctx.waitUntil(pending);
-  else await pending;
+  else return pending;
 }
 
 async function fetchGemini(url, fetchImpl) {
@@ -191,11 +219,30 @@ function researchFallback(source, fetchedAt) {
   });
 }
 
-function historyPayload(instrument, observations) {
-  const live = observations.length > 0;
+function newestTimestamp(observations) {
+  let newest = null;
+  let newestMs = -Infinity;
+  for (const observation of observations) {
+    const ms = Date.parse(observation.observedAtUtc);
+    if (Number.isFinite(ms) && ms >= newestMs) {
+      newestMs = ms;
+      newest = observation.observedAtUtc;
+    }
+  }
+  return newest;
+}
+
+function historyPayload(instrument, stored, fresh) {
+  const observations = mergeObservations(stored, fresh);
+  const now = Date.now();
+  const freshEnough = fresh.some((observation) => {
+    const observed = Date.parse(observation.observedAtUtc);
+    return Number.isFinite(observed) && now - observed <= FRESH_MS;
+  });
   return {
-    mode: live ? "live" : "stored",
-    live,
+    mode: freshEnough ? "live" : "stored",
+    live: freshEnough,
+    newestObservedAtUtc: newestTimestamp(observations),
     source: "gemini-exchange",
     fetchedAt: new Date().toISOString(),
     venue: "gemini-exchange",
@@ -206,6 +253,7 @@ function historyPayload(instrument, observations) {
 
 export function createResearchWorker(readHistory = readHyperdriveHistory, options = {}) {
   const fetchImpl = options.fetchImpl ?? globalThis.fetch;
+  const recordObservations = options.recordObservations ?? recordHyperdriveObservations;
   async function handleRequest(request, env = {}, ctx) {
     if (request.method !== "GET") return json({ error: "Use GET" }, 405, { Allow: "GET" });
     const { pathname, searchParams } = new URL(request.url);
@@ -229,7 +277,7 @@ export function createResearchWorker(readHistory = readHyperdriveHistory, option
         return researchFallback(source.href, fetchedAt);
       }
       const active = eventsIn(payload).filter((event) => event.status === "active");
-      await persistObservations(env, observationsFrom({ data: active }, fetchedAt), ctx);
+      remember(observationsFrom({ data: active }, fetchedAt));
       return json({
         mode: "live",
         live: true,
@@ -247,11 +295,11 @@ export function createResearchWorker(readHistory = readHyperdriveHistory, option
       const connectionString = env.VERITY_HISTORY_DB?.connectionString;
       if (!connectionString) {
         if (fresh.length === 0) return json({ error: "Stored quote history is not configured" }, 503);
-        return json(historyPayload(instrument, fresh));
+        return json(historyPayload(instrument, [], fresh));
       }
       try {
-        const observations = mergeObservations(await readHistory(connectionString, instrument), fresh);
-        return json(historyPayload(instrument, observations));
+        const stored = await readHistory(connectionString, instrument);
+        return json(historyPayload(instrument, stored, fresh));
       } catch {
         return json({ error: "Stored quote history is temporarily unavailable" }, 503);
       }
@@ -279,10 +327,38 @@ export function createResearchWorker(readHistory = readHyperdriveHistory, option
       logUpstream(source.href, error, result.response.status);
       return upstreamFailure(source.href, fetchedAt);
     }
-    await persistObservations(env, observationsFrom(payload, fetchedAt), ctx);
+    remember(observationsFrom(payload, fetchedAt));
     return json({ mode: "live", live: true, source: source.href, fetchedAt, data: payload });
   }
-  return { fetch: handleRequest };
+
+  async function handleScheduled(event, env = {}, ctx) {
+    const connectionString = env?.VERITY_HISTORY_DB?.connectionString;
+    if (!connectionString) return;
+    const source = new URL(events);
+    source.searchParams.set("status", "active");
+    source.searchParams.set("limit", String(COLLECT_LIMIT));
+    const fetchedAt = new Date().toISOString();
+    const result = await fetchGemini(source.href, fetchImpl);
+    if (result.failure || !result.response.ok) {
+      if (result.response && !result.response.ok) logUpstream(source.href, new Error(`upstream status ${result.response.status}`), result.response.status);
+      return;
+    }
+    let payload;
+    try {
+      payload = await result.response.json();
+    } catch (error) {
+      logUpstream(source.href, error, result.response.status);
+      return;
+    }
+    const active = eventsIn(payload).filter((item) => item.status === "active").slice(0, COLLECT_LIMIT);
+    const due = observationsDue(observationsFrom({ data: active }, fetchedAt));
+    if (due.length === 0) return;
+    markWritten(due);
+    console.error(JSON.stringify({ event: "market_history_collect", instruments: due.length, batched: true }));
+    await track(ctx, recordObservations(connectionString, due).catch((error) => logRecordError(error)));
+  }
+
+  return { fetch: handleRequest, scheduled: handleScheduled };
 }
 
 export default createResearchWorker();

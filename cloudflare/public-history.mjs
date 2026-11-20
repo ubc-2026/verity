@@ -27,43 +27,60 @@ export async function readHistory(sql, instrument) {
 }
 
 export async function recordObservations(sql, observations) {
-  let recorded = 0;
+  const seen = new Set();
+  const rows = [];
   for (const observation of observations) {
     if (!validInstrument(observation.instrument)) continue;
-    const inserted = await sql`
-      INSERT INTO research.instruments (venue, external_instrument_id)
-      SELECT 'gemini-exchange', ${observation.instrument}
-      WHERE NOT EXISTS (
-        SELECT 1 FROM research.instruments
-        WHERE venue = 'gemini-exchange' AND external_instrument_id = ${observation.instrument}
-      )
-      RETURNING id
-    `;
-    let instrumentId = inserted[0]?.id;
-    if (instrumentId == null) {
-      const existing = await sql`
-        SELECT id FROM research.instruments
-        WHERE venue = 'gemini-exchange' AND external_instrument_id = ${observation.instrument}
-      `;
-      instrumentId = existing[0]?.id;
-    }
-    if (instrumentId == null) continue;
-    await sql`
-      INSERT INTO research.quote_snapshots
-        (instrument_id, observed_at, observed_at_basis, source_mode, best_bid, best_ask, market_state)
-      VALUES (
-        ${instrumentId},
-        ${observation.observedAtUtc},
-        ${observation.timeBasis},
-        'live',
-        ${observation.bestBid},
-        ${observation.bestAsk},
-        ${observation.marketState}
-      )
-    `;
-    recorded += 1;
+    const key = `${observation.instrument}\0${observation.observedAtUtc}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    rows.push({
+      instrument: observation.instrument,
+      observed_at: observation.observedAtUtc,
+      time_basis: observation.timeBasis,
+      best_bid: observation.bestBid,
+      best_ask: observation.bestAsk,
+      market_state: observation.marketState,
+    });
   }
-  return recorded;
+  if (rows.length === 0) return 0;
+  // One statement: insert any missing instruments, then insert quotes.
+  // Both ON CONFLICT clauses need the unique indexes in supabase/worker-history-record.sql.
+  await sql`
+    WITH incoming AS (
+      SELECT * FROM jsonb_to_recordset(${JSON.stringify(rows)}::jsonb) AS t(
+        instrument text,
+        observed_at timestamptz,
+        time_basis text,
+        best_bid numeric,
+        best_ask numeric,
+        market_state text
+      )
+    ),
+    upserted AS (
+      INSERT INTO research.instruments (venue, external_instrument_id)
+      SELECT DISTINCT 'gemini-exchange', instrument FROM incoming
+      ON CONFLICT (venue, external_instrument_id) DO NOTHING
+      RETURNING id, venue, external_instrument_id
+    ),
+    known AS (
+      SELECT id, venue, external_instrument_id FROM upserted
+      UNION
+      SELECT i.id, i.venue, i.external_instrument_id
+      FROM research.instruments i
+      JOIN (SELECT DISTINCT instrument FROM incoming) n
+        ON i.venue = 'gemini-exchange' AND i.external_instrument_id = n.instrument
+    )
+    INSERT INTO research.quote_snapshots
+      (instrument_id, observed_at, observed_at_basis, source_mode, best_bid, best_ask, market_state)
+    SELECT DISTINCT ON (k.id, n.observed_at)
+      k.id, n.observed_at, n.time_basis, 'live', n.best_bid, n.best_ask, n.market_state
+    FROM incoming n
+    JOIN known k ON k.external_instrument_id = n.instrument
+    ORDER BY k.id, n.observed_at
+    ON CONFLICT (instrument_id, observed_at) DO NOTHING
+  `;
+  return rows.length;
 }
 
 export async function recordHyperdriveObservations(connectionString, observations) {

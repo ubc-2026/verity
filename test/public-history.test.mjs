@@ -62,7 +62,8 @@ it("records a live quote and reads it back in time order", async () => {
       CREATE TABLE research.instruments (
         id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         venue text NOT NULL,
-        external_instrument_id text NOT NULL
+        external_instrument_id text NOT NULL,
+        UNIQUE (venue, external_instrument_id)
       );
       CREATE TABLE research.quote_snapshots (
         id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -72,20 +73,27 @@ it("records a live quote and reads it back in time order", async () => {
         source_mode text NOT NULL,
         best_bid numeric,
         best_ask numeric,
-        market_state text NOT NULL
+        market_state text NOT NULL,
+        UNIQUE (instrument_id, observed_at)
       );
     `);
+    let queries = 0;
     const sql = async (strings, ...values) => {
+      queries += 1;
       const query = strings.reduce((text, part, index) => index === 0 ? part : `${text}$${index}${part}`, "");
       return (await database.query(query, values)).rows;
     };
     const symbol = "GEMI-WXHIGH-BOS-2611210459-66TO67";
-    const recorded = await recordObservations(sql, [
+    const batch = [
       { instrument: symbol, observedAtUtc: "2026-11-20T05:25:56Z", timeBasis: "worker-fetch", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
       { instrument: symbol, observedAtUtc: "2026-11-20T05:26:56Z", timeBasis: "worker-fetch", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },
       { instrument: "not a symbol", observedAtUtc: "2026-11-20T05:26:56Z", timeBasis: "worker-fetch", bestBid: "0.10", bestAsk: "0.20", marketState: "open" },
-    ]);
+    ];
+    const recorded = await recordObservations(sql, batch);
     assert.equal(recorded, 2);
+    assert.equal(queries, 1);
+    assert.equal(await recordObservations(sql, batch), 2);
+    assert.equal(queries, 2);
     assert.deepEqual(await readHistory(sql, symbol), [
       { observedAtUtc: "2026-11-20T05:25:56.000Z", timeBasis: "worker-fetch", bestBid: "0.43", bestAsk: "0.50", marketState: "open" },
       { observedAtUtc: "2026-11-20T05:26:56.000Z", timeBasis: "worker-fetch", bestBid: "0.44", bestAsk: "0.51", marketState: "open" },

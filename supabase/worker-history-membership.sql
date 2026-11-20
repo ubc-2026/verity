@@ -13,7 +13,8 @@ BEGIN
     SELECT 1 FROM pg_auth_members m
     JOIN pg_roles member ON member.oid = m.member
     JOIN pg_roles parent ON parent.oid = m.roleid
-    WHERE member.rolname = 'verity_history_worker' AND parent.rolname <> 'verity_history_reader'
+    WHERE member.rolname = 'verity_history_worker'
+      AND parent.rolname NOT IN ('verity_history_reader', 'verity_history_writer')
   ) THEN
     RAISE EXCEPTION 'The Worker login already has an unexpected role membership';
   END IF;

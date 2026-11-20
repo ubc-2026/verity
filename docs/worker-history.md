@@ -1,10 +1,23 @@
 # Connect the Verity Research API to Supabase
 
-The existing `verity-research-api` Worker still serves its Gemini market and research routes. The new GET route is `/v1/market-history?instrument=<full Gemini instrument symbol>`. It returns up to 120 stored live observations in time order and can return an empty result. A missing or failed database binding returns HTTP 503, unless this isolate has already recorded observations for that instrument from a live Gemini fetch.
+The existing `verity-research-api` Worker still serves its Gemini market and research routes. `GET /v1/market-history?instrument=<full Gemini instrument symbol>` returns up to 120 observations in time order and can return an empty result. A missing or failed database binding returns HTTP 503, unless this isolate has already seen that instrument on a market or research fetch.
 
-`/v1/markets`, `/v1/markets/{eventTicker}`, `/v1/research`, and `/v1/market-history` each return `mode`, `live`, `source`, and `fetchedAt`. `mode` is `live` only for data just read from Gemini, or for history rows that were collected from those reads. An upstream failure on a market route is HTTP 502 with `mode: "unavailable"` and `live: false`. `/v1/research` is built from events Gemini reports as active. When that read fails, the route returns `mode: "fallback"`, `live: false`, and no cached brief. A fallback is never labeled live.
+`/v1/markets`, `/v1/markets/{eventTicker}`, and `/v1/research` return `mode`, `live`, `source`, and `fetchedAt`. `/v1/market-history` also returns `newestObservedAtUtc`. `mode` is `live` only when this isolate has an observation for that instrument from the last 60 seconds. Rows read from the database are `mode: "stored"` and `live: false`, including rows that were collected recently by another isolate. `newestObservedAtUtc` is the newest timestamp in the response, or `null` when there are no rows. An upstream failure on a market route is HTTP 502 with `mode: "unavailable"` and `live: false`. `/v1/research` is built from events Gemini reports as active. When that read fails, the route returns `mode: "fallback"`, `live: false`, and no cached brief.
 
-A successful market or research fetch records each contract quote. The isolate keeps those observations and serves them from `/v1/market-history`. When `VERITY_HISTORY_DB` is configured, the Worker also inserts them into `research.quote_snapshots` with `source_mode = 'live'` and `observed_at_basis = 'worker-fetch'`. The hosted login inherits the read-only `verity_history_reader` role, so a refused insert is logged once without secrets and the market response still succeeds. Durable collection needs `INSERT` on `research.instruments` and `research.quote_snapshots` for that role. A failed insert does not change `mode` on the market response.
+Public requests do not write to the database. Each isolate keeps an in-memory copy of quotes it has just fetched. That copy is not shared with other isolates: a history read on a different isolate does not see it. The copy holds at most 2,000 instruments and evicts the oldest instrument first. Each instrument keeps at most 120 quotes.
+
+Durable collection is a Cron Trigger, `*/2 * * * *`, declared in `wrangler.jsonc`. The trigger does nothing until the next deploy of this Worker. On each run the scheduled handler reads at most 20 active Gemini events and inserts quotes that this isolate has not written in the last 60 seconds. The insert is one statement: missing instruments, then quotes, both with `ON CONFLICT DO NOTHING`. It uses the unique indexes in `supabase/worker-history-record.sql`. The owner applies that file. Nothing in CI or the Worker runs it. Until it is applied, and until `verity_history_worker` has the writer role, the insert fails, is logged once without the connection string, and market responses stay successful.
+
+The writer role `verity_history_writer` needs `USAGE` on schema `research`, `SELECT` and `INSERT` on `research.instruments` and `research.quote_snapshots`, and `USAGE` and `SELECT` on the identity sequences behind those tables' `id` columns (`pg_get_serial_sequence` for `id`). It does not need `UPDATE` or `DELETE`. The migration grants those privileges and, when the login exists, grants the role to `verity_history_worker`.
+
+Recommended Cloudflare rate-limiting rule, created in the dashboard for the zone that serves `api.verityresearch.us`. It is not part of the Worker and takes effect when the owner saves it:
+
+- Expression: `(http.host eq "api.verityresearch.us" and starts_with(http.request.uri.path, "/v1/"))`
+- Characteristic: IP
+- Period: 60 requests per 1 minute
+- Action: Block
+
+Request handlers do not write, so this rule is a limit on Gemini egress, not on database load.
 
 ## Cloudflare setup
 
