@@ -28,3 +28,16 @@ jobs:
       - run: npm run test:worker
       - run: python -m pytest -q
         working-directory: analysis
+      # audit/ and portal/ are separate packages with their own lockfiles and tests.
+      - run: npm ci
+        working-directory: audit
+      - run: npm test
+        working-directory: audit
+      - run: npm run typecheck
+        working-directory: audit
+      - run: npm ci
+        working-directory: portal
+      - run: npm test
+        working-directory: portal
+      - run: npm run typecheck
+        working-directory: portal
