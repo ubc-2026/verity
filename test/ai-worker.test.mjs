@@ -23,17 +23,20 @@ function budgetNamespace() {
   const open = (name) => {
     if (!objects.has(name)) {
       const store = new Map();
-      objects.set(name, { store, object: new DemoBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } }) });
+      const object = new DemoBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } });
+      object.clock = () => (ns.now ? new Date(ns.now) : new Date()); // ns.now moves every counter's clock at once
+      objects.set(name, { store, object });
     }
     return objects.get(name);
   };
   const global = open("global");
-  return {
-    store: global.store, object: global.object, objects, idFromName: (n) => n,
+  const ns = {
+    now: null, store: global.store, object: global.object, objects, idFromName: (n) => n,
     used: (name) => objects.get(name)?.store.get("budget")?.used ?? 0,
     names: () => [...objects.keys()].filter((n) => n !== "global"),
     get: (id) => ({ fetch: (url, init) => open(id).object.fetch(new Request(url, init)) }),
   };
+  return ns;
 }
 
 function env(extra = {}) {
@@ -244,6 +247,69 @@ describe("verity-gemini: signed-in visitors get a larger daily allowance than gu
     assert.match((await r.json()).error, /budget/i);
     const [guest] = e.AI_BUDGET.names();
     assert.equal(e.AI_BUDGET.used(guest), 1, "only the call that ran is counted against the guest");
+  });
+
+  it("UTC rollover: a refund delayed past midnight can't lower the new day's count", async () => {
+    const e = tiers();
+    const ns = e.AI_BUDGET;
+    ns.now = "2026-11-20T23:59:59Z";
+    // The first global reservation is held until the test releases it, then refused.
+    let release;
+    const gate = new Promise((r) => (release = r));
+    let held = false;
+    const real = ns.get;
+    ns.get = (id) => (id === "global" && !held
+      ? (held = true, { fetch: async () => (await gate, Response.json({ ok: false, day: "2026-11-20", used: 100, cap: 100 })) })
+      : real(id));
+
+    const late = ask(e); // charged to the guest on 2026-11-20, then waits on the global step
+    while (!held) await new Promise((r) => setImmediate(r));
+    const [guest] = ns.names();
+    assert.equal(ns.objects.get(guest).store.get("budget").day, "2026-11-20");
+
+    ns.now = "2026-11-21T00:00:01Z";
+    assert.equal((await ask(e)).status, 200, "a new reservation on 2026-11-21");
+    release();
+    assert.equal((await late).status, 503);
+    assert.deepEqual(ns.objects.get(guest).store.get("budget"), { day: "2026-11-21", used: 1 },
+      "yesterday's refund was dropped; today's reservation is kept");
+  });
+
+  it("DemoBudget refunds only the day named in the refund, and only once a reservation exists", async () => {
+    const ns = budgetNamespace();
+    const call = (method, body) => ns.object.fetch(new Request("https://ai-budget/spend", { method, body: JSON.stringify(body) })).then((r) => r.json());
+    ns.now = "2026-11-21T10:00:00Z";
+    await call("POST", { units: 3, cap: 10 });
+    assert.equal((await call("DELETE", { units: 1, cap: 10 })).refunded, false, "no day: ignored");
+    assert.equal((await call("DELETE", { units: 1, cap: 10, day: "2026-11-20" })).refunded, false, "another day: ignored");
+    assert.equal((await call("DELETE", { units: 0, cap: 10, day: "2026-11-21" })).refunded, false);
+    const ok = await call("DELETE", { units: 5, cap: 10, day: "2026-11-21" });
+    assert.deepEqual([ok.refunded, ok.used], [true, 0], "never below zero");
+    const empty = budgetNamespace();
+    const none = await empty.object.fetch(new Request("https://ai-budget/spend", { method: "DELETE", body: JSON.stringify({ units: 1, cap: 10, day: new Date().toISOString().slice(0, 10) }) })).then((r) => r.json());
+    assert.equal(none.refunded, false, "nothing reserved yet, nothing written");
+    assert.equal(empty.store.size, 0);
+  });
+
+  it("a global storage error refunds the caller's reservation and calls no model", async () => {
+    const e = tiers();
+    const real = e.AI_BUDGET.get;
+    e.AI_BUDGET.get = (id) => (id === "global" ? { fetch: async () => { throw new Error("storage down"); } } : real(id));
+    const r = await ask(e);
+    assert.equal(r.status, 503);
+    assert.match((await r.json()).error, /unavailable/);
+    const [guest] = e.AI_BUDGET.names();
+    assert.equal(e.AI_BUDGET.used(guest), 0, "the guest keeps the credit");
+    assert.equal(geminiCalls().length, 0);
+
+    // A failure on the caller's own counter stops before the global step.
+    const e2 = tiers();
+    let globalCalls = 0;
+    const real2 = e2.AI_BUDGET.get;
+    e2.AI_BUDGET.get = (id) => (id === "global" ? (globalCalls++, real2(id)) : { fetch: async () => { throw new Error("storage down"); } });
+    assert.equal((await ask(e2)).status, 503);
+    assert.equal(globalCalls, 0);
+    assert.equal(e2.AI_BUDGET.store.size, 0);
   });
 
   it("Exa research misses use the same allowance, and CORS allows the pass header", async () => {

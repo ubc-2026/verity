@@ -285,19 +285,23 @@ export class DemoBudget {
     this.queue = run.catch(() => {});
     return run;
   }
-  async apply(method, { units, cap }) {
+  async apply(method, { units, cap, day: reservedDay }) {
     const rec = (await this.state.storage.get('budget')) || {};
     const today = this.clock().toISOString().slice(0, 10);
     // The stored day never moves backwards (e.g. if the clock steps back).
     const day = typeof rec.day === 'string' && rec.day > today ? rec.day : today;
     const used = rec.day === day ? rec.used : 0;
-    if (method === 'DELETE' && units > 0) {
-      // Refund a reservation that a later gate refused (only today's count, never below zero).
+    if (method === 'DELETE') {
+      // Refund a reservation that a later step refused. Only the day the reservation was charged to is
+      // refunded: a refund that arrives after midnight is dropped, so it can't lower the new day's count.
+      if (!(units > 0) || typeof reservedDay !== 'string' || reservedDay !== day || rec.day !== day) {
+        return Response.json({ ok: true, day, used, cap, refunded: false });
+      }
       const back = Math.max(0, used - units);
       await this.state.storage.put('budget', { day, used: back });
-      return Response.json({ ok: true, day, used: back, cap });
+      return Response.json({ ok: true, day, used: back, cap, refunded: true });
     }
-    if (method === 'GET' || method === 'DELETE' || !(units > 0)) return Response.json({ ok: true, day, used, cap });
+    if (method === 'GET' || !(units > 0)) return Response.json({ ok: true, day, used, cap });
     if (used + units > cap) return Response.json({ ok: false, day, used, cap });
     await this.state.storage.put('budget', { day, used: used + units });
     return Response.json({ ok: true, day, used: used + units, cap });
@@ -340,33 +344,48 @@ export async function caller(request, env) {
   return { tier: 'guest', key: 'guest:' + digest, limiter: env.REVIEW_LIMIT, daily: allowance(env.AI_GUEST_DAILY, 5) };
 }
 
-async function budgetCall(env, units, name = 'global', cap = dailyCap(env), method = 'POST') {
+async function budgetCall(env, units, name = 'global', cap = dailyCap(env), method = 'POST', day) {
   const stub = env.AI_BUDGET.get(env.AI_BUDGET.idFromName(name));
-  const res = await stub.fetch('https://ai-budget/spend', { method, body: JSON.stringify({ units, cap }) });
+  const body = method === 'DELETE' ? { units, cap, day } : { units, cap };
+  const res = await stub.fetch('https://ai-budget/spend', { method, body: JSON.stringify(body) });
   return res.json();
 }
 
-/** Reserves units from the caller's daily allowance, then from the global cap. A global refusal refunds the first. */
+const UNAVAILABLE = { ok: false, status: 503, error: 'AI budget storage is unavailable right now.' };
+
+/**
+ * Reserves units from the caller's daily allowance, then from the global cap. If the global step refuses
+ * or fails, the caller's reservation is refunded for the day it was charged to, so no credits are lost
+ * when no AI call runs.
+ */
 export async function spendBudget(env, units, who) {
   if (!env.AI_BUDGET) return { ok: false, status: 503, error: 'AI budget storage is not configured.' };
-  try {
-    if (who) {
-      const mine = await budgetCall(env, units, who.key, who.daily);
-      if (!mine.ok) {
-        return { ok: false, status: 429, error: who.tier === 'member'
-          ? `You’ve used today’s ${who.daily} AI credits. They reset at 00:00 UTC.`
-          : `Guests get ${who.daily} AI credits a day, and today’s are used. Sign in for more, or try again after 00:00 UTC.` };
-      }
+  let mine = null;
+  if (who) {
+    try {
+      mine = await budgetCall(env, units, who.key, who.daily);
+    } catch {
+      return UNAVAILABLE;
     }
-    const r = await budgetCall(env, units);
-    if (!r.ok) {
-      if (who) await budgetCall(env, units, who.key, who.daily, 'DELETE').catch(() => {});
-      return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
+    if (!mine.ok) {
+      return { ok: false, status: 429, error: who.tier === 'member'
+        ? `You’ve used today’s ${who.daily} AI credits. They reset at 00:00 UTC.`
+        : `Guests get ${who.daily} AI credits a day, and today’s are used. Sign in for more, or try again after 00:00 UTC.` };
     }
-    return { ok: true };
-  } catch {
-    return { ok: false, status: 503, error: 'AI budget storage is unavailable right now.' };
   }
+  const refund = () => (mine ? budgetCall(env, units, who.key, who.daily, 'DELETE', mine.day).catch(() => {}) : undefined);
+  let r;
+  try {
+    r = await budgetCall(env, units);
+  } catch {
+    await refund();
+    return UNAVAILABLE;
+  }
+  if (!r.ok) {
+    await refund();
+    return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
+  }
+  return { ok: true };
 }
 
 async function sameSecret(given, expected) {
