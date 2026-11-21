@@ -160,6 +160,17 @@ describe("GET /market and /markets", () => {
     assert.match(j.note, /Ranked among the 50 events checked/);
     assert.match(j.order, /among the events checked only/);
 
+    for (const total of [null, "", false, "abc", -1, 1.5]) {
+      store.clear();
+      upstream.list = () => Response.json({ data: page, pagination: { total } });
+      const odd = await (await worker.fetch(get("/markets"), env())).json();
+      assert.deepEqual(odd.ranked_from, { events_checked: 50, open_events_total: null, complete: false }, `total: ${JSON.stringify(total)}`);
+      assert.match(odd.note, /Ranked among the 50 events checked/);
+    }
+    store.clear();
+    upstream.list = () => Response.json({ data: page, pagination: { total: "120" } });
+    assert.equal((await (await worker.fetch(get("/markets"), env())).json()).ranked_from.open_events_total, 120, "a numeric string total is accepted");
+
     store.clear();
     upstream.list = () => Response.json({ data: page.slice(0, 7) });
     const short = await (await worker.fetch(get("/markets"), env())).json();

@@ -122,7 +122,9 @@ export function activeEvents(query, limit = 8) {
       const checked = page.length;
       // An unknown total stays null. Completeness needs proof: a known total that this page covers, or a page
       // shorter than requested (the list ended). A full page with no total may have more after it.
-      const reported = Number(r.json?.pagination?.total);
+      // Validate the raw value first: Number(null), Number('') and Number(false) are all 0.
+      const raw = r.json?.pagination?.total;
+      const reported = typeof raw === 'number' ? raw : typeof raw === 'string' && /^\d+$/.test(raw) ? Number(raw) : NaN;
       const total = Number.isInteger(reported) && reported >= 0 ? Math.max(checked, reported) : null;
       const complete = total !== null ? checked >= total : checked < ACTIVE_PULL;
       const events = page.filter(e => e?.status === 'active')
