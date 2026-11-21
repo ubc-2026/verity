@@ -38,7 +38,15 @@ Run exactly one audit server per ledger file (`LEDGER_PATH`, default `data/ledge
 - At startup it creates `<ledger>.lock` exclusively. A second server on the same file exits with "ledger is already open for writing".
 - Before every save it checks the lock is still its own, and refuses to write if not.
 - It removes the lock on normal exit, Ctrl-C and SIGTERM.
-- A lock left by a crashed server on the same host is taken over at the next start. A lock written by another host is never taken over: stop that server, then delete the lock file.
+- It never removes a lock it does not own, not even one left by a crashed server. A takeover could race with another server restarting at the same moment, and both could end up writing.
+
+After a crash (power loss, `kill -9`), the next start stops and names the leftover lock file. When the recorded pid is no longer running on this host, the message says the server probably crashed. To recover:
+
+1. Confirm no audit server is running on this ledger, on any host.
+2. Delete `<ledger>.lock`.
+3. Start the server again.
+
+Don't delete the lock while its server is running. The check before each save would stop the old server's next write, but a write already past that check could still land.
 
 This rule is what makes webhook replay protection hold. Each accepted delivery's nonce is saved in the ledger in the same write as its blocks. The single writer then sees every receipt, including after a restart, and answers a repeat with `200 {"duplicate": true}` without processing it again.
 
