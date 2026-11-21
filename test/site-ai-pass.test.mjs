@@ -11,7 +11,7 @@ const HELPERS = src.slice(start, src.indexOf(marker) + marker.length);
 const ENDPOINT = "https://verity-gemini.example.workers.dev/review";
 
 // A minimal browser: Turnstile is already loaded and answers at once; /auth/ai-pass answers as each test says.
-function page({ wait = 40, pass }) {
+function page({ wait = 40, pass }, prelude) {
   const requests = [];
   const document = {
     createElement: () => ({ style: {}, remove() {} }),
@@ -25,10 +25,10 @@ function page({ wait = 40, pass }) {
   const fetch = (url, init = {}) => {
     requests.push({ url: String(url), init });
     if (String(url) === "/auth/ai-pass") return pass(init);
-    return Promise.resolve(new Response("{}", { status: 200 }));
+    return Promise.resolve(Response.json({ items: [] }));
   };
   const ctx = createContext({ document, window, fetch, setTimeout, clearTimeout, Promise, Object, Error, Date, AbortController, Response });
-  new Script(`${HELPERS};AITS.wait=1000;AIPASS.wait=${wait};
+  new Script(`${prelude ?? `${HELPERS};AITS.wait=1000;AIPASS.wait=${wait};`}
     globalThis.callAi=async()=>{const h=await aiHeaders({'content-type':'application/json'});await fetch(${JSON.stringify(ENDPOINT)},{method:'POST',headers:h,body:'{}'});return h;};
     globalThis.AIPASS=AIPASS;`).runInContext(ctx);
   return { ctx, requests, aiCalls: () => requests.filter((r) => r.url === ENDPOINT) };
@@ -95,6 +95,39 @@ describe("site member pass", () => {
   it("a pass that answers after the deadline is ignored", async () => {
     const p = page({ wait: 20, pass: () => new Promise((ok) => setTimeout(() => ok(Response.json(passFor(600))), 80)) });
     assert.equal((await p.ctx.callAi())["x-verity-pass"], undefined);
+  });
+
+  it("research requests carry the member pass and Turnstile token, in the source and in the published build", async () => {
+    // A rebuild from an older copy once dropped the pass from research calls and from dist. Run the real
+    // fetchResearch from each copy against a stubbed fetch and check the headers on the outgoing request.
+    const news = readFileSync(new URL("../site/src/news.js", import.meta.url), "utf8");
+    const dist = readFileSync(new URL("../site/dist/index.html", import.meta.url), "utf8");
+    const slice = (text, from, to) => {
+      const a = text.indexOf(from), b = text.indexOf(to, a);
+      assert.ok(a >= 0 && b > a, `found ${from}`);
+      return text.slice(a, b + to.length);
+    };
+    const research = (text) => slice(text, "async function fetchResearch(", "return j.items||[];}");
+    for (const [name, helpers, fetchResearch] of [
+      ["src", HELPERS, research(news)],
+      ["dist", slice(dist, "const AITS=", marker), research(dist)],
+    ]) {
+      const p = page({ pass: () => Promise.resolve(Response.json(passFor(600, "v1.member"))) }, `${helpers};AITS.wait=1000;AIPASS.wait=40;`);
+      new Script(`const GAI={endpoint:${JSON.stringify(ENDPOINT)}};${fetchResearch};globalThis.fetchResearch=fetchResearch;`).runInContext(p.ctx);
+      await p.ctx.fetchResearch("bitcoin", 7);
+      const sent = p.requests.filter((r) => r.url.startsWith(ENDPOINT.replace(/\/review$/, "/research")));
+      assert.equal(sent.length, 1, `${name}: one research request`);
+      assert.equal(sent[0].init.headers["x-verity-pass"], "v1.member", `${name}: research carries the member pass`);
+      assert.equal(sent[0].init.headers["cf-turnstile-response"], "ts-token", `${name}: research carries the Turnstile token`);
+    }
+  });
+
+  it("review/ask and forecast build their request headers with aiHeaders, in the source and in the published build", () => {
+    const dist = readFileSync(new URL("../site/dist/index.html", import.meta.url), "utf8");
+    for (const [name, text] of [["gemini.js", src], ["dist/index.html", dist]]) {
+      assert.ok(text.includes(marker), `${name} adds x-verity-pass`);
+      assert.equal((text.match(/headers:await aiHeaders\(/g) || []).length, 2, `${name}: review/ask and forecast pass aiHeaders to fetch`);
+    }
   });
 
   it("guests (401) and broken answers fall back to the guest allowance", async () => {
