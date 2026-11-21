@@ -273,10 +273,11 @@ export async function verifyHuman(request, env) {
  * Global daily AI budget, counted in one Durable Object (binding AI_BUDGET, class DemoBudget).
  * The class keeps v8's name so its existing namespace (migration demo-budget-v1) is reused, not deleted.
  * A Durable Object runs one request at a time, so concurrent calls cannot overshoot the cap
- * the way an eventually consistent KV counter can.
+ * the way an eventually consistent KV counter can. The UTC day is read inside that one-at-a-time step,
+ * never taken from the caller, so a request delayed across midnight cannot reset today's total.
  */
 export class DemoBudget {
-  constructor(state) { this.state = state; this.queue = Promise.resolve(); }
+  constructor(state) { this.state = state; this.queue = Promise.resolve(); this.clock = () => new Date(); }
   async fetch(request) {
     const body = await request.json();
     // Explicit queue: each read-check-write finishes before the next starts.
@@ -284,8 +285,11 @@ export class DemoBudget {
     this.queue = run.catch(() => {});
     return run;
   }
-  async apply(method, { day, units, cap }) {
+  async apply(method, { units, cap }) {
     const rec = (await this.state.storage.get('budget')) || {};
+    const today = this.clock().toISOString().slice(0, 10);
+    // The stored day never moves backwards (e.g. if the clock steps back).
+    const day = typeof rec.day === 'string' && rec.day > today ? rec.day : today;
     const used = rec.day === day ? rec.used : 0;
     if (method === 'GET' || !(units > 0)) return Response.json({ ok: true, day, used, cap });
     if (used + units > cap) return Response.json({ ok: false, day, used, cap });
@@ -299,7 +303,7 @@ const dailyCap = env => (Number(env.AI_DAILY_CAP) > 0 ? Number(env.AI_DAILY_CAP)
 async function budgetCall(env, units) {
   const stub = env.AI_BUDGET.get(env.AI_BUDGET.idFromName('global'));
   const res = await stub.fetch('https://ai-budget/spend', { method: 'POST',
-    body: JSON.stringify({ day: new Date().toISOString().slice(0, 10), units, cap: dailyCap(env) }) });
+    body: JSON.stringify({ units, cap: dailyCap(env) }) });
   return res.json();
 }
 

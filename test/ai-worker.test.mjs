@@ -19,7 +19,7 @@ const realCaches = globalThis.caches;
 function budgetNamespace() {
   const store = new Map();
   const object = new DemoBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } });
-  return { store, idFromName: (n) => n, get: () => ({ fetch: (url, init) => object.fetch(new Request(url, init)) }) };
+  return { store, object, idFromName: (n) => n, get: () => ({ fetch: (url, init) => object.fetch(new Request(url, init)) }) };
 }
 
 function env(extra = {}) {
@@ -106,6 +106,34 @@ describe("verity-gemini: who can spend money", () => {
     const results = await Promise.all([1, 2, 3, 4, 5].map(() => worker.fetch(review({ mode: "review", market: { title: "x" } }), e)));
     assert.deepEqual(results.map((r) => r.status).sort(), [200, 200, 200, 503, 503]);
     assert.equal(ns.store.get("budget").used, 3);
+  });
+
+  it("midnight rollover: the day comes from the Durable Object's clock, so a late reservation can't wipe today's total", async () => {
+    const ns = budgetNamespace();
+    let now = new Date("2026-11-20T23:59:59Z");
+    ns.object.clock = () => now;
+    const spend = (body) => ns.object.fetch(new Request("https://ai-budget/spend", { method: "POST", body: JSON.stringify(body) })).then((r) => r.json());
+    assert.equal((await spend({ units: 2, cap: 10 })).used, 2);
+    assert.deepEqual(ns.store.get("budget"), { day: "2026-11-20", used: 2 });
+
+    now = new Date("2026-11-21T00:00:01Z");
+    assert.equal((await spend({ units: 1, cap: 10 })).used, 1, "a new day starts from zero");
+    // A request built before midnight, still carrying yesterday's date, arrives after today's first reservation.
+    const late = await spend({ day: "2026-11-20", units: 3, cap: 10 });
+    assert.equal(late.day, "2026-11-21");
+    assert.deepEqual(ns.store.get("budget"), { day: "2026-11-21", used: 4 }, "today's reservations are kept");
+
+    now = new Date("2026-11-20T23:59:58Z");
+    assert.deepEqual(await spend({ units: 1, cap: 10 }).then((r) => [r.day, r.used]), ["2026-11-21", 5], "the day never moves backwards");
+  });
+
+  it("budgetCall sends no day; the Worker can't influence which day is charged", async () => {
+    const e = env();
+    let sent;
+    const real = e.AI_BUDGET.get;
+    e.AI_BUDGET.get = (id) => ({ fetch: async (url, init) => { sent = JSON.parse(init.body); return real(id).fetch(url, init); } });
+    await worker.fetch(review({ mode: "review", market: { title: "x" } }), e);
+    assert.deepEqual(Object.keys(sent).sort(), ["cap", "units"]);
   });
 
   it("checks input before spending: a bad request uses no budget and no Turnstile call", async () => {

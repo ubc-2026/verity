@@ -58,8 +58,6 @@ export class AuditServer {
   readonly #sweepOnWebhook: boolean;
   readonly #report?: (body: unknown) => Promise<void>;
   readonly http: Server;
-  /** Nonces of signed deliveries already processed, with the time they can be forgotten (ms). */
-  readonly #seenNonces = new Map<string, number>();
 
   constructor(options: AuditServerOptions) {
     this.ledger = options.ledger;
@@ -189,18 +187,17 @@ export class AuditServer {
     });
     if (!valid) return this.#send(response, 401, { error: "invalid signature" });
     // A signed body stays valid for the whole skew window, so a captured delivery could be sent again.
-    // A nonce is remembered only after it is processed, so a delivery that failed can still be retried.
+    // The nonce is stored in the ledger with the ingested batch (one save), so the record survives a restart
+    // and any server opened on the same ledger sees it. A delivery that failed is not recorded and can be retried.
     const nowMs = this.#now().getTime();
-    for (const [seen, until] of this.#seenNonces) if (until <= nowMs) this.#seenNonces.delete(seen);
-    if (this.#seenNonces.has(nonce)) return this.#send(response, 200, { ok: true, duplicate: true });
+    if (this.ledger.seenWebhook(nonce, nowMs)) return this.#send(response, 200, { ok: true, duplicate: true });
     let body: unknown;
     try {
       body = JSON.parse(payload);
     } catch {
       return this.#send(response, 400, { error: "invalid payload" });
     }
-    const result = this.ledger.ingest(body);
-    this.#seenNonces.set(nonce, nowMs + 2 * this.#maxSkewSeconds * 1000);
+    const result = this.ledger.ingest(body, { nonce, expiresAtMs: nowMs + 2 * this.#maxSkewSeconds * 1000, nowMs });
     this.#send(response, 200, { ok: true, ...result });
     if (this.#sweepOnWebhook) {
       void this.sweep().catch((error: unknown) => {
