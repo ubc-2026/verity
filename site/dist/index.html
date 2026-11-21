@@ -739,6 +739,33 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 @media (max-width:1024px){.lp-art::before{background:rgba(9,12,16,.86)}.lp-hero{min-height:0}.lp-field-key{display:none}.lp-field-cap{text-align:left}}
 .lp-art.on-dot{cursor:pointer}
 #verity-astryx-root{position:relative;z-index:100}
+
+/* ---------- Refinement pass: calmer labels, clearer hierarchy ----------
+   Mono is kept for numbers, prices, tickers and hashes only. Labels are sentence-case sans.
+   Sections open with a left-aligned heading and one line under it. Hierarchy comes from surface tone, not outlines. */
+.label,.tick-status{font-family:var(--font-sans);letter-spacing:0;font-size:.78rem}
+.kv dt{font-family:var(--font-sans);font-size:.8rem}
+.tag{font-family:var(--font-sans);font-size:.74rem;letter-spacing:0}
+.demo,.real{font-family:var(--font-sans);font-size:.72rem;letter-spacing:0;padding:2px 8px;border-radius:999px;font-weight:500}
+.demo{border:0;background:rgba(245,158,11,.12);color:#F5B544}
+.real{border:0;background:rgba(139,155,180,.12);color:var(--text-muted)}
+.real#inspSrc,.real#mktSrc{font-family:var(--font-mono);font-size:.68rem}
+.status{font-family:var(--font-sans)!important;letter-spacing:0!important;text-transform:none!important}
+.section{padding:104px 0 88px}
+.sec-head{display:block;margin-bottom:40px;max-width:760px}
+.sec-head .idx{display:none}
+.sec-head h2{font-size:clamp(1.9rem,3.2vw,2.8rem);line-height:1.06;letter-spacing:-.03em;font-weight:600;margin:0 0 14px;max-width:22ch;text-wrap:balance}
+.sec-head p{font-size:1.02rem;line-height:1.6;color:var(--text-muted);margin:0;max-width:62ch}
+.panel-head{border-bottom:0;padding:18px 20px 6px}
+.panel-head h3{font-size:1.06rem;letter-spacing:-.01em}
+.board-title{font-size:clamp(2rem,3.4vw,3rem)!important;line-height:1.04!important;letter-spacing:-.035em!important;font-weight:600!important;max-width:20ch!important;text-wrap:balance}
+@media (max-width:640px){.section{padding:72px 0 56px}.sec-head{margin-bottom:28px}}
+.seg button{font-family:var(--font-sans);font-size:.8rem}
+#tfSeg button{font-family:var(--font-mono);font-size:.74rem}
+.mrow-cat,.cat{font-family:var(--font-sans);font-size:.68rem;border:0;background:rgba(139,155,180,.12);border-radius:999px;padding:1px 8px}
+.coin-note{font-family:var(--font-sans);font-size:.7rem}
+.stage-body>p{max-width:72ch}
+.kv dd a[href*="/tx/"],.kv dd .hash{font-family:var(--font-mono);font-size:.8rem}
 </style>
 </head>
 <body>
@@ -1044,7 +1071,7 @@ window.__lpField=(function(){
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h4.2L12 15.6 16.8 4H21l-7.4 16h-3.2z" fill="#F1F5F9"/><path d="M10.4 20h3.2l1.3-2.9H9.1z" fill="#2E5CFF"/></svg>
       VERITY
     </a>
-    <span class="status" title="No live payment, settlement or stream service is connected to this page">Testnet · demo mode</span>
+    <span class="status" title="No live payment, settlement or stream service is connected to this page">Testnet demo</span>
     <nav class="nav-links" aria-label="Primary">
       <a href="#terminal">Terminal</a>
       <a href="#stack">4-layer stack</a>
@@ -1145,7 +1172,7 @@ window.__lpField=(function(){
     </div>
     <div class="term-grid">
       <div class="panel term-a">
-        <div class="panel-head"><div><h3 id="chartTitle">Crowd-implied probability</h3><p class="label" id="mktQ" style="margin-top:2px"></p></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="demo" id="probBadge">DEMO FIXTURE PATH</span><div class="seg" role="group" aria-label="Timeframe" id="tfSeg"><button data-tf="1H" aria-pressed="false">1H</button><button data-tf="24H" aria-pressed="true">24H</button><button data-tf="7D" aria-pressed="false">7D</button><button data-tf="30D" aria-pressed="false">30D</button><button data-tf="ALL" aria-pressed="false">ALL</button></div></div></div>
+        <div class="panel-head"><div><h3 id="chartTitle">Crowd-implied probability</h3><p class="label" id="mktQ" style="margin-top:2px"></p></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="demo" id="probBadge">Demo price path</span><div class="seg" role="group" aria-label="Timeframe" id="tfSeg"><button data-tf="1H" aria-pressed="false">1H</button><button data-tf="24H" aria-pressed="true">24H</button><button data-tf="7D" aria-pressed="false">7D</button><button data-tf="30D" aria-pressed="false">30D</button><button data-tf="ALL" aria-pressed="false">ALL</button></div></div></div>
         <div class="quote-row" aria-live="polite">
           <div><div class="label">Mid (implied)</div><div class="v" id="qMid">56.0¢</div></div>
           <div><div class="label">Bid / ask</div><div class="v sm" id="qBA">54¢ / 58¢</div></div>
@@ -1169,7 +1196,7 @@ window.__lpField=(function(){
           <div class="score-grid" id="scoreGrid"></div>
         </div>
         <div class="panel">
-          <div class="panel-head"><h3>Microstructure</h3><div style="display:flex;gap:6px;align-items:center"><span class="demo" id="candleBadge">DEMO FIXTURE</span><button class="btn sm" id="candlePause" aria-pressed="false">Pause</button></div></div>
+          <div class="panel-head"><h3>Microstructure</h3><div style="display:flex;gap:6px;align-items:center"><span class="demo" id="candleBadge">Demo candles</span><button class="btn sm" id="candlePause" aria-pressed="false">Pause</button></div></div>
           <div class="chart-wrap short" id="candleWrap"><canvas id="candleChart" role="img" aria-label="Candlestick, volume and order-book depth for the selected contract, demo fixture"></canvas><div class="tooltip" id="candleTip"></div></div>
           <div class="chart-foot"><span id="candleFoot">Top of book is real; candles and depth beyond it are fixtures.</span><span class="num" id="candleStamp">—</span></div>
         </div>
@@ -1210,7 +1237,7 @@ window.__lpField=(function(){
       <button class="btn" id="wtNext" aria-label="Next step">Next step</button>
       <span class="sep" aria-hidden="true"></span>
       <button class="btn" id="wtEvidence">Inspect evidence</button>
-      <span class="demo" style="margin-left:auto">SIMULATED</span>
+      <span class="demo" style="margin-left:auto">Simulated</span>
     </div>
     <ol class="timeline" id="timeline" aria-label="Run steps"></ol>
     <div class="wt-grid">
@@ -1229,7 +1256,7 @@ window.__lpField=(function(){
   <div class="wrap">
     <div class="sec-head"><span class="idx">Recorded on Arc</span><h2 id="arcTitle">One testnet purchase, already settled</h2><p>Paid on 20 Nov 2026 for the Central Park climate file. The walkthrough above cannot send this payment.</p></div>
     <div class="panel">
-      <div class="panel-head"><h3>purchase-arc-1795164394</h3><span class="real">ARC TESTNET · RECONCILED</span></div>
+      <div class="panel-head"><h3>purchase-arc-1795164394</h3><span class="real">Arc testnet, reconciled</span></div>
       <div class="stage-body">
         <dl class="kv">
           <dt>Contract</dt><dd>GEMI-WXHIGH-NYC-2611210459-66TO67 · NYC high, 66°F to 67°F</dd>
@@ -1246,7 +1273,7 @@ window.__lpField=(function(){
       </div>
     </div>
     <section class="panel" id="voice-approval" aria-labelledby="voiceTitle" style="margin-top:24px">
-      <div class="panel-head"><h3 id="voiceTitle">Owner call, 0.51 to 2.00 USDC</h3><span class="real">ELEVENLABS · VOICE DOES NOT PAY</span></div>
+      <div class="panel-head"><h3 id="voiceTitle">Owner call, 0.51 to 2.00 USDC</h3><span class="real">Voice approves, the wallet pays</span></div>
       <div class="stage-body">
         <p>The 0.05 USDC receipt above did not call anyone. That amount is automatic. From 0.51 to 2.00 USDC, Verity phones the owner through the ElevenLabs agent. The agent asks for a 4-digit code shown only on the owner’s screen, then asks yes or no.</p>
         <dl class="kv">
@@ -1301,7 +1328,7 @@ window.__lpField=(function(){
         <button data-f="flag" aria-pressed="false">Flagged exceptions</button>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <span class="demo">DEMO FIXTURE STREAM</span>
+        <span class="demo">Demo stream</span>
         <button class="btn sm" id="recReplay">Replay fixture stream</button>
         <button class="btn sm ghost" id="recClear">Clear</button>
       </div>
@@ -1344,7 +1371,7 @@ window.__lpField=(function(){
         <span class="label">Run console · market to results to audit</span>
         <p class="muted" style="font-size:.9rem;margin-top:8px">Pick a fixture or live Gemini Exchange market, run the analysis, step through a fixture purchase on Arc direct or Circle Gateway, and audit the run, purchase, receipt, Circle transfer, Arc batch and QuickNode confirmation.</p>
         <p class="label" style="margin-top:10px">Run <code class="mono">npm run app</code> in the repository, then open it.</p>
-        <p style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn sm" href="http://127.0.0.1:8790/" target="_blank" rel="noopener">Open run console (127.0.0.1:8790)</a><span class="demo">FIXTURE PAYMENTS</span></p>
+        <p style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn sm" href="http://127.0.0.1:8790/" target="_blank" rel="noopener">Open run console (127.0.0.1:8790)</a><span class="demo">Demo payments</span></p>
       </div>
     </div>
     <div id="ldgOut" hidden>
@@ -1999,7 +2026,7 @@ function renderTerm(light){
   const openF=new Set($$('#flagList .flag>button[aria-expanded="true"]').map(b=>b.textContent));$('#flagList').innerHTML=(m.live?liveFlags(m):FLAGS[m.key]).map((f,i)=>`<div class="flag"><button aria-expanded="false" aria-controls="fb${i}"><span class="tag ${f.sev}">${{warn:'!',no:'✕',info:'i',ok:'✓',neutral:'–'}[f.sev]}</span><span><span style="display:block;font-size:.9rem">${f.title}</span><span class="label">${f.prov}</span></span><span class="chev" aria-hidden="true">›</span></button><div class="flag-body" id="fb${i}">${f.body}${f.ex?`<div class="excerpt"><span class="label" style="display:block;margin-bottom:4px">Contract excerpt · ${f.prov.split('·')[0]}</span>${f.ex}</div>`:''}</div></div>`).join('');
   $$('#flagList .flag>button').forEach(b=>{if(light&&openF.has(b.textContent)){b.setAttribute('aria-expanded','true');$('#'+b.getAttribute('aria-controls')).classList.add('open');}});$$('#flagList .flag>button').forEach(b=>b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);$('#'+b.getAttribute('aria-controls')).classList.toggle('open',o);}));
   $('#purchaseList').innerHTML=(m.live?livePurch(m):PURCH[m.key]).map(p=>`<div class="purchase"><span>${p.t}</span><span class="num">${p.p} USDC</span><span class="meta"><span class="tag ${p.state[0]}">${p.state[1]}</span> <code class="mono" style="font-size:.7rem">${p.id}</code><br>${p.meta}</span></div>`).join('');
-  const pb=$('#probBadge'),cb=$('#candleBadge');pb.className=cb.className=m.live?'real':'demo';pb.textContent=m.live?'GEMINI EXCHANGE CANDLES':'DEMO FIXTURE PATH';cb.textContent=m.live?'GEMINI EXCHANGE':'DEMO FIXTURE';
+  const pb=$('#probBadge'),cb=$('#candleBadge');pb.className=cb.className=m.live?'real':'demo';pb.textContent=m.live?'Gemini Exchange candles':'Demo price path';cb.textContent=m.live?'Gemini Exchange':'Demo candles';
   if(!light||!m.live)$('#probFoot').textContent=m.live?(term.foot||'Closing price of each Gemini Exchange candle for the contract shown. The band is the live bid–ask.'):'The path ends at the real captured mid. Earlier points are a deterministic demo fixture.';
   $('#candleFoot').textContent=m.live?'Real 5-minute candles and live top of book. Order-book depth is not public.':'Top of book is real; candles and depth beyond it are fixtures.';
   $('#mktQ').textContent=m.question;if(typeof gaiSyncMarket==='function')gaiSyncMarket();
