@@ -2,7 +2,8 @@
 // and whether visitor or web text can steer the model or pull out its instructions.
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import worker, { DemoBudget, GUARD, REFUSAL, buildUserText, cleanMarket, leaksInstructions } from "../worker/worker.mjs";
+import worker, { DemoBudget, GUARD, REFUSAL, buildUserText, cleanMarket, leaksInstructions, readMemberPass } from "../worker/worker.mjs";
+import { mintAiPass } from "../cloudflare/website-account/src/website-account.mjs";
 
 const SITE = "https://verityresearch.us";
 const W = "https://verity-gemini.example.workers.dev";
@@ -15,18 +16,31 @@ let exaHighlights;
 const realFetch = globalThis.fetch;
 const realCaches = globalThis.caches;
 
-// A Durable Object namespace that runs the real DemoBudget class over in-memory storage.
+// A Durable Object namespace that runs the real DemoBudget class over in-memory storage, one object per name.
+// `store` and `object` are the global counter; `used(name)` reads any other counter.
 function budgetNamespace() {
-  const store = new Map();
-  const object = new DemoBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } });
-  return { store, object, idFromName: (n) => n, get: () => ({ fetch: (url, init) => object.fetch(new Request(url, init)) }) };
+  const objects = new Map();
+  const open = (name) => {
+    if (!objects.has(name)) {
+      const store = new Map();
+      objects.set(name, { store, object: new DemoBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } }) });
+    }
+    return objects.get(name);
+  };
+  const global = open("global");
+  return {
+    store: global.store, object: global.object, objects, idFromName: (n) => n,
+    used: (name) => objects.get(name)?.store.get("budget")?.used ?? 0,
+    names: () => [...objects.keys()].filter((n) => n !== "global"),
+    get: (id) => ({ fetch: (url, init) => open(id).object.fetch(new Request(url, init)) }),
+  };
 }
 
 function env(extra = {}) {
   return {
     SITE_ORIGIN: SITE, GEMINI_MODEL: "gemini-test", BACKUP_MODEL: "@cf/test/model",
     GEMINI_API_KEY: "g".repeat(39), EXA_API_KEY: "e".repeat(36), TURNSTILE_SECRET: "t".repeat(35),
-    AI_BUDGET: budgetNamespace(), AI_DAILY_CAP: "10",
+    AI_BUDGET: budgetNamespace(), AI_DAILY_CAP: "10", AI_GUEST_DAILY: "100", AI_MEMBER_DAILY: "200",
     REVIEW_LIMIT: { limit: async () => ({ success: true }) },
     ...extra,
   };
@@ -134,12 +148,14 @@ describe("verity-gemini: who can spend money", () => {
     e.AI_BUDGET.get = (id) => ({ fetch: async (url, init) => { sent = JSON.parse(init.body); return real(id).fetch(url, init); } });
     await worker.fetch(review({ mode: "review", market: { title: "x" } }), e);
     assert.deepEqual(Object.keys(sent).sort(), ["cap", "units"]);
+    assert.equal(sent.cap, 10, "the last call is the global reservation");
   });
 
   it("checks input before spending: a bad request uses no budget and no Turnstile call", async () => {
     const e = env();
     assert.equal((await worker.fetch(review({ mode: "drop tables", market: {} }), e)).status, 400);
     assert.equal(e.AI_BUDGET.store.size, 0);
+    assert.deepEqual(e.AI_BUDGET.names(), [], "no allowance was touched either");
     assert.equal(calls.length, 0);
   });
 
@@ -150,15 +166,97 @@ describe("verity-gemini: who can spend money", () => {
     const ok = await worker.fetch(get({ "x-verity-status-key": "k".repeat(32) }), env({ STATUS_KEY: "k".repeat(32) }));
     assert.equal(ok.status, 200);
     const j = await ok.json();
-    assert.equal(j.version, "v9");
+    assert.equal(j.version, "v10");
     assert.equal(j.ai_budget.used, 0);
     assert.equal(j.ai_budget.cap, 10);
+    assert.deepEqual(j.ai_allowance, { guest_daily: 100, member_daily: 200, member_pass_configured: false });
   });
 
   it("Exa research: a cache miss needs a token and budget", async () => {
     const r = await worker.fetch(new Request(`${W}/research?q=bitcoin`, { headers: { origin: SITE } }), env());
     assert.equal(r.status, 403);
     assert.equal(calls.filter((c) => c.url.startsWith("https://api.exa.ai/")).length, 0);
+  });
+});
+
+describe("verity-gemini: signed-in visitors get a larger daily allowance than guests", () => {
+  const KEY = "p".repeat(48);
+  const limiter = () => { const keys = []; return { keys, limit: async ({ key }) => (keys.push(key), { success: true }) }; };
+  const tiers = (extra = {}) => env({ AI_PASS_KEY: KEY, AI_GUEST_DAILY: "2", AI_MEMBER_DAILY: "4", AI_DAILY_CAP: "100",
+    REVIEW_LIMIT: limiter(), MEMBER_LIMIT: limiter(), ...extra });
+  const ask = (e, headers = {}) => worker.fetch(review({ mode: "review", market: { title: "x" } }, headers), e);
+  const statuses = async (e, n, headers) => { const out = []; for (let i = 0; i < n; i++) out.push((await ask(e, headers)).status); return out; };
+
+  it("a guest gets AI_GUEST_DAILY units per IP, then a 429 that suggests signing in", async () => {
+    const e = tiers();
+    assert.deepEqual(await statuses(e, 2), [200, 200]);
+    const over = await ask(e);
+    assert.equal(over.status, 429);
+    assert.match((await over.json()).error, /Guests get 2 AI credits a day.*Sign in/);
+    assert.equal(e.AI_BUDGET.store.get("budget").used, 2, "the refused call reserved nothing globally");
+    assert.equal(geminiCalls().length, 2);
+    assert.equal((await ask(e, { "cf-connecting-ip": "198.51.100.9" })).status, 200, "another IP has its own allowance");
+  });
+
+  it("a signed-in visitor gets AI_MEMBER_DAILY units per account, separate from the guest count on the same IP", async () => {
+    const e = tiers();
+    const { pass } = await mintAiPass(KEY, "11111111-2222-3333-4444-555555555555");
+    assert.deepEqual(await statuses(e, 2), [200, 200], "the guest allowance on this IP is used up");
+    assert.deepEqual(await statuses(e, 4, { "x-verity-pass": pass }), [200, 200, 200, 200]);
+    const over = await ask(e, { "x-verity-pass": pass });
+    assert.equal(over.status, 429);
+    assert.match((await over.json()).error, /used today’s 4 AI credits/);
+    assert.equal(e.MEMBER_LIMIT.keys.length, 5, "members use the member per-minute limit");
+    assert.ok(e.MEMBER_LIMIT.keys.every((k) => k.startsWith("member:") && !k.includes("1111")), "keyed by a hash, not the account ID");
+    assert.ok(e.REVIEW_LIMIT.keys.every((k) => k.startsWith("guest:") && !k.includes("203.0.113.7")), "guests keyed by a hash of the IP");
+    const other = await mintAiPass(KEY, "99999999-2222-3333-4444-555555555555");
+    assert.equal((await ask(e, { "x-verity-pass": other.pass })).status, 200, "a second account has its own allowance");
+  });
+
+  it("a forged, tampered, expired, far-future or wrong-key pass counts as a guest", async () => {
+    const now = Date.now();
+    const good = (await mintAiPass(KEY, "acct")).pass;
+    const [v, sub, exp, sig] = good.split(".");
+    const flip = (t) => t.slice(0, -1) + (t.at(-1) === "A" ? "B" : "A");
+    const bad = [
+      "forged",
+      [v, flip(sub), exp, sig].join("."),
+      [v, sub, String(Number(exp) + 1), sig].join("."),
+      [v, sub, exp, flip(sig)].join("."),
+      (await mintAiPass(KEY, "acct", now - 11 * 60_000)).pass,
+      (await mintAiPass(KEY, "acct", now + 30 * 60_000)).pass,
+      (await mintAiPass("q".repeat(48), "acct")).pass,
+    ];
+    for (const pass of bad) assert.equal(await readMemberPass(pass, { AI_PASS_KEY: KEY }), null, pass);
+    assert.equal(await readMemberPass(good, { AI_PASS_KEY: KEY }), sub);
+    assert.equal(await readMemberPass(good, {}), null, "without AI_PASS_KEY nobody is a member");
+    assert.equal(await readMemberPass(good, { AI_PASS_KEY: "short" }), null, "a short key is treated as missing");
+
+    const e = tiers();
+    assert.deepEqual(await statuses(e, 3, { "x-verity-pass": bad[3] }), [200, 200, 429], "a bad pass gets the guest allowance");
+  });
+
+  it("when the global cap refuses, the caller's allowance is refunded", async () => {
+    const e = tiers({ AI_DAILY_CAP: "1" });
+    assert.equal((await ask(e)).status, 200);
+    const r = await ask(e);
+    assert.equal(r.status, 503);
+    assert.match((await r.json()).error, /budget/i);
+    const [guest] = e.AI_BUDGET.names();
+    assert.equal(e.AI_BUDGET.used(guest), 1, "only the call that ran is counted against the guest");
+  });
+
+  it("Exa research misses use the same allowance, and CORS allows the pass header", async () => {
+    const e = tiers();
+    const research = (q) => worker.fetch(new Request(W + "/research?q=" + q,
+      { headers: { origin: SITE, "cf-turnstile-response": "tok", "cf-connecting-ip": "203.0.113.7" } }), e);
+    assert.equal((await research("bitcoin")).status, 200);
+    assert.equal((await research("ether")).status, 200);
+    assert.equal((await research("solana")).status, 429);
+    for (const path of ["/review", "/research"]) {
+      const pre = await worker.fetch(new Request(W + path, { method: "OPTIONS", headers: { origin: SITE } }), e);
+      assert.match(pre.headers.get("access-control-allow-headers"), /x-verity-pass/);
+    }
   });
 });
 
