@@ -41,5 +41,10 @@ jobs:
         working-directory: portal
       - run: npm run typecheck
         working-directory: portal
+      # The website and voice Worker (verity-site-sign-in) is its own package too.
+      - run: npm ci
+        working-directory: cloudflare/site-sign-in
+      - run: npm test
+        working-directory: cloudflare/site-sign-in
       # The published page is site/dist/index.html; it must be the build of site/src.
       - run: sh site/build.sh && git diff --ignore-cr-at-eol --exit-code site/dist
