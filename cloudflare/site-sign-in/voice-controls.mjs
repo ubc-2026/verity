@@ -132,8 +132,10 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
     connecting = true;
     updateButton('Cancel voice start');
     let microphoneGranted = false;
+    let sdkLoaded = false;
     try {
       let ticket;
+      let sdk;
       if (protectedVoice) {
         status.textContent = 'Allow microphone access to start the call.';
         // Hold this local stream until the SDK opens its own input so one-time
@@ -145,6 +147,11 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
         signIn.hidden = true;
         if (allowance) allowance.hidden = true;
         status.textContent = 'Connecting…';
+        // Load the SDK before asking for a ticket: the server charges the allowance when it issues one, so a
+        // bundle that fails to load must fail here, before a guest's only call is spent.
+        sdk = await loadSdk();
+        sdkLoaded = true;
+        if (current !== run) return;
         const response = await requestVoice('/_verity/voice-session');
         if (current !== run) return;
         if (response.status === 401) {
@@ -175,7 +182,7 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
         showAllowance(ticket);
       }
       status.textContent = protectedVoice ? 'Connecting…' : 'Connecting. Allow microphone access when asked.';
-      const { Conversation } = await loadSdk();
+      const { Conversation } = sdk ?? await loadSdk();
       if (current !== run) return;
       const connected = await Conversation.startSession({
         ...(ticket ? { signedUrl: ticket.signedUrl, connectionType: 'websocket', libsampleratePath: '/_verity/voice-resampler.js' }
@@ -206,6 +213,8 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
         status.textContent = protectedVoice && !microphoneGranted
           ? 'Microphone access was denied. No call was used.'
           : 'Microphone access was denied. Allow it in your browser and try again.';
+      } else if (protectedVoice && microphoneGranted && !sdkLoaded) {
+        status.textContent = 'Voice could not load. No call was used. Check your connection and try again.';
       } else {
         status.textContent = 'Voice is unavailable. The demo may be busy or at its limit. You can still use the text review.';
       }
