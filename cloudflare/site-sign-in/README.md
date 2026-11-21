@@ -50,6 +50,14 @@ The only secret is `ELEVENLABS_API_KEY`, set with `wrangler secret put`. Never c
 - The allowance is charged only after ElevenLabs returns a valid signed ticket.
 - The budget stores keyed hashes only: no raw IP addresses, raw account IDs, audio or keys.
 
+## Voice opt-in
+
+Above Start voice, the panel shows a notice that ElevenLabs receives the microphone audio, with a link to `/privacy.html`. Below the notice is a checkbox: "I agree to send microphone audio to ElevenLabs for this call."
+
+- Start voice stays disabled until the box is ticked.
+- Nothing asks for the microphone or a ticket before that.
+- The box locks during the call and clears when the call ends, so each call needs a fresh opt-in.
+
 ## Not released yet
 
-An earlier session's local copy also has a voice opt-in checkbox, a microphone disclosure that links to `privacy.html`, homepage CSP headers and a live transcript. None of that is live or in this folder. Ship it as its own change, after `privacy.html` exists on the site.
+An earlier session's local copy also has homepage CSP headers and a live agent transcript. Neither is live or in this folder. Ship each as its own change.

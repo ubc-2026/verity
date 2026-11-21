@@ -4,13 +4,14 @@ import { test } from 'node:test';
 import { runInNewContext } from 'node:vm';
 import { mountVoiceControls, selectedMarket } from './voice-controls.mjs';
 
-function mockPage({ protectedVoice = false, fetch, withDock = false, getUserMedia = async () => ({ getTracks: () => [] }) } = {}) {
+function mockPage({ protectedVoice = false, fetch, withDock = false, consentChecked = true, getUserMedia = async () => ({ getTracks: () => [] }) } = {}) {
   const button = { addEventListener(event, handler) { this.click = handler; } };
   const status = { textContent: '' };
   const time = {};
   const allowance = { hidden: true };
   const signIn = {};
   const mute = { addEventListener(event, handler) { this.click = handler; } };
+  const consent = { checked: consentChecked, addEventListener(event, handler) { this.change = handler; } };
   const browser = {
     navigator: { mediaDevices: { getUserMedia } }, fetch,
     addEventListener(event, handler) { this[event] = handler; }, setInterval() {}, clearInterval() {},
@@ -26,7 +27,7 @@ function mockPage({ protectedVoice = false, fetch, withDock = false, getUserMedi
     dockOpen = open;
     changeDock();
   };
-  const elements = { button, '[role="status"]': status, '[data-voice-time]': time, '[data-voice-allowance]': allowance, '[data-voice-signin]': signIn, '[data-voice-mute]': mute };
+  const elements = { button, '[role="status"]': status, '[data-voice-time]': time, '[data-voice-allowance]': allowance, '[data-voice-signin]': signIn, '[data-voice-mute]': mute, '[data-voice-consent]': consent };
   const controls = {
     dataset: { verityVoice: 'agent_demoFixture' },
     closest: () => dock,
@@ -34,8 +35,43 @@ function mockPage({ protectedVoice = false, fetch, withDock = false, getUserMedi
     querySelector: selector => elements[selector],
   };
   const document = { querySelector: () => controls, createElement: tag => ({ tag }), defaultView: browser };
-  return { button, status, browser, document, time, allowance, signIn, mute, setDockOpen };
+  return { button, status, browser, document, time, allowance, signIn, mute, consent, setDockOpen };
 }
+
+test('requires a fresh opt-in before requesting microphone access or a provider ticket', async () => {
+  let microphoneRequests = 0;
+  let ticketRequests = 0;
+  const { button, consent, document, status } = mockPage({ protectedVoice: true, consentChecked: false,
+    getUserMedia: async () => { microphoneRequests++; return { getTracks: () => [] }; },
+    fetch: async () => { ticketRequests++; return Response.json({ signedUrl: 'wss://fixture/', callSeconds: 60 }); },
+  });
+  mountVoiceControls(document, async () => ({ Conversation: { async startSession() { return { endSession() {} }; } } }));
+  assert.equal(button.disabled, true);
+  await button.click();
+  assert.equal(microphoneRequests, 0);
+  assert.equal(ticketRequests, 0);
+  assert.match(status.textContent, /Agree to send microphone audio/);
+  consent.checked = true;
+  consent.change();
+  assert.equal(button.disabled, false);
+  await button.click();
+  assert.equal(microphoneRequests, 1);
+  assert.equal(ticketRequests, 1);
+  assert.equal(consent.disabled, true, 'the opt-in is locked during the call');
+  await button.click();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(consent.checked, false, 'each call needs a fresh opt-in');
+  assert.equal(consent.disabled, false);
+  assert.equal(button.disabled, true);
+});
+
+test('the exact browser bundle keeps Start voice disabled until the visitor opts in', async () => {
+  const { button, document } = mockPage({ consentChecked: false });
+  button.disabled = false;
+  const browserScript = await readFile(new URL('./.generated/voice-entry.txt', import.meta.url), 'utf8');
+  runInNewContext(browserScript, { document });
+  assert.equal(button.disabled, true);
+});
 
 test('voice starts in place only after a click and releases the call on exit', async () => {
   let loaded = 0;
@@ -220,7 +256,7 @@ test('protected voice displays its allotted time and can mute the microphone', a
 test('the signed-in panel shows its live balance before, during, and after calls', async () => {
   let remaining = 3;
   let started = 0;
-  const { button, document, allowance, setDockOpen } = mockPage({
+  const { button, document, allowance, consent, setDockOpen } = mockPage({
     protectedVoice: true, withDock: true, fetch: async url => {
       if (url === '/_verity/voice-allowance') return Response.json({ mode: 'account', remaining });
       assert.equal(url, '/_verity/voice-session');
@@ -237,6 +273,8 @@ test('the signed-in panel shows its live balance before, during, and after calls
   assert.equal(allowance.textContent, '3 calls remaining today');
   assert.equal(started, 0);
   for (const balance of ['2 calls remaining today', '1 call remaining today', '0 calls remaining today']) {
+    consent.checked = true;
+    consent.change();
     await button.click();
     assert.equal(allowance.textContent, balance);
     await button.click();
