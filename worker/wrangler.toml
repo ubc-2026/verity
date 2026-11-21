@@ -7,8 +7,11 @@ preview_urls = false
 [vars]
 SITE_ORIGIN = "https://verityresearch.us"
 GEMINI_MODEL = "gemini-3.5-flash-lite"
-# Global spend cap in units per UTC day: review/ask 1, forecast 3, Exa research miss 1.
-AI_DAILY_CAP = "300"
+# Spend caps in units per UTC day: review/ask 1, forecast 3, Exa research miss 1.
+# Every call needs room in both the caller's allowance and the global cap.
+AI_DAILY_CAP = "500"      # all visitors together
+AI_GUEST_DAILY = "5"      # per IP address, not signed in
+AI_MEMBER_DAILY = "50"    # per signed-in account (pass from verity-website-account)
 BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
 [ai]
@@ -20,6 +23,15 @@ namespace_id = "1001"
 
 [ratelimits.simple]
 limit = 4
+period = 60
+
+# Signed-in accounts: per-minute limit keyed by account instead of IP.
+[[ratelimits]]
+name = "MEMBER_LIMIT"
+namespace_id = "1041"
+
+[ratelimits.simple]
+limit = 10
 period = 60
 
 # Daily AI budget counter: one Durable Object (class DemoBudget in worker.mjs). The live v8 Worker
@@ -37,3 +49,4 @@ new_sqlite_classes = ["DemoBudget"]
 #   npx wrangler secret put EXA_API_KEY
 #   npx wrangler secret put TURNSTILE_SECRET   # same widget secret as the sign-in page (VERITY_AUTH_TURNSTILE_SECRET)
 #   npx wrangler secret put STATUS_KEY         # optional; without it /status answers 404
+#   npx wrangler secret put AI_PASS_KEY        # same value as verity-website-account; without it everyone is a guest

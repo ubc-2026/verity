@@ -285,12 +285,22 @@ export class DemoBudget {
     this.queue = run.catch(() => {});
     return run;
   }
-  async apply(method, { units, cap }) {
+  async apply(method, { units, cap, day: reservedDay }) {
     const rec = (await this.state.storage.get('budget')) || {};
     const today = this.clock().toISOString().slice(0, 10);
     // The stored day never moves backwards (e.g. if the clock steps back).
     const day = typeof rec.day === 'string' && rec.day > today ? rec.day : today;
     const used = rec.day === day ? rec.used : 0;
+    if (method === 'DELETE') {
+      // Refund a reservation that a later step refused. Only the day the reservation was charged to is
+      // refunded: a refund that arrives after midnight is dropped, so it can't lower the new day's count.
+      if (!(units > 0) || typeof reservedDay !== 'string' || reservedDay !== day || rec.day !== day) {
+        return Response.json({ ok: true, day, used, cap, refunded: false });
+      }
+      const back = Math.max(0, used - units);
+      await this.state.storage.put('budget', { day, used: back });
+      return Response.json({ ok: true, day, used: back, cap, refunded: true });
+    }
     if (method === 'GET' || !(units > 0)) return Response.json({ ok: true, day, used, cap });
     if (used + units > cap) return Response.json({ ok: false, day, used, cap });
     await this.state.storage.put('budget', { day, used: used + units });
@@ -298,24 +308,93 @@ export class DemoBudget {
   }
 }
 
-const dailyCap = env => (Number(env.AI_DAILY_CAP) > 0 ? Number(env.AI_DAILY_CAP) : 300);
+const allowance = (value, fallback) => (Number(value) > 0 ? Math.floor(Number(value)) : fallback);
+const dailyCap = env => allowance(env.AI_DAILY_CAP, 300);
 
-async function budgetCall(env, units) {
-  const stub = env.AI_BUDGET.get(env.AI_BUDGET.idFromName('global'));
-  const res = await stub.fetch('https://ai-budget/spend', { method: 'POST',
-    body: JSON.stringify({ units, cap: dailyCap(env) }) });
+/**
+ * Who is calling, for per-caller limits. A signed-in visitor sends x-verity-pass, a short-lived pass that
+ * verity-website-account signs with AI_PASS_KEY after checking the sign-in session (the session cookie
+ * never reaches this Worker, which runs on another domain). Anything else, including a bad or expired
+ * pass, is a guest counted by IP address. Without AI_PASS_KEY everyone is a guest.
+ */
+const PASS_TTL_MAX_MS = 20 * 60 * 1000;
+const b64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+async function hmac(key, text) {
+  const enc = new TextEncoder();
+  const k = await crypto.subtle.importKey('raw', enc.encode(key), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return b64url(await crypto.subtle.sign('HMAC', k, enc.encode(text)));
+}
+
+export async function readMemberPass(pass, env, nowMs = Date.now()) {
+  if (typeof env.AI_PASS_KEY !== 'string' || env.AI_PASS_KEY.length < 32 || typeof pass !== 'string') return null;
+  const m = /^v1\.([A-Za-z0-9_-]{22})\.(\d{10})\.([A-Za-z0-9_-]{43})$/.exec(pass);
+  if (!m) return null;
+  const [, sub, exp, sig] = m;
+  const expMs = Number(exp) * 1000;
+  if (expMs <= nowMs || expMs > nowMs + PASS_TTL_MAX_MS) return null;
+  return (await sameSecret(sig, await hmac(env.AI_PASS_KEY, `verity-ai-pass.v1.${sub}.${exp}`))) ? sub : null;
+}
+
+export async function caller(request, env) {
+  const sub = await readMemberPass(request.headers.get('x-verity-pass'), env);
+  if (sub) return { tier: 'member', key: 'member:' + sub, limiter: env.MEMBER_LIMIT || env.REVIEW_LIMIT, daily: allowance(env.AI_MEMBER_DAILY, 50) };
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const digest = b64url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ip))).slice(0, 22);
+  return { tier: 'guest', key: 'guest:' + digest, limiter: env.REVIEW_LIMIT, daily: allowance(env.AI_GUEST_DAILY, 5) };
+}
+
+async function budgetCall(env, units, name = 'global', cap = dailyCap(env), method = 'POST', day) {
+  const stub = env.AI_BUDGET.get(env.AI_BUDGET.idFromName(name));
+  const body = method === 'DELETE' ? { units, cap, day } : { units, cap };
+  const res = await stub.fetch('https://ai-budget/spend', { method, body: JSON.stringify(body) });
   return res.json();
 }
 
-export async function spendBudget(env, units) {
+const UNAVAILABLE = { ok: false, status: 503, error: 'AI budget storage is unavailable right now.' };
+
+/**
+ * Reserves units from the caller's daily allowance, then from the global cap. If the global step refuses
+ * or fails, the caller's reservation is refunded for the day it was charged to. The refund is best effort:
+ * if it also fails (the same storage outage, say), the caller loses those credits for the rest of that UTC
+ * day even though no AI call ran. That failure is logged ("ai-budget: refund failed") so it shows up in
+ * Workers logs; nothing in the log identifies the caller.
+ */
+export async function spendBudget(env, units, who) {
   if (!env.AI_BUDGET) return { ok: false, status: 503, error: 'AI budget storage is not configured.' };
-  try {
-    const r = await budgetCall(env, units);
-    if (!r.ok) return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
-    return { ok: true };
-  } catch {
-    return { ok: false, status: 503, error: 'AI budget storage is unavailable right now.' };
+  let mine = null;
+  if (who) {
+    try {
+      mine = await budgetCall(env, units, who.key, who.daily);
+    } catch {
+      return UNAVAILABLE;
+    }
+    if (!mine.ok) {
+      return { ok: false, status: 429, error: who.tier === 'member'
+        ? `You’ve used today’s ${who.daily} AI credits. They reset at 00:00 UTC.`
+        : `Guests get ${who.daily} AI credits a day, and today’s are used. Sign in for more, or try again after 00:00 UTC.` };
+    }
   }
+  const refund = async (reason) => {
+    if (!mine) return;
+    try {
+      await budgetCall(env, units, who.key, who.daily, 'DELETE', mine.day);
+    } catch (error) {
+      console.error('ai-budget: refund failed', { reason, tier: who.tier, units, day: mine.day, error: String(error?.message ?? error) });
+    }
+  };
+  let r;
+  try {
+    r = await budgetCall(env, units);
+  } catch {
+    await refund('global_error');
+    return UNAVAILABLE;
+  }
+  if (!r.ok) {
+    await refund('global_cap');
+    return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
+  }
+  return { ok: true };
 }
 
 async function sameSecret(given, expected) {
@@ -337,12 +416,13 @@ async function research(request, env, headers, fail) {
   const key = new Request('https://verity-cache.internal/research-v1?d=' + days + '&q=' + encodeURIComponent(q.toLowerCase()));
   const hit = await cache.match(key);
   if (hit) return new Response(hit.body, { status: 200, headers: { ...headers, 'Content-Type': 'application/json', 'X-Cache': 'HIT' } });
-  const { success } = await env.REVIEW_LIMIT.limit({ key: 'research:' + (request.headers.get('CF-Connecting-IP') || 'unknown') });
+  const who = await caller(request, env);
+  const { success } = await who.limiter.limit({ key: 'research:' + who.key });
   if (!success) return fail(429, 'Too many requests.');
   // A cache hit costs nothing. A miss calls Exa, so it needs a person and budget.
   const human = await verifyHuman(request, env);
   if (!human.ok) return fail(human.status, human.error);
-  const budget = await spendBudget(env, COST.research);
+  const budget = await spendBudget(env, COST.research, who);
   if (!budget.ok) return fail(budget.status, budget.error);
   const res = await exaSearch(env, q, days, 10);
   if (!res.ok) return fail(res.reason === 'no_exa_key' ? 503 : 502, res.reason === 'no_exa_key' ? 'Research needs an Exa API key on the Worker.' : 'Exa research is unavailable right now.');
@@ -369,13 +449,14 @@ export default {
       // Operator-only: shows which keys are set, model choice and the last call's outcome.
       if (!(await sameSecret(request.headers.get('x-verity-status-key'), env.STATUS_KEY))) return fail(404, 'Unknown endpoint.');
       const budget = env.AI_BUDGET ? await budgetCall(env, 0).catch(() => null) : null;
-      return Response.json({ version: 'v9', ai_budget: budget && { day: budget.day, used: budget.used, cap: budget.cap }, gemini: { key_configured: !!env.GEMINI_API_KEY, preferred_model: env.GEMINI_MODEL, chosen_model: chosenModel, last_call: lastGemini, candidates },
+      return Response.json({ version: 'v10', ai_budget: budget && { day: budget.day, used: budget.used, cap: budget.cap },
+        ai_allowance: { guest_daily: allowance(env.AI_GUEST_DAILY, 5), member_daily: allowance(env.AI_MEMBER_DAILY, 50), member_pass_configured: typeof env.AI_PASS_KEY === 'string' && env.AI_PASS_KEY.length >= 32 }, gemini: { key_configured: !!env.GEMINI_API_KEY, preferred_model: env.GEMINI_MODEL, chosen_model: chosenModel, last_call: lastGemini, candidates },
         workers_ai: { bound: !!env.AI, model: env.BACKUP_MODEL }, exa: { key_configured: !!env.EXA_API_KEY } }, { headers });
     }
     if (path === '/research') {
       if (request.method === 'OPTIONS') {
         headers['Access-Control-Allow-Methods'] = 'GET';
-        headers['Access-Control-Allow-Headers'] = 'cf-turnstile-response';
+        headers['Access-Control-Allow-Headers'] = 'cf-turnstile-response, x-verity-pass';
         return new Response(null, { status: 204, headers });
       }
       if (request.method !== 'GET') return fail(405, 'Use GET.');
@@ -383,16 +464,15 @@ export default {
     }
     if (request.method === 'OPTIONS') {
       headers['Access-Control-Allow-Methods'] = 'POST';
-      headers['Access-Control-Allow-Headers'] = 'Content-Type, cf-turnstile-response';
+      headers['Access-Control-Allow-Headers'] = 'Content-Type, cf-turnstile-response, x-verity-pass';
       return new Response(null, { status: 204, headers });
     }
     if (request.method !== 'POST') return fail(405, 'Use POST.');
     if (request.headers.get('Content-Type')?.split(';')[0].trim() !== 'application/json') {
       return fail(415, 'Send JSON.');
     }
-    const { success } = await env.REVIEW_LIMIT.limit({
-      key: request.headers.get('CF-Connecting-IP') || 'unknown',
-    });
+    const who = await caller(request, env);
+    const { success } = await who.limiter.limit({ key: who.key });
     if (!success) return fail(429, 'Too many requests.');
 
     let input;
@@ -425,7 +505,7 @@ export default {
     // Validation first (free), then the paid-call gates.
     const human = await verifyHuman(request, env);
     if (!human.ok) return fail(human.status, human.error);
-    const budget = await spendBudget(env, COST[mode]);
+    const budget = await spendBudget(env, COST[mode], who);
     if (!budget.ok) return fail(budget.status, budget.error);
     const market = cleanMarket(rawMarket);
     // The question travels separately, inside <user_question>, never spliced into the task text.

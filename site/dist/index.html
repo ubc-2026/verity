@@ -2309,13 +2309,24 @@ function aiToken(){const deadline=Date.now()+AITS.wait;const run=()=>new Promise
       'timeout-callback':()=>finish('Verification timed out. Try again.'),'before-interactive-callback':()=>clearTimeout(timer)});},
     ()=>finish('Verification is unavailable right now. Try again.'));});
   return AITS.q=AITS.q.catch(()=>{}).then(run);}
+// Signed-in visitors get a larger daily AI allowance. /auth/ai-pass (same site, sends the session cookie)
+// returns a pass for the AI Worker; guests get 401. The page asks again before every paid call and keeps
+// nothing: the session cookie is HttpOnly, so the page can't tell when another tab signs in, signs out or
+// switches account, and a cached answer could charge the wrong allowance. The lookup runs alongside
+// Turnstile with its own deadline (AIPASS.wait); a slow or stalled answer falls back to the guest allowance.
+const AIPASS={wait:3000};
+async function aiPass(){const now=Date.now()/1000;const ctl=typeof AbortController==='function'?new AbortController():null;let timer;
+  const deadline=new Promise(ok=>{timer=setTimeout(()=>{if(ctl)ctl.abort();ok(null);},AIPASS.wait);});
+  const lookup=(async()=>{try{const r=await fetch('/auth/ai-pass',{credentials:'same-origin',cache:'no-store',signal:ctl?ctl.signal:undefined});if(!r.ok)return null;const j=await r.json();return typeof j.pass==='string'&&j.expiresAt>now?j.pass:null;}catch(e){return null;}})();
+  return Promise.race([lookup,deadline]).finally(()=>clearTimeout(timer));}
+async function aiHeaders(extra){const [tok,pass]=await Promise.all([aiToken(),aiPass()]);const h=Object.assign({},extra,{'cf-turnstile-response':tok});if(pass)h['x-verity-pass']=pass;return h;}
 const FALLBACK_WHY={quota:'Google Gemini’s quota was used up',unreachable:'Google Gemini could not be reached',no_key:'Google Gemini is not configured',blocked:'Google Gemini declined to answer',empty:'Google Gemini returned an empty answer'};
 function providerOf(j){const backup=j.provider==='workers-ai';const name=backup?'Workers AI ('+String(j.modelVersion||'').replace(/^@cf\/[^/]+\//,'')+')':'Google Gemini';
   const why=backup?(FALLBACK_WHY[j.fallbackReason]||('Google Gemini was unavailable'+(j.fallbackReason?' ('+j.fallbackReason+')':''))):'';
   return {backup,name,tag:backup?'<span class="tag warn">! Backup · Cloudflare Workers AI</span>':'<span class="tag info">Google Gemini · advisory</span>',note:backup?`<p class="gai-note">${esc(why)}, so Verity’s backup model answered.</p>`:''};}
 try{localStorage.removeItem('verity.googleGeminiKey');}catch(e){} // clean up keys saved by the earlier bring-your-own-key version
 function gaiErr(status,msg){
-  if(status===429)return msg&&/quota/i.test(msg)?'Google Gemini’s quota is used up for now. Try again later.':'Too many reviews from this connection. Wait a minute and try again (limit: 6 per minute).';
+  if(status===429)return msg&&/credits/i.test(msg)?msg:msg&&/quota/i.test(msg)?'Google Gemini’s quota is used up for now. Try again later.':'Too many reviews in the last minute. Wait a minute and try again.';
   if(status===503)return msg||'The review service is still being set up.';
   if(status===502)return msg||'Both Google Gemini and the backup model are unavailable right now. Try again in a minute.';
   if(status===403)return msg||'The review service only answers requests from verityresearch.us.';
@@ -2338,7 +2349,7 @@ async function gaiRun(mode){if(GAI.busy)return;const q=$('#gaiQ').value.trim();
   const ctx=fitContext(marketContext());GAI.busy=true;const btn=mode==='ask'?$('#gaiAsk'):$('#gaiReview');btn.setAttribute('aria-busy','true');$$('#gaiPanel [data-gai]').forEach(x=>x.disabled=true);
   const out=$('#gaiOut');out.innerHTML='<p class="muted">Asking Google Gemini about '+esc(ctx.title||'this market')+'…</p>';gaiStatus('Waiting for Google Gemini…');
   const t0=performance.now();let status=0;
-  try{const r=await fetch(GAI.endpoint,{method:'POST',headers:{'content-type':'application/json','cf-turnstile-response':await aiToken()},body:JSON.stringify(mode==='ask'?{mode,question:q,market:ctx}:{mode,market:ctx})});
+  try{const r=await fetch(GAI.endpoint,{method:'POST',headers:await aiHeaders({'content-type':'application/json'}),body:JSON.stringify(mode==='ask'?{mode,question:q,market:ctx}:{mode,market:ctx})});
     status=r.status;const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||''),{status});
     const cand=j.candidates&&j.candidates[0];const text=cand&&cand.content&&cand.content.parts?cand.content.parts.map(p=>p.text||'').join(''):'';
     if(!text)throw Object.assign(new Error(j.promptFeedback&&j.promptFeedback.blockReason?'Google Gemini declined to answer ('+j.promptFeedback.blockReason+').':'Google Gemini returned an empty answer'+(cand&&cand.finishReason?' ('+cand.finishReason+')':'')+'.'),{status:-1});
@@ -2411,7 +2422,7 @@ async function runForecast(){if(FC.busy)return;const m=MARKETS[term.market];cons
   try{const hist=await historyFor(m);if(!hist)throw Object.assign(new Error('This contract has no trading history yet, so there is nothing to forecast from.'),{status:-1});
     out.innerHTML='<p class="muted">Asking Google Gemini and Workers AI…</p>';gaiStatus('Waiting for both models…');
     const ctx=fitContext(marketContext());ctx.history=hist;
-    const r=await fetch(GAI.endpoint,{method:'POST',headers:{'content-type':'application/json','cf-turnstile-response':await aiToken()},body:JSON.stringify({mode:'forecast',market:ctx})});
+    const r=await fetch(GAI.endpoint,{method:'POST',headers:await aiHeaders({'content-type':'application/json'}),body:JSON.stringify({mode:'forecast',market:ctx})});
     const j=await r.json().catch(()=>({}));
     if(r.status===400&&/review mode/i.test(j.error||''))throw Object.assign(new Error('The AI service needs the v4 update to run forecasts. Run the latest redeploy-verity-gemini.ps1.'),{status:-1});
     if(!r.ok)throw Object.assign(new Error(j.error||''),{status:r.status});
@@ -2497,9 +2508,9 @@ const RES={q:'',busy:false};
 const RES_URL=q=>GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days=7';
 function resErr(e){if(e.status===-1||e.status===403)return e.message||'Verification failed. Reload the page and try again.';
   if(e.status===503)return e.message||'Exa research needs an Exa API key on the Worker. Run the v6 redeploy script and add the key when it asks.';
-  if(e.status===429)return 'Too many searches from this connection. Wait a minute.';if(e.status===400)return e.message||'Try a different search.';
+  if(e.status===429)return e.message&&/credits/i.test(e.message)?e.message:'Too many searches in the last minute. Wait a minute.';if(e.status===400)return e.message||'Try a different search.';
   if(e.status===0||e.status===404)return 'Exa research turns on after the Worker v6 update.';return 'Exa research is unavailable right now.';}
-async function fetchResearch(q,days=7){const tok=await aiToken();let r;try{r=await fetch(GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days='+days,{cache:'no-store',headers:{'cf-turnstile-response':tok}});}catch(e){throw Object.assign(new Error('network'),{status:0});}
+async function fetchResearch(q,days=7){const h=await aiHeaders();let r;try{r=await fetch(GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days='+days,{cache:'no-store',headers:h});}catch(e){throw Object.assign(new Error('network'),{status:0});}
   const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||''),{status:r.status});return j.items||[];}
 function resItems(items){return items.map(i=>`<li><a class="news-item" href="${esc(safeHref(i.link))}" target="_blank" rel="noopener noreferrer">${pic(i,'item-pic')}<span class="news-text"><span class="news-title">${esc(i.title)}</span>${i.summary?`<span class="res-sum">${esc(i.summary)}</span>`:''}<span class="label">${esc(i.source)}${i.published?' · '+agoStr(i.published):''}</span></span></a></li>`).join('');}
 async function runResearch(q){q=(q||'').trim()||'crypto market trends bitcoin ethereum stablecoins regulation';if(RES.busy)return;RES.busy=true;RES.q=q;
