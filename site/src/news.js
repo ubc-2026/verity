@@ -34,20 +34,21 @@ const RES={q:'',busy:false};
 const RES_URL=q=>GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days=7';
 function resErr(e){if(e.status===-1||e.status===403)return e.message||'Verification failed. Reload the page and try again.';
   if(e.status===503)return e.message||'Exa research needs an Exa API key on the Worker. Run the v6 redeploy script and add the key when it asks.';
-  if(e.status===429)return e.message&&/credits/i.test(e.message)?e.message:'Too many searches in the last minute. Wait a minute.';if(e.status===400)return e.message||'Try a different search.';
+  if(e.status===429)return 'Too many searches from this connection. Wait a minute.';if(e.status===400)return e.message||'Try a different search.';
   if(e.status===0||e.status===404)return 'Exa research turns on after the Worker v6 update.';return 'Exa research is unavailable right now.';}
-async function fetchResearch(q,days=7){const h=await aiHeaders();let r;try{r=await fetch(GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days='+days,{cache:'no-store',headers:h});}catch(e){throw Object.assign(new Error('network'),{status:0});}
+async function fetchResearch(q,days=7){const tok=await aiToken();let r;try{r=await fetch(GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days='+days,{cache:'no-store',headers:{'cf-turnstile-response':tok}});}catch(e){throw Object.assign(new Error('network'),{status:0});}
   const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||''),{status:r.status});return j.items||[];}
 function resItems(items){return items.map(i=>`<li><a class="news-item" href="${esc(safeHref(i.link))}" target="_blank" rel="noopener noreferrer">${pic(i,'item-pic')}<span class="news-text"><span class="news-title">${esc(i.title)}</span>${i.summary?`<span class="res-sum">${esc(i.summary)}</span>`:''}<span class="label">${esc(i.source)}${i.published?' · '+agoStr(i.published):''}</span></span></a></li>`).join('');}
-async function runResearch(q){q=(q||'').trim()||'crypto market trends bitcoin ethereum stablecoins regulation';if(RES.busy)return;RES.busy=true;RES.q=q;
+async function runResearch(q,auto){q=(q||'').trim()||'crypto market trends bitcoin ethereum stablecoins regulation';if(RES.busy||(auto&&RES.autoDone))return;RES.busy=true;RES.q=q;if(auto)RES.autoDone=true;
   const list=$('#resList'),st=$('#resStatus'),btn=$('#resGo');btn.setAttribute('aria-busy','true');st.className='tick-status';st.textContent='Searching Exa…';
   try{const items=await fetchResearch(q);list.innerHTML=resItems(items)||'<li class="empty">No recent articles for that search.</li>';st.className='tick-status live';st.innerHTML=`<span class="dot" aria-hidden="true"></span>Exa · ${items.length} articles from the last 7 days`;}
-  catch(e){list.innerHTML='';st.className='tick-status stale';st.textContent=resErr(e);}
+  catch(e){if(auto){RES.q='';list.innerHTML='<li class="empty">Search recent coverage above, or pick a topic.</li>';st.className='tick-status';st.textContent='Exa research';} // the automatic load stays quiet; errors show only after someone searches
+    else{list.innerHTML='';st.className='tick-status stale';st.textContent=resErr(e);}}
   finally{RES.busy=false;btn.removeAttribute('aria-busy');}}
 (function resInit(){$('#resForm').addEventListener('submit',e=>{e.preventDefault();runResearch($('#resQ').value);});
   $$('#resChips button').forEach(b=>b.addEventListener('click',()=>{$('#resQ').value=b.dataset.q;runResearch(b.dataset.q);}));
-  onVisible($('#resList'),v=>{if(v&&!RES.q)runResearch('');});
-  (window.VERITY_GATE||Promise.resolve()).then(()=>setTimeout(()=>{if(!RES.q)runResearch('');},3000));})(); // don't rely only on the visibility observer
+  // No automatic search: it would trigger the human check before anyone asked for anything.
+  $('#resList').innerHTML='<li class="empty">Search recent coverage above, or pick a topic.</li>';const st=$('#resStatus');st.className='tick-status';st.textContent='Exa search';})(); // don't rely only on the visibility observer
 
 /* Research for the market selected in the terminal (AI panel) */
 async function runMarketResearch(){const m=MARKETS[term.market];const out=$('#gaiOut');const btn=$('#mresRun');
