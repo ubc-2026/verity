@@ -1,3 +1,5 @@
+import { activeEvents, liveEvent, validTicker } from './market-data.mjs';
+
 const string = { type: 'STRING' };
 const score = { type: 'INTEGER', minimum: 1, maximum: 3 };
 const object = properties => ({ type: 'OBJECT', properties, required: Object.keys(properties) });
@@ -57,9 +59,29 @@ export function buildUserText(task, market, research = [], question) {
 
 /** Copies only plain market fields from the browser and drops anything the server sets itself. */
 export function cleanMarket(market) {
-  const { recent_research: _ignored, ...rest } = market;
+  const { recent_research: _r, live_snapshot: _l, most_active_markets: _m, ...rest } = market;
   return rest;
 }
+
+/**
+ * Adds data the server fetched itself from Gemini's public API, so the model reads current prices and
+ * activity instead of whatever the page had loaded. live_snapshot is the selected event (when the page names
+ * a live ticker); ask also gets most_active_markets, so a question about other markets has something to go on.
+ * A failed fetch just leaves the field out; the model is told to say when data is missing.
+ */
+export async function withLiveData(market, mode) {
+  const out = { ...market };
+  const jobs = [];
+  if (validTicker(market.event_ticker)) {
+    jobs.push(liveEvent(market.event_ticker, { rules: mode !== 'review' || !market.rules_text, pin: market.outcome })
+      .then(r => { if (r.ok) out.live_snapshot = r.data; }));
+  }
+  if (mode === 'ask') jobs.push(activeEvents('', 8).then(r => { if (r.ok) out.most_active_markets = r.data; }));
+  await Promise.all(jobs.map(j => j.catch(() => {})));
+  return out;
+}
+const LIVE_NOTE = ' If market_data has live_snapshot, the server fetched it from Gemini\'s public API at its fetched_at time: prefer it over older page fields for prices and volume, and mention the time when you quote a price.';
+const ACTIVE_NOTE = ' market_data.most_active_markets, when present, lists other live markets by 24-hour volume; use it for questions about other markets or overall activity.';
 
 // If the configured model is retired (404), ask Google which models this key can use and
 // pick the newest stable Flash model. The choice is cached while this Worker instance lives.
@@ -431,13 +453,48 @@ async function research(request, env, headers, fail) {
   return new Response(body, { status: 200, headers: { ...headers, 'Content-Type': 'application/json', 'X-Cache': 'MISS' } });
 }
 
+/**
+ * GET /market?ticker=…  and  GET /markets?q=…&limit=…: live public market data for the site and for the voice
+ * agent's server tools (which call without an Origin header). Read-only, no AI spend, no key; answers come
+ * from a short edge cache. Browsers on other sites are refused, and every caller is rate-limited by IP.
+ */
+async function marketRoute(request, env, path, origin) {
+  const headers = { Vary: 'Origin', 'Cache-Control': 'public, max-age=30' };
+  const fail = (status, error) => Response.json({ error }, { status, headers: { ...headers, 'Cache-Control': 'no-store' } });
+  if (origin && origin !== env.SITE_ORIGIN) return fail(403, 'Origin unavailable.');
+  if (origin) headers['Access-Control-Allow-Origin'] = origin;
+  if (request.method === 'OPTIONS') { headers['Access-Control-Allow-Methods'] = 'GET'; return new Response(null, { status: 204, headers }); }
+  if (request.method !== 'GET') return fail(405, 'Use GET.');
+  const limiter = env.MARKET_LIMIT || env.MEMBER_LIMIT || env.REVIEW_LIMIT;
+  if (limiter) {
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const digest = b64url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ip))).slice(0, 22);
+    const { success } = await limiter.limit({ key: 'market:' + digest });
+    if (!success) return fail(429, 'Too many requests.');
+  }
+  const u = new URL(request.url);
+  let r;
+  if (path === '/market') {
+    const ticker = u.searchParams.get('ticker') || '';
+    if (!validTicker(ticker)) return fail(400, 'Give an event ticker, for example ?ticker=BTC2611212200.');
+    r = await liveEvent(ticker, { pin: u.searchParams.get('outcome') || undefined });
+  } else {
+    const q = u.searchParams.get('q') || '';
+    if (q.length > 80) return fail(400, 'Search text can be up to 80 characters.');
+    r = await activeEvents(q, u.searchParams.get('limit'));
+  }
+  if (!r.ok) return r.reason === 'not_found' ? fail(404, 'No market with that ticker.') : fail(502, 'Live market data is unavailable right now.');
+  return new Response(JSON.stringify(r.data), { status: 200, headers: { ...headers, 'Content-Type': 'application/json', 'X-Cache': r.cache } });
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin');
     const headers = { Vary: 'Origin', 'Cache-Control': 'no-store' };
     const fail = (status, error) => Response.json({ error }, { status, headers });
     const path = new URL(request.url).pathname;
-    if (!['/review', '/news', '/research', '/status'].includes(path)) return fail(404, 'Unknown endpoint.');
+    if (!['/review', '/news', '/research', '/status', '/market', '/markets'].includes(path)) return fail(404, 'Unknown endpoint.');
+    if (path === '/market' || path === '/markets') return marketRoute(request, env, path, origin);
     if (origin !== env.SITE_ORIGIN) return fail(403, 'Origin unavailable.');
     headers['Access-Control-Allow-Origin'] = origin;
     if (path === '/news') {
@@ -507,14 +564,14 @@ export default {
     if (!human.ok) return fail(human.status, human.error);
     const budget = await spendBudget(env, COST[mode], who);
     if (!budget.ok) return fail(budget.status, budget.error);
-    const market = cleanMarket(rawMarket);
+    const market = await withLiveData(cleanMarket(rawMarket), mode);
     // The question travels separately, inside <user_question>, never spliced into the task text.
     const prompt = mode === 'ask'
-      ? 'Answer the question in <user_question> using only <market_data>. If the data does not answer it, say so.'
-      :'Review this contract for settlement risk and compare with verity_rules_v1. Return: summary, settlement_source, ambiguities [{issue, quote, why_it_matters}], scores {ambiguity, source, correlation} (1-3), agrees_with_rules_analyst (boolean), disagreement, research_to_close_gaps [strings], confidence (low|medium|high).';
+      ? 'Answer the question in <user_question> using only <market_data>. If the data does not answer it, say so.' + LIVE_NOTE + ACTIVE_NOTE
+      :'Review this contract for settlement risk and compare with verity_rules_v1. Return: summary, settlement_source, ambiguities [{issue, quote, why_it_matters}], scores {ambiguity, source, correlation} (1-3), agrees_with_rules_analyst (boolean), disagreement, research_to_close_gaps [strings], confidence (low|medium|high).' + LIVE_NOTE;
 
     if (mode === 'forecast') {
-      const fp = 'Estimate P(Yes) for the outcome named in the data. Use the price history (prices are 0-1 = implied probability), recent changes, volume and the settlement rules. Return probability_yes, confidence, reasoning (2-4 sentences), drivers [strings], risks [strings].';
+      const fp = 'Estimate P(Yes) for the outcome named in the data. Use the price history (prices are 0-1 = implied probability), recent changes, volume and the settlement rules. Return probability_yes, confidence, reasoning (2-4 sentences), drivers [strings], risks [strings].' + LIVE_NOTE;
       const opts = { system: FORECAST_SYSTEM, schema: forecastSchema, jsonSchema: forecastJsonSchema, research: [] };
       let researchUsed = [];
       if (env.EXA_API_KEY && typeof market.title === 'string') {
