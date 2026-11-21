@@ -152,6 +152,21 @@ describe("GET /market and /markets", () => {
     assert.equal(all.note, undefined);
   });
 
+  it("a full page with no total from Gemini is treated as partial; a short page with no total is complete", async () => {
+    const page = Array.from({ length: 50 }, (_, i) => event("E" + i, i));
+    upstream.list = () => Response.json({ data: page });
+    const j = await (await worker.fetch(get("/markets"), env())).json();
+    assert.deepEqual(j.ranked_from, { events_checked: 50, open_events_total: null, complete: false });
+    assert.match(j.note, /Ranked among the 50 events checked/);
+    assert.match(j.order, /among the events checked only/);
+
+    store.clear();
+    upstream.list = () => Response.json({ data: page.slice(0, 7) });
+    const short = await (await worker.fetch(get("/markets"), env())).json();
+    assert.deepEqual(short.ranked_from, { events_checked: 7, open_events_total: null, complete: true });
+    assert.equal(short.note, undefined);
+  });
+
   it("returns the market even when the edge cache cannot be read or written", async () => {
     globalThis.caches = { default: { match: async () => { throw new Error("cache read failed"); }, put: async () => { throw new Error("cache write failed"); } } };
     const one = await worker.fetch(get("/market?ticker=NBA1122LALBOS"), env());

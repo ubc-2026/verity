@@ -120,8 +120,11 @@ export function activeEvents(query, limit = 8) {
       if (!r.ok) return r;
       const page = Array.isArray(r.json?.data) ? r.json.data : [];
       const checked = page.length;
-      const total = Math.max(checked, Number(r.json?.pagination?.total) || checked);
-      const complete = checked >= total;
+      // An unknown total stays null. Completeness needs proof: a known total that this page covers, or a page
+      // shorter than requested (the list ended). A full page with no total may have more after it.
+      const reported = Number(r.json?.pagination?.total);
+      const total = Number.isInteger(reported) && reported >= 0 ? Math.max(checked, reported) : null;
+      const complete = total !== null ? checked >= total : checked < ACTIVE_PULL;
       const events = page.filter(e => e?.status === 'active')
         .sort((a, b) => (num(b.volume24h) ?? 0) - (num(a.volume24h) ?? 0)).slice(0, n)
         .map(e => compactEvent(e, { contracts: 3, rules: false }));
@@ -129,7 +132,8 @@ export function activeEvents(query, limit = 8) {
         fetched_at: new Date().toISOString(), source: 'Gemini Exchange public API', query: q || null,
         order: complete ? 'volume_24h_usd, highest first' : 'volume_24h_usd, highest first, among the events checked only',
         ranked_from: { events_checked: checked, open_events_total: total, complete },
-        ...(complete ? {} : { note: `Ranked within the first ${checked} of ${total} open events Gemini returned. A busier market outside them would not appear, so do not call any of these the busiest overall.` }),
+        ...(complete ? {} : { note: (total !== null ? `Ranked within the first ${checked} of ${total} open events Gemini returned.` : `Ranked among the ${checked} events checked; Gemini did not say how many are open.`)
+          + ' A busier market outside them would not appear, so do not call any of these the busiest overall.' }),
         events,
       } };
     } catch { return { ok: false, reason: 'unavailable' }; }
