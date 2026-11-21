@@ -1,6 +1,12 @@
 node_modules/
 .env
 .env.*
+!.env.example
+# Local secrets and tool state (Wrangler, Supabase CLI)
+.dev.vars
+.dev.vars.*
+.wrangler/
+supabase/.temp/
 .verity/
 .mf/
 dist/
