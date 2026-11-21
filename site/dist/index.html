@@ -2191,15 +2191,28 @@ window.verityPickMarket=async function(){let pick;try{pick=JSON.parse(sessionSto
    or in this repo. verity-rules-v1 remains the score of record. */
 const GAI={endpoint:'https://verity-gemini.safe-572.workers.dev/review',model:'gemini-2.5-flash',busy:false,last:null};
 /* Turnstile token for each paid AI call (Gemini, Exa). The Worker verifies it server-side; tokens are single use.
-   Same public site key as the sign-in page. Calls run one at a time so only one widget exists. */
-const AITS={site:'0x4AAAAAAGKN-DMfLk3IAK3l',load:null,q:Promise.resolve()};
-function aiTsLoad(){return AITS.load||(AITS.load=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.async=true;s.onload=()=>window.turnstile?ok(window.turnstile):no(new Error('verification unavailable'));s.onerror=()=>{AITS.load=null;no(new Error('verification unavailable'));};document.head.appendChild(s);}));}
-function aiToken(){const run=()=>aiTsLoad().then(ts=>new Promise((ok,no)=>{let box=document.getElementById('aiTs');
-  if(!box){box=document.createElement('div');box.id='aiTs';box.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999';document.body.appendChild(box);}
-  let id=null;const end=()=>{try{if(id!==null)ts.remove(id);}catch(e){}};
-  id=ts.render(box,{sitekey:AITS.site,action:'verity_ai',appearance:'interaction-only',
-    callback:t=>{end();ok(t);},'error-callback':()=>{end();no(Object.assign(new Error('Verification failed. Reload the page and try again.'),{status:-1}));},
-    'timeout-callback':()=>{end();no(Object.assign(new Error('Verification timed out. Try again.'),{status:-1}));}});}));
+   Same public site key as the sign-in page. Calls run one at a time so only one widget exists.
+   Each attempt has its own deadline (AITS.wait), so a stalled script load or widget can't block later calls:
+   on timeout the attempt rejects, a loader that never settled is dropped (script removed) and the next attempt
+   starts fresh. Once Cloudflare shows an interactive challenge, the deadline stops and Turnstile's own timeout applies. */
+const AITS={site:'0x4AAAAAAGKN-DMfLk3IAK3l',load:null,script:null,q:Promise.resolve(),wait:15000};
+function aiTsDrop(){if(AITS.script)AITS.script.remove();AITS.load=null;AITS.script=null;}
+function aiTsLoad(){if(AITS.load)return AITS.load;
+  if(window.turnstile)return AITS.load=Promise.resolve(window.turnstile);
+  const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.async=true;
+  const p=new Promise((ok,no)=>{s.onload=()=>window.turnstile?ok(window.turnstile):no(new Error('verification unavailable'));s.onerror=()=>no(new Error('verification unavailable'));});
+  p.catch(()=>{if(AITS.load===p)aiTsDrop();});
+  AITS.load=p;AITS.script=s;document.head.appendChild(s);return p;}
+function aiToken(){const run=()=>new Promise((ok,no)=>{let ts=null,id=null,done=false;
+  const end=()=>{if(ts&&id!==null){try{ts.remove(id);}catch(e){}}id=null;};
+  const finish=(err,tok)=>{if(done)return;done=true;clearTimeout(timer);end();err?no(Object.assign(new Error(err),{status:-1})):ok(tok);};
+  const timer=setTimeout(()=>{if(!ts)aiTsDrop();finish('Verification timed out. Try again.');},AITS.wait);
+  aiTsLoad().then(t=>{if(done)return;ts=t;let box=document.getElementById('aiTs');
+    if(!box){box=document.createElement('div');box.id='aiTs';box.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999';document.body.appendChild(box);}
+    id=ts.render(box,{sitekey:AITS.site,action:'verity_ai',appearance:'interaction-only',
+      callback:tok=>finish(null,tok),'error-callback':()=>finish('Verification failed. Reload the page and try again.'),
+      'timeout-callback':()=>finish('Verification timed out. Try again.'),'before-interactive-callback':()=>clearTimeout(timer)});},
+    ()=>finish('Verification is unavailable right now. Try again.'));});
   return AITS.q=AITS.q.catch(()=>{}).then(run);}
 const FALLBACK_WHY={quota:'Google Gemini’s quota was used up',unreachable:'Google Gemini could not be reached',no_key:'Google Gemini is not configured',blocked:'Google Gemini declined to answer',empty:'Google Gemini returned an empty answer'};
 function providerOf(j){const backup=j.provider==='workers-ai';const name=backup?'Workers AI ('+String(j.modelVersion||'').replace(/^@cf\/[^/]+\//,'')+')':'Google Gemini';
