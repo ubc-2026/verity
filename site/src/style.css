@@ -747,3 +747,14 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 .coin-note{font-family:var(--font-sans);font-size:.7rem}
 .stage-body>p{max-width:72ch}
 .kv dd a[href*="/tx/"],.kv dd .hash{font-family:var(--font-mono);font-size:.8rem}
+/* Hero side: the lead news story replaces the coin */
+.side-top{display:block!important}
+.lead-link{padding:14px}
+.lead-pic{aspect-ratio:16/8}
+.lead-title{font-size:1.18rem;letter-spacing:-.01em}
+/* Model estimate shown when a contract has no trades */
+:root{--model:#B794F6}
+.tick-status.model{color:var(--model)}
+.model-key{display:inline-flex;align-items:center;gap:6px;color:var(--model)}
+.model-key::before{content:"";width:18px;border-top:2px dashed var(--model)}
+.real.model-badge{background:rgba(183,148,246,.14);color:var(--model)}
