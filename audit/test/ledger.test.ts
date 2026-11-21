@@ -5,7 +5,7 @@ import { join } from "node:path";
 import test from "node:test";
 import { ARC_USDC } from "../src/chain.ts";
 import { Ledger } from "../src/ledger.ts";
-import { openLedger } from "../src/store.ts";
+import { closeLedger, openLedger } from "../src/store.ts";
 import { authorizationLog, block, OTHER, payload, PAYER, PAY_TO, purchase, receipt, transferLog, word } from "./fixture.ts";
 
 function settled(tx = word(100), amount = 50000n, nonce = word(1), from = PAYER, to = PAY_TO) {
@@ -153,7 +153,9 @@ test("the ledger rejects another chain and persists a purchase", () => {
   const ledger = openLedger(path, { finalityDepth: 0 });
   ledger.registerPurchase(purchase());
   ledger.ingest(payload([block(10, word(10), word(9), [settled()])]));
+  closeLedger(ledger);
   const restored = openLedger(path, { finalityDepth: 0 });
   assert.equal(restored.view("purchase-1")?.ledgerStatus, "Paid, delivery missing");
   assert.equal(restored.token, ARC_USDC);
+  closeLedger(restored);
 });

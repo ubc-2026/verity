@@ -4,7 +4,7 @@ import test from "node:test";
 import { Ledger } from "../src/ledger.ts";
 import type { OverdueEvent } from "../src/overdue.ts";
 import { AuditServer } from "../src/server.ts";
-import { openLedger } from "../src/store.ts";
+import { closeLedger, openLedger } from "../src/store.ts";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -273,6 +273,7 @@ test("a delivery accepted before a restart is a duplicate on a server reopened f
     await new Promise((resolve) => setImmediate(resolve));
     assert.equal(first.sweeps(), 1, "the first delivery schedules a sweep");
     await first.server.close();
+    closeLedger(first.ledger); // the restart: the old process releases its writer lock
 
     const second = await boot();
     try {
@@ -286,6 +287,7 @@ test("a delivery accepted before a restart is a duplicate on a server reopened f
       assert.equal(JSON.stringify(second.ledger.snapshot()), before, "the ledger is unchanged");
     } finally {
       await second.server.close();
+      closeLedger(second.ledger);
     }
   } finally {
     rmSync(dir, { recursive: true, force: true });
