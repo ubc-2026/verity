@@ -1,0 +1,15 @@
+{
+  "name": "verity-site-sign-in",
+  "private": true,
+  "scripts": {
+    "build:voice": "node build-voice.mjs",
+    "test": "npm run build:voice && node --test voice-controls.test.mjs voice-session.test.mjs"
+  },
+  "dependencies": {
+    "@elevenlabs/client": "1.37.1",
+    "@alexanderolsen/libsamplerate-js": "2.1.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

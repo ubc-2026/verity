@@ -1,0 +1,20 @@
+{
+  "name": "verity-site-sign-in",
+  "main": "worker.mjs",
+  "account_id": "5721d456c33bef4cf9da9094b8a455ef",
+  "compatibility_date": "2026-11-20",
+  "workers_dev": false,
+  "preview_urls": false,
+  "build": { "command": "npm run build:voice" },
+  "services": [{ "binding": "VERITY_VOICE_ACCOUNT", "service": "verity-website-account" }],
+  "durable_objects": { "bindings": [{ "name": "VOICE_BUDGET", "class_name": "VoiceBudget", "script_name": "verity-voice-budget" }] },
+  "ratelimits": [{ "name": "VOICE_IP_LIMIT", "namespace_id": "2026112017", "simple": { "limit": 6, "period": 60 } }],
+  "vars": {
+    "VERITY_ELEVENLABS_AGENT_ID": "agent_9001m7x29v7kekz8wm2tek94vg2v",
+    "VERITY_VOICE_MODE": "protected"
+  },
+  "routes": [
+    { "pattern": "verityresearch.us/", "zone_name": "verityresearch.us" },
+    { "pattern": "verityresearch.us/*", "zone_name": "verityresearch.us" }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "verity-voice-budget",
+  "main": "voice-budget.mjs",
+  "account_id": "5721d456c33bef4cf9da9094b8a455ef",
+  "compatibility_date": "2026-11-20",
+  "workers_dev": false,
+  "preview_urls": false,
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VoiceBudget"] }]
+}
