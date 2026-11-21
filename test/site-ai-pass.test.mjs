@@ -35,7 +35,7 @@ function page({ wait = 40, pass }) {
 }
 
 const never = () => new Promise(() => {});
-const passFor = (seconds) => ({ pass: "v1.member", expiresAt: Math.floor(Date.now() / 1000) + seconds });
+const passFor = (seconds, pass = "v1.member") => ({ pass, expiresAt: Math.floor(Date.now() / 1000) + seconds });
 
 describe("site member pass", () => {
   it("a stalled /auth/ai-pass that ignores abort: the AI request still goes out within the deadline, as a guest", async () => {
@@ -48,28 +48,53 @@ describe("site member pass", () => {
     assert.equal(headers["x-verity-pass"], undefined, "no pass, so the Worker applies the guest allowance");
   });
 
-  it("the deadline aborts the lookup, and a timed-out lookup is not retried for a minute", async () => {
-    let aborted = false;
-    const p = page({ wait: 30, pass: (init) => new Promise((_ok, no) => init.signal.addEventListener("abort", () => { aborted = true; no(new Error("aborted")); })) });
+  it("the deadline aborts the stalled lookup; the next call asks again", async () => {
+    let aborted = 0;
+    const p = page({ wait: 30, pass: (init) => new Promise((_ok, no) => init.signal.addEventListener("abort", () => { aborted += 1; no(new Error("aborted")); })) });
     await p.ctx.callAi();
-    assert.equal(aborted, true, "the stalled request is cancelled");
     await p.ctx.callAi();
-    assert.equal(p.requests.filter((r) => r.url === "/auth/ai-pass").length, 1, "the second call skips the lookup");
+    assert.equal(aborted, 2, "each stalled request is cancelled");
+    assert.equal(p.requests.filter((r) => r.url === "/auth/ai-pass").length, 2, "nothing is cached from a timeout");
     assert.equal(p.aiCalls().length, 2);
   });
 
-  it("a signed-in visitor's pass is sent and reused until a minute before it expires", async () => {
-    const p = page({ pass: () => Promise.resolve(Response.json(passFor(600))) });
+  it("a signed-in visitor's pass is sent with the session cookie, fetched fresh for each call", async () => {
+    const p = page({ pass: () => Promise.resolve(Response.json(passFor(600, "v1.member"))) });
     assert.equal((await p.ctx.callAi())["x-verity-pass"], "v1.member");
     assert.equal((await p.ctx.callAi())["x-verity-pass"], "v1.member");
-    assert.equal(p.requests.filter((r) => r.url === "/auth/ai-pass").length, 1);
+    assert.equal(p.requests.filter((r) => r.url === "/auth/ai-pass").length, 2);
     assert.equal(p.requests[0].init.credentials, "same-origin");
   });
 
-  it("a pass that answers after the deadline is ignored for this call", async () => {
+  it("switching account in another tab: the very next call is charged to the new account", async () => {
+    // The session cookie is shared by all tabs, so /auth/ai-pass answers for whoever is signed in now.
+    let signedIn = "A";
+    const p = page({ pass: () => Promise.resolve(Response.json(passFor(600, "v1.account-" + signedIn))) });
+    assert.equal((await p.ctx.callAi())["x-verity-pass"], "v1.account-A");
+    signedIn = "B"; // another tab signs out of A and into B; this tab gets no event
+    assert.equal((await p.ctx.callAi())["x-verity-pass"], "v1.account-B");
+    assert.equal(p.aiCalls().at(-1).init.headers["x-verity-pass"], "v1.account-B", "the AI request carries B's pass");
+  });
+
+  it("signing in after a guest call: the very next call gets the member allowance", async () => {
+    let signedIn = false;
+    const p = page({ pass: () => Promise.resolve(signedIn ? Response.json(passFor(600, "v1.member")) : new Response("{}", { status: 401 })) });
+    assert.equal((await p.ctx.callAi())["x-verity-pass"], undefined);
+    signedIn = true;
+    assert.equal((await p.ctx.callAi())["x-verity-pass"], "v1.member");
+  });
+
+  it("signing out in another tab: the next call goes out as a guest", async () => {
+    let signedIn = true;
+    const p = page({ pass: () => Promise.resolve(signedIn ? Response.json(passFor(600, "v1.member")) : new Response("{}", { status: 401 })) });
+    assert.equal((await p.ctx.callAi())["x-verity-pass"], "v1.member");
+    signedIn = false;
+    assert.equal((await p.ctx.callAi())["x-verity-pass"], undefined);
+  });
+
+  it("a pass that answers after the deadline is ignored", async () => {
     const p = page({ wait: 20, pass: () => new Promise((ok) => setTimeout(() => ok(Response.json(passFor(600))), 80)) });
     assert.equal((await p.ctx.callAi())["x-verity-pass"], undefined);
-    assert.equal(p.ctx.AIPASS.v, null);
   });
 
   it("guests (401) and broken answers fall back to the guest allowance", async () => {

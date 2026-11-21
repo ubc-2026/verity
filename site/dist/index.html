@@ -2310,16 +2310,15 @@ function aiToken(){const deadline=Date.now()+AITS.wait;const run=()=>new Promise
     ()=>finish('Verification is unavailable right now. Try again.'));});
   return AITS.q=AITS.q.catch(()=>{}).then(run);}
 // Signed-in visitors get a larger daily AI allowance. /auth/ai-pass (same site, sends the session cookie)
-// returns a 10-minute pass for the AI Worker; guests get 401 and are asked again after a minute at most.
-// The lookup has its own deadline (AIPASS.wait): a slow or stalled answer falls back to the guest allowance.
-const AIPASS={v:null,exp:0,miss:0,wait:3000};
-function aiPassFetch(now){const ctl=typeof AbortController==='function'?new AbortController():null;let timer;
+// returns a pass for the AI Worker; guests get 401. The page asks again before every paid call and keeps
+// nothing: the session cookie is HttpOnly, so the page can't tell when another tab signs in, signs out or
+// switches account, and a cached answer could charge the wrong allowance. The lookup runs alongside
+// Turnstile with its own deadline (AIPASS.wait); a slow or stalled answer falls back to the guest allowance.
+const AIPASS={wait:3000};
+async function aiPass(){const now=Date.now()/1000;const ctl=typeof AbortController==='function'?new AbortController():null;let timer;
   const deadline=new Promise(ok=>{timer=setTimeout(()=>{if(ctl)ctl.abort();ok(null);},AIPASS.wait);});
-  const lookup=(async()=>{try{const r=await fetch('/auth/ai-pass',{credentials:'same-origin',cache:'no-store',signal:ctl?ctl.signal:undefined});if(!r.ok)return null;const j=await r.json();return typeof j.pass==='string'&&j.expiresAt>now?j:null;}catch(e){return null;}})();
+  const lookup=(async()=>{try{const r=await fetch('/auth/ai-pass',{credentials:'same-origin',cache:'no-store',signal:ctl?ctl.signal:undefined});if(!r.ok)return null;const j=await r.json();return typeof j.pass==='string'&&j.expiresAt>now?j.pass:null;}catch(e){return null;}})();
   return Promise.race([lookup,deadline]).finally(()=>clearTimeout(timer));}
-async function aiPass(){const now=Date.now()/1000;if(AIPASS.v&&AIPASS.exp-60>now)return AIPASS.v;if(AIPASS.miss>now)return null;
-  const j=await aiPassFetch(now);if(j){AIPASS.v=j.pass;AIPASS.exp=j.expiresAt;return j.pass;}
-  AIPASS.v=null;AIPASS.miss=now+60;return null;}
 async function aiHeaders(extra){const [tok,pass]=await Promise.all([aiToken(),aiPass()]);const h=Object.assign({},extra,{'cf-turnstile-response':tok});if(pass)h['x-verity-pass']=pass;return h;}
 const FALLBACK_WHY={quota:'Google Gemini’s quota was used up',unreachable:'Google Gemini could not be reached',no_key:'Google Gemini is not configured',blocked:'Google Gemini declined to answer',empty:'Google Gemini returned an empty answer'};
 function providerOf(j){const backup=j.provider==='workers-ai';const name=backup?'Workers AI ('+String(j.modelVersion||'').replace(/^@cf\/[^/]+\//,'')+')':'Google Gemini';

@@ -291,6 +291,46 @@ describe("verity-gemini: signed-in visitors get a larger daily allowance than gu
     assert.equal(empty.store.size, 0);
   });
 
+  it("after an account switch, the next call is charged to the new account's allowance only", async () => {
+    const e = tiers();
+    const a = await mintAiPass(KEY, "aaaaaaaa-1111-4222-8333-944445555666");
+    const b = await mintAiPass(KEY, "bbbbbbbb-1111-4222-8333-944445555666");
+    const key = (pass) => "member:" + pass.split(".")[1];
+    assert.equal((await ask(e, { "x-verity-pass": a.pass })).status, 200);
+    assert.equal((await ask(e, { "x-verity-pass": b.pass })).status, 200); // the page fetched B's pass after the switch
+    assert.equal(e.AI_BUDGET.used(key(a.pass)), 1, "A was charged once, for A's call");
+    assert.equal(e.AI_BUDGET.used(key(b.pass)), 1, "B's call was charged to B");
+  });
+
+  it("refunds are best effort: if the refund fails too, the failure is logged without identifying the caller", async () => {
+    const e = tiers();
+    const real = e.AI_BUDGET.get;
+    e.AI_BUDGET.get = (id) => {
+      if (id === "global") return { fetch: async () => { throw new Error("storage down"); } };
+      const counter = real(id);
+      return { fetch: (url, init) => (init.method === "DELETE" ? Promise.reject(new Error("refund storage down")) : counter.fetch(url, init)) };
+    };
+    const logged = [];
+    const original = console.error;
+    console.error = (...args) => logged.push(args);
+    try {
+      const r = await ask(e);
+      assert.equal(r.status, 503);
+      assert.match((await r.json()).error, /unavailable/);
+    } finally {
+      console.error = original;
+    }
+    assert.equal(geminiCalls().length, 0, "no AI call ran");
+    assert.equal(logged.length, 1);
+    const [message, details] = logged[0];
+    assert.equal(message, "ai-budget: refund failed");
+    assert.deepEqual(Object.keys(details).sort(), ["day", "error", "reason", "tier", "units"]);
+    assert.deepEqual([details.reason, details.tier, details.units, details.error], ["global_error", "guest", 1, "refund storage down"]);
+    assert.ok(!JSON.stringify(details).includes("203.0.113.7") && !JSON.stringify(details).includes("guest:"), "no IP or counter key");
+    const [guest] = e.AI_BUDGET.names();
+    assert.equal(e.AI_BUDGET.used(guest), 1, "the documented loss: the credit stays charged for that day");
+  });
+
   it("a global storage error refunds the caller's reservation and calls no model", async () => {
     const e = tiers();
     const real = e.AI_BUDGET.get;

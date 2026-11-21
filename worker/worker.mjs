@@ -355,8 +355,10 @@ const UNAVAILABLE = { ok: false, status: 503, error: 'AI budget storage is unava
 
 /**
  * Reserves units from the caller's daily allowance, then from the global cap. If the global step refuses
- * or fails, the caller's reservation is refunded for the day it was charged to, so no credits are lost
- * when no AI call runs.
+ * or fails, the caller's reservation is refunded for the day it was charged to. The refund is best effort:
+ * if it also fails (the same storage outage, say), the caller loses those credits for the rest of that UTC
+ * day even though no AI call ran. That failure is logged ("ai-budget: refund failed") so it shows up in
+ * Workers logs; nothing in the log identifies the caller.
  */
 export async function spendBudget(env, units, who) {
   if (!env.AI_BUDGET) return { ok: false, status: 503, error: 'AI budget storage is not configured.' };
@@ -373,16 +375,23 @@ export async function spendBudget(env, units, who) {
         : `Guests get ${who.daily} AI credits a day, and today’s are used. Sign in for more, or try again after 00:00 UTC.` };
     }
   }
-  const refund = () => (mine ? budgetCall(env, units, who.key, who.daily, 'DELETE', mine.day).catch(() => {}) : undefined);
+  const refund = async (reason) => {
+    if (!mine) return;
+    try {
+      await budgetCall(env, units, who.key, who.daily, 'DELETE', mine.day);
+    } catch (error) {
+      console.error('ai-budget: refund failed', { reason, tier: who.tier, units, day: mine.day, error: String(error?.message ?? error) });
+    }
+  };
   let r;
   try {
     r = await budgetCall(env, units);
   } catch {
-    await refund();
+    await refund('global_error');
     return UNAVAILABLE;
   }
   if (!r.ok) {
-    await refund();
+    await refund('global_cap');
     return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
   }
   return { ok: true };
