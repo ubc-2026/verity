@@ -38,6 +38,12 @@ interface CanonicalBlock {
   parentHash: Hex | null;
 }
 
+/** A signed webhook delivery that was ingested, kept until its signature can no longer be replayed. */
+export interface WebhookReceipt {
+  nonce: string;
+  expiresAtMs: number;
+}
+
 export interface LedgerState {
   purchases: Purchase[];
   deliveries: Delivery[];
@@ -45,6 +51,8 @@ export interface LedgerState {
   evidence: TxEvidence[];
   emittedPurchaseIds: string[];
   pendingEvents: OverdueEvent[];
+  /** Optional so ledgers saved before replay protection still load. */
+  webhookNonces?: WebhookReceipt[];
 }
 
 export interface PurchaseView {
@@ -183,12 +191,31 @@ export class Ledger {
     this.#touch();
   }
 
-  ingest(body: unknown): { blocks: number; transactions: number; reorgs: number } {
+  /** True when a signed delivery with this nonce was ingested and its record has not expired. */
+  seenWebhook(nonce: string, nowMs: number): boolean {
+    return (this.#state.webhookNonces ?? []).some((entry) => entry.nonce === nonce && entry.expiresAtMs > nowMs);
+  }
+
+  /**
+   * Applies a stream batch. With a receipt, the delivery's nonce is recorded in the same state change,
+   * so the batch and its replay record are saved together or not at all.
+   */
+  ingest(
+    body: unknown,
+    receipt?: { nonce: string; expiresAtMs: number; nowMs: number },
+  ): { blocks: number; transactions: number; reorgs: number } {
     const batch = parseStreamPayload(body, this.token);
     if (this.expectedNetwork && batch.network && batch.network !== this.expectedNetwork) {
       throw new LedgerError(`unexpected network ${batch.network}`);
     }
     this.#apply(batch);
+    if (receipt) {
+      const kept = (this.#state.webhookNonces ?? []).filter(
+        (entry) => entry.expiresAtMs > receipt.nowMs && entry.nonce !== receipt.nonce,
+      );
+      kept.push({ nonce: receipt.nonce, expiresAtMs: receipt.expiresAtMs });
+      this.#state.webhookNonces = kept;
+    }
     this.#touch();
     return {
       blocks: batch.blocks.length,

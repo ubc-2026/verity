@@ -31,6 +31,25 @@ npm start
 
 The read token is entered in the browser at `http://127.0.0.1:8787/`. It is stored in `sessionStorage` and is not written into the page.
 
+### One writer per ledger
+
+Run exactly one audit server per ledger file (`LEDGER_PATH`, default `data/ledger.json`). Do not put several replicas behind a load balancer on the same file or a shared volume. The server enforces this rule:
+
+- At startup it creates `<ledger>.lock` exclusively. A second server on the same file exits with "ledger is already open for writing".
+- Before every save it checks the lock is still its own, and refuses to write if not.
+- It removes the lock on normal exit, Ctrl-C and SIGTERM.
+- It never removes a lock it does not own, not even one left by a crashed server. A takeover could race with another server restarting at the same moment, and both could end up writing.
+
+After a crash (power loss, `kill -9`), the next start stops and names the leftover lock file. When the recorded pid is no longer running on this host, the message says the server probably crashed. To recover:
+
+1. Confirm no audit server is running on this ledger, on any host.
+2. Delete `<ledger>.lock`.
+3. Start the server again.
+
+Don't delete the lock while its server is running. The check before each save would stop the old server's next write, but a write already past that check could still land.
+
+This rule is what makes webhook replay protection hold. Each accepted delivery's nonce is saved in the ledger in the same write as its blocks. The single writer then sees every receipt, including after a restart, and answers a repeat with `200 {"duplicate": true}` without processing it again.
+
 ## QuickNode stream
 
 1. Create a stream for Arc Testnet, dataset `block_with_receipts`.

@@ -4,6 +4,10 @@ import test from "node:test";
 import { Ledger } from "../src/ledger.ts";
 import type { OverdueEvent } from "../src/overdue.ts";
 import { AuditServer } from "../src/server.ts";
+import { closeLedger, openLedger } from "../src/store.ts";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { signWebhook } from "../src/signature.ts";
 import { authorizationLog, block, payload, purchase, receipt, transferLog, word } from "./fixture.ts";
 
@@ -208,6 +212,102 @@ test("a verified delivery and a later sweep emit one overdue event", async () =>
     const page = await fetch(`http://127.0.0.1:${port}/`);
     assert.equal(page.status, 200);
     assert.match(await page.text(), /Audit ledger/);
+  } finally {
+    await server.close();
+  }
+});
+
+test("a replayed signed delivery is acknowledged but not processed twice", async () => {
+  const now = new Date("2026-11-18T12:00:00Z");
+  const server = await start({ now: () => now });
+  try {
+    const body = JSON.stringify(payload([block(10, word(10), word(9)), block(11, word(11), word(10))]));
+    const timestamp = String(Math.floor(now.getTime() / 1000));
+    const send = () => fetch(`http://127.0.0.1:${server.address().port}/webhooks/quicknode`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-qn-nonce": "n-replay", "x-qn-timestamp": timestamp,
+        "x-qn-signature": signWebhook(secret, "n-replay", timestamp, body) },
+      body,
+    });
+    const first = await (await send()).json();
+    assert.equal(first.ok, true);
+    assert.equal(first.duplicate, undefined);
+    const again = await send();
+    assert.equal(again.status, 200);
+    assert.equal((await again.json()).duplicate, true);
+  } finally {
+    await server.close();
+  }
+});
+
+test("a delivery accepted before a restart is a duplicate on a server reopened from the same ledger file", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "audit-ledger-"));
+  const path = join(dir, "ledger.json");
+  const options = { finalityDepth: 1, expectedNetwork: "arc-testnet" };
+  const now = new Date("2026-11-18T12:00:00Z");
+  const body = JSON.stringify(payload([block(10, word(10), word(9)), block(11, word(11), word(10))]));
+  const timestamp = String(Math.floor(now.getTime() / 1000));
+  const boot = async () => {
+    const ledger = openLedger(path, options);
+    let sweeps = 0;
+    const collect = ledger.collectOverdue.bind(ledger);
+    ledger.collectOverdue = (...args: Parameters<typeof collect>) => {
+      sweeps += 1;
+      return collect(...args);
+    };
+    const server = new AuditServer({ ledger, quicknodeSecret: secret, readToken, writeToken, now: () => now, sweepOnWebhook: true });
+    await server.listen(0);
+    return { server, ledger, sweeps: () => sweeps };
+  };
+  const send = (port: number) =>
+    fetch(`http://127.0.0.1:${port}/webhooks/quicknode`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-qn-nonce": "n-restart", "x-qn-timestamp": timestamp,
+        "x-qn-signature": signWebhook(secret, "n-restart", timestamp, body) },
+      body,
+    });
+  try {
+    const first = await boot();
+    const accepted = await (await send(first.server.address().port)).json();
+    assert.equal(accepted.duplicate, undefined);
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(first.sweeps(), 1, "the first delivery schedules a sweep");
+    await first.server.close();
+    closeLedger(first.ledger); // the restart: the old process releases its writer lock
+
+    const second = await boot();
+    try {
+      const before = JSON.stringify(second.ledger.snapshot());
+      assert.ok(second.ledger.seenWebhook("n-restart", now.getTime()), "the nonce was saved with the batch");
+      const replay = await send(second.server.address().port);
+      assert.equal(replay.status, 200);
+      assert.equal((await replay.json()).duplicate, true);
+      await new Promise((resolve) => setImmediate(resolve));
+      assert.equal(second.sweeps(), 0, "a duplicate schedules no sweep");
+      assert.equal(JSON.stringify(second.ledger.snapshot()), before, "the ledger is unchanged");
+    } finally {
+      await second.server.close();
+      closeLedger(second.ledger);
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("a delivery that fails to ingest leaves no nonce, so it can be retried", async () => {
+  const ledger = new Ledger(undefined, { finalityDepth: 1, expectedNetwork: "arc-testnet" });
+  assert.throws(() => ledger.ingest({ not: "a stream payload" }, { nonce: "n-bad", expiresAtMs: 2, nowMs: 1 }));
+  assert.equal(ledger.seenWebhook("n-bad", 1), false);
+  assert.equal(ledger.snapshot().webhookNonces, undefined);
+});
+
+test("a malformed escape in a purchase path is a 400, not a server error", async () => {
+  const server = await start();
+  try {
+    const response = await fetch(`http://127.0.0.1:${server.address().port}/purchases/%E0%A4%A`, {
+      headers: { authorization: `Bearer ${readToken}` },
+    });
+    assert.equal(response.status, 400);
   } finally {
     await server.close();
   }

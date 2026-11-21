@@ -3,7 +3,7 @@ import { ARC_USDC } from "./chain.ts";
 import { postOverdueEvent } from "./overdue.ts";
 import { reportStream } from "./portalClient.ts";
 import { AuditServer } from "./server.ts";
-import { openLedger } from "./store.ts";
+import { closeLedger, LedgerLockedError, openLedger } from "./store.ts";
 
 loadEnvFile(".env");
 
@@ -13,10 +13,26 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
-const ledger = openLedger(process.env.LEDGER_PATH ?? "data/ledger.json", {
-  finalityDepth: numberEnv("FINALITY_DEPTH", 1),
-  expectedNetwork: process.env.EXPECTED_NETWORK || null,
-});
+// One writer per ledger: openLedger takes an exclusive lock and a second server on the same file stops here.
+let ledger: ReturnType<typeof openLedger>;
+try {
+  ledger = openLedger(process.env.LEDGER_PATH ?? "data/ledger.json", {
+    finalityDepth: numberEnv("FINALITY_DEPTH", 1),
+    expectedNetwork: process.env.EXPECTED_NETWORK || null,
+  });
+} catch (error) {
+  if (error instanceof LedgerLockedError) {
+    console.error(error.message);
+    process.exit(1);
+  }
+  throw error;
+}
+for (const signal of ["SIGINT", "SIGTERM"] as const) {
+  process.once(signal, () => {
+    closeLedger(ledger);
+    process.exit(0);
+  });
+}
 
 const webhookUrl = process.env.GROK_BOT_WEBHOOK_URL;
 const webhookKey = process.env.GROK_BOT_WEBHOOK_KEY;

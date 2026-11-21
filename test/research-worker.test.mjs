@@ -156,3 +156,18 @@ it("falls back to the terms PDF in a weather contract description", () => {
   assert.equal(termsUrlOf({ description: `${pdf} https://assets.gemini.com/predictions/terms_and_conditions/B.pdf` }, {}), null);
   assert.equal(termsUrlOf({}, {}), null);
 });
+
+it("limits each IP, with a tighter limit on the database-backed history route", async () => {
+  const keys = [];
+  const deny = { limit: async ({ key }) => (keys.push(key), { success: false }) };
+  const allow = { limit: async ({ key }) => (keys.push(key), { success: true }) };
+  const worker = createResearchWorker(async () => { throw new Error("history must not be read when limited"); });
+  const get = (path) => new Request(`https://api.verityresearch.us${path}`, { headers: { "cf-connecting-ip": "198.51.100.4" } });
+
+  const limited = await worker.fetch(get("/v1/market-history?instrument=GEMI-ABC-2611201200-YES"), { API_LIMIT: allow, API_HISTORY_LIMIT: deny });
+  assert.equal(limited.status, 429);
+  assert.equal(limited.headers.get("retry-after"), "60");
+  assert.equal((await worker.fetch(get("/"), { API_LIMIT: deny, API_HISTORY_LIMIT: allow })).status, 429);
+  assert.deepEqual(keys, ["history:198.51.100.4", "api:198.51.100.4"]);
+  assert.equal((await worker.fetch(get("/"), {})).status, 200, "no binding: public data stays available");
+});

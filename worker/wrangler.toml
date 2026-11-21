@@ -7,6 +7,8 @@ preview_urls = false
 [vars]
 SITE_ORIGIN = "https://verityresearch.us"
 GEMINI_MODEL = "gemini-3.5-flash-lite"
+# Global spend cap in units per UTC day: review/ask 1, forecast 3, Exa research miss 1.
+AI_DAILY_CAP = "300"
 BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
 [ai]
@@ -17,5 +19,21 @@ name = "REVIEW_LIMIT"
 namespace_id = "1001"
 
 [ratelimits.simple]
-limit = 6
+limit = 4
 period = 60
+
+# Daily AI budget counter: one Durable Object (class DemoBudget in worker.mjs). The live v8 Worker
+# already applied migration demo-budget-v1, so deploying reuses that namespace; nothing to create by hand.
+[[durable_objects.bindings]]
+name = "AI_BUDGET"
+class_name = "DemoBudget"
+
+[[migrations]]
+tag = "demo-budget-v1"
+new_sqlite_classes = ["DemoBudget"]
+
+# Secrets (set by an operator, never committed):
+#   npx wrangler secret put GEMINI_API_KEY
+#   npx wrangler secret put EXA_API_KEY
+#   npx wrangler secret put TURNSTILE_SECRET   # same widget secret as the sign-in page (VERITY_AUTH_TURNSTILE_SECRET)
+#   npx wrangler secret put STATUS_KEY         # optional; without it /status answers 404
