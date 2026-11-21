@@ -269,15 +269,48 @@ export async function verifyHuman(request, env) {
   }
 }
 
-/** Global daily budget in KV (AI_BUDGET). KV is eventually consistent, so the cap can overshoot slightly under bursts. */
+/**
+ * Global daily AI budget, counted in one Durable Object (binding AI_BUDGET, class AiBudget).
+ * A Durable Object runs one request at a time, so concurrent calls cannot overshoot the cap
+ * the way an eventually consistent KV counter can.
+ */
+export class AiBudget {
+  constructor(state) { this.state = state; this.queue = Promise.resolve(); }
+  async fetch(request) {
+    const body = await request.json();
+    // Explicit queue: each read-check-write finishes before the next starts.
+    const run = this.queue.then(() => this.apply(request.method, body));
+    this.queue = run.catch(() => {});
+    return run;
+  }
+  async apply(method, { day, units, cap }) {
+    const rec = (await this.state.storage.get('budget')) || {};
+    const used = rec.day === day ? rec.used : 0;
+    if (method === 'GET' || !(units > 0)) return Response.json({ ok: true, day, used, cap });
+    if (used + units > cap) return Response.json({ ok: false, day, used, cap });
+    await this.state.storage.put('budget', { day, used: used + units });
+    return Response.json({ ok: true, day, used: used + units, cap });
+  }
+}
+
+const dailyCap = env => (Number(env.AI_DAILY_CAP) > 0 ? Number(env.AI_DAILY_CAP) : 300);
+
+async function budgetCall(env, units) {
+  const stub = env.AI_BUDGET.get(env.AI_BUDGET.idFromName('global'));
+  const res = await stub.fetch('https://ai-budget/spend', { method: 'POST',
+    body: JSON.stringify({ day: new Date().toISOString().slice(0, 10), units, cap: dailyCap(env) }) });
+  return res.json();
+}
+
 export async function spendBudget(env, units) {
   if (!env.AI_BUDGET) return { ok: false, status: 503, error: 'AI budget storage is not configured.' };
-  const cap = Number(env.AI_DAILY_CAP) > 0 ? Number(env.AI_DAILY_CAP) : 300;
-  const key = 'units:' + new Date().toISOString().slice(0, 10);
-  const used = Number(await env.AI_BUDGET.get(key)) || 0;
-  if (used + units > cap) return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
-  await env.AI_BUDGET.put(key, String(used + units), { expirationTtl: 172800 });
-  return { ok: true };
+  try {
+    const r = await budgetCall(env, units);
+    if (!r.ok) return { ok: false, status: 503, error: 'Today’s AI budget is used up. Try again tomorrow.' };
+    return { ok: true };
+  } catch {
+    return { ok: false, status: 503, error: 'AI budget storage is unavailable right now.' };
+  }
 }
 
 async function sameSecret(given, expected) {
@@ -330,7 +363,8 @@ export default {
     if (path === '/status') {
       // Operator-only: shows which keys are set, model choice and the last call's outcome.
       if (!(await sameSecret(request.headers.get('x-verity-status-key'), env.STATUS_KEY))) return fail(404, 'Unknown endpoint.');
-      return Response.json({ version: 'v7', gemini: { key_configured: !!env.GEMINI_API_KEY, preferred_model: env.GEMINI_MODEL, chosen_model: chosenModel, last_call: lastGemini, candidates },
+      const budget = env.AI_BUDGET ? await budgetCall(env, 0).catch(() => null) : null;
+      return Response.json({ version: 'v9', ai_budget: budget && { day: budget.day, used: budget.used, cap: budget.cap }, gemini: { key_configured: !!env.GEMINI_API_KEY, preferred_model: env.GEMINI_MODEL, chosen_model: chosenModel, last_call: lastGemini, candidates },
         workers_ai: { bound: !!env.AI, model: env.BACKUP_MODEL }, exa: { key_configured: !!env.EXA_API_KEY } }, { headers });
     }
     if (path === '/research') {

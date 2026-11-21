@@ -22,11 +22,18 @@ namespace_id = "1001"
 limit = 6
 period = 60
 
-# Daily AI budget counter. Create it once, then paste the id:
-#   npx wrangler kv namespace create AI_BUDGET
+# Daily AI budget counter: one Durable Object (class AiBudget in worker.mjs). Nothing to create by hand;
+# the first deploy applies the migration below.
+[[durable_objects.bindings]]
+name = "AI_BUDGET"
+class_name = "AiBudget"
+
+[[migrations]]
+tag = "ai-budget-v1"
+new_sqlite_classes = ["AiBudget"]
+
 # Secrets (set by an operator, never committed):
+#   npx wrangler secret put GEMINI_API_KEY
+#   npx wrangler secret put EXA_API_KEY
 #   npx wrangler secret put TURNSTILE_SECRET   # same widget secret as the sign-in page (VERITY_AUTH_TURNSTILE_SECRET)
 #   npx wrangler secret put STATUS_KEY         # optional; without it /status answers 404
-[[kv_namespaces]]
-binding = "AI_BUDGET"
-id = "REPLACE_WITH_AI_BUDGET_KV_ID"

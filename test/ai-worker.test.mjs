@@ -2,7 +2,7 @@
 // and whether visitor or web text can steer the model or pull out its instructions.
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import worker, { GUARD, REFUSAL, buildUserText, cleanMarket, leaksInstructions } from "../worker/worker.mjs";
+import worker, { AiBudget, GUARD, REFUSAL, buildUserText, cleanMarket, leaksInstructions } from "../worker/worker.mjs";
 
 const SITE = "https://verityresearch.us";
 const W = "https://verity-gemini.example.workers.dev";
@@ -15,16 +15,18 @@ let exaHighlights;
 const realFetch = globalThis.fetch;
 const realCaches = globalThis.caches;
 
-function kv() {
+// A Durable Object namespace that runs the real AiBudget class over in-memory storage.
+function budgetNamespace() {
   const store = new Map();
-  return { store, get: async (k) => store.get(k) ?? null, put: async (k, v) => void store.set(k, v) };
+  const object = new AiBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } });
+  return { store, idFromName: (n) => n, get: () => ({ fetch: (url, init) => object.fetch(new Request(url, init)) }) };
 }
 
 function env(extra = {}) {
   return {
     SITE_ORIGIN: SITE, GEMINI_MODEL: "gemini-test", BACKUP_MODEL: "@cf/test/model",
     GEMINI_API_KEY: "g".repeat(39), EXA_API_KEY: "e".repeat(36), TURNSTILE_SECRET: "t".repeat(35),
-    AI_BUDGET: kv(), AI_DAILY_CAP: "10",
+    AI_BUDGET: budgetNamespace(), AI_DAILY_CAP: "10",
     REVIEW_LIMIT: { limit: async () => ({ success: true }) },
     ...extra,
   };
@@ -94,7 +96,16 @@ describe("verity-gemini: who can spend money", () => {
     const over = await worker.fetch(review({ mode: "review", market: { title: "x" } }), e);
     assert.equal(over.status, 503);
     assert.match((await over.json()).error, /budget/i);
-    assert.equal([...e.AI_BUDGET.store.values()][0], "4");
+    assert.equal(e.AI_BUDGET.store.get("budget").used, 4);
+  });
+
+  it("the budget resets on a new UTC day and concurrent calls cannot overshoot the cap", async () => {
+    const ns = budgetNamespace();
+    ns.store.set("budget", { day: "2000-01-01", used: 999 });
+    const e = env({ AI_BUDGET: ns, AI_DAILY_CAP: "3" });
+    const results = await Promise.all([1, 2, 3, 4, 5].map(() => worker.fetch(review({ mode: "review", market: { title: "x" } }), e)));
+    assert.deepEqual(results.map((r) => r.status).sort(), [200, 200, 200, 503, 503]);
+    assert.equal(ns.store.get("budget").used, 3);
   });
 
   it("checks input before spending: a bad request uses no budget and no Turnstile call", async () => {
@@ -108,7 +119,12 @@ describe("verity-gemini: who can spend money", () => {
     const get = (h = {}) => new Request(`${W}/status`, { headers: { origin: SITE, ...h } });
     assert.equal((await worker.fetch(get(), env())).status, 404);
     assert.equal((await worker.fetch(get({ "x-verity-status-key": "guess" }), env({ STATUS_KEY: "k".repeat(32) }))).status, 404);
-    assert.equal((await worker.fetch(get({ "x-verity-status-key": "k".repeat(32) }), env({ STATUS_KEY: "k".repeat(32) }))).status, 200);
+    const ok = await worker.fetch(get({ "x-verity-status-key": "k".repeat(32) }), env({ STATUS_KEY: "k".repeat(32) }));
+    assert.equal(ok.status, 200);
+    const j = await ok.json();
+    assert.equal(j.version, "v9");
+    assert.equal(j.ai_budget.used, 0);
+    assert.equal(j.ai_budget.cap, 10);
   });
 
   it("Exa research: a cache miss needs a token and budget", async () => {
