@@ -151,8 +151,9 @@ function attachVoiceAgent(response, agentId, protectedVoice) {
   return new HTMLRewriter().on("#gaiPanel .ai-dock-body", {
     element(panel) {
       panel.prepend(`<div class="ai-market" data-verity-voice="${protectedVoice ? '' : agentId}"${protectedVoice ? ' data-verity-voice-protected' : ''}>
+        <p class="gai-help" id="verity-voice-disclosure">Voice is optional. ElevenLabs receives and processes your microphone audio; the audio and transcript are not kept after the call. Share only public market rules. <a href="/privacy.html">Privacy notice</a>.</p>
+        <p class="gai-help"><label><input type="checkbox" data-voice-consent aria-describedby="verity-voice-disclosure" autocomplete="off"> I agree to send microphone audio to ElevenLabs for this call.</label></p>
         <button class="btn ai-full" type="button" aria-describedby="verity-voice-disclosure" disabled>Start voice</button>
-        <p class="gai-help" id="verity-voice-disclosure">ElevenLabs processes your microphone audio. Share only public market rules.</p>
         <p class="gai-help" data-voice-allowance aria-live="polite" hidden></p>
         <p class="gai-help" role="status"></p>
         <p class="gai-help" data-voice-time hidden></p>

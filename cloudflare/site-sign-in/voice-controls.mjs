@@ -25,6 +25,8 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
   const allowance = controls.querySelector('[data-voice-allowance]');
   const signIn = controls.querySelector('[data-voice-signin]');
   const mute = controls.querySelector('[data-voice-mute]');
+  // Each call needs a fresh opt-in to send microphone audio to ElevenLabs.
+  const consent = controls.querySelector('[data-voice-consent]');
   const dock = controls.closest('.ai-dock');
   const browser = document.defaultView;
   const protectedVoice = controls.hasAttribute('data-verity-voice-protected');
@@ -57,14 +59,16 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
     mute.hidden = true;
     status.textContent = message;
     if (!previous) {
-      updateButton('Start voice', connecting || ending);
+      updateButton('Start voice', connecting || ending || !consent?.checked);
       return;
     }
     ending = true;
+    if (consent) consent.checked = false;
     updateButton('Ending voice…', true);
     void Promise.resolve().then(() => previous.endSession()).catch(() => {}).finally(() => {
       ending = false;
-      updateButton('Start voice');
+      if (consent) consent.disabled = false;
+      updateButton('Start voice', !consent?.checked);
     });
   }
 
@@ -123,6 +127,10 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
       return;
     }
     if (ending) return;
+    if (!consent?.checked) {
+      status.textContent = 'Agree to send microphone audio before starting a voice call.';
+      return;
+    }
     if (!browser.navigator.mediaDevices?.getUserMedia) {
       status.textContent = 'Microphone access is unavailable in this browser. You can still use the text review.';
       return;
@@ -130,6 +138,7 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
 
     const current = ++run;
     connecting = true;
+    consent.disabled = true;
     updateButton('Cancel voice start');
     let microphoneGranted = false;
     let sdkLoaded = false;
@@ -221,12 +230,18 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
     } finally {
       releaseMicrophoneCheck();
       connecting = false;
-      if (!session) updateButton('Start voice');
+      if (!session) {
+        consent.disabled = false;
+        updateButton('Start voice', !consent.checked);
+      }
       if (current !== run && dock?.classList.contains('open')) void refreshAllowance();
     }
   }
 
   button.addEventListener('click', toggleVoice);
+  consent?.addEventListener('change', () => {
+    if (!session && !connecting && !ending) updateButton('Start voice', !consent.checked);
+  });
   mute.addEventListener('click', () => {
     if (!session) return;
     muted = !muted;
@@ -246,5 +261,5 @@ export function mountVoiceControls(document, loadSdk = () => import(new URL('/_v
     observer.observe(dock, { attributes: true, attributeFilter: ['class'] });
     if (open) void refreshAllowance();
   }
-  button.disabled = false;
+  button.disabled = !consent?.checked;
 }
