@@ -147,7 +147,7 @@ test('the exact browser bundle enables Start voice without opening a connection'
 
 test('an expired sign-in is prompted and the voice SDK is never started', async () => {
   const { button, document, signIn } = mockPage({ protectedVoice: true, fetch: async () => new Response(null, { status: 401 }) });
-  mountVoiceControls(document, () => assert.fail('Expired session reached the voice SDK'));
+  mountVoiceControls(document, async () => ({ Conversation: { startSession() { assert.fail('Expired session reached the voice SDK'); } } }));
   await button.click();
   assert.equal(signIn.hidden, false);
 });
@@ -156,9 +156,36 @@ test('a spent guest allowance offers sign-in without starting audio', async () =
   const { button, document, signIn } = mockPage({
     protectedVoice: true, fetch: async () => Response.json({ error: 'guest_used' }, { status: 429 }),
   });
-  mountVoiceControls(document, () => assert.fail('Guest with a spent allowance reached the voice SDK'));
+  mountVoiceControls(document, async () => ({ Conversation: { startSession() { assert.fail('Guest with a spent allowance reached the voice SDK'); } } }));
   await button.click();
   assert.equal(signIn.hidden, false);
+});
+
+test('a voice SDK that fails to load uses no call: the ticket is never requested', async () => {
+  const requests = [];
+  const { button, document, status } = mockPage({
+    protectedVoice: true, fetch: async url => { requests.push(url); return Response.json({ signedUrl: 'wss://fixture/', callSeconds: 60, mode: 'guest', remaining: 0 }); },
+  });
+  mountVoiceControls(document, async () => { throw new TypeError('Failed to fetch dynamically imported module'); });
+  await button.click();
+  assert.deepEqual(requests, [], 'no voice-session request, so the allowance is not charged');
+  assert.equal(button.disabled, false);
+  assert.equal(button.textContent, 'Start voice');
+  assert.match(status.textContent, /No call was used/);
+});
+
+test('cancelling while the voice SDK loads requests no ticket', async () => {
+  const sdk = Promise.withResolvers();
+  const requests = [];
+  const { button, document, status } = mockPage({ protectedVoice: true, fetch: async url => { requests.push(url); return new Response(null, { status: 500 }); } });
+  mountVoiceControls(document, () => sdk.promise);
+  const starting = button.click();
+  await new Promise(resolve => setImmediate(resolve));
+  await button.click();
+  sdk.resolve({ Conversation: { startSession() { assert.fail('Cancelled start reached the provider'); } } });
+  await starting;
+  assert.deepEqual(requests, []);
+  assert.equal(status.textContent, 'Voice start cancelled.');
 });
 
 test('protected voice displays its allotted time and can mute the microphone', async () => {
