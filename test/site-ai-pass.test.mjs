@@ -97,6 +97,19 @@ describe("site member pass", () => {
     assert.equal((await p.ctx.callAi())["x-verity-pass"], undefined);
   });
 
+  it("every paid call on the page sends the member pass, in the source and in the published build", () => {
+    // A rebuild from an older copy once dropped the pass from research calls and from dist; this catches that.
+    const news = readFileSync(new URL("../site/src/news.js", import.meta.url), "utf8");
+    const dist = readFileSync(new URL("../site/dist/index.html", import.meta.url), "utf8");
+    assert.match(news, /async function fetchResearch\([^)]*\)\{const h=await aiHeaders\(\);/, "research uses aiHeaders");
+    assert.doesNotMatch(news, /'cf-turnstile-response':tok/, "no Turnstile-only research request");
+    for (const [name, text] of [["gemini.js", src], ["dist/index.html", dist]]) {
+      assert.ok(text.includes(marker), `${name} adds x-verity-pass`);
+      assert.equal((text.match(/headers:await aiHeaders\(/g) || []).length, 2, `${name}: review/ask and forecast use aiHeaders`);
+    }
+    assert.match(dist, /async function fetchResearch\([^)]*\)\{const h=await aiHeaders\(\);/, "published research uses aiHeaders");
+  });
+
   it("guests (401) and broken answers fall back to the guest allowance", async () => {
     for (const answer of [new Response("{}", { status: 401 }), new Response("not json"), Response.json({ pass: 7 }), Response.json(passFor(-5))]) {
       const p = page({ pass: () => Promise.resolve(answer) });
