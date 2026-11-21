@@ -81,7 +81,7 @@ export async function withLiveData(market, mode) {
   return out;
 }
 const LIVE_NOTE = ' If market_data has live_snapshot, the server fetched it from Gemini\'s public API at its fetched_at time: prefer it over older page fields for prices and volume, and mention the time when you quote a price.';
-const ACTIVE_NOTE = ' market_data.most_active_markets, when present, lists other live markets by 24-hour volume; use it for questions about other markets or overall activity.';
+const ACTIVE_NOTE = ' market_data.most_active_markets, when present, lists other live markets by 24-hour volume; use it for questions about other markets or overall activity. If its ranked_from.complete is false, the ranking covers only the events checked: say so, and do not call any market the busiest overall.';
 
 // If the configured model is retired (404), ask Google which models this key can use and
 // pick the newest stable Flash model. The choice is cached while this Worker instance lives.

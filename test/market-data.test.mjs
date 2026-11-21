@@ -136,6 +136,35 @@ describe("GET /market and /markets", () => {
     assert.equal((await worker.fetch(get("/markets?q=" + "x".repeat(81)), env())).status, 400);
   });
 
+  it("says the ranking covers only the events it checked when Gemini has more open events than one page", async () => {
+    // Gemini's list is not ordered by 24-hour volume, so the busiest event can sit on a page that was never fetched.
+    upstream.list = () => Response.json({ data: [event("SMALL", 10), event("MID", 400)], pagination: { limit: 50, offset: 0, total: 120 } });
+    const j = await (await worker.fetch(get("/markets"), env())).json();
+    assert.deepEqual(j.events.map((e) => e.ticker), ["MID", "SMALL"]);
+    assert.deepEqual(j.ranked_from, { events_checked: 2, open_events_total: 120, complete: false });
+    assert.match(j.note, /first 2 of 120/);
+    assert.doesNotMatch(j.order, /^volume_24h_usd, highest first$/, "the order label does not claim a full ranking");
+
+    store.clear();
+    upstream.list = () => Response.json({ data: [event("SMALL", 10), event("BIG", 9000)], pagination: { total: 2 } });
+    const all = await (await worker.fetch(get("/markets"), env())).json();
+    assert.equal(all.ranked_from.complete, true);
+    assert.equal(all.note, undefined);
+  });
+
+  it("returns the market even when the edge cache cannot be read or written", async () => {
+    globalThis.caches = { default: { match: async () => { throw new Error("cache read failed"); }, put: async () => { throw new Error("cache write failed"); } } };
+    const one = await worker.fetch(get("/market?ticker=NBA1122LALBOS"), env());
+    assert.equal(one.status, 200);
+    assert.equal((await one.json()).event.ticker, "NBA1122LALBOS");
+    const list = await worker.fetch(get("/markets"), env());
+    assert.equal(list.status, 200);
+    assert.deepEqual((await list.json()).events.map((e) => e.ticker), ["BIG", "MID", "SMALL"]);
+    const r = await worker.fetch(review({ mode: "ask", question: "Who leads?", market: { source: "live Gemini Exchange market", event_ticker: "NBA1122LALBOS", title: "Lakers vs Celtics" } }), env());
+    assert.equal(r.status, 200);
+    assert.equal(marketSent().live_snapshot.event.ticker, "NBA1122LALBOS", "ask keeps the fresh snapshot");
+  });
+
   it("says live data is unavailable when Gemini fails, and does not cache the failure", async () => {
     upstream.list = () => new Response("down", { status: 500 });
     assert.equal((await worker.fetch(get("/markets"), env())).status, 502);

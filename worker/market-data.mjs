@@ -72,13 +72,22 @@ async function upstream(url) {
 }
 
 // Caches the compact result (small), not the raw upstream body (the active list is over a megabyte).
+// The cache is best effort: a failed read falls through to Gemini, and a failed write still returns the data.
 async function cached(key, ttl, build) {
   const cache = globalThis.caches?.default;
   const req = new Request('https://verity-cache.internal/' + key);
-  const hit = cache && await cache.match(req);
-  if (hit) return { ok: true, data: await hit.json(), cache: 'HIT' };
+  if (cache) {
+    try {
+      const hit = await cache.match(req);
+      if (hit) return { ok: true, data: await hit.json(), cache: 'HIT' };
+    } catch { /* read failed: fetch fresh */ }
+  }
   const res = await build();
-  if (res.ok && cache) await cache.put(req, new Response(JSON.stringify(res.data), { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'max-age=' + ttl } }));
+  if (res.ok && cache) {
+    try {
+      await cache.put(req, new Response(JSON.stringify(res.data), { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'max-age=' + ttl } }));
+    } catch { /* write failed: the fresh data is still good */ }
+  }
   return { ...res, cache: 'MISS' };
 }
 
@@ -96,18 +105,33 @@ export function liveEvent(ticker, opts = {}) {
   });
 }
 
-/** Active events, busiest first. `query` narrows by Gemini's own search; without it this is the most-active list. */
+/**
+ * Active events, busiest first by 24-hour volume. `query` narrows by Gemini's own search.
+ * Gemini's list is not ordered by 24-hour volume and has no sort option, and each page of 50 is about 2 MB, so this
+ * ranks one page. The response says how many events were checked out of how many are open, so callers never
+ * present a partial ranking as the whole market.
+ */
 export function activeEvents(query, limit = 8) {
   const q = typeof query === 'string' ? query.trim().slice(0, 80) : '';
   const n = Math.max(1, Math.min(10, Number(limit) || 8));
-  return cached(`markets-v1/${n}?q=${encodeURIComponent(q.toLowerCase())}`, ACTIVE_TTL, async () => {
+  return cached(`markets-v2/${n}?q=${encodeURIComponent(q.toLowerCase())}`, ACTIVE_TTL, async () => {
     try {
       const r = await upstream(`${GEMINI_EVENTS}?status=active&limit=${ACTIVE_PULL}${q ? '&search=' + encodeURIComponent(q) : ''}`);
       if (!r.ok) return r;
-      const events = (Array.isArray(r.json?.data) ? r.json.data : []).filter(e => e?.status === 'active')
+      const page = Array.isArray(r.json?.data) ? r.json.data : [];
+      const checked = page.length;
+      const total = Math.max(checked, Number(r.json?.pagination?.total) || checked);
+      const complete = checked >= total;
+      const events = page.filter(e => e?.status === 'active')
         .sort((a, b) => (num(b.volume24h) ?? 0) - (num(a.volume24h) ?? 0)).slice(0, n)
         .map(e => compactEvent(e, { contracts: 3, rules: false }));
-      return { ok: true, data: { fetched_at: new Date().toISOString(), source: 'Gemini Exchange public API', query: q || null, order: 'volume_24h_usd, highest first', events } };
+      return { ok: true, data: {
+        fetched_at: new Date().toISOString(), source: 'Gemini Exchange public API', query: q || null,
+        order: complete ? 'volume_24h_usd, highest first' : 'volume_24h_usd, highest first, among the events checked only',
+        ranked_from: { events_checked: checked, open_events_total: total, complete },
+        ...(complete ? {} : { note: `Ranked within the first ${checked} of ${total} open events Gemini returned. A busier market outside them would not appear, so do not call any of these the busiest overall.` }),
+        events,
+      } };
     } catch { return { ok: false, reason: 'unavailable' }; }
   });
 }
