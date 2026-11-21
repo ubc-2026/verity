@@ -26,6 +26,16 @@ limit = 4
 period = 60
 
 # Signed-in accounts: per-minute limit keyed by account instead of IP.
+# Public market data (/market, /markets) for the site and the voice agent's tools. No AI spend, cached;
+# the limit only stops one caller from turning this Worker into an open proxy for the upstream API.
+[[ratelimits]]
+name = "MARKET_LIMIT"
+namespace_id = "1042"
+
+[ratelimits.simple]
+limit = 60
+period = 60
+
 [[ratelimits]]
 name = "MEMBER_LIMIT"
 namespace_id = "1041"

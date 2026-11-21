@@ -239,6 +239,16 @@ describe("verity-gemini: signed-in visitors get a larger daily allowance than gu
     assert.deepEqual(await statuses(e, 3, { "x-verity-pass": bad[3] }), [200, 200, 429], "a bad pass gets the guest allowance");
   });
 
+  it("tells the page which tier it was served as, so a signed-in visitor can confirm the pass worked", async () => {
+    const e = tiers();
+    const { pass } = await mintAiPass(KEY, "11111111-2222-3333-4444-555555555555");
+    const member = await ask(e, { "x-verity-pass": pass });
+    assert.equal(member.headers.get("X-Verity-Tier"), "member");
+    assert.match(member.headers.get("Access-Control-Expose-Headers"), /X-Verity-Tier/);
+    assert.equal((await ask(e)).headers.get("X-Verity-Tier"), "guest");
+    assert.equal((await ask(e, { "x-verity-pass": "forged" })).headers.get("X-Verity-Tier"), "guest");
+  });
+
   it("when the global cap refuses, the caller's allowance is refunded", async () => {
     const e = tiers({ AI_DAILY_CAP: "1" });
     assert.equal((await ask(e)).status, 200);
