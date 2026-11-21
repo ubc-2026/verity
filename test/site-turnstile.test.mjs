@@ -64,6 +64,14 @@ describe("site Turnstile helper", () => {
     assert.ok(p.scripts.every((s) => s.removed), "every stalled script is removed");
   });
 
+  it("time spent queued counts: a call made during a stall settles within one deadline of the click", async () => {
+    const p = page({ wait: 80 });
+    const t0 = Date.now();
+    const calls = [p.ctx.aiToken(), p.ctx.aiToken(), p.ctx.aiToken()].map((c) => c.then(() => "ok", () => Date.now() - t0));
+    const waited = await Promise.all(calls);
+    for (const ms of waited) assert.ok(ms < 160, `settled after ${ms} ms; a per-attempt timer would take up to 240 ms`);
+  });
+
   it("a widget that never answers times out and is removed; the next call reuses the loaded script", async () => {
     const p = page();
     p.window.turnstile = undefined;

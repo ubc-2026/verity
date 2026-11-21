@@ -2192,7 +2192,8 @@ window.verityPickMarket=async function(){let pick;try{pick=JSON.parse(sessionSto
 const GAI={endpoint:'https://verity-gemini.safe-572.workers.dev/review',model:'gemini-2.5-flash',busy:false,last:null};
 /* Turnstile token for each paid AI call (Gemini, Exa). The Worker verifies it server-side; tokens are single use.
    Same public site key as the sign-in page. Calls run one at a time so only one widget exists.
-   Each attempt has its own deadline (AITS.wait), so a stalled script load or widget can't block later calls:
+   Each call has a deadline of AITS.wait from the moment it is made (time spent queued counts), so a stalled script
+   load or widget can't block later calls:
    on timeout the attempt rejects, a loader that never settled is dropped (script removed) and the next attempt
    starts fresh. Once Cloudflare shows an interactive challenge, the deadline stops and Turnstile's own timeout applies. */
 const AITS={site:'0x4AAAAAAGKN-DMfLk3IAK3l',load:null,script:null,q:Promise.resolve(),wait:15000};
@@ -2203,10 +2204,10 @@ function aiTsLoad(){if(AITS.load)return AITS.load;
   const p=new Promise((ok,no)=>{s.onload=()=>window.turnstile?ok(window.turnstile):no(new Error('verification unavailable'));s.onerror=()=>no(new Error('verification unavailable'));});
   p.catch(()=>{if(AITS.load===p)aiTsDrop();});
   AITS.load=p;AITS.script=s;document.head.appendChild(s);return p;}
-function aiToken(){const run=()=>new Promise((ok,no)=>{let ts=null,id=null,done=false;
+function aiToken(){const deadline=Date.now()+AITS.wait;const run=()=>new Promise((ok,no)=>{if(Date.now()>=deadline)return no(Object.assign(new Error('Verification timed out. Try again.'),{status:-1}));let ts=null,id=null,done=false;
   const end=()=>{if(ts&&id!==null){try{ts.remove(id);}catch(e){}}id=null;};
   const finish=(err,tok)=>{if(done)return;done=true;clearTimeout(timer);end();err?no(Object.assign(new Error(err),{status:-1})):ok(tok);};
-  const timer=setTimeout(()=>{if(!ts)aiTsDrop();finish('Verification timed out. Try again.');},AITS.wait);
+  const timer=setTimeout(()=>{if(!ts)aiTsDrop();finish('Verification timed out. Try again.');},Math.max(0,deadline-Date.now()));
   aiTsLoad().then(t=>{if(done)return;ts=t;let box=document.getElementById('aiTs');
     if(!box){box=document.createElement('div');box.id='aiTs';box.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999';document.body.appendChild(box);}
     id=ts.render(box,{sitekey:AITS.site,action:'verity_ai',appearance:'interaction-only',
