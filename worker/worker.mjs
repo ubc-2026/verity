@@ -439,6 +439,7 @@ async function research(request, env, headers, fail) {
   const hit = await cache.match(key);
   if (hit) return new Response(hit.body, { status: 200, headers: { ...headers, 'Content-Type': 'application/json', 'X-Cache': 'HIT' } });
   const who = await caller(request, env);
+  headers['X-Verity-Tier'] = who.tier;
   const { success } = await who.limiter.limit({ key: 'research:' + who.key });
   if (!success) return fail(429, 'Too many requests.');
   // A cache hit costs nothing. A miss calls Exa, so it needs a person and budget.
@@ -497,6 +498,7 @@ export default {
     if (path === '/market' || path === '/markets') return marketRoute(request, env, path, origin);
     if (origin !== env.SITE_ORIGIN) return fail(403, 'Origin unavailable.');
     headers['Access-Control-Allow-Origin'] = origin;
+    headers['Access-Control-Expose-Headers'] = 'X-Verity-Tier, X-Cache';
     if (path === '/news') {
       if (request.method === 'OPTIONS') { headers['Access-Control-Allow-Methods'] = 'GET'; return new Response(null, { status: 204, headers }); }
       if (request.method !== 'GET') return fail(405, 'Use GET.');
@@ -529,6 +531,7 @@ export default {
       return fail(415, 'Send JSON.');
     }
     const who = await caller(request, env);
+    headers['X-Verity-Tier'] = who.tier; // lets the page confirm its pass was accepted
     const { success } = await who.limiter.limit({ key: who.key });
     if (!success) return fail(429, 'Too many requests.');
 
