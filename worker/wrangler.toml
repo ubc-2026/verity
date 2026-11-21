@@ -19,18 +19,18 @@ name = "REVIEW_LIMIT"
 namespace_id = "1001"
 
 [ratelimits.simple]
-limit = 6
+limit = 4
 period = 60
 
-# Daily AI budget counter: one Durable Object (class AiBudget in worker.mjs). Nothing to create by hand;
-# the first deploy applies the migration below.
+# Daily AI budget counter: one Durable Object (class DemoBudget in worker.mjs). The live v8 Worker
+# already applied migration demo-budget-v1, so deploying reuses that namespace; nothing to create by hand.
 [[durable_objects.bindings]]
 name = "AI_BUDGET"
-class_name = "AiBudget"
+class_name = "DemoBudget"
 
 [[migrations]]
-tag = "ai-budget-v1"
-new_sqlite_classes = ["AiBudget"]
+tag = "demo-budget-v1"
+new_sqlite_classes = ["DemoBudget"]
 
 # Secrets (set by an operator, never committed):
 #   npx wrangler secret put GEMINI_API_KEY

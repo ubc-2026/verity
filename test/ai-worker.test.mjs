@@ -2,7 +2,7 @@
 // and whether visitor or web text can steer the model or pull out its instructions.
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import worker, { AiBudget, GUARD, REFUSAL, buildUserText, cleanMarket, leaksInstructions } from "../worker/worker.mjs";
+import worker, { DemoBudget, GUARD, REFUSAL, buildUserText, cleanMarket, leaksInstructions } from "../worker/worker.mjs";
 
 const SITE = "https://verityresearch.us";
 const W = "https://verity-gemini.example.workers.dev";
@@ -15,10 +15,10 @@ let exaHighlights;
 const realFetch = globalThis.fetch;
 const realCaches = globalThis.caches;
 
-// A Durable Object namespace that runs the real AiBudget class over in-memory storage.
+// A Durable Object namespace that runs the real DemoBudget class over in-memory storage.
 function budgetNamespace() {
   const store = new Map();
-  const object = new AiBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } });
+  const object = new DemoBudget({ storage: { get: async (k) => store.get(k), put: async (k, v) => void store.set(k, v) } });
   return { store, idFromName: (n) => n, get: () => ({ fetch: (url, init) => object.fetch(new Request(url, init)) }) };
 }
 

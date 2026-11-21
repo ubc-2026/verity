@@ -270,11 +270,12 @@ export async function verifyHuman(request, env) {
 }
 
 /**
- * Global daily AI budget, counted in one Durable Object (binding AI_BUDGET, class AiBudget).
+ * Global daily AI budget, counted in one Durable Object (binding AI_BUDGET, class DemoBudget).
+ * The class keeps v8's name so its existing namespace (migration demo-budget-v1) is reused, not deleted.
  * A Durable Object runs one request at a time, so concurrent calls cannot overshoot the cap
  * the way an eventually consistent KV counter can.
  */
-export class AiBudget {
+export class DemoBudget {
   constructor(state) { this.state = state; this.queue = Promise.resolve(); }
   async fetch(request) {
     const body = await request.json();
