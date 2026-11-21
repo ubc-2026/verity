@@ -32,10 +32,11 @@ async function loadNews(){if(document.hidden)return;
 /* ---------- More research via Exa (through Verity's Worker) ---------- */
 const RES={q:'',busy:false};
 const RES_URL=q=>GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days=7';
-function resErr(e){if(e.status===503)return 'Exa research needs an Exa API key on the Worker. Run the v6 redeploy script and add the key when it asks.';
+function resErr(e){if(e.status===-1||e.status===403)return e.message||'Verification failed. Reload the page and try again.';
+  if(e.status===503)return e.message||'Exa research needs an Exa API key on the Worker. Run the v6 redeploy script and add the key when it asks.';
   if(e.status===429)return 'Too many searches from this connection. Wait a minute.';if(e.status===400)return e.message||'Try a different search.';
   if(e.status===0||e.status===404)return 'Exa research turns on after the Worker v6 update.';return 'Exa research is unavailable right now.';}
-async function fetchResearch(q,days=7){let r;try{r=await fetch(GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days='+days,{cache:'no-store'});}catch(e){throw Object.assign(new Error('network'),{status:0});}
+async function fetchResearch(q,days=7){const tok=await aiToken();let r;try{r=await fetch(GAI.endpoint.replace(/\/review$/,'/research')+'?q='+encodeURIComponent(q)+'&days='+days,{cache:'no-store',headers:{'cf-turnstile-response':tok}});}catch(e){throw Object.assign(new Error('network'),{status:0});}
   const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||''),{status:r.status});return j.items||[];}
 function resItems(items){return items.map(i=>`<li><a class="news-item" href="${esc(safeHref(i.link))}" target="_blank" rel="noopener noreferrer">${pic(i,'item-pic')}<span class="news-text"><span class="news-title">${esc(i.title)}</span>${i.summary?`<span class="res-sum">${esc(i.summary)}</span>`:''}<span class="label">${esc(i.source)}${i.published?' · '+agoStr(i.published):''}</span></span></a></li>`).join('');}
 async function runResearch(q){q=(q||'').trim()||'crypto market trends bitcoin ethereum stablecoins regulation';if(RES.busy)return;RES.busy=true;RES.q=q;

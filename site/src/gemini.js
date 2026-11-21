@@ -3,6 +3,31 @@
    Google API key as a Worker secret. No key is ever in this page, in the browser,
    or in this repo. verity-rules-v1 remains the score of record. */
 const GAI={endpoint:'https://verity-gemini.safe-572.workers.dev/review',model:'gemini-2.5-flash',busy:false,last:null};
+/* Turnstile token for each paid AI call (Gemini, Exa). The Worker verifies it server-side; tokens are single use.
+   Same public site key as the sign-in page. Calls run one at a time so only one widget exists.
+   Each call has a deadline of AITS.wait from the moment it is made (time spent queued counts), so a stalled script
+   load or widget can't block later calls:
+   on timeout the attempt rejects, a loader that never settled is dropped (script removed) and the next attempt
+   starts fresh. Once Cloudflare shows an interactive challenge, the deadline stops and Turnstile's own timeout applies. */
+const AITS={site:'0x4AAAAAAGKN-DMfLk3IAK3l',load:null,script:null,q:Promise.resolve(),wait:15000};
+function aiTsDrop(){if(AITS.script)AITS.script.remove();AITS.load=null;AITS.script=null;}
+function aiTsLoad(){if(AITS.load)return AITS.load;
+  if(window.turnstile)return AITS.load=Promise.resolve(window.turnstile);
+  const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.async=true;
+  const p=new Promise((ok,no)=>{s.onload=()=>window.turnstile?ok(window.turnstile):no(new Error('verification unavailable'));s.onerror=()=>no(new Error('verification unavailable'));});
+  p.catch(()=>{if(AITS.load===p)aiTsDrop();});
+  AITS.load=p;AITS.script=s;document.head.appendChild(s);return p;}
+function aiToken(){const deadline=Date.now()+AITS.wait;const run=()=>new Promise((ok,no)=>{if(Date.now()>=deadline)return no(Object.assign(new Error('Verification timed out. Try again.'),{status:-1}));let ts=null,id=null,done=false;
+  const end=()=>{if(ts&&id!==null){try{ts.remove(id);}catch(e){}}id=null;};
+  const finish=(err,tok)=>{if(done)return;done=true;clearTimeout(timer);end();err?no(Object.assign(new Error(err),{status:-1})):ok(tok);};
+  const timer=setTimeout(()=>{if(!ts)aiTsDrop();finish('Verification timed out. Try again.');},Math.max(0,deadline-Date.now()));
+  aiTsLoad().then(t=>{if(done)return;ts=t;let box=document.getElementById('aiTs');
+    if(!box){box=document.createElement('div');box.id='aiTs';box.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999';document.body.appendChild(box);}
+    id=ts.render(box,{sitekey:AITS.site,action:'verity_ai',appearance:'interaction-only',
+      callback:tok=>finish(null,tok),'error-callback':()=>finish('Verification failed. Reload the page and try again.'),
+      'timeout-callback':()=>finish('Verification timed out. Try again.'),'before-interactive-callback':()=>clearTimeout(timer)});},
+    ()=>finish('Verification is unavailable right now. Try again.'));});
+  return AITS.q=AITS.q.catch(()=>{}).then(run);}
 const FALLBACK_WHY={quota:'Google Gemini’s quota was used up',unreachable:'Google Gemini could not be reached',no_key:'Google Gemini is not configured',blocked:'Google Gemini declined to answer',empty:'Google Gemini returned an empty answer'};
 function providerOf(j){const backup=j.provider==='workers-ai';const name=backup?'Workers AI ('+String(j.modelVersion||'').replace(/^@cf\/[^/]+\//,'')+')':'Google Gemini';
   const why=backup?(FALLBACK_WHY[j.fallbackReason]||('Google Gemini was unavailable'+(j.fallbackReason?' ('+j.fallbackReason+')':''))):'';
@@ -10,9 +35,9 @@ function providerOf(j){const backup=j.provider==='workers-ai';const name=backup?
 try{localStorage.removeItem('verity.googleGeminiKey');}catch(e){} // clean up keys saved by the earlier bring-your-own-key version
 function gaiErr(status,msg){
   if(status===429)return msg&&/quota/i.test(msg)?'Google Gemini’s quota is used up for now. Try again later.':'Too many reviews from this connection. Wait a minute and try again (limit: 6 per minute).';
-  if(status===503)return 'The review service is still being set up.';
+  if(status===503)return msg||'The review service is still being set up.';
   if(status===502)return msg||'Both Google Gemini and the backup model are unavailable right now. Try again in a minute.';
-  if(status===403)return 'The review service only answers requests from verityresearch.us.';
+  if(status===403)return msg||'The review service only answers requests from verityresearch.us.';
   if(status===413)return 'This market’s data is too large to send. Try another market.';
   if(status===0)return 'Couldn’t reach the review service. Check your connection and try again.';
   return msg||('The review service returned an error (HTTP '+status+').');}
@@ -32,7 +57,7 @@ async function gaiRun(mode){if(GAI.busy)return;const q=$('#gaiQ').value.trim();
   const ctx=fitContext(marketContext());GAI.busy=true;const btn=mode==='ask'?$('#gaiAsk'):$('#gaiReview');btn.setAttribute('aria-busy','true');$$('#gaiPanel [data-gai]').forEach(x=>x.disabled=true);
   const out=$('#gaiOut');out.innerHTML='<p class="muted">Asking Google Gemini about '+esc(ctx.title||'this market')+'…</p>';gaiStatus('Waiting for Google Gemini…');
   const t0=performance.now();let status=0;
-  try{const r=await fetch(GAI.endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(mode==='ask'?{mode,question:q,market:ctx}:{mode,market:ctx})});
+  try{const r=await fetch(GAI.endpoint,{method:'POST',headers:{'content-type':'application/json','cf-turnstile-response':await aiToken()},body:JSON.stringify(mode==='ask'?{mode,question:q,market:ctx}:{mode,market:ctx})});
     status=r.status;const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||''),{status});
     const cand=j.candidates&&j.candidates[0];const text=cand&&cand.content&&cand.content.parts?cand.content.parts.map(p=>p.text||'').join(''):'';
     if(!text)throw Object.assign(new Error(j.promptFeedback&&j.promptFeedback.blockReason?'Google Gemini declined to answer ('+j.promptFeedback.blockReason+').':'Google Gemini returned an empty answer'+(cand&&cand.finishReason?' ('+cand.finishReason+')':'')+'.'),{status:-1});
@@ -105,7 +130,7 @@ async function runForecast(){if(FC.busy)return;const m=MARKETS[term.market];cons
   try{const hist=await historyFor(m);if(!hist)throw Object.assign(new Error('This contract has no trading history yet, so there is nothing to forecast from.'),{status:-1});
     out.innerHTML='<p class="muted">Asking Google Gemini and Workers AI…</p>';gaiStatus('Waiting for both models…');
     const ctx=fitContext(marketContext());ctx.history=hist;
-    const r=await fetch(GAI.endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mode:'forecast',market:ctx})});
+    const r=await fetch(GAI.endpoint,{method:'POST',headers:{'content-type':'application/json','cf-turnstile-response':await aiToken()},body:JSON.stringify({mode:'forecast',market:ctx})});
     const j=await r.json().catch(()=>({}));
     if(r.status===400&&/review mode/i.test(j.error||''))throw Object.assign(new Error('The AI service needs the v4 update to run forecasts. Run the latest redeploy-verity-gemini.ps1.'),{status:-1});
     if(!r.ok)throw Object.assign(new Error(j.error||''),{status:r.status});
