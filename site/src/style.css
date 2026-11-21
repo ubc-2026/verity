@@ -720,3 +720,30 @@ html.demo-mode .signin,html.signed-in .signout{display:inline-flex}
 @media (max-width:1024px){.lp-art::before{background:rgba(9,12,16,.86)}.lp-hero{min-height:0}.lp-field-key{display:none}.lp-field-cap{text-align:left}}
 .lp-art.on-dot{cursor:pointer}
 #verity-astryx-root{position:relative;z-index:100}
+
+/* ---------- Refinement pass: calmer labels, clearer hierarchy ----------
+   Mono is kept for numbers, prices, tickers and hashes only. Labels are sentence-case sans.
+   Sections open with a left-aligned heading and one line under it. Hierarchy comes from surface tone, not outlines. */
+.label,.tick-status{font-family:var(--font-sans);letter-spacing:0;font-size:.78rem}
+.kv dt{font-family:var(--font-sans);font-size:.8rem}
+.tag{font-family:var(--font-sans);font-size:.74rem;letter-spacing:0}
+.demo,.real{font-family:var(--font-sans);font-size:.72rem;letter-spacing:0;padding:2px 8px;border-radius:999px;font-weight:500}
+.demo{border:0;background:rgba(245,158,11,.12);color:#F5B544}
+.real{border:0;background:rgba(139,155,180,.12);color:var(--text-muted)}
+.real#inspSrc,.real#mktSrc{font-family:var(--font-mono);font-size:.68rem}
+.status{font-family:var(--font-sans)!important;letter-spacing:0!important;text-transform:none!important}
+.section{padding:104px 0 88px}
+.sec-head{display:block;margin-bottom:40px;max-width:760px}
+.sec-head .idx{display:none}
+.sec-head h2{font-size:clamp(1.9rem,3.2vw,2.8rem);line-height:1.06;letter-spacing:-.03em;font-weight:600;margin:0 0 14px;max-width:22ch;text-wrap:balance}
+.sec-head p{font-size:1.02rem;line-height:1.6;color:var(--text-muted);margin:0;max-width:62ch}
+.panel-head{border-bottom:0;padding:18px 20px 6px}
+.panel-head h3{font-size:1.06rem;letter-spacing:-.01em}
+.board-title{font-size:clamp(2rem,3.4vw,3rem)!important;line-height:1.04!important;letter-spacing:-.035em!important;font-weight:600!important;max-width:20ch!important;text-wrap:balance}
+@media (max-width:640px){.section{padding:72px 0 56px}.sec-head{margin-bottom:28px}}
+.seg button{font-family:var(--font-sans);font-size:.8rem}
+#tfSeg button{font-family:var(--font-mono);font-size:.74rem}
+.mrow-cat,.cat{font-family:var(--font-sans);font-size:.68rem;border:0;background:rgba(139,155,180,.12);border-radius:999px;padding:1px 8px}
+.coin-note{font-family:var(--font-sans);font-size:.7rem}
+.stage-body>p{max-width:72ch}
+.kv dd a[href*="/tx/"],.kv dd .hash{font-family:var(--font-mono);font-size:.8rem}
